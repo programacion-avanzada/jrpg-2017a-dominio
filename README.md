@@ -9,10 +9,12 @@
 
 ### Integrantes del equipo
 
-* XXXX
-* XXXX
-* XXXX
-* XXXX
+* Efocaraccio Ezequiel ([efocaraccio (https://github.com/efocaraccio))
+* Menendez Leonel ([LeonelMenendez] (https://github.com/LeonelMenendez))
+* Ruttimann Hernan ([ruttimannh] (https://github.com/ruttimannh))
+* Claudio Saccella ([cdsaccella] (https://github.com/cdsaccella))
+* Scarpione Lautaro ([LautaroScarpione] (https://github.com/LautaroScarpione))
+* Vespoli Nicolas ([NicoVespoli] (https://github.com/NicoVespoli))
 
 ## Sobre la tecnología
 
