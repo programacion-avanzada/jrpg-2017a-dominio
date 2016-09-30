@@ -9,7 +9,7 @@
 
 ### Integrantes del equipo
 
-* Efocaraccio Ezequiel ([efocaraccio] (https://github.com/efocaraccio))
+* Focaraccio Ezequiel ([efocaraccio] (https://github.com/efocaraccio))
 * Menendez Leonel ([LeonelMenendez] (https://github.com/LeonelMenendez))
 * Ruttimann Hernan ([ruttimannh] (https://github.com/ruttimannh))
 * Claudio Saccella ([cdsaccella] (https://github.com/cdsaccella))
