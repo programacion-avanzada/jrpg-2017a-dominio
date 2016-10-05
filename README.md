@@ -1,4 +1,4 @@
-# [Nombre del juego]
+# World Of Middle Earth (WOME)
 
 ## Sobre las personas
 
