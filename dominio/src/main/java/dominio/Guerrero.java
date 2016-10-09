@@ -2,25 +2,31 @@ package dominio;
 
 public class Guerrero extends Casta{
 
-	public Guerrero(double crit,double evasion)
+	public Guerrero(double prob_crit,double evasion,double daño_crit)
 	{
-		this.probabilidadGolpeCritico=crit;
-		this.probabilidadEvitarDaño=evasion;
+		super(prob_crit,evasion,daño_crit);
 	}
 	
-	public int golpeDoble(Personaje caster, Peleable atacado) //pega el doble de fuerte que un ataque normal
+	public void golpeDoble(Personaje caster, Peleable atacado) //pega el doble de fuerte que un ataque normal
 	{
-		return 0;
+		atacado.serAtacado(caster.calcularPuntosDeAtaque()*2);
+		
 	}
 	
-	public int aumentarDefensa(Personaje caster) //aumenta la defensa propia
+	public void aumentarDefensa(Personaje caster) //aumenta la defensa propia
 	{
-		return 0;
+		caster.setDefensa(caster.getDefensa()+10);
 	}
 	
-	public int ignoraDefensa(Personaje caster, Peleable atacado) //ataca e ignora la defensa del oponente
+	public void ignoraDefensa(Personaje caster, Peleable atacado) //ataca e ignora la defensa del oponente
 	{
-		return 0;
+		if(atacado instanceof Personaje)
+		{
+			int defensa_original =((Personaje) atacado).getDefensa();
+			((Personaje) atacado).setDefensa(0);
+			atacado.serAtacado(caster.fuerza);
+			((Personaje) atacado).setDefensa(defensa_original);
+		}
 	}
 	
 }

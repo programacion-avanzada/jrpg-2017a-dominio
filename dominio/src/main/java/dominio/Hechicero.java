@@ -2,25 +2,27 @@ package dominio;
 
 public class Hechicero extends Casta{
 	
-	public Hechicero(double crit,double evasion)
+	public Hechicero(double prob_crit,double evasion, double daño_crit)
 	{
-		this.probabilidadGolpeCritico=crit;
-		this.probabilidadEvitarDaño=evasion;
+		super(prob_crit,evasion,daño_crit);
 	}
 	
-	public int curar(Personaje caster, Personaje aliado) //cura la salud a un aliado
+	public void curar(Personaje caster, Peleable aliado) //cura la salud a un aliado
 	{
-		return 0;
+		if(aliado instanceof Personaje)
+			((Personaje) aliado).serCurado(caster.getInteligencia()); //la inteligencia es la "fuerza" de mis hechizos, hay que modificarlo
 	}
 	
-	public int bolaDeFuego(Personaje caster, Peleable atacado) //lanza una bola de fuego que es mas fuerte que su ataque "basico"
+	public void bolaDeFuego(Personaje caster, Peleable atacado) //lanza una bola de fuego que es mas fuerte que su ataque "basico"
 	{
-		return 0;
+		atacado.serAtacado(caster.getInteligencia());
 	}
 	
-	public int quitarEnergia(Personaje caster, Personaje atacado) //roba energia de los enemigos
+	public void quitarEnergia(Personaje caster, Peleable atacado) //roba energia de los enemigos
 	{
-		return 0;
+		if(atacado instanceof Personaje)
+			((Personaje) atacado).serDesernegizado(caster.getInteligencia());
+		
 	}
 
 }
