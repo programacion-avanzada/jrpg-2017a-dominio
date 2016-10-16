@@ -1,30 +1,30 @@
 package dominio;
 
-public class Personaje implements Peleable{
-	
-	int salud;
-	int energia;
-	int fuerza;
-	int destreza;
-	int inteligencia;
-	Casta casta;
-	Item [] itemsEquipados;
-	Item [] itemsGuardados;
-	int experiencia;
-	int nivel;
-	
-	int defensa;
-	int idPersonaje;
-	
-	public Personaje(String casta){
-		
+public class Personaje implements Peleable {
+
+	protected int salud;
+	protected int energia;
+	protected int fuerza;
+	protected int destreza;
+	protected int inteligencia;
+	protected Casta casta;
+	protected Item[] itemsEquipados;
+	protected Item[] itemsGuardados;
+	protected int experiencia;
+	protected int nivel;
+
+	protected int defensa;
+	protected int idPersonaje;
+
+	protected int item_manos = 0;
+
+	public Personaje(String casta) {
+
 	}
-	
-	
-	
+
 	public Personaje(int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta,
-			Item[] itemsEquipados, Item[] itemsGuardados, int experiencia, int nivel, int idPersonaje,int defensa) {
-		
+			Item[] itemsEquipados, Item[] itemsGuardados, int experiencia, int nivel, int idPersonaje, int defensa) {
+
 		this.salud = salud;
 		this.energia = energia;
 		this.fuerza = fuerza;
@@ -35,12 +35,12 @@ public class Personaje implements Peleable{
 		this.itemsGuardados = itemsGuardados;
 		this.experiencia = experiencia;
 		this.nivel = nivel;
-		
-		this.idPersonaje = idPersonaje;//agregue un Id para la base de datos (nose si se va a implementar asi)
-		this.defensa =defensa;// creo que es mas comodo tener un atributo defensa que un metodo calcularPuntosDefensa
+
+		this.idPersonaje = idPersonaje;// agregue un Id para la base de datos
+										// (nose si se va a implementar asi)
+		this.defensa = defensa;// creo que es mas comodo tener un atributo
+								// defensa que un metodo calcularPuntosDefensa
 	}
-
-
 
 	public int getSalud() {
 		return salud;
@@ -130,199 +130,226 @@ public class Personaje implements Peleable{
 		this.idPersonaje = idPersonaje;
 	}
 
-	
-	
-	
 	public int getDefensa() {
 		return defensa;
 	}
-
-
 
 	public void setDefensa(int defensa) {
 		this.defensa = defensa;
 	}
 
-
-
-	public void atacar(Peleable atacado){
-	atacado.serAtacado(this.getFuerza());
+	public void atacar(Peleable atacado) {
+		atacado.serAtacado(this.calcularPuntosDeAtaque());
 	}
-	
-	public void despuesDeTurno(){
-		
+
+	public void despuesDeTurno() {
+
 	}
-	
-	public boolean puedeAtacar(){
+
+	public boolean puedeAtacar() {
 		return true;
 	}
-	
-	public int calcularPuntosDeAtaque(){
-		return this.getFuerza(); // hago que el daño de un personaje sea igual a la fuerza que tiene, luego hay que modificarlo
-		
+
+	public int calcularPuntosDeAtaque() {
+		int daño_items = 0;
+		for (int i = 0; i < 6; i++) {
+			if (this.itemsEquipados[i] != null)
+
+				daño_items += this.itemsEquipados[i].getBono_daño();
+
+		}
+		System.out.println("Daño causado: " + (this.getFuerza() + daño_items));
+		return (this.getFuerza() + daño_items); // hago que el daño de un
+												// personaje sea igual a la
+												// fuerza que tiene mas el daño
+												// de sus items, luego hay que
+												// modificarlo
+
 	}
-	
-	/*public int calcularPuntosDeDefensa(){//creo que hay que tener el atributo de defensa propio
-		return 0;
-	}*/
-	
-	public boolean estaVivo(){
+
+	public int calcularPuntosDeDefensa() {
+		int defensa_items = 0;
+		for (int i = 0; i < 6; i++) {
+			if (this.itemsEquipados[i] != null)
+				defensa_items += this.itemsEquipados[i].getBono_defensa();
+		}
+		System.out.println("Defensa obtenida: " + (this.getDefensa() * 0.5 + defensa_items + this.getDestreza()));
+		return (int) (this.getDefensa() * 0.5 + defensa_items + this.getDestreza());
+	}
+
+	public boolean estaVivo() {
 		return salud > 0;
 	}
-	
-	public int serAtacado(int daño){
-		daño -= this.getDefensa()*0.5;
-		if(daño>0)
-			{salud -= daño;
+
+	public int serAtacado(int daño) {
+		daño -= this.calcularPuntosDeDefensa();
+		if (daño > 0) {
+			salud -= daño;
 			return daño;
-			}
+		}
 		return 0;// no le hizo daño (la defensa fue mayor)
 	}
-	
-	public void serDesernegizado(int daño){
+
+	public void serDesernegizado(int daño) {
 		energia -= daño;
 	}
-	
-	public void serCurado(int salud){
+
+	public void serCurado(int salud) {
 		this.salud += salud;
 	}
-	
-	public void serEnergizado(){
+
+	public void serEnergizado() {
 		energia = 100;
 	}
-	
-	public void desequiparItem(int item){
-		
+
+	public void desequiparItem(int item) {
+
 	}
-	
-	public void dropearItem(int  item){
-		
+
+	public void dropearItem(int item) {
+
 	}
-	public void salirDeAlianza(){
-		
+
+	public boolean equiparItem(Item i) {
+		int j = 0;
+		while (this.itemsEquipados[j] != null && j < 6)
+			j++;
+		if (j == 6) {
+			System.out.println("Ya esta equipado al 100%");
+			return false;
+		}
+		if (this.puedeEquipar(i)) {
+			this.itemsEquipados[j] = i;
+			return true;
+		}
+		return false;
 	}
-	
-	public void aliarme(Personaje aliado){
-		
+
+	public boolean puedeEquipar(Item i) {
+
+		if (i.getClass().getName() == "dominio.ItemDeManos") {
+
+			if (item_manos < 2) {
+				item_manos++;
+				return true;
+			} else
+				System.out.println("No puede equipar mas items del tipo " + i.getClass().getName());
+			return false;
+		}
+
+		for (int j = 0; j < 6; j++) {
+			if (this.itemsEquipados[j] != null) {
+				if (this.itemsEquipados[j].getClass().getName() == i.getClass().getName()) {
+					System.out.println("No puede equipar mas items del tipo " + i.getClass().getName());
+					return false;
+
+				}
+			}
+		}
+		return true;
 	}
-	
-	public void subirNivel(){
-		
+
+	public void salirDeAlianza() {
+
 	}
-	
-	public void ganarExperiencia(int exp){
+
+	public void aliarme(Personaje aliado) {
+
+	}
+
+	public void subirNivel() {
+		if (this.nivel < 100)
+			this.nivel++;
+		else
+			System.out.println("Maximo nivel alcanzado");
+	}
+
+	public void ganarExperiencia(int exp) {
 		experiencia += exp;
 	}
 
-	public void habilidad1(Peleable atacado)
-	{
-		if(this.getCasta() instanceof Guerrero)
-		{
-			if(this.getEnergia()>10)// habria que ver cuanta energia consume cada habilidad
-			{
-				
-			Guerrero g1= (Guerrero)this.getCasta();
-			g1.golpeDoble(this, atacado);
-			this.setEnergia(this.getEnergia()-10);
-			}
-		}
-		
-		if(this.getCasta() instanceof Hechicero)
-		{
-			if(this.getEnergia()>10)
-			{
-			Hechicero h1= (Hechicero)this.getCasta();
-			h1.curar(this, atacado);
-			this.setEnergia(this.getEnergia()-10);
-			}
-		}
-		
-		if(this.getCasta() instanceof Asesino)
-		{
-			if(this.getEnergia()>10){
-			Asesino a1= (Asesino)this.getCasta();
-			a1.golpeCritico(this, atacado);
-			this.setEnergia(this.getEnergia()-10);
-			}
-		}
-		
+	/*
+	 * public void habilidad1(Peleable atacado) { if(this.getCasta() instanceof
+	 * Guerrero) { if(this.getEnergia()>10)// habria que ver cuanta energia
+	 * consume cada habilidad {
+	 * 
+	 * Guerrero g1= (Guerrero)this.getCasta(); g1.golpeDoble(this, atacado);
+	 * this.setEnergia(this.getEnergia()-10); } }
+	 * 
+	 * if(this.getCasta() instanceof Hechicero) { if(this.getEnergia()>10) {
+	 * Hechicero h1= (Hechicero)this.getCasta(); h1.curar(this, atacado);
+	 * this.setEnergia(this.getEnergia()-10); } }
+	 * 
+	 * if(this.getCasta() instanceof Asesino) { if(this.getEnergia()>10){
+	 * Asesino a1= (Asesino)this.getCasta(); a1.golpeCritico(this, atacado);
+	 * this.setEnergia(this.getEnergia()-10); } }
+	 * 
+	 * }
+	 * 
+	 * 
+	 * public void habilidad2( Peleable atacado) { if(this.getCasta() instanceof
+	 * Guerrero) { if(this.getEnergia()>10){ Guerrero g1=
+	 * (Guerrero)this.getCasta(); g1.aumentarDefensa(this);
+	 * this.setEnergia(this.getEnergia()-10); } }
+	 * 
+	 * if(this.getCasta() instanceof Hechicero) { if(this.getEnergia()>10){
+	 * Hechicero h1= (Hechicero)this.getCasta(); h1.bolaDeFuego(this, atacado);
+	 * this.setEnergia(this.getEnergia()-10); } }
+	 * 
+	 * if(this.getCasta() instanceof Asesino) { if(this.getEnergia()>10){
+	 * Asesino a1= (Asesino)this.getCasta(); a1.perspicacia();
+	 * this.setEnergia(this.getEnergia()-10); } } }
+	 * 
+	 * public void habilidad3(Peleable atacado) { if(this.getCasta() instanceof
+	 * Guerrero) { if(this.getEnergia()>10){ Guerrero g1=
+	 * (Guerrero)this.getCasta(); g1.ignoraDefensa(this, atacado);
+	 * this.setEnergia(this.getEnergia()-10); } }
+	 * 
+	 * if(this.getCasta() instanceof Hechicero) { if(this.getEnergia()>10){
+	 * Hechicero h1= (Hechicero)this.getCasta(); h1.quitarEnergia(this,
+	 * atacado); this.setEnergia(this.getEnergia()-10); } }
+	 * 
+	 * if(this.getCasta() instanceof Asesino) { if(this.getEnergia()>10){
+	 * Asesino a1= (Asesino)this.getCasta(); a1.robar(this, atacado);
+	 * this.setEnergia(this.getEnergia()-10); } } }
+	 */
+
+	public void habilidadCasta1(Peleable atacado) {
+		this.getCasta().habilidad1(this, atacado);
 	}
-	
-	
-	public void habilidad2( Peleable atacado)
-	{
-		if(this.getCasta() instanceof Guerrero)
-		{
-			if(this.getEnergia()>10){
-			Guerrero g1= (Guerrero)this.getCasta();
-			g1.aumentarDefensa(this);
-			this.setEnergia(this.getEnergia()-10);
-			}
-		}
-		
-		if(this.getCasta() instanceof Hechicero)
-		{
-			if(this.getEnergia()>10){
-			Hechicero h1= (Hechicero)this.getCasta();
-			h1.bolaDeFuego(this, atacado);
-			this.setEnergia(this.getEnergia()-10);
-			}
-		}
-		
-		if(this.getCasta() instanceof Asesino)
-		{
-			if(this.getEnergia()>10){
-			Asesino a1= (Asesino)this.getCasta();
-			a1.perspicacia();
-			this.setEnergia(this.getEnergia()-10);
-			}
-		}
+
+	public void habilidadCasta2(Peleable atacado) {
+		this.getCasta().habilidad1(this, atacado);
 	}
-	
-	public void habilidad3(Peleable atacado)
-	{
-		if(this.getCasta() instanceof Guerrero)
-		{
-			if(this.getEnergia()>10){
-			Guerrero g1= (Guerrero)this.getCasta();
-			g1.ignoraDefensa(this, atacado);
-			this.setEnergia(this.getEnergia()-10);
-			}
-		}
-		
-		if(this.getCasta() instanceof Hechicero)
-		{
-			if(this.getEnergia()>10){
-			Hechicero h1= (Hechicero)this.getCasta();
-			h1.quitarEnergia(this, atacado);
-			this.setEnergia(this.getEnergia()-10);
-			}
-		}
-		
-		if(this.getCasta() instanceof Asesino)
-		{
-			if(this.getEnergia()>10){
-			Asesino a1= (Asesino)this.getCasta();
-			a1.robar(this, atacado);
-			this.setEnergia(this.getEnergia()-10);
-			}
-		}
+
+	public void habilidadCasta3(Peleable atacado) {
+		this.getCasta().habilidad1(this, atacado);
 	}
-	
-	public static void main(String[] args)
-	{
-		Humano h = new Humano(100,100,15,20,30,new Guerrero(0.2,0.3,1.5),null,null,0,1,1,50);
-		Orco o = new Orco(200,100,15,20,30,new Guerrero(0.2,0.3,1.5),null,null,0,1,1,50);
-		
-		System.out.println("Energia Humano:"+" "+h.getEnergia());
-		System.out.println("Vida del Orco:"+" "+o.getSalud());
-		
-		//h.habilidad1(o);
-		h.atacar(o);// esta bien que no le haga daño, ya que la defensa del orco es mas fuerte que la fuerza del humano
-		
-		System.out.println("Energia Humano:"+" "+h.getEnergia());
-		System.out.println("Vida del Orco:"+" "+o.getSalud());
-		
+
+	public static void main(String[] args) {
+		Humano h = new Humano(100, 100, 15, 20, 30, new Guerrero(0.2, 0.3, 1.5), new Item[6], new Item[20], 0, 1, 1,
+				50);
+		Orco o = new Orco(200, 100, 15, 20, 30, new Guerrero(0.2, 0.3, 1.5), new Item[6], new Item[20], 0, 1, 1, 50);
+
+		ItemDeManos excalibur = new ItemDeManos(1, 10, "Excalibur", 50, 0, 0, 0, 0, 10, 10, 10);
+		ItemDeTorso cotaDeMalla = new ItemDeTorso(2, 10, "Cota de Malla", 0, 20, 0, 0, 0, 10, 10, 10);
+
+		h.equiparItem(excalibur);
+		o.equiparItem(cotaDeMalla);
+		// o.equiparItem(cotaDeMalla);
+		h.equiparItem(excalibur);
+
+		// System.out.println(cotaDeMalla.getClass().getName());
+		System.out.println("Energia Humano:" + " " + h.getEnergia());
+		System.out.println("Vida del Orco:" + " " + o.getSalud());
+
+		h.habilidadCasta1(o);
+		// h.atacar(o);// esta bien que no le haga daño, ya que la defensa del
+		// orco es mas fuerte que la fuerza del humano
+
+		System.out.println("Energia Humano:" + " " + h.getEnergia());
+		System.out.println("Vida del Orco:" + " " + o.getSalud());
+
 	}
-	
+
 }

@@ -2,8 +2,10 @@ package dominio;
 
 public class NonPlayableCharacter implements Peleable{
 
-	int salud;
-	int fuerza;
+	public int salud;
+	public int fuerza;
+	public int defensa;
+	public Item[] items_dropeables;
 	
 	
 	
