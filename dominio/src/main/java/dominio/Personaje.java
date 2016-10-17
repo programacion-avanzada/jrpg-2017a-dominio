@@ -1,4 +1,5 @@
 package dominio;
+import java.util.Random;
 
 public class Personaje implements Peleable {
 
@@ -139,6 +140,12 @@ public class Personaje implements Peleable {
 	}
 
 	public void atacar(Peleable atacado) {
+		 Random rnd = new Random();
+			if(rnd.nextDouble()<=this.getCasta().getProbabilidadGolpeCritico())
+				{
+				System.out.println("GOLPE CRITICO!");
+				atacado.serAtacado((int) (this.calcularPuntosDeAtaque()*this.getCasta().getDañoCritico()));//pego daño critico
+				}
 		atacado.serAtacado(this.calcularPuntosDeAtaque());
 	}
 
@@ -159,7 +166,7 @@ public class Personaje implements Peleable {
 
 		}
 		System.out.println("Daño causado: " + (this.getFuerza() + daño_items));
-		return (this.getFuerza() + daño_items); // hago que el daño de un
+			return (this.getFuerza() + daño_items); // hago que el daño de un
 												// personaje sea igual a la
 												// fuerza que tiene mas el daño
 												// de sus items, luego hay que
@@ -182,12 +189,18 @@ public class Personaje implements Peleable {
 	}
 
 	public int serAtacado(int daño) {
+		 Random rnd = new Random();
+		if(rnd.nextDouble()>=this.getCasta().getProbabilidadEvitarDaño())
+		{
 		daño -= this.calcularPuntosDeDefensa();
 		if (daño > 0) {
 			salud -= daño;
 			return daño;
 		}
-		return 0;// no le hizo daño (la defensa fue mayor)
+		return 0;// no le hace daño ya que la defensa fue mayor
+		}
+		System.out.println("GOLPE EVADIDO!");
+		return 0;//esquivo el golpe
 	}
 
 	public void serDesernegizado(int daño) {
@@ -202,12 +215,38 @@ public class Personaje implements Peleable {
 		energia = 100;
 	}
 
-	public void desequiparItem(int item) {
-
+	public boolean desequiparItem(Item i) { // lo puedo usar para desequipar un
+											// item o para dropear directamente
+											// un item equipado
+		for (int j = 0; j < 6; j++) {
+			if (this.itemsEquipados[j].equals(i)) {
+				this.itemsEquipados[j] = null;
+				if (i.getClass().getName() == "dominio.ItemDeManos")
+					this.item_manos--;
+				return true;
+			}
+		}
+		return false;
 	}
 
-	public void dropearItem(int item) {
+	public boolean dropearItem(Item i) { // aca se dropearia desde la mochila
+		for (int j = 0; j < 20; j++) {
+			if (this.itemsGuardados[j].equals(i)) {
+				this.itemsGuardados[j] = null;
+				return true;
+			}
+		}
+		return false;
+	}
 
+	public boolean guardarItem(Item i) {
+		for (int j = 0; j < 20; j++) {
+			if (this.itemsGuardados[j] == null) {
+				this.itemsGuardados[j] = i;
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public boolean equiparItem(Item i) {
@@ -247,6 +286,26 @@ public class Personaje implements Peleable {
 			}
 		}
 		return true;
+	}
+
+	public String listaItemsEquipados() {
+		String aux = "";
+		for (Item i : this.itemsEquipados) {
+			if (i != null)
+				aux += i.toString();
+		}
+		return aux;
+
+	}
+
+	public String listaItemsGuardados() {
+		String aux = "";
+		for (Item i : this.itemsGuardados) {
+			if (i != null)
+				aux += i.toString();
+		}
+		return aux;
+
 	}
 
 	public void salirDeAlianza() {
@@ -335,17 +394,11 @@ public class Personaje implements Peleable {
 		ItemDeTorso cotaDeMalla = new ItemDeTorso(2, 10, "Cota de Malla", 0, 20, 0, 0, 0, 10, 10, 10);
 
 		h.equiparItem(excalibur);
-		o.equiparItem(cotaDeMalla);
-		// o.equiparItem(cotaDeMalla);
-		h.equiparItem(excalibur);
-
-		// System.out.println(cotaDeMalla.getClass().getName());
 		System.out.println("Energia Humano:" + " " + h.getEnergia());
 		System.out.println("Vida del Orco:" + " " + o.getSalud());
 
-		h.habilidadCasta1(o);
-		// h.atacar(o);// esta bien que no le haga daño, ya que la defensa del
-		// orco es mas fuerte que la fuerza del humano
+		//h.habilidadCasta1(o);
+		 h.atacar(o);
 
 		System.out.println("Energia Humano:" + " " + h.getEnergia());
 		System.out.println("Vida del Orco:" + " " + o.getSalud());

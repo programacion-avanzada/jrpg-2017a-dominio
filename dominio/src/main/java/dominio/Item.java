@@ -84,4 +84,41 @@ public void setBono_energia(int bono_energia) {
 }
 
 
+
+@Override
+public int hashCode() {
+	final int prime = 31;
+	int result = 1;
+	result = prime * result + bono_daño;
+	result = prime * result + bono_defensa;
+	result = prime * result + bono_energia;
+	result = prime * result + bono_magia;
+	result = prime * result + bono_salud;
+	result = prime * result + destreza_requerida;
+	result = prime * result + fuerza_requerida;
+	result = prime * result + id_Item;
+	result = prime * result + inteligencia_requerida;
+	result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+	result = prime * result + prioridad;
+	return result;
+}
+
+
+
+@Override
+public boolean equals(Object obj) {
+	if (this == obj)
+		return true;
+	if (obj == null)
+		return false;
+	if (getClass() != obj.getClass())
+		return false;
+	return true;
+}
+
+public String toString ()
+{
+	return this.nombre+"  Daño:"+this.bono_daño+"  Defensa:"+this.bono_defensa+"  Magia:"+this.bono_magia+"  Salud:"+this.bono_salud+"  Energia:"+this.bono_energia+"\n";
+}
+
 }

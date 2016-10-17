@@ -1,6 +1,6 @@
 package dominio;
 
-public class Guerrero extends Casta{
+public  class Guerrero extends Casta{
 
 	public Guerrero(double prob_crit,double evasion,double daño_crit)
 	{

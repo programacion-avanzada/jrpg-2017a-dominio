@@ -4,7 +4,7 @@ public abstract class  Casta {
 protected double probabilidadGolpeCritico;
 protected double probabilidadEvitarDaño;
 protected double dañoCritico; // es el porcentaje que hace el critico
-//falta minimo un metodo abstracto :/
+
 
 public Casta(double prob_crit,double evasion,double daño_crit)
 {
