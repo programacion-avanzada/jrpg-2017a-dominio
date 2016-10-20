@@ -45,6 +45,7 @@ public class NonPlayableCharacter implements Peleable{
 			System.out.println("GOLPE CRITICO NPC!");
 			atacado.serAtacado((int) (this.getFuerza()*1.5));//pego daño critico
 			}
+		else
 	atacado.serAtacado(this.getFuerza());
 	}
 	

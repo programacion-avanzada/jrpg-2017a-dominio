@@ -1,4 +1,6 @@
 package tests_dominio;
+import java.util.LinkedList;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -12,9 +14,9 @@ public class Test_Daño {
 	@Test
 	public void test_AtaqueComun()
 	{
-		Humano h = new Humano(100, 100, 15, 20, 30, new Guerrero(0.2, 0.3, 1.5), new Item[6], new Item[20], 0, 1, 1,
+		Humano h = new Humano(100, 100, 15, 20, 30, new Guerrero(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 1, 1,
 				50);
-		Orco o = new Orco(200, 100, 15, 20, 30, new Guerrero(0.2, 0.3, 1.5), new Item[6], new Item[20], 0, 1, 1, 50);
+		Orco o = new Orco(200, 100, 15, 20, 30, new Guerrero(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 1, 1, 50);
 		
 		Assert.assertEquals(200, o.getSalud());
 		//h.atacar(o);

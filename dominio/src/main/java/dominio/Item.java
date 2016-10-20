@@ -4,6 +4,7 @@ public abstract class Item {
 protected int id_Item ;
 protected int prioridad;
 protected String nombre;
+protected String tipo;/////////////HAY Q AGREGARLO AL CONSTRUCTTTTTTT
 
 protected int bono_daño;
 protected int bono_defensa;
@@ -17,11 +18,12 @@ public abstract int obtenerCantidadDeItemsMaximo();
 
 
 
-public Item(int id_Item, int prioridad, String nombre, int bono_daño, int bono_defensa, int bono_magia, int bono_salud,
+public Item(int id_Item, int prioridad, String nombre, String tipo, int bono_daño, int bono_defensa, int bono_magia, int bono_salud,
 		int bono_energia,int fuerza_requerida,int inteligencia_requerida,int destreza_requerida) {
 	this.id_Item = id_Item;
 	this.prioridad = prioridad;
 	this.nombre = nombre;
+	this.tipo=tipo;
 	this.bono_daño = bono_daño;
 	this.bono_defensa = bono_defensa;
 	this.bono_magia = bono_magia;
@@ -81,6 +83,54 @@ public int getBono_energia() {
 }
 public void setBono_energia(int bono_energia) {
 	this.bono_energia = bono_energia;
+}
+
+
+
+public String getTipo() {
+	return tipo;
+}
+
+
+
+public void setTipo(String tipo) {
+	this.tipo = tipo;
+}
+
+
+
+public int getFuerza_requerida() {
+	return fuerza_requerida;
+}
+
+
+
+public void setFuerza_requerida(int fuerza_requerida) {
+	this.fuerza_requerida = fuerza_requerida;
+}
+
+
+
+public int getInteligencia_requerida() {
+	return inteligencia_requerida;
+}
+
+
+
+public void setInteligencia_requerida(int inteligencia_requerida) {
+	this.inteligencia_requerida = inteligencia_requerida;
+}
+
+
+
+public int getDestreza_requerida() {
+	return destreza_requerida;
+}
+
+
+
+public void setDestreza_requerida(int destreza_requerida) {
+	this.destreza_requerida = destreza_requerida;
 }
 
 

@@ -1,5 +1,7 @@
 package dominio;
 
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Random;
 
 public class Personaje implements Peleable {
@@ -10,8 +12,10 @@ public class Personaje implements Peleable {
 	protected int destreza;
 	protected int inteligencia;
 	protected Casta casta;
-	protected Item[] itemsEquipados;
-	protected Item[] itemsGuardados;
+
+	
+	protected LinkedList<Item> itemsEquipados;
+	protected LinkedList<Item> itemsGuardados;
 	protected int experiencia;
 	protected int nivel;
 
@@ -19,13 +23,15 @@ public class Personaje implements Peleable {
 	protected int idPersonaje;
 	protected int item_manos = 0;
 	protected Alianza clan = null;
+	protected int salud_tope;// nose si va
+	protected int energia_tope;// nose si va
 
 	public Personaje(String casta) {
 
 	}
 
 	public Personaje(int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta,
-			Item[] itemsEquipados, Item[] itemsGuardados, int experiencia, int nivel, int idPersonaje, int defensa) {
+			LinkedList<Item> itemsEquipados, LinkedList<Item> itemsGuardados, int experiencia, int nivel, int idPersonaje, int defensa) {
 
 		this.salud = salud;
 		this.energia = energia;
@@ -92,19 +98,19 @@ public class Personaje implements Peleable {
 		this.casta = casta;
 	}
 
-	public Item[] getItemsEquipados() {
+	public LinkedList<Item> getItemsEquipados() {
 		return itemsEquipados;
 	}
 
-	public void setItemsEquipados(Item[] itemsEquipados) {
+	public void setItemsEquipados(LinkedList<Item> itemsEquipados) {
 		this.itemsEquipados = itemsEquipados;
 	}
 
-	public Item[] getItemsGuardados() {
+	public LinkedList<Item> getItemsGuardados() {
 		return itemsGuardados;
 	}
 
-	public void setItemsGuardados(Item[] itemsGuardados) {
+	public void setItemsGuardados(LinkedList<Item> itemsGuardados) {
 		this.itemsGuardados = itemsGuardados;
 	}
 
@@ -148,6 +154,7 @@ public class Personaje implements Peleable {
 																											// daño
 																											// critico
 		}
+		else
 		atacado.serAtacado(this.calcularPuntosDeAtaque());
 	}
 
@@ -161,12 +168,9 @@ public class Personaje implements Peleable {
 
 	public int calcularPuntosDeAtaque() {
 		int daño_items = 0;
-		for (int i = 0; i < 6; i++) {
-			if (this.itemsEquipados[i] != null)
-
-				daño_items += this.itemsEquipados[i].getBono_daño();
-
-		}
+		Iterator<Item> it = this.itemsEquipados.iterator();
+		while(it.hasNext())
+			daño_items += it.next().bono_daño;
 		System.out.println("Daño causado: " + (this.getFuerza() + daño_items));
 		return (this.getFuerza() + daño_items); // hago que el daño de un
 		// personaje sea igual a la
@@ -178,10 +182,9 @@ public class Personaje implements Peleable {
 
 	public int calcularPuntosDeDefensa() {
 		int defensa_items = 0;
-		for (int i = 0; i < 6; i++) {
-			if (this.itemsEquipados[i] != null)
-				defensa_items += this.itemsEquipados[i].getBono_defensa();
-		}
+		Iterator<Item> it = this.itemsEquipados.iterator();
+		while(it.hasNext())
+			defensa_items += it.next().bono_defensa;
 		System.out.println("Defensa obtenida: " + (this.getDefensa() * 0.5 + defensa_items + this.getDestreza()));
 		return (int) (this.getDefensa() * 0.5 + defensa_items + this.getDestreza());
 	}
@@ -204,90 +207,93 @@ public class Personaje implements Peleable {
 		return 0;// esquivo el golpe
 	}
 
-	public void serDesernegizado(int daño) {
-		energia -= daño;
+	public boolean serDesernegizado(int daño) { //nose si se va a usar este metodo, mas facil es manejarse con get y set
+		if(energia>0 && energia-daño>0)
+			{
+			energia -= daño;
+			return true;
+			}
+		return false;
 	}
 
 	public void serCurado(int salud) {
-		this.salud += salud;
+		if(this.salud+salud<=this.salud_tope)
+			this.salud += salud;
+		else
+			this.salud=salud_tope;
 	}
 
-	public void serEnergizado() {
-		energia = 100;
+	public void serEnergizado(int energia) {
+		if(this.energia+energia<=this.energia_tope)
+			this.energia += energia;
+		else
+			this.energia=energia_tope;
 	}
 
 	public boolean desequiparItem(Item i) { // lo puedo usar para desequipar un
 											// item o para dropear directamente
-											// un item equipado
-		for (int j = 0; j < 6; j++) {
-			if (this.itemsEquipados[j].equals(i)) {
-				this.itemsEquipados[j] = null;
-				if (i.getClass().getName() == "dominio.ItemDeManos")
-					this.item_manos--;
-				return true;
-			}
+										// un item equipado
+		if(this.itemsEquipados.remove(i))
+		{
+		if (i.getTipo()=="Manos")
+			this.item_manos--;
+		return true;
 		}
 		return false;
 	}
 
 	public boolean dropearItem(Item i) { // aca se dropearia desde la mochila
-		for (int j = 0; j < 20; j++) {
-			if (this.itemsGuardados[j].equals(i)) {
-				this.itemsGuardados[j] = null;
-				return true;
-			}
+		return this.itemsGuardados.remove(i);
 		}
-		return false;
-	}
 
 	public boolean guardarItem(Item i) {
-		for (int j = 0; j < 20; j++) {
-			if (this.itemsGuardados[j] == null) {
-				this.itemsGuardados[j] = i;
-				return true;
-			}
+		
+		if(this.itemsGuardados.size()<=20)
+		{
+			this.itemsGuardados.add(i);
+			return true;
 		}
-		return false;
+		return false;	
 	}
 
 	public boolean equiparItem(Item i) {
-		int j = 0;
-		while (this.itemsEquipados[j] != null && j < 6)
-			j++;
-		if (j == 6) {
-			System.out.println("Ya esta equipado al 100%");
-			return false;
+		if(this.itemsEquipados.size()<=6)
+		{
+			if(this.puedeEquipar(i))
+				{
+				this.itemsEquipados.add(i);
+			
+				return true;
+				}
+			
 		}
-		if (this.puedeEquipar(i)) {
-			this.itemsEquipados[j] = i;
-			return true;
-		}
+
 		return false;
 	}
+			
+			
+		
+	 boolean puedeEquipar(Item i) {
 
-	public boolean puedeEquipar(Item i) {
-
-		if (i.getClass().getName() == "dominio.ItemDeManos") {
-
-			if (item_manos < 2) {
-				item_manos++;
-				return true;
-			} else
-				System.out.println("No puede equipar mas items del tipo " + i.getClass().getName());
-			return false;
-		}
-
-		for (int j = 0; j < 6; j++) {
-			if (this.itemsEquipados[j] != null) {
-				if (this.itemsEquipados[j].getClass().getName() == i.getClass().getName()) {
-					System.out.println("No puede equipar mas items del tipo " + i.getClass().getName());
-					return false;
-
+		 if(i.getTipo() == "Manos")
+		 {
+			 if (item_manos < 2) 
+			 	{
+					item_manos++;
+					return true;
 				}
+			 return false;
+		 }
+		 
+		 Iterator<Item> it = this.itemsEquipados.iterator();
+			while(it.hasNext())
+			{
+				if(it.next().getTipo() == i.getTipo())
+					return false;
 			}
+		 return true;
 		}
-		return true;
-	}
+
 
 	public String listaItemsEquipados() {
 		String aux = "";
@@ -404,14 +410,16 @@ public class Personaje implements Peleable {
 	}
 
 	public static void main(String[] args) {
-		Humano h = new Humano(100, 100, 15, 20, 30, new Guerrero(0.2, 0.3, 1.5), new Item[6], new Item[20], 0, 1, 1,
+		Humano h = new Humano(100, 100, 15, 20, 30, new Guerrero(0.2, 0.3, 1.5), new LinkedList<Item>(), new LinkedList<Item>(), 0, 1, 1,
 				50);
-		Orco o = new Orco(200, 100, 15, 20, 30, new Guerrero(0.2, 0.3, 1.5), new Item[6], new Item[20], 0, 1, 1, 50);
+		Orco o = new Orco(200, 100, 15, 20, 30, new Guerrero(0.2, 0.3, 1.5), new LinkedList<Item>(), new LinkedList<Item>(), 0, 1, 1, 50);
 
-		ItemDeManos excalibur = new ItemDeManos(1, 10, "Excalibur", 50, 0, 0, 0, 0, 10, 10, 10);
-		ItemDeTorso cotaDeMalla = new ItemDeTorso(2, 10, "Cota de Malla", 0, 20, 0, 0, 0, 10, 10, 10);
+		ItemDeManos excalibur = new ItemDeManos(1, 10, "Excalibur","Manos", 50, 0, 0, 0, 0, 10, 10, 10);
+		ItemDeTorso cotaDeMalla = new ItemDeTorso(2, 10, "Cota de Malla","Manos", 0, 20, 0, 0, 0, 10, 10, 10);
 
 		h.equiparItem(excalibur);
+		h.equiparItem(excalibur);
+		
 		System.out.println("Energia Humano:" + " " + h.getEnergia());
 		System.out.println("Vida del Orco:" + " " + o.getSalud());
 
