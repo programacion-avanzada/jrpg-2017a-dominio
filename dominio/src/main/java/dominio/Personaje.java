@@ -25,7 +25,16 @@ public class Personaje implements Peleable {
 	protected Alianza clan = null;
 	protected int salud_tope;// nose si va
 	protected int energia_tope;// nose si va
+	protected static int tabla_nivel[];
 
+	public static void cargar_tabla_nivel()
+	{
+		Personaje.tabla_nivel = new int[100];
+		Personaje.tabla_nivel[0]=0;
+		for(int i=1;i<100;i++)
+			Personaje.tabla_nivel[i]=Personaje.tabla_nivel[i-1]+50;
+	}
+	
 	public Personaje(String casta) {
 
 	}
@@ -337,18 +346,21 @@ public class Personaje implements Peleable {
 		return false;
 	}
 
-	public boolean subirNivel() {
-		if (this.nivel < 100) {
+	public void subirNivel() {
+		
+		int aux=0;
+		while(this.experiencia>=Personaje.tabla_nivel[this.nivel]+aux)
+		{System.out.println("hoaaaaa");
+		aux+=Personaje.tabla_nivel[this.nivel];
 			this.nivel++;
-			return true;
-		} else {
-			System.out.println("Maximo nivel alcanzado");
-			return false;
 		}
-	}
+		this.experiencia-=aux;
+		}
 
 	public void ganarExperiencia(int exp) {
 		experiencia += exp;
+		if(experiencia >= Personaje.tabla_nivel[this.nivel])
+			this.subirNivel();
 	}
 
 	/*
@@ -428,6 +440,12 @@ public class Personaje implements Peleable {
 
 		System.out.println("Energia Humano:" + " " + h.getEnergia());
 		System.out.println("Vida del Orco:" + " " + o.getSalud());
+		
+		Personaje.cargar_tabla_nivel();
+		h.ganarExperiencia(50);
+		System.out.println("Nivel: "+h.getNivel());
+		System.out.println("Exp: "+h.getExperiencia());
+		
 
 	}
 
