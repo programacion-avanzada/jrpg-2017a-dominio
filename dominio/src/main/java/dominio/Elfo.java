@@ -26,7 +26,11 @@ public class Elfo extends Personaje{
 	}
 	
 	public void ataqueBosque(Peleable atacado){
-		
+		if(this.getEnergia()>10)
+		{
+			atacado.serAtacado( (int) (this.calcularPuntosDeMagia()));
+			this.setEnergia(this.getEnergia()-10);
+		}
 	}
 
 }

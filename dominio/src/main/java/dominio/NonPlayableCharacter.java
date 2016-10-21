@@ -99,6 +99,7 @@ public class NonPlayableCharacter implements Peleable{
 	
 	public Item serRobado()
 	{
-		return this.items_dropeables[0];
+		Random rnd = new Random();
+		return this.items_dropeables[rnd.nextInt(this.items_dropeables.length)];
 	}
 }

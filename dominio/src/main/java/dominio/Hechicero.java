@@ -12,17 +12,8 @@ public class Hechicero extends Casta {
 		if (caster.getEnergia() > 10) {
 			caster.setEnergia(caster.getEnergia() - 10);
 			if (aliado instanceof Personaje)
-				((Personaje) aliado).serCurado(caster.getInteligencia()); // la
-																			// inteligencia
-																			// es
-																			// la
-																			// "fuerza"
-																			// de
-																			// mis
-																			// hechizos,
-																			// hay
-																			// que
-																			// modificarlo
+				((Personaje) aliado).serCurado(caster.calcularPuntosDeMagia()); 
+																			
 		}
 	}
 
@@ -34,18 +25,22 @@ public class Hechicero extends Casta {
 	{
 		if (caster.getEnergia() > 10) {
 			caster.setEnergia(caster.getEnergia() - 10);
-			atacado.serAtacado(caster.getInteligencia());
+			atacado.serAtacado(caster.calcularPuntosDeMagia());
 		}
 	}
 
-	public void habilidad3(Personaje caster, Peleable atacado) // roba energia
+	public void habilidad3(Personaje caster, Peleable atacado) // roba energia y salud
 																// de los
-																// enemigos y vida
+																// enemigos 
 	{
 		if (caster.getEnergia() > 10) {
 			caster.setEnergia(caster.getEnergia() - 10);
 			if (atacado instanceof Personaje)
-				((Personaje) atacado).serDesernegizado(caster.getInteligencia());
+				{
+				((Personaje) atacado).serDesernegizado(caster.calcularPuntosDeMagia());
+				((Personaje) atacado).serRobadoSalud(caster.calcularPuntosDeMagia()/2);//divido por 2 sino es muy fruta
+				}
+				
 		}
 	}
 

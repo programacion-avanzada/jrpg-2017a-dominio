@@ -21,7 +21,7 @@ public  class Guerrero extends Casta{
 		if(caster.getEnergia()>10)
 		{
 		caster.setEnergia(caster.getEnergia()-10);
-		caster.setDefensa(caster.getDefensa()+10);
+		caster.setDefensa(caster.getDefensa()+caster.calcularPuntosDeMagia());
 		}
 	}
 	
@@ -35,7 +35,7 @@ public  class Guerrero extends Casta{
 		{
 			int defensa_original =((Personaje) atacado).getDefensa();
 			((Personaje) atacado).setDefensa(0);
-			atacado.serAtacado(caster.fuerza);
+			atacado.serAtacado(caster.calcularPuntosDeAtaque());
 			((Personaje) atacado).setDefensa(defensa_original);
 		}
 		}
