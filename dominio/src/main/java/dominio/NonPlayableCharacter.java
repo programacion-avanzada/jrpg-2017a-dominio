@@ -7,7 +7,7 @@ public class NonPlayableCharacter implements Peleable{
 	private  int fuerza;
 	private int defensa;
 	private Item[] items_dropeables;
-	
+	private int nivel;
 	
 	public boolean estaVivo() {
 		return salud > 0;
@@ -74,6 +74,31 @@ public class NonPlayableCharacter implements Peleable{
 		int aux=(int) (rnd.nextDouble()*10);
 			while(aux>items_dropeables.length-1)
 				aux=(int) (rnd.nextDouble()*10);
-		return items_dropeables[aux];
+			
+		int	nivel_item=(int) (rnd.nextDouble()*100);
+			while((this.nivel-5)>nivel_item || (this.nivel+5)<nivel_item)///aca hago que dropee un item dependiendo del nivel del NPC
+				nivel_item=(int) (rnd.nextDouble()*100);
+		return modificarItem(items_dropeables[aux],nivel_item);
+	}
+	
+	public Item modificarItem(Item i, int nivel_item)///La modificacion depende directamente del nivel(nivel 5 = bono_daño+5,etc)
+	{
+		i.setNivel(nivel_item);
+		if(i.getBono_daño()!=0)
+			i.setBono_daño(i.getBono_daño()+nivel_item);
+		if(i.getBono_defensa()!=0)
+			i.setBono_defensa(i.getBono_defensa()+nivel_item);
+		if(i.getBono_magia()!=0)
+			i.setBono_magia(i.getBono_magia()+nivel_item);
+		if(i.getBono_salud()!=0)
+			i.setBono_salud(i.getBono_salud()+nivel_item);
+		if(i.getBono_energia()!=0)
+			i.setBono_daño(i.getBono_energia()+nivel_item);
+		return i;
+	}
+	
+	public Item serRobado()
+	{
+		return this.items_dropeables[0];
 	}
 }

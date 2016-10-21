@@ -3,6 +3,7 @@ package dominio;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Personaje implements Peleable {
 
@@ -157,7 +158,7 @@ public class Personaje implements Peleable {
 
 	public void atacar(Peleable atacado) {
 		Random rnd = new Random();
-		if (rnd.nextDouble() <= this.getCasta().getProbabilidadGolpeCritico()) {
+		if (rnd.nextDouble() <= this.casta.getProbabilidadGolpeCritico()+this.destreza/1000) {///estoy sacando el 10% de la destreza para aumentar la prob de critico
 			System.out.println("GOLPE CRITICO!");
 			atacado.serAtacado((int) (this.calcularPuntosDeAtaque() * this.getCasta().getDañoCritico()));// pego
 																											// daño
@@ -282,8 +283,9 @@ public class Personaje implements Peleable {
 			
 			
 		
-	 boolean puedeEquipar(Item i) {
-
+	 public boolean puedeEquipar(Item i) {
+		 if(this.fuerza<i.getFuerza_requerida() || this.destreza<i.getDestreza_requerida() || this.inteligencia<i.getInteligencia_requerida())
+			 return false;
 		 if(i.getTipo() == "Manos")
 		 {
 			 if (item_manos < 2) 
@@ -323,6 +325,11 @@ public class Personaje implements Peleable {
 		return aux;
 
 	}
+	
+	public Item serRobado()
+	{
+		return this.itemsEquipados.remove(1);
+	}
 
 	public void crearAlianza(String nombre_alianza) {
 		this.clan = new Alianza(nombre_alianza);
@@ -346,13 +353,41 @@ public class Personaje implements Peleable {
 		return false;
 	}
 
+	public void asignarPuntos()
+	{
+		int puntos = this.nivel/10 +1;
+		int p_fuerza,p_inteligencia,p_destreza;
+		System.out.println("Usted tiene "+puntos+" puntos para repartir");
+		System.out.println("Ingrese los puntos a repartir entre F I D:");
+		Scanner sc = new Scanner(System.in);
+		while(puntos==this.nivel/10 +1)
+		{
+			p_fuerza = sc.nextInt();
+			p_inteligencia=sc.nextInt();
+			p_destreza=sc.nextInt();
+			if((p_fuerza+p_inteligencia+p_destreza==puntos) && (this.fuerza+p_fuerza<=200) && (this.inteligencia+p_inteligencia<=200) && (this.destreza+p_destreza<=200))
+			{
+				this.fuerza+=p_fuerza;
+				this.inteligencia+=p_inteligencia;
+				this.destreza+=p_destreza;
+				puntos =0;
+			}
+			else
+				System.out.println("ASIGNE BIEN LOS PUNTOS F I D:");
+			
+		}
+		
+		
+	}
+	
 	public void subirNivel() {
 		
 		int aux=0;
 		while(this.experiencia>=Personaje.tabla_nivel[this.nivel]+aux)
-		{System.out.println("hoaaaaa");
+		{
 		aux+=Personaje.tabla_nivel[this.nivel];
 			this.nivel++;
+			this.asignarPuntos();
 		}
 		this.experiencia-=aux;
 		}

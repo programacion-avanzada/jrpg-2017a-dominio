@@ -40,7 +40,7 @@ public class Hechicero extends Casta {
 
 	public void habilidad3(Personaje caster, Peleable atacado) // roba energia
 																// de los
-																// enemigos
+																// enemigos y vida
 	{
 		if (caster.getEnergia() > 10) {
 			caster.setEnergia(caster.getEnergia() - 10);

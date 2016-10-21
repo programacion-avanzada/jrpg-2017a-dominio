@@ -14,6 +14,7 @@ protected int bono_energia;
 protected int fuerza_requerida;
 protected int inteligencia_requerida;
 protected int destreza_requerida;
+protected int nivel=1;
 public abstract int obtenerCantidadDeItemsMaximo();
 
 
@@ -131,6 +132,18 @@ public int getDestreza_requerida() {
 
 public void setDestreza_requerida(int destreza_requerida) {
 	this.destreza_requerida = destreza_requerida;
+}
+
+
+
+public int getNivel() {
+	return nivel;
+}
+
+
+
+public void setNivel(int nivel) {
+	this.nivel = nivel;
 }
 
 

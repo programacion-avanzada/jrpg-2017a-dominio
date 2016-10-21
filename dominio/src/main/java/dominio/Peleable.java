@@ -5,4 +5,5 @@ public interface Peleable {
 	public int getSalud();
 	public void despuesDeTurno();
 	public void atacar(Peleable atacado);
+	public Item serRobado();
 }
