@@ -9,9 +9,9 @@ public class Personaje implements Peleable {
 
 	protected int salud;
 	protected int energia;
-	protected int defensa;//depende de la destreza
-	//protected int ataque;//depende de la fuerza
-	//protected int magia;//depende de la inteligencia
+	protected int defensa;//depende de la destreza y de los items
+	protected int ataque;//depende de la fuerza y de los items
+	protected int magia;//depende de la inteligencia y de los items
 	
 	protected int fuerza;
 	protected int destreza;
@@ -27,8 +27,6 @@ public class Personaje implements Peleable {
 	protected int idPersonaje;
 	protected int item_manos = 0;
 	protected Alianza clan = null;
-	protected int salud_tope;// nose si va
-	protected int energia_tope;// nose si va
 	protected static int tabla_nivel[];
 
 	public static void cargar_tabla_nivel() {
@@ -44,8 +42,8 @@ public class Personaje implements Peleable {
 
 	public Personaje(int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta,
 			LinkedList<Item> itemsEquipados, LinkedList<Item> itemsGuardados, int experiencia, int nivel,
-			int idPersonaje, int defensa) {
-
+			int idPersonaje) {
+		
 		this.salud = salud;
 		this.energia = energia;
 		this.fuerza = fuerza;
@@ -57,10 +55,10 @@ public class Personaje implements Peleable {
 		this.experiencia = experiencia;
 		this.nivel = nivel;
 
-		this.idPersonaje = idPersonaje;// agregue un Id para la base de datos
-										// (nose si se va a implementar asi)
-		this.defensa = defensa;// creo que es mas comodo tener un atributo
-								// defensa que un metodo calcularPuntosDefensa
+		this.idPersonaje = idPersonaje;
+		this.defensa=this.calcularPuntosDeDefensa();
+		this.ataque=this.calcularPuntosDeAtaque();
+		this.magia=this.calcularPuntosDeMagia();
 	}
 
 	public int getSalud() {
@@ -175,11 +173,13 @@ public class Personaje implements Peleable {
 																									/// de
 																									/// critico
 			System.out.println("GOLPE CRITICO!");
-			atacado.serAtacado((int) (this.calcularPuntosDeAtaque() * this.getCasta().getDañoCritico()));// pego
+			System.out.println("Daño inflingido: "+(this.ataque * this.getCasta().getDañoCritico()));
+			atacado.serAtacado((int) (this.ataque * this.getCasta().getDañoCritico()));// pego
 																											// daño
 																											// critico
 		} else
-			atacado.serAtacado(this.calcularPuntosDeAtaque());
+			{System.out.println("Daño inflingido: "+(this.ataque));
+			atacado.serAtacado(this.ataque);}
 	}
 
 	public void despuesDeTurno() {
@@ -195,12 +195,11 @@ public class Personaje implements Peleable {
 		Iterator<Item> it = this.itemsEquipados.iterator();
 		while (it.hasNext())
 			daño_items += it.next().bono_daño;
-		System.out.println("Daño causado: " + (this.getFuerza() + daño_items));
+		//System.out.println("Daño : " + (this.getFuerza() + daño_items));
 		return (this.getFuerza() + daño_items); // hago que el daño de un
 		// personaje sea igual a la
 		// fuerza que tiene mas el daño
-		// de sus items, luego hay que
-		// modificarlo
+		// de sus items
 
 	}
 
@@ -209,7 +208,7 @@ public class Personaje implements Peleable {
 		Iterator<Item> it = this.itemsEquipados.iterator();
 		while (it.hasNext())
 			defensa_items += it.next().bono_defensa;
-		System.out.println("Defensa obtenida: " + (this.getDefensa() * 0.5 + defensa_items + this.getDestreza()));
+		//System.out.println("Defensa : " + (this.getDefensa() * 0.5 + defensa_items + this.getDestreza()));
 		return (int) (defensa_items + this.getDestreza());
 	}
 
@@ -218,9 +217,38 @@ public class Personaje implements Peleable {
 		Iterator<Item> it = this.itemsEquipados.iterator();
 		while (it.hasNext())
 			magia_items += it.next().bono_magia;
-		System.out.println("Magia obtenida: " + (this.getInteligencia() + magia_items));
+		//System.out.println("Magia : " + (this.getInteligencia() + magia_items));
 		return (this.getInteligencia() + magia_items);
 
+	}
+	
+	public int calcularPuntosDeSalud()
+	{
+		int salud_items=0;
+		Iterator<Item> it = this.itemsEquipados.iterator();
+		while (it.hasNext())
+			salud_items += it.next().bono_salud;
+		//System.out.println("Salud : "+(this.getSalud()+salud_items));
+		return (this.getSalud()+salud_items);
+	}
+	
+	public int calcularPuntosDeEnergia()
+	{
+		int energia_items=0;
+		Iterator<Item> it = this.itemsEquipados.iterator();
+		while (it.hasNext())
+			energia_items += it.next().bono_energia;
+		//System.out.println("Energia : "+(this.getEnergia()+energia_items));
+		return (this.getEnergia()+energia_items);
+	}
+	
+	public void modificarAtributos()
+	{
+		this.salud=this.calcularPuntosDeSalud();
+		this.energia=this.calcularPuntosDeEnergia();
+		this.ataque=this.calcularPuntosDeAtaque();
+		this.defensa=this.calcularPuntosDeDefensa();
+		this.magia=this.calcularPuntosDeMagia();
 	}
 
 	public boolean estaVivo() {
@@ -230,7 +258,8 @@ public class Personaje implements Peleable {
 	public int serAtacado(int daño) {
 		Random rnd = new Random();
 		if (rnd.nextDouble() >= this.getCasta().getProbabilidadEvitarDaño()) {
-			daño -= this.calcularPuntosDeDefensa();
+			daño -= this.defensa;
+			System.out.println("Defensa obtenida: "+this.defensa);
 			if (daño > 0) {
 				salud -= daño;
 				return daño;
@@ -242,7 +271,7 @@ public class Personaje implements Peleable {
 	}
 
 	public int serRobadoSalud(int daño) {
-		daño -= this.calcularPuntosDeDefensa();
+		daño -= this.defensa;
 		if (daño <= 0)
 			return 0;
 		if ((salud - daño) >= 0)
@@ -255,7 +284,7 @@ public class Personaje implements Peleable {
 	}
 
 	public int serDesernegizado(int daño) {
-		daño -= this.calcularPuntosDeDefensa();
+		daño -= this.defensa;
 		if (daño <= 0)
 			return 0;
 		if ((energia - daño) >= 0)
@@ -268,17 +297,17 @@ public class Personaje implements Peleable {
 	}
 
 	public void serCurado(int salud) {
-		if ((this.salud + salud) <= this.salud_tope)
+		if ((this.salud + salud) <= this.calcularPuntosDeSalud())
 			this.salud += salud;
 		else
-			this.salud = salud_tope;
+			this.salud = this.calcularPuntosDeSalud();
 	}
 
 	public void serEnergizado(int energia) {
-		if ((this.energia + energia) <= this.energia_tope)
+		if ((this.energia + energia) <= this.calcularPuntosDeEnergia())
 			this.energia += energia;
 		else
-			this.energia = energia_tope;
+			this.energia = this.calcularPuntosDeEnergia();
 	}
 
 	public boolean desequiparItem(Item i) { // lo puedo usar para desequipar un
@@ -287,6 +316,7 @@ public class Personaje implements Peleable {
 		if (this.itemsEquipados.remove(i)) {
 			if (i.getTipo() == "Manos")
 				this.item_manos--;
+			this.modificarAtributos();
 			return true;
 		}
 		return false;
@@ -310,7 +340,7 @@ public class Personaje implements Peleable {
 		if (this.itemsEquipados.size() <= 6) {
 			if (this.puedeEquipar(i)) {
 				this.itemsEquipados.add(i);
-
+				this.modificarAtributos();
 				return true;
 			}
 
@@ -505,10 +535,10 @@ public class Personaje implements Peleable {
 
 	public static void main(String[] args) {
 		Humano h = new Humano(100, 100, 15, 20, 30, new Guerrero(0.2, 0.3, 1.5), new LinkedList<Item>(),
-				new LinkedList<Item>(), 0, 1, 1, 50);
+				new LinkedList<Item>(), 0, 1, 1);
 		Orco o = new Orco(200, 100, 15, 20, 30, new Guerrero(0.2, 0.3, 1.5), new LinkedList<Item>(),
-				new LinkedList<Item>(), 0, 1, 1, 50);
-
+				new LinkedList<Item>(), 0, 1, 1);
+		Personaje.cargar_tabla_nivel();
 		ItemDeManos excalibur = new ItemDeManos(1, 10, "Excalibur", "Manos", 50, 0, 0, 0, 0, 10, 10, 10);
 		ItemDeTorso cotaDeMalla = new ItemDeTorso(2, 10, "Cota de Malla", "Manos", 0, 20, 0, 0, 0, 10, 10, 10);
 
@@ -524,10 +554,9 @@ public class Personaje implements Peleable {
 		System.out.println("Energia Humano:" + " " + h.getEnergia());
 		System.out.println("Vida del Orco:" + " " + o.getSalud());
 
-		Personaje.cargar_tabla_nivel();
-		h.ganarExperiencia(50);
-		System.out.println("Nivel: " + h.getNivel());
-		System.out.println("Exp: " + h.getExperiencia());
+	
+		
+		
 
 	}
 

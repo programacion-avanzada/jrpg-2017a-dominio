@@ -11,9 +11,9 @@ public class Elfo extends Personaje{
 	
 	
 	public Elfo(int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta, LinkedList<Item> itemsEquipados,
-			LinkedList<Item> itemsGuardados, int experiencia, int nivel, int idPersonaje,int defensa) {
+			LinkedList<Item> itemsGuardados, int experiencia, int nivel, int idPersonaje) {
 		super(salud, energia, fuerza, destreza, inteligencia, casta, itemsEquipados, itemsGuardados, experiencia, nivel,
-				idPersonaje,defensa);
+				idPersonaje);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -21,14 +21,14 @@ public class Elfo extends Personaje{
 
 	public void golpeLevel(Peleable atacado){
 		if(this.getEnergia()>10)
-		{atacado.serAtacado(this.getFuerza()+this.getNivel()*10);
+		{atacado.serAtacado(this.getFuerza()+this.getNivel()*10);//no importan los items, solo la fuerza y el level
 		this.setEnergia(this.getEnergia()-10);}
 	}
 	
 	public void ataqueBosque(Peleable atacado){
 		if(this.getEnergia()>10)
 		{
-			atacado.serAtacado( (int) (this.calcularPuntosDeMagia()));
+			atacado.serAtacado( (int) (this.magia));
 			this.setEnergia(this.getEnergia()-10);
 		}
 	}

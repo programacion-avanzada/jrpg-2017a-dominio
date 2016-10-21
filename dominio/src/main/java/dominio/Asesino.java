@@ -19,7 +19,7 @@ public class Asesino extends Casta {
 	{
 		if (caster.getEnergia() > 10) {
 			caster.setEnergia(caster.getEnergia() - 10);
-			atacado.serAtacado((int) (caster.getFuerza() * caster.getCasta().getDañoCritico()));
+			atacado.serAtacado((int) (caster.ataque * caster.getCasta().getDañoCritico()));
 		}
 	}
 

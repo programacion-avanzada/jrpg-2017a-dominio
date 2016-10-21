@@ -11,9 +11,9 @@ public class Humano extends Personaje {
 	
 	
 	public Humano(int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta,
-			LinkedList<Item> itemsEquipados, LinkedList<Item> itemsGuardados, int experiencia, int nivel, int idPersonaje, int defensa) {
+			LinkedList<Item> itemsEquipados, LinkedList<Item> itemsGuardados, int experiencia, int nivel, int idPersonaje) {
 		super(salud, energia, fuerza, destreza, inteligencia, casta, itemsEquipados, itemsGuardados, experiencia, nivel,
-				idPersonaje,defensa);
+				idPersonaje);
 		
 	}
 
