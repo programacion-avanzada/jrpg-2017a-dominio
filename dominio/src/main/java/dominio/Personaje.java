@@ -13,6 +13,9 @@ public abstract class Personaje implements Peleable {
 	protected int ataque;//depende de la fuerza y de los items
 	protected int magia;//depende de la inteligencia y de los items
 	
+	int x;
+	int y;
+	
 	protected int fuerza;
 	protected int destreza;
 	protected int inteligencia;
@@ -60,6 +63,32 @@ public abstract class Personaje implements Peleable {
 		this.defensa=this.calcularPuntosDeDefensa();
 		this.ataque=this.calcularPuntosDeAtaque();
 		this.magia=this.calcularPuntosDeMagia();
+	}
+
+	
+	
+	public int getPosicion_x() {
+		return x;
+	}
+
+	public void setPosicion_x(int posicion_x) {
+		this.x = posicion_x;
+	}
+
+	public int getPosicion_y() {
+		return y;
+	}
+
+	public void setPosicion_y(int posicion_y) {
+		this.y = posicion_y;
+	}
+
+	public Alianza getClan() {
+		return clan;
+	}
+
+	public void setClan(Alianza clan) {
+		this.clan = clan;
 	}
 
 	public int getSalud() {
@@ -501,6 +530,8 @@ public abstract class Personaje implements Peleable {
 		return this.nivel*40;
 	}
 	
+	
+	
 	/*
 	 * public void habilidad1(Peleable atacado) { if(this.getCasta() instanceof
 	 * Guerrero) { if(this.getEnergia()>10)// habria que ver cuanta energia
@@ -546,6 +577,17 @@ public abstract class Personaje implements Peleable {
 	 * Asesino a1= (Asesino)this.getCasta(); a1.robar(this, atacado);
 	 * this.setEnergia(this.getEnergia()-10); } } }
 	 */
+
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		// TODO Auto-generated method stub
+		return super.clone();
+	}
+	
+	public double distanciaCon(Personaje p) {
+		return Math.sqrt( Math.pow(this.x - p.x, 2)
+				+ Math.pow(this.y - p.y, 2));
+	}
 
 	public void habilidadCasta1(Peleable atacado) {
 		this.getCasta().habilidad1(this, atacado);

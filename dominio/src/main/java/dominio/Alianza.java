@@ -7,6 +7,16 @@ public class Alianza {
 	String nombre;
 	ArrayList<Personaje> aliados;
 	
+	
+	
+	public ArrayList<Personaje> getAliados() {
+		return aliados;
+	}
+
+	public void setAliados(ArrayList<Personaje> aliados) {
+		this.aliados = aliados;
+	}
+
 	public Alianza(String nombre){
 		this.nombre=nombre;
 	}

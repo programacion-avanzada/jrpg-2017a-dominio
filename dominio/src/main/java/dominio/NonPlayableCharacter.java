@@ -8,6 +8,8 @@ public class NonPlayableCharacter implements Peleable{
 	private int defensa;
 	private Item[] items_dropeables;
 	private int nivel;
+	private int x;
+	private int y;
 	
 	public NonPlayableCharacter(int nivel,Item[] items_dropeables)
 	{
