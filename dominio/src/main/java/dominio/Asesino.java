@@ -54,6 +54,7 @@ public class Asesino extends Casta {
 				caster.itemsGuardados.add(atacado.serRobado());
 				System.out.println("Se pudo robar!");
 			}
+			else
 			System.out.println("No se pudo robar!");
 
 		}

@@ -6,4 +6,5 @@ public interface Peleable {
 	public void despuesDeTurno();
 	public void atacar(Peleable atacado);
 	public Item serRobado();
+	public int otorgarExp();
 }

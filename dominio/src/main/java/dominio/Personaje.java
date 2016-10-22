@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Personaje implements Peleable {
+public abstract class Personaje implements Peleable {
 
 	protected int salud;
 	protected int energia;
@@ -34,6 +34,7 @@ public class Personaje implements Peleable {
 		Personaje.tabla_nivel[0] = 0;
 		for (int i = 1; i < 100; i++)
 			Personaje.tabla_nivel[i] = Personaje.tabla_nivel[i - 1] + 50;
+		
 	}
 
 	public Personaje(String casta) {
@@ -412,6 +413,20 @@ public class Personaje implements Peleable {
 		return item_robado;
 	}
 
+	public Item getEquipado(int i)
+	{
+		if(this.itemsEquipados.size()>i)
+			return this.itemsEquipados.get(i);
+		return null;
+	}
+	
+	public Item getMochila(int i)
+	{
+		if(this.itemsGuardados.size()>i)
+		return this.itemsGuardados.get(i);
+		return null;
+	}
+	
 	public void crearAlianza(String nombre_alianza) {
 		this.clan = new Alianza(nombre_alianza);
 		this.clan.añadirPersonaje(this);
@@ -434,7 +449,7 @@ public class Personaje implements Peleable {
 		return false;
 	}
 
-	public void asignarPuntos() {
+/*	public void asignarPuntos() {
 		int puntos = this.nivel / 10 + 1;
 		int p_fuerza, p_inteligencia, p_destreza;
 		System.out.println("Usted tiene " + puntos + " puntos para repartir");
@@ -456,25 +471,36 @@ public class Personaje implements Peleable {
 		}
 		sc.close();
 
-	}
+	}*/
 
 	public void subirNivel() {
 
 		int aux = 0;
-		while (this.experiencia >= Personaje.tabla_nivel[this.nivel] + aux) {
+		if(this.nivel==100)
+		{
+			System.out.println("Ya ha alcanzado el maximo nivel!");
+			return;
+		}
+		while (this.nivel!=100 && (this.experiencia >= Personaje.tabla_nivel[this.nivel] + aux)  ) {
 			aux += Personaje.tabla_nivel[this.nivel];
 			this.nivel++;
-			this.asignarPuntos();
+	//		this.asignarPuntos();
+			this.modificarAtributos();
 		}
 		this.experiencia -= aux;
 	}
 
 	public void ganarExperiencia(int exp) {
-		experiencia += exp;
+		this.experiencia += exp;
 		if (experiencia >= Personaje.tabla_nivel[this.nivel])
 			this.subirNivel();
 	}
 
+	public int otorgarExp()
+	{
+		return this.nivel*40;
+	}
+	
 	/*
 	 * public void habilidad1(Peleable atacado) { if(this.getCasta() instanceof
 	 * Guerrero) { if(this.getEnergia()>10)// habria que ver cuanta energia
@@ -526,11 +552,11 @@ public class Personaje implements Peleable {
 	}
 
 	public void habilidadCasta2(Peleable atacado) {
-		this.getCasta().habilidad1(this, atacado);
+		this.getCasta().habilidad2(this, atacado);
 	}
 
 	public void habilidadCasta3(Peleable atacado) {
-		this.getCasta().habilidad1(this, atacado);
+		this.getCasta().habilidad3(this, atacado);
 	}
 
 	public static void main(String[] args) {
@@ -540,7 +566,7 @@ public class Personaje implements Peleable {
 				new LinkedList<Item>(), 0, 1, 1);
 		Personaje.cargar_tabla_nivel();
 		ItemDeManos excalibur = new ItemDeManos(1, 10, "Excalibur", "Manos", 50, 0, 0, 0, 0, 10, 10, 10);
-		ItemDeTorso cotaDeMalla = new ItemDeTorso(2, 10, "Cota de Malla", "Manos", 0, 20, 0, 0, 0, 10, 10, 10);
+		ItemDeTorso cotaDeMalla = new ItemDeTorso(2, 10, "Cota de Malla", "Torso", 0, 20, 0, 0, 0, 10, 10, 10);
 
 		h.equiparItem(excalibur);
 		h.equiparItem(excalibur);
@@ -555,8 +581,6 @@ public class Personaje implements Peleable {
 		System.out.println("Vida del Orco:" + " " + o.getSalud());
 
 	
-		
-		
 
 	}
 
