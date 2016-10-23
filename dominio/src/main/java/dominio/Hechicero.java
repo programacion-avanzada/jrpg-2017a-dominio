@@ -41,8 +41,6 @@ public class Hechicero extends Casta {
 				int salud_robada=((Personaje) atacado).serRobadoSalud(caster.calcularPuntosDeMagia()/2);//divido por 2 sino es muy fruta
 				caster.serEnergizado(energia_robada);
 				caster.serCurado(salud_robada);
-				System.out.println("Energia robada: "+energia_robada);
-				System.out.println("Salud robada: "+salud_robada);
 				}
 				
 		}

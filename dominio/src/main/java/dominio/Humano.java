@@ -19,8 +19,12 @@ public class Humano extends Personaje {
 
 
 
-	public void incentivar(Batallon aliados){
-		
+	public void incentivar(Personaje aliado){
+		if(this.getEnergia()>10)
+		{
+			this.setEnergia(this.getEnergia()-10);
+			aliado.setAtaque(aliado.getAtaque()+this.getMagia());
+		}
 	}
 	
 	public void golpeFatal(Peleable atacado){

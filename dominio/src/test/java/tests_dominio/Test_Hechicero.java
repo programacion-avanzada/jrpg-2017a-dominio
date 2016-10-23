@@ -9,7 +9,7 @@ import dominio.*;
 
 public class Test_Hechicero {
 	
-	/*@Test
+	@Test
 	public void test_curar()
 	{
 		Humano h = new Humano(100, 100, 55, 20, 30, new Hechicero(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 1, 1);
@@ -33,7 +33,7 @@ public class Test_Hechicero {
 		h.habilidadCasta2(e);
 		Assert.assertTrue(e.getSalud()==75);
 
-	}*/
+	}
 	
 	@Test
 	public void test_robarEnergia_y_Salud()

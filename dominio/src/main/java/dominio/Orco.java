@@ -19,7 +19,7 @@ public class Orco extends Personaje {
 
 
 
-	public void superGole(Batallon enemigos){
+	public void superGolpe(Batallon enemigos){
 		
 	}
 	

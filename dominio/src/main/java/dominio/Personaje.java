@@ -274,15 +274,15 @@ public abstract class Personaje implements Peleable {
 
 	}
 	
-	public int calcularPuntosDeSalud()
+/*	public int calcularPuntosDeSalud()
 	{
 		int salud_items=0;
 		Iterator<Item> it = this.itemsEquipados.iterator();
 		while (it.hasNext())
 			salud_items += it.next().bono_salud;
-		//System.out.println("Salud : "+(this.getSalud()+salud_items));
+		System.out.println("Salud del pj: "+this.getSalud()+" Salud del item"+salud_items);
 		return (this.getSalud()+salud_items);
-	}
+	} ////MAL IMPLEMENTADOSSSSSSSSSSSSSSSSSSSSSSSS
 	
 	public int calcularPuntosDeEnergia()
 	{
@@ -290,17 +290,18 @@ public abstract class Personaje implements Peleable {
 		Iterator<Item> it = this.itemsEquipados.iterator();
 		while (it.hasNext())
 			energia_items += it.next().bono_energia;
-		//System.out.println("Energia : "+(this.getEnergia()+energia_items));
+		System.out.println("Energia del pj: "+this.getEnergia()+" Energia del item:"+energia_items);
 		return (this.getEnergia()+energia_items);
-	}
+	}*/ //MAL IMPLEMENTADOSSSSSSSSSSSSSSSSSSSSSSSS
 	
 	public void modificarAtributos()
 	{
-		this.salud=this.calcularPuntosDeSalud();
-		this.energia=this.calcularPuntosDeEnergia();
+	//	this.salud=this.calcularPuntosDeSalud();
+	//	this.energia=this.calcularPuntosDeEnergia();
 		this.ataque=this.calcularPuntosDeAtaque();
 		this.defensa=this.calcularPuntosDeDefensa();
 		this.magia=this.calcularPuntosDeMagia();
+		
 	}
 
 	public boolean estaVivo() {
@@ -371,6 +372,10 @@ public abstract class Personaje implements Peleable {
 			if (i.getTipo() == "Manos")
 				this.item_manos--;
 			this.modificarAtributos();
+			this.salud_tope-=i.getBono_salud();
+			this.energia_tope-=i.getBono_energia();
+			this.salud=this.salud_tope;
+			this.energia=this.energia_tope;
 			return true;
 		}
 		return false;
@@ -383,7 +388,7 @@ public abstract class Personaje implements Peleable {
 
 	public boolean guardarItem(Item i) {
 
-		if (this.itemsGuardados.size() <= 20) {
+		if (this.itemsGuardados.size() < 20) {
 			this.itemsGuardados.add(i);
 			return true;
 		}
@@ -395,6 +400,10 @@ public abstract class Personaje implements Peleable {
 			if (this.puedeEquipar(i)) {
 				this.itemsEquipados.add(i);
 				this.modificarAtributos();
+				this.salud_tope+=i.getBono_salud();
+				this.energia_tope+=i.getBono_energia();
+				this.salud=this.salud_tope;
+				this.energia=this.energia_tope;
 				return true;
 			}
 
