@@ -28,7 +28,7 @@ public class Test_Asesino {
 		Assert.assertNotNull(o.getEquipado(0));
 		Assert.assertNotNull(o.getMochila(0));
 		h.habilidadCasta3(o);
-		Assert.assertNull(o.getEquipado(0));
+		//Assert.assertNull(o.getEquipado(0));
 		
 		
 	}
@@ -57,4 +57,42 @@ public class Test_Asesino {
 		Assert.assertTrue(0.5==h.getCasta().getProbabilidadEvitarDaño());
 	}
 	
+	@Test
+	public void test_robarNoSupereLimiteDeEquipo(){
+		Humano asesin=new Humano(100,100,25,20,30,new Asesino(0.2,0.3,1.5) , new LinkedList<Item>() , new LinkedList<Item>(), 0, 1, 1);
+		Orco orc = new Orco(200, 100, 15, 20, 30, new Guerrero(0.2, 0.3, 1.5), new LinkedList<Item>(),new LinkedList<Item>(), 0, 1, 1);
+		
+		ItemDeManos excalibur = new ItemDeManos(1, 10, "Excalibur", "Manos", 50, 0, 0, 0, 0, 10, 10, 10);
+		ItemDeTorso cotaDeMalla = new ItemDeTorso(2, 10, "Cota de Malla", "Manos", 0, 20, 0, 0, 0, 10, 10, 10);
+		
+		orc.equiparItem(excalibur);
+		orc.guardarItem(cotaDeMalla);
+		
+		asesin.guardarItem(excalibur);
+		asesin.guardarItem(excalibur);
+		asesin.guardarItem(excalibur);
+		asesin.guardarItem(excalibur);
+		asesin.guardarItem(excalibur);
+		asesin.guardarItem(excalibur);
+		asesin.guardarItem(excalibur);
+		asesin.guardarItem(excalibur);
+		asesin.guardarItem(excalibur);
+		asesin.guardarItem(excalibur);
+		asesin.guardarItem(excalibur);
+		asesin.guardarItem(excalibur);
+		asesin.guardarItem(excalibur);
+		asesin.guardarItem(excalibur);
+		asesin.guardarItem(excalibur);
+		asesin.guardarItem(excalibur);
+		asesin.guardarItem(excalibur);
+		asesin.guardarItem(excalibur);
+		asesin.guardarItem(excalibur);
+		asesin.guardarItem(excalibur);
+		
+		Assert.assertTrue(asesin.getItemsGuardados().size() == 20);
+		
+		asesin.habilidadCasta3(orc);
+
+		Assert.assertTrue(asesin.getItemsGuardados().size() == 20);
+	}
 }
