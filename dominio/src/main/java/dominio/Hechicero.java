@@ -25,7 +25,7 @@ public class Hechicero extends Casta {
 	{
 		if (caster.getEnergia() > 10) {
 			caster.setEnergia(caster.getEnergia() - 10);
-			atacado.serAtacado(caster.calcularPuntosDeMagia());
+			atacado.serAtacado((int) (caster.calcularPuntosDeMagia()*1.5));
 		}
 	}
 
@@ -37,8 +37,12 @@ public class Hechicero extends Casta {
 			caster.setEnergia(caster.getEnergia() - 10);
 			if (atacado instanceof Personaje)
 				{
-				((Personaje) atacado).serDesernegizado(caster.calcularPuntosDeMagia());
-				((Personaje) atacado).serRobadoSalud(caster.calcularPuntosDeMagia()/2);//divido por 2 sino es muy fruta
+				int energia_robada=((Personaje) atacado).serDesernegizado(caster.calcularPuntosDeMagia());
+				int salud_robada=((Personaje) atacado).serRobadoSalud(caster.calcularPuntosDeMagia()/2);//divido por 2 sino es muy fruta
+				caster.serEnergizado(energia_robada);
+				caster.serCurado(salud_robada);
+				System.out.println("Energia robada: "+energia_robada);
+				System.out.println("Salud robada: "+salud_robada);
 				}
 				
 		}

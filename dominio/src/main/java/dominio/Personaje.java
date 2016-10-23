@@ -13,8 +13,11 @@ public abstract class Personaje implements Peleable {
 	protected int ataque;//depende de la fuerza y de los items
 	protected int magia;//depende de la inteligencia y de los items
 	
-	int x;
-	int y;
+	protected int x;
+	protected int y;
+	
+	protected int salud_tope;
+	protected int energia_tope;
 	
 	protected int fuerza;
 	protected int destreza;
@@ -59,6 +62,9 @@ public abstract class Personaje implements Peleable {
 		this.experiencia = experiencia;
 		this.nivel = nivel;
 
+		this.salud_tope=this.salud;
+		this.energia_tope=this.energia;
+		
 		this.idPersonaje = idPersonaje;
 		this.defensa=this.calcularPuntosDeDefensa();
 		this.ataque=this.calcularPuntosDeAtaque();
@@ -67,6 +73,22 @@ public abstract class Personaje implements Peleable {
 
 	
 	
+	public int getAtaque() {
+		return ataque;
+	}
+
+	public void setAtaque(int ataque) {
+		this.ataque = ataque;
+	}
+
+	public int getMagia() {
+		return magia;
+	}
+
+	public void setMagia(int magia) {
+		this.magia = magia;
+	}
+
 	public int getPosicion_x() {
 		return x;
 	}
@@ -327,17 +349,19 @@ public abstract class Personaje implements Peleable {
 	}
 
 	public void serCurado(int salud) {
-		if ((this.salud + salud) <= this.calcularPuntosDeSalud())
+		if ((this.salud + salud) <= this.salud_tope)
 			this.salud += salud;
 		else
-			this.salud = this.calcularPuntosDeSalud();
+			this.salud = this.salud_tope;
+			
+			
 	}
 
 	public void serEnergizado(int energia) {
-		if ((this.energia + energia) <= this.calcularPuntosDeEnergia())
+		if ((this.energia + energia) <= this.energia_tope)
 			this.energia += energia;
 		else
-			this.energia = this.calcularPuntosDeEnergia();
+			this.energia = this.energia_tope;
 	}
 
 	public boolean desequiparItem(Item i) { // lo puedo usar para desequipar un
@@ -601,29 +625,5 @@ public abstract class Personaje implements Peleable {
 		this.getCasta().habilidad3(this, atacado);
 	}
 
-	public static void main(String[] args) {
-		Humano h = new Humano(100, 100, 15, 20, 30, new Guerrero(0.2, 0.3, 1.5), new LinkedList<Item>(),
-				new LinkedList<Item>(), 0, 1, 1);
-		Orco o = new Orco(200, 100, 15, 20, 30, new Guerrero(0.2, 0.3, 1.5), new LinkedList<Item>(),
-				new LinkedList<Item>(), 0, 1, 1);
-		Personaje.cargar_tabla_nivel();
-		ItemDeManos excalibur = new ItemDeManos(1, 10, "Excalibur", "Manos", 50, 0, 0, 0, 0, 10, 10, 10);
-		ItemDeTorso cotaDeMalla = new ItemDeTorso(2, 10, "Cota de Malla", "Torso", 0, 20, 0, 0, 0, 10, 10, 10);
-
-		h.equiparItem(excalibur);
-		h.equiparItem(excalibur);
-
-		System.out.println("Energia Humano:" + " " + h.getEnergia());
-		System.out.println("Vida del Orco:" + " " + o.getSalud());
-
-		// h.habilidadCasta1(o);
-		h.atacar(o);
-
-		System.out.println("Energia Humano:" + " " + h.getEnergia());
-		System.out.println("Vida del Orco:" + " " + o.getSalud());
-
 	
-
-	}
-
 }
