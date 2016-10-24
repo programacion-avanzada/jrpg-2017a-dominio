@@ -140,4 +140,9 @@ public class NonPlayableCharacter implements Peleable{
 		Random rnd = new Random();
 		return this.items_dropeables[rnd.nextInt(this.items_dropeables.length)];
 	}
+	
+	public void ganarExperiencia(int exp)
+	{
+		
+	}
 }
