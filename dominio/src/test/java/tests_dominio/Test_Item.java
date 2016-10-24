@@ -122,4 +122,18 @@ public class Test_Item {
 		
 	}
 	
+	@Test
+	public void test_equipoDeItemsDelMismoTipo(){
+		Humano h = new Humano(100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 1, 1);
+		
+		ItemDeTorso cotaDeMalla = new ItemDeTorso(1, 10, "cotaDeMalla", "Torso", 0, 0, 50, 0, 0, 10, 10, 10);
+		ItemDeTorso cotaDeEscamas = new ItemDeTorso(1, 10, "cotaDeEscamas", "Torso", 0, 0, 50, 0, 0, 10, 10, 10);
+		
+		h.equiparItem(cotaDeMalla);
+		h.equiparItem(cotaDeEscamas);
+		
+		Assert.assertEquals(1, h.getItemsEquipados().size());
+	}
+
 }
+

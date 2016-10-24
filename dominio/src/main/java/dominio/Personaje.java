@@ -211,7 +211,9 @@ public abstract class Personaje implements Peleable {
 
 	public void atacar(Peleable atacado) {
 		Random rnd = new Random();
-		if (rnd.nextDouble() <= this.casta.getProbabilidadGolpeCritico() + this.destreza / 1000) {/// estoy
+		if(salud==0) return;
+		if(atacado.getSalud()>0){
+			if (rnd.nextDouble() <= this.casta.getProbabilidadGolpeCritico() + this.destreza / 1000) {/// estoy
 																									/// sacando
 																									/// el
 																									/// 10%
@@ -224,14 +226,15 @@ public abstract class Personaje implements Peleable {
 																									/// prob
 																									/// de
 																									/// critico
-			System.out.println("GOLPE CRITICO!");
-			System.out.println("Daño inflingido: "+(this.ataque * this.getCasta().getDañoCritico()));
-			atacado.serAtacado((int) (this.ataque * this.getCasta().getDañoCritico()));// pego
+				System.out.println("GOLPE CRITICO!");
+				System.out.println("Daño inflingido: "+(this.ataque * this.getCasta().getDañoCritico()));
+				atacado.serAtacado((int) (this.ataque * this.getCasta().getDañoCritico()));// pego
 																											// daño
 																											// critico
-		} else
-			{System.out.println("Daño inflingido: "+(this.ataque));
-			atacado.serAtacado(this.ataque);}
+			} else
+				{System.out.println("Daño inflingido: "+(this.ataque));
+				atacado.serAtacado(this.ataque);}
+		}
 	}
 
 	public void despuesDeTurno() {
@@ -314,8 +317,14 @@ public abstract class Personaje implements Peleable {
 			daño -= this.defensa;
 			System.out.println("Defensa obtenida: "+this.defensa);
 			if (daño > 0) {
-				salud -= daño;
-				return daño;
+				if(salud<=daño){
+					daño=salud;
+					salud=0;
+				}
+				else{
+					salud -= daño;
+					return daño;
+				}
 			}
 			return 0;// no le hace daño ya que la defensa fue mayor
 		}
