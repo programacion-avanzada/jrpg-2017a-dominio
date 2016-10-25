@@ -7,8 +7,10 @@ import java.util.Scanner;
 
 public class BatallonPersonajes  {
 
-	LinkedList <Personaje> equipo;
-	String alianza;
+	private LinkedList <Personaje> equipo;
+	private String alianza;
+	private int exp1;
+	private LinkedList<Item> items;
 	
 	
 	
@@ -17,26 +19,28 @@ public class BatallonPersonajes  {
 	{
 		this.equipo=aliados;
 		this.alianza=this.equipo.get(0).getClan().nombre;
+		this.exp1=0;
+		this.items = new LinkedList <Item>();
 	}
 	
-	public void despuesDeBatallar(int exp,LinkedList<Item> itemsParaRepartir)
+	public void despuesDeBatallar()
 	{
 		
 		int cant_sobrevivientes=this.equipo.size();
 		Iterator <Personaje> it =this.equipo.iterator();
-		exp/=cant_sobrevivientes;
+		exp1/=cant_sobrevivientes;
 		System.out.println("CANT. SOBREVIVIENTES: "+cant_sobrevivientes);
 		while(it.hasNext())
 		{	
-			System.out.println("EXPERIENCIA QUE LE VOY A DAR: "+exp);
-			it.next().ganarExperiencia(exp);
+			System.out.println("EXPERIENCIA QUE LE VOY A DAR: "+exp1);
+			it.next().ganarExperiencia(exp1);
 		}
-		if(itemsParaRepartir.size()>0)
-			this.repartirItems(itemsParaRepartir);
+		if(items.size()>0)
+			this.repartirItems();
 		
 	}
 	
-	public void repartirItems(LinkedList<Item> items)
+	public void repartirItems()
 	{
 		int j;
 		Iterator <Personaje> it = this.equipo.iterator();
@@ -106,7 +110,7 @@ public class BatallonPersonajes  {
 				if(turno1==this.equipo.size())
 					turno1=0;
 			opcion=this.equipo.get(turno1).elegirOpcion();
-			this.realizarTurno(exp1, turno1, opcion, items1, pjsEnemigos);
+			this.realizarTurno(turno1, opcion, pjsEnemigos);
 			turno1++;
 			}
 		
@@ -115,7 +119,7 @@ public class BatallonPersonajes  {
 				if(turno2==pjsEnemigos.equipo.size())
 					turno2=0;
 			opcion=pjsEnemigos.equipo.get(turno2).elegirOpcion();
-			pjsEnemigos.realizarTurno(exp2, turno2, opcion, items2, this);
+			pjsEnemigos.realizarTurno(turno2, opcion, this);
 			turno2++;
 			}
 			System.out.println("TURNO 1= "+turno1+" TURNO 2= "+turno2);
@@ -134,11 +138,11 @@ public class BatallonPersonajes  {
 		}
 		
 		if(this.equipo.size()>0)
-			{this.despuesDeBatallar(exp1, items1);
+			{this.despuesDeBatallar();
 			System.out.println("GANO EL PRIMERO");
 			}
 		else
-			{pjsEnemigos.despuesDeBatallar(exp2, items2);
+			{pjsEnemigos.despuesDeBatallar();
 			System.out.println("GANO EL SEGUNDO");
 
 			}
@@ -148,8 +152,7 @@ public class BatallonPersonajes  {
 	
 	public void batallarContraNPCs(BatallonNPC npcsEnemigos)
 	{
-		int exp1;
-		LinkedList <Item> items1 = new LinkedList <Item>();
+		
 		this.establecerEstrategia();
 		
 		
@@ -169,7 +172,7 @@ public void establecerEstrategia(){
 		
 	}
 	
-	public void realizarTurno(int exp1,int turno1,int opcion,LinkedList <Item> items1, BatallonPersonajes pjsEnemigos)
+	public void realizarTurno(int turno1,int opcion,BatallonPersonajes pjsEnemigos)
 	{
 		int victima;
 		switch (opcion)
@@ -179,7 +182,7 @@ public void establecerEstrategia(){
 				this.equipo.get(turno1).atacar(pjsEnemigos.equipo.get(victima));
 				if(!pjsEnemigos.equipo.get(victima).estaVivo())
 					{
-						items1.add(pjsEnemigos.equipo.get(victima).otorgarItem());
+						items.add(pjsEnemigos.equipo.get(victima).otorgarItem());
 						exp1 += pjsEnemigos.equipo.get(victima).otorgarExp();
 						pjsEnemigos.equipo.remove(victima);
 					}
@@ -189,7 +192,7 @@ public void establecerEstrategia(){
 				 this.equipo.get(turno1).habilidadCasta1(pjsEnemigos.equipo.get(victima));
 				 if(!pjsEnemigos.equipo.get(victima).estaVivo())
 					{
-						items1.add(pjsEnemigos.equipo.get(victima).otorgarItem());
+						items.add(pjsEnemigos.equipo.get(victima).otorgarItem());
 						exp1 +=pjsEnemigos.equipo.get(victima).otorgarExp();
 						pjsEnemigos.equipo.remove(victima);
 					}
@@ -209,7 +212,7 @@ public void establecerEstrategia(){
 				this.equipo.get(turno1).habilidadCasta3(pjsEnemigos.equipo.get(victima));
 				if(!pjsEnemigos.equipo.get(victima).estaVivo())
 				{
-					items1.add(pjsEnemigos.equipo.get(victima).otorgarItem());
+					items.add(pjsEnemigos.equipo.get(victima).otorgarItem());
 					exp1 +=pjsEnemigos.equipo.get(victima).otorgarExp();
 					pjsEnemigos.equipo.remove(victima);
 				}
@@ -227,7 +230,7 @@ public void establecerEstrategia(){
 			this.equipo.get(turno1).habilidadRaza1(pjsEnemigos.equipo.get(victima));
 			if(!pjsEnemigos.equipo.get(victima).estaVivo())
 			{
-				items1.add(pjsEnemigos.equipo.get(victima).otorgarItem());
+				items.add(pjsEnemigos.equipo.get(victima).otorgarItem());
 				exp1 +=pjsEnemigos.equipo.get(victima).otorgarExp();
 				pjsEnemigos.equipo.remove(victima);
 			}
@@ -239,7 +242,7 @@ public void establecerEstrategia(){
 		this.equipo.get(turno1).habilidadRaza2(pjsEnemigos.equipo.get(victima));
 		if(!pjsEnemigos.equipo.get(victima).estaVivo())
 		{
-			items1.add(pjsEnemigos.equipo.get(victima).otorgarItem());
+			items.add(pjsEnemigos.equipo.get(victima).otorgarItem());
 			exp1 +=pjsEnemigos.equipo.get(victima).otorgarExp();
 			pjsEnemigos.equipo.remove(victima);
 		}
@@ -251,7 +254,7 @@ public void establecerEstrategia(){
 	{
 		Scanner sc = new Scanner(System.in);
 		String aux="";
-		System.out.println("Batallon enemigo:");
+		System.out.println("\nBatallon enemigo:");
 		for(int i=0;i<enemigos.equipo.size();i++)
 			aux+="ID: "+enemigos.equipo.get(i).getIdPersonaje()+"  ";
 		System.out.println(aux);

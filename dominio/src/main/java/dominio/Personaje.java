@@ -587,7 +587,7 @@ public abstract class Personaje implements Peleable {
 
 	public void ganarExperiencia(int exp) {
 		this.experiencia += exp;
-		System.out.println("oaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+		
 		if (experiencia >= Personaje.tabla_nivel[this.nivel])
 			this.subirNivel();
 	}
@@ -671,8 +671,28 @@ public abstract class Personaje implements Peleable {
 	public abstract void habilidadRaza1(Peleable atacado);
 	public abstract void habilidadRaza2(Peleable atacado);
 	
+	
 	public int elegirOpcion(){
-		return 1;
+		String aux="";
+		aux+="1-Atacar\n";
+		if(this.getCasta() instanceof Guerrero)
+			aux+="2-Golpe Doble\n3-Aumentar Defensa\n4-Ignorar Defensa\n";
+		if(this.getCasta() instanceof Hechicero)
+			aux+="2-Bola de Fuego\n3-Curar\n4-Robar Energia y Salud\n";
+		if(this.getCasta() instanceof Asesino)
+			aux+="2-Golpe Critico\n3-Aumentar Evasion\n4-Robar\n";
+		
+		if(this instanceof Humano)
+			aux+="5-Incentivar\n6-Golpe Fatal\n";
+		if(this instanceof Elfo)
+			aux+="5-Golpe Level\n6-Ataque Bosque\n";
+		if(this instanceof Orco)
+			aux+="5-Super Golpe\n6-Mordisco de Vida\n";
+		System.out.println(aux);
+		Scanner sc = new Scanner(System.in);
+		return sc.nextInt();
+
+		
 	}
 	
 	public LinkedList <Personaje> armarBatallonPjs()
