@@ -67,24 +67,16 @@ public class NonPlayableCharacter implements Peleable{
 		this.salud = salud;
 	}
 
-	public int getFuerza() {
-		return fuerza;
-	}
-
-	public void setFuerza(int fuerza) {
-		this.fuerza = fuerza;
-	}
-
 	public void atacar(Peleable atacado)
 	{
 		Random rnd = new Random();
 		if(rnd.nextDouble()<=0.15)//los NPC tienen 15% de golpes criticos
 			{
 			System.out.println("GOLPE CRITICO NPC!");
-			atacado.serAtacado((int) (this.getFuerza()*1.5));//pego daño critico
+			atacado.serAtacado((int) (this.getAtaque()*1.5));//pego daño critico
 			}
 		else
-	atacado.serAtacado(this.getFuerza());
+	atacado.serAtacado(this.getAtaque());
 	}
 	
 	public int serAtacado(int daño){
@@ -143,6 +135,18 @@ public class NonPlayableCharacter implements Peleable{
 	
 	public void ganarExperiencia(int exp)
 	{
+		
+	}
+
+	@Override
+	public int getAtaque() {
+		return fuerza;
+	
+	}
+
+	@Override
+	public void setAtaque(int ataque) {
+		this.fuerza=ataque;
 		
 	}
 }

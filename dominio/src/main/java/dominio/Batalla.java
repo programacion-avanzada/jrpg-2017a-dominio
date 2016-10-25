@@ -16,20 +16,7 @@ public class Batalla {
 		batallonDos = b2;
 	}
 	
-	public void batallar(){
-		batallonUno.establecerEstrategia();
-		batallonDos.establecerEstrategia();
-		while(batallonUno.equipo.size()>0 && batallonDos.equipo.size()>0)
-		{
-			batallonUno.accion();
-			batallonDos.accion();
-		}
-		
-		//if(batallonUno.equipo.size()>0)
-			//batallonUno.despuesDeBatallar(this.experiencia1, items1);
-		//else
-			//batallonUno.despuesDeBatallar(this.experiencia2, items2);
-	}
+	
 	
 	
 }

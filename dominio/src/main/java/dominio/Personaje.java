@@ -13,6 +13,8 @@ public abstract class Personaje implements Peleable {
 	protected int ataque;//depende de la fuerza y de los items
 	protected int magia;//depende de la inteligencia y de los items
 	
+	protected String nombre;//hay que agregarlo a todos los constructores
+	
 	protected int x;
 	protected int y;
 	
@@ -643,5 +645,7 @@ public abstract class Personaje implements Peleable {
 		this.getCasta().habilidad3(this, atacado);
 	}
 
+	public abstract void habilidadRaza1(Peleable atacado);
+	public abstract void habilidadRaza2(Peleable atacado);
 	
 }

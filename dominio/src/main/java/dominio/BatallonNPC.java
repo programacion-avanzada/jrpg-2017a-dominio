@@ -17,4 +17,9 @@ public class BatallonNPC {
 		}
 	}
 
+	public void accion()
+	{
+		
+	}
+	
 }

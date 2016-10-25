@@ -23,7 +23,7 @@ public class Test_Orco {
 		
 		Assert.assertTrue(h.getSalud()==100);
 		o.setSalud(50);
-		o.mordiscoDeVida(h);
+		o.habilidadRaza2(h);
 		Assert.assertTrue(h.getSalud()==40);
 		Assert.assertTrue(o.getSalud()==100);
 

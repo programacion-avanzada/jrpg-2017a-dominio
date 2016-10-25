@@ -7,4 +7,6 @@ public interface Peleable {
 	public void atacar(Peleable atacado);
 	public Item serRobado();
 	public int otorgarExp();
+	public int getAtaque();
+	public void setAtaque(int ataque);
 }

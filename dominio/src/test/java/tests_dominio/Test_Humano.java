@@ -16,7 +16,7 @@ public class Test_Humano {
 		Elfo e = new Elfo(100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 3, 1);
 		
 		Assert.assertTrue(e.getAtaque()==25);
-		h.incentivar(e);
+		h.habilidadRaza1(e);
 		Assert.assertTrue(e.getAtaque()==55);
 	}
 	
@@ -28,7 +28,7 @@ public class Test_Humano {
 		
 		Assert.assertTrue(h.getEnergia()==100);
 		Assert.assertTrue(e.getSalud()==100);
-		h.golpeFatal(e);
+		h.habilidadRaza2(e);
 		Assert.assertTrue(e.getSalud()==70);
 		Assert.assertTrue(h.getEnergia()==50);
 	}

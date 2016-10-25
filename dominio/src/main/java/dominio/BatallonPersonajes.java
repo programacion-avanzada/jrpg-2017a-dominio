@@ -45,43 +45,92 @@ public class BatallonPersonajes  {
 	public void repartirItems(LinkedList<Item> items)
 	{
 		int j;
+		Iterator <Personaje> it = this.equipo.iterator();
+		while(it.hasNext())
+		{
+			if(it.next().getItemsGuardados().size()>=20)
+				it.remove();
+		}
+		if(this.equipo.size()==0)
+			return;
+		
+		
 		if(items.size()==this.equipo.size())
 		{
 			for(int i=0;i<items.size();i++)
-					{
-						j=i;
-						while(!this.equipo.get(j).guardarItem(items.get(i)) && j<this.equipo.size())
-							j++;
-						if(j==this.equipo.size())	
-							return;
-					}
+				this.equipo.get(i).guardarItem(items.get(i));
 		}
+		
 		if(items.size()<this.equipo.size())
 		{
 			Random rnd = new Random();
-			int cant_veces=this.equipo.size()*2,controlador=0;
-			for(int i=0;i< items.size();i++)
+			for(int i=0;i<items.size();i++)
 			{
 				j=rnd.nextInt(this.equipo.size());
-				while(!this.equipo.get(j).guardarItem(items.get(i)) && controlador<cant_veces)
-						{
-							j=rnd.nextInt(this.equipo.size());
-							controlador++;
-						}
+				this.equipo.get(j).guardarItem(items.get(i));
 			}
 		}
-		///FALTA REPARTIR SI HAY MAS ITEMS QUE PJS
+		
+		if(items.size()>this.equipo.size())
+		{
+			j=0;
+			for(int i=0;i<items.size();i++)
+			{
+				while(j<=this.equipo.size() && !this.equipo.get(j).guardarItem(items.get(i)) )
+					j++;
+				
+				j++;
+				if(j>this.equipo.size())
+					j=0;
+			}
+		}
+		
 	}
 	
 	public void batallarContraPersonajes(BatallonPersonajes pjsEnemigos)
 	{
+		int exp1=0,exp2=0;
+		LinkedList <Item> items1 = new LinkedList <Item>();
+		LinkedList <Item> items2 = new LinkedList <Item>();
 		
+		this.establecerEstrategia();
+		pjsEnemigos.establecerEstrategia();
+		
+		while(this.equipo.size()>0 && pjsEnemigos.equipo.size()>0)
+		{
+			this.accion();
+			pjsEnemigos.accion();
+		}
+		
+		if(this.equipo.size()>0)
+			this.despuesDeBatallar(exp1, items1);
+		else
+			pjsEnemigos.despuesDeBatallar(exp2, items2);
 	}
 	
 	public void batallarContraNPCs(BatallonNPC npcsEnemigos)
 	{
+		int exp1;
+		LinkedList <Item> items1 = new LinkedList <Item>();
+		this.establecerEstrategia();
+		
+		while(this.equipo.size()>0 && npcsEnemigos.equipo.size()>0)
+		{
+			this.accion();
+			npcsEnemigos.accion();
+		}
+
+		
 		
 	}
 	
+public void establecerEstrategia(){
+		
+	}
+	
+	public void accion()
+	{
+		
+	}
 	
 }

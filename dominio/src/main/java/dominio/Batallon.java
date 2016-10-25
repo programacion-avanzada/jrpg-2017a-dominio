@@ -37,14 +37,7 @@ public class Batallon {
 		return equipo.size();
 	}
 	
-	public void establecerEstrategia(){
-		
-	}
 	
-	public void accion()
-	{
-		
-	}
 	
 	
 }

@@ -19,11 +19,11 @@ public class Orco extends Personaje {
 
 
 
-	public void superGolpe(Batallon enemigos){
+	public void habilidadRaza1(Peleable atacado){ //PENSAR UNO MAS
 		
 	}
 	
-	public void mordiscoDeVida(Peleable atacado){
+	public void habilidadRaza2(Peleable atacado){//mordisco de vida
 		if(this.getEnergia()>10)
 		{
 		int daño_causado = atacado.serAtacado(this.getFuerza());//solo depende de la fuerza
