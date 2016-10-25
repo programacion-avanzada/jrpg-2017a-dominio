@@ -19,7 +19,7 @@ public class Humano extends Personaje {
 
 
 
-	public void habilidadRaza1(Peleable atacado){
+	public void habilidadRaza1(Peleable atacado){//incentivar
 		if(this.getEnergia()>10)
 		{
 			this.setEnergia(this.getEnergia()-10);
@@ -27,7 +27,7 @@ public class Humano extends Personaje {
 		}
 	}
 	
-	public void habilidadRaza2(Peleable atacado){
+	public void habilidadRaza2(Peleable atacado){//golpefatal
 		if(this.getEnergia()>10)
 		{
 			atacado.serAtacado(atacado.getSalud()/2);

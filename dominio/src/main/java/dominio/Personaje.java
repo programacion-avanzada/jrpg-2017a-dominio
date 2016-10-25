@@ -113,6 +113,7 @@ public abstract class Personaje implements Peleable {
 
 	public void setClan(Alianza clan) {
 		this.clan = clan;
+		clan.añadirPersonaje(this);//////////////////////
 	}
 
 	public int getSalud() {
@@ -500,6 +501,27 @@ public abstract class Personaje implements Peleable {
 		return null;
 	}
 	
+	public Item otorgarItem()
+	{
+		if(this.getItemsEquipados().size()==0 && this.getItemsGuardados().size()==0)
+			return null;
+		Item aux;
+		Random rnd = new Random();
+		if(this.getItemsGuardados().size()>0)
+			{
+			aux = this.getItemsGuardados().get(rnd.nextInt(this.itemsGuardados.size()));
+			this.dropearItemMochila(aux);
+			return aux;
+			}
+		else
+		{
+			aux = this.getItemsEquipados().get(rnd.nextInt(this.itemsEquipados.size()));
+			this.desequiparItem(aux);
+			return aux;
+		}
+		
+	}
+	
 	public void crearAlianza(String nombre_alianza) {
 		this.clan = new Alianza(nombre_alianza);
 		this.clan.añadirPersonaje(this);
@@ -565,6 +587,7 @@ public abstract class Personaje implements Peleable {
 
 	public void ganarExperiencia(int exp) {
 		this.experiencia += exp;
+		System.out.println("oaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		if (experiencia >= Personaje.tabla_nivel[this.nivel])
 			this.subirNivel();
 	}
@@ -647,5 +670,24 @@ public abstract class Personaje implements Peleable {
 
 	public abstract void habilidadRaza1(Peleable atacado);
 	public abstract void habilidadRaza2(Peleable atacado);
+	
+	public int elegirOpcion(){
+		return 1;
+	}
+	
+	public LinkedList <Personaje> armarBatallonPjs()
+	{
+		
+		LinkedList <Personaje> batallon_amigo = new LinkedList();
+		Iterator <Personaje> it = this.getClan().getAliados().iterator(); 
+		Personaje aux;
+		while(it.hasNext())
+		{
+			aux=it.next();
+			if(aux.distanciaCon(this)<=10)
+				batallon_amigo.add(aux);
+		}
+		return batallon_amigo;
+	}
 	
 }

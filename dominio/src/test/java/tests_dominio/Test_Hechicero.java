@@ -18,7 +18,7 @@ public class Test_Hechicero {
 		Assert.assertTrue(e.getSalud()==100);
 		h.atacar(e);
 		Assert.assertTrue(e.getSalud()==65);
-		h.habilidadCasta1(e);
+		h.habilidadCasta2(e);
 		Assert.assertTrue(e.getSalud()==95);
 
 	}
@@ -30,7 +30,7 @@ public class Test_Hechicero {
 		Elfo e = new Elfo(100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 3, 1);
 		
 		Assert.assertTrue(e.getSalud()==100);
-		h.habilidadCasta2(e);
+		h.habilidadCasta1(e);
 		Assert.assertTrue(e.getSalud()==75);
 
 	}
