@@ -51,8 +51,15 @@ public class Asesino extends Casta {
 
 			if ((rnd.nextDouble() <= this.prob_robar + caster.getDestreza() / 1000)
 					&& caster.itemsGuardados.size() < 20) {
-				caster.itemsGuardados.add(atacado.serRobado());
+			Item aux=atacado.serRobado();	
+			if(aux!=null)
+			{
+				caster.itemsGuardados.add(aux);
 				System.out.println("Se pudo robar!");
+			}
+			else
+				System.out.println("No se pudo robar!(No hay items para robar)");
+
 			}
 			else
 			System.out.println("No se pudo robar!");

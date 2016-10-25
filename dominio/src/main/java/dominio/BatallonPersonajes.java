@@ -49,7 +49,7 @@ public class BatallonPersonajes  {
 			if(it.next().getItemsGuardados().size()>=20)
 				it.remove();
 		}
-		if(this.equipo.size()==0)
+		if(this.equipo.size()==0 || items.size()==0)
 			return;
 		
 		
@@ -61,6 +61,7 @@ public class BatallonPersonajes  {
 		
 		if(items.size()<this.equipo.size())
 		{
+			System.out.println("oaaaaa");
 			Random rnd = new Random();
 			for(int i=0;i<items.size();i++)
 			{
@@ -78,7 +79,7 @@ public class BatallonPersonajes  {
 					j++;
 				
 				j++;
-				if(j>this.equipo.size())
+				if(j>=this.equipo.size())
 					j=0;
 			}
 		}
