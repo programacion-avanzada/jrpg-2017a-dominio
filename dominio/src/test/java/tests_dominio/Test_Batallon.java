@@ -15,8 +15,8 @@ public class Test_Batallon {
 	Alianza a1 = new Alianza("Demacia");
 	Alianza a2 = new Alianza("Noxus");
 	
-	Humano h = new Humano(100, 100, 100, 20, 30, new Asesino(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 1, 1);
-	Orco o = new Orco(100, 100, 15, 20, 30, new Guerrero(0.2, 0.3, 1.5), new LinkedList<Item>(),new LinkedList<Item>(), 0, 1, 1);
+	Humano h = new Humano("Nico",100, 100, 100, 20, 30, new Asesino(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 1, 1);
+	Orco o = new Orco("Hernan",100, 100, 15, 20, 30, new Guerrero(0.2, 0.3, 1.5), new LinkedList<Item>(),new LinkedList<Item>(), 0, 1, 1);
 	ItemDeManos excalibur = new ItemDeManos(1, 10, "Excalibur", "Manos", 50, 0, 0, 0, 0, 10, 10, 10);
 	ItemDeManos ragnarok = new ItemDeManos(1, 10, "ragnarok", "Manos", 50, 0, 0, 0, 0, 10, 10, 10);
 	ItemDeTorso cotaDeMalla = new ItemDeTorso(1, 10, "cotaDeMalla", "Torso", 0, 0, 50, 0, 0, 10, 10, 10);
@@ -46,9 +46,9 @@ public class Test_Batallon {
 		Alianza a2 = new Alianza("Noxus");
 		
 		Personaje.cargar_tabla_nivel();
-		Humano h = new Humano(100, 100, 100, 20, 30, new Asesino(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 1, 1);
-		Orco o = new Orco(100, 100, 15, 20, 30, new Guerrero(0.2, 0.3, 1.5), new LinkedList<Item>(),new LinkedList<Item>(), 0, 1, 1);
-		Elfo e = new Elfo(100, 100, 15, 20, 30, new Hechicero(0.2, 0.3, 1.5), new LinkedList<Item>(),new LinkedList<Item>(), 0, 1, 1);
+		Humano h = new Humano("Nico",100, 100, 100, 20, 30, new Asesino(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 1, 1);
+		Orco o = new Orco("Hernan",100, 100, 15, 20, 30, new Guerrero(0.2, 0.3, 1.5), new LinkedList<Item>(),new LinkedList<Item>(), 0, 1, 1);
+		Elfo e = new Elfo("Lautaro",100, 100, 15, 20, 30, new Hechicero(0.2, 0.3, 1.5), new LinkedList<Item>(),new LinkedList<Item>(), 0, 1, 1);
 		
 		ItemDeManos ragnarok = new ItemDeManos(1, 10, "ragnarok", "Manos", 50, 0, 0, 0, 0, 10, 10, 10);
 		ItemDeManos excalibur = new ItemDeManos(1, 10, "Excalibur", "Manos", 50, 0, 0, 0, 0, 10, 10, 10);
@@ -78,10 +78,10 @@ public class Test_Batallon {
 		Alianza a2 = new Alianza("Noxus");
 		
 		Personaje.cargar_tabla_nivel();
-		Humano h = new Humano(100, 100, 100, 20, 30, new Asesino(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 1, 1);
-		Orco o = new Orco(100, 100, 70, 20, 30, new Guerrero(0.2, 0.3, 1.5), new LinkedList<Item>(),new LinkedList<Item>(), 0, 1, 1);
-		Elfo e = new Elfo(100, 100, 70, 20, 30, new Hechicero(0.2, 0.3, 1.5), new LinkedList<Item>(),new LinkedList<Item>(), 0, 1, 1);
-		Orco g = new Orco(100, 100, 70, 20, 30, new Asesino(0.2, 0.3, 1.5), new LinkedList<Item>(),new LinkedList<Item>(), 0, 1, 1);
+		Humano h = new Humano("Nico",100, 100, 100, 20, 30, new Asesino(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 1, 1);
+		Orco o = new Orco("Hernan",100, 100, 70, 20, 30, new Guerrero(0.2, 0.3, 1.5), new LinkedList<Item>(),new LinkedList<Item>(), 0, 1, 1);
+		Elfo e = new Elfo("Lautaro",100, 100, 70, 20, 30, new Hechicero(0.2, 0.3, 1.5), new LinkedList<Item>(),new LinkedList<Item>(), 0, 1, 1);
+		Orco g = new Orco("Leonel",100, 100, 70, 20, 30, new Asesino(0.2, 0.3, 1.5), new LinkedList<Item>(),new LinkedList<Item>(), 0, 1, 1);
 
 		ItemDeManos ragnarok = new ItemDeManos(1, 10, "ragnarok", "Manos", 50, 0, 0, 0, 0, 10, 10, 10);
 		ItemDeManos excalibur = new ItemDeManos(1, 10, "Excalibur", "Manos", 50, 0, 0, 0, 0, 10, 10, 10);

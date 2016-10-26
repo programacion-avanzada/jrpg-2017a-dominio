@@ -21,8 +21,8 @@ public class Test_Elfo {
 	@Test
 	public void test_golpeLevel()
 	{
-		Elfo e = new Elfo(100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 3, 1);
-		Humano h = new Humano(100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 1, 1);
+		Elfo e = new Elfo("Nico",100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 3, 1);
+		Humano h = new Humano("Nico",100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 1, 1);
 
 		Assert.assertTrue(h.getSalud()==100);
 		e.habilidadRaza1(h);
@@ -33,8 +33,8 @@ public class Test_Elfo {
 	@Test
 	public void test_ataqueBosque()
 	{
-		Elfo e = new Elfo(100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 3, 1);
-		Humano h = new Humano(100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 1, 1);
+		Elfo e = new Elfo("Nico",100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 3, 1);
+		Humano h = new Humano("Nico",100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 1, 1);
 		
 		Assert.assertTrue(h.getSalud()==100);
 		e.habilidadRaza2(h);

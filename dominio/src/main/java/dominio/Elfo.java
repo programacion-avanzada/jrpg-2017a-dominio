@@ -4,15 +4,18 @@ import java.util.LinkedList;
 
 public class Elfo extends Personaje{
 	
-	public Elfo(String casta){
-		super(casta);
+	public Elfo(String nombre,Casta casta,int id)
+	{
+		super(nombre,casta,id);
+		energia_tope+=10;
+		salud=salud_tope;
+		energia=energia_tope;
 	}
 	
 	
-	
-	public Elfo(int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta, LinkedList<Item> itemsEquipados,
+	public Elfo(String nombre,int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta, LinkedList<Item> itemsEquipados,
 			LinkedList<Item> itemsGuardados, int experiencia, int nivel, int idPersonaje) {
-		super(salud, energia, fuerza, destreza, inteligencia, casta, itemsEquipados, itemsGuardados, experiencia, nivel,
+		super(nombre,salud, energia, fuerza, destreza, inteligencia, casta, itemsEquipados, itemsGuardados, experiencia, nivel,
 				idPersonaje);
 		// TODO Auto-generated constructor stub
 	}

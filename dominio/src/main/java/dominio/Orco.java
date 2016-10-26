@@ -4,15 +4,19 @@ import java.util.LinkedList;
 
 public class Orco extends Personaje {
 	
-	public Orco(String casta){
-		super(casta);
+	public Orco(String nombre,Casta casta,int id)
+	{
+		super(nombre,casta,id);
+		salud_tope+=10;
+		salud=salud_tope;
+		energia=energia_tope;
 	}
 	
 	
 	
-	public Orco(int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta, LinkedList<Item> itemsEquipados,
+	public Orco(String nombre,int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta, LinkedList<Item> itemsEquipados,
 			LinkedList<Item> itemsGuardados, int experiencia, int nivel, int idPersonaje) {
-		super(salud, energia, fuerza, destreza, inteligencia, casta, itemsEquipados, itemsGuardados, experiencia, nivel,
+		super(nombre,salud, energia, fuerza, destreza, inteligencia, casta, itemsEquipados, itemsGuardados, experiencia, nivel,
 				idPersonaje);
 		
 	}

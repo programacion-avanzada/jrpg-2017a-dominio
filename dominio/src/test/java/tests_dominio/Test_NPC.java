@@ -19,7 +19,7 @@ public class Test_NPC {
 	public void test_Pelea()
 	{
 		NonPlayableCharacter npc = new NonPlayableCharacter(1,null);
-		Humano h = new Humano(100, 100, 1000, 20, 30, new Asesino(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 1, 1);
+		Humano h = new Humano("Nico",100, 100, 1000, 20, 30, new Asesino(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 1, 1);
 		
 		h.atacar(npc);
 		Assert.assertFalse(npc.estaVivo());

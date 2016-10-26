@@ -10,6 +10,11 @@ public class Asesino extends Casta {
 		super(prob_crit, evasion, daño_crit);
 	}
 
+	public Asesino ()// creo que se llama por defecto no? preguntarle a lucas
+	{
+		super();
+	}
+	
 	public void habilidad1(Personaje caster, Peleable atacado)// ataca con un
 																// golpe mas
 																// poderoso de

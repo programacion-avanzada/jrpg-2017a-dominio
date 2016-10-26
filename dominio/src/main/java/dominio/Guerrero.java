@@ -7,6 +7,11 @@ public  class Guerrero extends Casta{
 		super(prob_crit,evasion,daño_crit);
 	}
 	
+	public Guerrero ()// creo que se llama por defecto no? preguntarle a lucas
+	{
+		super();
+	}
+	
 	public void habilidad1 (Personaje caster, Peleable atacado) //pega el doble de fuerte que un ataque normal
 	{
 		if(caster.getEnergia()>10)

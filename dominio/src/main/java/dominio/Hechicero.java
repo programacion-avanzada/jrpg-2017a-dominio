@@ -6,6 +6,12 @@ public class Hechicero extends Casta {
 		super(prob_crit, evasion, daño_crit);
 	}
 
+	public Hechicero ()// creo que se llama por defecto no? preguntarle a lucas
+	{
+		super();
+	}
+	
+	
 	public void habilidad1(Personaje caster, Peleable atacado) // lanza una bola
 																// de fuego que
 																// es mas fuerte

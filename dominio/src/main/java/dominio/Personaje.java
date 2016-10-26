@@ -45,14 +45,40 @@ public abstract class Personaje implements Peleable {
 		
 	}
 
-	public Personaje(String casta) {
-
+	public Personaje(String nombre,Casta casta,int id) {
+		this.nombre=nombre;
+		this.casta=casta;
+		this.idPersonaje=id;
+		x=0;
+		y=0;
+		itemsEquipados= new LinkedList<Item>();
+		itemsGuardados= new LinkedList<Item>();
+		experiencia=0;
+		nivel=1;
+		fuerza=10;
+		inteligencia=10;
+		destreza=10;
+		if(casta instanceof Guerrero)
+			fuerza+=5;
+		if(casta instanceof Hechicero)
+			inteligencia+=5;
+		if(casta instanceof Asesino)
+			destreza+=5;
+		
+		salud_tope=50;
+		energia_tope=50;
+		
+		ataque=this.calcularPuntosDeAtaque();
+		defensa=this.calcularPuntosDeDefensa();
+		magia=this.calcularPuntosDeMagia();
+		
 	}
 
-	public Personaje(int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta,
+	public Personaje(String nombre,int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta,
 			LinkedList<Item> itemsEquipados, LinkedList<Item> itemsGuardados, int experiencia, int nivel,
 			int idPersonaje) {
 		
+		this.nombre=nombre;
 		this.salud = salud;
 		this.energia = energia;
 		this.fuerza = fuerza;
@@ -75,6 +101,30 @@ public abstract class Personaje implements Peleable {
 
 	
 	
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
 	public int getAtaque() {
 		return ataque;
 	}
@@ -230,12 +280,12 @@ public abstract class Personaje implements Peleable {
 																									/// de
 																									/// critico
 				System.out.println("GOLPE CRITICO!");
-				System.out.println("Daño inflingido: "+(this.ataque * this.getCasta().getDañoCritico()));
+			//	System.out.println("Daño inflingido: "+(this.ataque * this.getCasta().getDañoCritico()));
 				atacado.serAtacado((int) (this.ataque * this.getCasta().getDañoCritico()));// pego
 																											// daño
 																											// critico
 			} else
-				{System.out.println("Daño inflingido: "+(this.ataque));
+				{//System.out.println("Daño inflingido: "+(this.ataque));
 				atacado.serAtacado(this.ataque);}
 		}
 	}
@@ -254,7 +304,7 @@ public abstract class Personaje implements Peleable {
 		while (it.hasNext())
 			daño_items += it.next().bono_daño;
 		//System.out.println("Daño : " + (this.getFuerza() + daño_items));
-		return (this.getFuerza() + daño_items); // hago que el daño de un
+		return (int) (this.getFuerza()*1.5 + daño_items); // hago que el daño de un
 		// personaje sea igual a la
 		// fuerza que tiene mas el daño
 		// de sus items
@@ -276,8 +326,16 @@ public abstract class Personaje implements Peleable {
 		while (it.hasNext())
 			magia_items += it.next().bono_magia;
 		//System.out.println("Magia : " + (this.getInteligencia() + magia_items));
-		return (this.getInteligencia() + magia_items);
+		return (int) (this.getInteligencia()*1.5 + magia_items);
 
+	}
+	
+	public void restablecerSalud(){
+		this.salud=this.salud_tope;
+	}
+	
+	public void restablecerEnergia(){
+		this.energia=this.energia_tope;
 	}
 	
 /*	public int calcularPuntosDeSalud()
@@ -318,7 +376,7 @@ public abstract class Personaje implements Peleable {
 		Random rnd = new Random();
 		if (rnd.nextDouble() >= this.getCasta().getProbabilidadEvitarDaño()) {
 			daño -= this.defensa;
-			System.out.println("Defensa obtenida: "+this.defensa);
+			//System.out.println("Defensa obtenida: "+this.defensa);
 			if (daño > 0) {
 				if(salud<=daño){
 					daño=salud;
@@ -414,8 +472,8 @@ public abstract class Personaje implements Peleable {
 				this.modificarAtributos();
 				this.salud_tope+=i.getBono_salud();
 				this.energia_tope+=i.getBono_energia();
-				this.salud=this.salud_tope;
-				this.energia=this.energia_tope;
+			//	this.salud=this.salud_tope;//si me equipo me curo, hay que sacarlo
+			//	this.energia=this.energia_tope;//si me equipo me energizo, hay que sacarlo
 				return true;
 			}
 
@@ -581,6 +639,8 @@ public abstract class Personaje implements Peleable {
 			this.nivel++;
 	//		this.asignarPuntos();
 			this.modificarAtributos();
+			this.salud_tope+=25;
+			this.energia_tope+=20;
 		}
 		this.experiencia -= aux;
 	}

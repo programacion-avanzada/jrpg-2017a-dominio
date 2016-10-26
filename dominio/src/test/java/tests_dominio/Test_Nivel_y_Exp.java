@@ -16,7 +16,7 @@ public class Test_Nivel_y_Exp {
 	public void test_ganarExp()
 	{
 		Personaje.cargar_tabla_nivel();
-		Humano h = new Humano(100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 1, 1);
+		Humano h = new Humano("Nico",100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 1, 1);
 		h.ganarExperiencia(45);
 		Assert.assertTrue(h.getExperiencia()==45);
 	}
@@ -25,7 +25,7 @@ public class Test_Nivel_y_Exp {
 	public void test_SubirNivel()
 	{
 		Personaje.cargar_tabla_nivel();
-		Humano h = new Humano(100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 1, 1);
+		Humano h = new Humano("Nico",100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 1, 1);
 		h.ganarExperiencia(159);
 		Assert.assertTrue(h.getNivel()==3);
 		Assert.assertTrue(h.getExperiencia()==9);
@@ -35,7 +35,7 @@ public class Test_Nivel_y_Exp {
 	public void test_Level100()
 	{
 		Personaje.cargar_tabla_nivel();
-		Humano h = new Humano(100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 99, 1);
+		Humano h = new Humano("Nico",100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 99, 1);
 		h.ganarExperiencia(10000);
 		Assert.assertTrue(h.getNivel()==100);
 	}

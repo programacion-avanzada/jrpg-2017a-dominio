@@ -123,7 +123,7 @@ public class BatallonPersonajes  {
 			pjsEnemigos.realizarTurno(turno2, opcion, this);
 			turno2++;
 			}
-			System.out.println("TURNO 1= "+turno1+" TURNO 2= "+turno2);
+			/*System.out.println("TURNO 1= "+turno1+" TURNO 2= "+turno2);
 			if(turno1>=this.equipo.size())
 				{
 				turno1=0;
@@ -134,7 +134,7 @@ public class BatallonPersonajes  {
 				turno2=0;
 				System.out.println("RESETEO TURNO 2");
 
-				}
+				}*/
 			
 		}
 		
@@ -185,6 +185,7 @@ public void establecerEstrategia(){
 					{
 						items.add(pjsEnemigos.equipo.get(victima).otorgarItem());
 						exp1 += pjsEnemigos.equipo.get(victima).otorgarExp();
+						System.out.println(pjsEnemigos.equipo.get(victima).getNombre()+" ha muerto!\n");
 						pjsEnemigos.equipo.remove(victima);
 					}
 				break;
@@ -195,6 +196,7 @@ public void establecerEstrategia(){
 					{
 						items.add(pjsEnemigos.equipo.get(victima).otorgarItem());
 						exp1 +=pjsEnemigos.equipo.get(victima).otorgarExp();
+						System.out.println(pjsEnemigos.equipo.get(victima).getNombre()+" ha muerto!\n");
 						pjsEnemigos.equipo.remove(victima);
 					}
 				break;
@@ -215,6 +217,7 @@ public void establecerEstrategia(){
 				{
 					items.add(pjsEnemigos.equipo.get(victima).otorgarItem());
 					exp1 +=pjsEnemigos.equipo.get(victima).otorgarExp();
+					System.out.println(pjsEnemigos.equipo.get(victima).getNombre()+" ha muerto!\n");
 					pjsEnemigos.equipo.remove(victima);
 				}
 			break;
@@ -233,6 +236,7 @@ public void establecerEstrategia(){
 			{
 				items.add(pjsEnemigos.equipo.get(victima).otorgarItem());
 				exp1 +=pjsEnemigos.equipo.get(victima).otorgarExp();
+				System.out.println(pjsEnemigos.equipo.get(victima).getNombre()+" ha muerto!\n");
 				pjsEnemigos.equipo.remove(victima);
 			}
 		
@@ -245,6 +249,7 @@ public void establecerEstrategia(){
 		{
 			items.add(pjsEnemigos.equipo.get(victima).otorgarItem());
 			exp1 +=pjsEnemigos.equipo.get(victima).otorgarExp();
+			System.out.println(pjsEnemigos.equipo.get(victima).getNombre()+" ha muerto!\n");
 			pjsEnemigos.equipo.remove(victima);
 		}
 		}
@@ -257,7 +262,7 @@ public void establecerEstrategia(){
 		String aux="";
 		System.out.println("\nBatallon enemigo:");
 		for(int i=0;i<enemigos.equipo.size();i++)
-			aux+="ID: "+enemigos.equipo.get(i).getIdPersonaje()+"  ";
+			aux+=enemigos.equipo.get(i).getNombre()+"  ";
 		System.out.println(aux);
 		return sc.nextInt();
 	}
@@ -268,7 +273,7 @@ public void establecerEstrategia(){
 		String aux="";
 		System.out.println("Batallon aliado:");
 		for(int i=0;i<this.equipo.size();i++)
-			aux+="ID: "+this.equipo.get(i).getIdPersonaje()+"  ";
+			aux+=this.equipo.get(i).getNombre()+"  ";
 		System.out.println(aux);
 		return sc.nextInt();
 	}

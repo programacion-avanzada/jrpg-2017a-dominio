@@ -4,15 +4,20 @@ import java.util.LinkedList;
 
 public class Humano extends Personaje {
 
-	public Humano(String casta){
-		super(casta);
+	public Humano(String nombre,Casta casta,int id)
+	{
+		super(nombre,casta,id);
+		salud_tope+=5;
+		energia_tope+=5;
+		salud=salud_tope;
+		energia=energia_tope;
 	}
 	
 	
 	
-	public Humano(int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta,
+	public Humano(String nombre,int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta,
 			LinkedList<Item> itemsEquipados, LinkedList<Item> itemsGuardados, int experiencia, int nivel, int idPersonaje) {
-		super(salud, energia, fuerza, destreza, inteligencia, casta, itemsEquipados, itemsGuardados, experiencia, nivel,
+		super(nombre,salud, energia, fuerza, destreza, inteligencia, casta, itemsEquipados, itemsGuardados, experiencia, nivel,
 				idPersonaje);
 		
 	}

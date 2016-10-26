@@ -18,8 +18,8 @@ public class Test_Orco {
 	@Test
 	public void test_MordiscoDeVida()
 	{
-		Humano h = new Humano(100, 100, 55, 20, 30, new Hechicero(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 1, 1);
-		Orco o = new Orco(100, 100, 80, 20, 30, new Asesino(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 1, 1);
+		Humano h = new Humano("Nico",100, 100, 55, 20, 30, new Hechicero(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 1, 1);
+		Orco o = new Orco("Nico",100, 100, 80, 20, 30, new Asesino(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 1, 1);
 		
 		Assert.assertTrue(h.getSalud()==100);
 		o.setSalud(50);
