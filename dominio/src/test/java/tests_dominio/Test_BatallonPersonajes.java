@@ -7,7 +7,7 @@ import org.junit.Test;
 import dominio.*;
 import junit.framework.Assert;
 
-public class Test_Batallon {
+public class Test_BatallonPersonajes {
 
 	/*@Test
 	public void test_1vs1()

@@ -11,7 +11,7 @@ public class Test_Enemigos_y_Experiencia {
 	public void test_PjvsNPC(){
 		
 	Humano h = new Humano("Nicolas",new Guerrero(),1);
-	NonPlayableCharacter npc = new NonPlayableCharacter(1,null,0);
+	NonPlayableCharacter npc = new NonPlayableCharacter("Gigante",1,null,0);
 	Personaje.cargar_tabla_nivel();
 	Assert.assertTrue(h.getExperiencia()==0);
 	while(npc.estaVivo())
@@ -24,8 +24,8 @@ public class Test_Enemigos_y_Experiencia {
 	@Test
 	public void test_MasFuerte_MasExperiencia(){
 		
-		NonPlayableCharacter npc = new NonPlayableCharacter(1,null,0);
-		NonPlayableCharacter npc2 = new NonPlayableCharacter(2,null,0);
+		NonPlayableCharacter npc = new NonPlayableCharacter("Gigante",1,null,0);
+		NonPlayableCharacter npc2 = new NonPlayableCharacter("Gigante",2,null,0);
 		
 		
 		Assert.assertTrue(npc.otorgarExp()<npc2.otorgarExp());

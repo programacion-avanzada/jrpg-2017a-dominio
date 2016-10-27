@@ -14,6 +14,12 @@ public class ItemDeManos extends Item{
 		return 2;
 	}
 	
+	public Item clone(){
+		ItemDeManos aux = new ItemDeManos(this.id_Item, this.prioridad, this.nombre, this.tipo, this.bono_daño, this.bono_defensa,
+					this.bono_magia, this.bono_salud, this.bono_energia, this.fuerza_requerida,
+					this.inteligencia_requerida, this.destreza_requerida);
+		return aux;
 	
+	}
 	
 }

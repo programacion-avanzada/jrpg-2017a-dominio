@@ -15,5 +15,12 @@ public ItemDePie(int id_Item, int prioridad, String nombre,String tipo, int bono
 		return 1;
 	}
 
+	public Item clone(){
+		ItemDePie aux = new ItemDePie(this.id_Item, this.prioridad, this.nombre, this.tipo, this.bono_daño, this.bono_defensa,
+					this.bono_magia, this.bono_salud, this.bono_energia, this.fuerza_requerida,
+					this.inteligencia_requerida, this.destreza_requerida);
+		return aux;
+	
+	}
 	
 }

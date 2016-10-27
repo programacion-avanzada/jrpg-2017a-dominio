@@ -6,12 +6,14 @@ public class NonPlayableCharacter implements Peleable{
 	private int salud;
 	private  int fuerza;
 	private int defensa;
+	private String nombre;
 	private Item[] items_dropeables;
 	private int nivel;
 	private int x;
 	private int y;
 	
-	public NonPlayableCharacter(int nivel,Item[] items_dropeables,int dif){
+	public NonPlayableCharacter(String nombre,int nivel,Item[] items_dropeables,int dif){
+		this.nombre=nombre;
 		this.nivel=nivel;
 		this.items_dropeables=items_dropeables;
 		Random rnd = new Random();
@@ -71,11 +73,53 @@ public class NonPlayableCharacter implements Peleable{
 		System.out.println("Fuerza: "+this.fuerza+" Defensa: "+this.defensa+" Salud: "+this.salud);
 	}*/
 	
+	
+	
 	public int otorgarExp()
 	{
 		return this.nivel*30; // dsp se cambia
 	}
 	
+	public int getFuerza() {
+		return fuerza;
+	}
+
+	public void setFuerza(int fuerza) {
+		this.fuerza = fuerza;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public int getNivel() {
+		return nivel;
+	}
+
+	public void setNivel(int nivel) {
+		this.nivel = nivel;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
 	public boolean estaVivo() {
 		return salud > 0;
 	}
@@ -131,17 +175,21 @@ public class NonPlayableCharacter implements Peleable{
 	{
 		Random rnd =new Random();
 		int aux=(int) (rnd.nextDouble()*10);
-			while(aux>items_dropeables.length-1)
+		if(items_dropeables!=null)
+			{while(aux>items_dropeables.length-1)
 				aux=(int) (rnd.nextDouble()*10);
 			
 		int	nivel_item=(int) (rnd.nextDouble()*100);
 			while((this.nivel-5)>nivel_item || (this.nivel+5)<nivel_item)///aca hago que dropee un item dependiendo del nivel del NPC
 				nivel_item=(int) (rnd.nextDouble()*100);
 		return modificarItem(items_dropeables[aux],nivel_item);
+			}
+		return null;
 	}
 	
-	public Item modificarItem(Item i, int nivel_item)///La modificacion depende directamente del nivel(nivel 5 = bono_daño+5,etc)
+	public Item modificarItem(Item a, int nivel_item)///La modificacion depende directamente del nivel(nivel 5 = bono_daño+5,etc)
 	{
+		Item i = a.clone();
 		i.setNivel(nivel_item);
 		if(i.getBono_daño()!=0)
 			i.setBono_daño(i.getBono_daño()+nivel_item);
@@ -159,7 +207,7 @@ public class NonPlayableCharacter implements Peleable{
 	public Item serRobado()
 	{
 		Random rnd = new Random();
-		return this.items_dropeables[rnd.nextInt(this.items_dropeables.length)];
+		return this.items_dropeables[rnd.nextInt(this.items_dropeables.length)].clone();
 	}
 	
 	public void ganarExperiencia(int exp)

@@ -18,7 +18,8 @@ public class BatallonPersonajes  {
 	public BatallonPersonajes(LinkedList <Personaje> aliados)//de pjs
 	{
 		this.equipo=aliados;
-		this.alianza=this.equipo.get(0).getClan().nombre;
+		if(this.equipo.get(0).getClan()!=null)
+			this.alianza=this.equipo.get(0).getClan().nombre;
 		this.exp1=0;
 		this.items = new LinkedList <Item>();
 	}
@@ -123,18 +124,18 @@ public class BatallonPersonajes  {
 			pjsEnemigos.realizarTurno(turno2, opcion, this);
 			turno2++;
 			}
-			/*System.out.println("TURNO 1= "+turno1+" TURNO 2= "+turno2);
+		//	System.out.println("TURNO 1= "+turno1+" TURNO 2= "+turno2);
 			if(turno1>=this.equipo.size())
 				{
 				turno1=0;
-				System.out.println("RESETEO TURNO 1");
+			//	System.out.println("RESETEO TURNO 1");
 				}
 			if(turno2>=pjsEnemigos.equipo.size())
 				{
 				turno2=0;
-				System.out.println("RESETEO TURNO 2");
+				//System.out.println("RESETEO TURNO 2");
 
-				}*/
+				}
 			
 		}
 		
@@ -154,13 +155,68 @@ public class BatallonPersonajes  {
 	public void batallarContraNPCs(BatallonNPC npcsEnemigos)
 	{
 		
+		int exp1=0;
+		LinkedList <Item> items1 = new LinkedList <Item>();
+		int turno1=0,turno2=0;
+		int opcion;
+		int victima;
+		Random rnd = new Random();
+		int victima_del_npc;
+		
 		this.establecerEstrategia();
 		
 		
-		while(this.equipo.size()>0 && npcsEnemigos.equipo.size()>0)
+		while(this.equipo.size()>0 && npcsEnemigos.getEquipo().size()>0)
 		{
+		
+			if(this.equipo.size()>0)
+			{
+				if(turno1==this.equipo.size())
+					turno1=0;
+			opcion=this.equipo.get(turno1).elegirOpcion();
+			this.realizarTurnoVsNPC(turno1, opcion, npcsEnemigos);
+			turno1++;
+			}
+		
+			if(npcsEnemigos.equipo.size()>0)
+			{
+				if(turno2==npcsEnemigos.equipo.size())
+					turno2=0;
+				victima_del_npc=rnd.nextInt(this.getEquipo().size());
+				System.out.println(npcsEnemigos.getEquipo().get(turno2).getNombre()+" ataca a "+(this.getEquipo().get(victima_del_npc).getNombre()));
+				npcsEnemigos.getEquipo().get(turno2).atacar(this.getEquipo().get(victima_del_npc));
+				if(!this.getEquipo().get(victima_del_npc).estaVivo())
+				{
+					System.out.println(this.getEquipo().get(victima_del_npc).getNombre()+" ha muerto!");
+					this.getEquipo().remove(victima_del_npc);
+				}
+			turno2++;
+			}
+		//	System.out.println("TURNO 1= "+turno1+" TURNO 2= "+turno2);
+			if(turno1>=this.equipo.size())
+				{
+				turno1=0;
+			//	System.out.println("RESETEO TURNO 1");
+				}
+			if(turno2>=npcsEnemigos.equipo.size())
+				{
+				turno2=0;
+				//System.out.println("RESETEO TURNO 2");
+
+				}
 			
 		}
+		
+		if(this.equipo.size()>0)
+			{
+			this.despuesDeBatallar();
+			System.out.println("GANO EL PRIMERO");
+			}
+		else
+			
+			System.out.println("GANARON LOS NPCs");
+
+			
 
 	}
 	
@@ -261,8 +317,8 @@ public void establecerEstrategia(){
 		Scanner sc = new Scanner(System.in);
 		String aux="";
 		System.out.println("\nBatallon enemigo:");
-		for(int i=0;i<enemigos.equipo.size();i++)
-			aux+=enemigos.equipo.get(i).getNombre()+"  ";
+		for(int i=0;i<enemigos.getEquipo().size();i++)
+			aux+=enemigos.getEquipo().get(i).getNombre()+"  ";
 		System.out.println(aux);
 		return sc.nextInt();
 	}
@@ -277,5 +333,119 @@ public void establecerEstrategia(){
 		System.out.println(aux);
 		return sc.nextInt();
 	}
+
+	public LinkedList<Personaje> getEquipo() {
+		return equipo;
+	}
+
+	public void setEquipo(LinkedList<Personaje> equipo) {
+		this.equipo = equipo;
+	}
+
 	
+	
+	/*public boolean matoAlEnemigo(BatallonPersonajes pjsEnemigos, int victima)
+	{
+		if(!pjsEnemigos.equipo.get(victima).estaVivo())
+		{
+			items.add(pjsEnemigos.equipo.get(victima).otorgarItem());
+			exp1 += pjsEnemigos.equipo.get(victima).otorgarExp();
+			System.out.println(pjsEnemigos.equipo.get(victima).getNombre()+" ha muerto!\n");
+			return true;
+		}
+		return false;
+	}*/
+	public void realizarTurnoVsNPC(int turno1,int opcion,BatallonNPC pjsEnemigos)
+	{
+		int victima;
+		switch (opcion)
+		{
+		case 1: victima = this.elegirNPCVictima(pjsEnemigos);
+				victima-=1;
+				this.equipo.get(turno1).atacar(pjsEnemigos.equipo.get(victima));
+				if(!pjsEnemigos.equipo.get(victima).estaVivo())
+					{
+						items.add(pjsEnemigos.equipo.get(victima).dropearItemAleatorio());//otrogarItem()
+						exp1 += pjsEnemigos.equipo.get(victima).otorgarExp();
+						System.out.println(pjsEnemigos.equipo.get(victima).getNombre()+" ha muerto!\n");
+						pjsEnemigos.equipo.remove(victima);
+					}
+				break;
+		case 2:  victima = this.elegirNPCVictima(pjsEnemigos);
+				 victima-=1;
+				 this.equipo.get(turno1).habilidadCasta1(pjsEnemigos.equipo.get(victima));
+				 if(!pjsEnemigos.equipo.get(victima).estaVivo())
+					{
+						items.add(pjsEnemigos.equipo.get(victima).dropearItemAleatorio());
+						exp1 +=pjsEnemigos.equipo.get(victima).otorgarExp();
+						System.out.println(pjsEnemigos.equipo.get(victima).getNombre()+" ha muerto!\n");
+						pjsEnemigos.equipo.remove(victima);
+					}
+				break;
+		case 3: if	( this.equipo.get(turno1).getCasta() instanceof Hechicero)
+					{
+					victima = this.elegirPjBeneficiado();//lo va a curar
+					victima-=1;
+					this.equipo.get(turno1).habilidadCasta2(this.equipo.get(victima));
+					
+					}
+				else
+					this.equipo.get(turno1).habilidadCasta2(null);
+				break;
+		case 4: victima = this.elegirNPCVictima(pjsEnemigos);
+				victima-=1;
+				this.equipo.get(turno1).habilidadCasta3(pjsEnemigos.equipo.get(victima));
+				if(!pjsEnemigos.equipo.get(victima).estaVivo())
+				{
+					items.add(pjsEnemigos.equipo.get(victima).dropearItemAleatorio());
+					exp1 +=pjsEnemigos.equipo.get(victima).otorgarExp();
+					System.out.println(pjsEnemigos.equipo.get(victima).getNombre()+" ha muerto!\n");
+					pjsEnemigos.equipo.remove(victima);
+				}
+			break;
+		case 5: if(this.equipo.get(turno1) instanceof Humano)
+		{
+			victima = this.elegirPjBeneficiado();//lo va a incentivar
+			victima-=1;
+			this.equipo.get(turno1).habilidadRaza1(this.equipo.get(victima));
+		}
+		else
+		{
+			victima = this.elegirNPCVictima(pjsEnemigos);
+			victima-=1;
+			this.equipo.get(turno1).habilidadRaza1(pjsEnemigos.equipo.get(victima));
+			if(!pjsEnemigos.equipo.get(victima).estaVivo())
+			{
+				items.add(pjsEnemigos.equipo.get(victima).dropearItemAleatorio());
+				exp1 +=pjsEnemigos.equipo.get(victima).otorgarExp();
+				System.out.println(pjsEnemigos.equipo.get(victima).getNombre()+" ha muerto!\n");
+				pjsEnemigos.equipo.remove(victima);
+			}
+		
+		}
+		break;	
+		case 6:victima = this.elegirNPCVictima(pjsEnemigos);
+		victima-=1;
+		this.equipo.get(turno1).habilidadRaza2(pjsEnemigos.equipo.get(victima));
+		if(!pjsEnemigos.equipo.get(victima).estaVivo())
+		{
+			items.add(pjsEnemigos.equipo.get(victima).dropearItemAleatorio());
+			exp1 +=pjsEnemigos.equipo.get(victima).otorgarExp();
+			System.out.println(pjsEnemigos.equipo.get(victima).getNombre()+" ha muerto!\n");
+			pjsEnemigos.equipo.remove(victima);
+		}
+		}
+		
+	}
+	
+	public int elegirNPCVictima(BatallonNPC enemigos)
+	{
+		Scanner sc = new Scanner(System.in);
+		String aux="";
+		System.out.println("\nBatallon enemigo:");
+		for(int i=0;i<enemigos.getEquipo().size();i++)
+			aux+=enemigos.getEquipo().get(i).getNombre()+"  ";
+		System.out.println(aux);
+		return sc.nextInt();
+	}
 }
