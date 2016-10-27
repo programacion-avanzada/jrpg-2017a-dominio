@@ -55,8 +55,32 @@ public class Juego implements Runnable {
 	public void run() { // Hilo principal del juego
 		iniciar();
 		
+		int fps = 60; // Cantidad de actualizaciones por segundo que se desean
+		double tiempoPorActualizacion = 1000000000 / fps; // Cantidad de nanosegundos en FPS deseados
+		double delta = 0;
+		long ahora;
+		long ultimoTiempo = System.nanoTime();
+		long timer = 0; // Timer para mostrar fps cada un segundo
+		int actualizaciones = 0; // Cantidad de actualizaciones que se realizan realmente
+		
 		while(corriendo) {
+			ahora = System.nanoTime();
+			delta += (ahora - ultimoTiempo) / tiempoPorActualizacion; // Calculo para determinar cuando realizar la actualizacion y el graficado
+			timer += ahora - ultimoTiempo; // Sumo el tiempo transcurrido hasta que se acumule 1 segundo y mostrar los FPS
+			ultimoTiempo = ahora; // Para las proximas corridas del bucle
 			
+			if (delta >= 1) {
+				actualizar();
+				graficar();
+				actualizaciones++;
+				delta--;
+			}
+			
+			if(timer >= 1000000000) { // Si paso 1 segundo muestro los FPS
+				System.out.println("FPS: " + actualizaciones);
+				actualizaciones = 0;
+				timer = 0;
+			}
 		}
 		
 		stop();
