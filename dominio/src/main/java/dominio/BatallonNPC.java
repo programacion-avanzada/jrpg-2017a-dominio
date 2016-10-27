@@ -13,7 +13,7 @@ public class BatallonNPC {
 		int cant_npc=rnd.nextInt(3)+3;
 		for(int i=0;i<cant_npc;i++)
 		{
-			this.equipo.add(new NonPlayableCharacter(nivel,it));
+			this.equipo.add(new NonPlayableCharacter(nivel,it,-1));
 		}
 	}
 

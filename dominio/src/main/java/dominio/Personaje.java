@@ -40,7 +40,8 @@ public abstract class Personaje implements Peleable {
 	public static void cargar_tabla_nivel() {
 		Personaje.tabla_nivel = new int[100];
 		Personaje.tabla_nivel[0] = 0;
-		for (int i = 1; i < 100; i++)
+		Personaje.tabla_nivel[1] = 0;
+		for (int i = 2; i < 100; i++)
 			Personaje.tabla_nivel[i] = Personaje.tabla_nivel[i - 1] + 50;
 		
 	}
@@ -260,6 +261,24 @@ public abstract class Personaje implements Peleable {
 
 	public void setDefensa(int defensa) {
 		this.defensa = defensa;
+	}
+
+	
+	
+	public int getSalud_tope() {
+		return salud_tope;
+	}
+
+	public void setSalud_tope(int salud_tope) {
+		this.salud_tope = salud_tope;
+	}
+
+	public int getEnergia_tope() {
+		return energia_tope;
+	}
+
+	public void setEnergia_tope(int energia_tope) {
+		this.energia_tope = energia_tope;
 	}
 
 	public void atacar(Peleable atacado) {
@@ -626,6 +645,13 @@ public abstract class Personaje implements Peleable {
 
 	}*/
 
+	public void AsignarPuntosSkills(int fuerza,int destreza,int inteligencia)
+	{
+		this.fuerza+=fuerza;
+		this.destreza+=destreza;
+		this.inteligencia+=inteligencia;
+	}
+	
 	public void subirNivel() {
 
 		int aux = 0;
@@ -634,7 +660,7 @@ public abstract class Personaje implements Peleable {
 			System.out.println("Ya ha alcanzado el maximo nivel!");
 			return;
 		}
-		while (this.nivel!=100 && (this.experiencia >= Personaje.tabla_nivel[this.nivel] + aux)  ) {
+		while (this.nivel!=100 && (this.experiencia > Personaje.tabla_nivel[this.nivel] + aux)  ) {
 			aux += Personaje.tabla_nivel[this.nivel];
 			this.nivel++;
 	//		this.asignarPuntos();
@@ -658,52 +684,6 @@ public abstract class Personaje implements Peleable {
 	}
 	
 	
-	
-	/*
-	 * public void habilidad1(Peleable atacado) { if(this.getCasta() instanceof
-	 * Guerrero) { if(this.getEnergia()>10)// habria que ver cuanta energia
-	 * consume cada habilidad {
-	 * 
-	 * Guerrero g1= (Guerrero)this.getCasta(); g1.golpeDoble(this, atacado);
-	 * this.setEnergia(this.getEnergia()-10); } }
-	 * 
-	 * if(this.getCasta() instanceof Hechicero) { if(this.getEnergia()>10) {
-	 * Hechicero h1= (Hechicero)this.getCasta(); h1.curar(this, atacado);
-	 * this.setEnergia(this.getEnergia()-10); } }
-	 * 
-	 * if(this.getCasta() instanceof Asesino) { if(this.getEnergia()>10){
-	 * Asesino a1= (Asesino)this.getCasta(); a1.golpeCritico(this, atacado);
-	 * this.setEnergia(this.getEnergia()-10); } }
-	 * 
-	 * }
-	 * 
-	 * 
-	 * public void habilidad2( Peleable atacado) { if(this.getCasta() instanceof
-	 * Guerrero) { if(this.getEnergia()>10){ Guerrero g1=
-	 * (Guerrero)this.getCasta(); g1.aumentarDefensa(this);
-	 * this.setEnergia(this.getEnergia()-10); } }
-	 * 
-	 * if(this.getCasta() instanceof Hechicero) { if(this.getEnergia()>10){
-	 * Hechicero h1= (Hechicero)this.getCasta(); h1.bolaDeFuego(this, atacado);
-	 * this.setEnergia(this.getEnergia()-10); } }
-	 * 
-	 * if(this.getCasta() instanceof Asesino) { if(this.getEnergia()>10){
-	 * Asesino a1= (Asesino)this.getCasta(); a1.perspicacia();
-	 * this.setEnergia(this.getEnergia()-10); } } }
-	 * 
-	 * public void habilidad3(Peleable atacado) { if(this.getCasta() instanceof
-	 * Guerrero) { if(this.getEnergia()>10){ Guerrero g1=
-	 * (Guerrero)this.getCasta(); g1.ignoraDefensa(this, atacado);
-	 * this.setEnergia(this.getEnergia()-10); } }
-	 * 
-	 * if(this.getCasta() instanceof Hechicero) { if(this.getEnergia()>10){
-	 * Hechicero h1= (Hechicero)this.getCasta(); h1.quitarEnergia(this,
-	 * atacado); this.setEnergia(this.getEnergia()-10); } }
-	 * 
-	 * if(this.getCasta() instanceof Asesino) { if(this.getEnergia()>10){
-	 * Asesino a1= (Asesino)this.getCasta(); a1.robar(this, atacado);
-	 * this.setEnergia(this.getEnergia()-10); } } }
-	 */
 
 	@Override
 	protected Object clone() throws CloneNotSupportedException {

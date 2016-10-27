@@ -11,7 +11,36 @@ public class NonPlayableCharacter implements Peleable{
 	private int x;
 	private int y;
 	
-	public NonPlayableCharacter(int nivel,Item[] items_dropeables)
+	public NonPlayableCharacter(int nivel,Item[] items_dropeables,int dif){
+		this.nivel=nivel;
+		this.items_dropeables=items_dropeables;
+		Random rnd = new Random();
+		int dificultad ;
+		if(dif==-1)
+			dificultad = rnd.nextInt(3);
+		else
+			dificultad=dif;
+		
+		switch(dificultad)
+		{
+		case 0: this.fuerza=10+(nivel-1)*3;//30%
+				this.salud=30+(nivel-1)*15;
+				this.defensa=2+(nivel-1)*1;
+				break;
+		case 1:	this.fuerza=20+(nivel-1)*6;//50%
+				this.salud=40+(nivel-1)*20;
+				this.defensa=5+(nivel-1)*2;
+				break;
+		case 2:	this.fuerza=30+(nivel-1)*10;//50%
+				this.salud=50+(nivel-1)*25;
+				this.defensa=4+(nivel-1)*4;
+				break;		
+				
+		}
+		System.out.println("Fuerza: "+this.fuerza+" Salud: "+this.salud+" Defensa: "+this.defensa);
+	}
+	
+	/*public NonPlayableCharacter(int nivel,Item[] items_dropeables)
 	{
 		this.nivel=nivel;
 		this.items_dropeables=items_dropeables;
@@ -40,7 +69,7 @@ public class NonPlayableCharacter implements Peleable{
 		if(dificultad==2)
 			this.defensa=this.nivel*200;	
 		System.out.println("Fuerza: "+this.fuerza+" Defensa: "+this.defensa+" Salud: "+this.salud);
-	}
+	}*/
 	
 	public int otorgarExp()
 	{
@@ -149,4 +178,6 @@ public class NonPlayableCharacter implements Peleable{
 		this.fuerza=ataque;
 		
 	}
+	
+	
 }

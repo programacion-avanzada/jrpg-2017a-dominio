@@ -15,7 +15,7 @@ import dominio.Orco;
 
 public class Test_Asesino {
 
-	@Test
+	/*@Test
 	public void test_Robar()
 	{
 		Humano h = new Humano("Nico",100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 1, 1);
@@ -31,7 +31,7 @@ public class Test_Asesino {
 		//Assert.assertNull(o.getEquipado(0));
 		
 		
-	}
+	}*/
 	
 	/*@Test
 	public void test_Critico()

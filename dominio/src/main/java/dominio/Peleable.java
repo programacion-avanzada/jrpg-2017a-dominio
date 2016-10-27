@@ -9,4 +9,5 @@ public interface Peleable {
 	public int otorgarExp();
 	public int getAtaque();
 	public void setAtaque(int ataque);
+	public boolean estaVivo();
 }
