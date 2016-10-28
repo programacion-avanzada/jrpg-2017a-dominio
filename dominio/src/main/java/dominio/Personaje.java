@@ -37,12 +37,11 @@ public abstract class Personaje implements Peleable {
 	protected static int tabla_nivel[];
 
 	public static void cargar_tabla_nivel() {
-		Personaje.tabla_nivel = new int[100];
+		Personaje.tabla_nivel = new int[101];
 		Personaje.tabla_nivel[0] = 0;
 		Personaje.tabla_nivel[1] = 0;
-		for (int i = 2; i < 100; i++)
+		for (int i = 2; i < 101; i++)
 			Personaje.tabla_nivel[i] = Personaje.tabla_nivel[i - 1] + 50;
-
 	}
 
 	public Personaje(String nombre, Casta casta, int id) {
@@ -276,34 +275,23 @@ public abstract class Personaje implements Peleable {
 		this.energia_tope = energia_tope;
 	}
 
-	public void atacar(Peleable atacado) {
+	public int atacar(Peleable atacado) {
 		Random rnd = new Random();
 		if (salud == 0)
-			return;
+			return 0;
 		if (atacado.getSalud() > 0) {
-			if (rnd.nextDouble() <= this.casta.getProbabilidadGolpeCritico() + this.destreza / 1000) {/// estoy
-																										/// sacando
-																										/// el
-																										/// 10%
-																										/// de
-																										/// la
-																										/// destreza
-																										/// para
-																										/// aumentar
-																										/// la
-																										/// prob
-																										/// de
-																										/// critico
+			if (rnd.nextDouble() <= this.casta.getProbabilidadGolpeCritico() + this.destreza / 1000) {
 				System.out.println("GOLPE CRITICO!");
-				// System.out.println("Daño inflingido: "+(this.ataque *
-				// this.getCasta().getDañoCritico()));
-				atacado.serAtacado((int) (this.ataque * this.getCasta().getDañoCritico()));// pego
-																							// daño
-																							// critico
-			} else {// System.out.println("Daño inflingido: "+(this.ataque));
-				atacado.serAtacado(this.ataque);
+				return atacado.serAtacado(this.golpe_critico());
+			} else {
+				return atacado.serAtacado(this.ataque);
 			}
 		}
+		return 0;
+	}
+
+	public int golpe_critico() {
+		return (int) (this.ataque * this.getCasta().getDañoCritico());
 	}
 
 	public void despuesDeTurno() {
@@ -319,13 +307,7 @@ public abstract class Personaje implements Peleable {
 		Iterator<Item> it = this.itemsEquipados.iterator();
 		while (it.hasNext())
 			daño_items += it.next().bono_daño;
-		// System.out.println("Daño : " + (this.getFuerza() + daño_items));
-		return (int) (this.getFuerza() * 1.5 + daño_items); // hago que el daño
-															// de un
-		// personaje sea igual a la
-		// fuerza que tiene mas el daño
-		// de sus items
-
+		return (int) (this.getFuerza() * 1.5 + daño_items);
 	}
 
 	public int calcularPuntosDeDefensa() {
@@ -333,8 +315,6 @@ public abstract class Personaje implements Peleable {
 		Iterator<Item> it = this.itemsEquipados.iterator();
 		while (it.hasNext())
 			defensa_items += it.next().bono_defensa;
-		// System.out.println("Defensa : " + (this.getDefensa() * 0.5 +
-		// defensa_items + this.getDestreza()));
 		return (int) (defensa_items + this.getDestreza());
 	}
 
@@ -343,8 +323,6 @@ public abstract class Personaje implements Peleable {
 		Iterator<Item> it = this.itemsEquipados.iterator();
 		while (it.hasNext())
 			magia_items += it.next().bono_magia;
-		// System.out.println("Magia : " + (this.getInteligencia() +
-		// magia_items));
 		return (int) (this.getInteligencia() * 1.5 + magia_items);
 
 	}
@@ -390,7 +368,6 @@ public abstract class Personaje implements Peleable {
 		Random rnd = new Random();
 		if (rnd.nextDouble() >= this.getCasta().getProbabilidadEvitarDaño()) {
 			daño -= this.defensa;
-			// System.out.println("Defensa obtenida: "+this.defensa);
 			if (daño > 0) {
 				if (salud <= daño) {
 					daño = salud;
@@ -400,10 +377,10 @@ public abstract class Personaje implements Peleable {
 					return daño;
 				}
 			}
-			return 0;// no le hace daño ya que la defensa fue mayor
+			return 0;
 		}
 		System.out.println("GOLPE EVADIDO!");
-		return 0;// esquivo el golpe
+		return 0;
 	}
 
 	public int serRobadoSalud(int daño) {
@@ -651,8 +628,10 @@ public abstract class Personaje implements Peleable {
 			System.out.println("Ya ha alcanzado el maximo nivel!");
 			return;
 		}
-		while (this.nivel != 100 && (this.experiencia > Personaje.tabla_nivel[this.nivel] + aux)) {
-			aux += Personaje.tabla_nivel[this.nivel];
+		while (this.nivel != 100 && (this.experiencia >= Personaje.tabla_nivel[this.nivel+1] + aux)) {
+			
+			aux += Personaje.tabla_nivel[this.nivel+1];
+			//System.out.println(aux);
 			this.nivel++;
 			// this.asignarPuntos();
 			this.modificarAtributos();
@@ -660,6 +639,7 @@ public abstract class Personaje implements Peleable {
 			this.energia_tope += 20;
 		}
 		this.experiencia -= aux;
+		//System.out.println("aux:"+aux);
 	}
 
 	public void ganarExperiencia(int exp) {
@@ -683,21 +663,21 @@ public abstract class Personaje implements Peleable {
 		return Math.sqrt(Math.pow(this.x - p.x, 2) + Math.pow(this.y - p.y, 2));
 	}
 
-	public void habilidadCasta1(Peleable atacado) {
-		this.getCasta().habilidad1(this, atacado);
+	public boolean habilidadCasta1(Peleable atacado) {
+		return this.getCasta().habilidad1(this, atacado);
 	}
 
-	public void habilidadCasta2(Peleable atacado) {
-		this.getCasta().habilidad2(this, atacado);
+	public boolean habilidadCasta2(Peleable atacado) {
+		return this.getCasta().habilidad2(this, atacado);
 	}
 
-	public void habilidadCasta3(Peleable atacado) {
-		this.getCasta().habilidad3(this, atacado);
+	public boolean habilidadCasta3(Peleable atacado) {
+		return this.getCasta().habilidad3(this, atacado);
 	}
 
-	public abstract void habilidadRaza1(Peleable atacado);
+	public abstract boolean habilidadRaza1(Peleable atacado);
 
-	public abstract void habilidadRaza2(Peleable atacado);
+	public abstract boolean habilidadRaza2(Peleable atacado);
 
 	public int elegirOpcion() {
 		String aux = "";

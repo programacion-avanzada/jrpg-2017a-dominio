@@ -24,21 +24,27 @@ public class Humano extends Personaje {
 
 
 
-	public void habilidadRaza1(Peleable atacado){//incentivar
+	public boolean habilidadRaza1(Peleable atacado){//incentivar
 		if(this.getEnergia()>10)
 		{
 			this.setEnergia(this.getEnergia()-10);
 			atacado.setAtaque(atacado.getAtaque()+this.getMagia());
+			return true;
 		}
+		return false;
 	}
 	
-	public void habilidadRaza2(Peleable atacado){//golpefatal
+	public boolean habilidadRaza2(Peleable atacado){//golpefatal
 		if(this.getEnergia()>10)
 		{
-			atacado.serAtacado(atacado.getSalud()/2);
-			this.setEnergia(this.getEnergia()/2);
+			if(atacado.serAtacado(atacado.getSalud()/2)!=0)
+				{
+				this.setEnergia(this.getEnergia()/2);
+				return true;
+				}
 		}
-		
+		this.setEnergia(this.getEnergia()-10);
+		return false;
 		
 	}
 	

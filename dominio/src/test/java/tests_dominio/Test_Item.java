@@ -36,9 +36,9 @@ public class Test_Item {
 		
 		Assert.assertTrue(h.getSalud()==100);
 		Assert.assertTrue(h.getEnergia()==100);
-		Assert.assertTrue(h.getAtaque()==25);
+		Assert.assertTrue(h.getAtaque()==37);
 		Assert.assertTrue(h.getDefensa()==20);
-		Assert.assertTrue(h.getMagia()==30);
+		Assert.assertTrue(h.getMagia()==45);
 		
 		h.equiparItem(excalibur);
 		h.equiparItem(ragnarok);
@@ -48,11 +48,11 @@ public class Test_Item {
 		h.equiparItem(anilloSupremo);
 		
 		
-		Assert.assertTrue(h.getSalud()==150);
-		Assert.assertTrue(h.getEnergia()==150);
-		Assert.assertTrue(h.getAtaque()==125);
+		Assert.assertTrue(h.getSalud_tope()==150);
+		Assert.assertTrue(h.getEnergia_tope()==150);
+		Assert.assertTrue(h.getAtaque()==137);
 		Assert.assertTrue(h.getDefensa()==70);
-		Assert.assertTrue(h.getMagia()==80);
+		Assert.assertTrue(h.getMagia()==95);
 		
 		
 		Assert.assertTrue(h.getItemsEquipados().size()==6);
@@ -68,9 +68,9 @@ public class Test_Item {
 		
 		Assert.assertTrue(h.getSalud()==100);
 		Assert.assertTrue(h.getEnergia()==100);
-		Assert.assertTrue(h.getAtaque()==25);
+		Assert.assertTrue(h.getAtaque()==37);
 		Assert.assertTrue(h.getDefensa()==20);
-		Assert.assertTrue(h.getMagia()==30);
+		Assert.assertTrue(h.getMagia()==45);
 		
 	}
 	
@@ -135,5 +135,7 @@ public class Test_Item {
 		Assert.assertEquals(1, h.getItemsEquipados().size());
 	}
 
+	
+	
 }
 

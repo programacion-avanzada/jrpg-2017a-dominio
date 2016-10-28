@@ -16,10 +16,10 @@ public class Test_Hechicero {
 		Elfo e = new Elfo("Nico",100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 3, 1);
 		
 		Assert.assertTrue(e.getSalud()==100);
-		h.atacar(e);
+		e.setSalud(65);
 		Assert.assertTrue(e.getSalud()==65);
 		h.habilidadCasta2(e);
-		Assert.assertTrue(e.getSalud()==95);
+		Assert.assertTrue(e.getSalud()>65);
 
 	}
 	
@@ -30,8 +30,11 @@ public class Test_Hechicero {
 		Elfo e = new Elfo("Nico",100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 3, 1);
 		
 		Assert.assertTrue(e.getSalud()==100);
-		h.habilidadCasta1(e);
-		Assert.assertTrue(e.getSalud()==75);
+		if(h.habilidadCasta1(e))
+			Assert.assertTrue(e.getSalud()<100);
+		else
+			Assert.assertTrue(e.getSalud()==100);
+
 
 	}
 	
@@ -44,11 +47,18 @@ public class Test_Hechicero {
 		Assert.assertTrue(e.getSalud()==100);
 		h.setSalud(50);
 		h.setEnergia(50);
-		h.habilidadCasta3(e);
-	
-		Assert.assertTrue(e.getSalud()==95);
-		Assert.assertTrue(h.getEnergia()==70);
-		Assert.assertTrue(h.getSalud()==55);
-		
+		if(h.habilidadCasta3(e))
+		{
+		Assert.assertTrue(e.getSalud()<100);
+		Assert.assertTrue(h.getEnergia()>50);
+		Assert.assertTrue(h.getSalud()>50);
+		}
+		else
+			{
+			Assert.assertTrue(h.getSalud()==50);
+			Assert.assertTrue(h.getEnergia()<50);
+			Assert.assertTrue(e.getSalud()==100);
+			}
+
 	}
 }

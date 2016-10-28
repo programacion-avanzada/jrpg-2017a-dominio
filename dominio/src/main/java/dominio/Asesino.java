@@ -10,12 +10,12 @@ public class Asesino extends Casta {
 		super(prob_crit, evasion, daño_crit);
 	}
 
-	public Asesino ()// creo que se llama por defecto no? preguntarle a lucas
+	public Asesino()// creo que se llama por defecto no? preguntarle a lucas
 	{
 		super();
 	}
-	
-	public void habilidad1(Personaje caster, Peleable atacado)// ataca con un
+
+	public boolean habilidad1(Personaje caster, Peleable atacado)// ataca con un
 																// golpe mas
 																// poderoso de
 																// lo normal,
@@ -24,11 +24,13 @@ public class Asesino extends Casta {
 	{
 		if (caster.getEnergia() > 10) {
 			caster.setEnergia(caster.getEnergia() - 10);
-			atacado.serAtacado((int) (caster.ataque * caster.getCasta().getDañoCritico()));
+			if(atacado.serAtacado((int) (caster.ataque * caster.getCasta().getDañoCritico()))!=0)
+				return true;
 		}
+		return false;
 	}
 
-	public void habilidad2(Personaje caster, Peleable atacado)// aumenta su
+	public boolean habilidad2(Personaje caster, Peleable atacado)// aumenta su
 																// probabilidadEvitarDaño,
 																// hasta un
 																// maximo
@@ -37,17 +39,22 @@ public class Asesino extends Casta {
 		if (caster.getEnergia() > 10) {
 			caster.setEnergia(caster.getEnergia() - 10);
 			if (this.getProbabilidadEvitarDaño() + 0.15 < 0.5)
-				this.probabilidadEvitarDaño += 0.15;// hay que ponerle un tope(en este caso 0.5)
+				this.probabilidadEvitarDaño += 0.15;// hay que ponerle un
+													// tope(en este caso 0.5)
 			else
 				this.probabilidadEvitarDaño = 0.5;
+			return true;
 		}
+		return false;
 	}
 
-	public void habilidad3(Personaje caster, Peleable atacado)// roba un item,
-																// aunque tiene
-																// una
-																// probabilidad
-																// de exito
+	public boolean habilidad3(Personaje caster, Peleable atacado)// roba un
+																	// item,
+																	// aunque
+																	// tiene
+																	// una
+																	// probabilidad
+																	// de exito
 	{
 
 		if (caster.getEnergia() > 10) {
@@ -56,19 +63,18 @@ public class Asesino extends Casta {
 
 			if ((rnd.nextDouble() <= this.prob_robar + caster.getDestreza() / 1000)
 					&& caster.itemsGuardados.size() < 20) {
-			Item aux=atacado.serRobado();	
-			if(aux!=null)
-			{
-				caster.itemsGuardados.add(aux);
-				System.out.println("Se pudo robar!");
-			}
-			else
-				System.out.println("No se pudo robar!(No hay items para robar)");
+				Item aux = atacado.serRobado();
+				if (aux != null) {
+					caster.itemsGuardados.add(aux);
+					System.out.println("Se pudo robar!");
+					return true;
+				} else
+					System.out.println("No se pudo robar!(No hay items para robar)");
 
-			}
-			else
-			System.out.println("No se pudo robar!");
+			} else
+				System.out.println("No se pudo robar!");
 
 		}
+		return false;
 	}
 }

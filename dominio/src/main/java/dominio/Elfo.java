@@ -22,18 +22,24 @@ public class Elfo extends Personaje{
 
 
 
-	public void habilidadRaza1(Peleable atacado){ //golpelevel
-		if(this.getEnergia()>10)
-		{atacado.serAtacado(this.getFuerza()+this.getNivel()*10);//no importan los items, solo la fuerza y el level
-		this.setEnergia(this.getEnergia()-10);}
-	}
-	
-	public void habilidadRaza2(Peleable atacado){ //ataquebosque
+	public boolean habilidadRaza1(Peleable atacado){ //golpelevel
 		if(this.getEnergia()>10)
 		{
-			atacado.serAtacado( (int) (this.magia));
 			this.setEnergia(this.getEnergia()-10);
+			if(atacado.serAtacado(this.getFuerza()+this.getNivel()*10)!=0)
+				return true;
 		}
+		return false;
+	}
+	
+	public boolean habilidadRaza2(Peleable atacado){ //ataquebosque
+		if(this.getEnergia()>10)
+		{
+			this.setEnergia(this.getEnergia()-10);
+			if(atacado.serAtacado( (int) (this.magia))!=0)
+				return true;
+		}
+		return false;
 	}
 
 }

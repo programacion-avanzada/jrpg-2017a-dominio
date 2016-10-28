@@ -155,7 +155,7 @@ public abstract class Item {
 
 	public String toString() {
 		return this.nombre + "  Daño:" + this.bono_daño + "  Defensa:" + this.bono_defensa + "  Magia:"
-				+ this.bono_magia + "  Salud:" + this.bono_salud + "  Energia:" + this.bono_energia + "\n";
+				+ this.bono_magia + "  Salud:" + this.bono_salud + "  Energia:" + this.bono_energia;
 	}
 
 }

@@ -21,8 +21,12 @@ public class Test_Guerrero {
 	Elfo e = new Elfo("Nico",100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 3, 1);
 
 	Assert.assertTrue(e.getSalud()==100);
-	h.habilidadCasta1(e);
-	Assert.assertTrue(e.getSalud()==70);
+	if(h.habilidadCasta1(e))
+		Assert.assertTrue(e.getSalud()<100);
+		
+	else
+		Assert.assertTrue(e.getSalud()==100);
+
 	}
 	
 	@Test
@@ -32,7 +36,7 @@ public class Test_Guerrero {
 		
 		Assert.assertTrue(h.getDefensa()==20);
 		h.habilidadCasta2(null);
-		Assert.assertTrue(h.getDefensa()==50);
+		Assert.assertTrue(h.getDefensa()==65);	
 
 	}
 	
@@ -43,8 +47,11 @@ public class Test_Guerrero {
 		Elfo e = new Elfo("Nico",100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 3, 1);
 		
 		Assert.assertTrue(e.getSalud()==100);
-		h.habilidadCasta3(e);
-		Assert.assertTrue(e.getSalud()==75);
+		if(h.habilidadCasta3(e))
+			Assert.assertTrue(e.getSalud()<100);
+		else
+			Assert.assertTrue(e.getSalud()==100);
+
 	}
 	
 	

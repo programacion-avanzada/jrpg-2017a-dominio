@@ -140,16 +140,16 @@ public class NonPlayableCharacter implements Peleable{
 		this.salud = salud;
 	}
 
-	public void atacar(Peleable atacado)
+	public int atacar(Peleable atacado)
 	{
 		Random rnd = new Random();
 		if(rnd.nextDouble()<=0.15)//los NPC tienen 15% de golpes criticos
 			{
 			System.out.println("GOLPE CRITICO NPC!");
-			atacado.serAtacado((int) (this.getAtaque()*1.5));//pego daño critico
+		return	atacado.serAtacado((int) (this.getAtaque()*1.5));//pego daño critico
 			}
 		else
-	atacado.serAtacado(this.getAtaque());
+	return atacado.serAtacado(this.getAtaque());
 	}
 	
 	public int serAtacado(int daño){
