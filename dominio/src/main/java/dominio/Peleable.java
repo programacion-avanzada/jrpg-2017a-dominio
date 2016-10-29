@@ -4,7 +4,7 @@ public interface Peleable {
 	public int serAtacado(int daño);
 	public int getSalud();
 	public void despuesDeTurno();
-	public void atacar(Peleable atacado);
+	public int atacar(Peleable atacado);
 	public Item serRobado();
 	public int otorgarExp();
 	public int getAtaque();

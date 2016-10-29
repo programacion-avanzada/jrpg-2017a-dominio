@@ -17,17 +17,17 @@ public class Test_Aliar_y_Combatir {
 		h.aliar(h2);
 		Assert.assertNotNull(h.getClan());
 		Assert.assertNotNull(h2.getClan());
-
 	}
 	
+	@Test
 	public void test_Dañar(){
 		Humano h = new Humano("Nicolas",new Guerrero(),1);
-		Humano h2 = new Humano("Lautaro",new Guerrero(),1);
-		
+		Humano h2 = new Humano("Lautaro",new Asesino(),1);
 		Assert.assertTrue(h2.getSalud()==55);
-		h.atacar(h2);
-		Assert.assertTrue(h2.getSalud()<55);
-
+		if(	h.atacar(h2)!=0)
+			Assert.assertTrue(h2.getSalud()<55);
+		else
+			Assert.assertTrue(h2.getSalud()==55);
 	}
 	
 	@Test

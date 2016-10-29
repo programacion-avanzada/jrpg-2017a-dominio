@@ -26,9 +26,11 @@ public class Test_Nivel_y_Exp {
 	{
 		Personaje.cargar_tabla_nivel();
 		Humano h = new Humano("Nico",100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 1, 1);
-		h.ganarExperiencia(159);
-		Assert.assertTrue(h.getNivel()==3);
-		Assert.assertTrue(h.getExperiencia()==9);
+		h.ganarExperiencia(300);
+		Assert.assertTrue(h.getNivel()==4);
+		//System.out.println(h.getNivel());
+		Assert.assertTrue(h.getExperiencia()==0);
+		
 	}
 	
 	@Test

@@ -6,56 +6,45 @@ public class Hechicero extends Casta {
 		super(prob_crit, evasion, daño_crit);
 	}
 
-	public Hechicero ()// creo que se llama por defecto no? preguntarle a lucas
+	public Hechicero()// creo que se llama por defecto no? preguntarle a lucas
 	{
 		super();
 	}
-	
-	
-	public void habilidad1(Personaje caster, Peleable atacado) // lanza una bola
-																// de fuego que
-																// es mas fuerte
-																// que su ataque
-																// "basico"
-	{
+
+	public boolean habilidad1(Personaje caster, Peleable atacado) {
 		if (caster.getEnergia() > 10) {
 			caster.setEnergia(caster.getEnergia() - 10);
-			atacado.serAtacado((int) (caster.calcularPuntosDeMagia() * 1.5));
+			if (atacado.serAtacado((int) (caster.calcularPuntosDeMagia() * 1.5)) != 0)
+				return true;
 		}
+		return false;
 	}
 
-	public void habilidad2(Personaje caster, Peleable aliado) // cura la salud a
-	// un aliado
-	{
+	public boolean habilidad2(Personaje caster, Peleable aliado) {
 		if (caster.getEnergia() > 10) {
 			caster.setEnergia(caster.getEnergia() - 10);
-			if (aliado instanceof Personaje)
+			if (aliado instanceof Personaje) {
 				((Personaje) aliado).serCurado(caster.calcularPuntosDeMagia());
-
+				return true;
+			}
 		}
+		return false;
 	}
 
-	public void habilidad3(Personaje caster, Peleable atacado) // roba energia y
-																// salud
-																// de los
-																// enemigos
+	public boolean habilidad3(Personaje caster, Peleable atacado) 
 	{
 		if (caster.getEnergia() > 10) {
 			caster.setEnergia(caster.getEnergia() - 10);
 			if (atacado instanceof Personaje) {
 				int energia_robada = ((Personaje) atacado).serDesernegizado(caster.calcularPuntosDeMagia());
-				int salud_robada = ((Personaje) atacado).serRobadoSalud(caster.calcularPuntosDeMagia() / 2);// divido
-																											// por
-																											// 2
-																											// sino
-																											// es
-																											// muy
-																											// fruta
+				int salud_robada = ((Personaje) atacado).serRobadoSalud(caster.calcularPuntosDeMagia() / 2);
 				caster.serEnergizado(energia_robada);
 				caster.serCurado(salud_robada);
+				return true;
 			}
 
 		}
+		return false;
 	}
 
 }
