@@ -39,7 +39,7 @@ public class Juego implements Runnable {
 		
 		Recursos.cargar();
 		
-		testMovimiento = new Entidad(this);
+		testMovimiento = new Entidad(this, 64, 64);
 	}
 	
 	private void actualizar() { // Actualiza los objetos y sus posiciones

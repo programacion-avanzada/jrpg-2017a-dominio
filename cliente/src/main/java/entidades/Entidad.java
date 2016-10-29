@@ -1,14 +1,21 @@
 package entidades;
 
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 import juego.Juego;
 import recursos.Recursos;
+import entidades.Animacion;
 
 public class Entidad {
 
 	Juego juego;
-
+	
+	// Tamaño de la entidad
+	private int tamAncho;
+	private int tamAlto;
+	
+	// Posiciones
 	private double x;
 	private double y;
 	private double xInicio;
@@ -17,15 +24,17 @@ public class Entidad {
 	private double yFinal;
 	private int posMouse[];
 
+	// Calculo de movimiento
 	private double difX;
 	private double difY;
 	private double relacion;
-
+	
+	// Posicion final
 	private int auxX;
 	private int auxY;
 
+	// Movimiento Actual
 	private boolean enMovimiento;
-
 	private boolean horizontal;
 	private boolean vertical;
 	private boolean diagonalInfIzq;
@@ -33,19 +42,45 @@ public class Entidad {
 	private boolean diagonalSupIzq;
 	private boolean diagonalSupDer;
 
-	public Entidad(Juego juego) {
+	
+	// Animaciones
+	private final Animacion moverIzq;
+	private final Animacion moverArribaIzq;
+	private final Animacion moverArriba;
+	private final Animacion moverArribaDer;
+	private final Animacion moverDer;
+	private final Animacion moverAbajoDer;
+	private final Animacion moverAbajo;
+	private final Animacion moverAbajoIzq;
+	
+	public Entidad(Juego juego, int tamAncho, int tamAlto) {
 		this.juego = juego;
 		x = 100;
 		y = 100;
+		this.tamAncho = tamAncho;
+		this.tamAlto = tamAlto;
+		
+		moverIzq = new Animacion(200, Recursos.guerreroIzq); 
+		moverArribaIzq = new Animacion(200, Recursos.guerreroArribaIzq);
+		moverArriba = new Animacion(200, Recursos.guerreroArriba);
+		moverArribaDer = new Animacion(200, Recursos.guerreroArribaDer);
+		moverDer = new Animacion(200, Recursos.guerreroDer);
+		moverAbajoDer = new Animacion(200, Recursos.guerreroAbajoDer);
+		moverAbajo = new Animacion(200, Recursos.guerreroAbajo);
+		moverAbajoIzq = new Animacion(200, Recursos.guerreroAbajoIzq);
 	}
 
 	public void actualizar() {
+		moverIzq.actualizar();
+		moverArribaIzq.actualizar();
+		moverArriba.actualizar();
+		moverArribaDer.actualizar();
+		moverDer.actualizar();
+		moverAbajoDer.actualizar();
+		moverAbajo.actualizar();
+		moverAbajoIzq.actualizar();
 		getEntrada();
 		mover();
-	}
-
-	public void graficar(Graphics g) {
-		g.drawImage(Recursos.prueba, (int) x, (int) y, 32, 32, null);
 	}
 
 	public void getEntrada() {
@@ -76,15 +111,12 @@ public class Entidad {
 			if (difX == 0 || difY == 0) {
 				relacion = 1;
 			}
-
-			System.out.println("Inicio: " + xInicio + " " + yInicio);
-			System.out.println("Final: " + xFinal + " " + yFinal);
-
-			if (difX < 32 && yInicio != yFinal) {
+			
+			if (difX < tamAncho && yInicio != yFinal) {
 				vertical = true;
 				horizontal = true;
 			}
-			if (difY < 32 && xInicio != xFinal) {
+			if (difY < tamAncho && xInicio != xFinal) {
 				horizontal = true;
 				vertical = true;
 			}
@@ -161,5 +193,31 @@ public class Entidad {
 				enMovimiento = false;
 			}
 		}
+	}
+	
+	public void graficar(Graphics g) {
+		g.drawImage(getFrameAnimacionActual(), (int) x, (int) y, tamAncho, tamAlto, null);
+	}
+	
+	private BufferedImage getFrameAnimacionActual() {
+		if(horizontal && x > xFinal) {
+			return moverIzq.getFrameActual();
+		} else if(horizontal && x < xFinal) {
+			return moverDer.getFrameActual();
+		} else if(vertical && y > yFinal) {
+			return moverArriba.getFrameActual();
+		} else if(vertical && y < yFinal) {
+			return moverAbajo.getFrameActual();
+		} else if(diagonalInfIzq) {
+			return moverAbajoIzq.getFrameActual();
+		} else if(diagonalInfDer) {
+			return moverAbajoDer.getFrameActual();
+		} else if(diagonalSupIzq) {
+			return moverArribaIzq.getFrameActual();
+		} else if(diagonalSupDer) {
+			return moverArribaDer.getFrameActual();
+		}
+		
+		return Recursos.guerreroAbajo[0];
 	}
 }
