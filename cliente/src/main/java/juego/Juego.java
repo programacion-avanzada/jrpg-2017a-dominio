@@ -3,8 +3,13 @@ package juego;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
+import entidades.Entidad;
+import recursos.Recursos;
+
 public class Juego implements Runnable {
 
+	private Entidad testMovimiento;
+	
 	private Pantalla pantalla;
 	private final String NOMBRE;
 	private final int ANCHO;
@@ -16,18 +21,30 @@ public class Juego implements Runnable {
 	private BufferStrategy bs; // Estrategia para graficar mediante buffers (Primero se "grafica" en el/los buffer/s y finalmente en el canvas)
 	private Graphics g;	
 	
+	// HandlerMouse
+	private HandlerMouse handlerMouse;
+	
 	public Juego(final String nombre, final int ancho, final int alto) {
 		this.NOMBRE = nombre;
 		this.ALTO = alto;
 		this.ANCHO = ancho;
+		
+		handlerMouse = new HandlerMouse();
 	}
 
 	public void iniciar() { // Carga lo necesario para iniciar el juego
 		pantalla = new Pantalla(NOMBRE, ANCHO, ALTO);
+		
+		pantalla.getCanvas().addMouseListener(handlerMouse);
+		
+		Recursos.cargar();
+		
+		testMovimiento = new Entidad(this);
 	}
 	
 	private void actualizar() { // Actualiza los objetos y sus posiciones
-
+		handlerMouse.actualizar();
+		testMovimiento.actualizar();
 	}
 	
 	private void graficar() { // Grafica los objetos y sus posiciones
@@ -43,7 +60,7 @@ public class Juego implements Runnable {
 		
 		// Graficado de imagenes
 		
-
+		testMovimiento.graficar(g);
 		
 		// Fin de graficado de imagenes
 		
@@ -109,5 +126,9 @@ public class Juego implements Runnable {
 	
 	public int getAlto() {
 		return ALTO;
+	}
+	
+	public HandlerMouse getHandlerMouse() {
+		return handlerMouse;
 	}
 }
