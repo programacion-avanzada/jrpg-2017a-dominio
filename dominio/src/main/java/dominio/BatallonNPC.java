@@ -24,10 +24,7 @@ public class BatallonNPC {
 		}
 	}
 
-	public void accion()
-	{
-		
-	}
+	
 
 	public LinkedList<NonPlayableCharacter> getEquipo() {
 		return equipo;

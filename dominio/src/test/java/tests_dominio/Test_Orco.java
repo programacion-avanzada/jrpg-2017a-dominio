@@ -10,9 +10,17 @@ import dominio.*;
 public class Test_Orco {
 
 	@Test
-	public void test_superGolpe()
+	public void test_GolpeDefensivo()
 	{
-		
+		Humano h = new Humano("Nicolas",new Guerrero(),1);
+		Orco o = new Orco("Hernan",new Guerrero(),1);
+
+		Assert.assertTrue(h.getSalud()==55);
+		if(o.habilidadRaza1(h))
+			Assert.assertTrue(h.getSalud()==45);
+		else
+			Assert.assertTrue(o.getSalud()==55);
+
 	}
 	
 	@Test
@@ -23,10 +31,17 @@ public class Test_Orco {
 		
 		Assert.assertTrue(h.getSalud()==100);
 		o.setSalud(50);
-		o.habilidadRaza2(h);
-		Assert.assertTrue(h.getSalud()==40);
-		Assert.assertTrue(o.getSalud()==100);
+		if(o.habilidadRaza2(h))
+		{	
+			Assert.assertTrue(h.getSalud()==40);
+			Assert.assertTrue(o.getSalud()==100);
+		}
+		else
+		{
+			Assert.assertTrue(o.getSalud()==50);
+			Assert.assertTrue(h.getSalud()==100);
 
+		}
 		
 	}
 	

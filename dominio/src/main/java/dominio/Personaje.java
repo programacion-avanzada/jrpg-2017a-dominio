@@ -84,8 +84,15 @@ public abstract class Personaje implements Peleable {
 		this.destreza = destreza;
 		this.inteligencia = inteligencia;
 		this.casta = casta;
-		this.itemsEquipados = itemsEquipados;
-		this.itemsGuardados = itemsGuardados;
+		if(itemsEquipados!=null)
+			this.itemsEquipados = itemsEquipados;
+		else
+			this.itemsEquipados = new LinkedList<Item>();
+		if(itemsGuardados!=null)
+			this.itemsGuardados = itemsGuardados;
+		else
+			this.itemsGuardados = new LinkedList<Item>();
+
 		this.experiencia = experiencia;
 		this.nivel = nivel;
 

@@ -15,7 +15,10 @@ public class NonPlayableCharacter implements Peleable{
 	public NonPlayableCharacter(String nombre,int nivel,Item[] items_dropeables,int dif){
 		this.nombre=nombre;
 		this.nivel=nivel;
-		this.items_dropeables=items_dropeables;
+		if(items_dropeables!=null)
+			this.items_dropeables=items_dropeables.clone();
+		else
+			this.items_dropeables = new Item[3];
 		Random rnd = new Random();
 		int dificultad ;
 		if(dif==-1)

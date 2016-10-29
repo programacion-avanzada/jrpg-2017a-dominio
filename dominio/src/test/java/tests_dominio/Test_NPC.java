@@ -17,8 +17,11 @@ public class Test_NPC {
 		NonPlayableCharacter npc = new NonPlayableCharacter("Gigante",1,null,-1);
 		Humano h = new Humano("Nico",100, 100, 1000, 20, 30, new Asesino(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 1, 1);
 		
-		h.atacar(npc);
-		Assert.assertFalse(npc.estaVivo());
+		if(h.atacar(npc)!=0)
+			Assert.assertFalse(npc.estaVivo());
+		else
+			Assert.assertTrue(npc.estaVivo());
+
 	}
 	
 	@Test

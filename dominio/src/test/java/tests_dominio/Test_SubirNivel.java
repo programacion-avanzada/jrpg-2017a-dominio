@@ -37,7 +37,7 @@ public class Test_SubirNivel {
 
 		Humano h = new Humano("Nicolas",new Guerrero(),1);
 		Assert.assertTrue(h.getNivel()==1);
-		h.ganarExperiencia(100);
+		h.ganarExperiencia(150);
 		Assert.assertTrue(h.getNivel()==3);
 	}
 	
