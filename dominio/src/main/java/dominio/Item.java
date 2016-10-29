@@ -1,46 +1,45 @@
 package dominio;
 
 public abstract class Item {
-	protected int id_Item;
+	protected int idItem;
 	protected int prioridad;
 	protected String nombre;
-	protected String tipo;///////////// HAY Q AGREGARLO AL CONSTRUCTTTTTTT
+	protected String tipo;
 
-	protected int bono_daño;
-	protected int bono_defensa;
-	protected int bono_magia;
-	protected int bono_salud;
-	protected int bono_energia;
-	protected int fuerza_requerida;
-	protected int inteligencia_requerida;
-	protected int destreza_requerida;
+	protected int bonoDaño;
+	protected int bonoDefensa;
+	protected int bonoMagia;
+	protected int bonoSalud;
+	protected int bonoEnergia;
+	protected int fuerzaRequerida;
+	protected int inteligenciaRequerida;
+	protected int destrezaRequerida;
 	protected int nivel = 1;
 
-	public abstract int obtenerCantidadDeItemsMaximo();
 
 	public Item(int id_Item, int prioridad, String nombre, String tipo, int bono_daño, int bono_defensa, int bono_magia,
 			int bono_salud, int bono_energia, int fuerza_requerida, int inteligencia_requerida,
 			int destreza_requerida) {
-		this.id_Item = id_Item;
+		this.idItem = id_Item;
 		this.prioridad = prioridad;
 		this.nombre = nombre;
 		this.tipo = tipo;
-		this.bono_daño = bono_daño;
-		this.bono_defensa = bono_defensa;
-		this.bono_magia = bono_magia;
-		this.bono_salud = bono_salud;
-		this.bono_energia = bono_energia;
-		this.fuerza_requerida = fuerza_requerida;
-		this.destreza_requerida = destreza_requerida;
-		this.inteligencia_requerida = inteligencia_requerida;
+		this.bonoDaño = bono_daño;
+		this.bonoDefensa = bono_defensa;
+		this.bonoMagia = bono_magia;
+		this.bonoSalud = bono_salud;
+		this.bonoEnergia = bono_energia;
+		this.fuerzaRequerida = fuerza_requerida;
+		this.destrezaRequerida = destreza_requerida;
+		this.inteligenciaRequerida = inteligencia_requerida;
 	}
 
 	public int getId_Item() {
-		return id_Item;
+		return idItem;
 	}
 
 	public void setId_Item(int id_Item) {
-		this.id_Item = id_Item;
+		this.idItem = id_Item;
 	}
 
 	public int getPrioridad() {
@@ -59,44 +58,44 @@ public abstract class Item {
 		this.nombre = nombre;
 	}
 
-	public int getBono_daño() {
-		return bono_daño;
+	public int getBonoDaño() {
+		return bonoDaño;
 	}
 
-	public void setBono_daño(int bono_daño) {
-		this.bono_daño = bono_daño;
+	public void setBonoDaño(int bonoDaño) {
+		this.bonoDaño = bonoDaño;
 	}
 
-	public int getBono_defensa() {
-		return bono_defensa;
+	public int getBonoDefensa() {
+		return bonoDefensa;
 	}
 
-	public void setBono_defensa(int bono_defensa) {
-		this.bono_defensa = bono_defensa;
+	public void setBonoDefensa(int bonoDefensa) {
+		this.bonoDefensa = bonoDefensa;
 	}
 
-	public int getBono_magia() {
-		return bono_magia;
+	public int getBonoMagia() {
+		return bonoMagia;
 	}
 
-	public void setBono_magia(int bono_magia) {
-		this.bono_magia = bono_magia;
+	public void setBonoMagia(int bonoMagia) {
+		this.bonoMagia = bonoMagia;
 	}
 
-	public int getBono_salud() {
-		return bono_salud;
+	public int getBonoSalud() {
+		return bonoSalud;
 	}
 
-	public void setBono_salud(int bono_salud) {
-		this.bono_salud = bono_salud;
+	public void setBonoSalud(int bonoSalud) {
+		this.bonoSalud = bonoSalud;
 	}
 
-	public int getBono_energia() {
-		return bono_energia;
+	public int getBonoEnergia() {
+		return bonoEnergia;
 	}
 
-	public void setBono_energia(int bono_energia) {
-		this.bono_energia = bono_energia;
+	public void setBonoEnergia(int bonoEnergia) {
+		this.bonoEnergia = bonoEnergia;
 	}
 
 	public String getTipo() {
@@ -107,28 +106,28 @@ public abstract class Item {
 		this.tipo = tipo;
 	}
 
-	public int getFuerza_requerida() {
-		return fuerza_requerida;
+	public int getFuerzaRequerida() {
+		return fuerzaRequerida;
 	}
 
-	public void setFuerza_requerida(int fuerza_requerida) {
-		this.fuerza_requerida = fuerza_requerida;
+	public void setFuerzaRequerida(int fuerzaRequerida) {
+		this.fuerzaRequerida = fuerzaRequerida;
 	}
 
-	public int getInteligencia_requerida() {
-		return inteligencia_requerida;
+	public int getInteligenciaRequerida() {
+		return inteligenciaRequerida;
 	}
 
-	public void setInteligencia_requerida(int inteligencia_requerida) {
-		this.inteligencia_requerida = inteligencia_requerida;
+	public void setInteligenciaRequerida(int inteligenciaRequerida) {
+		this.inteligenciaRequerida = inteligenciaRequerida;
 	}
 
-	public int getDestreza_requerida() {
-		return destreza_requerida;
+	public int getDestrezaRequerida() {
+		return destrezaRequerida;
 	}
 
-	public void setDestreza_requerida(int destreza_requerida) {
-		this.destreza_requerida = destreza_requerida;
+	public void setDestrezaRequerida(int destrezaRequerida) {
+		this.destrezaRequerida = destrezaRequerida;
 	}
 
 	public int getNivel() {
@@ -154,8 +153,8 @@ public abstract class Item {
 	}
 
 	public String toString() {
-		return this.nombre + "  Daño:" + this.bono_daño + "  Defensa:" + this.bono_defensa + "  Magia:"
-				+ this.bono_magia + "  Salud:" + this.bono_salud + "  Energia:" + this.bono_energia;
+		return this.nombre + "  Daño:" + this.bonoDaño + "  Defensa:" + this.bonoDefensa + "  Magia:"
+				+ this.bonoMagia + "  Salud:" + this.bonoSalud + "  Energia:" + this.bonoEnergia;
 	}
 
 }

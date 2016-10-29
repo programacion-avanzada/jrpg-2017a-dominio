@@ -6,32 +6,31 @@ import org.junit.Test;
 import dominio.*;
 import junit.framework.Assert;
 
-public class Test_AsignarPuntos {
+public class TestAsignarPuntos {
 
 	@Test
-	public void test_AumentarSalud_tope(){
-		Personaje.cargar_tabla_nivel();
+	public void testAumentarSalud_tope(){
+		Personaje.cargarTablaNivel();
 
 		Humano h = new Humano("Nicolas",new Guerrero(),1);
-		Assert.assertTrue(h.getSalud_tope()==55);
+		Assert.assertTrue(h.getSaludTope()==55);
 		h.ganarExperiencia(50);
-		Assert.assertTrue(h.getSalud_tope()==80);
+		Assert.assertTrue(h.getSaludTope()==80);
+		}
+	
+	@Test
+	public void testAumentarEnergia_tope(){
+		Personaje.cargarTablaNivel();
+
+		Humano h = new Humano("Nicolas",new Guerrero(),1);
+		Assert.assertTrue(h.getEnergiaTope()==55);
+		h.ganarExperiencia(50);
+		Assert.assertTrue(h.getEnergiaTope()==75);
 		
 	}
 	
 	@Test
-	public void test_AumentarEnergia_tope(){
-		Personaje.cargar_tabla_nivel();
-
-		Humano h = new Humano("Nicolas",new Guerrero(),1);
-		Assert.assertTrue(h.getEnergia_tope()==55);
-		h.ganarExperiencia(50);
-		Assert.assertTrue(h.getEnergia_tope()==75);
-		
-	}
-	
-	@Test
-	public void test_MasDe200Puntos(){
+	public void testMasDe200Puntos(){
 		Humano h = new Humano("Nicolas",new Guerrero(),1);
 		h.setFuerza(199);
 		h.setDestreza(199);

@@ -6,21 +6,19 @@ import java.util.Random;
 public class BatallonNPC {
 
 	LinkedList <NonPlayableCharacter> equipo;
+	private static final int cantidadAleatoria = -1;
 	
-	public BatallonNPC(String nombre_npc,int nivel, Item[] it,int cant)//de npcs
-	{
+	public BatallonNPC(String nombreNPC,int nivel, Item[] itemsParaDropear,int cantidad){
 		equipo= new LinkedList <NonPlayableCharacter>();
-		int cant_npc;
-		if(cant==-1)
-		{
+		int cantidadNPC;
+		if(cantidad==cantidadAleatoria){
 		Random rnd = new Random();
-		 cant_npc=rnd.nextInt(3)+3;
+		cantidadNPC=rnd.nextInt(3)+3;
 		}
 		else
-			cant_npc=cant;
-		for(int i=0;i<cant_npc;i++)
-		{
-			this.equipo.add(new NonPlayableCharacter(nombre_npc+(i+1),nivel,it,-1));
+			cantidadNPC=cantidad;
+		for(int i=0;i<cantidadNPC;i++){
+			this.equipo.add(new NonPlayableCharacter(nombreNPC+(i+1),nivel,itemsParaDropear,-1));
 		}
 	}
 

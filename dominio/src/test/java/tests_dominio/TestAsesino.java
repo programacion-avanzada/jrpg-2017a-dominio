@@ -14,11 +14,10 @@ import dominio.ItemDeManos;
 import dominio.ItemDeTorso;
 import dominio.Orco;
 
-public class Test_Asesino {
+public class TestAsesino {
 
 	@Test
-	public void test_Robar()
-	{
+	public void testRobar(){
 		Humano h = new Humano("Nico",100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 1, 1);
 		Orco o = new Orco("Nico",200, 100, 15, 20, 30, new Guerrero(0.2, 0.3, 1.5), new LinkedList<Item>(),new LinkedList<Item>(), 0, 1, 1);
 		ItemDeManos excalibur = new ItemDeManos(1, 10, "Excalibur", "Manos", 50, 0, 0, 0, 0, 10, 10, 10);
@@ -30,28 +29,22 @@ public class Test_Asesino {
 			Assert.assertTrue(h.getItemsGuardados().size()==1);
 		else 
 			Assert.assertTrue(h.getItemsGuardados().size()==0);
-
-		
-		
 	}
 	
 	@Test
-	public void test_Critico()
-	{
+	public void testCritico(){
 		Humano h = new Humano("Nicolas",new Asesino(),1);
 		Humano h2 = new Humano("Lautaro",new Hechicero(),2);
 		
 		Assert.assertEquals(55, h2.getSalud());
-	if	(h.habilidadCasta1(h2))
-		Assert.assertTrue(43==h2.getSalud());
-	else
-		Assert.assertEquals(55, h2.getSalud());
-
+		if	(h.habilidadCasta1(h2))
+			Assert.assertTrue(43==h2.getSalud());
+		else
+			Assert.assertEquals(55, h2.getSalud());
 	}
 	
 	@Test
-	public void test_ProbEvasion()
-	{
+	public void testProbEvasion(){
 		Humano h = new Humano("Nico",100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 1, 1);
 		Orco o = new Orco("Nico",200, 100, 15, 20, 30, new Guerrero(0.2, 0.3, 1.5), new LinkedList<Item>(),new LinkedList<Item>(), 0, 1, 1);
 		
@@ -63,7 +56,7 @@ public class Test_Asesino {
 	}
 	
 	@Test
-	public void test_robarNoSupereCantMaxDeItemsGuardados(){
+	public void testrobarNoSupereCantMaxDeItemsGuardados(){
 		Humano h = new Humano("Nico",100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 1, 1);
 		Orco o = new Orco("Nico",200, 100, 15, 20, 30, new Guerrero(0.2, 0.3, 1.5), new LinkedList<Item>(),new LinkedList<Item>(), 0, 1, 1);
 		
@@ -95,9 +88,7 @@ public class Test_Asesino {
 		h.guardarItem(excalibur);
 		
 		Assert.assertTrue(h.getItemsGuardados().size() == 20);
-		
 		h.habilidadCasta3(o);
-		
 		Assert.assertTrue(h.getItemsGuardados().size() == 20);
 	}
 }

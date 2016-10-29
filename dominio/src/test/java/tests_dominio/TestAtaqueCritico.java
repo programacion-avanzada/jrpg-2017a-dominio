@@ -5,11 +5,10 @@ import org.junit.Test;
 
 import dominio.*;
 
-public class Test_AtaqueCritico {
+public class TestAtaqueCritico {
 
 	@Test
-	public void test_golpeCrit(){
-	
+	public void testgolpeCrit(){
 		Humano h = new Humano("Nicolas",new Guerrero(),1);
 		Assert.assertEquals(h.getAtaque()*1.5, h.golpe_critico(), 1);
 	}
