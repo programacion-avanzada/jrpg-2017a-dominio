@@ -4,14 +4,13 @@ import org.junit.Test;
 import dominio.*;
 import junit.framework.Assert;
 
-public class Test_Aliar_y_Combatir {
+public class TestAliarCombatir {
 
 	@Test
-	public void test_CrearAlianza(){
-		
+	public void testCrearAlianza(){
 		Humano h = new Humano("Nicolas",new Guerrero(),1);
 		Humano h2 = new Humano("Lautaro",new Guerrero(),1);
-
+		
 		Assert.assertNull(h.getClan());
 		Assert.assertNull(h2.getClan());
 		h.aliar(h2);
@@ -20,9 +19,10 @@ public class Test_Aliar_y_Combatir {
 	}
 	
 	@Test
-	public void test_Dañar(){
+	public void testDañar(){
 		Humano h = new Humano("Nicolas",new Guerrero(),1);
 		Humano h2 = new Humano("Lautaro",new Asesino(),1);
+		
 		Assert.assertTrue(h2.getSalud()==55);
 		if(	h.atacar(h2)!=0)
 			Assert.assertTrue(h2.getSalud()<55);
@@ -31,8 +31,7 @@ public class Test_Aliar_y_Combatir {
 	}
 	
 	@Test
-	public void test_Aliar()
-	{
+	public void testAliar(){
 		Humano h = new Humano("Nicolas",new Guerrero(),1);
 		Humano h2 = new Humano("Lautaro",new Guerrero(),1);
 		Alianza a1= new Alianza("Los CacheFC");

@@ -3,18 +3,16 @@ package dominio;
 public abstract class  Casta {
 protected double probabilidadGolpeCritico;
 protected double probabilidadEvitarDaño;
-protected double dañoCritico; // es el porcentaje que hace el critico
+protected double dañoCritico; 
 
 
-public Casta ()
-{
+public Casta (){
 	this.probabilidadGolpeCritico=0.2;
 	this.probabilidadEvitarDaño=0.2;
 	this.dañoCritico=1.5;
 }
 
-public Casta(double prob_crit,double evasion,double daño_crit)
-{
+public Casta(double prob_crit,double evasion,double daño_crit){
 	this.probabilidadGolpeCritico=prob_crit;
 	this.probabilidadEvitarDaño=evasion;
 	this.dañoCritico=daño_crit;

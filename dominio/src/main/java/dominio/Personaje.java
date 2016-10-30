@@ -18,8 +18,8 @@ public abstract class Personaje implements Peleable {
 	protected int x;
 	protected int y;
 
-	protected int salud_tope;
-	protected int energia_tope;
+	protected int saludTope;
+	protected int energiaTope;
 
 	protected int fuerza;
 	protected int destreza;
@@ -32,16 +32,16 @@ public abstract class Personaje implements Peleable {
 	protected int nivel;
 
 	protected int idPersonaje;
-	protected int item_manos = 0;
+	protected int itemManos = 0;
 	protected Alianza clan = null;
-	protected static int tabla_nivel[];
+	protected static int tablaDeNiveles[];
 
-	public static void cargar_tabla_nivel() {
-		Personaje.tabla_nivel = new int[101];
-		Personaje.tabla_nivel[0] = 0;
-		Personaje.tabla_nivel[1] = 0;
+	public static void cargarTablaNivel() {
+		Personaje.tablaDeNiveles = new int[101];
+		Personaje.tablaDeNiveles[0] = 0;
+		Personaje.tablaDeNiveles[1] = 0;
 		for (int i = 2; i < 101; i++)
-			Personaje.tabla_nivel[i] = Personaje.tabla_nivel[i - 1] + 50;
+			Personaje.tablaDeNiveles[i] = Personaje.tablaDeNiveles[i - 1] + 50;
 	}
 
 	public Personaje(String nombre, Casta casta, int id) {
@@ -64,8 +64,8 @@ public abstract class Personaje implements Peleable {
 		if (casta instanceof Asesino)
 			destreza += 5;
 
-		salud_tope = 50;
-		energia_tope = 50;
+		saludTope = 50;
+		energiaTope = 50;
 
 		ataque = this.calcularPuntosDeAtaque();
 		defensa = this.calcularPuntosDeDefensa();
@@ -96,8 +96,8 @@ public abstract class Personaje implements Peleable {
 		this.experiencia = experiencia;
 		this.nivel = nivel;
 
-		this.salud_tope = this.salud;
-		this.energia_tope = this.energia;
+		this.saludTope = this.salud;
+		this.energiaTope = this.energia;
 
 		this.idPersonaje = idPersonaje;
 		this.defensa = this.calcularPuntosDeDefensa();
@@ -266,20 +266,20 @@ public abstract class Personaje implements Peleable {
 		this.defensa = defensa;
 	}
 
-	public int getSalud_tope() {
-		return salud_tope;
+	public int getSaludTope() {
+		return saludTope;
 	}
 
-	public void setSalud_tope(int salud_tope) {
-		this.salud_tope = salud_tope;
+	public void setSaludTope(int saludTope) {
+		this.saludTope = saludTope;
 	}
 
-	public int getEnergia_tope() {
-		return energia_tope;
+	public int getEnergiaTope() {
+		return energiaTope;
 	}
 
-	public void setEnergia_tope(int energia_tope) {
-		this.energia_tope = energia_tope;
+	public void setEnergiaTope(int energiaTope) {
+		this.energiaTope = energiaTope;
 	}
 
 	public int atacar(Peleable atacado) {
@@ -313,7 +313,7 @@ public abstract class Personaje implements Peleable {
 		int daño_items = 0;
 		Iterator<Item> it = this.itemsEquipados.iterator();
 		while (it.hasNext())
-			daño_items += it.next().bono_daño;
+			daño_items += it.next().bonoDaño;
 		return (int) (this.getFuerza() * 1.5 + daño_items);
 	}
 
@@ -321,7 +321,7 @@ public abstract class Personaje implements Peleable {
 		int defensa_items = 0;
 		Iterator<Item> it = this.itemsEquipados.iterator();
 		while (it.hasNext())
-			defensa_items += it.next().bono_defensa;
+			defensa_items += it.next().bonoDefensa;
 		return (int) (defensa_items + this.getDestreza());
 	}
 
@@ -329,17 +329,17 @@ public abstract class Personaje implements Peleable {
 		int magia_items = 0;
 		Iterator<Item> it = this.itemsEquipados.iterator();
 		while (it.hasNext())
-			magia_items += it.next().bono_magia;
+			magia_items += it.next().bonoMagia;
 		return (int) (this.getInteligencia() * 1.5 + magia_items);
 
 	}
 
 	public void restablecerSalud() {
-		this.salud = this.salud_tope;
+		this.salud = this.saludTope;
 	}
 
 	public void restablecerEnergia() {
-		this.energia = this.energia_tope;
+		this.energia = this.energiaTope;
 	}
 
 	/*
@@ -417,18 +417,18 @@ public abstract class Personaje implements Peleable {
 	}
 
 	public void serCurado(int salud) {
-		if ((this.salud + salud) <= this.salud_tope)
+		if ((this.salud + salud) <= this.saludTope)
 			this.salud += salud;
 		else
-			this.salud = this.salud_tope;
+			this.salud = this.saludTope;
 
 	}
 
 	public void serEnergizado(int energia) {
-		if ((this.energia + energia) <= this.energia_tope)
+		if ((this.energia + energia) <= this.energiaTope)
 			this.energia += energia;
 		else
-			this.energia = this.energia_tope;
+			this.energia = this.energiaTope;
 	}
 
 	public boolean desequiparItem(Item i) { // lo puedo usar para desequipar un
@@ -436,24 +436,22 @@ public abstract class Personaje implements Peleable {
 		// un item equipado
 		if (this.itemsEquipados.remove(i)) {
 			if (i.getTipo() == "Manos")
-				this.item_manos--;
+				this.itemManos--;
 			this.modificarAtributos();
-			this.salud_tope -= i.getBono_salud();
-			this.energia_tope -= i.getBono_energia();
-			this.salud = this.salud_tope;
-			this.energia = this.energia_tope;
+			this.saludTope -= i.getBonoSalud();
+			this.energiaTope -= i.getBonoEnergia();
+			this.salud = this.saludTope;
+			this.energia = this.energiaTope;
 			return true;
 		}
 		return false;
 	}
 
-	public boolean dropearItemMochila(Item i) { // aca se dropearia desde la
-												// mochila
+	public boolean dropearItemMochila(Item i) { 
 		return this.itemsGuardados.remove(i);
 	}
 
 	public boolean guardarItem(Item i) {
-
 		if (this.itemsGuardados.size() < 20) {
 			this.itemsGuardados.add(i);
 			return true;
@@ -466,12 +464,8 @@ public abstract class Personaje implements Peleable {
 			if (this.puedeEquipar(i)) {
 				this.itemsEquipados.add(i);
 				this.modificarAtributos();
-				this.salud_tope += i.getBono_salud();
-				this.energia_tope += i.getBono_energia();
-				// this.salud=this.salud_tope;//si me equipo me curo, hay que
-				// sacarlo
-				// this.energia=this.energia_tope;//si me equipo me energizo,
-				// hay que sacarlo
+				this.saludTope += i.getBonoSalud();
+				this.energiaTope += i.getBonoEnergia();
 				return true;
 			}
 
@@ -481,12 +475,12 @@ public abstract class Personaje implements Peleable {
 	}
 
 	public boolean puedeEquipar(Item i) {
-		if (this.fuerza < i.getFuerza_requerida() || this.destreza < i.getDestreza_requerida()
-				|| this.inteligencia < i.getInteligencia_requerida())
+		if (this.fuerza < i.getFuerzaRequerida() || this.destreza < i.getDestrezaRequerida()
+				|| this.inteligencia < i.getInteligenciaRequerida())
 			return false;
 		if (i.getTipo() == "Manos") {
-			if (item_manos < 2) {
-				item_manos++;
+			if (itemManos < 2) {
+				itemManos++;
 				return true;
 			}
 			return false;
@@ -630,29 +624,26 @@ public abstract class Personaje implements Peleable {
 
 	public void subirNivel() {
 
-		int aux = 0;
+		int acumuladorExperiencia = 0;
 		if (this.nivel == 100) {
 			System.out.println("Ya ha alcanzado el maximo nivel!");
 			return;
 		}
-		while (this.nivel != 100 && (this.experiencia >= Personaje.tabla_nivel[this.nivel+1] + aux)) {
-			
-			aux += Personaje.tabla_nivel[this.nivel+1];
-			//System.out.println(aux);
+		while (this.nivel != 100 && (this.experiencia >= Personaje.tablaDeNiveles[this.nivel+1] + acumuladorExperiencia)) {
+			acumuladorExperiencia += Personaje.tablaDeNiveles[this.nivel+1];
 			this.nivel++;
 			// this.asignarPuntos();
 			this.modificarAtributos();
-			this.salud_tope += 25;
-			this.energia_tope += 20;
+			this.saludTope += 25;
+			this.energiaTope += 20;
 		}
-		this.experiencia -= aux;
-		//System.out.println("aux:"+aux);
+		this.experiencia -= acumuladorExperiencia;
 	}
 
 	public void ganarExperiencia(int exp) {
 		this.experiencia += exp;
 
-		if (experiencia >= Personaje.tabla_nivel[this.nivel])
+		if (experiencia >= Personaje.tablaDeNiveles[this.nivel])
 			this.subirNivel();
 	}
 
@@ -662,7 +653,6 @@ public abstract class Personaje implements Peleable {
 
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
-		// TODO Auto-generated method stub
 		return super.clone();
 	}
 
@@ -712,7 +702,6 @@ public abstract class Personaje implements Peleable {
 
 		LinkedList<Personaje> batallon_amigo = new LinkedList();
 		batallon_amigo.add(this);
-
 		if (this.getClan() != null) {
 			Iterator<Personaje> it = this.getClan().getAliados().iterator();
 			Personaje aux;

@@ -23,8 +23,6 @@ public class Alianza {
 		this.aliados = aliados;
 	}
 
-	
-	
 	public String obtenerNombre(){
 		return nombre;
 	}
