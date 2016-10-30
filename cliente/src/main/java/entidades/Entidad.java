@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import juego.Juego;
+import mundo.Tile;
 import recursos.Recursos;
 import entidades.Animacion;
 
@@ -12,22 +13,24 @@ public class Entidad {
 	Juego juego;
 	
 	// Tamaño de la entidad
-	private int tamAncho;
-	private int tamAlto;
+	private int ancho;
+	private int alto;
 	
 	// Posiciones
-	private double x;
-	private double y;
-	private double xInicio;
-	private double yInicio;
-	private double xFinal;
-	private double yFinal;
+	private float x;
+	private float y;
+	private float xInicio;
+	private float yInicio;
+	private float xFinal;
+	private float yFinal;
+	private float offSetX;
+	private float offSetY;
 	private int posMouse[];
 
 	// Calculo de movimiento
-	private double difX;
-	private double difY;
-	private double relacion;
+	private float difX;
+	private float difY;
+	private float relacion;
 	
 	// Posicion final
 	private int auxX;
@@ -53,21 +56,23 @@ public class Entidad {
 	private final Animacion moverAbajo;
 	private final Animacion moverAbajoIzq;
 	
-	public Entidad(Juego juego, int tamAncho, int tamAlto) {
+	public Entidad(Juego juego, int tamAncho, int tamAlto, float spawnX, float spawnY) {
 		this.juego = juego;
-		x = 100;
-		y = 100;
-		this.tamAncho = tamAncho;
-		this.tamAlto = tamAlto;
+		this.ancho = tamAncho;
+		this.alto = tamAlto;
+		offSetX = ancho / 2;
+		offSetY  = alto / 2;
+		x = spawnX - offSetX;
+		y = spawnY - offSetY;
 		
-		moverIzq = new Animacion(200, Recursos.guerreroIzq); 
-		moverArribaIzq = new Animacion(200, Recursos.guerreroArribaIzq);
-		moverArriba = new Animacion(200, Recursos.guerreroArriba);
-		moverArribaDer = new Animacion(200, Recursos.guerreroArribaDer);
-		moverDer = new Animacion(200, Recursos.guerreroDer);
-		moverAbajoDer = new Animacion(200, Recursos.guerreroAbajoDer);
-		moverAbajo = new Animacion(200, Recursos.guerreroAbajo);
-		moverAbajoIzq = new Animacion(200, Recursos.guerreroAbajoIzq);
+		moverIzq = new Animacion(200, Recursos.ogroIzq); 
+		moverArribaIzq = new Animacion(200, Recursos.ogroArribaIzq);
+		moverArriba = new Animacion(200, Recursos.ogroArriba);
+		moverArribaDer = new Animacion(200, Recursos.ogroArribaDer);
+		moverDer = new Animacion(200, Recursos.ogroDer);
+		moverAbajoDer = new Animacion(200, Recursos.ogroAbajoDer);
+		moverAbajo = new Animacion(200, Recursos.ogroAbajo);
+		moverAbajoIzq = new Animacion(200, Recursos.ogroAbajoIzq);
 	}
 
 	public void actualizar() {
@@ -100,10 +105,12 @@ public class Entidad {
 			y = Math.round(y);
 			xInicio = x;
 			yInicio = y;
+			
+			xFinal = posMouse[0] - offSetX;
+			yFinal = posMouse[1] - offSetY;
 
-			xFinal = posMouse[0];
-			yFinal = posMouse[1];
-
+			System.out.println(xInicio + " " + yInicio);
+			
 			difX = Math.abs(xFinal - xInicio);
 			difY = Math.abs(yFinal - yInicio);
 			relacion = difX / difY;
@@ -112,11 +119,11 @@ public class Entidad {
 				relacion = 1;
 			}
 			
-			if (difX < tamAncho && yInicio != yFinal) {
+			if (difX < ancho && yInicio != yFinal) {
 				vertical = true;
 				horizontal = true;
 			}
-			if (difY < tamAncho && xInicio != xFinal) {
+			if (difY < alto && xInicio != xFinal) {
 				horizontal = true;
 				vertical = true;
 			}
@@ -141,7 +148,7 @@ public class Entidad {
 	public void mover() {
 
 		if (enMovimiento && (x != xFinal || y != yFinal)) {
-
+			
 			if (vertical) {
 				if (yFinal > y) {
 					y++;
@@ -171,7 +178,7 @@ public class Entidad {
 				x -= relacion;
 				y--;
 			}
-
+			
 			auxX = (int) Math.round(x);
 			auxY = (int) Math.round(y);
 
@@ -196,7 +203,7 @@ public class Entidad {
 	}
 	
 	public void graficar(Graphics g) {
-		g.drawImage(getFrameAnimacionActual(), (int) x, (int) y, tamAncho, tamAlto, null);
+		g.drawImage(getFrameAnimacionActual(), (int) x, (int) y, ancho, alto, null);
 	}
 	
 	private BufferedImage getFrameAnimacionActual() {
@@ -218,6 +225,38 @@ public class Entidad {
 			return moverArribaDer.getFrameActual();
 		}
 		
-		return Recursos.guerreroAbajo[0];
+		return Recursos.ogroAbajo[0];
 	}
+	
+	public float getX() {
+		return x;
+	}
+
+	public void setX(float x) {
+		this.x = x;
+	}
+
+	public float getY() {
+		return y;
+	}
+
+	public void setY(float y) {
+		this.y = y;
+	}
+
+	public int getAncho() {
+		return ancho;
+	}
+
+	public void setAncho(int ancho) {
+		this.ancho = ancho;
+	}
+
+	public int getAlto() {
+		return alto;
+	}
+
+	public void setAlto(int alto) {
+		this.alto = alto;
+	}	
 }
