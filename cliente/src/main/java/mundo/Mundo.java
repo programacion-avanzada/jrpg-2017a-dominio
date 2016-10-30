@@ -10,8 +10,6 @@ public class Mundo {
 	private int alto;
 	private int spawnX;
 	private int spawnY;
-	private int xOffset = 300;
-	private int yOffset = 50;
 
 	private int[][] tiles;
 
@@ -29,8 +27,8 @@ public class Mundo {
 		for (int y = 0; y < alto; y++) {
 			for (int x = 0; x < ancho; x++) {
 				iso = dosDaIso(x, y);
-				getTile(x, y).graficar(g, (int) (iso[0] + xOffset - juego.getCamara().getxOffset()),
-										  (int) (iso[1] + yOffset - juego.getCamara().getyOffset()));
+				getTile(x, y).graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
+										  (int) (iso[1] - juego.getCamara().getyOffset()));
 			}
 		}
 	}

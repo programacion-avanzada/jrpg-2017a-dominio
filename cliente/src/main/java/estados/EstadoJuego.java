@@ -14,7 +14,7 @@ public class EstadoJuego extends Estado {
 
 	public EstadoJuego(Juego juego) {
 		super(juego);
-		personaje = new Entidad(juego, 64, 64, 332, 44);
+		personaje = new Entidad(juego, 64, 64, 0, 0);
 		mundo = new Mundo(juego, "recursos/mundo1.txt");
 	}
 
@@ -30,6 +30,5 @@ public class EstadoJuego extends Estado {
 		g.fill3DRect(0, 0, juego.getAncho(), juego.getAlto(), false);
 		mundo.graficar(g);
 		personaje.graficar(g);
-	}
-
+		}
 }

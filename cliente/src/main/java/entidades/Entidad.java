@@ -1,5 +1,6 @@
 package entidades;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
@@ -23,8 +24,10 @@ public class Entidad {
 	private float yInicio;
 	private float xFinal;
 	private float yFinal;
-	private float offSetX;
-	private float offSetY;
+	private float xOffset;
+	private float yOffset;
+	private int drawX;
+	private int drawY;
 	private int posMouse[];
 
 	// Calculo de movimiento
@@ -56,14 +59,14 @@ public class Entidad {
 	private final Animacion moverAbajo;
 	private final Animacion moverAbajoIzq;
 	
-	public Entidad(Juego juego, int tamAncho, int tamAlto, float spawnX, float spawnY) {
+	public Entidad(Juego juego, int ancho, int alto, float spawnX, float spawnY) {
 		this.juego = juego;
-		this.ancho = tamAncho;
-		this.alto = tamAlto;
-		offSetX = ancho / 2;
-		offSetY  = alto / 2;
-		x = spawnX - offSetX;
-		y = spawnY - offSetY;
+		this.ancho = ancho;
+		this.alto = alto;
+		xOffset = ancho / 2;
+		yOffset  = alto / 2;
+		x = spawnX;
+		y = spawnY;
 		
 		moverIzq = new Animacion(200, Recursos.ogroIzq); 
 		moverArribaIzq = new Animacion(200, Recursos.ogroArribaIzq);
@@ -86,6 +89,7 @@ public class Entidad {
 		moverAbajoIzq.actualizar();
 		getEntrada();
 		mover();
+		juego.getCamara().Centrar(this);
 	}
 
 	public void getEntrada() {
@@ -106,10 +110,8 @@ public class Entidad {
 			xInicio = x;
 			yInicio = y;
 			
-			xFinal = posMouse[0] - offSetX;
-			yFinal = posMouse[1] - offSetY;
-
-			System.out.println(xInicio + " " + yInicio);
+			xFinal = Math.round(posMouse[0] + juego.getCamara().getxOffset() - xOffset);
+			yFinal = Math.round(posMouse[1] + juego.getCamara().getyOffset() - yOffset);
 			
 			difX = Math.abs(xFinal - xInicio);
 			difY = Math.abs(yFinal - yInicio);
@@ -203,7 +205,12 @@ public class Entidad {
 	}
 	
 	public void graficar(Graphics g) {
-		g.drawImage(getFrameAnimacionActual(), (int) x, (int) y, ancho, alto, null);
+		drawX = (int) (x - juego.getCamara().getxOffset());
+		drawY = (int) (y - juego.getCamara().getyOffset());
+		g.drawImage(getFrameAnimacionActual(), drawX, drawY, ancho, alto, null);
+		g.setColor(Color.WHITE);
+		g.drawString("<LosCacheFC>", drawX, drawY);
+		g.drawString("Leo - 100", drawX + 10, drawY - 12);
 	}
 	
 	private BufferedImage getFrameAnimacionActual() {
