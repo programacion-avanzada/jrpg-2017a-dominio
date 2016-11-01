@@ -25,11 +25,21 @@ public class Recursos {
 	public static BufferedImage[] ogroAbajoDer;
 	public static BufferedImage[] ogroAbajo;
 	public static BufferedImage[] ogroAbajoIzq;
+	
+	public static BufferedImage[] guerrero2Izq;
+	public static BufferedImage[] guerrero2ArribaIzq;
+	public static BufferedImage[] guerrero2Arriba;
+	public static BufferedImage[] guerrero2ArribaDer;
+	public static BufferedImage[] guerrero2Der;
+	public static BufferedImage[] guerrero2AbajoDer;
+	public static BufferedImage[] guerrero2Abajo;
+	public static BufferedImage[] guerrero2AbajoIzq;
 	// Fin Personajes
 	
 	// Entorno
 	public static BufferedImage cesped;
 	public static BufferedImage fuego;
+	public static BufferedImage background;
 	// Fin Entorno
 	
 	// Cargo todos los recursos una sola vez para no tener que hacerlo en cada actualizacion
@@ -131,8 +141,9 @@ public class Recursos {
 		// Fin Ogro
 		
 		// Inicio Entorno
-		cesped = CargadorImagen.cargarImagen("/Cesped.png");
+		cesped = CargadorImagen.cargarImagen("/Cesped2.png");
 		fuego = CargadorImagen.cargarImagen("/Fuego.png");
-		// Fin Entor
+		background = CargadorImagen.cargarImagen("/background.jpg");
+		// Fin Entorno
 	}
 }

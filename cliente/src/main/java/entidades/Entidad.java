@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import juego.Juego;
+import mundo.Mundo;
 import mundo.Tile;
 import recursos.Recursos;
 import entidades.Animacion;
@@ -12,14 +13,16 @@ import entidades.Animacion;
 public class Entidad {
 
 	Juego juego;
-	
+
 	// Tamaño de la entidad
 	private int ancho;
 	private int alto;
-	
+
 	// Posiciones
 	private float x;
 	private float y;
+	private float dx;
+	private float dy;
 	private float xInicio;
 	private float yInicio;
 	private float xFinal;
@@ -29,15 +32,16 @@ public class Entidad {
 	private int drawX;
 	private int drawY;
 	private int posMouse[];
+	private float[] tile;
 
 	// Calculo de movimiento
 	private float difX;
 	private float difY;
 	private float relacion;
-	
+
 	// Posicion final
-	private int auxX;
-	private int auxY;
+	private float auxX;
+	private float auxY;
 
 	// Movimiento Actual
 	private boolean enMovimiento;
@@ -48,7 +52,6 @@ public class Entidad {
 	private boolean diagonalSupIzq;
 	private boolean diagonalSupDer;
 
-	
 	// Animaciones
 	private final Animacion moverIzq;
 	private final Animacion moverArribaIzq;
@@ -58,17 +61,20 @@ public class Entidad {
 	private final Animacion moverAbajoDer;
 	private final Animacion moverAbajo;
 	private final Animacion moverAbajoIzq;
-	
-	public Entidad(Juego juego, int ancho, int alto, float spawnX, float spawnY) {
+
+	private Mundo mundo;
+
+	public Entidad(Juego juego, Mundo mundo, int ancho, int alto, float spawnX, float spawnY) {
 		this.juego = juego;
 		this.ancho = ancho;
 		this.alto = alto;
+		this.mundo = mundo;
 		xOffset = ancho / 2;
-		yOffset  = alto / 2;
+		yOffset = alto / 2;
 		x = spawnX;
 		y = spawnY;
-		
-		moverIzq = new Animacion(200, Recursos.ogroIzq); 
+
+		moverIzq = new Animacion(200, Recursos.ogroIzq);
 		moverArribaIzq = new Animacion(200, Recursos.ogroArribaIzq);
 		moverArriba = new Animacion(200, Recursos.ogroArriba);
 		moverArribaDer = new Animacion(200, Recursos.ogroArribaDer);
@@ -105,14 +111,12 @@ public class Entidad {
 			horizontal = false;
 			enMovimiento = false;
 
-			x = Math.round(x);
-			y = Math.round(y);
 			xInicio = x;
 			yInicio = y;
-			
+
 			xFinal = Math.round(posMouse[0] + juego.getCamara().getxOffset() - xOffset);
 			yFinal = Math.round(posMouse[1] + juego.getCamara().getyOffset() - yOffset);
-			
+
 			difX = Math.abs(xFinal - xInicio);
 			difY = Math.abs(yFinal - yInicio);
 			relacion = difX / difY;
@@ -120,7 +124,7 @@ public class Entidad {
 			if (difX == 0 || difY == 0) {
 				relacion = 1;
 			}
-			
+
 			if (difX < ancho && yInicio != yFinal) {
 				vertical = true;
 				horizontal = true;
@@ -149,40 +153,61 @@ public class Entidad {
 
 	public void mover() {
 
+		dx = 0;
+		dy = 0;
+
 		if (enMovimiento && (x != xFinal || y != yFinal)) {
-			
+
 			if (vertical) {
 				if (yFinal > y) {
-					y++;
+					dy++;
 				} else {
-					y--;
+					dy--;
 				}
 			}
 
 			if (horizontal) {
 				if (xFinal > x) {
-					x++;
+					dx++;
 				} else {
-					x--;
+					dx--;
 				}
 			}
 
 			if (diagonalInfDer) {
-				x += relacion;
-				y++;
+				dx += relacion;
+				dy++;
 			} else if (diagonalInfIzq) {
-				x -= relacion;
-				y++;
+				dx -= relacion;
+				dy++;
 			} else if (diagonalSupDer) {
-				x += relacion;
-				y--;
+				dx += relacion;
+				dy--;
 			} else if (diagonalSupIzq) {
-				x -= relacion;
-				y--;
+				dx -= relacion;
+				dy--;
 			}
 			
-			auxX = (int) Math.round(x);
-			auxY = (int) Math.round(y);
+			auxX += dx;
+			auxY += dy;
+			
+			if(horizontal && dx > x || vertical && dy < y || diagonalInfDer || diagonalInfIzq) {
+				auxY += 15;
+			}
+			
+			tile = Mundo.mouseATile(auxX, auxY);
+			
+			if (mundo.getTile((int) tile[0], (int) tile[1]).esSolido()) {
+				xFinal = x;
+				yFinal = y;
+				auxX = x;
+				auxY= y;
+			} else {
+				x += dx;
+				y += dy;
+				auxX = (int) Math.round(x);
+				auxY = (int) Math.round(y);
+			}
 
 			if (horizontal || vertical) {
 				if (auxX == xFinal) {
@@ -203,7 +228,7 @@ public class Entidad {
 			}
 		}
 	}
-	
+
 	public void graficar(Graphics g) {
 		drawX = (int) (x - juego.getCamara().getxOffset());
 		drawY = (int) (y - juego.getCamara().getyOffset());
@@ -212,29 +237,29 @@ public class Entidad {
 		g.drawString("<LosCacheFC>", drawX, drawY);
 		g.drawString("Leo - 100", drawX + 10, drawY - 12);
 	}
-	
+
 	private BufferedImage getFrameAnimacionActual() {
-		if(horizontal && x > xFinal) {
+		if (horizontal && x > xFinal) {
 			return moverIzq.getFrameActual();
-		} else if(horizontal && x < xFinal) {
+		} else if (horizontal && x < xFinal) {
 			return moverDer.getFrameActual();
-		} else if(vertical && y > yFinal) {
+		} else if (vertical && y > yFinal) {
 			return moverArriba.getFrameActual();
-		} else if(vertical && y < yFinal) {
+		} else if (vertical && y < yFinal) {
 			return moverAbajo.getFrameActual();
-		} else if(diagonalInfIzq) {
+		} else if (diagonalInfIzq) {
 			return moverAbajoIzq.getFrameActual();
-		} else if(diagonalInfDer) {
+		} else if (diagonalInfDer) {
 			return moverAbajoDer.getFrameActual();
-		} else if(diagonalSupIzq) {
+		} else if (diagonalSupIzq) {
 			return moverArribaIzq.getFrameActual();
-		} else if(diagonalSupDer) {
+		} else if (diagonalSupDer) {
 			return moverArribaDer.getFrameActual();
 		}
-		
+
 		return Recursos.ogroAbajo[0];
 	}
-	
+
 	public float getX() {
 		return x;
 	}
@@ -265,5 +290,5 @@ public class Entidad {
 
 	public void setAlto(int alto) {
 		this.alto = alto;
-	}	
+	}
 }

@@ -15,7 +15,7 @@ public class Mundo {
 
 	public Mundo(Juego juego, String path) {
 		this.juego = juego;
-		cargarMundo("recursos/mundo1.txt");
+		cargarMundo(path);
 	}
 
 	public void actualizar() {
@@ -24,6 +24,7 @@ public class Mundo {
 
 	public void graficar(Graphics g) {
 		float[] iso = new float[2];
+		
 		for (int y = 0; y < alto; y++) {
 			for (int x = 0; x < ancho; x++) {
 				iso = dosDaIso(x, y);
@@ -69,19 +70,19 @@ public class Mundo {
 	
 	public static float[] dosDaIso(float x, float y) {
 		float[] iso = new float[2];
-		
+	
 		iso[0] = (x - y) * (Tile.ANCHO / 2);
 		iso[1] = (x + y) * (Tile.ALTO / 2);
 		
 		return iso;
 	}
 	
-	public static float[] mouseAIso(float x, float y) {
-		float iso[] = new float[2];
+	public static float[] mouseATile(float x, float y) {
+		float tile[] = new float[2];
 		
-		iso[0] = (float) Math.floor((y / Tile.ALTO) + (x / Tile.ANCHO));
-		iso[1] = (float) Math.floor((-x / Tile.ANCHO) + (y / Tile.ALTO));
+		tile[0] = (float) Math.floor((y / Tile.ALTO) + (x / Tile.ANCHO)) + 1;
+		tile[1] = (float) Math.floor((-x / Tile.ANCHO) + (y / Tile.ALTO)) + 1;
 	
-		return iso;
+		return tile;
 	}
 }

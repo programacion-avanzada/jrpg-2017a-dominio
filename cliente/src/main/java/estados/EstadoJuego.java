@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import entidades.Entidad;
 import juego.Juego;
 import mundo.Mundo;
+import recursos.Recursos;
 
 public class EstadoJuego extends Estado {
 
@@ -14,8 +15,8 @@ public class EstadoJuego extends Estado {
 
 	public EstadoJuego(Juego juego) {
 		super(juego);
-		personaje = new Entidad(juego, 64, 64, 0, 0);
-		mundo = new Mundo(juego, "recursos/mundo1.txt");
+		mundo = new Mundo(juego, "recursos/mundo2.txt");
+		personaje = new Entidad(juego, mundo, 64, 64, 0, 0);
 	}
 
 	@Override
@@ -26,8 +27,7 @@ public class EstadoJuego extends Estado {
 
 	@Override
 	public void graficar(Graphics g) {
-		g.setColor(Color.BLACK);
-		g.fill3DRect(0, 0, juego.getAncho(), juego.getAlto(), false);
+		g.drawImage(Recursos.background, 0, 0, juego.getAncho(), juego.getAlto(), null);
 		mundo.graficar(g);
 		personaje.graficar(g);
 		}
