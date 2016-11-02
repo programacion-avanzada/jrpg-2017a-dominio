@@ -152,4 +152,8 @@ public class Juego implements Runnable {
 	public Camara getCamara() {
 		return camara;
 	}
+	
+	public EstadoJuego getEstadoJuego() {
+		return (EstadoJuego) estadoJuego;
+	}
 }

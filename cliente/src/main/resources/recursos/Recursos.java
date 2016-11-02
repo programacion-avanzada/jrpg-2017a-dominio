@@ -5,8 +5,8 @@ import java.util.LinkedList;
 
 public class Recursos {
 
-	private static int ANCHO; // Ancho del tile a obtener
-	private static int ALTO; // Alto del tile a obtener
+	private static int ANCHO; // Ancho del frame a obtener
+	private static int ALTO; // Alto del frame a obtener
 	
 	// Inicio Personajes
 	public static LinkedList<BufferedImage[]> guerrero = new LinkedList<>();

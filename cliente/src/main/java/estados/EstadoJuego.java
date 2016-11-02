@@ -31,4 +31,8 @@ public class EstadoJuego extends Estado {
 		mundo.graficar(g);
 		personaje.graficar(g);
 		}
+	
+	public Entidad getPersonaje() {
+		return personaje;
+	}
 }

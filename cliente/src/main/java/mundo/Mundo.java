@@ -10,8 +10,16 @@ public class Mundo {
 	private int alto;
 	private int spawnX;
 	private int spawnY;
-
+	private int xOffset;
+	private int yOffset;
+	
+	private float[] iso = new float[2];
 	private int[][] tiles;
+
+	private int xMinimo;
+	private int xMaximo;
+	private int yMinimo;
+	private int yMaximo;
 
 	public Mundo(Juego juego, String path) {
 		this.juego = juego;
@@ -23,13 +31,21 @@ public class Mundo {
 	}
 
 	public void graficar(Graphics g) {
-		float[] iso = new float[2];
-		
-		for (int y = 0; y < alto; y++) {
-			for (int x = 0; x < ancho; x++) {
-				iso = dosDaIso(x, y);
-				getTile(x, y).graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
-										  (int) (iso[1] - juego.getCamara().getyOffset()));
+		xOffset = juego.getEstadoJuego().getPersonaje().getxOffset();
+		yOffset = juego.getEstadoJuego().getPersonaje().getYOffset();
+
+		xMinimo = (int) (juego.getCamara().getxOffset() - xOffset - 30);
+		xMaximo = xMinimo + juego.getAncho() + xOffset + 30;
+		yMinimo = (int) juego.getCamara().getyOffset() - yOffset + 5;
+		yMaximo = yMinimo + juego.getAlto() + yOffset - 5; 
+
+		for (int i = 0; i < alto; i++) {
+			for (int j = 0; j < ancho; j++) {
+				iso = dosDaIso(j, i);
+				if ((iso[0] >= xMinimo && iso[0] <= xMaximo) && (iso[1] >= yMinimo && iso[1] <= yMaximo)) {
+					getTile(j, i).graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
+							(int) (iso[1] - juego.getCamara().getyOffset()));
+				}
 			}
 		}
 	}
@@ -64,25 +80,25 @@ public class Mundo {
 
 		dosD[0] = (x / (Tile.ANCHO / 2) + y / (Tile.ALTO / 2)) / 2;
 		dosD[1] = (y / (Tile.ALTO / 2) - (x / (Tile.ANCHO / 2))) / 2;
-		
+
 		return dosD;
 	}
-	
+
 	public static float[] dosDaIso(float x, float y) {
 		float[] iso = new float[2];
-	
+
 		iso[0] = (x - y) * (Tile.ANCHO / 2);
 		iso[1] = (x + y) * (Tile.ALTO / 2);
-		
+
 		return iso;
 	}
-	
-	public static float[] mouseATile(float x, float y) {
-		float tile[] = new float[2];
-		
-		tile[0] = (float) Math.floor((y / Tile.ALTO) + (x / Tile.ANCHO)) + 1;
-		tile[1] = (float) Math.floor((-x / Tile.ANCHO) + (y / Tile.ALTO)) + 1;
-	
+
+	public static int[] mouseATile(float x, float y) {
+		int tile[] = new int[2];
+
+		tile[0] = (int) Math.floor((y / Tile.ALTO) + (x / Tile.ANCHO)) + 1;
+		tile[1] = (int) Math.floor((-x / Tile.ANCHO) + (y / Tile.ALTO)) + 1;
+
 		return tile;
 	}
 }

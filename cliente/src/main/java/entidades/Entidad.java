@@ -7,7 +7,6 @@ import java.util.LinkedList;
 
 import juego.Juego;
 import mundo.Mundo;
-import mundo.Tile;
 import recursos.Recursos;
 import entidades.Animacion;
 
@@ -28,12 +27,12 @@ public class Entidad {
 	private float yInicio;
 	private float xFinal;
 	private float yFinal;
-	private float xOffset;
-	private float yOffset;
+	private int xOffset;
+	private int yOffset;
 	private int drawX;
 	private int drawY;
 	private int posMouse[];
-	private float[] tile;
+	private int[] tile;
 
 	// Calculo de movimiento
 	private float difX;
@@ -117,10 +116,10 @@ public class Entidad {
 
 			xInicio = x;
 			yInicio = y;
-
+						
 			xFinal = Math.round(posMouse[0] + juego.getCamara().getxOffset() - xOffset);
 			yFinal = Math.round(posMouse[1] + juego.getCamara().getyOffset() - yOffset);
-
+						
 			difX = Math.abs(xFinal - xInicio);
 			difY = Math.abs(yFinal - yInicio);
 			relacion = difX / difY;
@@ -222,7 +221,7 @@ public class Entidad {
 					vertical = false;
 				}
 			}
-
+	
 			if (auxX == xFinal && auxY == yFinal) {
 				diagonalInfIzq = false;
 				diagonalInfDer = false;
@@ -294,5 +293,13 @@ public class Entidad {
 
 	public void setAlto(int alto) {
 		this.alto = alto;
+	}
+	
+	public int getxOffset() {
+		return xOffset;
+	}
+	
+	public int getYOffset() {
+		return yOffset;
 	}
 }
