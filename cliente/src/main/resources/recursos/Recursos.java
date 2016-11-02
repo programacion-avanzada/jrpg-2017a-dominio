@@ -1,6 +1,7 @@
 package recursos;
 
 import java.awt.image.BufferedImage;
+import java.util.LinkedList;
 
 public class Recursos {
 
@@ -8,32 +9,26 @@ public class Recursos {
 	private static int ALTO; // Alto del tile a obtener
 	
 	// Inicio Personajes
-	public static BufferedImage[] guerreroIzq;
-	public static BufferedImage[] guerreroArribaIzq;
-	public static BufferedImage[] guerreroArriba;
-	public static BufferedImage[] guerreroArribaDer;
-	public static BufferedImage[] guerreroDer;
-	public static BufferedImage[] guerreroAbajoDer;
-	public static BufferedImage[] guerreroAbajo;
-	public static BufferedImage[] guerreroAbajoIzq;
+	public static LinkedList<BufferedImage[]> guerrero = new LinkedList<>();
+	private static BufferedImage[] guerreroIzq;
+	private static BufferedImage[] guerreroArribaIzq; 
+	private static BufferedImage[] guerreroArriba;
+	private static BufferedImage[] guerreroArribaDer;
+	private static BufferedImage[] guerreroDer;
+	private static BufferedImage[] guerreroAbajoDer;
+	private static BufferedImage[] guerreroAbajo;
+	private static BufferedImage[] guerreroAbajoIzq;
+	 
 	
-	public static BufferedImage[] ogroIzq;
-	public static BufferedImage[] ogroArribaIzq;
-	public static BufferedImage[] ogroArriba;
-	public static BufferedImage[] ogroArribaDer;
-	public static BufferedImage[] ogroDer;
-	public static BufferedImage[] ogroAbajoDer;
-	public static BufferedImage[] ogroAbajo;
-	public static BufferedImage[] ogroAbajoIzq;
-	
-	public static BufferedImage[] guerrero2Izq;
-	public static BufferedImage[] guerrero2ArribaIzq;
-	public static BufferedImage[] guerrero2Arriba;
-	public static BufferedImage[] guerrero2ArribaDer;
-	public static BufferedImage[] guerrero2Der;
-	public static BufferedImage[] guerrero2AbajoDer;
-	public static BufferedImage[] guerrero2Abajo;
-	public static BufferedImage[] guerrero2AbajoIzq;
+	public static LinkedList<BufferedImage[]> ogro = new LinkedList<>();
+	private static BufferedImage[] ogroIzq;
+	private static BufferedImage[] ogroArribaIzq;
+	private static BufferedImage[] ogroArriba;
+	private static BufferedImage[] ogroArribaDer;
+	private static BufferedImage[] ogroDer;
+	private static BufferedImage[] ogroAbajoDer;
+	private static BufferedImage[] ogroAbajo;
+	private static BufferedImage[] ogroAbajoIzq; 
 	// Fin Personajes
 	
 	// Entorno
@@ -49,7 +44,7 @@ public class Recursos {
 		ANCHO = 256;
 		ALTO = 256;
 		// Inicio Guerrero
-		SpriteSheet guerrero = new SpriteSheet(CargadorImagen.cargarImagen("/Guerrero.png"));
+		SpriteSheet spriteGuerrero = new SpriteSheet(CargadorImagen.cargarImagen("/Guerrero.png"));
 		
 		guerreroIzq = new BufferedImage[4];
 		guerreroArribaIzq = new BufferedImage[4];
@@ -61,41 +56,49 @@ public class Recursos {
 		guerreroAbajoIzq = new BufferedImage[4];
 		
 		for(int i = 0; i < 4; i++) {
-			guerreroIzq[i] = guerrero.getTile(ANCHO*i, 0, ANCHO, ALTO);
+			guerreroIzq[i] = spriteGuerrero.getTile(ANCHO*i, 0, ANCHO, ALTO);
 		}
 		
 		for(int i = 0; i < 4; i++) {
-			guerreroArribaIzq[i] = guerrero.getTile(ANCHO*i, ALTO, ANCHO, ALTO);
+			guerreroArribaIzq[i] = spriteGuerrero.getTile(ANCHO*i, ALTO, ANCHO, ALTO);
 		}
 		
 		for(int i = 0; i < 4; i++) {
-			guerreroArriba[i] = guerrero.getTile(ANCHO*i, ALTO*2, ANCHO, ALTO);
+			guerreroArriba[i] = spriteGuerrero.getTile(ANCHO*i, ALTO*2, ANCHO, ALTO);
 		}
 		
 		for(int i = 0; i < 4; i++) {
-			guerreroArribaDer[i] = guerrero.getTile(ANCHO*i, ALTO*3, ANCHO, ALTO);
+			guerreroArribaDer[i] = spriteGuerrero.getTile(ANCHO*i, ALTO*3, ANCHO, ALTO);
 		}
 		
 		for(int i = 0; i < 4; i++) {
-			guerreroDer[i] = guerrero.getTile(ANCHO*i, ALTO*4, ANCHO, ALTO);
+			guerreroDer[i] = spriteGuerrero.getTile(ANCHO*i, ALTO*4, ANCHO, ALTO);
 		}
 		
 		for(int i = 0; i < 4; i++) {
-			guerreroAbajoDer[i] = guerrero.getTile(ANCHO*i, ALTO*5, ANCHO, ALTO);
+			guerreroAbajoDer[i] = spriteGuerrero.getTile(ANCHO*i, ALTO*5, ANCHO, ALTO);
 		}
 		
 		for(int i = 0; i < 4; i++) {
-			guerreroAbajo[i] = guerrero.getTile(ANCHO*i, ALTO*6, ANCHO, ALTO);
+			guerreroAbajo[i] = spriteGuerrero.getTile(ANCHO*i, ALTO*6, ANCHO, ALTO);
 		}
 		
 		for(int i = 0; i < 4; i++) {
-			guerreroAbajoIzq[i] = guerrero.getTile(ANCHO*i, ALTO*7, ANCHO, ALTO);
+			guerreroAbajoIzq[i] = spriteGuerrero.getTile(ANCHO*i, ALTO*7, ANCHO, ALTO);
 		}
 		
-		// Fin Guerrero
+		 guerrero.add(guerreroIzq);
+		 guerrero.add(guerreroArribaIzq);
+		 guerrero.add(guerreroArriba);
+		 guerrero.add(guerreroArribaDer);
+		 guerrero.add(guerreroDer);
+		 guerrero.add(guerreroAbajoDer);
+		 guerrero.add(guerreroAbajo);
+		 guerrero.add(guerreroAbajoIzq);
+		 // Fin Guerrero
 		
 		// Inicio Ogro
-		SpriteSheet ogro = new SpriteSheet(CargadorImagen.cargarImagen("/Ogro.png"));
+		SpriteSheet spriteOgro = new SpriteSheet(CargadorImagen.cargarImagen("/Ogro.png"));
 		
 		ogroIzq = new BufferedImage[4];
 		ogroArribaIzq = new BufferedImage[4];
@@ -107,42 +110,51 @@ public class Recursos {
 		ogroAbajoIzq = new BufferedImage[4];
 		
 		for(int i = 0; i < 4; i++) {
-			ogroIzq[i] = ogro.getTile(ANCHO*i, 0, ANCHO, ALTO);
+			ogroIzq[i] = spriteOgro.getTile(ANCHO*i, 0, ANCHO, ALTO);
 		}
 		
 		for(int i = 0; i < 4; i++) {
-			ogroArribaIzq[i] = ogro.getTile(ANCHO*i, ALTO, ANCHO, ALTO);
+			ogroArribaIzq[i] = spriteOgro.getTile(ANCHO*i, ALTO, ANCHO, ALTO);
 		}
 		
 		for(int i = 0; i < 4; i++) {
-			ogroArriba[i] = ogro.getTile(ANCHO*i, ALTO*2, ANCHO, ALTO);
+			ogroArriba[i] = spriteOgro.getTile(ANCHO*i, ALTO*2, ANCHO, ALTO);
 		}
 		
 		for(int i = 0; i < 4; i++) {
-			ogroArribaDer[i] = ogro.getTile(ANCHO*i, ALTO*3, ANCHO, ALTO);
+			ogroArribaDer[i] = spriteOgro.getTile(ANCHO*i, ALTO*3, ANCHO, ALTO);
 		}
 		
 		for(int i = 0; i < 4; i++) {
-			ogroDer[i] = ogro.getTile(ANCHO*i, ALTO*4, ANCHO, ALTO);
+			ogroDer[i] = spriteOgro.getTile(ANCHO*i, ALTO*4, ANCHO, ALTO);
 		}
 		
 		for(int i = 0; i < 4; i++) {
-			ogroAbajoDer[i] = ogro.getTile(ANCHO*i, ALTO*5, ANCHO, ALTO);
+			ogroAbajoDer[i] = spriteOgro.getTile(ANCHO*i, ALTO*5, ANCHO, ALTO);
 		}
 		
 		for(int i = 0; i < 4; i++) {
-			ogroAbajo[i] = ogro.getTile(ANCHO*i, ALTO*6, ANCHO, ALTO);
+			ogroAbajo[i] = spriteOgro.getTile(ANCHO*i, ALTO*6, ANCHO, ALTO);
 		}
 		
 		for(int i = 0; i < 4; i++) {
-			ogroAbajoIzq[i] = ogro.getTile(ANCHO*i, ALTO*7, ANCHO, ALTO);
+			ogroAbajoIzq[i] = spriteOgro.getTile(ANCHO*i, ALTO*7, ANCHO, ALTO);
 		}
+		
+		ogro.add(ogroIzq);
+		ogro.add(ogroArribaIzq);
+		ogro.add(ogroArriba);
+		ogro.add(ogroArribaDer);
+		ogro.add(ogroDer);
+		ogro.add(ogroAbajoDer);
+		ogro.add(ogroAbajo);
+		ogro.add(ogroAbajoIzq);
 		
 		// Fin Ogro
 		
 		// Inicio Entorno
-		cesped = CargadorImagen.cargarImagen("/Cesped2.png");
-		fuego = CargadorImagen.cargarImagen("/Fuego.png");
+		cesped = CargadorImagen.cargarImagen("/Cesped.png");
+		fuego = CargadorImagen.cargarImagen("/rock.png");
 		background = CargadorImagen.cargarImagen("/background.jpg");
 		// Fin Entorno
 	}

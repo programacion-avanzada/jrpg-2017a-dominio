@@ -3,6 +3,7 @@ package entidades;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.LinkedList;
 
 import juego.Juego;
 import mundo.Mundo;
@@ -53,6 +54,7 @@ public class Entidad {
 	private boolean diagonalSupDer;
 
 	// Animaciones
+	private LinkedList<BufferedImage[]> animaciones;
 	private final Animacion moverIzq;
 	private final Animacion moverArribaIzq;
 	private final Animacion moverArriba;
@@ -64,7 +66,7 @@ public class Entidad {
 
 	private Mundo mundo;
 
-	public Entidad(Juego juego, Mundo mundo, int ancho, int alto, float spawnX, float spawnY) {
+	public Entidad(Juego juego, Mundo mundo, int ancho, int alto, float spawnX, float spawnY, LinkedList<BufferedImage[]> animaciones, int velAnimacion) {
 		this.juego = juego;
 		this.ancho = ancho;
 		this.alto = alto;
@@ -74,14 +76,16 @@ public class Entidad {
 		x = spawnX;
 		y = spawnY;
 
-		moverIzq = new Animacion(200, Recursos.ogroIzq);
-		moverArribaIzq = new Animacion(200, Recursos.ogroArribaIzq);
-		moverArriba = new Animacion(200, Recursos.ogroArriba);
-		moverArribaDer = new Animacion(200, Recursos.ogroArribaDer);
-		moverDer = new Animacion(200, Recursos.ogroDer);
-		moverAbajoDer = new Animacion(200, Recursos.ogroAbajoDer);
-		moverAbajo = new Animacion(200, Recursos.ogroAbajo);
-		moverAbajoIzq = new Animacion(200, Recursos.ogroAbajoIzq);
+		this.animaciones = animaciones;
+		 
+	    moverIzq = new Animacion(velAnimacion, animaciones.get(0));
+	    moverArribaIzq = new Animacion(velAnimacion, animaciones.get(1));
+	    moverArriba = new Animacion(velAnimacion, animaciones.get(2));
+	    moverArribaDer = new Animacion(velAnimacion, animaciones.get(3));
+	    moverDer = new Animacion(velAnimacion, animaciones.get(4));
+	    moverAbajoDer = new Animacion(velAnimacion, animaciones.get(5));
+	    moverAbajo = new Animacion(velAnimacion, animaciones.get(6));
+	    moverAbajoIzq = new Animacion(velAnimacion, animaciones.get(7));
 	}
 
 	public void actualizar() {
@@ -257,7 +261,7 @@ public class Entidad {
 			return moverArribaDer.getFrameActual();
 		}
 
-		return Recursos.ogroAbajo[0];
+		return Recursos.ogro.get(6)[0];
 	}
 
 	public float getX() {

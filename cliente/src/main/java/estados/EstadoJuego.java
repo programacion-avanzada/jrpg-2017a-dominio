@@ -16,7 +16,7 @@ public class EstadoJuego extends Estado {
 	public EstadoJuego(Juego juego) {
 		super(juego);
 		mundo = new Mundo(juego, "recursos/mundo2.txt");
-		personaje = new Entidad(juego, mundo, 64, 64, 0, 0);
+	    personaje = new Entidad(juego, mundo, 64, 64, 0, 0, Recursos.ogro, 150);
 	}
 
 	@Override
