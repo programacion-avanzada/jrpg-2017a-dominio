@@ -4,11 +4,13 @@ public class Guerrero extends Casta {
 
 	public Guerrero(double prob_crit, double evasion, double daño_crit) {
 		super(prob_crit, evasion, daño_crit);
+		this.nombreCasta="Guerrero";
 	}
 
 	public Guerrero()// creo que se llama por defecto no? preguntarle a lucas
 	{
 		super();
+		this.nombreCasta="Guerrero";
 	}
 
 	public boolean habilidad1(Personaje caster, Peleable atacado) // pega el

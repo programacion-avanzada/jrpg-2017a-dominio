@@ -8,10 +8,12 @@ public class Asesino extends Casta {
 
 	public Asesino(double prob_crit, double evasion, double daño_crit) {
 		super(prob_crit, evasion, daño_crit);
+		this.nombreCasta="Asesino";
 	}
 
 	public Asesino() {
 		super();
+		this.nombreCasta="Asesino";
 	}
 
 	public boolean habilidad1(Personaje caster, Peleable atacado) {// Golpe
@@ -53,4 +55,5 @@ public class Asesino extends Casta {
 		}
 		return false;
 	}
+
 }

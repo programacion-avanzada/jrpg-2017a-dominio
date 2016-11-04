@@ -11,6 +11,7 @@ public class Humano extends Personaje {
 		energiaTope+=5;
 		salud=saludTope;
 		energia=energiaTope;
+		nombreRaza="Humano";
 	}
 	
 	
@@ -19,6 +20,7 @@ public class Humano extends Personaje {
 			LinkedList<Item> itemsEquipados, LinkedList<Item> itemsGuardados, int experiencia, int nivel, int idPersonaje) {
 		super(nombre,salud, energia, fuerza, destreza, inteligencia, casta, itemsEquipados, itemsGuardados, experiencia, nivel,
 				idPersonaje);
+		nombreRaza="Humano";
 		}
 
 

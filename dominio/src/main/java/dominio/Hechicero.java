@@ -4,11 +4,13 @@ public class Hechicero extends Casta {
 
 	public Hechicero(double prob_crit, double evasion, double daño_crit) {
 		super(prob_crit, evasion, daño_crit);
+		this.nombreCasta="Hechicero";
 	}
 
 	public Hechicero()// creo que se llama por defecto no? preguntarle a lucas
 	{
 		super();
+		this.nombreCasta="Hechicero";
 	}
 
 	public boolean habilidad1(Personaje caster, Peleable atacado) {

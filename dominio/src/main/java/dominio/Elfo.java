@@ -9,6 +9,7 @@ public class Elfo extends Personaje{
 		energiaTope+=10;
 		salud=saludTope;
 		energia=energiaTope;
+		nombreRaza="Elfo";
 	}
 	
 	
@@ -16,6 +17,7 @@ public class Elfo extends Personaje{
 			LinkedList<Item> itemsGuardados, int experiencia, int nivel, int idPersonaje) {
 		super(nombre,salud, energia, fuerza, destreza, inteligencia, casta, itemsEquipados, itemsGuardados, experiencia, nivel,
 				idPersonaje);
+		nombreRaza="Elfo";
 	}
 
 

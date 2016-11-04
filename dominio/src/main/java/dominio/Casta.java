@@ -4,7 +4,7 @@ public abstract class  Casta {
 protected double probabilidadGolpeCritico;
 protected double probabilidadEvitarDaño;
 protected double dañoCritico; 
-
+protected String nombreCasta;
 
 public Casta (){
 	this.probabilidadGolpeCritico=0.2;
@@ -21,6 +21,10 @@ public Casta(double prob_crit,double evasion,double daño_crit){
 public abstract boolean habilidad1 (Personaje caster,Peleable atacado);
 public abstract boolean habilidad2 (Personaje caster,Peleable atacado);
 public abstract boolean habilidad3 (Personaje caster,Peleable atacado);
+
+public String getNombreCasta(){
+	return this.nombreCasta;
+}
 
 public double getProbabilidadGolpeCritico() {
 	return probabilidadGolpeCritico;

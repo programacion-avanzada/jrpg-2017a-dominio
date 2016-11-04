@@ -14,7 +14,8 @@ public abstract class Personaje implements Peleable {
 	protected int magia;// depende de la inteligencia y de los items
 
 	protected String nombre;// hay que agregarlo a todos los constructores
-
+	protected String nombreRaza;
+	
 	protected int x;
 	protected int y;
 
@@ -103,6 +104,16 @@ public abstract class Personaje implements Peleable {
 		this.defensa = this.calcularPuntosDeDefensa();
 		this.ataque = this.calcularPuntosDeAtaque();
 		this.magia = this.calcularPuntosDeMagia();
+	}
+	
+	
+
+	public String getNombreRaza() {
+		return nombreRaza;
+	}
+
+	public void setNombreRaza(String nombreRaza) {
+		this.nombreRaza = nombreRaza;
 	}
 
 	public String getNombre() {
