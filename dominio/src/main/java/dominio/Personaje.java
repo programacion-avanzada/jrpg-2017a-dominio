@@ -1,11 +1,14 @@
 package dominio;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
 
-public abstract class Personaje implements Peleable {
+import dominio.Asesino;
+
+public abstract class Personaje implements Peleable,Serializable {
 
 	protected int salud;
 	protected int energia;
@@ -43,6 +46,11 @@ public abstract class Personaje implements Peleable {
 		Personaje.tablaDeNiveles[1] = 0;
 		for (int i = 2; i < 101; i++)
 			Personaje.tablaDeNiveles[i] = Personaje.tablaDeNiveles[i - 1] + 50;
+	}
+	
+	
+	public Personaje(){
+		this.setCasta(new Asesino(0.2, 0.3, 1.5));
 	}
 
 	public Personaje(String nombre, Casta casta, int id) {

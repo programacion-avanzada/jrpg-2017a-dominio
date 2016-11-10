@@ -14,7 +14,9 @@ public class Humano extends Personaje {
 		nombreRaza="Humano";
 	}
 	
-	
+	public Humano() {
+		
+	}
 	
 	public Humano(String nombre,int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta,
 			LinkedList<Item> itemsEquipados, LinkedList<Item> itemsGuardados, int experiencia, int nivel, int idPersonaje) {

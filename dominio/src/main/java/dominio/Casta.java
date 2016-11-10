@@ -1,6 +1,8 @@
 package dominio;
 
-public abstract class  Casta {
+import java.io.Serializable;
+
+public abstract class  Casta implements Serializable{
 protected double probabilidadGolpeCritico;
 protected double probabilidadEvitarDaño;
 protected double dañoCritico; 
@@ -24,6 +26,12 @@ public abstract boolean habilidad3 (Personaje caster,Peleable atacado);
 
 public String getNombreCasta(){
 	return this.nombreCasta;
+}
+
+
+
+public void setNombreCasta(String nombreCasta) {
+	this.nombreCasta = nombreCasta;
 }
 
 public double getProbabilidadGolpeCritico() {
