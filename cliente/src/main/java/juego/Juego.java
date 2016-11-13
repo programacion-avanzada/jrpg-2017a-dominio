@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
+import cliente.PaquetePersonaje;
 import entidades.Entidad;
 import estados.Estado;
 import estados.EstadoJuego;
@@ -11,6 +12,8 @@ import recursos.Recursos;
 
 public class Juego implements Runnable {
 
+	private PaquetePersonaje paquetePersonaje;
+	
 	private Pantalla pantalla;
 	private final String NOMBRE;
 	private final int ANCHO;
@@ -35,6 +38,15 @@ public class Juego implements Runnable {
 		this.NOMBRE = nombre;
 		this.ALTO = alto;
 		this.ANCHO = ancho;
+
+		handlerMouse = new HandlerMouse();
+	}
+	
+	public Juego(final String nombre, final int ancho, final int alto,PaquetePersonaje pp) {
+		this.NOMBRE = nombre;
+		this.ALTO = alto;
+		this.ANCHO = ancho;
+		this.paquetePersonaje = pp;
 
 		handlerMouse = new HandlerMouse();
 	}

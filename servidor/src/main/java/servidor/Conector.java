@@ -91,6 +91,8 @@ public class Conector {
 			if (rs != null && rs.next()) 
 				{ int idPersonaje = rs.getInt(1);
 			
+			p1.setIdPersonaje(idPersonaje);////
+		
 			
 			 PreparedStatement st3 = connect.prepareStatement("update registro set idPersonaje=? where usuario=? and password=?");
 			st3.setInt(1, idPersonaje);

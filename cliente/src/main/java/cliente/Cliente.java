@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 
 import dominio.*;
 import frames.*;
+import juego.Juego;
 
 
 
@@ -108,6 +109,7 @@ public class Cliente extends Thread {
 			FrameInicial fr1;
 			boolean opcion = false;
 			Personaje p1 = new Humano(); // auxiliar para la BD
+			Personaje per = new Humano();
 			
 			while (opcion == false) {
 				Semaphore sem = new Semaphore(0);
@@ -136,20 +138,19 @@ public class Cliente extends Thread {
 				switch (paquete.getComando()) {
 				case "estadoRegistro":
 					if (paquete.getMensaje().equals("1")) {
-						//PersonajeUser pjUser = new PersonajeUser();
-						Personaje per = new Humano("nico",new Asesino(),-1);
-						//CrearPersonaje cp = new CrearPersonaje(pjUser,sem);
+						
+					 per = new Humano("nico",new Asesino(),-1);
 						CrearPersonaje cp = new CrearPersonaje(per,sem);
 						cp.setVisible(true);
 						sem.acquire();
 						paquete.setComando("creacionPersonaje");
-					//	paquete.setMensaje(gson.toJson(pjUser));
-					//	salida.writeObject(gson.toJson(paquete));
+					
 						
 						salida.writeObject(gson.toJson(paquete));
-						
 						salida.writeObject(per);
 						JOptionPane.showMessageDialog(null, "Registro exitoso");
+						per.setIdPersonaje((int) entrada.readObject());
+						
 						
 						opcion = true;
 					} else {
@@ -183,11 +184,17 @@ public class Cliente extends Thread {
 
 			}
 			Semaphore sem = new Semaphore(0);
+			PaquetePersonaje pp = new PaquetePersonaje(per.getIdPersonaje(),per.getNombreRaza(),0,0,0);
+			
 			Paquete paquete = new Paquete(null, "mostrarMapas");
 			ElegirMapa em = new ElegirMapa (paquete,sem);
 			em.setVisible(true);
 			sem.acquire();
+			pp.setMundo(Integer.parseInt(paquete.getMensaje()));
 			salida.writeObject(gson.toJson(paquete));
+			
+			Juego wome = new Juego("World Of the Middle Earth", 800, 600,pp);
+			wome.start();
 			
 			paquete.setComando("desconectar");
 			paquete.setIp(this.miIp);

@@ -62,15 +62,14 @@ public class AtencionCliente extends Thread {
 					break;
 										
 				case "creacionPersonaje":
-										//PersonajeUser pjUser = new PersonajeUser();
+										
 										Personaje per;
 										con = new Conector();
 										con.connect();
-									//	pjUser = (PersonajeUser) Cliente.desconversor(paquete.getMensaje(), PersonajeUser.class);
-									//	con.registrarPersonaje(pjUser,u1);
 										per = (Personaje) entrada.readObject();
 										con.registrarPersonaje(per,u1);
-									//	System.out.println(per.getNombre()+" "+per.getIdPersonaje());
+										salida.writeObject((int) per.getIdPersonaje());
+										
 										break;
 				case "iniciarSesion":
 					con = new Conector();
