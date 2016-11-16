@@ -35,6 +35,7 @@ public class Recursos {
 	public static BufferedImage cesped;
 	public static BufferedImage fuego;
 	public static BufferedImage background;
+	public static BufferedImage marco;
 	// Fin Entorno
 	
 	// Cargo todos los recursos una sola vez para no tener que hacerlo en cada actualizacion
@@ -156,6 +157,7 @@ public class Recursos {
 		cesped = CargadorImagen.cargarImagen("/Cesped.png");
 		fuego = CargadorImagen.cargarImagen("/rock.png");
 		background = CargadorImagen.cargarImagen("/background.jpg");
+		marco = CargadorImagen.cargarImagen("/marco.png");
 		// Fin Entorno
 	}
 }

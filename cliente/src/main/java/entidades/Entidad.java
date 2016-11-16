@@ -165,7 +165,7 @@ public class Entidad {
 			NodoDePila nodoActualTile = pilaMovimiento.pop();
 			
 			if(nodoActualTile == null){
-				System.out.println("murio");
+				
 				enMovimiento = false;
 				juego.getHandlerMouse().setNuevoRecorrido(false);
 				pilaMovimiento = null;
@@ -343,18 +343,11 @@ public class Entidad {
 				}
 			}
 		}
-		// A ver que onda
-//		for(int i=0; i<vecCostos.length; i++){
-//			System.out.println("indice: " + nodos[i].getIndice() + " x: " + nodos[i].getX() + " y: " + nodos[i].getY() + " costo: " + vecCostos[i]);
-//		}
-//		for(int i=0; i<vecCostos.length; i++){
-//			System.out.println(nodos[i].getX() + " " + nodos[i].getY() + " predecesor: " + nodos[vecPredecesores[i]].getX() + " " + nodos[vecPredecesores[i]].getY());
-//		}
 		// Creo el vector de nodos hasta donde quiere llegar
 		PilaDeTiles camino = new PilaDeTiles();
 		int caca = 30;
 		while(nodoFinal != nodoInicial){
-			System.out.println(nodoFinal +  " sd " + vecPredecesores[nodoFinal]);
+			
 			camino.push(new NodoDePila(grafoLibres.obtenerNodos()[nodoFinal].obtenerX(),grafoLibres.obtenerNodos()[nodoFinal].obtenerY()));
 			nodoFinal = vecPredecesores[nodoFinal];
 			

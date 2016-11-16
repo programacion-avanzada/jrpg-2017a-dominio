@@ -30,7 +30,8 @@ public class EstadoJuego extends Estado {
 		g.drawImage(Recursos.background, 0, 0, juego.getAncho(), juego.getAlto(), null);
 		mundo.graficar(g);
 		personaje.graficar(g);
-		}
+		g.drawImage(Recursos.marco, 0, 0, juego.getAncho(), juego.getAlto(), null);
+	}
 	
 	public Entidad getPersonaje() {
 		return personaje;
