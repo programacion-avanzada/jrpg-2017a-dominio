@@ -3,8 +3,13 @@ package entidades;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.LinkedList;
 
+import com.google.gson.Gson;
+
+import cliente.Paquete;
+import cliente.PaquetePersonaje;
 import juego.Juego;
 import mundo.Grafo;
 import mundo.Mundo;
@@ -36,16 +41,25 @@ public class Entidad {
 	private int posMouse[];
 	private int[] tile;
 
+	// Calculo de movimiento
+	private float difX;
+	private float difY;
+	private float relacion;
+
+	// Posicion final
+	private float auxX;
+	private float auxY;
+
 	// Movimiento Actual
-	private static final int horizontalDer = 1;
-	private static final int horizontalIzq = 2;
-	private static final int verticalSup = 3;
-	private static final int verticalInf = 4;
-	private static final int diagonalInfIzq = 5;
-	private static final int diagonalInfDer = 6;
-	private static final int diagonalSupDer = 7;
-	private static final int diagonalSupIzq = 8;
-	private int movimientoHacia = 0;
+	private static final int horizontalDer = 4;
+	private static final int horizontalIzq = 0;
+	private static final int verticalSup = 2;
+	private static final int verticalInf = 6;
+	private static final int diagonalInfIzq = 7;
+	private static final int diagonalInfDer = 5;
+	private static final int diagonalSupDer = 3;
+	private static final int diagonalSupIzq = 1;
+	private int movimientoHacia = 6;
 	private boolean enMovimiento;
 
 	// Animaciones
@@ -59,13 +73,16 @@ public class Entidad {
 	private final Animacion moverAbajo;
 	private final Animacion moverAbajoIzq;
 
-	private Mundo mundo;
+	private final Gson gson = new Gson();
+	private int intervaloEnvio = 0;
 	
 	// pila de movimiento
 	private PilaDeTiles pilaMovimiento;
 	private int [] tileActual;
 	private int [] tileFinal;
 	private int [] tileMoverme;
+	
+	private Mundo mundo;
 
 	public Entidad(Juego juego, Mundo mundo, int ancho, int alto, float spawnX, float spawnY, LinkedList<BufferedImage[]> animaciones, int velAnimacion) {
 		this.juego = juego;
@@ -88,6 +105,7 @@ public class Entidad {
 	    moverAbajo = new Animacion(velAnimacion, animaciones.get(6));
 	    moverAbajoIzq = new Animacion(velAnimacion, animaciones.get(7));
 	}
+
 
 	public void actualizar() {
 		if(enMovimiento){
@@ -249,12 +267,22 @@ public class Entidad {
 			
 			x+=dx;
 			y+=dy;
+			
+			if(intervaloEnvio == 2) {
+				enviarPosicion();
+				intervaloEnvio = 0;
+			}
+			
+			intervaloEnvio++;
 				
 			if (x==xFinal && y==yFinal-32) {
 				enMovimiento = false;
 			}
 		}
 	}
+
+
+		
 
 	public void graficar(Graphics g) {
 		drawX = (int) (x - juego.getCamara().getxOffset());
@@ -285,6 +313,46 @@ public class Entidad {
 		}
 
 		return Recursos.ogro.get(6)[0];
+	}
+	
+	private int getDireccion() {
+		return movimientoHacia;
+	}
+	
+	private int getFrame() {
+		if (movimientoHacia == horizontalIzq) {
+			return moverIzq.getFrame();
+		} else if (movimientoHacia == horizontalDer) {
+			return moverDer.getFrame();
+		} else if (movimientoHacia == verticalSup) {
+			return moverArriba.getFrame();
+		} else if (movimientoHacia == verticalInf) {
+			return moverAbajo.getFrame();
+		} else if (movimientoHacia == diagonalInfIzq) {
+			return moverAbajoIzq.getFrame();
+		} else if (movimientoHacia == diagonalInfDer) {
+			return moverAbajoDer.getFrame();
+		} else if (movimientoHacia == diagonalSupIzq) {
+			return moverArribaIzq.getFrame();
+		} else if (movimientoHacia == diagonalSupDer) {
+			return moverArribaDer.getFrame();
+		}
+
+		return 0;
+	}
+
+	private void enviarPosicion() {
+		juego.getPersonaje().setPosX(x);
+		juego.getPersonaje().setPosY(y);
+		juego.getPersonaje().setDireccion(getDireccion());
+		juego.getPersonaje().setFrame(getFrame());
+		juego.getPersonaje().setComando("movimiento");
+		try {
+			System.out.println("Enviar Posicion : " + gson.toJson(juego.getPersonaje()));
+			juego.getCliente().getSalida().writeObject(gson.toJson(juego.getPersonaje()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private PilaDeTiles caminoMasCorto(int xInicial, int yInicial, int xFinal, int yFinal) {
@@ -361,7 +429,7 @@ public class Entidad {
 			return false;
 		return true;
 	}
-
+	
 	public float getX() {
 		return x;
 	}

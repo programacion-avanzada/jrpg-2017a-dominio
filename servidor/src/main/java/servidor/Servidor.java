@@ -6,20 +6,23 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JOptionPane;
+
+import cliente.PaquetePersonaje;
 
 
 
 public class Servidor extends Thread {
 
 	private static ArrayList<AtencionCliente> conectados = new ArrayList<>();
+	private static Map<Integer, PaquetePersonaje> personajes = new HashMap<>();
 	private ServerSocket server;
 	private final int puerto = 9999;
-//	private final int puerto = 20001;
 	private ObjectOutputStream salida;
 	private ObjectInputStream entrada;
-
 	
 	
 	public void run() {
@@ -42,13 +45,17 @@ public class Servidor extends Thread {
 				atencion.start();
 				conectados.add(atencion);
 			}
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
 	public static ArrayList<AtencionCliente> getConectados() {
 		return conectados;
+	}
+	
+	public static Map<Integer, PaquetePersonaje> getPersonajes() {
+		return personajes;
 	}
 
 	public static void main(String[] args) {

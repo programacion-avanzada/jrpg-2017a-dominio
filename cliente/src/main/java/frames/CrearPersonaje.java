@@ -51,12 +51,12 @@ public class CrearPersonaje extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CrearPersonaje(Personaje p1,Semaphore sem) {
-		String vecSalud[]= {"55","50","60"};
-		String vecEnergia[]= {"55","60","50"};
-		String vecFuerza[]= {"15","10","10"};
-		String vecDestreza[]= {"10","10","15"};
-		String vecInteligencia[]= {"10","15","10"};
+	public CrearPersonaje(final Personaje p1,final Semaphore sem) {
+		final String vecSalud[]= {"55","50","60"};
+		final String vecEnergia[]= {"55","60","50"};
+		final String vecFuerza[]= {"15","10","10"};
+		final String vecDestreza[]= {"10","10","15"};
+		final String vecInteligencia[]= {"10","15","10"};
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -135,7 +135,7 @@ public class CrearPersonaje extends JFrame {
 		btnAceptar.setBounds(265, 180, 89, 23);
 		contentPane.add(btnAceptar);
 		
-		JComboBox comboBox1 = new JComboBox();
+		final JComboBox comboBox1 = new JComboBox();
 		comboBox1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				p1.setNombreRaza((String) comboBox1.getSelectedItem());
@@ -155,7 +155,7 @@ public class CrearPersonaje extends JFrame {
 		comboBox1.addItem("Elfo");
 		comboBox1.addItem("Orco");
 		
-		JComboBox comboBox2 = new JComboBox();
+		final JComboBox comboBox2 = new JComboBox();
 		comboBox2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				p1.getCasta().setNombreCasta((String) comboBox2.getSelectedItem());

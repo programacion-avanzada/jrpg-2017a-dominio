@@ -55,7 +55,7 @@ public class Registro extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Registro(Usuario u1,Semaphore sem) {
+	public Registro(final Usuario u1,final Semaphore sem) {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {

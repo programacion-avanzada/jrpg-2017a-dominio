@@ -14,7 +14,7 @@ import dominio.Personaje;
 public class Conector {
 
 	private String url = "primeraBase.bd";
-	//private String url = "C:\\Users\\Nicolas\\primeraBase.bd";
+	// private String url = "C:\\Users\\Nicolas\\primeraBase.bd";
 	Connection connect;
 
 	public void connect() {
@@ -64,14 +64,14 @@ public class Conector {
 		}
 
 	}
-	
-	
-	public boolean registrarPersonaje(Personaje p1,Usuario u1) {
+
+	public boolean registrarPersonaje(Personaje p1, Usuario u1) {
 
 		try {
-			
+
 			PreparedStatement st = connect.prepareStatement(
-					"insert into personaje (idInventario, idMochila,casta,raza,fuerza,destreza,inteligencia,saludTope,energiaTope,nombre,experiencia,nivel,idAlianza) values (?,?,?,?,?,?,?,?,?,?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
+					"insert into personaje (idInventario, idMochila,casta,raza,fuerza,destreza,inteligencia,saludTope,energiaTope,nombre,experiencia,nivel,idAlianza) values (?,?,?,?,?,?,?,?,?,?,?,?,?)",
+					PreparedStatement.RETURN_GENERATED_KEYS);
 			st.setInt(1, -1);
 			st.setInt(2, -1);
 			st.setString(3, p1.getCasta().getNombreCasta());
@@ -86,59 +86,57 @@ public class Conector {
 			st.setInt(12, 1);
 			st.setInt(13, -1);
 			st.execute();
-			
+
 			ResultSet rs = st.getGeneratedKeys();
-			if (rs != null && rs.next()) 
-				{ int idPersonaje = rs.getInt(1);
-			
-			p1.setIdPersonaje(idPersonaje);////
-		
-			
-			 PreparedStatement st3 = connect.prepareStatement("update registro set idPersonaje=? where usuario=? and password=?");
-			st3.setInt(1, idPersonaje);
-			st3.setString(2, u1.getNombre_usuario());
-			st3.setString(3, u1.getPassword_usuario());
-			st3.execute();
-			if(this.registrarInventarioMochila(idPersonaje))
-				return true;
+			if (rs != null && rs.next()) {
+				int idPersonaje = rs.getInt(1);
+
+				p1.setIdPersonaje(idPersonaje);////
+
+				PreparedStatement st3 = connect
+						.prepareStatement("update registro set idPersonaje=? where usuario=? and password=?");
+				st3.setInt(1, idPersonaje);
+				st3.setString(2, u1.getNombre_usuario());
+				st3.setString(3, u1.getPassword_usuario());
+				st3.execute();
+				if (this.registrarInventarioMochila(idPersonaje))
+					return true;
 			}
-				return false;
-		
-			} catch (SQLException e) {
+			return false;
+
+		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
 		}
-		
+
 	}
-	
 
 	public boolean registrarInventarioMochila(int idInventarioMochila) {
 		ResultSet result = null;
 		try {
-	
-			PreparedStatement st1 = connect.prepareStatement("insert into inventario(idInventario,manos1,manos2,pie,cabeza,pecho,accesorio) values (?,-1,-1,-1,-1,-1,-1)");
+
+			PreparedStatement st1 = connect.prepareStatement(
+					"insert into inventario(idInventario,manos1,manos2,pie,cabeza,pecho,accesorio) values (?,-1,-1,-1,-1,-1,-1)");
 			st1.setInt(1, idInventarioMochila);
-		     PreparedStatement st2 = connect.prepareStatement("insert into mochila(idMochila,item1,item2,item3,item4,item5,item6,item7,item8,item9,item10,item11,item12,item13,item14,item15,item16,item17,item18,item19,item20) values(?,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1)");
-		    st2.setInt(1, idInventarioMochila);
-		   
-		    st1.execute();
-		    st2.execute();
-		    
-		    PreparedStatement st3 = connect.prepareStatement("update personaje set idInventario=? where idPersonaje=?");
-		    st3.setInt(1, idInventarioMochila);
-		    st3.setInt(2, idInventarioMochila);
-		    
-		    PreparedStatement st4 = connect.prepareStatement("update personaje set idMochila=? where idPersonaje=?");
-		    st4.setInt(1, idInventarioMochila);
-		    st4.setInt(2, idInventarioMochila);
-		    
-		    
-		    st3.execute();
-		    st4.execute();
-		    return true;
-		    
-			
-			
+			PreparedStatement st2 = connect.prepareStatement(
+					"insert into mochila(idMochila,item1,item2,item3,item4,item5,item6,item7,item8,item9,item10,item11,item12,item13,item14,item15,item16,item17,item18,item19,item20) values(?,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1)");
+			st2.setInt(1, idInventarioMochila);
+
+			st1.execute();
+			st2.execute();
+
+			PreparedStatement st3 = connect.prepareStatement("update personaje set idInventario=? where idPersonaje=?");
+			st3.setInt(1, idInventarioMochila);
+			st3.setInt(2, idInventarioMochila);
+
+			PreparedStatement st4 = connect.prepareStatement("update personaje set idMochila=? where idPersonaje=?");
+			st4.setInt(1, idInventarioMochila);
+			st4.setInt(2, idInventarioMochila);
+
+			st3.execute();
+			st4.execute();
+			return true;
+
 		} catch (SQLException e) {
 
 			e.printStackTrace();
@@ -156,10 +154,10 @@ public class Conector {
 			result = st.executeQuery();
 
 			if (result.next()) {
-				// System.out.println("Se logueo!");
+				//System.out.println("Se logueo!");
 				return true;
 			}
-			// System.out.println("No se logueo!");
+			//System.out.println("No se logueo!");
 
 			return false;
 
@@ -197,9 +195,34 @@ public class Conector {
 			PreparedStatement st = connect.prepareStatement("delete from registro");
 			st.executeQuery();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
+	public PaquetePersonaje getPersonaje(Usuario user) {
+		ResultSet result = null;
+		try {
+			System.out.println("Usuario: " + user.getNombre_usuario());
+			PreparedStatement st = connect.prepareStatement("select * from registro where usuario = ?");
+			st.setString(1, user.getNombre_usuario());
+			result = st.executeQuery();
+			int idPersonaje = result.getInt("idPersonaje");
+			
+			st = connect.prepareStatement("select * from personaje where idPersonaje = ?");
+			st.setInt(1, idPersonaje);
+			result = st.executeQuery();
+			String raza = result.getString("raza");
+
+			PaquetePersonaje personaje = new PaquetePersonaje();
+			personaje.setIdPersonaje(idPersonaje);
+			personaje.setNombreRaza(raza);
+		
+			return personaje;
+			
+		} catch (SQLException ex) {
+			System.err.println(ex.getMessage());
+		}
+		
+		return new PaquetePersonaje(-1, null, -1, -1, -1);
+	}
 }

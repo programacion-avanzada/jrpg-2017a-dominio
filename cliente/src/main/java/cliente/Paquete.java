@@ -9,6 +9,10 @@ public class Paquete implements Serializable {
 	private String sala;
 	private String comando;
 
+	public Paquete() {
+		
+	}
+	
 	public Paquete(String mensaje, String nick, String ip, String sala, String comando) {
 		this.mensaje = mensaje;
 		this.nick = nick;
@@ -22,8 +26,8 @@ public class Paquete implements Serializable {
 		this.comando = comando;
 	}
 
-	public Paquete() {
-		// TODO Auto-generated constructor stub
+	public Paquete(String comando) {
+		this.comando = comando;
 	}
 
 	public void setMensaje(String mensaje) {

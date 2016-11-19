@@ -41,7 +41,7 @@ public class FrameInicial extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FrameInicial(Usuario u1,Semaphore sem) {
+	public FrameInicial(final Usuario u1,final Semaphore sem) {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -84,3 +84,4 @@ public class FrameInicial extends JFrame {
 		contentPane.add(btnNewButton_1);
 	}
 }
+

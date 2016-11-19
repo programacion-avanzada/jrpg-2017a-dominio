@@ -38,4 +38,7 @@ public class Animacion {
 		return frames[indice];
 	}
 	
+	public int getFrame() {
+		return indice;
+	}
 }

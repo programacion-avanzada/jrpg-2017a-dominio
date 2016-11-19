@@ -44,7 +44,7 @@ public class InicioSesion extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public InicioSesion(Usuario user,Semaphore sem) {
+	public InicioSesion(final Usuario user,final Semaphore sem) {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {

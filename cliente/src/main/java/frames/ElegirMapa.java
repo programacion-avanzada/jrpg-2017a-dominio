@@ -39,7 +39,7 @@ public class ElegirMapa extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ElegirMapa(Paquete p,Semaphore sem) {
+	public ElegirMapa(final Paquete p,final Semaphore sem) {
 		setTitle("Elegir Mapa");
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -82,3 +82,4 @@ public class ElegirMapa extends JFrame {
 		contentPane.add(btnNewButton_2);
 	}
 }
+
