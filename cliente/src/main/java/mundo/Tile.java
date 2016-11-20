@@ -7,7 +7,7 @@ public class Tile {
 	
 	public static Tile[] tiles = new Tile[256];
 	public static Tile cesped = new TileCesped(0);
-	public static Tile fuego = new TileFuego(1);
+	public static Tile roca = new TileRoca(1);
 	
 	public static final int ANCHO = 64;
 	public static final int ALTO = 32;

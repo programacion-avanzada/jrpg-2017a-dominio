@@ -6,10 +6,10 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.LinkedList;
 
+import javax.swing.JOptionPane;
+
 import com.google.gson.Gson;
 
-import cliente.Paquete;
-import cliente.PaquetePersonaje;
 import juego.Juego;
 import mundo.Grafo;
 import mundo.Mundo;
@@ -75,40 +75,40 @@ public class Entidad {
 
 	private final Gson gson = new Gson();
 	private int intervaloEnvio = 0;
-	
+
 	// pila de movimiento
 	private PilaDeTiles pilaMovimiento;
-	private int [] tileActual;
-	private int [] tileFinal;
-	private int [] tileMoverme;
-	
+	private int[] tileActual;
+	private int[] tileFinal;
+	private int[] tileMoverme;
+
 	private Mundo mundo;
 
-	public Entidad(Juego juego, Mundo mundo, int ancho, int alto, float spawnX, float spawnY, LinkedList<BufferedImage[]> animaciones, int velAnimacion) {
+	public Entidad(Juego juego, Mundo mundo, int ancho, int alto, float spawnX, float spawnY,
+			LinkedList<BufferedImage[]> animaciones, int velAnimacion) {
 		this.juego = juego;
 		this.ancho = ancho;
 		this.alto = alto;
 		this.mundo = mundo;
 		xOffset = ancho / 2;
 		yOffset = alto / 2;
-		x = (int)(spawnX / 64) * 64;
-		y = (int)(spawnY / 32) * 32;
+		x = (int) (spawnX / 64) * 64;
+		y = (int) (spawnY / 32) * 32;
 
 		this.animaciones = animaciones;
-		 
-	    moverIzq = new Animacion(velAnimacion, animaciones.get(0));
-	    moverArribaIzq = new Animacion(velAnimacion, animaciones.get(1));
-	    moverArriba = new Animacion(velAnimacion, animaciones.get(2));
-	    moverArribaDer = new Animacion(velAnimacion, animaciones.get(3));
-	    moverDer = new Animacion(velAnimacion, animaciones.get(4));
-	    moverAbajoDer = new Animacion(velAnimacion, animaciones.get(5));
-	    moverAbajo = new Animacion(velAnimacion, animaciones.get(6));
-	    moverAbajoIzq = new Animacion(velAnimacion, animaciones.get(7));
+
+		moverIzq = new Animacion(velAnimacion, animaciones.get(0));
+		moverArribaIzq = new Animacion(velAnimacion, animaciones.get(1));
+		moverArriba = new Animacion(velAnimacion, animaciones.get(2));
+		moverArribaDer = new Animacion(velAnimacion, animaciones.get(3));
+		moverDer = new Animacion(velAnimacion, animaciones.get(4));
+		moverAbajoDer = new Animacion(velAnimacion, animaciones.get(5));
+		moverAbajo = new Animacion(velAnimacion, animaciones.get(6));
+		moverAbajoIzq = new Animacion(velAnimacion, animaciones.get(7));
 	}
 
-
 	public void actualizar() {
-		if(enMovimiento){
+		if (enMovimiento) {
 			moverIzq.actualizar();
 			moverArribaIzq.actualizar();
 			moverArriba.actualizar();
@@ -117,7 +117,7 @@ public class Entidad {
 			moverAbajoDer.actualizar();
 			moverAbajo.actualizar();
 			moverAbajoIzq.actualizar();
-		}else{
+		} else {
 			moverIzq.reset();
 			moverArribaIzq.reset();
 			moverArriba.reset();
@@ -136,101 +136,87 @@ public class Entidad {
 	public void getEntrada() {
 
 		posMouse = juego.getHandlerMouse().getPosMouse();
-		
-		if(juego.getHandlerMouse().getNuevoRecorrido()){
-			
-			tileMoverme = Mundo.mouseATile(posMouse[0]+ juego.getCamara().getxOffset() - xOffset, posMouse[1]+ juego.getCamara().getyOffset() - yOffset);
-			
+
+		if (juego.getHandlerMouse().getNuevoRecorrido()) {
+
+			tileMoverme = Mundo.mouseATile(posMouse[0] + juego.getCamara().getxOffset() - xOffset, posMouse[1] + juego.getCamara().getyOffset() - yOffset);
+
 			juego.getHandlerMouse().setNuevoRecorrido(false);
-			
+
 			pilaMovimiento = null;
-			
+
 		}
 
 		if (!enMovimiento && tileMoverme != null) {
-			
+
 			enMovimiento = false;
 
 			xInicio = x;
 			yInicio = y;
-	
-			
+
 			tileActual = Mundo.mouseATile(x, y);
-			
-			if(tileMoverme[0] < 0 || tileMoverme[1] < 0 || tileMoverme[0] >= mundo.obtenerAncho() || tileMoverme[1] >= mundo.obtenerAlto()){
+
+			if (tileMoverme[0] < 0 || tileMoverme[1] < 0 || tileMoverme[0] >= mundo.obtenerAncho()|| tileMoverme[1] >= mundo.obtenerAlto()) {
 				enMovimiento = false;
 				juego.getHandlerMouse().setNuevoRecorrido(false);
 				pilaMovimiento = null;
 				tileMoverme = null;
 				return;
 			}
-			
-			
-			if(tileMoverme[0] == tileActual[0] && tileMoverme[1] == tileActual[1]
-				|| mundo.getTile(tileMoverme[0], tileMoverme[1]).esSolido()){
-				
+
+			if (tileMoverme[0] == tileActual[0] && tileMoverme[1] == tileActual[1] || mundo.getTile(tileMoverme[0], tileMoverme[1]).esSolido()) {
 				tileMoverme = null;
 				enMovimiento = false;
 				juego.getHandlerMouse().setNuevoRecorrido(false);
 				pilaMovimiento = null;
 				return;
-			}	
-			
-			if(pilaMovimiento == null)
+			}
+
+			if (pilaMovimiento == null)
 				pilaMovimiento = caminoMasCorto(tileActual[0], tileActual[1], tileMoverme[0], tileMoverme[1]);
-			
+
 			// Me muevo al primero de la pila
 			NodoDePila nodoActualTile = pilaMovimiento.pop();
-			
-			if(nodoActualTile == null){
-				
+
+			if (nodoActualTile == null) {
 				enMovimiento = false;
 				juego.getHandlerMouse().setNuevoRecorrido(false);
 				pilaMovimiento = null;
 				tileMoverme = null;
 				return;
 			}
-			
+
 			tileFinal = new int[2];
 			tileFinal[0] = nodoActualTile.obtenerX();
 			tileFinal[1] = nodoActualTile.obtenerY();
-			
+
 			xFinal = Mundo.dosDaIso(tileFinal[0], tileFinal[1])[0];
 			yFinal = Mundo.dosDaIso(tileFinal[0], tileFinal[1])[1];
-			
-			if(tileFinal[0] == tileActual[0] - 1 && tileFinal[1] == tileActual[1] - 1)
+
+			if (tileFinal[0] == tileActual[0] - 1 && tileFinal[1] == tileActual[1] - 1)
 				movimientoHacia = verticalSup;
-				//verticalSup = true;
-			
-			if(tileFinal[0] == tileActual[0] + 1 && tileFinal[1] == tileActual[1] + 1)
+
+			if (tileFinal[0] == tileActual[0] + 1 && tileFinal[1] == tileActual[1] + 1)
 				movimientoHacia = verticalInf;
-				//verticalInf = true;
-			
-			if(tileFinal[0] == tileActual[0] - 1 && tileFinal[1] == tileActual[1] + 1)
+
+			if (tileFinal[0] == tileActual[0] - 1 && tileFinal[1] == tileActual[1] + 1)
 				movimientoHacia = horizontalIzq;
-				//horizontalIzq = true;
-			
-			if(tileFinal[0] == tileActual[0] + 1 && tileFinal[1] == tileActual[1] - 1)
+
+			if (tileFinal[0] == tileActual[0] + 1 && tileFinal[1] == tileActual[1] - 1)
 				movimientoHacia = horizontalDer;
-				//horizontalDer = true;
-			
-			if(tileFinal[0] == tileActual[0] - 1 && tileFinal[1] == tileActual[1])
+
+			if (tileFinal[0] == tileActual[0] - 1 && tileFinal[1] == tileActual[1])
 				movimientoHacia = diagonalSupIzq;
-				//diagonalSupIzq = true;
-			
-			if(tileFinal[0] == tileActual[0] + 1 && tileFinal[1] == tileActual[1])
+
+			if (tileFinal[0] == tileActual[0] + 1 && tileFinal[1] == tileActual[1])
 				movimientoHacia = diagonalInfDer;
-				//diagonalInfDer = true;
-			
-			if(tileFinal[0] == tileActual[0] && tileFinal[1] == tileActual[1] - 1)
+
+			if (tileFinal[0] == tileActual[0] && tileFinal[1] == tileActual[1] - 1)
 				movimientoHacia = diagonalSupDer;
-				//diagonalSupDer = true;
-			
-			if(tileFinal[0] == tileActual[0] && tileFinal[1] == tileActual[1] + 1)
+
+			if (tileFinal[0] == tileActual[0] && tileFinal[1] == tileActual[1] + 1)
 				movimientoHacia = diagonalInfIzq;
-				//diagonalInfIzq = true;
-			
-			//juego.getHandlerMouse().setNuevoRecorrido(false);
+
 			enMovimiento = true;
 		}
 	}
@@ -239,50 +225,47 @@ public class Entidad {
 
 		dx = 0;
 		dy = 0;
-		
+
 		double paso = 1;
 
-		if (enMovimiento && !(x==xFinal && y==yFinal-32)) {			
-			if(movimientoHacia == verticalSup)
-				dy-=paso;
-			else if(movimientoHacia == verticalInf)
-				dy+=paso;
-			else if(movimientoHacia == horizontalDer)
-				dx+=paso;
-			else if(movimientoHacia == horizontalIzq)
-				dx-=paso;
-			else if(movimientoHacia == diagonalInfDer) {
-				dx+=paso;
-				dy+=paso/2;
+		if (enMovimiento && !(x == xFinal && y == yFinal - 32)) {
+			if (movimientoHacia == verticalSup)
+				dy -= paso;
+			else if (movimientoHacia == verticalInf)
+				dy += paso;
+			else if (movimientoHacia == horizontalDer)
+				dx += paso;
+			else if (movimientoHacia == horizontalIzq)
+				dx -= paso;
+			else if (movimientoHacia == diagonalInfDer) {
+				dx += paso;
+				dy += paso / 2;
 			} else if (movimientoHacia == diagonalInfIzq) {
-				dx-=paso;
-				dy+=paso/2;
+				dx -= paso;
+				dy += paso / 2;
 			} else if (movimientoHacia == diagonalSupDer) {
-				dx+=paso;
-				dy-=paso/2;
+				dx += paso;
+				dy -= paso / 2;
 			} else if (movimientoHacia == diagonalSupIzq) {
-				dx-=paso;
-				dy-=paso/2;
+				dx -= paso;
+				dy -= paso / 2;
 			}
-			
-			x+=dx;
-			y+=dy;
-			
-			if(intervaloEnvio == 2) {
+
+			x += dx;
+			y += dy;
+
+			if (intervaloEnvio == 2) {
 				enviarPosicion();
 				intervaloEnvio = 0;
 			}
-			
+
 			intervaloEnvio++;
-				
-			if (x==xFinal && y==yFinal-32) {
+
+			if (x == xFinal && y == yFinal - 32) {
 				enMovimiento = false;
 			}
 		}
 	}
-
-
-		
 
 	public void graficar(Graphics g) {
 		drawX = (int) (x - juego.getCamara().getxOffset());
@@ -314,11 +297,11 @@ public class Entidad {
 
 		return Recursos.ogro.get(6)[0];
 	}
-	
+
 	private int getDireccion() {
 		return movimientoHacia;
 	}
-	
+
 	private int getFrame() {
 		if (movimientoHacia == horizontalIzq) {
 			return moverIzq.getFrame();
@@ -348,19 +331,22 @@ public class Entidad {
 		juego.getPersonaje().setFrame(getFrame());
 		juego.getPersonaje().setComando("movimiento");
 		try {
-			System.out.println("Enviar Posicion : " + gson.toJson(juego.getPersonaje()));
 			juego.getCliente().getSalida().writeObject(gson.toJson(juego.getPersonaje()));
 		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor.");
 			e.printStackTrace();
 		}
 	}
-	
+
 	private PilaDeTiles caminoMasCorto(int xInicial, int yInicial, int xFinal, int yFinal) {
 		Grafo grafoLibres = mundo.obtenerGrafoDeTilesNoSolidos();
 		// Transformo las coordenadas iniciales y finales en indices
-		int nodoInicial = (yInicial-grafoLibres.obtenerNodos()[0].obtenerY())*(int)Math.sqrt(grafoLibres.obtenerCantidadDeNodosTotal()) + xInicial-grafoLibres.obtenerNodos()[0].obtenerX();
-		int nodoFinal = (yFinal-grafoLibres.obtenerNodos()[0].obtenerY())*(int)Math.sqrt(grafoLibres.obtenerCantidadDeNodosTotal()) + xFinal-grafoLibres.obtenerNodos()[0].obtenerX();
+		int nodoInicial = (yInicial - grafoLibres.obtenerNodos()[0].obtenerY()) * (int) Math.sqrt(grafoLibres.obtenerCantidadDeNodosTotal()) 
+							+ xInicial - grafoLibres.obtenerNodos()[0].obtenerX();
 		
+		int nodoFinal = (yFinal - grafoLibres.obtenerNodos()[0].obtenerY()) * (int) Math.sqrt(grafoLibres.obtenerCantidadDeNodosTotal())
+							+ xFinal - grafoLibres.obtenerNodos()[0].obtenerX();
+
 		// Hago todo
 		double[] vecCostos = new double[grafoLibres.obtenerCantidadDeNodosTotal()];
 		int[] vecPredecesores = new int[grafoLibres.obtenerCantidadDeNodosTotal()];
@@ -376,20 +362,21 @@ public class Entidad {
 		vecCostos[nodoInicial] = 0;
 		Nodo[] adyacentes = grafoLibres.obtenerNodos()[nodoInicial].obtenerNodosAdyacentes();
 		for (int i = 0; i < grafoLibres.obtenerNodos()[nodoInicial].obtenerCantidadDeAdyacentes(); i++) {
-			if(estanEnDiagonal(grafoLibres.obtenerNodos()[nodoInicial],grafoLibres.obtenerNodos()[adyacentes[i].obtenerIndice()]))
+			if (estanEnDiagonal(grafoLibres.obtenerNodos()[nodoInicial], grafoLibres.obtenerNodos()[adyacentes[i].obtenerIndice()]))
 				vecCostos[adyacentes[i].obtenerIndice()] = 1.5;
 			else
 				vecCostos[adyacentes[i].obtenerIndice()] = 1;
 			vecPredecesores[adyacentes[i].obtenerIndice()] = nodoInicial;
 		}
 		// Aplico Dijkstra
-		while(cantSolucion < grafoLibres.obtenerCantidadDeNodosTotal()){
-			// Elijo W perteneciente al conjunto restante tal que el costo de W sea minimo
+		while (cantSolucion < grafoLibres.obtenerCantidadDeNodosTotal()) {
+			// Elijo W perteneciente al conjunto restante tal que el costo de W
+			// sea minimo
 			double minimo = Double.MAX_VALUE;
 			int indiceMinimo = 0;
 			Nodo nodoW = null;
 			for (int i = 0; i < grafoLibres.obtenerCantidadDeNodosTotal(); i++) {
-				if(!conjSolucion[i] && vecCostos[i]<minimo){
+				if (!conjSolucion[i] && vecCostos[i] < minimo) {
 					nodoW = grafoLibres.obtenerNodos()[i];
 					minimo = vecCostos[i];
 					indiceMinimo = i;
@@ -403,9 +390,10 @@ public class Entidad {
 			adyacentes = grafoLibres.obtenerNodos()[indiceMinimo].obtenerNodosAdyacentes();
 			for (int i = 0; i < grafoLibres.obtenerNodos()[indiceMinimo].obtenerCantidadDeAdyacentes(); i++) {
 				double valorASumar = 1;
-				if(estanEnDiagonal(grafoLibres.obtenerNodos()[indiceMinimo],grafoLibres.obtenerNodos()[adyacentes[i].obtenerIndice()]))
+				if (estanEnDiagonal(grafoLibres.obtenerNodos()[indiceMinimo],
+						grafoLibres.obtenerNodos()[adyacentes[i].obtenerIndice()]))
 					valorASumar = 1.5;
-				if(vecCostos[indiceMinimo] + valorASumar < vecCostos[adyacentes[i].obtenerIndice()]){
+				if (vecCostos[indiceMinimo] + valorASumar < vecCostos[adyacentes[i].obtenerIndice()]) {
 					vecCostos[adyacentes[i].obtenerIndice()] = vecCostos[indiceMinimo] + valorASumar;
 					vecPredecesores[adyacentes[i].obtenerIndice()] = indiceMinimo;
 				}
@@ -413,23 +401,20 @@ public class Entidad {
 		}
 		// Creo el vector de nodos hasta donde quiere llegar
 		PilaDeTiles camino = new PilaDeTiles();
-		int caca = 30;
-		while(nodoFinal != nodoInicial){
-			
-			camino.push(new NodoDePila(grafoLibres.obtenerNodos()[nodoFinal].obtenerX(),grafoLibres.obtenerNodos()[nodoFinal].obtenerY()));
+		while (nodoFinal != nodoInicial) {
+			camino.push(new NodoDePila(grafoLibres.obtenerNodos()[nodoFinal].obtenerX(), grafoLibres.obtenerNodos()[nodoFinal].obtenerY()));
 			nodoFinal = vecPredecesores[nodoFinal];
-			
 		}
-		// A ver que onda esto
+		
 		return camino;
 	}
-	
-	private boolean estanEnDiagonal(Nodo nodoUno, Nodo nodoDos){
-		if(nodoUno.obtenerX() == nodoDos.obtenerX() || nodoUno.obtenerY() == nodoDos.obtenerY())
+
+	private boolean estanEnDiagonal(Nodo nodoUno, Nodo nodoDos) {
+		if (nodoUno.obtenerX() == nodoDos.obtenerX() || nodoUno.obtenerY() == nodoDos.obtenerY())
 			return false;
 		return true;
 	}
-	
+
 	public float getX() {
 		return x;
 	}
@@ -461,11 +446,11 @@ public class Entidad {
 	public void setAlto(int alto) {
 		this.alto = alto;
 	}
-	
+
 	public int getxOffset() {
 		return xOffset;
 	}
-	
+
 	public int getYOffset() {
 		return yOffset;
 	}

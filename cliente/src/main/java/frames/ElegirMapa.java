@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -20,9 +21,6 @@ public class ElegirMapa extends JFrame {
 
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -30,15 +28,13 @@ public class ElegirMapa extends JFrame {
 					ElegirMapa frame = new ElegirMapa(new Paquete(null,null),new Semaphore(0));
 					frame.setVisible(true);
 				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "Fallo al abrir la ventana de selección del mapa.");
 					e.printStackTrace();
 				}
 			}
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public ElegirMapa(final Paquete p,final Semaphore sem) {
 		setTitle("Elegir Mapa");
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);

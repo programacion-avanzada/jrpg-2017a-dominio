@@ -1,7 +1,6 @@
 package frames;
 
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -13,9 +12,9 @@ import dominio.*;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
-import java.util.*;
 import java.util.concurrent.Semaphore;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
@@ -30,11 +29,6 @@ public class CrearPersonaje extends JFrame {
 	private JLabel salud;
 	private JLabel energia;
 
-	
-	
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -42,15 +36,13 @@ public class CrearPersonaje extends JFrame {
 					CrearPersonaje frame = new CrearPersonaje(new Humano(),new Semaphore(0));
 					frame.setVisible(true);
 				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "Fallo al abrir la ventana de creación del personaje.");
 					e.printStackTrace();
 				}
 			}
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public CrearPersonaje(final Personaje p1,final Semaphore sem) {
 		final String vecSalud[]= {"55","50","60"};
 		final String vecEnergia[]= {"55","60","50"};

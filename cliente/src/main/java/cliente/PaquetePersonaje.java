@@ -1,6 +1,5 @@
 package cliente;
 
-import java.awt.image.BufferedImage;
 import java.io.Serializable;
 
 import dominio.Mapa;
@@ -92,6 +91,5 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 		}
 		return obj;
 	}
-
 }
 

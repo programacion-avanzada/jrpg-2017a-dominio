@@ -25,25 +25,6 @@ public class InicioSesion extends JFrame {
 	private JTextField textField;
 	private JPasswordField passwordField;
 
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					InicioSesion frame = new InicioSesion();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
-
-	/**
-	 * Create the frame.
-	 */
 	public InicioSesion(final Usuario user,final Semaphore sem) {
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -54,9 +35,8 @@ public class InicioSesion extends JFrame {
 
 			}
 		});
-		;/////
+
 		setTitle("Iniciar Sesion");
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -84,7 +64,6 @@ public class InicioSesion extends JFrame {
 				user.setPassword_usuario(passwordField.getText());
 				user.setOpcion(1);
 				sem.release();
-				//user.getSemaforo().release();
 				dispose();
 			}
 		});

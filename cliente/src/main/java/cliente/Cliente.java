@@ -5,7 +5,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.Scanner;
 import java.util.concurrent.Semaphore;
 import javax.swing.JOptionPane;
 
@@ -21,15 +20,21 @@ public class Cliente extends Thread {
 	private ObjectInputStream entrada;
 	private ObjectOutputStream salida;
 	private Semaphore semaforo;
-	private String nick;
 	private String sala;
 	private final Gson gson = new Gson();
 
-	public Cliente(String ip, int puerto) throws UnknownHostException, IOException {
-		cliente = new Socket(ip, puerto);
-		miIp = cliente.getInetAddress().getHostAddress();
-		salida = new ObjectOutputStream(cliente.getOutputStream());
-		entrada = new ObjectInputStream(cliente.getInputStream());
+	public Cliente(String ip, int puerto) {
+		try {
+			cliente = new Socket(ip, puerto);
+			miIp = cliente.getInetAddress().getHostAddress();
+			entrada = new ObjectInputStream(cliente.getInputStream());
+			salida = new ObjectOutputStream(cliente.getOutputStream());
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "Fallo al iniciar la aplicación. Revise la conexión con el servidor.");
+			System.exit(1);
+			e.printStackTrace();
+		}
+		
 		semaforo = new Semaphore(0);
 	}
 
@@ -43,7 +48,7 @@ public class Cliente extends Thread {
 			Personaje per = new Humano();
 			PaquetePersonaje pp = null;
 
-			while (opcion == false) {
+			while (!opcion) {
 				Semaphore sem = new Semaphore(0);
 				u1 = new Usuario(null, null, -1);
 				fr1 = new FrameInicial(u1, sem);
@@ -54,6 +59,7 @@ public class Cliente extends Thread {
 				paquete.setMensaje(Cliente.conversor(u1, u1.getClass()));
 
 				switch (u1.getAccion()) {
+				
 				case "registro":
 					paquete.setComando("registrar");
 					break;
@@ -71,7 +77,9 @@ public class Cliente extends Thread {
 				salida.writeObject(gson.toJson(paquete));
 
 				paquete = gson.fromJson((String) entrada.readObject(), Paquete.class);
+				
 				switch (paquete.getComando()) {
+				
 				case "estadoRegistro":
 					if (paquete.getMensaje().equals("1")) {
 
@@ -83,14 +91,14 @@ public class Cliente extends Thread {
 
 						salida.writeObject(gson.toJson(paquete));
 						salida.writeObject(per);
-						JOptionPane.showMessageDialog(null, "Registro exitoso");
+						JOptionPane.showMessageDialog(null, "Registro exitoso.");
 						per.setIdPersonaje((int) entrada.readObject());
 						opcion = true;
-						
+
 						pp = new PaquetePersonaje(per.getIdPersonaje(), per.getNombreRaza(), 0, 0, 0);
 					} else {
 						if (paquete.getMensaje().equals("0"))
-							JOptionPane.showMessageDialog(null, "No se pudo registrar");
+							JOptionPane.showMessageDialog(null, "No se pudo registrar.");
 						opcion = false;
 					}
 					break;
@@ -118,7 +126,7 @@ public class Cliente extends Thread {
 				}
 
 			}
-			
+
 			Semaphore sem = new Semaphore(0);
 			Paquete paquete = new Paquete(null, "mostrarMapas");
 			ElegirMapa em = new ElegirMapa(paquete, sem);
@@ -130,18 +138,16 @@ public class Cliente extends Thread {
 			Juego wome = new Juego("World Of the Middle Earth", 800, 600, this, pp);
 			wome.start();
 
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
+		} catch (IOException | InterruptedException | ClassNotFoundException e) {
+			JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor durante el inicio de sesión.");
+			System.exit(1);
 			e.printStackTrace();
 		}
 
 	}
 
 	public static void main(String args[]) throws UnknownHostException, IOException {
-		Cliente cliente = new Cliente("192.168.1.39", 9999);
+		Cliente cliente = new Cliente("localhost", 9999);
 		cliente.start();
 	}
 
@@ -189,14 +195,6 @@ public class Cliente extends Thread {
 		semaforo.release();
 	}
 
-	public String getNick() {
-		return nick;
-	}
-
-	public void setNick(String nick) {
-		this.nick = nick;
-	}
-
 	public static <T> String conversor(Object obj, Class<T> clazz) {
 		Gson gson = new Gson();
 		return gson.toJson(obj, clazz);
@@ -206,7 +204,7 @@ public class Cliente extends Thread {
 		Gson gson = new Gson();
 		return gson.fromJson(obj, clazz);
 	}
-	
+
 	public Semaphore getSemaforo() {
 		return semaforo;
 	}

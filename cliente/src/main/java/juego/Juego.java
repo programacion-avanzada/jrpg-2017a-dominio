@@ -1,13 +1,13 @@
 package juego;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+
+import javax.swing.JOptionPane;
 
 import cliente.Cliente;
 import cliente.EscuchaMensajes;
 import cliente.PaquetePersonaje;
-import entidades.Entidad;
 import estados.Estado;
 import estados.EstadoJuego;
 import recursos.Recursos;
@@ -155,6 +155,7 @@ public class Juego implements Runnable {
 			corriendo = false;
 			hilo.join();
 		} catch (InterruptedException e) {
+			JOptionPane.showMessageDialog(null, "Fallo al intentar detener el juego.");
 			e.printStackTrace();
 		}
 	}

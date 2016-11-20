@@ -6,7 +6,7 @@ import juego.Juego;
 
 public abstract class Estado {
 
-	private static Estado estadoActual = null; // Estado para saber que actualizacion realizar
+	private static Estado estadoActual = null; 
  
 	protected Juego juego;
 	

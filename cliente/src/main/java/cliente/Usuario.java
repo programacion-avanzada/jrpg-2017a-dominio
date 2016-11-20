@@ -1,43 +1,39 @@
 package cliente;
 
 import java.io.Serializable;
-import java.util.concurrent.Semaphore;
 
-public class Usuario implements Serializable{
+public class Usuario implements Serializable {
 
-	private String nombre_usuario;
-	private String password_usuario;
+	private String nombreUsuario;
+	private String password;
 	private int opcion;
 	private int idPj;
-	//private Semaphore semaforo;
 	private String accion;
-	
-	public Usuario(String nombre_usuario, String password_usuario, int idPj) {
-		this.nombre_usuario = nombre_usuario;
-		this.password_usuario = password_usuario;
-		this.opcion=-1;
-		this.idPj=idPj;
-		//this.semaforo = new Semaphore(0);
+
+	public Usuario(String nombreUsuario, String password, int idPj) {
+		this.nombreUsuario = nombreUsuario;
+		this.password = password;
+		this.opcion = -1;
+		this.idPj = idPj;
 	}
 
 	public Usuario() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getNombre_usuario() {
-		return nombre_usuario;
+		return nombreUsuario;
 	}
 
 	public void setNombre_usuario(String nombre_usuario) {
-		this.nombre_usuario = nombre_usuario;
+		this.nombreUsuario = nombre_usuario;
 	}
 
 	public String getPassword_usuario() {
-		return password_usuario;
+		return password;
 	}
 
 	public void setPassword_usuario(String password_usuario) {
-		this.password_usuario = password_usuario;
+		this.password = password_usuario;
 	}
 
 	public int getIdPj() {
@@ -48,14 +44,6 @@ public class Usuario implements Serializable{
 		this.idPj = idPj;
 	}
 
-	/*public Semaphore getSemaforo() {
-		return semaforo;
-	}
-
-	public void setSemaforo(Semaphore semaforo) {
-		this.semaforo = semaforo;
-	}*/
-	
 	public int getOpcion() {
 		return opcion;
 	}
@@ -71,8 +59,4 @@ public class Usuario implements Serializable{
 	public void setAccion(String accion) {
 		this.accion = accion;
 	}
-	
-	
-	
 }
-

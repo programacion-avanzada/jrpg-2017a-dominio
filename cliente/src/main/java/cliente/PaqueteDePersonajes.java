@@ -1,10 +1,7 @@
 package cliente;
 
-import java.awt.image.BufferedImage;
 import java.io.Serializable;
 import java.util.Map;
-
-import dominio.Mapa;
 
 public class PaqueteDePersonajes extends Paquete implements Serializable, Cloneable {
 

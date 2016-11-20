@@ -33,12 +33,12 @@ public class Recursos {
 	
 	// Entorno
 	public static BufferedImage cesped;
-	public static BufferedImage fuego;
+	public static BufferedImage roca;
 	public static BufferedImage background;
 	public static BufferedImage marco;
 	// Fin Entorno
 	
-	// Cargo todos los recursos una sola vez para no tener que hacerlo en cada actualizacion
+	// Se cargan todos los recursos del juego una sola vez al inicio
 	
 	public static void cargar() {
 		
@@ -155,7 +155,7 @@ public class Recursos {
 		
 		// Inicio Entorno
 		cesped = CargadorImagen.cargarImagen("/Cesped.png");
-		fuego = CargadorImagen.cargarImagen("/rock.png");
+		roca = CargadorImagen.cargarImagen("/rock.png");
 		background = CargadorImagen.cargarImagen("/background.jpg");
 		marco = CargadorImagen.cargarImagen("/marco.png");
 		// Fin Entorno

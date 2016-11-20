@@ -7,6 +7,7 @@ import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import com.google.gson.Gson;
 
@@ -16,8 +17,8 @@ import cliente.Paquete;
 public class Pantalla {
 
 	private JFrame pantalla;
-	private Canvas canvas; // Objeto donde se grafica el juego
-	
+	private Canvas canvas;
+
 	private final Gson gson = new Gson();
 
 	public Pantalla(final String NOMBRE, final int ANCHO, final int ALTO, final Cliente cliente) {
@@ -26,8 +27,8 @@ public class Pantalla {
 		pantalla.setResizable(false);
 		pantalla.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		pantalla.addWindowListener(new WindowAdapter() {
-			   public void windowClosing(WindowEvent evt) {
-				   try {
+			public void windowClosing(WindowEvent evt) {
+				try {
 					Paquete p = new Paquete();
 					p.setComando("desconectar");
 					p.setIp(cliente.getMiIp());
@@ -36,10 +37,12 @@ public class Pantalla {
 					cliente.getSalida().close();
 					System.exit(0);
 				} catch (IOException e) {
+					JOptionPane.showMessageDialog(null, "Fallo al intentar cerrar la aplicación.");
+					System.exit(1);
 					e.printStackTrace();
 				}
-			   }
-			  });
+			}
+		});
 
 		pantalla.setLocationRelativeTo(null);
 		pantalla.setVisible(true);
@@ -49,7 +52,7 @@ public class Pantalla {
 		canvas.setMaximumSize(new Dimension(ANCHO, ALTO));
 		canvas.setMinimumSize(new Dimension(ANCHO, ALTO));
 		canvas.setFocusable(false);
-		
+
 		pantalla.add(canvas);
 		pantalla.pack();
 	}
@@ -57,7 +60,7 @@ public class Pantalla {
 	public Canvas getCanvas() {
 		return canvas;
 	}
-	
+
 	public JFrame getFrame() {
 		return pantalla;
 	}

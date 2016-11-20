@@ -2,10 +2,10 @@ package mundo;
 
 import recursos.Recursos;
 
-public class TileFuego extends Tile {
+public class TileRoca extends Tile {
 	
-	public TileFuego(int id) {
-		super(Recursos.fuego, id);
+	public TileRoca(int id) {
+		super(Recursos.roca, id);
 	}
 	
 	@Override

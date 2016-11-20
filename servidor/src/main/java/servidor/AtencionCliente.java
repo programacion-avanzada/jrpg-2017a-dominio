@@ -115,21 +115,19 @@ public class AtencionCliente extends Thread {
 						pdp.setComando("conectado");
 						conectado.salida.writeObject(gson.toJson(pdp));
 					}
+					
 					break;
 
 				case "movimiento":
 					personaje = (PaquetePersonaje) (gson.fromJson((String) cadenaLeida, PaquetePersonaje.class));
-					System.out.println(personaje.getIp()  + " recibi movimiento ");
-							//.clone();
 					Servidor.getPersonajes().get(personaje.getIdPersonaje()).setPosX(personaje.getPosX());
 					Servidor.getPersonajes().get(personaje.getIdPersonaje()).setPosY(personaje.getPosY());
 					Servidor.getPersonajes().get(personaje.getIdPersonaje()).setDireccion(personaje.getDireccion());
 					Servidor.getPersonajes().get(personaje.getIdPersonaje()).setFrame(personaje.getFrame());
-
+					
 					for (AtencionCliente conectado : Servidor.getConectados()) {
 						PaquetePersonaje pj = (PaquetePersonaje)Servidor.getPersonajes().get(personaje.getIdPersonaje()).clone();
 						pj.setComando("movimiento");
-						System.out.println("Al cliente: " + conectado.getId() + " le envio " + gson.toJson(pdp));
 						conectado.salida.writeObject(gson.toJson(pdp));
 					}
 					break;

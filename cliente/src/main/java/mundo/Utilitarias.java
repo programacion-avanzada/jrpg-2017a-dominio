@@ -4,6 +4,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import javax.swing.JOptionPane;
+
+import juego.Juego;
+
 public class Utilitarias {
 
 	public static String archivoAString(String path) {
@@ -17,6 +21,7 @@ public class Utilitarias {
 				builder.append(linea + System.lineSeparator());
 			}
 		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "Fallo al intentar cargar el mapa " + path );
 			e.printStackTrace();
 		}
 

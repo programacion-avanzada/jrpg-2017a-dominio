@@ -35,26 +35,7 @@ public class Registro extends JFrame {
 	private JTextField textfield_usuario;
 	private JPasswordField passwordField;
 	private Cliente cli;
-	
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Registro frame = new Registro();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
 
-	/**
-	 * Create the frame.
-	 */
 	public Registro(final Usuario u1,final Semaphore sem) {
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -65,7 +46,7 @@ public class Registro extends JFrame {
 				
 			}
 		});
-	;
+		
 		setTitle("Registro de Usuario");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -93,13 +74,9 @@ public class Registro extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				u1.setNombre_usuario(textfield_usuario.getText());
 				u1.setPassword_usuario(passwordField.getText());
-			//	textfield_usuario.setText("");
-				//passwordField.setText("");
-				//setVisible(false);
 				u1.setAccion("registro");
 				u1.setOpcion(0);
 				sem.release();
-				//u1.getSemaforo().release();
 				dispose();
 			}
 		});
@@ -124,22 +101,4 @@ public class Registro extends JFrame {
 	public void setPasswordField(JPasswordField passwordField) {
 		this.passwordField = passwordField;
 	}
-
-	/*public String getUser() {
-		return user;
-	}
-
-	public void setUser(String user) {
-		this.user = user;
-	}
-
-	public String getPass() {
-		return pass;
-	}
-
-	public void setPass(String pass) {
-		this.pass = pass;
-	}*/
-	
-	
 }
