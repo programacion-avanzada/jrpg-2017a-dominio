@@ -20,20 +20,20 @@ public class Usuario implements Serializable {
 	public Usuario() {
 	}
 
-	public String getNombre_usuario() {
+	public String getNombreUsuario() {
 		return nombreUsuario;
 	}
 
-	public void setNombre_usuario(String nombre_usuario) {
-		this.nombreUsuario = nombre_usuario;
+	public void setNombreUsuario(String nombreUsuario) {
+		this.nombreUsuario = nombreUsuario;
 	}
 
-	public String getPassword_usuario() {
+	public String getPassword() {
 		return password;
 	}
 
-	public void setPassword_usuario(String password_usuario) {
-		this.password = password_usuario;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public int getIdPj() {

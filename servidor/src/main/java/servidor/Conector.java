@@ -14,17 +14,15 @@ import dominio.Personaje;
 public class Conector {
 
 	private String url = "primeraBase.bd";
-	// private String url = "C:\\Users\\Nicolas\\primeraBase.bd";
 	Connection connect;
 
 	public void connect() {
 		try {
+			Servidor.log.append("Estableciendo conexión con la base de datos..." + System.lineSeparator());
 			connect = DriverManager.getConnection("jdbc:sqlite:" + url);
-			if (connect != null) {
-				System.out.println("Conectado");
-			}
+			Servidor.log.append("Conexión con la base de datos establecida con éxito." + System.lineSeparator());
 		} catch (SQLException ex) {
-			System.err.println("No se ha podido conectar a la base de datos\n" + ex.getMessage());
+			Servidor.log.append("Fallo al intentar establecer la conexión con la base de datos. " + ex.getMessage() + System.lineSeparator());
 		}
 	}
 
@@ -32,34 +30,33 @@ public class Conector {
 		try {
 			connect.close();
 		} catch (SQLException ex) {
+			Servidor.log.append("Error al intentar cerrar la conexión con la base de datos." + System.lineSeparator());
 			Logger.getLogger(Conector.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
 
-	public boolean registrarUsuario(Usuario user) {// la tabla se llama registro
+	public boolean registrarUsuario(Usuario user) {
 		ResultSet result = null;
 		try {
 			PreparedStatement st1 = connect.prepareStatement("select * from registro where usuario= ? ");
-			st1.setString(1, user.getNombre_usuario());
+			st1.setString(1, user.getNombreUsuario());
 			result = st1.executeQuery();
 
 			if (!result.next()) {
 
-				PreparedStatement st = connect
-						.prepareStatement("insert into registro (usuario, password, idPersonaje) values (?,?,?)");
-				st.setString(1, user.getNombre_usuario());
-				st.setString(2, user.getPassword_usuario());
+				PreparedStatement st = connect.prepareStatement("insert into registro (usuario, password, idPersonaje) values (?,?,?)");
+				st.setString(1, user.getNombreUsuario());
+				st.setString(2, user.getPassword());
 				st.setInt(3, user.getIdPj());
 				st.execute();
-				// System.out.println("Se registro al usuario!");
+				Servidor.log.append("El usuario " + user.getNombreUsuario() + " se ha registrado." + System.lineSeparator());
 				return true;
 			} else {
-				// System.out.println("Ya se usa ese user");
 				return false;
 			}
 		} catch (SQLException ex) {
+			Servidor.log.append("El usuario " + user.getNombreUsuario() + " ya se encuentra en uso." + System.lineSeparator());
 			System.err.println(ex.getMessage());
-			// System.out.println("User repetido");
 			return false;
 		}
 
@@ -68,7 +65,6 @@ public class Conector {
 	public boolean registrarPersonaje(Personaje p1, Usuario u1) {
 
 		try {
-
 			PreparedStatement st = connect.prepareStatement(
 					"insert into personaje (idInventario, idMochila,casta,raza,fuerza,destreza,inteligencia,saludTope,energiaTope,nombre,experiencia,nivel,idAlianza) values (?,?,?,?,?,?,?,?,?,?,?,?,?)",
 					PreparedStatement.RETURN_GENERATED_KEYS);
@@ -91,20 +87,22 @@ public class Conector {
 			if (rs != null && rs.next()) {
 				int idPersonaje = rs.getInt(1);
 
-				p1.setIdPersonaje(idPersonaje);////
+				p1.setIdPersonaje(idPersonaje);
 
-				PreparedStatement st3 = connect
-						.prepareStatement("update registro set idPersonaje=? where usuario=? and password=?");
+				PreparedStatement st3 = connect.prepareStatement("update registro set idPersonaje=? where usuario=? and password=?");
 				st3.setInt(1, idPersonaje);
-				st3.setString(2, u1.getNombre_usuario());
-				st3.setString(3, u1.getPassword_usuario());
+				st3.setString(2, u1.getNombreUsuario());
+				st3.setString(3, u1.getPassword());
 				st3.execute();
-				if (this.registrarInventarioMochila(idPersonaje))
+				if (this.registrarInventarioMochila(idPersonaje)) {
+					Servidor.log.append("El usuario " + u1.getNombreUsuario() + " ha creado el personaje " + p1.getIdPersonaje() + System.lineSeparator());
 					return true;
+				}
 			}
 			return false;
 
 		} catch (SQLException e) {
+			Servidor.log.append("Error al intentar crear el personaje " + p1.getNombre() + System.lineSeparator());
 			e.printStackTrace();
 			return false;
 		}
@@ -112,9 +110,7 @@ public class Conector {
 	}
 
 	public boolean registrarInventarioMochila(int idInventarioMochila) {
-		ResultSet result = null;
 		try {
-
 			PreparedStatement st1 = connect.prepareStatement(
 					"insert into inventario(idInventario,manos1,manos2,pie,cabeza,pecho,accesorio) values (?,-1,-1,-1,-1,-1,-1)");
 			st1.setInt(1, idInventarioMochila);
@@ -135,10 +131,11 @@ public class Conector {
 
 			st3.execute();
 			st4.execute();
+			Servidor.log.append("Se ha registrado el inventario de " + idInventarioMochila + System.lineSeparator());
 			return true;
 
 		} catch (SQLException e) {
-
+			Servidor.log.append("Error al registrar el inventario de " + idInventarioMochila + System.lineSeparator());
 			e.printStackTrace();
 			return false;
 		}
@@ -149,62 +146,30 @@ public class Conector {
 		try {
 			PreparedStatement st = connect
 					.prepareStatement("select * from registro where usuario = ? AND password = ? ");
-			st.setString(1, user.getNombre_usuario());
-			st.setString(2, user.getPassword_usuario());
+			st.setString(1, user.getNombreUsuario());
+			st.setString(2, user.getPassword());
 			result = st.executeQuery();
 
 			if (result.next()) {
-				//System.out.println("Se logueo!");
+				Servidor.log.append("El usuario " + user.getNombreUsuario() + " ha iniciado sesión." + System.lineSeparator());
 				return true;
 			}
-			//System.out.println("No se logueo!");
 
 			return false;
 
 		} catch (SQLException e) {
+			Servidor.log.append("El usuario " + user.getNombreUsuario() + " fallo al iniciar sesión." + System.lineSeparator());
 			e.printStackTrace();
 			return false;
 		}
 
-	}
-
-	public void mostrarUsuarios() {
-		ResultSet result = null;
-		try {
-			PreparedStatement st = connect.prepareStatement("select * from registro");
-			result = st.executeQuery();
-			while (result.next()) {
-				System.out.print("Usuario:");
-				System.out.println(result.getString("usuario"));
-
-				System.out.print("Password: ");
-				System.out.println(result.getString("password"));
-
-				System.out.print("ID Personaje: ");
-				System.out.println(result.getInt("idPersonaje"));
-
-				System.out.println("=======================");
-			}
-		} catch (SQLException ex) {
-			System.err.println(ex.getMessage());
-		}
-	}
-
-	public void borrarRegistro() {
-		try {
-			PreparedStatement st = connect.prepareStatement("delete from registro");
-			st.executeQuery();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 
 	public PaquetePersonaje getPersonaje(Usuario user) {
 		ResultSet result = null;
 		try {
-			System.out.println("Usuario: " + user.getNombre_usuario());
 			PreparedStatement st = connect.prepareStatement("select * from registro where usuario = ?");
-			st.setString(1, user.getNombre_usuario());
+			st.setString(1, user.getNombreUsuario());
 			result = st.executeQuery();
 			int idPersonaje = result.getInt("idPersonaje");
 			

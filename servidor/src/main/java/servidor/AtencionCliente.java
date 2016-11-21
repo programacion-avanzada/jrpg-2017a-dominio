@@ -2,15 +2,7 @@ package servidor;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.Semaphore;
-
 import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
 
 import cliente.*;
 import dominio.*;
@@ -20,7 +12,6 @@ public class AtencionCliente extends Thread {
 	private final Socket socket;
 	private final ObjectInputStream entrada;
 	private final ObjectOutputStream salida;
-	private String salaCliente;
 	private PaquetePersonaje personaje;
 	private PaqueteDePersonajes pdp;
 	private final Gson gson = new Gson();
@@ -36,9 +27,6 @@ public class AtencionCliente extends Thread {
 
 			Paquete paquete;
 			Paquete paqueteSv = new Paquete(null, null);
-			Conector con;
-			Semaphore semaforo = new Semaphore(0);
-			Personaje p1 = new Humano(); // auxiliar para la BD
 			Usuario u1 = new Usuario();
 
 			String cadenaLeida = (String) entrada.readObject();
@@ -46,51 +34,39 @@ public class AtencionCliente extends Thread {
 
 			while (!((paquete = gson.fromJson(cadenaLeida, Paquete.class)).getComando().equals("desconectar"))){
 				switch (paquete.getComando()) {
+				
 				case "registrar":
-
-					con = new Conector();
-					con.connect();
 					paqueteSv.setComando("estadoRegistro");
 					u1 = (Usuario) Cliente.desconversor(paquete.getMensaje(), Usuario.class);
 
-					if (con.registrarUsuario(u1)) {
-						{
-
+					if (Servidor.getConector().registrarUsuario(u1)) {
 							paqueteSv.setMensaje("1");
 							salida.writeObject(gson.toJson(paqueteSv));
-							con.mostrarUsuarios();
-						}
 					} else {
 						paqueteSv.setMensaje("0");
 						salida.writeObject(false);
 					}
-					con.close();
 					break;
 
 				case "creacionPersonaje":
 					Personaje per;
-					con = new Conector();
-					con.connect();
 					per = (Personaje) entrada.readObject();
-					con.registrarPersonaje(per, u1);
+					Servidor.getConector().registrarPersonaje(per, u1);
 					salida.writeObject((int) per.getIdPersonaje());
 					break;
 
 				case "iniciarSesion":
-					con = new Conector();
-					con.connect();
 					paqueteSv.setComando("estadoInicioSesion");
-					if (con.loguearUsuario((Usuario) Cliente.desconversor(paquete.getMensaje(), Usuario.class))) {
+					if (Servidor.getConector().loguearUsuario((Usuario) Cliente.desconversor(paquete.getMensaje(), Usuario.class))) {
 						paqueteSv.setMensaje("1");
 						salida.writeObject(gson.toJson(paqueteSv));
-						PaquetePersonaje pp = con
+						PaquetePersonaje pp = Servidor.getConector()
 								.getPersonaje((Usuario) Cliente.desconversor(paquete.getMensaje(), Usuario.class));
 						salida.writeObject(gson.toJson(pp));
 					} else {
 						paqueteSv.setMensaje("0");
 						salida.writeObject(gson.toJson(paqueteSv));
 					}
-					con.close();
 					break;
 
 				case "salir":
@@ -133,11 +109,10 @@ public class AtencionCliente extends Thread {
 					break;
 
 				case "mostrarMapas":
-					System.out.println("MAPA ELEGIDO: " + paquete.getMensaje());
+					Servidor.log.append(paquete.getIp() + " ha elegido el mapa " + paquete.getMensaje() + System.lineSeparator());
 					break;
-					
-					
 				}
+				
 				cadenaLeida = (String) entrada.readObject();
 			}
 
@@ -154,13 +129,24 @@ public class AtencionCliente extends Thread {
 				conectado.salida.writeObject(gson.toJson(pdp));
 			}
 
-			System.out.println(paquete.getIp() + " se ha desconectado.");
+			Servidor.log.append(paquete.getIp() + " se ha desconectado." + System.lineSeparator());
 
-		} catch (IOException e) {
+		} catch (IOException | ClassNotFoundException e) {
+			Servidor.log.append("Error de conexion: " + e.getMessage() + System.lineSeparator());
 			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		} 
+	}
+	
+	public Socket getSocket() {
+		return socket;
+	}
+	
+	public ObjectInputStream getEntrada() {
+		return entrada;
+	}
+	
+	public ObjectOutputStream getSalida() {
+		return salida;
 	}
 }
 

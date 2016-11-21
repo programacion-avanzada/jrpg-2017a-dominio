@@ -72,8 +72,8 @@ public class Registro extends JFrame {
 		JButton btnRegistrarse = new JButton(" Registrarse");
 		btnRegistrarse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				u1.setNombre_usuario(textfield_usuario.getText());
-				u1.setPassword_usuario(passwordField.getText());
+				u1.setNombreUsuario(textfield_usuario.getText());
+				u1.setPassword(passwordField.getText());
 				u1.setAccion("registro");
 				u1.setOpcion(0);
 				sem.release();

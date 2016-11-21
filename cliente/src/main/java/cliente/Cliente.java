@@ -44,7 +44,6 @@ public class Cliente extends Thread {
 			Usuario u1;
 			FrameInicial fr1;
 			boolean opcion = false;
-			Personaje p1 = new Humano(); // auxiliar para la BD
 			Personaje per = new Humano();
 			PaquetePersonaje pp = null;
 
@@ -133,6 +132,7 @@ public class Cliente extends Thread {
 			em.setVisible(true);
 			sem.acquire();
 			pp.setMundo(Integer.parseInt(paquete.getMensaje()));
+			paquete.setIp(miIp);
 			salida.writeObject(gson.toJson(paquete));
 
 			Juego wome = new Juego("World Of the Middle Earth", 800, 600, this, pp);

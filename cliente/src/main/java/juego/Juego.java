@@ -38,15 +38,7 @@ public class Juego implements Runnable {
 	private Cliente cliente;
 	private EscuchaMensajes escuchaMensajes;
 	private PaquetePersonaje paquetePersonaje;
-	
-	public Juego(final String nombre, final int ancho, final int alto) {
-		this.NOMBRE = nombre;
-		this.ALTO = alto;
-		this.ANCHO = ancho;
 
-		handlerMouse = new HandlerMouse();
-	}
-	
 	public Juego(final String nombre, final int ancho, final int alto, Cliente cliente, PaquetePersonaje pp) {
 		this.NOMBRE = nombre;
 		this.ALTO = alto;

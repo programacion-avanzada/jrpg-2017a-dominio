@@ -60,8 +60,8 @@ public class InicioSesion extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				user.setAccion("inicioSesion");
-				user.setNombre_usuario(textField.getText());
-				user.setPassword_usuario(passwordField.getText());
+				user.setNombreUsuario(textField.getText());
+				user.setPassword(passwordField.getText());
 				user.setOpcion(1);
 				sem.release();
 				dispose();
