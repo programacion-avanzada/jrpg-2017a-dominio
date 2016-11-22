@@ -1,13 +1,27 @@
 package frames;
 
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 import cliente.*;
 
+import java.awt.GridLayout;
 import javax.swing.JTextField;
-
+import java.awt.FlowLayout;
+import javax.swing.BoxLayout;
+/*import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.forms.layout.FormSpecs;*/
 import javax.swing.JButton;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import java.awt.GridBagLayout;
+import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
@@ -15,14 +29,12 @@ import java.util.concurrent.Semaphore;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import javax.swing.ImageIcon;
-import java.awt.Font;
-import java.awt.Color;
 
 public class Registro extends JFrame {
 	
 	private JTextField textfield_usuario;
 	private JPasswordField passwordField;
+	private Cliente cli;
 
 	public Registro(final Usuario u1,final Semaphore sem) {
 		addWindowListener(new WindowAdapter() {
@@ -31,46 +43,33 @@ public class Registro extends JFrame {
 				u1.setAccion("cerrar");
 				sem.release();
 				setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				
 			}
 		});
 		
-		setTitle("WOME - Registrarse");
+		setTitle("Registro de Usuario");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLocationRelativeTo(null);
-		setResizable(false);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);
 		
-		JLabel lblRegistrarse = new JLabel("Registrarse");
-		lblRegistrarse.setForeground(Color.WHITE);
-		lblRegistrarse.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblRegistrarse.setBounds(186, 182, 82, 23);
-		getContentPane().add(lblRegistrarse);
-		
 		textfield_usuario = new JTextField();
-		textfield_usuario.setBounds(199, 69, 118, 20);
+		textfield_usuario.setBounds(171, 71, 86, 20);
 		getContentPane().add(textfield_usuario);
 		textfield_usuario.setColumns(10);
 		
-		JLabel lblUsuario = new JLabel("Usuario");
-		lblUsuario.setForeground(Color.WHITE);
-		lblUsuario.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblUsuario.setBounds(113, 70, 57, 19);
+		JLabel lblUsuario = new JLabel("  Usuario");
+		lblUsuario.setBounds(181, 53, 65, 14);
 		getContentPane().add(lblUsuario);
 		
 		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setForeground(Color.WHITE);
-		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblPassword.setBounds(113, 121, 65, 17);
+		lblPassword.setBounds(181, 118, 65, 14);
 		getContentPane().add(lblPassword);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(199, 120, 118, 20);
+		passwordField.setBounds(171, 133, 86, 20);
 		getContentPane().add(passwordField);
 		
-		JButton btnRegistrarse = new JButton("");
-		btnRegistrarse.setFocusable(false);
-		btnRegistrarse.setIcon(new ImageIcon(Registro.class.getResource("/frames/BotonMenu.png")));
+		JButton btnRegistrarse = new JButton(" Registrarse");
 		btnRegistrarse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				u1.setNombreUsuario(textfield_usuario.getText());
@@ -81,13 +80,8 @@ public class Registro extends JFrame {
 				dispose();
 			}
 		});
-		btnRegistrarse.setBounds(143, 182, 153, 23);
+		btnRegistrarse.setBounds(157, 194, 114, 23);
 		getContentPane().add(btnRegistrarse);
-		
-		JLabel labelBackground = new JLabel("");
-		labelBackground.setIcon(new ImageIcon(Registro.class.getResource("/frames/menuBackground.jpg")));
-		labelBackground.setBounds(0, 0, 444, 271);
-		getContentPane().add(labelBackground);
 		
 		
 	}

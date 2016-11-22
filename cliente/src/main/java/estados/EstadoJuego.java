@@ -15,16 +15,14 @@ import mundo.Mundo;
 import recursos.Recursos;
 
 public class EstadoJuego extends Estado {
-	
-	private Juego juego;
+
 	private Entidad personaje;
 	private Mundo mundo;
 	private final Gson gson = new Gson();
 
 	public EstadoJuego(Juego juego) {
 		super(juego);
-		this.juego = juego;
-		mundo = new Mundo(juego, getMundo());
+		mundo = new Mundo(juego, "recursos/mundo2.txt");
 		personaje = new Entidad(juego, mundo, 64, 64, 0, 0, Recursos.ogro, 150);
 
 		try {
@@ -66,19 +64,5 @@ public class EstadoJuego extends Estado {
 	
 	public Entidad getPersonaje() {
 		return personaje;
-	}
-	
-	private String getMundo() {
-		int mundo = juego.getPersonaje().getMundo();
-		
-		if(mundo == 1) {
-			return "recursos/Aubenor.txt";
-		} else if(mundo == 2) {
-			return "recursos/Aris.txt";
-		} else if(mundo == 3) {
-			return "recursos/Eodrim.txt";
-		}
-		
-		return null;
 	}
 }

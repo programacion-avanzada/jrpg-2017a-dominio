@@ -35,7 +35,6 @@ public class Pantalla {
 					cliente.getSalida().writeObject(gson.toJson(p));
 					cliente.getEntrada().close();
 					cliente.getSalida().close();
-					cliente.getSocket().close();
 					System.exit(0);
 				} catch (IOException e) {
 					JOptionPane.showMessageDialog(null, "Fallo al intentar cerrar la aplicación.");

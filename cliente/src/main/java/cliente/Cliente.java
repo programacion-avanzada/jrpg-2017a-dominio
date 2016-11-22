@@ -15,7 +15,7 @@ import frames.*;
 import juego.Juego;
 
 public class Cliente extends Thread {
-	private Socket socket;
+	private Socket cliente;
 	private String miIp;
 	private ObjectInputStream entrada;
 	private ObjectOutputStream salida;
@@ -25,10 +25,10 @@ public class Cliente extends Thread {
 
 	public Cliente(String ip, int puerto) {
 		try {
-			socket = new Socket(ip, puerto);
-			miIp = socket.getInetAddress().getHostAddress();
-			entrada = new ObjectInputStream(socket.getInputStream());
-			salida = new ObjectOutputStream(socket.getOutputStream());
+			cliente = new Socket(ip, puerto);
+			miIp = cliente.getInetAddress().getHostAddress();
+			entrada = new ObjectInputStream(cliente.getInputStream());
+			salida = new ObjectOutputStream(cliente.getOutputStream());
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "Fallo al iniciar la aplicación. Revise la conexión con el servidor.");
 			System.exit(1);
@@ -151,12 +151,12 @@ public class Cliente extends Thread {
 		cliente.start();
 	}
 
-	public Socket getSocket() {
-		return socket;
+	public Socket getCliente() {
+		return cliente;
 	}
 
-	public void setSocket(Socket socket) {
-		this.socket = socket;
+	public void setCliente(Socket cliente) {
+		this.cliente = cliente;
 	}
 
 	public String getMiIp() {
