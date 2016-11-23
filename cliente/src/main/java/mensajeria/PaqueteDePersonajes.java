@@ -1,4 +1,4 @@
-package cliente;
+package mensajeria;
 
 import java.io.Serializable;
 import java.util.Map;
@@ -21,11 +21,7 @@ public class PaqueteDePersonajes extends Paquete implements Serializable, Clonea
 
 	public Object clone() {
 		Object obj = null;
-		try {
-			obj = super.clone();
-		} catch (CloneNotSupportedException ex) {
-			ex.printStackTrace();
-		}
+		obj = super.clone();
 		return obj;
 	}
 

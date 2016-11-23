@@ -1,9 +1,15 @@
 package entidades;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.awt.font.FontRenderContext;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
@@ -11,11 +17,16 @@ import javax.swing.JOptionPane;
 import com.google.gson.Gson;
 
 import juego.Juego;
+import juego.Pantalla;
+import mensajeria.Comando;
+import mensajeria.PaqueteBatalla;
+import mensajeria.PaqueteMovimiento;
 import mundo.Grafo;
 import mundo.Mundo;
 import mundo.Nodo;
 import recursos.Recursos;
 import entidades.Animacion;
+import estados.Estado;
 
 public class Entidad {
 
@@ -83,6 +94,8 @@ public class Entidad {
 	private int[] tileMoverme;
 
 	private Mundo mundo;
+	private int[] tilePersonajes;
+	private int idEnemigo;
 
 	public Entidad(Juego juego, Mundo mundo, int ancho, int alto, float spawnX, float spawnY,
 			LinkedList<BufferedImage[]> animaciones, int velAnimacion) {
@@ -105,9 +118,17 @@ public class Entidad {
 		moverAbajoDer = new Animacion(velAnimacion, animaciones.get(5));
 		moverAbajo = new Animacion(velAnimacion, animaciones.get(6));
 		moverAbajoIzq = new Animacion(velAnimacion, animaciones.get(7));
+		
+		// Informo mi posicion actual
+		juego.getUbicacionPersonaje().setPosX(x);
+		juego.getUbicacionPersonaje().setPosY(y);
+		juego.getUbicacionPersonaje().setDireccion(getDireccion());
+		juego.getUbicacionPersonaje().setFrame(getFrame());
 	}
 
 	public void actualizar() {
+		
+		
 		if (enMovimiento) {
 			moverIzq.actualizar();
 			moverArribaIzq.actualizar();
@@ -130,6 +151,7 @@ public class Entidad {
 
 		getEntrada();
 		mover();
+		
 		juego.getCamara().Centrar(this);
 	}
 
@@ -144,6 +166,45 @@ public class Entidad {
 			juego.getHandlerMouse().setNuevoRecorrido(false);
 
 			pilaMovimiento = null;
+			
+			if (juego.getEstadoJuego().getHaySolicitud()) {
+				
+				if (posMouse[0] >= 200 && posMouse[0] < 400 && posMouse[1] >= 0 && posMouse[1] <= 25) {
+					
+					PaqueteBatalla pBatalla = new PaqueteBatalla();
+					
+					pBatalla.setId(juego.getPersonaje().getId());
+					pBatalla.setIdEnemigo(idEnemigo);
+					
+					juego.getEstadoJuego().setHaySolicitud(false);
+					
+					try {
+						juego.getCliente().getSalida().writeObject(gson.toJson(pBatalla));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					
+				}
+			} else {
+				
+				Iterator<Integer> it = juego.getEscuchaMensajes().getUbicacionPersonajes().keySet().iterator();
+				int key;
+				PaqueteMovimiento actual;
+				while (it.hasNext()) {
+					key = (int) it.next();
+					actual = juego.getEscuchaMensajes().getUbicacionPersonajes().get(key);
+					tilePersonajes = Mundo.mouseATile(actual.getPosX(), actual.getPosY());
+					if (actual.getIdPersonaje() != juego.getPersonaje().getId() && 
+							juego.getEscuchaMensajes().getPersonajesConectados().get(actual.getIdPersonaje()).getEstado() == Estado.estadoJuego) {
+						if (tileMoverme[0] == tilePersonajes[0] && tileMoverme[1] == tilePersonajes[1]) {
+							juego.getEstadoJuego().setHaySolicitud(true);
+							idEnemigo = actual.getIdPersonaje();
+						}
+					}
+				}
+			}
 
 		}
 
@@ -250,15 +311,15 @@ public class Entidad {
 				dx -= paso;
 				dy -= paso / 2;
 			}
-
+			
 			x += dx;
 			y += dy;
-
+			
+			// Le envio la posicion
 			if (intervaloEnvio == 2) {
 				enviarPosicion();
 				intervaloEnvio = 0;
 			}
-
 			intervaloEnvio++;
 
 			if (x == xFinal && y == yFinal - 32) {
@@ -272,9 +333,11 @@ public class Entidad {
 		drawY = (int) (y - juego.getCamara().getyOffset());
 		g.drawImage(getFrameAnimacionActual(), drawX, drawY, ancho, alto, null);
 		g.setColor(Color.WHITE);
-		g.drawString("<LosCacheFC>", drawX, drawY);
-		g.drawString("Leo - 100", drawX + 10, drawY - 12);
+		//g.drawString("<LosCacheFC>", drawX, drawY);
+		//g.drawString(juego.getPersonaje().getNombre(), drawX + 10, drawY - 12);
+		Pantalla.centerString(g, new java.awt.Rectangle(drawX + 32, drawY-20, 0, 10), juego.getPersonaje().getNombre());
 	}
+	
 
 	private BufferedImage getFrameAnimacionActual() {
 		if (movimientoHacia == horizontalIzq) {
@@ -325,13 +388,12 @@ public class Entidad {
 	}
 
 	private void enviarPosicion() {
-		juego.getPersonaje().setPosX(x);
-		juego.getPersonaje().setPosY(y);
-		juego.getPersonaje().setDireccion(getDireccion());
-		juego.getPersonaje().setFrame(getFrame());
-		juego.getPersonaje().setComando("movimiento");
+		juego.getUbicacionPersonaje().setPosX(x);
+		juego.getUbicacionPersonaje().setPosY(y);
+		juego.getUbicacionPersonaje().setDireccion(getDireccion());
+		juego.getUbicacionPersonaje().setFrame(getFrame());
 		try {
-			juego.getCliente().getSalida().writeObject(gson.toJson(juego.getPersonaje()));
+			juego.getCliente().getSalida().writeObject(gson.toJson(juego.getUbicacionPersonaje(), PaqueteMovimiento.class));
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor.");
 			e.printStackTrace();

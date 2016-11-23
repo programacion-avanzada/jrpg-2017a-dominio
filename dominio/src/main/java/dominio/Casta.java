@@ -29,10 +29,10 @@ public String getNombreCasta(){
 }
 
 
-
-public void setNombreCasta(String nombreCasta) {
-	this.nombreCasta = nombreCasta;
-}
+//
+//public void setNombreCasta(String nombreCasta) {
+//	this.nombreCasta = nombreCasta;
+//}
 
 public double getProbabilidadGolpeCritico() {
 	return probabilidadGolpeCritico;

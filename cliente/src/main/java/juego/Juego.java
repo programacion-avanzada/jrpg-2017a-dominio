@@ -1,5 +1,6 @@
 package juego;
 
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
@@ -7,9 +8,11 @@ import javax.swing.JOptionPane;
 
 import cliente.Cliente;
 import cliente.EscuchaMensajes;
-import cliente.PaquetePersonaje;
 import estados.Estado;
+import estados.EstadoBatalla;
 import estados.EstadoJuego;
+import mensajeria.PaqueteMovimiento;
+import mensajeria.PaquetePersonaje;
 import recursos.Recursos;
 
 public class Juego implements Runnable {
@@ -27,6 +30,7 @@ public class Juego implements Runnable {
 
 	// Estados
 	private Estado estadoJuego;
+	private Estado estadoBatalla;
 
 	// HandlerMouse
 	private HandlerMouse handlerMouse;
@@ -38,15 +42,23 @@ public class Juego implements Runnable {
 	private Cliente cliente;
 	private EscuchaMensajes escuchaMensajes;
 	private PaquetePersonaje paquetePersonaje;
+	private PaqueteMovimiento ubicacionPersonaje;
+	
 
 	public Juego(final String nombre, final int ancho, final int alto, Cliente cliente, PaquetePersonaje pp) {
 		this.NOMBRE = nombre;
 		this.ALTO = alto;
 		this.ANCHO = ancho;
 		this.cliente = cliente;
-		pp.setDireccion(6);
-		pp.setFrame(0);
 		this.paquetePersonaje = pp;
+		
+		// Inicializo la ubicacion del personaje 
+		ubicacionPersonaje = new PaqueteMovimiento();
+		ubicacionPersonaje.setIdPersonaje(paquetePersonaje.getId());
+		ubicacionPersonaje.setFrame(0);
+		ubicacionPersonaje.setDireccion(6);
+		
+		// Creo el escucha de mensajes
 		escuchaMensajes = new EscuchaMensajes(cliente);
 		escuchaMensajes.start();
 		
@@ -61,6 +73,8 @@ public class Juego implements Runnable {
 		Recursos.cargar();
 
 		estadoJuego = new EstadoJuego(this);
+		estadoBatalla = new EstadoBatalla(this);
+		
 		Estado.setEstado(estadoJuego);
 		
 		camara = new Camara(this, 0, 0);
@@ -86,9 +100,10 @@ public class Juego implements Runnable {
 		g.clearRect(0, 0, ANCHO, ALTO); // Limpiamos la pantalla
 
 		// Graficado de imagenes
-		
+		g.setFont(new Font("Book Antiqua",1,15));
+	
 		if (Estado.getEstado() != null) {
-			estadoJuego.graficar(g);
+			Estado.getEstado().graficar(g);
 		}
 
 		// Fin de graficado de imagenes
@@ -172,6 +187,10 @@ public class Juego implements Runnable {
 		return (EstadoJuego) estadoJuego;
 	}
 	
+	public EstadoBatalla getEstadoBatalla(){
+		return (EstadoBatalla) estadoBatalla;
+	}
+	
 	public Cliente getCliente() {
 		return cliente;
 	}
@@ -182,5 +201,9 @@ public class Juego implements Runnable {
 	
 	public PaquetePersonaje getPersonaje() {
 		return paquetePersonaje;
+	}
+	
+	public PaqueteMovimiento getUbicacionPersonaje(){
+		return ubicacionPersonaje;
 	}
 }

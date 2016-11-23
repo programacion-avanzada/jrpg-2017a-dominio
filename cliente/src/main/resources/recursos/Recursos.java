@@ -36,6 +36,7 @@ public class Recursos {
 	public static BufferedImage roca;
 	public static BufferedImage background;
 	public static BufferedImage marco;
+	public static BufferedImage botonMenu;
 	// Fin Entorno
 	
 	// Se cargan todos los recursos del juego una sola vez al inicio
@@ -158,6 +159,7 @@ public class Recursos {
 		roca = CargadorImagen.cargarImagen("/rock.png");
 		background = CargadorImagen.cargarImagen("/background.jpg");
 		marco = CargadorImagen.cargarImagen("/marco.png");
+		botonMenu = CargadorImagen.cargarImagen("/botonMenu.png");
 		// Fin Entorno
 	}
 }

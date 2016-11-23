@@ -20,14 +20,19 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import cliente.PaquetePersonaje;
+import mensajeria.PaqueteMovimiento;
+import mensajeria.PaquetePersonaje;
 
 public class Servidor extends Thread {
 
-	private static ArrayList<AtencionCliente> conectados = new ArrayList<>();
-	private static Map<Integer, PaquetePersonaje> personajes = new HashMap<>();
+	private static ArrayList<EscuchaCliente> clientesConectados = new ArrayList<>();
+	
+	private static Map<Integer, PaqueteMovimiento> ubicacionPersonajes = new HashMap<>();
+	private static Map<Integer, PaquetePersonaje> personajesConectados = new HashMap<>();
 
-	private static ServerSocket server;
+	private static Thread server;
+	
+	private static ServerSocket serverSocket;
 	private static Conector conexionDB;
 	private final int PUERTO = 9999;
 
@@ -37,6 +42,9 @@ public class Servidor extends Thread {
 	private final static int ANCHO_LOG = ANCHO - 25;
 
 	public static JTextArea log;
+	
+	public static AtencionConexiones atencionConexiones = new AtencionConexiones();
+	public static AtencionMovimientos atencionMovimientos = new AtencionMovimientos();;
 
 	public static void main(String[] args) {
 		cargarInterfaz();
@@ -62,13 +70,14 @@ public class Servidor extends Thread {
 		scroll.setBounds(10, 40, ANCHO_LOG, ALTO_LOG);
 		ventana.add(scroll);
 
-		JButton botonIniciar = new JButton();
-		JButton botonDetener = new JButton();
+		final JButton botonIniciar = new JButton();
+		final JButton botonDetener = new JButton();
 		botonIniciar.setText("Iniciar");
 		botonIniciar.setBounds(220, ALTO - 70, 100, 30);
 		botonIniciar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new Thread(new Servidor()).start();
+				server = new Thread(new Servidor());
+				server.start();
 				botonIniciar.setEnabled(false);
 				botonDetener.setEnabled(true);
 			}
@@ -81,12 +90,13 @@ public class Servidor extends Thread {
 		botonDetener.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					for (AtencionCliente cliente : conectados) {
+					server.stop();
+					for (EscuchaCliente cliente : clientesConectados) {
 						cliente.getSalida().close();
 						cliente.getEntrada().close();
 						cliente.getSocket().close();
 					}
-					server.close();
+					serverSocket.close();
 				} catch (IOException e1) {
 					log.append("Fallo al intentar detener el servidor." + System.lineSeparator());
 					e1.printStackTrace();
@@ -96,20 +106,21 @@ public class Servidor extends Thread {
 				botonIniciar.setEnabled(true);
 			}
 		});
-
+		botonDetener.setEnabled(false);
 		ventana.add(botonDetener);
 
 		ventana.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		ventana.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent evt) {
-				if (server != null) {
+				if (serverSocket != null) {
 					try {
-						for (AtencionCliente cliente : conectados) {
+						server.stop();
+						for (EscuchaCliente cliente : clientesConectados) {
 							cliente.getSalida().close();
 							cliente.getEntrada().close();
 							cliente.getSocket().close();
 						}
-						server.close();
+						serverSocket.close();
 					} catch (IOException e) {
 						log.append("Fallo al intentar detener el servidor." + System.lineSeparator());
 						e.printStackTrace();
@@ -129,23 +140,26 @@ public class Servidor extends Thread {
 		try {
 
 			log.append("Iniciando el servidor..." + System.lineSeparator());
-			server = new ServerSocket(PUERTO);
+			serverSocket = new ServerSocket(PUERTO);
 			log.append("Servidor esperando conexiones..." + System.lineSeparator());
 			String ipRemota;
 			conexionDB = new Conector();
 			conexionDB.connect();
+			
+			atencionConexiones.start();
+			atencionMovimientos.start();
 
 			while (true) {
-				Socket cliente = server.accept();
+				Socket cliente = serverSocket.accept();
 				ipRemota = cliente.getInetAddress().getHostAddress();
 				log.append(ipRemota + " se ha conectado" + System.lineSeparator());
 
 				ObjectOutputStream salida = new ObjectOutputStream(cliente.getOutputStream());
 				ObjectInputStream entrada = new ObjectInputStream(cliente.getInputStream());
 
-				AtencionCliente atencion = new AtencionCliente(ipRemota, cliente, entrada, salida);
+				EscuchaCliente atencion = new EscuchaCliente(ipRemota, cliente, entrada, salida);
 				atencion.start();
-				conectados.add(atencion);
+				clientesConectados.add(atencion);
 			}
 		} catch (Exception e) {
 			log.append("Fallo la conexión." + System.lineSeparator());
@@ -153,12 +167,16 @@ public class Servidor extends Thread {
 		}
 	}
 
-	public static ArrayList<AtencionCliente> getConectados() {
-		return conectados;
+	public static ArrayList<EscuchaCliente> getClientesConectados() {
+		return clientesConectados;
 	}
 
-	public static Map<Integer, PaquetePersonaje> getPersonajes() {
-		return personajes;
+	public static Map<Integer, PaqueteMovimiento> getUbicacionPersonajes() {
+		return ubicacionPersonajes;
+	}
+	
+	public static Map<Integer, PaquetePersonaje> getPersonajesConectados() {
+		return personajesConectados;
 	}
 
 	public static Conector getConector() {

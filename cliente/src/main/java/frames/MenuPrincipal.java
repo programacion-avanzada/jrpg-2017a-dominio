@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import cliente.*;
+import mensajeria.Comando;
 
 import javax.swing.BoxLayout;
 import javax.swing.JSplitPane;
@@ -18,20 +19,26 @@ import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class FrameInicial extends JFrame {
+public class MenuPrincipal extends JFrame {
 
 	private JPanel contentPane;
 
-	public FrameInicial(final Usuario u1,final Semaphore sem) {
+	public MenuPrincipal(final Cliente cliente) {
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		// En caso de cerrar la ventana
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-					u1.setAccion("salir");
-					sem.release();
-					setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				synchronized(cliente){
+					cliente.setAccion(Comando.SALIR);
+					cliente.notify();
+				}
+				dispose();
 			}
 		});
 		
+		// Propiedadesd de la ventana
 		setTitle("Inicio");
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -39,27 +46,30 @@ public class FrameInicial extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnNewButton = new JButton("Registrarse");
-		btnNewButton.addActionListener(new ActionListener() {
+		// Boton Registrarse
+		JButton btnRegistrar = new JButton("Registrarse");
+		btnRegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Registro r1 = new Registro (u1,sem);
-				r1.setVisible(true);
+				MenuRegistro menuRegistro = new MenuRegistro(cliente);
+				menuRegistro.setVisible(true);
 				dispose();
 			}
 		});
-		btnNewButton.setBounds(58, 119, 118, 23);
-		contentPane.add(btnNewButton);
+		btnRegistrar.setBounds(58, 119, 118, 23);
+		contentPane.add(btnRegistrar);
 		
-		JButton btnNewButton_1 = new JButton("Iniciar Sesion");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		// Boton Iniciar sesion
+		JButton btnIniciarSesion = new JButton("Iniciar Sesion");
+		btnIniciarSesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				InicioSesion is = new InicioSesion(u1,sem);
-				is.setVisible(true);
+				MenuInicioSesion menuInicioSesion = new MenuInicioSesion(cliente);
+				menuInicioSesion.setVisible(true);
 				dispose();
 			}
 		});
-		btnNewButton_1.setBounds(242, 119, 128, 23);
-		contentPane.add(btnNewButton_1);
+		btnIniciarSesion.setBounds(242, 119, 128, 23);
+		contentPane.add(btnIniciarSesion);
 	}
 }
+
 

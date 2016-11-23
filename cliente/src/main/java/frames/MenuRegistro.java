@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import cliente.*;
+import mensajeria.Comando;
 
 import java.awt.GridLayout;
 import javax.swing.JTextField;
@@ -30,34 +31,35 @@ import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class Registro extends JFrame {
+public class MenuRegistro extends JFrame {
 	
-	private JTextField textfield_usuario;
-	private JPasswordField passwordField;
+	private JTextField txtUsuario;
+	private JPasswordField pwPassword;
 	private Cliente cli;
 
-	public Registro(final Usuario u1,final Semaphore sem) {
+	public MenuRegistro(final Cliente cliente) {
+		
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				u1.setAccion("cerrar");
-				sem.release();
-				setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				
+				synchronized(cliente){
+					cliente.setAccion(Comando.SALIR);
+					cliente.notify();
+				}
+				dispose();
 			}
 		});
 		
 		setTitle("Registro de Usuario");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);
 		
-		textfield_usuario = new JTextField();
-		textfield_usuario.setBounds(171, 71, 86, 20);
-		getContentPane().add(textfield_usuario);
-		textfield_usuario.setColumns(10);
+		txtUsuario = new JTextField();
+		txtUsuario.setBounds(171, 71, 86, 20);
+		getContentPane().add(txtUsuario);
+		txtUsuario.setColumns(10);
 		
-		JLabel lblUsuario = new JLabel("  Usuario");
+		JLabel lblUsuario = new JLabel("Usuario");
 		lblUsuario.setBounds(181, 53, 65, 14);
 		getContentPane().add(lblUsuario);
 		
@@ -65,18 +67,19 @@ public class Registro extends JFrame {
 		lblPassword.setBounds(181, 118, 65, 14);
 		getContentPane().add(lblPassword);
 		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(171, 133, 86, 20);
-		getContentPane().add(passwordField);
+		pwPassword = new JPasswordField();
+		pwPassword.setBounds(171, 133, 86, 20);
+		getContentPane().add(pwPassword);
 		
-		JButton btnRegistrarse = new JButton(" Registrarse");
+		JButton btnRegistrarse = new JButton("Registrarse");
 		btnRegistrarse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				u1.setNombreUsuario(textfield_usuario.getText());
-				u1.setPassword(passwordField.getText());
-				u1.setAccion("registro");
-				u1.setOpcion(0);
-				sem.release();
+				synchronized(cliente){
+					cliente.getPaqueteUsuario().setUsername(txtUsuario.getText());
+					cliente.getPaqueteUsuario().setPassword(pwPassword.getText());
+					cliente.setAccion(Comando.REGISTRO);
+					cliente.notify();
+				}
 				dispose();
 			}
 		});
@@ -86,19 +89,19 @@ public class Registro extends JFrame {
 		
 	}
 
-	public JTextField getTextfield_usuario() {
-		return textfield_usuario;
+	public JTextField gettxtUsuario() {
+		return txtUsuario;
 	}
 
-	public void setTextfield_usuario(JTextField textfield_usuario) {
-		this.textfield_usuario = textfield_usuario;
+	public void settxtUsuario(JTextField txtUsuario) {
+		this.txtUsuario = txtUsuario;
 	}
 
 	public JPasswordField getPasswordField() {
-		return passwordField;
+		return pwPassword;
 	}
 
-	public void setPasswordField(JPasswordField passwordField) {
-		this.passwordField = passwordField;
+	public void setPasswordField(JPasswordField pwPassword) {
+		this.pwPassword = pwPassword;
 	}
 }

@@ -1,53 +1,39 @@
-package cliente;
+package mensajeria;
 
 import java.io.Serializable;
 
 import dominio.Mapa;
 
-public class PaquetePersonaje extends Paquete implements Serializable, Cloneable {
+public class PaqueteMovimiento extends Paquete implements Serializable, Cloneable {
 
-	private int idPersonaje;
-	private String nombreRaza;
-	private int mundo;
+	private int id;
 	private float posX;
 	private float posY;
 	private int direccion;
 	private int frame;
 
-	public PaquetePersonaje() {
-
+	public PaqueteMovimiento() {
+		setComando(Comando.MOVIMIENTO);
 	}
 
-	public PaquetePersonaje(int idPersonaje, String nombreRaza, int mundo, float posX, float posY) {
-		this.idPersonaje = idPersonaje;
-		this.nombreRaza = nombreRaza;
-		this.mundo = mundo;
+	public PaqueteMovimiento(int idPersonaje) {
+		id = idPersonaje;
+		setComando(Comando.MOVIMIENTO);
+	}
+	
+	public PaqueteMovimiento(int idPersonaje, float posX, float posY) {
+		this.id = idPersonaje;
 		this.posX = posX;
 		this.posY = posY;
+		setComando(Comando.MOVIMIENTO);
 	}
 
 	public int getIdPersonaje() {
-		return idPersonaje;
+		return id;
 	}
 
 	public void setIdPersonaje(int idPersonaje) {
-		this.idPersonaje = idPersonaje;
-	}
-
-	public String getNombreRaza() {
-		return nombreRaza;
-	}
-
-	public void setNombreRaza(String nombreRaza) {
-		this.nombreRaza = nombreRaza;
-	}
-
-	public int getMundo() {
-		return mundo;
-	}
-
-	public void setMundo(int mundo) {
-		this.mundo = mundo;
+		this.id = idPersonaje;
 	}
 
 	public float getPosX() {
@@ -84,11 +70,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 
 	public Object clone() {
 		Object obj = null;
-		try {
-			obj = super.clone();
-		} catch (CloneNotSupportedException ex) {
-			ex.printStackTrace();
-		}
+		obj = super.clone();
 		return obj;
 	}
 }

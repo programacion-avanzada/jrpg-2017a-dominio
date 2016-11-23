@@ -7,6 +7,11 @@ import juego.Juego;
 public abstract class Estado {
 
 	private static Estado estadoActual = null; 
+	
+	// Tipo de estados
+	public static int estadoOffline = 0;
+	public static int estadoJuego = 1;
+	public static int estadoBatalla = 2;
  
 	protected Juego juego;
 	

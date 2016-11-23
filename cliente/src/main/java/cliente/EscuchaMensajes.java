@@ -2,26 +2,32 @@ package cliente;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.concurrent.Semaphore;
 
 import javax.swing.JOptionPane;
-import javax.swing.plaf.synth.SynthSpinnerUI;
 
 import com.google.gson.Gson;
 
-import juego.Juego;
-import recursos.Recursos;
+import estados.Estado;
+import mensajeria.Comando;
+import mensajeria.Paquete;
+import mensajeria.PaqueteBatalla;
+import mensajeria.PaqueteDeMovimientos;
+import mensajeria.PaqueteDePersonajes;
+import mensajeria.PaqueteMovimiento;
+import mensajeria.PaquetePersonaje;
 
 public class EscuchaMensajes extends Thread {
 
 	private Cliente cliente;
 	private ObjectInputStream entrada;
 	private final Gson gson = new Gson();
-	private Map<Integer, PaquetePersonaje> personajes;
+	
+	private PaqueteBatalla paqueteBatalla;
+	
+	private Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
+	private Map<Integer, PaquetePersonaje> personajesConectados;
 
 	public EscuchaMensajes(Cliente cliente) {
 		this.cliente = cliente;
@@ -33,38 +39,48 @@ public class EscuchaMensajes extends Thread {
 		try {
 
 			Paquete paquete;
-			PaquetePersonaje personaje;
-			personajes = new HashMap<>();
+			PaqueteMovimiento personaje;
+			personajesConectados = new HashMap<>();
+			ubicacionPersonajes = new HashMap<>();
 
 			while (true) {
 				
 				String objetoLeido = (String)entrada.readObject();
+				
+				//System.out.println(objetoLeido);
 
 				paquete = gson.fromJson(objetoLeido , Paquete.class);
 				
 				switch (paquete.getComando()) {
-
-				case "conectado":
-					personajes = (Map<Integer, PaquetePersonaje>) gson.fromJson( objetoLeido, PaqueteDePersonajes.class).getPersonajes();
+	
+				case Comando.CONEXION:
+					personajesConectados = (Map<Integer, PaquetePersonaje>) gson.fromJson(objetoLeido, PaqueteDePersonajes.class).getPersonajes();
 					break;
 
-				case "movimiento":
-					personaje = (PaquetePersonaje) gson.fromJson( objetoLeido , Paquete.class);
-					personajes.get(personaje.getIdPersonaje()).setPosX(personaje.getPosX());
-					personajes.get(personaje.getIdPersonaje()).setPosY(personaje.getPosY());
-					personajes.get(personaje.getIdPersonaje()).setDireccion(personaje.getDireccion());
-					personajes.get(personaje.getIdPersonaje()).setDireccion(personaje.getDireccion());
+				case Comando.MOVIMIENTO:
+					ubicacionPersonajes = (Map<Integer, PaqueteMovimiento>) gson.fromJson(objetoLeido, PaqueteDeMovimientos.class).getPersonajes();
 					break;
+					
+				case Comando.BATALLA:
+					paqueteBatalla = gson.fromJson(objetoLeido, PaqueteBatalla.class);
+					cliente.getPaquetePersonaje().setEstado(Estado.estadoBatalla);
+					Estado.setEstado(cliente.getJuego().getEstadoBatalla());
+					break;
+					
 				}
 			}
-		} catch (IOException | ClassNotFoundException e) {
-			JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor.");
-			System.exit(1);
+		} catch (Exception e) {
+			//JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor.");
+			//System.exit(1);
 			e.printStackTrace();
 		}
 	}
 
-	public Map<Integer, PaquetePersonaje> getPersonajes() {
-		return personajes;
+	public Map<Integer, PaqueteMovimiento> getUbicacionPersonajes() {
+		return ubicacionPersonajes;
+	}
+	
+	public Map<Integer, PaquetePersonaje> getPersonajesConectados(){
+		return personajesConectados;
 	}
 }
