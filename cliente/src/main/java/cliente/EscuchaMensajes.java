@@ -42,6 +42,7 @@ public class EscuchaMensajes extends Thread {
 		try {
 
 			Paquete paquete;
+			PaquetePersonaje paquetePersonaje;
 			PaqueteMovimiento personaje;
 			PaqueteBatalla paqueteBatalla;
 			PaqueteAtacar paqueteAtacar;
@@ -84,7 +85,17 @@ public class EscuchaMensajes extends Thread {
 					juego.getPersonaje().setEstado(Estado.estadoJuego);
 					Estado.setEstado(juego.getEstadoJuego());
 					break;
-				}
+					
+				case Comando.ACTUALIZARPERSONAJE:
+					paquetePersonaje = (PaquetePersonaje) gson.fromJson(objetoLeido, PaquetePersonaje.class);
+					
+					if(juego.getPersonaje().getId() == paquetePersonaje.getId()) {
+						juego.setPersonaje((PaquetePersonaje) personajesConectados.get(juego.getPersonaje().getId()).clone());
+					}
+
+					personajesConectados.remove(paquetePersonaje.getId());
+					personajesConectados.put(paquetePersonaje.getId(), paquetePersonaje);
+				}	
 			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor.");

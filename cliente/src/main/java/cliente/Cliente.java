@@ -47,7 +47,6 @@ public class Cliente extends Thread {
 		this.accion = accion;
 	}
 	
-	//
 	private Juego wome;
 
 	public Cliente(String ip, int puerto) {
@@ -102,9 +101,7 @@ public class Cliente extends Thread {
 					// Recibo el paquete desde el servidor
 					String cadenaLeida = (String) entrada.readObject();
 					Paquete paquete = gson.fromJson(cadenaLeida, Paquete.class);
-					
-					System.out.println("Recibi " + cadenaLeida);
-					
+				
 					switch (paquete.getComando()) {
 					
 					case Comando.REGISTRO:
@@ -124,10 +121,7 @@ public class Cliente extends Thread {
 							
 							// Recibo el paquete personaje con los datos (la id incluida)
 							paquetePersonaje = (PaquetePersonaje) gson.fromJson((String) entrada.readObject(), PaquetePersonaje.class);
-							
-							
-							System.out.println("REGISTRO: Recibi " + cadenaLeida);
-							
+
 							// Indico que el usuario ya inicio sesion
 							paqueteUsuario.setInicioSesion(true);
 							
@@ -149,8 +143,6 @@ public class Cliente extends Thread {
 							
 							// Recibo el paquete personaje con los datos
 							paquetePersonaje = (PaquetePersonaje) gson.fromJson(cadenaLeida, PaquetePersonaje.class);
-							
-							System.out.println("INICIO SESION Recibi " + cadenaLeida);
 
 						} else {
 							if (paquete.getMensaje().equals(Paquete.msjFracaso))

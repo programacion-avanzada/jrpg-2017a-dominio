@@ -212,4 +212,8 @@ public class Juego implements Runnable {
 	public PaqueteMovimiento getUbicacionPersonaje(){
 		return ubicacionPersonaje;
 	}
+	
+	public void setPersonaje(PaquetePersonaje paquetePersonaje) {
+		this.paquetePersonaje = paquetePersonaje;
+	}
 }

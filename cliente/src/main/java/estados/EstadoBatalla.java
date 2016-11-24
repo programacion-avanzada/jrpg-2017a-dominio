@@ -22,6 +22,7 @@ import dominio.Orco;
 import dominio.Personaje;
 import entidades.Entidad;
 import juego.Juego;
+import mensajeria.Comando;
 import mensajeria.PaqueteAtacar;
 import mensajeria.PaqueteBatalla;
 import mensajeria.PaqueteFinalizarBatalla;
@@ -200,7 +201,7 @@ public class EstadoBatalla extends Estado {
 			drawBarra = (personaje.getExperiencia() * ANCHOBARRA) / Personaje.tablaDeNiveles[personaje.getNivel() + 1];
 		}
 		
-		g.setFont(new Font("Tahoma", Font.PLAIN, 7));
+		g.setFont(new Font("Tahoma", Font.PLAIN, 8));
 		g.drawImage(Recursos.barraExperiencia, 77, 62, drawBarra, ALTOEXPERIENCIA, null);
 		g.drawString(String.valueOf(personaje.getExperiencia()) + " / " + String.valueOf(Personaje.tablaDeNiveles[personaje.getNivel() + 1]), 132, 68);
 		g.setFont(new Font("Tahoma", Font.PLAIN, 10));
@@ -331,6 +332,28 @@ public class EstadoBatalla extends Estado {
 	private void finalizarBatalla() {
 		try {
 			juego.getCliente().getSalida().writeObject(gson.toJson(paqueteFinalizarBatalla));
+			
+			paquetePersonaje.setSaludTope(personaje.getSaludTope());
+			paquetePersonaje.setEnergiaTope(paquetePersonaje.getEnergiaTope());
+			paquetePersonaje.setNivel(personaje.getNivel());
+			paquetePersonaje.setExperiencia(personaje.getExperiencia());
+			paquetePersonaje.setDestreza(personaje.getDestreza());
+			paquetePersonaje.setFuerza(personaje.getFuerza());
+			paquetePersonaje.setInteligencia(personaje.getInteligencia());
+			
+			paqueteEnemigo.setSaludTope(enemigo.getSaludTope());
+			paqueteEnemigo.setEnergiaTope(enemigo.getEnergiaTope());
+			paqueteEnemigo.setNivel(enemigo.getNivel());
+			paqueteEnemigo.setExperiencia(enemigo.getExperiencia());
+			paqueteEnemigo.setDestreza(enemigo.getDestreza());
+			paqueteEnemigo.setFuerza(enemigo.getFuerza());
+			paqueteEnemigo.setInteligencia(enemigo.getInteligencia());
+			
+			paquetePersonaje.setComando(Comando.ACTUALIZARPERSONAJE);
+			paqueteEnemigo.setComando(Comando.ACTUALIZARPERSONAJE);
+			
+			juego.getCliente().getSalida().writeObject(gson.toJson(paquetePersonaje));
+			juego.getCliente().getSalida().writeObject(gson.toJson(paqueteEnemigo));
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor.");
 			e.printStackTrace();

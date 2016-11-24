@@ -24,6 +24,7 @@ public class EscuchaCliente extends Thread {
 	private final Socket socket;
 	private final ObjectInputStream entrada;
 	private final ObjectOutputStream salida;
+	private int idPersonaje;
 	private final Gson gson = new Gson();
 	
 	private PaquetePersonaje paquetePersonaje;
@@ -52,9 +53,7 @@ public class EscuchaCliente extends Thread {
 			String cadenaLeida = (String) entrada.readObject();
 		
 			while (!((paquete = gson.fromJson(cadenaLeida, Paquete.class)).getComando() == Comando.DESCONECTAR)){
-				
-				Servidor.log.append("Me llego " + cadenaLeida + " de " + socket.getInetAddress().getHostAddress() + System.lineSeparator());
-				
+								
 				switch (paquete.getComando()) {
 				
 				case Comando.REGISTRO:
@@ -101,6 +100,8 @@ public class EscuchaCliente extends Thread {
 						paquetePersonaje = Servidor.getConector().getPersonaje(paqueteUsuario);
 						paquetePersonaje.setComando(Comando.INICIOSESION);
 						paquetePersonaje.setMensaje(Paquete.msjExito);
+						idPersonaje = paquetePersonaje.getId();
+						
 						salida.writeObject(gson.toJson(paquetePersonaje));
 						
 					} else {
@@ -159,23 +160,23 @@ public class EscuchaCliente extends Thread {
 					break;
 					
 				case Comando.BATALLA:
-				
+					
 					// Le reenvio al id del personaje batallado que quieren pelear
 					paqueteBatalla = (PaqueteBatalla) gson.fromJson(cadenaLeida, PaqueteBatalla.class);
 					Servidor.log.append(paqueteBatalla.getId() + " quiere batallar con " + paqueteBatalla.getIdEnemigo() + System.lineSeparator());
 					
 					//seteo estado de batalla
 					Servidor.getPersonajesConectados().get(paqueteBatalla.getId()).setEstado(Estado.estadoBatalla);
+					Servidor.getPersonajesConectados().get(paqueteBatalla.getIdEnemigo()).setEstado(Estado.estadoBatalla);
 					paqueteBatalla.setMiTurno(true);
 					salida.writeObject(gson.toJson(paqueteBatalla));
 					for(EscuchaCliente conectado : Servidor.getClientesConectados()){
-						if(conectado.getPaquetePersonaje().getId() == paqueteBatalla.getIdEnemigo()){
+						if(conectado.getIdPersonaje() == paqueteBatalla.getIdEnemigo()){
 							int aux = paqueteBatalla.getId();
 							paqueteBatalla.setId(paqueteBatalla.getIdEnemigo());
 							paqueteBatalla.setIdEnemigo(aux);
 							paqueteBatalla.setMiTurno(false);
 							conectado.getSalida().writeObject(gson.toJson(paqueteBatalla));
-							Servidor.getPersonajesConectados().get(paqueteBatalla.getId()).setEstado(Estado.estadoBatalla);
 							break;
 						}
 					}
@@ -188,9 +189,8 @@ public class EscuchaCliente extends Thread {
 					
 				case Comando.ATACAR: 
 					paqueteAtacar = (PaqueteAtacar) gson.fromJson(cadenaLeida, PaqueteAtacar.class);
-
 					for(EscuchaCliente conectado : Servidor.getClientesConectados()) {
-						if(conectado.getPaquetePersonaje().getId() == paqueteAtacar.getIdEnemigo()) {
+						if(conectado.getIdPersonaje() == paqueteAtacar.getIdEnemigo()) {
 							conectado.getSalida().writeObject(gson.toJson(paqueteAtacar));
 						}
 					}
@@ -201,7 +201,7 @@ public class EscuchaCliente extends Thread {
 					Servidor.getPersonajesConectados().get(paqueteFinalizarBatalla.getId()).setEstado(Estado.estadoJuego);
 					Servidor.getPersonajesConectados().get(paqueteFinalizarBatalla.getIdEnemigo()).setEstado(Estado.estadoJuego);
 					for(EscuchaCliente conectado : Servidor.getClientesConectados()) {
-						if(conectado.getPaquetePersonaje().getId() == paqueteFinalizarBatalla.getIdEnemigo()) {
+						if(conectado.getIdPersonaje() == paqueteFinalizarBatalla.getIdEnemigo()) {
 							conectado.getSalida().writeObject(gson.toJson(paqueteFinalizarBatalla));
 						}
 					}
@@ -212,6 +212,24 @@ public class EscuchaCliente extends Thread {
 					
 					break;
 					
+				case Comando.ACTUALIZARPERSONAJE:
+					paquetePersonaje = (PaquetePersonaje) gson.fromJson(cadenaLeida, PaquetePersonaje.class);
+					Servidor.getConector().actualizarPersonaje(paquetePersonaje);
+					
+					Servidor.getPersonajesConectados().get(paquetePersonaje.getId()).setSaludTope(paquetePersonaje.getSaludTope());
+					Servidor.getPersonajesConectados().get(paquetePersonaje.getId()).setEnergiaTope(paquetePersonaje.getEnergiaTope());
+					Servidor.getPersonajesConectados().get(paquetePersonaje.getId()).setDestreza(paquetePersonaje.getDestreza());
+					Servidor.getPersonajesConectados().get(paquetePersonaje.getId()).setFuerza(paquetePersonaje.getFuerza());
+					Servidor.getPersonajesConectados().get(paquetePersonaje.getId()).setInteligencia(paquetePersonaje.getInteligencia());
+					Servidor.getPersonajesConectados().get(paquetePersonaje.getId()).setNivel(paquetePersonaje.getNivel());
+					Servidor.getPersonajesConectados().get(paquetePersonaje.getId()).setExperiencia(paquetePersonaje.getExperiencia());
+					
+					for(EscuchaCliente conectado : Servidor.getClientesConectados()) {
+						conectado.getSalida().writeObject(gson.toJson(paquetePersonaje));
+					}
+					
+					break;
+				
 				default:
 					break;
 				}
@@ -255,6 +273,10 @@ public class EscuchaCliente extends Thread {
 	
 	public PaquetePersonaje getPaquetePersonaje(){
 		return paquetePersonaje;
+	}
+	
+	public int getIdPersonaje() {
+		return idPersonaje;
 	}
 }
 

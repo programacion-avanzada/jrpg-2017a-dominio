@@ -2,6 +2,7 @@ package mensajeria;
 
 public class Comando {
 	
+	public static final int ACTUALIZARPERSONAJE = 11;
 	public static final int ATACAR = 9;
 	public static final int BATALLA = 8;
 	public static final int CONEXION = 0;
