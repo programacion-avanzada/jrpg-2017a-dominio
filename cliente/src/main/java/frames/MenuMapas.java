@@ -26,6 +26,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.concurrent.Semaphore;
 import java.awt.event.ActionEvent;
+import javax.swing.JLayeredPane;
 
 public class MenuMapas extends JFrame {
 
@@ -58,65 +59,43 @@ public class MenuMapas extends JFrame {
 		setLocationRelativeTo(null);
 		setResizable(false);
 		
-		// Mapa Aubenor
-		JLabel lblAubenor = new JLabel("Aubenor");
-		lblAubenor.setForeground(Color.WHITE);
-		lblAubenor.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblAubenor.setBounds(194, 73, 66, 23);
-		contentPane.add(lblAubenor);
-		
-		JButton btnAubenor = new JButton("");
-		btnAubenor.setFocusable(false);
-		btnAubenor.setIcon(new ImageIcon(MenuMapas.class.getResource("/frames/BotonMenu.png")));
-		btnAubenor.setBounds(148, 73, 143, 23);
-		btnAubenor.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				synchronized(cliente){
-					cliente.getPaquetePersonaje().setMapa(1);
-					cliente.notify();
-				}
-				dispose();
-			}
-		});
-
-		contentPane.add(btnAubenor);
+		JLayeredPane layeredPane = new JLayeredPane();
+		layeredPane.setBounds(0, 0, 444, 271);
+		contentPane.add(layeredPane);
 		
 		// Mapa Aris
 		JLabel lblAris = new JLabel("Aris");
+		lblAris.setBounds(204, 129, 32, 23);
+		layeredPane.add(lblAris, new Integer(2));
 		lblAris.setForeground(Color.WHITE);
 		lblAris.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblAris.setBounds(204, 130, 32, 23);
-		contentPane.add(lblAris);
 		
-		JButton btnAris = new JButton("");
-		btnAris.setFocusable(false);
-		btnAris.setIcon(new ImageIcon(MenuMapas.class.getResource("/frames/BotonMenu.png")));
-		btnAris.setBounds(148, 130, 143, 23);
-		btnAris.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				synchronized(cliente){
-					cliente.getPaquetePersonaje().setMapa(2);
-					cliente.notify();
-				}
-				dispose();
-			}
-		});
-		
-		btnAris.setEnabled(false);
-		contentPane.add(btnAris);
+		// Mapa Aubenor
+		JLabel lblAubenor = new JLabel("Aubenor");
+		lblAubenor.setBounds(191, 72, 66, 23);
+		layeredPane.add(lblAubenor, new Integer(2));
+		lblAubenor.setForeground(Color.WHITE);
+		lblAubenor.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
 		// Mapa Eodrim
 		JLabel lblEodrim = new JLabel("Eodrim");
+		lblEodrim.setBounds(198, 192, 53, 23);
+		layeredPane.add(lblEodrim, new Integer(2));
 		lblEodrim.setForeground(Color.WHITE);
 		lblEodrim.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblEodrim.setBounds(196, 191, 53, 23);
-		contentPane.add(lblEodrim);
+		
+		JButton btnAubenor = new JButton("");
+		btnAubenor.setBounds(148, 72, 143, 23);
+		layeredPane.add(btnAubenor, new Integer(1));
+		btnAubenor.setFocusable(false);
+		btnAubenor.setIcon(new ImageIcon(MenuMapas.class.getResource("/frames/BotonMenu.png")));
 		
 		JButton btnEodrim = new JButton("");
+		btnEodrim.setBounds(148, 192, 143, 23);
+		layeredPane.add(btnEodrim, new Integer(1));
 		btnEodrim.setFocusable(false);
 		btnEodrim.setEnabled(false);
 		btnEodrim.setIcon(new ImageIcon(MenuMapas.class.getResource("/frames/BotonMenu.png")));
-		btnEodrim.setBounds(148, 191, 143, 23);
 		btnEodrim.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				synchronized(cliente){
@@ -128,12 +107,37 @@ public class MenuMapas extends JFrame {
 		});
 		
 		btnEodrim.setEnabled(false);
-		contentPane.add(btnEodrim);
+		
+		JButton btnAris = new JButton("");
+		btnAris.setBounds(148, 130, 143, 23);
+		layeredPane.add(btnAris, new Integer(1));
+		btnAris.setFocusable(false);
+		btnAris.setIcon(new ImageIcon(MenuMapas.class.getResource("/frames/BotonMenu.png")));
+		btnAris.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				synchronized(cliente){
+					cliente.getPaquetePersonaje().setMapa(2);
+					cliente.notify();
+				}
+				dispose();
+			}
+		});
+		
+		btnAris.setEnabled(false);
 		
 		JLabel lblBackground = new JLabel("");
-		lblBackground.setIcon(new ImageIcon(MenuMapas.class.getResource("/frames/menuBackground.jpg")));
 		lblBackground.setBounds(0, 0, 444, 271);
-		contentPane.add(lblBackground);
+		layeredPane.add(lblBackground, new Integer(0));
+		lblBackground.setIcon(new ImageIcon(MenuMapas.class.getResource("/frames/menuBackground.jpg")));
+		btnAubenor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				synchronized(cliente){
+					cliente.getPaquetePersonaje().setMapa(1);
+					cliente.notify();
+				}
+				dispose();
+			}
+		});
 	}
 }
 

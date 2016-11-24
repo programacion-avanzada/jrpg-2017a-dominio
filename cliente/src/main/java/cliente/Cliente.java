@@ -136,7 +136,6 @@ public class Cliente extends Thread {
 	
 					case Comando.INICIOSESION:
 						if (paquete.getMensaje().equals(Paquete.msjExito)) {
-							JOptionPane.showMessageDialog(null, "Se pudo loguear");
 							
 							// El usuario ya inicio sesión
 							paqueteUsuario.setInicioSesion(true);
@@ -146,7 +145,7 @@ public class Cliente extends Thread {
 
 						} else {
 							if (paquete.getMensaje().equals(Paquete.msjFracaso))
-								JOptionPane.showMessageDialog(null, "No se pudo loguear");
+								JOptionPane.showMessageDialog(null, "Error al iniciar sesión. Revise el usuario y la contraseña");
 	
 							// El usuario no pudo iniciar sesión
 							paqueteUsuario.setInicioSesion(false);
