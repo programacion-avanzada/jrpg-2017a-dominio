@@ -1,7 +1,9 @@
 package recursos;
 
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 public class Recursos {
 
@@ -9,15 +11,18 @@ public class Recursos {
 	private static int ALTO; // Alto del frame a obtener
 	
 	// Inicio Personajes
-	public static LinkedList<BufferedImage[]> guerrero = new LinkedList<>();
-	private static BufferedImage[] guerreroIzq;
-	private static BufferedImage[] guerreroArribaIzq; 
-	private static BufferedImage[] guerreroArriba;
-	private static BufferedImage[] guerreroArribaDer;
-	private static BufferedImage[] guerreroDer;
-	private static BufferedImage[] guerreroAbajoDer;
-	private static BufferedImage[] guerreroAbajo;
-	private static BufferedImage[] guerreroAbajoIzq;
+	// Hash de imagenes para los personajes (humano, ogro, elfo)
+	public static Map<String, LinkedList<BufferedImage[]> > personaje = new HashMap<>();
+	
+	public static LinkedList<BufferedImage[]> humano = new LinkedList<>();
+	private static BufferedImage[] humanoIzq;
+	private static BufferedImage[] humanoArribaIzq; 
+	private static BufferedImage[] humanoArriba;
+	private static BufferedImage[] humanoArribaDer;
+	private static BufferedImage[] humanoDer;
+	private static BufferedImage[] humanoAbajoDer;
+	private static BufferedImage[] humanoAbajo;
+	private static BufferedImage[] humanoAbajoIzq;
 	 
 	
 	public static LinkedList<BufferedImage[]> ogro = new LinkedList<>();
@@ -29,6 +34,16 @@ public class Recursos {
 	private static BufferedImage[] ogroAbajoDer;
 	private static BufferedImage[] ogroAbajo;
 	private static BufferedImage[] ogroAbajoIzq; 
+	
+	public static LinkedList<BufferedImage[]> elfo = new LinkedList<>();
+	private static BufferedImage[] elfoIzq;
+	private static BufferedImage[] elfoArribaIzq;
+	private static BufferedImage[] elfoArriba;
+	private static BufferedImage[] elfoArribaDer;
+	private static BufferedImage[] elfoDer;
+	private static BufferedImage[] elfoAbajoDer;
+	private static BufferedImage[] elfoAbajo;
+	private static BufferedImage[] elfoAbajoIzq; 
 	// Fin Personajes
 	
 	// Entorno
@@ -52,59 +67,60 @@ public class Recursos {
 		
 		ANCHO = 256;
 		ALTO = 256;
-		// Inicio Guerrero
-		SpriteSheet spriteGuerrero = new SpriteSheet(CargadorImagen.cargarImagen("/Guerrero.png"));
 		
-		guerreroIzq = new BufferedImage[4];
-		guerreroArribaIzq = new BufferedImage[4];
-		guerreroArriba = new BufferedImage[4];
-		guerreroArribaDer = new BufferedImage[4];
-		guerreroDer = new BufferedImage[4];
-		guerreroAbajoDer = new BufferedImage[4];
-		guerreroAbajo = new BufferedImage[4];
-		guerreroAbajoIzq = new BufferedImage[4];
+		// Inicio humano
+		SpriteSheet spriteHumano = new SpriteSheet(CargadorImagen.cargarImagen("/Humano.png"));
+		
+		humanoIzq = new BufferedImage[4];
+		humanoArribaIzq = new BufferedImage[4];
+		humanoArriba = new BufferedImage[4];
+		humanoArribaDer = new BufferedImage[4];
+		humanoDer = new BufferedImage[4];
+		humanoAbajoDer = new BufferedImage[4];
+		humanoAbajo = new BufferedImage[4];
+		humanoAbajoIzq = new BufferedImage[4];
 		
 		for(int i = 0; i < 4; i++) {
-			guerreroIzq[i] = spriteGuerrero.getTile(ANCHO*i, 0, ANCHO, ALTO);
+			humanoIzq[i] = spriteHumano.getTile(ANCHO*i, 0, ANCHO, ALTO);
 		}
 		
 		for(int i = 0; i < 4; i++) {
-			guerreroArribaIzq[i] = spriteGuerrero.getTile(ANCHO*i, ALTO, ANCHO, ALTO);
+			humanoArribaIzq[i] = spriteHumano.getTile(ANCHO*i, ALTO, ANCHO, ALTO);
 		}
 		
 		for(int i = 0; i < 4; i++) {
-			guerreroArriba[i] = spriteGuerrero.getTile(ANCHO*i, ALTO*2, ANCHO, ALTO);
+			humanoArriba[i] = spriteHumano.getTile(ANCHO*i, ALTO*2, ANCHO, ALTO);
 		}
 		
 		for(int i = 0; i < 4; i++) {
-			guerreroArribaDer[i] = spriteGuerrero.getTile(ANCHO*i, ALTO*3, ANCHO, ALTO);
+			humanoArribaDer[i] = spriteHumano.getTile(ANCHO*i, ALTO*3, ANCHO, ALTO);
 		}
 		
 		for(int i = 0; i < 4; i++) {
-			guerreroDer[i] = spriteGuerrero.getTile(ANCHO*i, ALTO*4, ANCHO, ALTO);
+			humanoDer[i] = spriteHumano.getTile(ANCHO*i, ALTO*4, ANCHO, ALTO);
 		}
 		
 		for(int i = 0; i < 4; i++) {
-			guerreroAbajoDer[i] = spriteGuerrero.getTile(ANCHO*i, ALTO*5, ANCHO, ALTO);
+			humanoAbajoDer[i] = spriteHumano.getTile(ANCHO*i, ALTO*5, ANCHO, ALTO);
 		}
 		
 		for(int i = 0; i < 4; i++) {
-			guerreroAbajo[i] = spriteGuerrero.getTile(ANCHO*i, ALTO*6, ANCHO, ALTO);
+			humanoAbajo[i] = spriteHumano.getTile(ANCHO*i, ALTO*6, ANCHO, ALTO);
 		}
 		
 		for(int i = 0; i < 4; i++) {
-			guerreroAbajoIzq[i] = spriteGuerrero.getTile(ANCHO*i, ALTO*7, ANCHO, ALTO);
+			humanoAbajoIzq[i] = spriteHumano.getTile(ANCHO*i, ALTO*7, ANCHO, ALTO);
 		}
 		
-		 guerrero.add(guerreroIzq);
-		 guerrero.add(guerreroArribaIzq);
-		 guerrero.add(guerreroArriba);
-		 guerrero.add(guerreroArribaDer);
-		 guerrero.add(guerreroDer);
-		 guerrero.add(guerreroAbajoDer);
-		 guerrero.add(guerreroAbajo);
-		 guerrero.add(guerreroAbajoIzq);
-		 // Fin Guerrero
+		 humano.add(humanoIzq);
+		 humano.add(humanoArribaIzq);
+		 humano.add(humanoArriba);
+		 humano.add(humanoArribaDer);
+		 humano.add(humanoDer);
+		 humano.add(humanoAbajoDer);
+		 humano.add(humanoAbajo);
+		 humano.add(humanoAbajoIzq);
+		 // Fin humano
 		
 		// Inicio Ogro
 		SpriteSheet spriteOgro = new SpriteSheet(CargadorImagen.cargarImagen("/Ogro.png"));
@@ -160,6 +176,67 @@ public class Recursos {
 		ogro.add(ogroAbajoIzq);
 		
 		// Fin Ogro
+		
+		// Inicio Elfo
+		SpriteSheet spriteElfo = new SpriteSheet(CargadorImagen.cargarImagen("/Elfo.png"));
+		
+		elfoIzq = new BufferedImage[4];
+		elfoArribaIzq = new BufferedImage[4];
+		elfoArriba = new BufferedImage[4];
+		elfoArribaDer = new BufferedImage[4];
+		elfoDer = new BufferedImage[4];
+		elfoAbajoDer = new BufferedImage[4];
+		elfoAbajo = new BufferedImage[4];
+		elfoAbajoIzq = new BufferedImage[4];
+		
+		for(int i = 0; i < 4; i++) {
+			elfoIzq[i] = spriteElfo.getTile(ANCHO*i, 0, ANCHO, ALTO);
+		}
+		
+		for(int i = 0; i < 4; i++) {
+			elfoArribaIzq[i] = spriteElfo.getTile(ANCHO*i, ALTO, ANCHO, ALTO);
+		}
+		
+		for(int i = 0; i < 4; i++) {
+			elfoArriba[i] = spriteElfo.getTile(ANCHO*i, ALTO*2, ANCHO, ALTO);
+		}
+		
+		for(int i = 0; i < 4; i++) {
+			elfoArribaDer[i] = spriteElfo.getTile(ANCHO*i, ALTO*3, ANCHO, ALTO);
+		}
+		
+		for(int i = 0; i < 4; i++) {
+			elfoDer[i] = spriteElfo.getTile(ANCHO*i, ALTO*4, ANCHO, ALTO);
+		}
+		
+		for(int i = 0; i < 4; i++) {
+			elfoAbajoDer[i] = spriteElfo.getTile(ANCHO*i, ALTO*5, ANCHO, ALTO);
+		}
+		
+		for(int i = 0; i < 4; i++) {
+			elfoAbajo[i] = spriteElfo.getTile(ANCHO*i, ALTO*6, ANCHO, ALTO);
+		}
+		
+		for(int i = 0; i < 4; i++) {
+			elfoAbajoIzq[i] = spriteElfo.getTile(ANCHO*i, ALTO*7, ANCHO, ALTO);
+		}
+		
+		elfo.add(elfoIzq);
+		elfo.add(elfoArribaIzq);
+		elfo.add(elfoArriba);
+		elfo.add(elfoArribaDer);
+		elfo.add(elfoDer);
+		elfo.add(elfoAbajoDer);
+		elfo.add(elfoAbajo);
+		elfo.add(elfoAbajoIzq);
+		
+		// Fin Ogro
+		
+		// Agrego los pj al hash
+		personaje.put("Humano", humano);
+		personaje.put("Orco", ogro);
+		personaje.put("Elfo", elfo);
+		
 		
 		// Inicio Entorno
 		cesped = CargadorImagen.cargarImagen("/Cesped.png");
