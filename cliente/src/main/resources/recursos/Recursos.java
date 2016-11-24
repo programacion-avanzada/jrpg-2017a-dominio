@@ -25,15 +25,15 @@ public class Recursos {
 	private static BufferedImage[] humanoAbajoIzq;
 	 
 	
-	public static LinkedList<BufferedImage[]> ogro = new LinkedList<>();
-	private static BufferedImage[] ogroIzq;
-	private static BufferedImage[] ogroArribaIzq;
-	private static BufferedImage[] ogroArriba;
-	private static BufferedImage[] ogroArribaDer;
-	private static BufferedImage[] ogroDer;
-	private static BufferedImage[] ogroAbajoDer;
-	private static BufferedImage[] ogroAbajo;
-	private static BufferedImage[] ogroAbajoIzq; 
+	public static LinkedList<BufferedImage[]> orco = new LinkedList<>();
+	private static BufferedImage[] orcoIzq;
+	private static BufferedImage[] orcoArribaIzq;
+	private static BufferedImage[] orcoArriba;
+	private static BufferedImage[] orcoArribaDer;
+	private static BufferedImage[] orcoDer;
+	private static BufferedImage[] orcoAbajoDer;
+	private static BufferedImage[] orcoAbajo;
+	private static BufferedImage[] orcoAbajoIzq; 
 	
 	public static LinkedList<BufferedImage[]> elfo = new LinkedList<>();
 	private static BufferedImage[] elfoIzq;
@@ -56,6 +56,10 @@ public class Recursos {
 	
 	// Batalla
 	public static BufferedImage barraSpells;
+	public static BufferedImage estadoPersonaje;
+	public static BufferedImage barraSalud;
+	public static BufferedImage barraEnergia;
+	public static BufferedImage barraExperiencia;
 	public static BufferedImage habilidad1;
 	public static BufferedImage habilidad2;
 	public static BufferedImage habilidad3;
@@ -125,55 +129,55 @@ public class Recursos {
 		// Inicio Ogro
 		SpriteSheet spriteOgro = new SpriteSheet(CargadorImagen.cargarImagen("/Ogro.png"));
 		
-		ogroIzq = new BufferedImage[4];
-		ogroArribaIzq = new BufferedImage[4];
-		ogroArriba = new BufferedImage[4];
-		ogroArribaDer = new BufferedImage[4];
-		ogroDer = new BufferedImage[4];
-		ogroAbajoDer = new BufferedImage[4];
-		ogroAbajo = new BufferedImage[4];
-		ogroAbajoIzq = new BufferedImage[4];
+		orcoIzq = new BufferedImage[4];
+		orcoArribaIzq = new BufferedImage[4];
+		orcoArriba = new BufferedImage[4];
+		orcoArribaDer = new BufferedImage[4];
+		orcoDer = new BufferedImage[4];
+		orcoAbajoDer = new BufferedImage[4];
+		orcoAbajo = new BufferedImage[4];
+		orcoAbajoIzq = new BufferedImage[4];
 		
 		for(int i = 0; i < 4; i++) {
-			ogroIzq[i] = spriteOgro.getTile(ANCHO*i, 0, ANCHO, ALTO);
+			orcoIzq[i] = spriteOgro.getTile(ANCHO*i, 0, ANCHO, ALTO);
 		}
 		
 		for(int i = 0; i < 4; i++) {
-			ogroArribaIzq[i] = spriteOgro.getTile(ANCHO*i, ALTO, ANCHO, ALTO);
+			orcoArribaIzq[i] = spriteOgro.getTile(ANCHO*i, ALTO, ANCHO, ALTO);
 		}
 		
 		for(int i = 0; i < 4; i++) {
-			ogroArriba[i] = spriteOgro.getTile(ANCHO*i, ALTO*2, ANCHO, ALTO);
+			orcoArriba[i] = spriteOgro.getTile(ANCHO*i, ALTO*2, ANCHO, ALTO);
 		}
 		
 		for(int i = 0; i < 4; i++) {
-			ogroArribaDer[i] = spriteOgro.getTile(ANCHO*i, ALTO*3, ANCHO, ALTO);
+			orcoArribaDer[i] = spriteOgro.getTile(ANCHO*i, ALTO*3, ANCHO, ALTO);
 		}
 		
 		for(int i = 0; i < 4; i++) {
-			ogroDer[i] = spriteOgro.getTile(ANCHO*i, ALTO*4, ANCHO, ALTO);
+			orcoDer[i] = spriteOgro.getTile(ANCHO*i, ALTO*4, ANCHO, ALTO);
 		}
 		
 		for(int i = 0; i < 4; i++) {
-			ogroAbajoDer[i] = spriteOgro.getTile(ANCHO*i, ALTO*5, ANCHO, ALTO);
+			orcoAbajoDer[i] = spriteOgro.getTile(ANCHO*i, ALTO*5, ANCHO, ALTO);
 		}
 		
 		for(int i = 0; i < 4; i++) {
-			ogroAbajo[i] = spriteOgro.getTile(ANCHO*i, ALTO*6, ANCHO, ALTO);
+			orcoAbajo[i] = spriteOgro.getTile(ANCHO*i, ALTO*6, ANCHO, ALTO);
 		}
 		
 		for(int i = 0; i < 4; i++) {
-			ogroAbajoIzq[i] = spriteOgro.getTile(ANCHO*i, ALTO*7, ANCHO, ALTO);
+			orcoAbajoIzq[i] = spriteOgro.getTile(ANCHO*i, ALTO*7, ANCHO, ALTO);
 		}
 		
-		ogro.add(ogroIzq);
-		ogro.add(ogroArribaIzq);
-		ogro.add(ogroArriba);
-		ogro.add(ogroArribaDer);
-		ogro.add(ogroDer);
-		ogro.add(ogroAbajoDer);
-		ogro.add(ogroAbajo);
-		ogro.add(ogroAbajoIzq);
+		orco.add(orcoIzq);
+		orco.add(orcoArribaIzq);
+		orco.add(orcoArriba);
+		orco.add(orcoArribaDer);
+		orco.add(orcoDer);
+		orco.add(orcoAbajoDer);
+		orco.add(orcoAbajo);
+		orco.add(orcoAbajoIzq);
 		
 		// Fin Ogro
 		
@@ -234,7 +238,7 @@ public class Recursos {
 		
 		// Agrego los pj al hash
 		personaje.put("Humano", humano);
-		personaje.put("Orco", ogro);
+		personaje.put("Orco", orco);
 		personaje.put("Elfo", elfo);
 		
 		
@@ -248,6 +252,10 @@ public class Recursos {
 		
 		// Inicio Batalla
 		barraSpells = CargadorImagen.cargarImagen("/BarraSpells.png");
+		estadoPersonaje = CargadorImagen.cargarImagen("/EstadoPersonaje.png");
+		barraSalud = CargadorImagen.cargarImagen("/BarraDeSalud.png");
+		barraEnergia = CargadorImagen.cargarImagen("/BarraDeEnergia.png");
+		barraExperiencia = CargadorImagen.cargarImagen("/BarraDeExperiencia.png");
 		habilidad1 = CargadorImagen.cargarImagen("/habilidad1.png");
 		habilidad2 = CargadorImagen.cargarImagen("/habilidad2.png");
 		habilidad3 = CargadorImagen.cargarImagen("/habilidad3.png");

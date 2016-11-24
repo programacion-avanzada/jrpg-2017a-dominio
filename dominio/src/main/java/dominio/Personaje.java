@@ -38,7 +38,7 @@ public abstract class Personaje implements Peleable,Serializable {
 	protected int idPersonaje;
 	protected int itemManos = 0;
 	protected Alianza clan = null;
-	protected static int tablaDeNiveles[];
+	public static int tablaDeNiveles[];
 
 	public static void cargarTablaNivel() {
 		Personaje.tablaDeNiveles = new int[101];
@@ -73,8 +73,8 @@ public abstract class Personaje implements Peleable,Serializable {
 		if (casta instanceof Asesino)
 			destreza += 5;
 
-		saludTope = 50;
-		energiaTope = 50;
+		saludTope = 100;
+		energiaTope = 100;
 
 		ataque = this.calcularPuntosDeAtaque();
 		defensa = this.calcularPuntosDeDefensa();
@@ -186,7 +186,7 @@ public abstract class Personaje implements Peleable,Serializable {
 
 	public void setClan(Alianza clan) {
 		this.clan = clan;
-		clan.añadirPersonaje(this);//////////////////////
+		clan.añadirPersonaje(this);
 	}
 
 	public int getSalud() {
@@ -361,25 +361,7 @@ public abstract class Personaje implements Peleable,Serializable {
 		this.energia = this.energiaTope;
 	}
 
-	/*
-	 * public int calcularPuntosDeSalud() { int salud_items=0; Iterator<Item> it
-	 * = this.itemsEquipados.iterator(); while (it.hasNext()) salud_items +=
-	 * it.next().bono_salud;
-	 * System.out.println("Salud del pj: "+this.getSalud()+" Salud del item"
-	 * +salud_items); return (this.getSalud()+salud_items); } ////MAL
-	 * IMPLEMENTADOSSSSSSSSSSSSSSSSSSSSSSSS
-	 * 
-	 * public int calcularPuntosDeEnergia() { int energia_items=0;
-	 * Iterator<Item> it = this.itemsEquipados.iterator(); while (it.hasNext())
-	 * energia_items += it.next().bono_energia;
-	 * System.out.println("Energia del pj: "+this.getEnergia()
-	 * +" Energia del item:"+energia_items); return
-	 * (this.getEnergia()+energia_items); }
-	 */ // MAL IMPLEMENTADOSSSSSSSSSSSSSSSSSSSSSSSS
-
 	public void modificarAtributos() {
-		// this.salud=this.calcularPuntosDeSalud();
-		// this.energia=this.calcularPuntosDeEnergia();
 		this.ataque = this.calcularPuntosDeAtaque();
 		this.defensa = this.calcularPuntosDeDefensa();
 		this.magia = this.calcularPuntosDeMagia();
@@ -613,24 +595,6 @@ public abstract class Personaje implements Peleable,Serializable {
 		return false;
 	}
 
-	/*
-	 * public void asignarPuntos() { int puntos = this.nivel / 10 + 1; int
-	 * p_fuerza, p_inteligencia, p_destreza; System.out.println("Usted tiene " +
-	 * puntos + " puntos para repartir");
-	 * System.out.println("Ingrese los puntos a repartir entre F I D:"); Scanner
-	 * sc = new Scanner(System.in); while (puntos == this.nivel / 10 + 1) {
-	 * p_fuerza = sc.nextInt(); p_inteligencia = sc.nextInt(); p_destreza =
-	 * sc.nextInt(); if ((p_fuerza + p_inteligencia + p_destreza == puntos) &&
-	 * (this.fuerza + p_fuerza <= 200) && (this.inteligencia + p_inteligencia <=
-	 * 200) && (this.destreza + p_destreza <= 200)) { this.fuerza += p_fuerza;
-	 * this.inteligencia += p_inteligencia; this.destreza += p_destreza; puntos
-	 * = 0; } else System.out.println("ASIGNE BIEN LOS PUNTOS F I D:");
-	 * 
-	 * } sc.close();
-	 * 
-	 * }
-	 */
-
 	public void AsignarPuntosSkills(int fuerza, int destreza, int inteligencia) {
 		if (this.fuerza + fuerza <= 200)
 			this.fuerza += fuerza;
@@ -651,7 +615,6 @@ public abstract class Personaje implements Peleable,Serializable {
 		while (this.nivel != 100 && (this.experiencia >= Personaje.tablaDeNiveles[this.nivel+1] + acumuladorExperiencia)) {
 			acumuladorExperiencia += Personaje.tablaDeNiveles[this.nivel+1];
 			this.nivel++;
-			// this.asignarPuntos();
 			this.modificarAtributos();
 			this.saludTope += 25;
 			this.energiaTope += 20;

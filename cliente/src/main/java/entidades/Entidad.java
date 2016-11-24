@@ -198,8 +198,9 @@ public class Entidad {
 					key = (int) it.next();
 					actual = juego.getEscuchaMensajes().getUbicacionPersonajes().get(key);
 					tilePersonajes = Mundo.mouseATile(actual.getPosX(), actual.getPosY());
-					if (actual.getIdPersonaje() != juego.getPersonaje().getId() && 
+					if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId() && 
 							juego.getEscuchaMensajes().getPersonajesConectados().get(actual.getIdPersonaje()).getEstado() == Estado.estadoJuego) {
+						
 						if (tileMoverme[0] == tilePersonajes[0] && tileMoverme[1] == tilePersonajes[1]) {
 							juego.getEstadoJuego().setHaySolicitud(true);
 							idEnemigo = actual.getIdPersonaje();
@@ -358,7 +359,7 @@ public class Entidad {
 			return moverArribaDer.getFrameActual();
 		}
 
-		return Recursos.ogro.get(6)[0];
+		return Recursos.orco.get(6)[0];
 	}
 
 	private int getDireccion() {

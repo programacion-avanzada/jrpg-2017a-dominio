@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 
 import cliente.Cliente;
 import cliente.EscuchaMensajes;
+import dominio.Personaje;
 import estados.Estado;
 import estados.EstadoBatalla;
 import estados.EstadoJuego;
@@ -77,6 +78,8 @@ public class Juego implements Runnable {
 		estadoJuego = new EstadoJuego(this);
 		
 		Estado.setEstado(estadoJuego);
+		
+		Personaje.cargarTablaNivel();
 	}
 
 	private void actualizar() { // Actualiza los objetos y sus posiciones

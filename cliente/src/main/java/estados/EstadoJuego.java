@@ -25,6 +25,7 @@ public class EstadoJuego extends Estado {
 	private Entidad personaje;
 	private Mundo mundo;
 	private boolean haySolicitud;
+	
 	private final Gson gson = new Gson();
 
 	public EstadoJuego(Juego juego) {
@@ -68,17 +69,19 @@ public class EstadoJuego extends Estado {
 
 	public void graficarPersonajes(Graphics g) {
 		
-		if(juego.getEscuchaMensajes().getUbicacionPersonajes() != null){
-			Iterator<Integer> it = juego.getEscuchaMensajes().getUbicacionPersonajes().keySet().iterator();
+		if(juego.getEscuchaMensajes().getPersonajesConectados() != null){
+			Iterator<Integer> it = juego.getEscuchaMensajes().getPersonajesConectados().keySet().iterator();
 			int key;
 			PaqueteMovimiento actual;
 			g.setFont(new Font("Book Antiqua", 0, 15));
 			while (it.hasNext()) {
 				key = (int) it.next();
 				actual = juego.getEscuchaMensajes().getUbicacionPersonajes().get(key);
-				if (actual.getIdPersonaje() != juego.getPersonaje().getId() && juego.getEscuchaMensajes().getPersonajesConectados().get(actual.getIdPersonaje()).getEstado() == Estado.estadoJuego) {
-					Pantalla.centerString(g, new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset() + 32), (int) (actual.getPosY() - juego.getCamara().getyOffset() - 20 ), 0, 10), juego.getEscuchaMensajes().getPersonajesConectados().get(actual.getIdPersonaje()).getNombre());
-					g.drawImage(Recursos.personaje.get(juego.getEscuchaMensajes().getPersonajesConectados().get(actual.getIdPersonaje()).getRaza()).get(actual.getDireccion())[actual.getFrame()], (int) (actual.getPosX() - juego.getCamara().getxOffset() ), (int) (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
+				if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId() && juego.getEscuchaMensajes().getPersonajesConectados().get(actual.getIdPersonaje()).getEstado() == Estado.estadoJuego) {
+					if(juego.getEscuchaMensajes().getPersonajesConectados().get(actual.getIdPersonaje()).getEstado() == Estado.estadoJuego) {
+						Pantalla.centerString(g, new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset() + 32), (int) (actual.getPosY() - juego.getCamara().getyOffset() - 20 ), 0, 10), juego.getEscuchaMensajes().getPersonajesConectados().get(actual.getIdPersonaje()).getNombre());
+						g.drawImage(Recursos.personaje.get(juego.getEscuchaMensajes().getPersonajesConectados().get(actual.getIdPersonaje()).getRaza()).get(actual.getDireccion())[actual.getFrame()], (int) (actual.getPosX() - juego.getCamara().getxOffset() ), (int) (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
+					}
 				}
 			}
 		}

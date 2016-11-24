@@ -4,15 +4,17 @@ import java.io.Serializable;
 
 public class PaqueteAtacar extends Paquete implements Serializable, Cloneable {
 
-	int id;
-	int idEnemigo;
-	int nuevaSalud;
+	private int id;
+	private int idEnemigo;
+	private int nuevaSalud;
+	private int nuevaEnergia;
 	
-	public PaqueteAtacar(int id, int idEnemigo, int nuevaSalud) {
+	public PaqueteAtacar(int id, int idEnemigo, int nuevaSalud, int nuevaEnergia) {
 		setComando(Comando.ATACAR);
 		this.id = id;
 		this.idEnemigo = idEnemigo;
 		this.nuevaSalud = nuevaSalud;
+		this.nuevaEnergia = nuevaEnergia;
 	}
 
 	public int getId() {
@@ -37,5 +39,13 @@ public class PaqueteAtacar extends Paquete implements Serializable, Cloneable {
 
 	public void setNuevaSalud(int nuevaSalud) {
 		this.nuevaSalud = nuevaSalud;
+	}
+
+	public int getNuevaEnergia() {
+		return nuevaEnergia;
+	}
+
+	public void setNuevaEnergia(int nuevaEnergia) {
+		this.nuevaEnergia = nuevaEnergia;
 	}
 }
