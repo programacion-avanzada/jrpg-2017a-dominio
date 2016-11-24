@@ -58,8 +58,8 @@ public class EstadoBatalla extends Estado {
 		paquetePersonaje = juego.getEscuchaMensajes().getPersonajesConectados().get(paqueteBatalla.getId());
 		paqueteEnemigo = juego.getEscuchaMensajes().getPersonajesConectados().get(paqueteBatalla.getIdEnemigo());
 
-		entidadPersonaje = new Entidad(juego, mundo, 128, 128, paquetePersonaje.getNombre(), 0, 0, Recursos.ogro, 150);
-		entidadEnemigo = new Entidad(juego, mundo, 128, 128, paqueteEnemigo.getNombre(), 0, 0, Recursos.ogro, 150);
+		entidadPersonaje = new Entidad(juego, mundo, 128, 128, paquetePersonaje.getNombre(), 0, 0, Recursos.personaje.get(paquetePersonaje.getRaza()), 150);
+		entidadEnemigo = new Entidad(juego, mundo, 128, 128, paqueteEnemigo.getNombre(), 0, 0, Recursos.personaje.get(paqueteEnemigo.getRaza()), 150);
 
 		crearPersonajes();
 

@@ -30,7 +30,7 @@ public class EstadoJuego extends Estado {
 	public EstadoJuego(Juego juego) {
 		super(juego);
 		mundo = new Mundo(juego, "recursos/" + getMundo() + ".txt");
-		personaje = new Entidad(juego, mundo, 64, 64, juego.getPersonaje().getNombre(), 0, 0, Recursos.ogro, 150);
+		personaje = new Entidad(juego, mundo, 64, 64, juego.getPersonaje().getNombre(), 0, 0, Recursos.personaje.get(juego.getPersonaje().getRaza()), 150);
 
 		try {
 			// Le envio al servidor que me conecte al mapa y mi posicion
@@ -67,6 +67,7 @@ public class EstadoJuego extends Estado {
 	}
 
 	public void graficarPersonajes(Graphics g) {
+		
 		if(juego.getEscuchaMensajes().getUbicacionPersonajes() != null){
 			Iterator<Integer> it = juego.getEscuchaMensajes().getUbicacionPersonajes().keySet().iterator();
 			int key;
@@ -77,7 +78,7 @@ public class EstadoJuego extends Estado {
 				actual = juego.getEscuchaMensajes().getUbicacionPersonajes().get(key);
 				if (actual.getIdPersonaje() != juego.getPersonaje().getId() && juego.getEscuchaMensajes().getPersonajesConectados().get(actual.getIdPersonaje()).getEstado() == Estado.estadoJuego) {
 					Pantalla.centerString(g, new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset() + 32), (int) (actual.getPosY() - juego.getCamara().getyOffset() - 20 ), 0, 10), juego.getEscuchaMensajes().getPersonajesConectados().get(actual.getIdPersonaje()).getNombre());
-					g.drawImage(Recursos.ogro.get(actual.getDireccion())[actual.getFrame()], (int) (actual.getPosX() - juego.getCamara().getxOffset() ), (int) (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
+					g.drawImage(Recursos.personaje.get(juego.getEscuchaMensajes().getPersonajesConectados().get(actual.getIdPersonaje()).getRaza()).get(actual.getDireccion())[actual.getFrame()], (int) (actual.getPosX() - juego.getCamara().getxOffset() ), (int) (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
 				}
 			}
 		}
