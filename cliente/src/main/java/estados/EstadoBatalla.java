@@ -23,6 +23,7 @@ import juego.Juego;
 import mensajeria.Comando;
 import mensajeria.PaqueteAtacar;
 import mensajeria.PaqueteBatalla;
+import mensajeria.PaqueteFinalizarBatalla;
 import mensajeria.PaquetePersonaje;
 import mundo.Mundo;
 import recursos.Recursos;
@@ -35,13 +36,12 @@ public class EstadoBatalla extends Estado {
 	private Entidad entidadPersonaje;
 	private Entidad entidadEnemigo;
 	private int[] posMouse;
-	private PaqueteBatalla paqueteBatalla;
 	private PaquetePersonaje paquetePersonaje;
 	private PaquetePersonaje paqueteEnemigo;
 	private PaqueteAtacar paqueteAtacar;
+	private PaqueteFinalizarBatalla paqueteFinalizarBatalla;
 	private boolean miTurno;
 	private boolean haySpellSeleccionada;
-	private int valorAtaque;
 
 	private Gson gson = new Gson();
 
@@ -52,7 +52,6 @@ public class EstadoBatalla extends Estado {
 
 	public EstadoBatalla(Juego juego, PaqueteBatalla paqueteBatalla) {
 		super(juego);
-		this.paqueteBatalla = paqueteBatalla;
 		mundo = new Mundo(juego, "recursos/mundoBatalla.txt");
 		miTurno = paqueteBatalla.isMiTurno();
 
@@ -74,6 +73,10 @@ public class EstadoBatalla extends Estado {
 
 		XSPELLS = 3;
 		YSPELLS = juego.getAlto() - 60;
+		
+		paqueteFinalizarBatalla = new PaqueteFinalizarBatalla();
+		paqueteFinalizarBatalla.setId(personaje.getIdPersonaje());
+		paqueteFinalizarBatalla.setIdEnemigo(enemigo.getIdPersonaje());
 	}
 
 	@Override
@@ -116,7 +119,6 @@ public class EstadoBatalla extends Estado {
 
 				if (haySpellSeleccionada) {
 					if (!enemigo.estaVivo()) {
-						paqueteBatalla.setComando(Comando.FINALIZARBATALLA);
 						finalizarBatalla();
 						Estado.setEstado(juego.getEstadoJuego());
 					} else {
@@ -230,7 +232,7 @@ public class EstadoBatalla extends Estado {
 
 	private void finalizarBatalla() {
 		try {
-			juego.getCliente().getSalida().writeObject(gson.toJson(paqueteBatalla));
+			juego.getCliente().getSalida().writeObject(gson.toJson(paqueteFinalizarBatalla));
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor.");
 			e.printStackTrace();

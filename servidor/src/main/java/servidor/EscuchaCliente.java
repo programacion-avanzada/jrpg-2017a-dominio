@@ -201,7 +201,7 @@ public class EscuchaCliente extends Thread {
 					Servidor.getPersonajesConectados().get(paqueteFinalizarBatalla.getId()).setEstado(Estado.estadoJuego);
 					Servidor.getPersonajesConectados().get(paqueteFinalizarBatalla.getIdEnemigo()).setEstado(Estado.estadoJuego);
 					for(EscuchaCliente conectado : Servidor.getClientesConectados()) {
-						if(conectado.getPaquetePersonaje().getId() == paqueteAtacar.getIdEnemigo()) {
+						if(conectado.getPaquetePersonaje().getId() == paqueteFinalizarBatalla.getIdEnemigo()) {
 							conectado.getSalida().writeObject(gson.toJson(paqueteFinalizarBatalla));
 						}
 					}

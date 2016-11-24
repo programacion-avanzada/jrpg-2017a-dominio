@@ -29,7 +29,7 @@ public class EstadoJuego extends Estado {
 
 	public EstadoJuego(Juego juego) {
 		super(juego);
-		mundo = new Mundo(juego, "recursos/mundo2.txt");
+		mundo = new Mundo(juego, "recursos/" + getMundo() + ".txt");
 		personaje = new Entidad(juego, mundo, 64, 64, juego.getPersonaje().getNombre(), 0, 0, Recursos.ogro, 150);
 
 		try {
@@ -71,17 +71,12 @@ public class EstadoJuego extends Estado {
 			Iterator<Integer> it = juego.getEscuchaMensajes().getUbicacionPersonajes().keySet().iterator();
 			int key;
 			PaqueteMovimiento actual;
-			g.setFont(new Font("Book Antiqua",0,15));
+			g.setFont(new Font("Book Antiqua", 0, 15));
 			while (it.hasNext()) {
 				key = (int) it.next();
 				actual = juego.getEscuchaMensajes().getUbicacionPersonajes().get(key);
-				if (actual.getIdPersonaje() != juego.getPersonaje().getId() && 
-						juego.getEscuchaMensajes().getPersonajesConectados().get(actual.getIdPersonaje()).getEstado() == Estado.estadoJuego) {
-					
-					Pantalla.centerString(g, new Rectangle(
-							(int) (actual.getPosX() - juego.getCamara().getxOffset() + 32), (int) (actual.getPosY() - juego.getCamara().getyOffset() - 20 ), 0, 10), 
-							juego.getEscuchaMensajes().getPersonajesConectados().get(actual.getIdPersonaje()).getNombre());
-					
+				if (actual.getIdPersonaje() != juego.getPersonaje().getId() && juego.getEscuchaMensajes().getPersonajesConectados().get(actual.getIdPersonaje()).getEstado() == Estado.estadoJuego) {
+					Pantalla.centerString(g, new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset() + 32), (int) (actual.getPosY() - juego.getCamara().getyOffset() - 20 ), 0, 10), juego.getEscuchaMensajes().getPersonajesConectados().get(actual.getIdPersonaje()).getNombre());
 					g.drawImage(Recursos.ogro.get(actual.getDireccion())[actual.getFrame()], (int) (actual.getPosX() - juego.getCamara().getxOffset() ), (int) (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
 				}
 			}
@@ -90,6 +85,20 @@ public class EstadoJuego extends Estado {
 	
 	public Entidad getPersonaje() {
 		return personaje;
+	}
+	
+	private String getMundo() {
+		int mundo = juego.getPersonaje().getMapa();
+
+		if (mundo == 1) {
+			return "Aubenor";
+		} else if (mundo == 2) {
+			return "Aris";
+		} else if (mundo == 3) {
+			return "Eodrim";
+		}
+
+		return null;
 	}
 	
 	public void setHaySolicitud(boolean b) {
