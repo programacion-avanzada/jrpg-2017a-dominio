@@ -47,28 +47,8 @@ public class NonPlayableCharacter implements Peleable {
 			break;
 
 		}
-		System.out.println("Fuerza: " + this.fuerza + " Salud: " + this.salud + " Defensa: " + this.defensa);
 	}
-
-	/*
-	 * public NonPlayableCharacter(int nivel,Item[] itemsDropeables) {
-	 * this.nivel=nivel; this.itemsDropeables=itemsDropeables; Random rnd = new
-	 * Random(); int dificultad = rnd.nextInt(3);//hago que los atrib sean al
-	 * azar,y dependientes del lvl if(dificultad==0) this.salud=this.nivel*100;
-	 * if(dificultad==1) this.salud=this.nivel*150; if(dificultad==2)
-	 * this.salud=this.nivel*200;
-	 * 
-	 * dificultad = rnd.nextInt(3); if(dificultad==0)
-	 * this.fuerza=this.nivel*100; if(dificultad==1) this.fuerza=this.nivel*150;
-	 * if(dificultad==2) this.fuerza=this.nivel*200;
-	 * 
-	 * dificultad = rnd.nextInt(3); if(dificultad==0)
-	 * this.defensa=this.nivel*100; if(dificultad==1)
-	 * this.defensa=this.nivel*150; if(dificultad==2)
-	 * this.defensa=this.nivel*200;
-	 * System.out.println("Fuerza: "+this.fuerza+" Defensa: "+this.
-	 * defensa+" Salud: "+this.salud); }
-	 */
+		
 
 	public int otorgarExp() {
 		return this.nivel * 30;

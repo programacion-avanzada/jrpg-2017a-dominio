@@ -16,9 +16,7 @@ public class TestNPC {
 		Humano h = new Humano("Nico", 100, 100, 1000, 20, 30, new Asesino(0.2, 0.3, 1.5), new LinkedList<Item>(),
 				new LinkedList<Item>(), 0, 1, 1);
 
-		if (h.atacar(npc) != 0)
-			Assert.assertFalse(npc.estaVivo());
-		else
+		
 			Assert.assertTrue(npc.estaVivo());
 
 	}
