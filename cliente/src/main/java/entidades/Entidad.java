@@ -94,14 +94,16 @@ public class Entidad {
 	private int[] tileMoverme;
 
 	private Mundo mundo;
+	private String nombre;
 	private int[] tilePersonajes;
 	private int idEnemigo;
 
-	public Entidad(Juego juego, Mundo mundo, int ancho, int alto, float spawnX, float spawnY,
+	public Entidad(Juego juego, Mundo mundo, int ancho, int alto, String nombre, float spawnX, float spawnY,
 			LinkedList<BufferedImage[]> animaciones, int velAnimacion) {
 		this.juego = juego;
 		this.ancho = ancho;
 		this.alto = alto;
+		this.nombre = nombre;
 		this.mundo = mundo;
 		xOffset = ancho / 2;
 		yOffset = alto / 2;
@@ -168,30 +170,30 @@ public class Entidad {
 			pilaMovimiento = null;
 			
 			if (juego.getEstadoJuego().getHaySolicitud()) {
-				
-				if (posMouse[0] >= 200 && posMouse[0] < 400 && posMouse[1] >= 0 && posMouse[1] <= 25) {
-					
-					PaqueteBatalla pBatalla = new PaqueteBatalla();
-					
-					pBatalla.setId(juego.getPersonaje().getId());
-					pBatalla.setIdEnemigo(idEnemigo);
-					
-					juego.getEstadoJuego().setHaySolicitud(false);
-					
-					try {
-						juego.getCliente().getSalida().writeObject(gson.toJson(pBatalla));
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+				if(posMouse[1] >= 0 && posMouse[1] <= 25) {
+					if (posMouse[0] >= 200 && posMouse[0] <= 400) {
+						PaqueteBatalla pBatalla = new PaqueteBatalla();
+						
+						pBatalla.setId(juego.getPersonaje().getId());
+						pBatalla.setIdEnemigo(idEnemigo);
+						
+						juego.getEstadoJuego().setHaySolicitud(false);
+						
+						try {
+							juego.getCliente().getSalida().writeObject(gson.toJson(pBatalla));
+						} catch (IOException e) {
+							JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor");
+							e.printStackTrace();
+						}
+					} else if(posMouse[0] >= 430 && posMouse[0] <= 630) {
+						juego.getEstadoJuego().setHaySolicitud(false);
 					}
-					
-					
 				}
 			} else {
-				
 				Iterator<Integer> it = juego.getEscuchaMensajes().getUbicacionPersonajes().keySet().iterator();
 				int key;
 				PaqueteMovimiento actual;
+				
 				while (it.hasNext()) {
 					key = (int) it.next();
 					actual = juego.getEscuchaMensajes().getUbicacionPersonajes().get(key);
@@ -333,9 +335,7 @@ public class Entidad {
 		drawY = (int) (y - juego.getCamara().getyOffset());
 		g.drawImage(getFrameAnimacionActual(), drawX, drawY, ancho, alto, null);
 		g.setColor(Color.WHITE);
-		//g.drawString("<LosCacheFC>", drawX, drawY);
-		//g.drawString(juego.getPersonaje().getNombre(), drawX + 10, drawY - 12);
-		Pantalla.centerString(g, new java.awt.Rectangle(drawX + 32, drawY-20, 0, 10), juego.getPersonaje().getNombre());
+		Pantalla.centerString(g, new java.awt.Rectangle(drawX + 32, drawY - 20, 0, 10), nombre);
 	}
 	
 

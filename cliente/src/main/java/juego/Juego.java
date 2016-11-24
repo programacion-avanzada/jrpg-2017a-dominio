@@ -59,7 +59,7 @@ public class Juego implements Runnable {
 		ubicacionPersonaje.setDireccion(6);
 		
 		// Creo el escucha de mensajes
-		escuchaMensajes = new EscuchaMensajes(cliente);
+		escuchaMensajes = new EscuchaMensajes(this);
 		escuchaMensajes.start();
 		
 		handlerMouse = new HandlerMouse();
@@ -72,12 +72,11 @@ public class Juego implements Runnable {
 
 		Recursos.cargar();
 
+		camara = new Camara(this, 0, 0);
+		
 		estadoJuego = new EstadoJuego(this);
-		estadoBatalla = new EstadoBatalla(this);
 		
 		Estado.setEstado(estadoJuego);
-		
-		camara = new Camara(this, 0, 0);
 	}
 
 	private void actualizar() { // Actualiza los objetos y sus posiciones
@@ -189,6 +188,10 @@ public class Juego implements Runnable {
 	
 	public EstadoBatalla getEstadoBatalla(){
 		return (EstadoBatalla) estadoBatalla;
+	}
+	
+	public void setEstadoBatalla(EstadoBatalla estadoBatalla){
+		this.estadoBatalla = estadoBatalla;
 	}
 	
 	public Cliente getCliente() {

@@ -1,6 +1,7 @@
 package cliente;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -203,10 +204,17 @@ public class Cliente extends Thread {
 
 	}
 
-	public static void main(String args[]) throws UnknownHostException, IOException {
-		Scanner sc = new Scanner(new File("config.txt"));
-		Cliente cliente = new Cliente(sc.next(), 9999);
-		cliente.start();
+	public static void main(String args[])  {
+		Scanner sc;
+		try {
+			sc = new Scanner(new File("config.txt"));
+			Cliente cliente = new Cliente(sc.next(), 9999);
+			cliente.start();
+			sc.close();
+		} catch (FileNotFoundException e) {
+			JOptionPane.showMessageDialog(null, "No se ha encontrado el archivo de configuración config.txt");
+			e.printStackTrace();
+		}
 	}
 
 	public Socket getSocket() {

@@ -39,6 +39,13 @@ public class Recursos {
 	public static BufferedImage botonMenu;
 	// Fin Entorno
 	
+	// Batalla
+	public static BufferedImage barraSpells;
+	public static BufferedImage habilidad1;
+	public static BufferedImage habilidad2;
+	public static BufferedImage habilidad3;
+	// Fin Batalla
+	
 	// Se cargan todos los recursos del juego una sola vez al inicio
 	
 	public static void cargar() {
@@ -161,5 +168,12 @@ public class Recursos {
 		marco = CargadorImagen.cargarImagen("/marco.png");
 		botonMenu = CargadorImagen.cargarImagen("/botonMenu.png");
 		// Fin Entorno
+		
+		// Inicio Batalla
+		barraSpells = CargadorImagen.cargarImagen("/BarraSpells.png");
+		habilidad1 = CargadorImagen.cargarImagen("/habilidad1.png");
+		habilidad2 = CargadorImagen.cargarImagen("/habilidad2.png");
+		habilidad3 = CargadorImagen.cargarImagen("/habilidad3.png");
+		// Fin Batalla
 	}
 }

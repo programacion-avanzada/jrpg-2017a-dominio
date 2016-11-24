@@ -7,7 +7,7 @@ public class Hechicero extends Casta {
 		this.nombreCasta="Hechicero";
 	}
 
-	public Hechicero()// creo que se llama por defecto no? preguntarle a lucas
+	public Hechicero()
 	{
 		super();
 		this.nombreCasta="Hechicero";

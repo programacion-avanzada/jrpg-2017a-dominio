@@ -30,7 +30,7 @@ public class EstadoJuego extends Estado {
 	public EstadoJuego(Juego juego) {
 		super(juego);
 		mundo = new Mundo(juego, "recursos/mundo2.txt");
-		personaje = new Entidad(juego, mundo, 64, 64, 0, 0, Recursos.ogro, 150);
+		personaje = new Entidad(juego, mundo, 64, 64, juego.getPersonaje().getNombre(), 0, 0, Recursos.ogro, 150);
 
 		try {
 			// Le envio al servidor que me conecte al mapa y mi posicion
@@ -59,8 +59,10 @@ public class EstadoJuego extends Estado {
 		g.drawImage(Recursos.marco, 0, 0, juego.getAncho(), juego.getAlto(), null);
 		if(haySolicitud) {
 			g.drawImage(Recursos.botonMenu, 200, 0, 200, 25, null);
+			g.drawImage(Recursos.botonMenu, 430, 0, 200, 25, null);
 			g.setColor(Color.WHITE);
 			g.drawString("Batallar", 280, 15);
+			g.drawString("Cancelar", 505, 15);
 		}
 	}
 
