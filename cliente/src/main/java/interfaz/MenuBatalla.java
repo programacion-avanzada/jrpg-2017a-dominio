@@ -25,7 +25,10 @@ public class MenuBatalla {
 	
 	public void graficar(Graphics g){
 		
-		g.drawImage(Recursos.menuBatalla, x, y, null);
+		if(habilitado)
+			g.drawImage(Recursos.menuBatalla, x, y, null);
+		else
+			g.drawImage(Recursos.menuBatallaDeshabilitado, x, y, null);
 		
 		// Dibujo los boones
 		g.drawImage(Recursos.habilidades.get(personaje.getHabilidadesRaza()[0]), botones[0][0], botones[0][1], anchoBoton, anchoBoton, null);

@@ -1,5 +1,6 @@
 package recursos;
 
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -9,7 +10,7 @@ import frames.MenuCarga;
 
 public class Recursos {
 
-	private static int ELEMENTOS = 58;
+	private static int ELEMENTOS = 59;
 	private static int ANCHOBARRA = 345;
 
 	private static int ANCHO; // Ancho del frame a obtener
@@ -69,9 +70,11 @@ public class Recursos {
 	public static BufferedImage barraEnergia;
 	public static BufferedImage barraExperiencia;
 	public static BufferedImage menuBatalla;
+	public static BufferedImage menuBatallaDeshabilitado;
 	
 	public static Map<String, BufferedImage> habilidades = new HashMap<>();
 	// Fin Batalla
+	
 
 	// Se cargan todos los recursos del juego una sola vez al inicio
 
@@ -381,6 +384,9 @@ public class Recursos {
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 		
 		menuBatalla = CargadorImagen.cargarImagen("/MenuBatalla.png");
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+		
+		menuBatallaDeshabilitado = CargadorImagen.cargarImagen("/MenuBatallaDeshabilitado.png");
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 		// Fin Batalla
 	}
