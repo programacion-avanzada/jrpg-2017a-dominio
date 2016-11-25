@@ -9,6 +9,9 @@ import cliente.*;
 import mensajeria.Comando;
 
 import javax.swing.ImageIcon;
+
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -19,6 +22,10 @@ public class MenuCarga extends JFrame {
 
 	public MenuCarga(final Cliente cliente) {
 
+		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
+				new ImageIcon(MenuPrincipal.class.getResource("/cursor.png")).getImage(),
+				new Point(0,0),"custom cursor"));
+		
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		// En caso de cerrar la ventana

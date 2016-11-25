@@ -44,7 +44,10 @@ public class EstadoBatalla extends Estado {
 	private PaqueteAtacar paqueteAtacar;
 	private PaqueteFinalizarBatalla paqueteFinalizarBatalla;
 	private boolean miTurno;
+	
 	private boolean haySpellSeleccionada;
+	private boolean seRealizoAccion;
+	private boolean golpeEvadido;
 
 	private Gson gson = new Gson();
 
@@ -80,7 +83,9 @@ public class EstadoBatalla extends Estado {
 		juego.getCamara().setxOffset(-350);
 		juego.getCamara().setyOffset(150);
 		
+		seRealizoAccion = false;
 		haySpellSeleccionada = false;
+		golpeEvadido = false;
 
 		if (miTurno) {
 			
@@ -90,48 +95,66 @@ public class EstadoBatalla extends Estado {
 				if (menuBatalla.clickEnMenu(posMouse[0], posMouse[1])) {
 
 					if (menuBatalla.getBotonClickeado(posMouse[0], posMouse[1]) == 1) {
-						personaje.habilidadRaza1(enemigo);
+						if(personaje.puedeAtacar()){
+							seRealizoAccion = true;
+							personaje.habilidadRaza1(enemigo);
+						}
 						haySpellSeleccionada = true;
 					}
 
 					if (menuBatalla.getBotonClickeado(posMouse[0], posMouse[1]) == 2) {
-						personaje.habilidadRaza2(enemigo);
+						if(personaje.puedeAtacar()){
+							seRealizoAccion = true;
+							personaje.habilidadRaza2(enemigo);
+						}
 						haySpellSeleccionada = true;
 					}
 
 					if (menuBatalla.getBotonClickeado(posMouse[0], posMouse[1]) == 3) {
-						personaje.habilidadCasta1(enemigo);
+						if(personaje.puedeAtacar()){
+							seRealizoAccion = true;
+							personaje.habilidadCasta1(enemigo);
+						}
 						haySpellSeleccionada = true;
 					}
 
 					if (menuBatalla.getBotonClickeado(posMouse[0], posMouse[1]) == 4) {
-						personaje.habilidadCasta2(enemigo);
+						if(personaje.puedeAtacar()){
+							seRealizoAccion = true;
+							personaje.habilidadCasta2(enemigo);
+						}
 						haySpellSeleccionada = true;
 					}
 
 					if (menuBatalla.getBotonClickeado(posMouse[0], posMouse[1]) == 5) {
-						personaje.habilidadCasta3(enemigo);
+						if(personaje.puedeAtacar()){
+							seRealizoAccion = true;
+							personaje.habilidadCasta3(enemigo);
+						}
 						haySpellSeleccionada = true;
 					}
 
 					if (menuBatalla.getBotonClickeado(posMouse[0], posMouse[1]) == 6) {
+						seRealizoAccion = true;
 						personaje.serEnergizado(5);
 						haySpellSeleccionada = true;
 					}
 				}
 
 
-				if (haySpellSeleccionada) {
+				if (haySpellSeleccionada && seRealizoAccion) {
 					if (!enemigo.estaVivo()) {
 						personaje.ganarExperiencia(enemigo.getNivel() * 40);
 						finalizarBatalla();
 						Estado.setEstado(juego.getEstadoJuego());
 					} else {
-						paqueteAtacar = new PaqueteAtacar(paquetePersonaje.getId(), paqueteEnemigo.getId(), enemigo.getSalud(), personaje.getEnergia());
+						paqueteAtacar = new PaqueteAtacar(paquetePersonaje.getId(), paqueteEnemigo.getId(), personaje.getSalud(), personaje.getEnergia(), enemigo.getSalud(), enemigo.getEnergia());
 						enviarAtaque(paqueteAtacar);
 						miTurno = false;
 						menuBatalla.setHabilitado(false);
 					}
+				} else if(haySpellSeleccionada && !seRealizoAccion){
+					JOptionPane.showMessageDialog(null, "No posees la energ�a suficiente para realizar esta habilidad.");
 				}
 
 				juego.getHandlerMouse().setNuevoRecorrido(false);

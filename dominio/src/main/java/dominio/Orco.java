@@ -11,8 +11,8 @@ public class Orco extends Personaje {
 		saludTope += 10;
 		salud = saludTope;
 		energia = energiaTope;
-		nombreRaza="Orco";
-		
+		nombreRaza = "Orco";
+
 		habilidadesRaza = new String[2];
 		habilidadesRaza[0] = "Golpe Defensa";
 		habilidadesRaza[1] = "Mordisco de Vida";
@@ -23,27 +23,29 @@ public class Orco extends Personaje {
 			int idPersonaje) {
 		super(nombre, salud, energia, fuerza, destreza, inteligencia, casta, itemsEquipados, itemsGuardados,
 				experiencia, nivel, idPersonaje);
-		nombreRaza="Orco";
-		
+		nombreRaza = "Orco";
+
 		habilidadesRaza = new String[2];
 		habilidadesRaza[0] = "Golpe Defensa";
 		habilidadesRaza[1] = "Mordisco de Vida";
 	}
 
-	public boolean habilidadRaza1(Peleable atacado) { // Golpe Defensa
-		if (this.getEnergia() > 10){
+	// Golpe Defensa
+	public boolean habilidadRaza1(Peleable atacado) {
+		if (this.getEnergia() > 10) {
 			this.setEnergia(this.getEnergia() - 10);
-			atacado.serAtacado(this.getDefensa()*2);
-			return true;
-			}
+			if(atacado.serAtacado(this.getDefensa() * 2)>0)
+				return true;
+		}
 		return false;
 	}
 
-	public boolean habilidadRaza2(Peleable atacado) {// Mordisco de vida
+	// Mordisco de Vida
+	public boolean habilidadRaza2(Peleable atacado) {
 		if (this.getEnergia() > 10) {
 			this.setEnergia(this.getEnergia() - 10);
 			int daño_causado = atacado.serAtacado(this.getFuerza());
-			if (daño_causado != 0) {
+			if (daño_causado > 0) {
 				this.serCurado(daño_causado);
 				return true;
 			}

@@ -9,6 +9,8 @@ import mensajeria.Comando;
 
 import javax.swing.JTextField;
 import java.awt.Font;
+import java.awt.Point;
+import java.awt.Toolkit;
 
 /*import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
@@ -32,6 +34,9 @@ public class MenuRegistro extends JFrame {
 	private Cliente cli;
 
 	public MenuRegistro(final Cliente cliente) {
+		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
+				new ImageIcon(MenuPrincipal.class.getResource("/cursor.png")).getImage(),
+				new Point(0,0),"custom cursor"));
 		
 		addWindowListener(new WindowAdapter() {
 			@Override

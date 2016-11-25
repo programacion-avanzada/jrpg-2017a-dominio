@@ -17,15 +17,17 @@ public class Hechicero extends Casta {
 		habilidadesCasta[2] = "Robar Energía y Salud";
 	}
 
+	// Bola de Fuego
 	public boolean habilidad1(Personaje caster, Peleable atacado) {
 		if (caster.getEnergia() > 10) {
 			caster.setEnergia(caster.getEnergia() - 10);
-			if (atacado.serAtacado((int) (caster.calcularPuntosDeMagia() * 1.5)) != 0)
+			if (atacado.serAtacado((int) (caster.calcularPuntosDeMagia() * 1.5)) > 0)
 				return true;
 		}
 		return false;
 	}
 
+	// Curar Aliado
 	public boolean habilidad2(Personaje caster, Peleable aliado) {
 		if (caster.getEnergia() > 10) {
 			caster.setEnergia(caster.getEnergia() - 10);
@@ -37,6 +39,7 @@ public class Hechicero extends Casta {
 		return false;
 	}
 
+	// Robar Energia y Salud
 	public boolean habilidad3(Personaje caster, Peleable atacado) 
 	{
 		if (caster.getEnergia() > 10) {
