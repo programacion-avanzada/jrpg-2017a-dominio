@@ -88,13 +88,14 @@ public class EscuchaMensajes extends Thread {
 					
 				case Comando.ACTUALIZARPERSONAJE:
 					paquetePersonaje = (PaquetePersonaje) gson.fromJson(objetoLeido, PaquetePersonaje.class);
-					
-					if(juego.getPersonaje().getId() == paquetePersonaje.getId()) {
-						juego.setPersonaje((PaquetePersonaje) personajesConectados.get(juego.getPersonaje().getId()).clone());
-					}
 
 					personajesConectados.remove(paquetePersonaje.getId());
 					personajesConectados.put(paquetePersonaje.getId(), paquetePersonaje);
+					
+					if(juego.getPersonaje().getId() == paquetePersonaje.getId()) {
+						juego.actualizarPersonaje();
+						juego.getEstadoJuego().actualizarPersonaje();
+					}
 				}	
 			}
 		} catch (Exception e) {

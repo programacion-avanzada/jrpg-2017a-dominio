@@ -216,4 +216,8 @@ public class Juego implements Runnable {
 	public void setPersonaje(PaquetePersonaje paquetePersonaje) {
 		this.paquetePersonaje = paquetePersonaje;
 	}
+	
+	public void actualizarPersonaje() {
+		paquetePersonaje = (PaquetePersonaje) (escuchaMensajes.getPersonajesConectados().get(paquetePersonaje.getId()).clone());
+	}
 }

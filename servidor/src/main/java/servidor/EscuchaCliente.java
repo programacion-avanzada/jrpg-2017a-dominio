@@ -216,14 +216,9 @@ public class EscuchaCliente extends Thread {
 					paquetePersonaje = (PaquetePersonaje) gson.fromJson(cadenaLeida, PaquetePersonaje.class);
 					Servidor.getConector().actualizarPersonaje(paquetePersonaje);
 					
-					Servidor.getPersonajesConectados().get(paquetePersonaje.getId()).setSaludTope(paquetePersonaje.getSaludTope());
-					Servidor.getPersonajesConectados().get(paquetePersonaje.getId()).setEnergiaTope(paquetePersonaje.getEnergiaTope());
-					Servidor.getPersonajesConectados().get(paquetePersonaje.getId()).setDestreza(paquetePersonaje.getDestreza());
-					Servidor.getPersonajesConectados().get(paquetePersonaje.getId()).setFuerza(paquetePersonaje.getFuerza());
-					Servidor.getPersonajesConectados().get(paquetePersonaje.getId()).setInteligencia(paquetePersonaje.getInteligencia());
-					Servidor.getPersonajesConectados().get(paquetePersonaje.getId()).setNivel(paquetePersonaje.getNivel());
-					Servidor.getPersonajesConectados().get(paquetePersonaje.getId()).setExperiencia(paquetePersonaje.getExperiencia());
-					
+					Servidor.getPersonajesConectados().remove(paquetePersonaje.getId());
+					Servidor.getPersonajesConectados().put(paquetePersonaje.getId(), paquetePersonaje);
+
 					for(EscuchaCliente conectado : Servidor.getClientesConectados()) {
 						conectado.getSalida().writeObject(gson.toJson(paquetePersonaje));
 					}

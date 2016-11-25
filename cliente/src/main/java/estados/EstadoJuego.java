@@ -168,4 +168,8 @@ public class EstadoJuego extends Estado {
 	public boolean getHaySolicitud() {
 		return haySolicitud;
 	}
+	
+	public void actualizarPersonaje() {
+		paquetePersonaje = juego.getPersonaje();
+	}
 }
