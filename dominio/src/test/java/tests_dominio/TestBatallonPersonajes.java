@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import org.junit.Test;
 
 import dominio.*;
-import junit.framework.Assert;
+import org.junit.Assert;
 
 public class TestBatallonPersonajes {
 
@@ -38,8 +38,6 @@ public class TestBatallonPersonajes {
 	 System.out.println("Items Humano: "+h.listaItemsGuardados());
 	 System.out.println("Items Orco: "+ o.listaItemsGuardados()); }
 	 
-
-	
 	 @Test public void test_1vs2(){ 
 	 Alianza a1 = new Alianza("Demacia");
 	 Alianza a2 = new Alianza("Noxus");
@@ -111,6 +109,5 @@ public class TestBatallonPersonajes {
 		System.out.println("Items Orco o: " + o.listaItemsGuardados());
 		System.out.println("Items Elfo: " + e.listaItemsGuardados());
 		System.out.println("Items Orco g: " + g.listaItemsGuardados());
-
 	}
 }

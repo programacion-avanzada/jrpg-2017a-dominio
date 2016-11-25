@@ -10,8 +10,6 @@ public class NonPlayableCharacter implements Peleable {
 	private String nombre;
 	private Item[] itemsDropeables;
 	private int nivel;
-	private int x;
-	private int y;
 	private static final int cantidadItemsDropeables = 3;
 	private static final int dificultadAleatoria = -1;
 
@@ -78,22 +76,6 @@ public class NonPlayableCharacter implements Peleable {
 		this.nivel = nivel;
 	}
 
-	public int getX() {
-		return x;
-	}
-
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
-	}
-
 	public boolean estaVivo() {
 		return salud > 0;
 	}
@@ -117,7 +99,6 @@ public class NonPlayableCharacter implements Peleable {
 	public int atacar(Peleable atacado) {
 		Random rnd = new Random();
 		if (rnd.nextDouble() <= 0.15) {// los NPC tienen 15% de golpes criticos
-			System.out.println("GOLPE CRITICO NPC!");
 			return atacado.serAtacado((int) (this.getAtaque() * 1.5));
 		} else
 			return atacado.serAtacado(this.getAtaque());
@@ -133,7 +114,6 @@ public class NonPlayableCharacter implements Peleable {
 			}
 			return 0;// no le hace daño ya que la defensa fue mayor
 		}
-		System.out.println("GOLPE EVADIDO NPC!");
 		return 0;// esquivo el golpe
 	}
 

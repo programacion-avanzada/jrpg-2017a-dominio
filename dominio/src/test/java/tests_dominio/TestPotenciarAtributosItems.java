@@ -3,7 +3,7 @@ package tests_dominio;
 import org.junit.Test;
 
 import dominio.*;
-import junit.framework.Assert;
+import org.junit.Assert;
 
 public class TestPotenciarAtributosItems {
 
@@ -54,7 +54,6 @@ public class TestPotenciarAtributosItems {
 		Assert.assertTrue(h.getAtaque() == 72);
 		h.desequiparItem(ragnarok);
 		Assert.assertTrue(h.getAtaque() == 22);
-
 	}
 
 	@Test
@@ -70,7 +69,6 @@ public class TestPotenciarAtributosItems {
 		Assert.assertTrue(h.getItemsEquipados().size() == 2);
 		h.equiparItem(anduril);
 		Assert.assertTrue(h.getItemsEquipados().size() == 2);
-
 	}
 
 	@Test
@@ -107,7 +105,5 @@ public class TestPotenciarAtributosItems {
 		Assert.assertTrue(h.getItemsEquipados().size() == 4);
 		h.equiparItem(anilloSupremo);
 		Assert.assertTrue(h.getItemsEquipados().size() == 4);
-
 	}
-
 }

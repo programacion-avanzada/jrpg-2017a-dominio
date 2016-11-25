@@ -26,7 +26,6 @@ public class TestGuerrero {
 
 		else
 			Assert.assertTrue(e.getSalud() == 100);
-
 	}
 
 	@Test
@@ -37,7 +36,6 @@ public class TestGuerrero {
 		Assert.assertTrue(h.getDefensa() == 20);
 		h.habilidadCasta2(null);
 		Assert.assertTrue(h.getDefensa() == 65);
-
 	}
 
 	@Test
@@ -52,7 +50,6 @@ public class TestGuerrero {
 			Assert.assertTrue(e.getSalud() < 100);
 		else
 			Assert.assertTrue(e.getSalud() == 100);
-
 	}
 
 }

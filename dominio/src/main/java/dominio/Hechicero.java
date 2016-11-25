@@ -4,13 +4,12 @@ public class Hechicero extends Casta {
 
 	public Hechicero(double prob_crit, double evasion, double daño_crit) {
 		super(prob_crit, evasion, daño_crit);
-		this.nombreCasta="Hechicero";
+		this.nombreCasta = "Hechicero";
 	}
 
-	public Hechicero()
-	{
+	public Hechicero() {
 		super();
-		this.nombreCasta="Hechicero";
+		this.nombreCasta = "Hechicero";
 		habilidadesCasta = new String[3];
 		habilidadesCasta[0] = "Bola de Fuego";
 		habilidadesCasta[1] = "Curar Aliado";
@@ -40,8 +39,7 @@ public class Hechicero extends Casta {
 	}
 
 	// Robar Energia y Salud
-	public boolean habilidad3(Personaje caster, Peleable atacado) 
-	{
+	public boolean habilidad3(Personaje caster, Peleable atacado) {
 		if (caster.getEnergia() > 10) {
 			caster.setEnergia(caster.getEnergia() - 10);
 			if (atacado instanceof Personaje) {
@@ -55,5 +53,4 @@ public class Hechicero extends Casta {
 		}
 		return false;
 	}
-
 }

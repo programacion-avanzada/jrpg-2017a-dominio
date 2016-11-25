@@ -4,11 +4,12 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Random;
-import java.util.Scanner;
+
+import javax.swing.JOptionPane;
 
 import dominio.Asesino;
 
-public abstract class Personaje implements Peleable,Serializable {
+public abstract class Personaje implements Peleable, Serializable {
 
 	protected int salud;
 	protected int energia;
@@ -18,9 +19,6 @@ public abstract class Personaje implements Peleable,Serializable {
 
 	protected String nombre;// hay que agregarlo a todos los constructores
 	protected String nombreRaza;
-	
-	protected int x;
-	protected int y;
 
 	protected int saludTope;
 	protected int energiaTope;
@@ -30,6 +28,9 @@ public abstract class Personaje implements Peleable,Serializable {
 	protected int inteligencia;
 	protected Casta casta;
 
+	protected int x;
+	protected int y;
+	
 	protected LinkedList<Item> itemsEquipados;
 	protected LinkedList<Item> itemsGuardados;
 	protected int experiencia;
@@ -39,14 +40,14 @@ public abstract class Personaje implements Peleable,Serializable {
 	protected int itemManos = 0;
 	protected Alianza clan = null;
 	public static int tablaDeNiveles[];
-	
-	protected String [] habilidadesRaza;
-	
-	public String [] getHabilidadesRaza(){
+
+	protected String[] habilidadesRaza;
+
+	public String[] getHabilidadesRaza() {
 		return habilidadesRaza;
 	}
-	
-	public String [] getHabilidadesCasta(){
+
+	public String[] getHabilidadesCasta() {
 		return casta.getHabilidadesCasta();
 	}
 
@@ -62,8 +63,6 @@ public abstract class Personaje implements Peleable,Serializable {
 		this.nombre = nombre;
 		this.casta = casta;
 		this.idPersonaje = id;
-		x = 0;
-		y = 0;
 		itemsEquipados = new LinkedList<Item>();
 		itemsGuardados = new LinkedList<Item>();
 		experiencia = 0;
@@ -78,6 +77,8 @@ public abstract class Personaje implements Peleable,Serializable {
 		if (casta instanceof Asesino)
 			destreza += 5;
 
+		x = 0;
+		y = 0;
 		saludTope = 100;
 		energiaTope = 100;
 
@@ -98,11 +99,11 @@ public abstract class Personaje implements Peleable,Serializable {
 		this.destreza = destreza;
 		this.inteligencia = inteligencia;
 		this.casta = casta;
-		if(itemsEquipados!=null)
+		if (itemsEquipados != null)
 			this.itemsEquipados = itemsEquipados;
 		else
 			this.itemsEquipados = new LinkedList<Item>();
-		if(itemsGuardados!=null)
+		if (itemsGuardados != null)
 			this.itemsGuardados = itemsGuardados;
 		else
 			this.itemsGuardados = new LinkedList<Item>();
@@ -118,8 +119,6 @@ public abstract class Personaje implements Peleable,Serializable {
 		this.ataque = this.calcularPuntosDeAtaque();
 		this.magia = this.calcularPuntosDeMagia();
 	}
-	
-	
 
 	public String getNombreRaza() {
 		return nombreRaza;
@@ -337,7 +336,6 @@ public abstract class Personaje implements Peleable,Serializable {
 		this.ataque = this.calcularPuntosDeAtaque();
 		this.defensa = this.calcularPuntosDeDefensa();
 		this.magia = this.calcularPuntosDeMagia();
-
 	}
 
 	public boolean estaVivo() {
@@ -393,7 +391,6 @@ public abstract class Personaje implements Peleable,Serializable {
 			this.salud += salud;
 		else
 			this.salud = this.saludTope;
-
 	}
 
 	public void serEnergizado(int energia) {
@@ -403,8 +400,7 @@ public abstract class Personaje implements Peleable,Serializable {
 			this.energia = this.energiaTope;
 	}
 
-	public boolean desequiparItem(Item i) { // lo puedo usar para desequipar un
-											// item o para dropear directamente
+	public boolean desequiparItem(Item i) {
 		// un item equipado
 		if (this.itemsEquipados.remove(i)) {
 			if (i.getTipo() == "Manos")
@@ -419,7 +415,7 @@ public abstract class Personaje implements Peleable,Serializable {
 		return false;
 	}
 
-	public boolean dropearItemMochila(Item i) { 
+	public boolean dropearItemMochila(Item i) {
 		return this.itemsGuardados.remove(i);
 	}
 
@@ -442,7 +438,6 @@ public abstract class Personaje implements Peleable,Serializable {
 			}
 
 		}
-
 		return false;
 	}
 
@@ -473,7 +468,6 @@ public abstract class Personaje implements Peleable,Serializable {
 				aux += i.toString();
 		}
 		return aux;
-
 	}
 
 	public String listaItemsGuardados() {
@@ -483,7 +477,6 @@ public abstract class Personaje implements Peleable,Serializable {
 				aux += i.toString();
 		}
 		return aux;
-
 	}
 
 	public Item serRobado() {
@@ -535,7 +528,6 @@ public abstract class Personaje implements Peleable,Serializable {
 			this.desequiparItem(aux);
 			return aux;
 		}
-
 	}
 
 	public void crearAlianza(String nombre_alianza) {
@@ -562,7 +554,7 @@ public abstract class Personaje implements Peleable,Serializable {
 			this.clan.añadirPersonaje(nuevo_aliado);
 			return true;
 		} else
-			System.out.println("NO SE PUEDE ALIAR YA QUE YA ESTA EN UNA ALIANZA");
+			JOptionPane.showMessageDialog(null, "Ya se encuentra en una alianza");
 		return false;
 	}
 
@@ -582,8 +574,9 @@ public abstract class Personaje implements Peleable,Serializable {
 		if (this.nivel == 100) {
 			return;
 		}
-		while (this.nivel != 100 && (this.experiencia >= Personaje.tablaDeNiveles[this.nivel+1] + acumuladorExperiencia)) {
-			acumuladorExperiencia += Personaje.tablaDeNiveles[this.nivel+1];
+		while (this.nivel != 100
+				&& (this.experiencia >= Personaje.tablaDeNiveles[this.nivel + 1] + acumuladorExperiencia)) {
+			acumuladorExperiencia += Personaje.tablaDeNiveles[this.nivel + 1];
 			this.nivel++;
 			this.modificarAtributos();
 			this.saludTope += 25;
@@ -595,11 +588,10 @@ public abstract class Personaje implements Peleable,Serializable {
 	public boolean ganarExperiencia(int exp) {
 		this.experiencia += exp;
 
-		if (experiencia >= Personaje.tablaDeNiveles[this.nivel + 1]){
+		if (experiencia >= Personaje.tablaDeNiveles[this.nivel + 1]) {
 			subirNivel();
 			return true;
 		}
-		
 		return false;
 	}
 
@@ -633,30 +625,11 @@ public abstract class Personaje implements Peleable,Serializable {
 	public abstract boolean habilidadRaza2(Peleable atacado);
 
 	public int elegirOpcion() {
-		String aux = "";
-		aux += "1-Atacar\n";
-		if (this.getCasta() instanceof Guerrero)
-			aux += "2-Golpe Doble\n3-Aumentar Defensa\n4-Ignorar Defensa\n";
-		if (this.getCasta() instanceof Hechicero)
-			aux += "2-Bola de Fuego\n3-Curar\n4-Robar Energia y Salud\n";
-		if (this.getCasta() instanceof Asesino)
-			aux += "2-Golpe Critico\n3-Aumentar Evasion\n4-Robar\n";
-
-		if (this instanceof Humano)
-			aux += "5-Incentivar\n6-Golpe Fatal\n";
-		if (this instanceof Elfo)
-			aux += "5-Golpe Level\n6-Ataque Bosque\n";
-		if (this instanceof Orco)
-			aux += "5-Super Golpe\n6-Mordisco de Vida\n";
-		System.out.println(aux);
-		Scanner sc = new Scanner(System.in);
-		return sc.nextInt();
-
+		return Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el ataque a realizar: "));
 	}
 
 	public LinkedList<Personaje> armarBatallonPjs() {
-
-		LinkedList<Personaje> batallon_amigo = new LinkedList();
+		LinkedList<Personaje> batallon_amigo = new LinkedList<>();
 		batallon_amigo.add(this);
 		if (this.getClan() != null) {
 			Iterator<Personaje> it = this.getClan().getAliados().iterator();
@@ -669,6 +642,5 @@ public abstract class Personaje implements Peleable,Serializable {
 
 		}
 		return batallon_amigo;
-
 	}
 }

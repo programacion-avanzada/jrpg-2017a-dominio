@@ -1,11 +1,8 @@
 package tests_dominio;
 
-import java.util.LinkedList;
-
 import org.junit.Test;
 
 import dominio.*;
-import junit.framework.Assert;
 
 public class TestBatallonNPC {
 
@@ -23,7 +20,5 @@ public class TestBatallonNPC {
 		BatallonNPC b2= new BatallonNPC("Lobo",1,item,2);
 		BatallonPersonajes b1= new BatallonPersonajes(h.armarBatallonPjs());
 		b1.batallarContraNPCs(b2);
-		
-		
 	}
 }
