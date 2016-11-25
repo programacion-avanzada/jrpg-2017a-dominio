@@ -21,13 +21,13 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JLayeredPane;
 
-public class MenuPrincipal extends JFrame {
+public class MenuJugar extends JFrame {
 
 	private JPanel contentPane;
 
-	public MenuPrincipal(final Cliente cliente) {
+	public MenuJugar(final Cliente cliente) {
 		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
-				new ImageIcon(MenuPrincipal.class.getResource("/cursor.png")).getImage(),
+				new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(),
 				new Point(0,0),"custom cursor"));
 		
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -78,7 +78,7 @@ public class MenuPrincipal extends JFrame {
 		btnRegistrar.setBounds(121, 162, 191, 23);
 		layeredPane.add(btnRegistrar, new Integer(1));
 		btnRegistrar.setFocusable(false);
-		btnRegistrar.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/frames/BotonMenu.png")));
+		btnRegistrar.setIcon(new ImageIcon(MenuJugar.class.getResource("/frames/BotonMenu.png")));
 		btnRegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MenuRegistro menuRegistro = new MenuRegistro(cliente);
@@ -91,7 +91,7 @@ public class MenuPrincipal extends JFrame {
 		btnIniciarSesion.setBounds(121, 92, 191, 23);
 		layeredPane.add(btnIniciarSesion, new Integer(1));
 		btnIniciarSesion.setFocusable(false);
-		btnIniciarSesion.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/frames/BotonMenu.png")));
+		btnIniciarSesion.setIcon(new ImageIcon(MenuJugar.class.getResource("/frames/BotonMenu.png")));
 		btnIniciarSesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MenuInicioSesion menuInicioSesion = new MenuInicioSesion(cliente);
@@ -102,7 +102,7 @@ public class MenuPrincipal extends JFrame {
 		
 		JLabel lblBackground = new JLabel("");
 		lblBackground.setBounds(0, 0, 444, 271);
-		lblBackground.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/frames/menuBackground.jpg")));
+		lblBackground.setIcon(new ImageIcon(MenuJugar.class.getResource("/frames/menuBackground.jpg")));
 		layeredPane.add(lblBackground, new Integer(0));
 	}
 }

@@ -38,6 +38,10 @@ public class Cliente extends Thread {
 	
 	// Acciones que realiza el usuario
 	private int accion;
+	
+	// Ip y puerto
+	private String ip;
+	private int puerto;
 
 	public int getAccion() {
 		return accion;
@@ -50,7 +54,20 @@ public class Cliente extends Thread {
 	private Juego wome;
 	private MenuCarga menuCarga;
 
-	public Cliente(String ip, int puerto) {
+	public Cliente() {
+		
+		Scanner sc;
+		
+		try {
+			sc = new Scanner(new File("config.txt"));
+			ip = sc.nextLine();
+			puerto = sc.nextInt();
+			sc.close();
+		} catch (FileNotFoundException e) {
+			JOptionPane.showMessageDialog(null, "No se ha encontrado el archivo de configuración config.txt");
+			e.printStackTrace();
+		}
+		
 		try {
 			cliente = new Socket(ip, puerto);
 			miIp = cliente.getInetAddress().getHostAddress();
@@ -73,7 +90,7 @@ public class Cliente extends Thread {
 				while (!paqueteUsuario.isInicioSesion()) {
 					
 					// Muestro el menú principal
-					new MenuPrincipal(this).setVisible(true);
+					new MenuJugar(this).setVisible(true);
 					
 					// Creo los paquetes que le voy a enviar al servidor
 					paqueteUsuario = new PaqueteUsuario();
@@ -207,20 +224,7 @@ public class Cliente extends Thread {
 		}
 
 	}
-
-	public static void main(String args[])  {
-		Scanner sc;
-		try {
-			sc = new Scanner(new File("config.txt"));
-			Cliente cliente = new Cliente(sc.next(), 9999);
-			cliente.start();
-			sc.close();
-		} catch (FileNotFoundException e) {
-			JOptionPane.showMessageDialog(null, "No se ha encontrado el archivo de configuración config.txt");
-			e.printStackTrace();
-		}
-	}
-
+	
 	public Socket getSocket() {
 		return cliente;
 	}

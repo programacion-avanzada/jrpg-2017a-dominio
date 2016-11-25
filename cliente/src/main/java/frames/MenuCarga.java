@@ -23,7 +23,7 @@ public class MenuCarga extends JFrame {
 	public MenuCarga(final Cliente cliente) {
 
 		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
-				new ImageIcon(MenuPrincipal.class.getResource("/cursor.png")).getImage(),
+				new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(),
 				new Point(0,0),"custom cursor"));
 		
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);

@@ -40,7 +40,7 @@ public class MenuCreacionPj extends JFrame {
 	public MenuCreacionPj(final Cliente cliente, final PaquetePersonaje personaje) {
 		
 		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
-				new ImageIcon(MenuPrincipal.class.getResource("/cursor.png")).getImage(),
+				new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(),
 				new Point(0,0),"custom cursor"));
 		
 		final String vecSalud[] = { "55", "50", "60" };
