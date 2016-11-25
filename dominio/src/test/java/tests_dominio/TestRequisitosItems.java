@@ -3,7 +3,7 @@ package tests_dominio;
 import org.junit.Test;
 
 import dominio.*;
-import junit.framework.Assert;
+import org.junit.Assert;
 
 public class TestRequisitosItems {
 
@@ -21,7 +21,6 @@ public class TestRequisitosItems {
 		h.AsignarPuntosSkills(10, 10, 10);
 		h.equiparItem(excalibur);
 		Assert.assertTrue(h.getItemsEquipados().size() == 2);
-
 	}
 
 	@Test
@@ -31,7 +30,6 @@ public class TestRequisitosItems {
 		Assert.assertTrue(h.getItemsEquipados().isEmpty());
 		h.equiparItem(excalibur);
 		Assert.assertTrue(h.getItemsEquipados().isEmpty());
-
 	}
 
 	@Test
@@ -41,7 +39,6 @@ public class TestRequisitosItems {
 		Assert.assertTrue(h.getItemsEquipados().isEmpty());
 		h.equiparItem(excalibur);
 		Assert.assertTrue(h.getItemsEquipados().isEmpty());
-
 	}
 
 	@Test
@@ -51,7 +48,5 @@ public class TestRequisitosItems {
 		Assert.assertTrue(h.getItemsEquipados().isEmpty());
 		h.equiparItem(excalibur);
 		Assert.assertTrue(h.getItemsEquipados().isEmpty());
-
 	}
-
 }

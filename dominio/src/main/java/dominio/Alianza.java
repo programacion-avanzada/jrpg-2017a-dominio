@@ -1,15 +1,12 @@
 package dominio;
 
-
 import java.util.LinkedList;
 
 public class Alianza {
 
 	String nombre;
 	LinkedList<Personaje> aliados;
-	
-	
-	
+
 	public Alianza(String nombre) {
 		this.nombre = nombre;
 		this.aliados = new LinkedList <Personaje>();

@@ -8,7 +8,7 @@ import dominio.Asesino;
 import dominio.Humano;
 import dominio.Item;
 import dominio.Personaje;
-import junit.framework.Assert;
+import org.junit.Assert;
 
 public class TestNivelExp {
 
@@ -28,9 +28,7 @@ public class TestNivelExp {
 				new LinkedList<Item>(), 0, 1, 1);
 		h.ganarExperiencia(300);
 		Assert.assertTrue(h.getNivel() == 4);
-		// System.out.println(h.getNivel());
 		Assert.assertTrue(h.getExperiencia() == 0);
-
 	}
 
 	@Test
@@ -41,5 +39,4 @@ public class TestNivelExp {
 		h.ganarExperiencia(10000);
 		Assert.assertTrue(h.getNivel() == 100);
 	}
-
 }

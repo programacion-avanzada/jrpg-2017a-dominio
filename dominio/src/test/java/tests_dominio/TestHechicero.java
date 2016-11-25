@@ -21,7 +21,6 @@ public class TestHechicero {
 		Assert.assertTrue(e.getSalud() == 65);
 		h.habilidadCasta2(e);
 		Assert.assertTrue(e.getSalud() > 65);
-
 	}
 
 	@Test
@@ -36,7 +35,6 @@ public class TestHechicero {
 			Assert.assertTrue(e.getSalud() < 100);
 		else
 			Assert.assertTrue(e.getSalud() == 100);
-
 	}
 
 	@Test
@@ -58,6 +56,5 @@ public class TestHechicero {
 			Assert.assertTrue(h.getEnergia() < 50);
 			Assert.assertTrue(e.getSalud() == 100);
 		}
-
 	}
 }

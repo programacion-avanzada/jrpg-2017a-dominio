@@ -35,5 +35,4 @@ public class TestSubirNivel {
 		h.ganarExperiencia(150);
 		Assert.assertTrue(h.getNivel() == 3);
 	}
-
 }

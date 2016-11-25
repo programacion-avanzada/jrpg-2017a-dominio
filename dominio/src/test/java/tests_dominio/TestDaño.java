@@ -28,7 +28,6 @@ public class TestDaño {
 			Assert.assertTrue(o.getSalud() == 0);
 		} else
 			Assert.assertTrue(o.getSalud() == 0);
-
 	}
 
 	@Test
@@ -46,5 +45,4 @@ public class TestDaño {
 		o.atacar(h);
 		Assert.assertEquals(100, h.getSalud());
 	}
-
 }

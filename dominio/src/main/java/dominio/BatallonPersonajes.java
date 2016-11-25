@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 public class BatallonPersonajes {
 
 	private LinkedList<Personaje> equipo;
@@ -98,10 +100,10 @@ public class BatallonPersonajes {
 
 		if (this.equipo.size() > 0) {
 			this.despuesDeBatallar();
-			System.out.println("GANO EL PRIMERO");
+			JOptionPane.showMessageDialog(null, "Ha ganado el equipo 1");
 		} else {
 			pjsEnemigos.despuesDeBatallar();
-			System.out.println("GANO EL SEGUNDO");
+			JOptionPane.showMessageDialog(null, "Ha ganado el equipo 2");
 		}
 	}
 
@@ -128,13 +130,9 @@ public class BatallonPersonajes {
 				if (turno2 == npcsEnemigos.equipo.size())
 					turno2 = 0;
 				victima_del_npc = rnd.nextInt(this.getEquipo().size());
-				System.out.println(npcsEnemigos.getEquipo().get(turno2).getNombre() + " ataca a "
-						+ (this.getEquipo().get(victima_del_npc).getNombre()));
 				npcsEnemigos.getEquipo().get(turno2).atacar(this.getEquipo().get(victima_del_npc));
-				if (!this.getEquipo().get(victima_del_npc).estaVivo()) {
-					System.out.println(this.getEquipo().get(victima_del_npc).getNombre() + " ha muerto!");
+				if (!this.getEquipo().get(victima_del_npc).estaVivo()) 
 					this.getEquipo().remove(victima_del_npc);
-				}
 				turno2++;
 			}
 			
@@ -146,10 +144,9 @@ public class BatallonPersonajes {
 
 		if (this.equipo.size() > 0) {
 			this.despuesDeBatallar();
-			System.out.println("GANO EL PRIMERO");
+			JOptionPane.showMessageDialog(null, "Ha ganado el equipo 1");
 		} else
-			System.out.println("GANARON LOS NPCs");
-
+			JOptionPane.showMessageDialog(null, "Ha ganado el equipo de NPC");
 	}
 
 	public void establecerEstrategia() {
@@ -170,7 +167,6 @@ public class BatallonPersonajes {
 			if (!pjsEnemigos.equipo.get(victima).estaVivo()) {
 				itemsGanados.add(pjsEnemigos.equipo.get(victima).otorgarItem());
 				experienciaGanada += pjsEnemigos.equipo.get(victima).otorgarExp();
-				System.out.println(pjsEnemigos.equipo.get(victima).getNombre() + " ha muerto!\n");
 				pjsEnemigos.equipo.remove(victima);
 			}
 			break;
@@ -181,7 +177,6 @@ public class BatallonPersonajes {
 			if (!pjsEnemigos.equipo.get(victima).estaVivo()) {
 				itemsGanados.add(pjsEnemigos.equipo.get(victima).otorgarItem());
 				experienciaGanada += pjsEnemigos.equipo.get(victima).otorgarExp();
-				System.out.println(pjsEnemigos.equipo.get(victima).getNombre() + " ha muerto!\n");
 				pjsEnemigos.equipo.remove(victima);
 			}
 			break;
@@ -201,7 +196,6 @@ public class BatallonPersonajes {
 			if (!pjsEnemigos.equipo.get(victima).estaVivo()) {
 				itemsGanados.add(pjsEnemigos.equipo.get(victima).otorgarItem());
 				experienciaGanada += pjsEnemigos.equipo.get(victima).otorgarExp();
-				System.out.println(pjsEnemigos.equipo.get(victima).getNombre() + " ha muerto!\n");
 				pjsEnemigos.equipo.remove(victima);
 			}
 			break;
@@ -217,7 +211,6 @@ public class BatallonPersonajes {
 				if (!pjsEnemigos.equipo.get(victima).estaVivo()) {
 					itemsGanados.add(pjsEnemigos.equipo.get(victima).otorgarItem());
 					experienciaGanada += pjsEnemigos.equipo.get(victima).otorgarExp();
-					System.out.println(pjsEnemigos.equipo.get(victima).getNombre() + " ha muerto!\n");
 					pjsEnemigos.equipo.remove(victima);
 				}
 
@@ -230,7 +223,6 @@ public class BatallonPersonajes {
 			if (!pjsEnemigos.equipo.get(victima).estaVivo()) {
 				itemsGanados.add(pjsEnemigos.equipo.get(victima).otorgarItem());
 				experienciaGanada += pjsEnemigos.equipo.get(victima).otorgarExp();
-				System.out.println(pjsEnemigos.equipo.get(victima).getNombre() + " ha muerto!\n");
 				pjsEnemigos.equipo.remove(victima);
 			}
 		}
@@ -238,23 +230,11 @@ public class BatallonPersonajes {
 	}
 
 	public int elegirPjVictima(BatallonPersonajes enemigos) {
-		Scanner sc = new Scanner(System.in);
-		String aux = "";
-		System.out.println("\nBatallon enemigo:");
-		for (int i = 0; i < enemigos.getEquipo().size(); i++)
-			aux += enemigos.getEquipo().get(i).getNombre() + "  ";
-		System.out.println(aux);
-		return sc.nextInt();
+		return Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la victima: "));
 	}
 
 	public int elegirPjBeneficiado() {
-		Scanner sc = new Scanner(System.in);
-		String aux = "";
-		System.out.println("Batallon aliado:");
-		for (int i = 0; i < this.equipo.size(); i++)
-			aux += this.equipo.get(i).getNombre() + "  ";
-		System.out.println(aux);
-		return sc.nextInt();
+		return Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el beneficiado: "));
 	}
 
 	public LinkedList<Personaje> getEquipo() {
@@ -265,14 +245,6 @@ public class BatallonPersonajes {
 		this.equipo = equipo;
 	}
 
-	/*
-	 * public boolean matoAlEnemigo(BatallonPersonajes pjsEnemigos, int victima)
-	 * { if(!pjsEnemigos.equipo.get(victima).estaVivo()) {
-	 * items.add(pjsEnemigos.equipo.get(victima).otorgarItem()); exp1 +=
-	 * pjsEnemigos.equipo.get(victima).otorgarExp();
-	 * System.out.println(pjsEnemigos.equipo.get(victima).getNombre()
-	 * +" ha muerto!\n"); return true; } return false; }
-	 */
 	public void realizarTurnoVsNPC(int turno1, int opcion, BatallonNPC pjsEnemigos) {
 		int victima;
 		switch (opcion) {
@@ -283,7 +255,6 @@ public class BatallonPersonajes {
 			if (!pjsEnemigos.equipo.get(victima).estaVivo()) {
 				itemsGanados.add(pjsEnemigos.equipo.get(victima).dropearItemAleatorio());// otrogarItem()
 				experienciaGanada += pjsEnemigos.equipo.get(victima).otorgarExp();
-				System.out.println(pjsEnemigos.equipo.get(victima).getNombre() + " ha muerto!\n");
 				pjsEnemigos.equipo.remove(victima);
 			}
 			break;
@@ -294,7 +265,6 @@ public class BatallonPersonajes {
 			if (!pjsEnemigos.equipo.get(victima).estaVivo()) {
 				itemsGanados.add(pjsEnemigos.equipo.get(victima).dropearItemAleatorio());
 				experienciaGanada += pjsEnemigos.equipo.get(victima).otorgarExp();
-				System.out.println(pjsEnemigos.equipo.get(victima).getNombre() + " ha muerto!\n");
 				pjsEnemigos.equipo.remove(victima);
 			}
 			break;
@@ -314,7 +284,6 @@ public class BatallonPersonajes {
 			if (!pjsEnemigos.equipo.get(victima).estaVivo()) {
 				itemsGanados.add(pjsEnemigos.equipo.get(victima).dropearItemAleatorio());
 				experienciaGanada += pjsEnemigos.equipo.get(victima).otorgarExp();
-				System.out.println(pjsEnemigos.equipo.get(victima).getNombre() + " ha muerto!\n");
 				pjsEnemigos.equipo.remove(victima);
 			}
 			break;
@@ -330,7 +299,6 @@ public class BatallonPersonajes {
 				if (!pjsEnemigos.equipo.get(victima).estaVivo()) {
 					itemsGanados.add(pjsEnemigos.equipo.get(victima).dropearItemAleatorio());
 					experienciaGanada += pjsEnemigos.equipo.get(victima).otorgarExp();
-					System.out.println(pjsEnemigos.equipo.get(victima).getNombre() + " ha muerto!\n");
 					pjsEnemigos.equipo.remove(victima);
 				}
 
@@ -343,7 +311,6 @@ public class BatallonPersonajes {
 			if (!pjsEnemigos.equipo.get(victima).estaVivo()) {
 				itemsGanados.add(pjsEnemigos.equipo.get(victima).dropearItemAleatorio());
 				experienciaGanada += pjsEnemigos.equipo.get(victima).otorgarExp();
-				System.out.println(pjsEnemigos.equipo.get(victima).getNombre() + " ha muerto!\n");
 				pjsEnemigos.equipo.remove(victima);
 			}
 		}
@@ -351,12 +318,6 @@ public class BatallonPersonajes {
 	}
 
 	public int elegirNPCVictima(BatallonNPC enemigos) {
-		Scanner sc = new Scanner(System.in);
-		String aux = "";
-		System.out.println("\nBatallon enemigo:");
-		for (int i = 0; i < enemigos.getEquipo().size(); i++)
-			aux += enemigos.getEquipo().get(i).getNombre() + "  ";
-		System.out.println(aux);
-		return sc.nextInt();
+		return Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el NPC victima: "));
 	}
 }

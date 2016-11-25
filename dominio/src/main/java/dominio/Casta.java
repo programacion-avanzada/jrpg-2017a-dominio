@@ -7,8 +7,8 @@ public abstract class Casta implements Serializable {
 	protected double probabilidadEvitarDaño;
 	protected double dañoCritico;
 	protected String nombreCasta;
-	
-	protected String [] habilidadesCasta;
+
+	protected String[] habilidadesCasta;
 
 	public Casta() {
 		this.probabilidadGolpeCritico = 0.2;
@@ -32,15 +32,10 @@ public abstract class Casta implements Serializable {
 		return this.nombreCasta;
 	}
 
-	//
-	// public void setNombreCasta(String nombreCasta) {
-	// this.nombreCasta = nombreCasta;
-	// }
-
-	public String [] getHabilidadesCasta(){
+	public String[] getHabilidadesCasta() {
 		return habilidadesCasta;
 	}
-	
+
 	public double getProbabilidadGolpeCritico() {
 		return probabilidadGolpeCritico;
 	}
@@ -64,5 +59,4 @@ public abstract class Casta implements Serializable {
 	public void setDañoCritico(double dañoCritico) {
 		this.dañoCritico = dañoCritico;
 	}
-
 }

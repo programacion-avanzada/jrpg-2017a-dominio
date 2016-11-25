@@ -46,7 +46,6 @@ public class TestAsesino {
 	@Test
 	public void testProbEvasion(){
 		Humano h = new Humano("Nico",100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5),  new LinkedList<Item>(),  new LinkedList<Item>(), 0, 1, 1);
-		Orco o = new Orco("Nico",200, 100, 15, 20, 30, new Guerrero(0.2, 0.3, 1.5), new LinkedList<Item>(),new LinkedList<Item>(), 0, 1, 1);
 		
 		Assert.assertTrue(0.3==h.getCasta().getProbabilidadEvitarDaño());
 		h.habilidadCasta2(null);

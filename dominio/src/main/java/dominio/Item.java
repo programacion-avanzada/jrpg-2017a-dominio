@@ -151,10 +151,4 @@ public abstract class Item {
 			return false;
 		return true;
 	}
-
-	public String toString() {
-		return this.nombre + "  Daño:" + this.bonoDaño + "  Defensa:" + this.bonoDefensa + "  Magia:"
-				+ this.bonoMagia + "  Salud:" + this.bonoSalud + "  Energia:" + this.bonoEnergia;
-	}
-
 }

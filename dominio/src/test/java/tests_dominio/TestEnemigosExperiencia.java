@@ -3,7 +3,7 @@ package tests_dominio;
 import org.junit.Test;
 
 import dominio.*;
-import junit.framework.Assert;
+import org.junit.Assert;
 
 public class TestEnemigosExperiencia {
 
@@ -18,17 +18,14 @@ public class TestEnemigosExperiencia {
 			h.atacar(npc);
 		h.ganarExperiencia(npc.otorgarExp());
 		Assert.assertTrue(h.getExperiencia() == 30);
-
 	}
 
 	@Test
 	public void testMasFuerteMasExperiencia() {
-
 		NonPlayableCharacter npc = new NonPlayableCharacter("Gigante", 1, null, 0);
 		NonPlayableCharacter npc2 = new NonPlayableCharacter("Gigante", 2, null, 0);
 
 		Assert.assertTrue(npc.otorgarExp() < npc2.otorgarExp());
-
 	}
 
 	@Test

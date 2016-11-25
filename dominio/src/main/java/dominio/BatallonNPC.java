@@ -21,9 +21,7 @@ public class BatallonNPC {
 			this.equipo.add(new NonPlayableCharacter(nombreNPC+(i+1),nivel,itemsParaDropear,-1));
 		}
 	}
-
 	
-
 	public LinkedList<NonPlayableCharacter> getEquipo() {
 		return equipo;
 	}
@@ -31,6 +29,4 @@ public class BatallonNPC {
 	public void setEquipo(LinkedList<NonPlayableCharacter> equipo) {
 		this.equipo = equipo;
 	}
-	
-	
 }

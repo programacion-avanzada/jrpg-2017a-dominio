@@ -19,7 +19,6 @@ public class TestHumano {
 		Assert.assertTrue(e.getAtaque() == 37);
 		h.habilidadRaza1(e);
 		Assert.assertTrue(e.getAtaque() > 37);
-
 	}
 
 	@Test
@@ -37,8 +36,6 @@ public class TestHumano {
 		} else {
 			Assert.assertTrue(h.getEnergia() == 90);
 			Assert.assertTrue(e.getSalud() == 100);
-
 		}
 	}
-
 }
