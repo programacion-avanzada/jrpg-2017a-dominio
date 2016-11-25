@@ -6,15 +6,19 @@ public class PaqueteAtacar extends Paquete implements Serializable, Cloneable {
 
 	private int id;
 	private int idEnemigo;
-	private int nuevaSalud;
-	private int nuevaEnergia;
+	private int nuevaSaludPersonaje;
+	private int nuevaEnergiaPersonaje;
+	private int nuevaSaludEnemigo;
+	private int nuevaEnergiaEnemigo;
 	
-	public PaqueteAtacar(int id, int idEnemigo, int nuevaSalud, int nuevaEnergia) {
+	public PaqueteAtacar(int id, int idEnemigo, int nuevaSalud, int nuevaEnergia, int nuevaSaludEnemigo, int nuevaEnergiaEnemigo) {
 		setComando(Comando.ATACAR);
 		this.id = id;
 		this.idEnemigo = idEnemigo;
-		this.nuevaSalud = nuevaSalud;
-		this.nuevaEnergia = nuevaEnergia;
+		this.nuevaSaludPersonaje = nuevaSalud;
+		this.nuevaEnergiaPersonaje = nuevaEnergia;
+		this.nuevaSaludEnemigo = nuevaSaludEnemigo;
+		this.nuevaEnergiaEnemigo = nuevaEnergiaEnemigo;
 	}
 
 	public int getId() {
@@ -32,20 +36,39 @@ public class PaqueteAtacar extends Paquete implements Serializable, Cloneable {
 	public void setIdEnemigo(int idEnemigo) {
 		this.idEnemigo = idEnemigo;
 	}
-
-	public int getNuevaSalud() {
-		return nuevaSalud;
+	
+	public int getNuevaSaludPersonaje() {
+		return nuevaSaludPersonaje;
 	}
 
-	public void setNuevaSalud(int nuevaSalud) {
-		this.nuevaSalud = nuevaSalud;
+	public void setNuevaSaludPersonaje(int nuevaSaludPersonaje) {
+		this.nuevaSaludPersonaje = nuevaSaludPersonaje;
 	}
 
-	public int getNuevaEnergia() {
-		return nuevaEnergia;
+	public int getNuevaEnergiaPersonaje() {
+		return nuevaEnergiaPersonaje;
 	}
 
-	public void setNuevaEnergia(int nuevaEnergia) {
-		this.nuevaEnergia = nuevaEnergia;
+	public void setNuevaEnergiaPersonaje(int nuevaEnergiaPersonaje) {
+		this.nuevaEnergiaPersonaje = nuevaEnergiaPersonaje;
 	}
+
+	public int getNuevaSaludEnemigo() {
+		return nuevaSaludEnemigo;
+	}
+
+	public void setNuevaSaludEnemigo(int nuevaSaludEnemigo) {
+		this.nuevaSaludEnemigo = nuevaSaludEnemigo;
+	}
+
+	public int getNuevaEnergiaEnemigo() {
+		return nuevaEnergiaEnemigo;
+	}
+
+	public void setNuevaEnergiaEnemigo(int nuevaEnergiaEnemigo) {
+		this.nuevaEnergiaEnemigo = nuevaEnergiaEnemigo;
+	}
+
+
+
 }

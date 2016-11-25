@@ -20,18 +20,18 @@ public class Asesino extends Casta {
 		habilidadesCasta[2] = "Robar";
 	}
 
-	public boolean habilidad1(Personaje caster, Peleable atacado) {// Golpe
-																	// Critico
+	// Golpe Crítico
+	public boolean habilidad1(Personaje caster, Peleable atacado) {
 		if (caster.getEnergia() > 10) {
 			caster.setEnergia(caster.getEnergia() - 10);
-			if (atacado.serAtacado((int) (caster.ataque * caster.getCasta().getDañoCritico())) != 0)
+			if (atacado.serAtacado((int) (caster.ataque * caster.getCasta().getDañoCritico())) > 0)
 				return true;
 		}
 		return false;
 	}
 
-	public boolean habilidad2(Personaje caster, Peleable atacado) {// Aumentar
-																	// Evasion
+	// Aumentar Evasion
+	public boolean habilidad2(Personaje caster, Peleable atacado) {
 		if (caster.getEnergia() > 10) {
 			caster.setEnergia(caster.getEnergia() - 10);
 			if (this.getProbabilidadEvitarDaño() + 0.15 < 0.5)
@@ -43,8 +43,8 @@ public class Asesino extends Casta {
 		return false;
 	}
 
-	public boolean habilidad3(Personaje caster, Peleable atacado) {// Robar
-
+	// Robar
+	public boolean habilidad3(Personaje caster, Peleable atacado) {
 		if (caster.getEnergia() > 10) {
 			caster.setEnergia(caster.getEnergia() - 10);
 			Random rnd = new Random();

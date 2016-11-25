@@ -14,13 +14,6 @@ public class Humano extends Personaje {
 		nombreRaza="Humano";
 	}
 	
-	public Humano() {
-		habilidadesRaza = new String[2];
-		habilidadesRaza[0] = "Incentivar";
-		habilidadesRaza[1] = "Golpe Fatal";
-		
-	}
-	
 	public Humano(String nombre,int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta,
 			LinkedList<Item> itemsEquipados, LinkedList<Item> itemsGuardados, int experiencia, int nivel, int idPersonaje) {
 		super(nombre,salud, energia, fuerza, destreza, inteligencia, casta, itemsEquipados, itemsGuardados, experiencia, nivel,
@@ -45,10 +38,10 @@ public class Humano extends Personaje {
 	
 	public boolean habilidadRaza2(Peleable atacado){//golpefatal
 		if(this.getEnergia()>10){
-			if(atacado.serAtacado(atacado.getSalud()/2)!=0){
+			if(atacado.serAtacado(atacado.getSalud()/2) > 0){
 				this.setEnergia(this.getEnergia()/2);
 				return true;
-				}
+			}
 		}
 		this.setEnergia(this.getEnergia()-10);
 		return false;

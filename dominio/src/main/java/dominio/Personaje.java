@@ -57,11 +57,6 @@ public abstract class Personaje implements Peleable,Serializable {
 		for (int i = 2; i < 101; i++)
 			Personaje.tablaDeNiveles[i] = Personaje.tablaDeNiveles[i - 1] + 50;
 	}
-	
-	
-	public Personaje(){
-		this.setCasta(new Asesino(0.2, 0.3, 1.5));
-	}
 
 	public Personaje(String nombre, Casta casta, int id) {
 		this.nombre = nombre;
@@ -285,7 +280,6 @@ public abstract class Personaje implements Peleable,Serializable {
 			return 0;
 		if (atacado.getSalud() > 0) {
 			if (rnd.nextDouble() <= this.casta.getProbabilidadGolpeCritico() + this.destreza / 1000) {
-				System.out.println("GOLPE CRITICO!");
 				return atacado.serAtacado(this.golpe_critico());
 			} else {
 				return atacado.serAtacado(this.ataque);
@@ -303,7 +297,7 @@ public abstract class Personaje implements Peleable,Serializable {
 	}
 
 	public boolean puedeAtacar() {
-		return true;
+		return energia > 10;
 	}
 
 	public int calcularPuntosDeAtaque() {
@@ -360,13 +354,12 @@ public abstract class Personaje implements Peleable,Serializable {
 					salud = 0;
 				} else {
 					salud -= daño;
-					return daño;
 				}
+				return daño;
 			}
 			return 0;
 		}
-		System.out.println("GOLPE EVADIDO!");
-		return 0;
+		return -1;
 	}
 
 	public int serRobadoSalud(int daño) {
