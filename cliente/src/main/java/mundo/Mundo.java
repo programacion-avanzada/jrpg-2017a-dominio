@@ -15,6 +15,7 @@ public class Mundo {
 	
 	private float[] iso = new float[2];
 	private int[][] tiles;
+	private int[][]  obstaculos; 
 	private int[][] tilesInv;
 
 	private int xMinimo;
@@ -24,12 +25,12 @@ public class Mundo {
 	
 	private Grafo grafoDeTilesNoSolidos;
 
-	public Mundo(Juego juego, String path) {
+	public Mundo(Juego juego, String pathMap, String pathObstac) {
 		this.juego = juego;
-		cargarMundo(path);
-		mundoAGrafo();
-		
+		cargarMundo(pathMap, pathObstac);
+		mundoAGrafo();	
 	}
+
 
 	public void actualizar() {
 
@@ -54,6 +55,20 @@ public class Mundo {
 			}
 		}
 	}
+	
+	public void graficarObstaculos(Graphics g){
+	    Tile obst;
+	    for(int i=0 ; i<alto ; i++) {
+	      for(int j=0 ; j<ancho; j++){
+	        iso = dosDaIso(j, i);
+	        if ((iso[0] >= xMinimo && iso[0] <= xMaximo) && (iso[1] >= yMinimo && iso[1] <= yMaximo) && (obst=getTileObstaculo(j,i))!= null) {
+	          obst.graficar(g, (int) (iso[0] - juego.getCamara().getxOffset() - 5),
+	              (int) (iso[1] - juego.getCamara().getyOffset() - obst.getAlto()/2 - 5), obst.getAncho() , obst.getAlto() );
+	        }
+	      }  
+	    }
+	}
+	 
 
 	public Tile getTile(int x, int y) {
 		Tile t = Tile.tiles[tiles[x][y]];
@@ -62,25 +77,36 @@ public class Mundo {
 		}
 		return t;
 	}
+	
+	  public Tile getTileObstaculo(int x, int y){
+		  if(obstaculos[x][y] == 0)
+		      return null;
+		  return Tile.tiles[obstaculos[x][y]];	 
+	 }
+		 
 
-	private void cargarMundo(String path) {
-		String archivo = Utilitarias.archivoAString(path);
+	  private void cargarMundo(String pathMapa, String pathObstaculos) {
+		String archivo = Utilitarias.archivoAString(pathMapa);
+		String archivoObstaculos = Utilitarias.archivoAString(pathObstaculos);
 		String[] tokens = archivo.split("\\s+");
+		String[] tokensDos = archivoObstaculos.split("\\s+");
 		ancho = Utilitarias.parseInt(tokens[0]);
 		alto = Utilitarias.parseInt(tokens[1]);
 		spawnX = Utilitarias.parseInt(tokens[2]);
 		spawnY = Utilitarias.parseInt(tokens[3]);
 
 		tiles = new int[ancho][alto];
+		obstaculos = new int[ancho][alto];
 		tilesInv = new int[alto][ancho];
-		
+			
 		for (int y = 0; y < alto; y++)
 			for (int x = 0; x < ancho; x++){
 				tiles[x][y] = Utilitarias.parseInt(tokens[(x + y * ancho + 4)]);
+				if(tiles[x][y]!=0)
+					obstaculos[x][y] = Utilitarias.parseInt(tokensDos[(x + y * ancho + 4)]);
 				tilesInv[y][x] = tiles[x][y];
-			}
-				
-	}
+		}		
+	  }
 	
 	private void mundoAGrafo(){
 		// Creo una matriz de nodos

@@ -335,12 +335,17 @@ public class Entidad {
 	}
 
 	public void graficar(Graphics g) {
-		drawX = (int) (x - juego.getCamara().getxOffset());
-		drawY = (int) (y - juego.getCamara().getyOffset());
-		g.drawImage(getFrameAnimacionActual(), drawX, drawY, ancho, alto, null);
-		g.setColor(Color.WHITE);
-		Pantalla.centerString(g, new java.awt.Rectangle(drawX + 32, drawY - 20, 0, 10), nombre);
+	    drawX = (int) (x - juego.getCamara().getxOffset());
+	    drawY = (int) (y - juego.getCamara().getyOffset());
+	    g.drawImage(getFrameAnimacionActual(), drawX, drawY+4, ancho, alto, null);
 	}
+	
+	public void graficarNombre(Graphics g){
+		g.setColor(Color.WHITE);
+	    Pantalla.centerString(g, new java.awt.Rectangle(drawX + 32, drawY - 20, 0, 10), nombre);
+	}
+	 
+	 
 
 	private BufferedImage getFrameAnimacionActual() {
 		if (movimientoHacia == horizontalIzq) {

@@ -58,7 +58,7 @@ public class EstadoBatalla extends Estado {
 	
 	public EstadoBatalla(Juego juego, PaqueteBatalla paqueteBatalla) {
 		super(juego);
-		mundo = new Mundo(juego, "recursos/mundoBatalla.txt");
+		mundo = new Mundo(juego, "recursos/mundoBatalla.txt", "recursos/mundoBatallaCapaDos.txt");
 		miTurno = paqueteBatalla.isMiTurno();
 
 		paquetePersonaje = juego.getEscuchaMensajes().getPersonajesConectados().get(paqueteBatalla.getId());
@@ -172,6 +172,7 @@ public class EstadoBatalla extends Estado {
 		g.drawImage(Recursos.personaje.get(paquetePersonaje.getRaza()).get(3)[0], 0, 175, 256, 256, null);
 		g.drawImage(Recursos.personaje.get(paqueteEnemigo.getRaza()).get(7)[0], 550, 75, 256, 256, null);
 		
+		mundo.graficarObstaculos(g);
 		menuBatalla.graficar(g);
 		
 		g.setColor(Color.GREEN);

@@ -47,9 +47,9 @@ public class EstadoJuego extends Estado {
 
 	public EstadoJuego(Juego juego) {
 		super(juego);
-		mundo = new Mundo(juego, "recursos/" + getMundo() + ".txt");
+		mundo = new Mundo(juego, "recursos/" + getMundo() + ".txt", "recursos/" + getMundo() + "CapaDos" + ".txt");
 		paquetePersonaje = juego.getPersonaje();
-		entidadPersonaje = new Entidad(juego, mundo, 64, 64, juego.getPersonaje().getNombre(), 0, 0, Recursos.personaje.get(paquetePersonaje.getRaza()), 150);
+		entidadPersonaje = new Entidad(juego, mundo, 60, 60, juego.getPersonaje().getNombre(), 0, 0, Recursos.personaje.get(juego.getPersonaje().getRaza()), 150);
 		miniaturaPersonaje = Recursos.personaje.get(paquetePersonaje.getRaza()).get(5)[0];
 
 		try {
@@ -76,6 +76,8 @@ public class EstadoJuego extends Estado {
 		mundo.graficar(g);
 		entidadPersonaje.graficar(g);
 		graficarPersonajes(g);
+		mundo.graficarObstaculos(g);
+		entidadPersonaje.graficarNombre(g);
 		g.drawImage(Recursos.marco, 0, 0, juego.getAncho(), juego.getAlto(), null);
 		EstadoDePersonaje.dibujarEstadoDePersonaje(g, 5, 5, paquetePersonaje, miniaturaPersonaje);
 		if(haySolicitud) 

@@ -60,6 +60,7 @@ public class Recursos {
 	public static BufferedImage marco;
 	public static BufferedImage botonMenu;
 	public static BufferedImage menuEnemigo;
+	public static BufferedImage greenTree;
 	// Fin Entorno
 
 	// Batalla
@@ -318,6 +319,8 @@ public class Recursos {
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 		menuEnemigo = CargadorImagen.cargarImagen("/MenuEnemigo.png");
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+		SpriteSheet trees = new SpriteSheet(CargadorImagen.cargarImagen("/trees.png"));  
+		greenTree = trees.getTile(0, 0, 42, 50);
 		// Fin Entorno
 
 		// Inicio Batalla
