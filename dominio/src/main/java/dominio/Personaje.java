@@ -580,7 +580,6 @@ public abstract class Personaje implements Peleable,Serializable {
 
 		int acumuladorExperiencia = 0;
 		if (this.nivel == 100) {
-			System.out.println("Ya ha alcanzado el maximo nivel!");
 			return;
 		}
 		while (this.nivel != 100 && (this.experiencia >= Personaje.tablaDeNiveles[this.nivel+1] + acumuladorExperiencia)) {
@@ -593,11 +592,15 @@ public abstract class Personaje implements Peleable,Serializable {
 		this.experiencia -= acumuladorExperiencia;
 	}
 
-	public void ganarExperiencia(int exp) {
+	public boolean ganarExperiencia(int exp) {
 		this.experiencia += exp;
 
-		if (experiencia >= Personaje.tablaDeNiveles[this.nivel])
-			this.subirNivel();
+		if (experiencia >= Personaje.tablaDeNiveles[this.nivel + 1]){
+			subirNivel();
+			return true;
+		}
+		
+		return false;
 	}
 
 	public int otorgarExp() {

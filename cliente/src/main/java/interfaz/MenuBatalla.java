@@ -1,5 +1,6 @@
 package interfaz;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -44,6 +45,7 @@ public class MenuBatalla {
 		g.drawString("Ser energizado", x + 442, y + 168);
 		
 		// Dibujo el turno de quien es
+		g.setColor(Color.WHITE);
 		if(habilitado)
 			Pantalla.centerString(g, new Rectangle(x, y + 5, Recursos.menuBatalla.getWidth(), 20), "Mi Turno");
 		else

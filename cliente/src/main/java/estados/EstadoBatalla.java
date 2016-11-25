@@ -24,6 +24,7 @@ import entidades.Animacion;
 import entidades.Entidad;
 import interfaz.EstadoDePersonaje;
 import interfaz.MenuBatalla;
+import interfaz.MenuInfoPersonaje;
 import juego.Juego;
 import mensajeria.Comando;
 import mensajeria.PaqueteAtacar;
@@ -74,6 +75,12 @@ public class EstadoBatalla extends Estado {
 		paqueteFinalizarBatalla = new PaqueteFinalizarBatalla();
 		paqueteFinalizarBatalla.setId(personaje.getIdPersonaje());
 		paqueteFinalizarBatalla.setIdEnemigo(enemigo.getIdPersonaje());
+		
+		// por defecto batalla perdida
+		juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(), MenuInfoPersonaje.menuPerderBatalla);
+		
+		// limpio la accion del mouse
+		juego.getHandlerMouse().setNuevoClick(false);
 		
 	}
 
@@ -144,7 +151,11 @@ public class EstadoBatalla extends Estado {
 
 				if (haySpellSeleccionada && seRealizoAccion) {
 					if (!enemigo.estaVivo()) {
-						personaje.ganarExperiencia(enemigo.getNivel() * 40);
+						juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(), MenuInfoPersonaje.menuGanarBatalla);
+						if(personaje.ganarExperiencia(enemigo.getNivel() * 40)){
+							juego.getPersonaje().setNivel(juego.getPersonaje().getNivel() + 1);
+							juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(), MenuInfoPersonaje.menuSubirNivel);
+						}
 						finalizarBatalla();
 						Estado.setEstado(juego.getEstadoJuego());
 					} else {
@@ -154,7 +165,7 @@ public class EstadoBatalla extends Estado {
 						menuBatalla.setHabilitado(false);
 					}
 				} else if(haySpellSeleccionada && !seRealizoAccion){
-					JOptionPane.showMessageDialog(null, "No posees la energï¿½a suficiente para realizar esta habilidad.");
+					JOptionPane.showMessageDialog(null, "No posees la energía suficiente para realizar esta habilidad.");
 				}
 
 				juego.getHandlerMouse().setNuevoClick(false);

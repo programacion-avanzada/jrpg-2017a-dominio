@@ -21,7 +21,7 @@ import dominio.Personaje;
 import entidades.Entidad;
 import interfaz.EstadoDePersonaje;
 import interfaz.MenuBatalla;
-import interfaz.MenuEnemigo;
+import interfaz.MenuInfoPersonaje;
 import juego.Juego;
 import juego.Pantalla;
 import mensajeria.Comando;
@@ -38,12 +38,13 @@ public class EstadoJuego extends Estado {
 	private Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
 	private Map<Integer, PaquetePersonaje> personajesConectados;
 	private boolean haySolicitud;
+	private int tipoSolicitud;
 	
 	private final Gson gson = new Gson();
 	
 	private BufferedImage miniaturaPersonaje;
 	
-	MenuEnemigo menuEnemigo;
+	MenuInfoPersonaje menuEnemigo;
 
 	public EstadoJuego(Juego juego) {
 		super(juego);
@@ -78,8 +79,9 @@ public class EstadoJuego extends Estado {
 		graficarPersonajes(g);
 		g.drawImage(Recursos.marco, 0, 0, juego.getAncho(), juego.getAlto(), null);
 		EstadoDePersonaje.dibujarEstadoDePersonaje(g, 5, 5, paquetePersonaje, miniaturaPersonaje);
-		if(haySolicitud) 
-			menuEnemigo.graficar(g);
+		if(haySolicitud)
+			menuEnemigo.graficar(g, tipoSolicitud);
+			
 	}
 
 	public void graficarPersonajes(Graphics g) {
@@ -120,10 +122,11 @@ public class EstadoJuego extends Estado {
 		return null;
 	}
 	
-	public void setHaySolicitud(boolean b, PaquetePersonaje enemigo) {
+	public void setHaySolicitud(boolean b, PaquetePersonaje enemigo, int tipoSolicitud) {
 		haySolicitud = b;
 		// menu que mostrara al enemigo
-		menuEnemigo = new MenuEnemigo(300, 50, enemigo);
+		menuEnemigo = new MenuInfoPersonaje(300, 50, enemigo);
+		this.tipoSolicitud = tipoSolicitud;
 	}
 	
 	public boolean getHaySolicitud() {
@@ -134,8 +137,12 @@ public class EstadoJuego extends Estado {
 		paquetePersonaje = juego.getPersonaje();
 	}
 	
-	public MenuEnemigo getMenuEnemigo(){
+	public MenuInfoPersonaje getMenuEnemigo(){
 		return menuEnemigo;
+	}
+
+	public int getTipoSolicitud() {
+		return tipoSolicitud;
 	}
 	
 }
