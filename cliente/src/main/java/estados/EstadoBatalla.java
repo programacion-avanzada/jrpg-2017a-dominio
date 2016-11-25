@@ -157,7 +157,7 @@ public class EstadoBatalla extends Estado {
 					JOptionPane.showMessageDialog(null, "No posees la energ�a suficiente para realizar esta habilidad.");
 				}
 
-				juego.getHandlerMouse().setNuevoRecorrido(false);
+				juego.getHandlerMouse().setNuevoClick(false);
 			}
 		}
 		
@@ -298,7 +298,7 @@ public class EstadoBatalla extends Estado {
 	public void setMiTurno(boolean b) {
 		miTurno = b;
 		menuBatalla.setHabilitado(b);
-		juego.getHandlerMouse().setNuevoRecorrido(false);
+		juego.getHandlerMouse().setNuevoClick(false);
 	}
 
 	public Personaje getPersonaje() {

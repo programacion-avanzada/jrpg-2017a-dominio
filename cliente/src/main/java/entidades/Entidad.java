@@ -112,7 +112,7 @@ public class Entidad {
 		moverAbajoDer = new Animacion(velAnimacion, animaciones.get(5));
 		moverAbajo = new Animacion(velAnimacion, animaciones.get(6));
 		moverAbajoIzq = new Animacion(velAnimacion, animaciones.get(7));
-		
+
 		// Informo mi posicion actual
 		juego.getUbicacionPersonaje().setPosX(x);
 		juego.getUbicacionPersonaje().setPosY(y);
@@ -121,8 +121,7 @@ public class Entidad {
 	}
 
 	public void actualizar() {
-		
-		
+
 		if (enMovimiento) {
 			moverIzq.actualizar();
 			moverArribaIzq.actualizar();
@@ -145,7 +144,7 @@ public class Entidad {
 
 		getEntrada();
 		mover();
-		
+
 		juego.getCamara().Centrar(this);
 	}
 
@@ -154,63 +153,67 @@ public class Entidad {
 		posMouseRecorrido = juego.getHandlerMouse().getPosMouseRecorrido();
 		posMouse = juego.getHandlerMouse().getPosMouse();
 
-		if(juego.getHandlerMouse().getNuevoClick()) {
+		if (juego.getHandlerMouse().getNuevoClick()) {
 			if (juego.getEstadoJuego().getHaySolicitud()) {
-				if(juego.getEstadoJuego().getMenuEnemigo().clickEnMenu(posMouse[0], posMouse[1])) {
+				if (juego.getEstadoJuego().getMenuEnemigo().clickEnMenu(posMouse[0], posMouse[1])) {
 					if (juego.getEstadoJuego().getMenuEnemigo().clickEnBatallar(posMouse[0], posMouse[1])) {
 						PaqueteBatalla pBatalla = new PaqueteBatalla();
-						
+
 						pBatalla.setId(juego.getPersonaje().getId());
 						pBatalla.setIdEnemigo(idEnemigo);
-						
+
 						juego.getEstadoJuego().setHaySolicitud(false, null);
-						
+
 						try {
 							juego.getCliente().getSalida().writeObject(gson.toJson(pBatalla));
 						} catch (IOException e) {
 							JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor");
 							e.printStackTrace();
 						}
-					} else if(juego.getEstadoJuego().getMenuEnemigo().clickEnCerrar(posMouse[0], posMouse[1])) {
+					} else if (juego.getEstadoJuego().getMenuEnemigo().clickEnCerrar(posMouse[0], posMouse[1])) {
 						juego.getEstadoJuego().setHaySolicitud(false, null);
 					}
 				} else {
 					juego.getEstadoJuego().setHaySolicitud(false, null);
 				}
-		} else {
-			Iterator<Integer> it = juego.getEscuchaMensajes().getUbicacionPersonajes().keySet().iterator();
-			int key;
-			int tileMoverme[] = Mundo.mouseATile(posMouse[0] + juego.getCamara().getxOffset() - xOffset, posMouse[1] + juego.getCamara().getyOffset() - yOffset);
-			PaqueteMovimiento actual;
-			
-			while (it.hasNext()) {
-				key = (int) it.next();
-				actual = juego.getEscuchaMensajes().getUbicacionPersonajes().get(key);
-				tilePersonajes = Mundo.mouseATile(actual.getPosX(), actual.getPosY());
-				if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId() && 
-						juego.getEscuchaMensajes().getPersonajesConectados().get(actual.getIdPersonaje()) != null &&
-						juego.getEscuchaMensajes().getPersonajesConectados().get(actual.getIdPersonaje()).getEstado() == Estado.estadoJuego) {
-					
-					if (tileMoverme[0] == tilePersonajes[0] && tileMoverme[1] == tilePersonajes[1]) {
-						idEnemigo = actual.getIdPersonaje();
-						juego.getEstadoJuego().setHaySolicitud(true, juego.getEscuchaMensajes().getPersonajesConectados().get(idEnemigo));
+			} else {
+				Iterator<Integer> it = juego.getEscuchaMensajes().getUbicacionPersonajes().keySet().iterator();
+				int key;
+				int tileMoverme[] = Mundo.mouseATile(posMouse[0] + juego.getCamara().getxOffset() - xOffset,
+						posMouse[1] + juego.getCamara().getyOffset() - yOffset);
+				PaqueteMovimiento actual;
+
+				while (it.hasNext()) {
+					key = (int) it.next();
+					actual = juego.getEscuchaMensajes().getUbicacionPersonajes().get(key);
+					tilePersonajes = Mundo.mouseATile(actual.getPosX(), actual.getPosY());
+					if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId()
+							&& juego.getEscuchaMensajes().getPersonajesConectados().get(actual.getIdPersonaje()) != null
+							&& juego.getEscuchaMensajes().getPersonajesConectados().get(actual.getIdPersonaje())
+									.getEstado() == Estado.estadoJuego) {
+
+						if (tileMoverme[0] == tilePersonajes[0] && tileMoverme[1] == tilePersonajes[1]) {
+							idEnemigo = actual.getIdPersonaje();
+							juego.getEstadoJuego().setHaySolicitud(true,
+									juego.getEscuchaMensajes().getPersonajesConectados().get(idEnemigo));
+							juego.getHandlerMouse().setNuevoClick(false);
+						}
 					}
 				}
 			}
-		} 
-	} 
-		
+		}
+
 		if (juego.getHandlerMouse().getNuevoRecorrido() && !juego.getEstadoJuego().getHaySolicitud()) {
 
-		tileMoverme = Mundo.mouseATile(posMouseRecorrido[0] + juego.getCamara().getxOffset() - xOffset, posMouseRecorrido[1] + juego.getCamara().getyOffset() - yOffset);
+			tileMoverme = Mundo.mouseATile(posMouseRecorrido[0] + juego.getCamara().getxOffset() - xOffset,
+					posMouseRecorrido[1] + juego.getCamara().getyOffset() - yOffset);
 
-		juego.getHandlerMouse().setNuevoRecorrido(false);
+			juego.getHandlerMouse().setNuevoRecorrido(false);
 
-		pilaMovimiento = null;
-		
-		juego.getEstadoJuego().setHaySolicitud(false, null);
-	}
-		
+			pilaMovimiento = null;
+
+			juego.getEstadoJuego().setHaySolicitud(false, null);
+		}
 
 		if (!enMovimiento && tileMoverme != null) {
 
@@ -221,7 +224,8 @@ public class Entidad {
 
 			tileActual = Mundo.mouseATile(x, y);
 
-			if (tileMoverme[0] < 0 || tileMoverme[1] < 0 || tileMoverme[0] >= mundo.obtenerAncho()|| tileMoverme[1] >= mundo.obtenerAlto()) {
+			if (tileMoverme[0] < 0 || tileMoverme[1] < 0 || tileMoverme[0] >= mundo.obtenerAncho()
+					|| tileMoverme[1] >= mundo.obtenerAlto()) {
 				enMovimiento = false;
 				juego.getHandlerMouse().setNuevoRecorrido(false);
 				pilaMovimiento = null;
@@ -229,7 +233,8 @@ public class Entidad {
 				return;
 			}
 
-			if (tileMoverme[0] == tileActual[0] && tileMoverme[1] == tileActual[1] || mundo.getTile(tileMoverme[0], tileMoverme[1]).esSolido()) {
+			if (tileMoverme[0] == tileActual[0] && tileMoverme[1] == tileActual[1]
+					|| mundo.getTile(tileMoverme[0], tileMoverme[1]).esSolido()) {
 				tileMoverme = null;
 				enMovimiento = false;
 				juego.getHandlerMouse().setNuevoRecorrido(false);
@@ -315,10 +320,10 @@ public class Entidad {
 				dx -= paso;
 				dy -= paso / 2;
 			}
-			
+
 			x += dx;
 			y += dy;
-			
+
 			// Le envio la posicion
 			if (intervaloEnvio == 2) {
 				enviarPosicion();
@@ -339,7 +344,6 @@ public class Entidad {
 		g.setColor(Color.WHITE);
 		Pantalla.centerString(g, new java.awt.Rectangle(drawX + 32, drawY - 20, 0, 10), nombre);
 	}
-	
 
 	private BufferedImage getFrameAnimacionActual() {
 		if (movimientoHacia == horizontalIzq) {
@@ -395,7 +399,8 @@ public class Entidad {
 		juego.getUbicacionPersonaje().setDireccion(getDireccion());
 		juego.getUbicacionPersonaje().setFrame(getFrame());
 		try {
-			juego.getCliente().getSalida().writeObject(gson.toJson(juego.getUbicacionPersonaje(), PaqueteMovimiento.class));
+			juego.getCliente().getSalida()
+					.writeObject(gson.toJson(juego.getUbicacionPersonaje(), PaqueteMovimiento.class));
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor.");
 			e.printStackTrace();
@@ -405,11 +410,13 @@ public class Entidad {
 	private PilaDeTiles caminoMasCorto(int xInicial, int yInicial, int xFinal, int yFinal) {
 		Grafo grafoLibres = mundo.obtenerGrafoDeTilesNoSolidos();
 		// Transformo las coordenadas iniciales y finales en indices
-		int nodoInicial = (yInicial - grafoLibres.obtenerNodos()[0].obtenerY()) * (int) Math.sqrt(grafoLibres.obtenerCantidadDeNodosTotal()) 
-							+ xInicial - grafoLibres.obtenerNodos()[0].obtenerX();
-		
-		int nodoFinal = (yFinal - grafoLibres.obtenerNodos()[0].obtenerY()) * (int) Math.sqrt(grafoLibres.obtenerCantidadDeNodosTotal())
-							+ xFinal - grafoLibres.obtenerNodos()[0].obtenerX();
+		int nodoInicial = (yInicial - grafoLibres.obtenerNodos()[0].obtenerY())
+				* (int) Math.sqrt(grafoLibres.obtenerCantidadDeNodosTotal()) + xInicial
+				- grafoLibres.obtenerNodos()[0].obtenerX();
+
+		int nodoFinal = (yFinal - grafoLibres.obtenerNodos()[0].obtenerY())
+				* (int) Math.sqrt(grafoLibres.obtenerCantidadDeNodosTotal()) + xFinal
+				- grafoLibres.obtenerNodos()[0].obtenerX();
 
 		// Hago todo
 		double[] vecCostos = new double[grafoLibres.obtenerCantidadDeNodosTotal()];
@@ -426,7 +433,8 @@ public class Entidad {
 		vecCostos[nodoInicial] = 0;
 		Nodo[] adyacentes = grafoLibres.obtenerNodos()[nodoInicial].obtenerNodosAdyacentes();
 		for (int i = 0; i < grafoLibres.obtenerNodos()[nodoInicial].obtenerCantidadDeAdyacentes(); i++) {
-			if (estanEnDiagonal(grafoLibres.obtenerNodos()[nodoInicial], grafoLibres.obtenerNodos()[adyacentes[i].obtenerIndice()]))
+			if (estanEnDiagonal(grafoLibres.obtenerNodos()[nodoInicial],
+					grafoLibres.obtenerNodos()[adyacentes[i].obtenerIndice()]))
 				vecCostos[adyacentes[i].obtenerIndice()] = 1.5;
 			else
 				vecCostos[adyacentes[i].obtenerIndice()] = 1;
@@ -466,10 +474,11 @@ public class Entidad {
 		// Creo el vector de nodos hasta donde quiere llegar
 		PilaDeTiles camino = new PilaDeTiles();
 		while (nodoFinal != nodoInicial) {
-			camino.push(new NodoDePila(grafoLibres.obtenerNodos()[nodoFinal].obtenerX(), grafoLibres.obtenerNodos()[nodoFinal].obtenerY()));
+			camino.push(new NodoDePila(grafoLibres.obtenerNodos()[nodoFinal].obtenerX(),
+					grafoLibres.obtenerNodos()[nodoFinal].obtenerY()));
 			nodoFinal = vecPredecesores[nodoFinal];
 		}
-		
+
 		return camino;
 	}
 
