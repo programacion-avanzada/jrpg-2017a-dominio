@@ -52,15 +52,6 @@ public class Entidad {
 	private int posMouse[];
 	private int[] tile;
 
-	// Calculo de movimiento
-	private float difX;
-	private float difY;
-	private float relacion;
-
-	// Posicion final
-	private float auxX;
-	private float auxY;
-
 	// Movimiento Actual
 	private static final int horizontalDer = 4;
 	private static final int horizontalIzq = 0;
@@ -170,14 +161,18 @@ public class Entidad {
 			pilaMovimiento = null;
 			
 			if (juego.getEstadoJuego().getHaySolicitud()) {
-				if(posMouse[1] >= 0 && posMouse[1] <= 25) {
-					if (posMouse[0] >= 200 && posMouse[0] <= 400) {
+				
+				juego.getEstadoJuego().getMenuEnemigo().clickEnBatallar(posMouse[0], posMouse[1]);
+				juego.getEstadoJuego().getMenuEnemigo().clickEnCerrar(posMouse[0], posMouse[1]);
+				
+				if(juego.getEstadoJuego().getMenuEnemigo().clickEnMenu(posMouse[0], posMouse[1])) {
+					if (juego.getEstadoJuego().getMenuEnemigo().clickEnBatallar(posMouse[0], posMouse[1])) {
 						PaqueteBatalla pBatalla = new PaqueteBatalla();
 						
 						pBatalla.setId(juego.getPersonaje().getId());
 						pBatalla.setIdEnemigo(idEnemigo);
 						
-						juego.getEstadoJuego().setHaySolicitud(false);
+						juego.getEstadoJuego().setHaySolicitud(false, null);
 						
 						try {
 							juego.getCliente().getSalida().writeObject(gson.toJson(pBatalla));
@@ -185,9 +180,11 @@ public class Entidad {
 							JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor");
 							e.printStackTrace();
 						}
-					} else if(posMouse[0] >= 430 && posMouse[0] <= 630) {
-						juego.getEstadoJuego().setHaySolicitud(false);
+					} else if(juego.getEstadoJuego().getMenuEnemigo().clickEnCerrar(posMouse[0], posMouse[1])) {
+						juego.getEstadoJuego().setHaySolicitud(false, null);
 					}
+				} else {
+					juego.getEstadoJuego().setHaySolicitud(false, null);
 				}
 			} else {
 				Iterator<Integer> it = juego.getEscuchaMensajes().getUbicacionPersonajes().keySet().iterator();
@@ -199,11 +196,12 @@ public class Entidad {
 					actual = juego.getEscuchaMensajes().getUbicacionPersonajes().get(key);
 					tilePersonajes = Mundo.mouseATile(actual.getPosX(), actual.getPosY());
 					if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId() && 
+							juego.getEscuchaMensajes().getPersonajesConectados().get(actual.getIdPersonaje()) != null &&
 							juego.getEscuchaMensajes().getPersonajesConectados().get(actual.getIdPersonaje()).getEstado() == Estado.estadoJuego) {
 						
 						if (tileMoverme[0] == tilePersonajes[0] && tileMoverme[1] == tilePersonajes[1]) {
-							juego.getEstadoJuego().setHaySolicitud(true);
 							idEnemigo = actual.getIdPersonaje();
+							juego.getEstadoJuego().setHaySolicitud(true, juego.getEscuchaMensajes().getPersonajesConectados().get(idEnemigo));
 						}
 					}
 				}

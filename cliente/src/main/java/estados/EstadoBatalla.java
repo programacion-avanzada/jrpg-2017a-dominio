@@ -22,7 +22,7 @@ import dominio.Orco;
 import dominio.Personaje;
 import entidades.Animacion;
 import entidades.Entidad;
-import interfaz.InterfazGrafica;
+import interfaz.EstadoDePersonaje;
 import juego.Juego;
 import mensajeria.Comando;
 import mensajeria.PaqueteAtacar;
@@ -162,8 +162,8 @@ public class EstadoBatalla extends Estado {
 		g.drawString(paqueteEnemigo.getCasta(),(int) (200 - juego.getCamara().getxOffset() + entidadEnemigo.getxOffset() / 2), (int) (480 - juego.getCamara().getyOffset()));
 		g.setColor(Color.GREEN);
 		
-		InterfazGrafica.dibujarEstadoDePersonaje(g, 25, 5, personaje, miniaturaPersonaje);
-		InterfazGrafica.dibujarEstadoDePersonaje(g, 550, 5, enemigo, miniaturaEnemigo);
+		EstadoDePersonaje.dibujarEstadoDePersonaje(g, 25, 5, personaje, miniaturaPersonaje);
+		EstadoDePersonaje.dibujarEstadoDePersonaje(g, 550, 5, enemigo, miniaturaEnemigo);
 	}
 	
 	private void crearPersonajes() {

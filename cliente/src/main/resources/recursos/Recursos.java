@@ -52,6 +52,7 @@ public class Recursos {
 	public static BufferedImage background;
 	public static BufferedImage marco;
 	public static BufferedImage botonMenu;
+	public static BufferedImage menuEnemigo;
 	// Fin Entorno
 	
 	// Batalla
@@ -248,6 +249,7 @@ public class Recursos {
 		background = CargadorImagen.cargarImagen("/background.jpg");
 		marco = CargadorImagen.cargarImagen("/marco.png");
 		botonMenu = CargadorImagen.cargarImagen("/botonMenu.png");
+		menuEnemigo = CargadorImagen.cargarImagen("/MenuEnemigo.png");
 		// Fin Entorno
 		
 		// Inicio Batalla

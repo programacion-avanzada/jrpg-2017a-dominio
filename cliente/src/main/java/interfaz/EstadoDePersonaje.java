@@ -9,7 +9,7 @@ import dominio.Personaje;
 import mensajeria.PaquetePersonaje;
 import recursos.Recursos;
 
-public class InterfazGrafica {
+public class EstadoDePersonaje {
 	
 	private static final int ANCHOBARRA = 122;
 	private static final int ALTOSALUD = 14;
@@ -92,49 +92,6 @@ public class InterfazGrafica {
 		g.drawString(String.valueOf(personaje.getNivel()), x + 59, y + 70);
 		
 	}
-	
-//	private void graficarEstadoPersonaje(Graphics g) {
-//	g.drawImage(Recursos.estadoPersonaje, 0, 0, null);
-//
-//	g.drawImage(miniaturaPersonaje, 5, 5, ANCHOMINIATURA, ALTOMINIATURA, null);
-//	
-//	if(personaje.getSalud() == personaje.getSaludTope()) {
-//		drawBarra = ANCHOBARRA;
-//	} else {
-//		drawBarra = (personaje.getSalud() * ANCHOBARRA) / personaje.getSaludTope();
-//	}
-//	
-//	g.setColor(Color.WHITE);
-//	g.setFont(new Font("Tahoma", Font.PLAIN, 10));
-//	g.drawImage(Recursos.barraSalud, 78, 23, drawBarra, ALTOSALUD, null);
-//	g.drawString(String.valueOf(personaje.getSalud()) + " / " + String.valueOf(personaje.getSaludTope()), 132, 33);
-//	
-//	if(personaje.getEnergia() == personaje.getEnergiaTope()) {
-//		drawBarra = ANCHOBARRA;
-//	} else {
-//		drawBarra = (personaje.getEnergia() * ANCHOBARRA) / personaje.getEnergiaTope();
-//	}
-//	
-//	g.drawImage(Recursos.barraEnergia, 78, 41, drawBarra, ALTOENERGIA, null);
-//	g.drawString(String.valueOf(personaje.getEnergia()) + " / " + String.valueOf(personaje.getEnergiaTope()), 132, 53);
-//
-//	if(personaje.getExperiencia() == Personaje.tablaDeNiveles[personaje.getNivel() + 1]) {
-//		drawBarra = ANCHOBARRA;
-//	} else {
-//		drawBarra = (personaje.getExperiencia() * ANCHOBARRA) / Personaje.tablaDeNiveles[personaje.getNivel() + 1];
-//	}
-//	
-//	g.setFont(new Font("Tahoma", Font.PLAIN, 8));
-//	g.drawImage(Recursos.barraExperiencia, 77, 62, drawBarra, ALTOEXPERIENCIA, null);
-//	g.drawString(String.valueOf(personaje.getExperiencia()) + " / " + String.valueOf(Personaje.tablaDeNiveles[personaje.getNivel() + 1]), 132, 68);
-//	g.setFont(new Font("Tahoma", Font.PLAIN, 10));
-//	g.setColor(Color.GREEN);
-//	g.drawString(String.valueOf(personaje.getNivel()), 55, 68);
-//}
-//
-//private void graficarEstadoEnemigo(Graphics g) {
-
-//}
 
 
 }

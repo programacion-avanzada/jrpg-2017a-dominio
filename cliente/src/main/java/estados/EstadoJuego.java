@@ -19,7 +19,8 @@ import dominio.Humano;
 import dominio.Orco;
 import dominio.Personaje;
 import entidades.Entidad;
-import interfaz.InterfazGrafica;
+import interfaz.EstadoDePersonaje;
+import interfaz.MenuEnemigo;
 import juego.Juego;
 import juego.Pantalla;
 import mensajeria.Comando;
@@ -40,6 +41,8 @@ public class EstadoJuego extends Estado {
 	private final Gson gson = new Gson();
 	
 	private BufferedImage miniaturaPersonaje;
+	
+	MenuEnemigo menuEnemigo;
 
 	public EstadoJuego(Juego juego) {
 		super(juego);
@@ -73,14 +76,9 @@ public class EstadoJuego extends Estado {
 		entidadPersonaje.graficar(g);
 		graficarPersonajes(g);
 		g.drawImage(Recursos.marco, 0, 0, juego.getAncho(), juego.getAlto(), null);
-		InterfazGrafica.dibujarEstadoDePersonaje(g, 5, 5, paquetePersonaje, miniaturaPersonaje);
-		if(haySolicitud) {
-			g.drawImage(Recursos.botonMenu, 200, 0, 200, 25, null);
-			g.drawImage(Recursos.botonMenu, 430, 0, 200, 25, null);
-			g.setColor(Color.WHITE);
-			g.drawString("Batallar", 280, 15);
-			g.drawString("Cancelar", 505, 15);
-		}
+		EstadoDePersonaje.dibujarEstadoDePersonaje(g, 5, 5, paquetePersonaje, miniaturaPersonaje);
+		if(haySolicitud) 
+			menuEnemigo.graficar(g);
 	}
 
 	public void graficarPersonajes(Graphics g) {
@@ -121,8 +119,10 @@ public class EstadoJuego extends Estado {
 		return null;
 	}
 	
-	public void setHaySolicitud(boolean b) {
+	public void setHaySolicitud(boolean b, PaquetePersonaje enemigo) {
 		haySolicitud = b;
+		// menu que mostrara al enemigo
+		menuEnemigo = new MenuEnemigo(300, 50, enemigo);
 	}
 	
 	public boolean getHaySolicitud() {
@@ -131,5 +131,9 @@ public class EstadoJuego extends Estado {
 	
 	public void actualizarPersonaje() {
 		paquetePersonaje = juego.getPersonaje();
+	}
+	
+	public MenuEnemigo getMenuEnemigo(){
+		return menuEnemigo;
 	}
 }
