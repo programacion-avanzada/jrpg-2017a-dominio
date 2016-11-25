@@ -83,8 +83,7 @@ public class Juego implements Runnable {
 	}
 
 	private void actualizar() { // Actualiza los objetos y sus posiciones
-		handlerMouse.actualizar();
-
+		
 		if (Estado.getEstado() != null) {
 			Estado.getEstado().actualizar();
 		}
