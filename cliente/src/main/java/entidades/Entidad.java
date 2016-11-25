@@ -32,7 +32,7 @@ public class Entidad {
 
 	Juego juego;
 
-	// Tamaño de la entidad
+	// Tamaï¿½o de la entidad
 	private int ancho;
 	private int alto;
 
@@ -167,7 +167,7 @@ public class Entidad {
 						try {
 							juego.getCliente().getSalida().writeObject(gson.toJson(pBatalla));
 						} catch (IOException e) {
-							JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor");
+							JOptionPane.showMessageDialog(null, "Fallo la conexiï¿½n con el servidor");
 							e.printStackTrace();
 						}
 					} else if (juego.getEstadoJuego().getMenuEnemigo().clickEnCerrar(posMouse[0], posMouse[1])) {
@@ -176,32 +176,29 @@ public class Entidad {
 				} else {
 					juego.getEstadoJuego().setHaySolicitud(false, null);
 				}
-			} else {
-				Iterator<Integer> it = juego.getEscuchaMensajes().getUbicacionPersonajes().keySet().iterator();
-				int key;
-				int tileMoverme[] = Mundo.mouseATile(posMouse[0] + juego.getCamara().getxOffset() - xOffset,
-						posMouse[1] + juego.getCamara().getyOffset() - yOffset);
-				PaqueteMovimiento actual;
-
-				while (it.hasNext()) {
-					key = (int) it.next();
-					actual = juego.getEscuchaMensajes().getUbicacionPersonajes().get(key);
-					tilePersonajes = Mundo.mouseATile(actual.getPosX(), actual.getPosY());
-					if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId()
-							&& juego.getEscuchaMensajes().getPersonajesConectados().get(actual.getIdPersonaje()) != null
-							&& juego.getEscuchaMensajes().getPersonajesConectados().get(actual.getIdPersonaje())
-									.getEstado() == Estado.estadoJuego) {
-
-						if (tileMoverme[0] == tilePersonajes[0] && tileMoverme[1] == tilePersonajes[1]) {
-							idEnemigo = actual.getIdPersonaje();
-							juego.getEstadoJuego().setHaySolicitud(true,
-									juego.getEscuchaMensajes().getPersonajesConectados().get(idEnemigo));
-							juego.getHandlerMouse().setNuevoClick(false);
-						}
+		} else {
+			Iterator<Integer> it = juego.getEscuchaMensajes().getUbicacionPersonajes().keySet().iterator();
+			int key;
+			int tileMoverme[] = Mundo.mouseATile(posMouse[0] + juego.getCamara().getxOffset() - xOffset, posMouse[1] + juego.getCamara().getyOffset() - yOffset);
+			PaqueteMovimiento actual;
+			
+			while (it.hasNext()) {
+				key = (int) it.next();
+				actual = juego.getEscuchaMensajes().getUbicacionPersonajes().get(key);
+				tilePersonajes = Mundo.mouseATile(actual.getPosX(), actual.getPosY());
+				if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId() && 
+						juego.getEscuchaMensajes().getPersonajesConectados().get(actual.getIdPersonaje()) != null &&
+						juego.getEscuchaMensajes().getPersonajesConectados().get(actual.getIdPersonaje()).getEstado() == Estado.estadoJuego) {
+					
+					if (tileMoverme[0] == tilePersonajes[0] && tileMoverme[1] == tilePersonajes[1]) {
+						idEnemigo = actual.getIdPersonaje();
+						juego.getEstadoJuego().setHaySolicitud(true, juego.getEscuchaMensajes().getPersonajesConectados().get(idEnemigo));
+						juego.getHandlerMouse().setNuevoClick(false);
 					}
 				}
 			}
 		}
+	}
 
 		if (juego.getHandlerMouse().getNuevoRecorrido() && !juego.getEstadoJuego().getHaySolicitud()) {
 
@@ -402,7 +399,7 @@ public class Entidad {
 			juego.getCliente().getSalida()
 					.writeObject(gson.toJson(juego.getUbicacionPersonaje(), PaqueteMovimiento.class));
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor.");
+			JOptionPane.showMessageDialog(null, "Fallo la conexiï¿½n con el servidor.");
 			e.printStackTrace();
 		}
 	}
