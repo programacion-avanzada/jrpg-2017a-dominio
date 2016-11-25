@@ -248,9 +248,38 @@ public class Conector {
 			return personaje;
 
 		} catch (SQLException ex) {
-			System.err.println(ex.getMessage());
+			Servidor.log.append("Fallo al intentar recuperar el personaje " + user.getUsername() + System.lineSeparator());
+			Servidor.log.append(ex.getMessage() + System.lineSeparator());
+			ex.printStackTrace();
 		}
 
 		return new PaquetePersonaje();
+	}
+	
+	public PaqueteUsuario getUsuario(String usuario) {
+		ResultSet result = null;
+		PreparedStatement st;
+		
+		try {
+			st = connect.prepareStatement("SELECT * FROM registro WHERE usuario = ?");
+			st.setString(1, usuario);
+			result = st.executeQuery();
+
+			String password = result.getString("password");
+			int idPersonaje = result.getInt("idPersonaje");
+			
+			PaqueteUsuario paqueteUsuario = new PaqueteUsuario();
+			paqueteUsuario.setUsername(usuario);
+			paqueteUsuario.setPassword(password);
+			paqueteUsuario.setIdPj(idPersonaje);
+			
+			return paqueteUsuario;
+		} catch (SQLException e) {
+			Servidor.log.append("Fallo al intentar recuperar el usuario " + usuario + System.lineSeparator());
+			Servidor.log.append(e.getMessage() + System.lineSeparator());
+			e.printStackTrace();
+		}
+		
+		return new PaqueteUsuario();
 	}
 }
