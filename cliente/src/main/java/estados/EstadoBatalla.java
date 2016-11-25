@@ -20,7 +20,9 @@ import dominio.Humano;
 import dominio.Item;
 import dominio.Orco;
 import dominio.Personaje;
+import entidades.Animacion;
 import entidades.Entidad;
+import interfaz.InterfazGrafica;
 import juego.Juego;
 import mensajeria.Comando;
 import mensajeria.PaqueteAtacar;
@@ -51,18 +53,9 @@ public class EstadoBatalla extends Estado {
 	private final int YSPELLS;
 	private final int ANCHOSPELL = 42;
 	private final int SEPARACION = 6;
-	private final int ANCHOBARRA = 122;
-	private final int ALTOSALUD = 14;
-	private final int ALTOENERGIA = 14; 
-	private final int ALTOEXPERIENCIA = 6; 
-	private final int ALTOMINIATURA = 64;
-	private final int ANCHOMINIATURA = 64;
 	private BufferedImage miniaturaPersonaje;
 	private BufferedImage miniaturaEnemigo;
 	
-	private int drawBarra;
-	
-
 	public EstadoBatalla(Juego juego, PaqueteBatalla paqueteBatalla) {
 		super(juego);
 		mundo = new Mundo(juego, "recursos/mundoBatalla.txt");
@@ -90,6 +83,7 @@ public class EstadoBatalla extends Estado {
 		paqueteFinalizarBatalla = new PaqueteFinalizarBatalla();
 		paqueteFinalizarBatalla.setId(personaje.getIdPersonaje());
 		paqueteFinalizarBatalla.setIdEnemigo(enemigo.getIdPersonaje());
+		
 	}
 
 	@Override
@@ -145,6 +139,7 @@ public class EstadoBatalla extends Estado {
 				juego.getHandlerMouse().setNuevoRecorrido(false);
 			}
 		}
+		
 	}
 
 	@Override
@@ -152,9 +147,10 @@ public class EstadoBatalla extends Estado {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, juego.getAncho(), juego.getAlto());
 		mundo.graficar(g);
-		entidadPersonaje.graficar(g);
-		entidadEnemigo.graficar(g);
-
+		
+		g.drawImage(Recursos.personaje.get(paquetePersonaje.getRaza()).get(3)[0], 0, 200, 256, 256, null);
+		g.drawImage(Recursos.personaje.get(paqueteEnemigo.getRaza()).get(7)[0], 550, 100, 256, 256, null);
+		
 		if (miTurno) {
 			g.drawImage(Recursos.barraSpells, 0, YSPELLS, 300, 60, null);
 			g.drawImage(Recursos.habilidad1, XSPELLS, YSPELLS + 7, 40, 48, null);
@@ -166,88 +162,10 @@ public class EstadoBatalla extends Estado {
 		g.drawString(paqueteEnemigo.getCasta(),(int) (200 - juego.getCamara().getxOffset() + entidadEnemigo.getxOffset() / 2), (int) (480 - juego.getCamara().getyOffset()));
 		g.setColor(Color.GREEN);
 		
-		graficarEstadoPersonaje(g);
-		graficarEstadoEnemigo(g);
+		InterfazGrafica.dibujarEstadoDePersonaje(g, 25, 5, personaje, miniaturaPersonaje);
+		InterfazGrafica.dibujarEstadoDePersonaje(g, 550, 5, enemigo, miniaturaEnemigo);
 	}
 	
-	private void graficarEstadoPersonaje(Graphics g) {
-		g.drawImage(Recursos.estadoPersonaje, 0, 0, null);
-
-		g.drawImage(miniaturaPersonaje, 5, 5, ANCHOMINIATURA, ALTOMINIATURA, null);
-		
-		if(personaje.getSalud() == personaje.getSaludTope()) {
-			drawBarra = ANCHOBARRA;
-		} else {
-			drawBarra = (personaje.getSalud() * ANCHOBARRA) / personaje.getSaludTope();
-		}
-		
-		g.setColor(Color.WHITE);
-		g.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		g.drawImage(Recursos.barraSalud, 78, 23, drawBarra, ALTOSALUD, null);
-		g.drawString(String.valueOf(personaje.getSalud()) + " / " + String.valueOf(personaje.getSaludTope()), 132, 33);
-		
-		if(personaje.getEnergia() == personaje.getEnergiaTope()) {
-			drawBarra = ANCHOBARRA;
-		} else {
-			drawBarra = (personaje.getEnergia() * ANCHOBARRA) / personaje.getEnergiaTope();
-		}
-		
-		g.drawImage(Recursos.barraEnergia, 78, 41, drawBarra, ALTOENERGIA, null);
-		g.drawString(String.valueOf(personaje.getEnergia()) + " / " + String.valueOf(personaje.getEnergiaTope()), 132, 53);
-
-		if(personaje.getExperiencia() == Personaje.tablaDeNiveles[personaje.getNivel() + 1]) {
-			drawBarra = ANCHOBARRA;
-		} else {
-			drawBarra = (personaje.getExperiencia() * ANCHOBARRA) / Personaje.tablaDeNiveles[personaje.getNivel() + 1];
-		}
-		
-		g.setFont(new Font("Tahoma", Font.PLAIN, 8));
-		g.drawImage(Recursos.barraExperiencia, 77, 62, drawBarra, ALTOEXPERIENCIA, null);
-		g.drawString(String.valueOf(personaje.getExperiencia()) + " / " + String.valueOf(Personaje.tablaDeNiveles[personaje.getNivel() + 1]), 132, 68);
-		g.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		g.setColor(Color.GREEN);
-		g.drawString(String.valueOf(personaje.getNivel()), 55, 68);
-	}
-	
-	private void graficarEstadoEnemigo(Graphics g) {
-		g.drawImage(Recursos.estadoPersonaje, 500, 0, null);
-
-		g.drawImage(miniaturaEnemigo, 505, 5, ANCHOMINIATURA, ALTOMINIATURA, null);
-		
-		if(enemigo.getSalud() == enemigo.getSaludTope()) {
-			drawBarra = ANCHOBARRA;
-		} else {
-			drawBarra = (enemigo.getSalud() * ANCHOBARRA) / enemigo.getSaludTope();
-		}
-		
-		g.setColor(Color.WHITE);
-		g.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		g.drawImage(Recursos.barraSalud, 578, 23, drawBarra, ALTOSALUD, null);
-		g.drawString(String.valueOf(enemigo.getSalud()) + " / " + String.valueOf(enemigo.getSaludTope()), 632, 33);
-		
-		if(enemigo.getEnergia() == enemigo.getEnergiaTope()) {
-			drawBarra = ANCHOBARRA;
-		} else {
-			drawBarra = (enemigo.getEnergia() * ANCHOBARRA) / enemigo.getEnergiaTope();
-		}
-		
-		g.drawImage(Recursos.barraEnergia, 578, 41, drawBarra, ALTOENERGIA, null);
-		g.drawString(String.valueOf(enemigo.getEnergia()) + " / " + String.valueOf(enemigo.getEnergiaTope()), 632, 53);
-
-		if(enemigo.getExperiencia() == Personaje.tablaDeNiveles[enemigo.getNivel() + 1]) {
-			drawBarra = ANCHOBARRA;
-		} else {
-			drawBarra = (enemigo.getExperiencia() * ANCHOBARRA) / Personaje.tablaDeNiveles[enemigo.getNivel() + 1];
-		}
-		
-		g.setFont(new Font("Tahoma", Font.PLAIN, 7));
-		g.drawImage(Recursos.barraExperiencia, 577, 62, drawBarra, ALTOEXPERIENCIA, null);
-		g.drawString(String.valueOf(enemigo.getExperiencia()) + " / " + String.valueOf(Personaje.tablaDeNiveles[enemigo.getNivel() + 1]), 632, 68);
-		g.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		g.setColor(Color.GREEN);
-		g.drawString(String.valueOf(enemigo.getNivel()), 555, 68);
-	}
-
 	private void crearPersonajes() {
 		String nombre = paquetePersonaje.getNombre();
 		int salud = paquetePersonaje.getSaludTope();
