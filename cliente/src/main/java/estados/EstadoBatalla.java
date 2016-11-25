@@ -23,6 +23,7 @@ import dominio.Personaje;
 import entidades.Animacion;
 import entidades.Entidad;
 import interfaz.EstadoDePersonaje;
+import interfaz.MenuBatalla;
 import juego.Juego;
 import mensajeria.Comando;
 import mensajeria.PaqueteAtacar;
@@ -37,8 +38,6 @@ public class EstadoBatalla extends Estado {
 	private Mundo mundo;
 	private Personaje personaje;
 	private Personaje enemigo;
-	private Entidad entidadPersonaje;
-	private Entidad entidadEnemigo;
 	private int[] posMouse;
 	private PaquetePersonaje paquetePersonaje;
 	private PaquetePersonaje paqueteEnemigo;
@@ -49,12 +48,10 @@ public class EstadoBatalla extends Estado {
 
 	private Gson gson = new Gson();
 
-	private final int XSPELLS;
-	private final int YSPELLS;
-	private final int ANCHOSPELL = 42;
-	private final int SEPARACION = 6;
 	private BufferedImage miniaturaPersonaje;
 	private BufferedImage miniaturaEnemigo;
+	
+	private MenuBatalla menuBatalla;
 	
 	public EstadoBatalla(Juego juego, PaqueteBatalla paqueteBatalla) {
 		super(juego);
@@ -64,21 +61,15 @@ public class EstadoBatalla extends Estado {
 		paquetePersonaje = juego.getEscuchaMensajes().getPersonajesConectados().get(paqueteBatalla.getId());
 		paqueteEnemigo = juego.getEscuchaMensajes().getPersonajesConectados().get(paqueteBatalla.getIdEnemigo());
 
-		entidadPersonaje = new Entidad(juego, mundo, 128, 128, paquetePersonaje.getNombre(), 0, 0, Recursos.personaje.get(paquetePersonaje.getRaza()), 150);
-		entidadEnemigo = new Entidad(juego, mundo, 128, 128, paqueteEnemigo.getNombre(), 0, 0, Recursos.personaje.get(paqueteEnemigo.getRaza()), 150);
-
 		crearPersonajes();
-
-		entidadPersonaje.setX(-150);
-		entidadPersonaje.setY(350);
-
-		entidadEnemigo.setX(200);
-		entidadEnemigo.setY(350);
+		
+		menuBatalla = new MenuBatalla(miTurno, personaje);
+		
+		miniaturaPersonaje = Recursos.personaje.get(personaje.getNombreRaza()).get(5)[0];
+		miniaturaEnemigo = Recursos.personaje.get(enemigo.getNombreRaza()).get(5)[0];
+		
 		juego.getCamara().setxOffset(-350);
 		juego.getCamara().setyOffset(150);
-
-		XSPELLS = 3;
-		YSPELLS = juego.getAlto() - 60;
 		
 		paqueteFinalizarBatalla = new PaqueteFinalizarBatalla();
 		paqueteFinalizarBatalla.setId(personaje.getIdPersonaje());
@@ -91,38 +82,43 @@ public class EstadoBatalla extends Estado {
 		haySpellSeleccionada = false;
 
 		if (miTurno) {
+			
 			if (juego.getHandlerMouse().getNuevoRecorrido()) {
 				posMouse = juego.getHandlerMouse().getPosMouse();
 
-				if (posMouse[1] >= YSPELLS + 7 && posMouse[1] <= YSPELLS + 54) {
+				if (menuBatalla.clickEnMenu(posMouse[0], posMouse[1])) {
 
-					if (posMouse[0] >= XSPELLS && posMouse[0] <= XSPELLS + ANCHOSPELL) {
+					if (menuBatalla.getBotonClickeado(posMouse[0], posMouse[1]) == 1) {
+						personaje.habilidadRaza1(enemigo);
+						haySpellSeleccionada = true;
+					}
+
+					if (menuBatalla.getBotonClickeado(posMouse[0], posMouse[1]) == 2) {
+						personaje.habilidadRaza2(enemigo);
+						haySpellSeleccionada = true;
+					}
+
+					if (menuBatalla.getBotonClickeado(posMouse[0], posMouse[1]) == 3) {
 						personaje.habilidadCasta1(enemigo);
 						haySpellSeleccionada = true;
 					}
 
-					if (posMouse[0] >= XSPELLS + 2 * SEPARACION + ANCHOSPELL && posMouse[0] <= XSPELLS + 2 * (SEPARACION + ANCHOSPELL)) {
+					if (menuBatalla.getBotonClickeado(posMouse[0], posMouse[1]) == 4) {
 						personaje.habilidadCasta2(enemigo);
 						haySpellSeleccionada = true;
 					}
 
-					if (posMouse[0] >= XSPELLS + 3 * SEPARACION + 2 * ANCHOSPELL && posMouse[0] <= XSPELLS + 3 * (SEPARACION + ANCHOSPELL)) {
+					if (menuBatalla.getBotonClickeado(posMouse[0], posMouse[1]) == 5) {
 						personaje.habilidadCasta3(enemigo);
 						haySpellSeleccionada = true;
 					}
 
-					if (posMouse[0] >= XSPELLS + 4 * SEPARACION + 3 * ANCHOSPELL && posMouse[0] <= XSPELLS + 4 * (SEPARACION + ANCHOSPELL)) {
-						haySpellSeleccionada = true;
-					}
-
-					if (posMouse[0] >= XSPELLS + 5 * SEPARACION + 4 * ANCHOSPELL && posMouse[0] <= XSPELLS + 5 * (SEPARACION + ANCHOSPELL)) {
-						haySpellSeleccionada = true;
-					}
-
-					if (posMouse[0] >= XSPELLS + 6 * SEPARACION + 5 * ANCHOSPELL && posMouse[0] <= XSPELLS + 6 * (SEPARACION + ANCHOSPELL)) {
+					if (menuBatalla.getBotonClickeado(posMouse[0], posMouse[1]) == 6) {
+						personaje.serEnergizado(5);
 						haySpellSeleccionada = true;
 					}
 				}
+
 
 				if (haySpellSeleccionada) {
 					if (!enemigo.estaVivo()) {
@@ -133,6 +129,7 @@ public class EstadoBatalla extends Estado {
 						paqueteAtacar = new PaqueteAtacar(paquetePersonaje.getId(), paqueteEnemigo.getId(), enemigo.getSalud(), personaje.getEnergia());
 						enviarAtaque(paqueteAtacar);
 						miTurno = false;
+						menuBatalla.setHabilitado(false);
 					}
 				}
 
@@ -148,22 +145,16 @@ public class EstadoBatalla extends Estado {
 		g.fillRect(0, 0, juego.getAncho(), juego.getAlto());
 		mundo.graficar(g);
 		
-		g.drawImage(Recursos.personaje.get(paquetePersonaje.getRaza()).get(3)[0], 0, 200, 256, 256, null);
-		g.drawImage(Recursos.personaje.get(paqueteEnemigo.getRaza()).get(7)[0], 550, 100, 256, 256, null);
+		g.drawImage(Recursos.personaje.get(paquetePersonaje.getRaza()).get(3)[0], 0, 175, 256, 256, null);
+		g.drawImage(Recursos.personaje.get(paqueteEnemigo.getRaza()).get(7)[0], 550, 75, 256, 256, null);
 		
-		if (miTurno) {
-			g.drawImage(Recursos.barraSpells, 0, YSPELLS, 300, 60, null);
-			g.drawImage(Recursos.habilidad1, XSPELLS, YSPELLS + 7, 40, 48, null);
-			g.drawImage(Recursos.habilidad2, XSPELLS + 2 * SEPARACION + ANCHOSPELL, YSPELLS + 7, 40, 48, null);
-			g.drawImage(Recursos.habilidad3, XSPELLS + 3 * SEPARACION + 2 * ANCHOSPELL, YSPELLS + 7, 40, 48, null);
-		}
+		menuBatalla.graficar(g);
 		
-		g.setColor(Color.RED);
-		g.drawString(paqueteEnemigo.getCasta(),(int) (200 - juego.getCamara().getxOffset() + entidadEnemigo.getxOffset() / 2), (int) (480 - juego.getCamara().getyOffset()));
 		g.setColor(Color.GREEN);
 		
 		EstadoDePersonaje.dibujarEstadoDePersonaje(g, 25, 5, personaje, miniaturaPersonaje);
 		EstadoDePersonaje.dibujarEstadoDePersonaje(g, 550, 5, enemigo, miniaturaEnemigo);
+		
 	}
 	
 	private void crearPersonajes() {
@@ -191,15 +182,12 @@ public class EstadoBatalla extends Estado {
 		if (paquetePersonaje.getRaza().equals("Humano")) {
 			personaje = new Humano(nombre, salud, energia, fuerza, destreza, inteligencia, casta, itemsEquipados,
 					itemsGuardados, experiencia, nivel, id);
-			miniaturaPersonaje = Recursos.humano.get(5)[0];
 		} else if (paquetePersonaje.getRaza().equals("Orco")) {
 			personaje = new Orco(nombre, salud, energia, fuerza, destreza, inteligencia, casta, itemsEquipados,
 					itemsGuardados, experiencia, nivel, id);
-			miniaturaPersonaje = Recursos.orco.get(5)[0];
 		} else if (paquetePersonaje.getRaza().equals("Elfo")) {
 			personaje = new Elfo(nombre, salud, energia, fuerza, destreza, inteligencia, casta, itemsEquipados,
 					itemsGuardados, experiencia, nivel, id);
-			miniaturaPersonaje = Recursos.elfo.get(5)[0];
 		}
 
 		nombre = paqueteEnemigo.getNombre();
@@ -226,15 +214,12 @@ public class EstadoBatalla extends Estado {
 		if (paqueteEnemigo.getRaza().equals("Humano")) {
 			enemigo = new Humano(nombre, salud, energia, fuerza, destreza, inteligencia, casta, itemsEquipados,
 					itemsGuardados, experiencia, nivel, id);
-			miniaturaEnemigo = Recursos.humano.get(5)[0];
 		} else if (paqueteEnemigo.getRaza().equals("Orco")) {
 			enemigo = new Orco(nombre, salud, energia, fuerza, destreza, inteligencia, casta, itemsEquipados,
 					itemsGuardados, experiencia, nivel, id);
-			miniaturaEnemigo = Recursos.orco.get(5)[0];
 		} else if (paqueteEnemigo.getRaza().equals("Elfo")) {
 			enemigo = new Elfo(nombre, salud, energia, fuerza, destreza, inteligencia, casta, itemsEquipados,
 					itemsGuardados, experiencia, nivel, id);
-			miniaturaEnemigo = Recursos.elfo.get(5)[0];
 		}
 	}
 
@@ -288,6 +273,8 @@ public class EstadoBatalla extends Estado {
 
 	public void setMiTurno(boolean b) {
 		miTurno = b;
+		menuBatalla.setHabilitado(b);
+		juego.getHandlerMouse().setNuevoRecorrido(false);
 	}
 
 	public Personaje getPersonaje() {

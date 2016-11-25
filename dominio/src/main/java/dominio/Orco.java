@@ -12,6 +12,10 @@ public class Orco extends Personaje {
 		salud = saludTope;
 		energia = energiaTope;
 		nombreRaza="Orco";
+		
+		habilidadesRaza = new String[2];
+		habilidadesRaza[0] = "Golpe Defensa";
+		habilidadesRaza[1] = "Mordisco de Vida";
 	}
 
 	public Orco(String nombre, int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta,
@@ -20,6 +24,10 @@ public class Orco extends Personaje {
 		super(nombre, salud, energia, fuerza, destreza, inteligencia, casta, itemsEquipados, itemsGuardados,
 				experiencia, nivel, idPersonaje);
 		nombreRaza="Orco";
+		
+		habilidadesRaza = new String[2];
+		habilidadesRaza[0] = "Golpe Defensa";
+		habilidadesRaza[1] = "Mordisco de Vida";
 	}
 
 	public boolean habilidadRaza1(Peleable atacado) { // Golpe Defensa

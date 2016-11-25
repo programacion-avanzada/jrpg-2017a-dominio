@@ -162,9 +162,6 @@ public class Entidad {
 			
 			if (juego.getEstadoJuego().getHaySolicitud()) {
 				
-				juego.getEstadoJuego().getMenuEnemigo().clickEnBatallar(posMouse[0], posMouse[1]);
-				juego.getEstadoJuego().getMenuEnemigo().clickEnCerrar(posMouse[0], posMouse[1]);
-				
 				if(juego.getEstadoJuego().getMenuEnemigo().clickEnMenu(posMouse[0], posMouse[1])) {
 					if (juego.getEstadoJuego().getMenuEnemigo().clickEnBatallar(posMouse[0], posMouse[1])) {
 						PaqueteBatalla pBatalla = new PaqueteBatalla();

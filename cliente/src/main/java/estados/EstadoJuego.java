@@ -20,6 +20,7 @@ import dominio.Orco;
 import dominio.Personaje;
 import entidades.Entidad;
 import interfaz.EstadoDePersonaje;
+import interfaz.MenuBatalla;
 import interfaz.MenuEnemigo;
 import juego.Juego;
 import juego.Pantalla;
@@ -136,4 +137,5 @@ public class EstadoJuego extends Estado {
 	public MenuEnemigo getMenuEnemigo(){
 		return menuEnemigo;
 	}
+	
 }

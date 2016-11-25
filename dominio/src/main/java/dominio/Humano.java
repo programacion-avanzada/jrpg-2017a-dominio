@@ -15,6 +15,9 @@ public class Humano extends Personaje {
 	}
 	
 	public Humano() {
+		habilidadesRaza = new String[2];
+		habilidadesRaza[0] = "Incentivar";
+		habilidadesRaza[1] = "Golpe Fatal";
 		
 	}
 	
@@ -23,7 +26,11 @@ public class Humano extends Personaje {
 		super(nombre,salud, energia, fuerza, destreza, inteligencia, casta, itemsEquipados, itemsGuardados, experiencia, nivel,
 				idPersonaje);
 		nombreRaza="Humano";
-		}
+		
+		habilidadesRaza = new String[2];
+		habilidadesRaza[0] = "Incentivar";
+		habilidadesRaza[1] = "Golpe Fatal";
+	}
 
 
 

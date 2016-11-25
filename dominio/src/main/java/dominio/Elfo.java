@@ -10,6 +10,10 @@ public class Elfo extends Personaje{
 		salud=saludTope;
 		energia=energiaTope;
 		nombreRaza="Elfo";
+		
+		habilidadesRaza = new String[2];
+		habilidadesRaza[0] = "Golpe Level";
+		habilidadesRaza[1] = "Ataque Bosque";
 	}
 	
 	
@@ -18,6 +22,10 @@ public class Elfo extends Personaje{
 		super(nombre,salud, energia, fuerza, destreza, inteligencia, casta, itemsEquipados, itemsGuardados, experiencia, nivel,
 				idPersonaje);
 		nombreRaza="Elfo";
+		
+		habilidadesRaza = new String[2];
+		habilidadesRaza[0] = "Golpe Level";
+		habilidadesRaza[1] = "Ataque Bosque";
 	}
 
 

@@ -39,6 +39,16 @@ public abstract class Personaje implements Peleable,Serializable {
 	protected int itemManos = 0;
 	protected Alianza clan = null;
 	public static int tablaDeNiveles[];
+	
+	protected String [] habilidadesRaza;
+	
+	public String [] getHabilidadesRaza(){
+		return habilidadesRaza;
+	}
+	
+	public String [] getHabilidadesCasta(){
+		return casta.getHabilidadesCasta();
+	}
 
 	public static void cargarTablaNivel() {
 		Personaje.tablaDeNiveles = new int[101];

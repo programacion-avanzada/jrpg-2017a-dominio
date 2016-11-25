@@ -61,9 +61,9 @@ public class Recursos {
 	public static BufferedImage barraSalud;
 	public static BufferedImage barraEnergia;
 	public static BufferedImage barraExperiencia;
-	public static BufferedImage habilidad1;
-	public static BufferedImage habilidad2;
-	public static BufferedImage habilidad3;
+	
+	public static BufferedImage menuBatalla;
+	public static Map<String, BufferedImage> habilidades = new HashMap<>();
 	// Fin Batalla
 	
 	// Se cargan todos los recursos del juego una sola vez al inicio
@@ -258,9 +258,27 @@ public class Recursos {
 		barraSalud = CargadorImagen.cargarImagen("/BarraDeSalud.png");
 		barraEnergia = CargadorImagen.cargarImagen("/BarraDeEnergia.png");
 		barraExperiencia = CargadorImagen.cargarImagen("/BarraDeExperiencia.png");
-		habilidad1 = CargadorImagen.cargarImagen("/habilidad1.png");
-		habilidad2 = CargadorImagen.cargarImagen("/habilidad2.png");
-		habilidad3 = CargadorImagen.cargarImagen("/habilidad3.png");
+		
+		habilidades.put("Golpe Level", CargadorImagen.cargarImagen("/Golpe Level.png"));
+		habilidades.put("Ataque Bosque", CargadorImagen.cargarImagen("/Ataque Bosque.png"));
+		habilidades.put("Golpe Defensa", CargadorImagen.cargarImagen("/Golpe Defensa.png"));
+		habilidades.put("Mordisco de Vida", CargadorImagen.cargarImagen("/Mordisco de Vida.png"));
+		habilidades.put("Incentivar", CargadorImagen.cargarImagen("/Incentivar.png"));
+		habilidades.put("Golpe Fatal", CargadorImagen.cargarImagen("/Golpe Fatal.png"));
+		
+		habilidades.put("Ataque Doble", CargadorImagen.cargarImagen("/Ataque Doble.png"));
+		habilidades.put("Aumentar Defensa", CargadorImagen.cargarImagen("/Aumentar Defensa.png"));
+		habilidades.put("Ignorar Defensa",  CargadorImagen.cargarImagen("/Ignorar Defensa.png"));
+		habilidades.put("Bola de Fuego", CargadorImagen.cargarImagen("/Bola de Fuego.png"));
+		habilidades.put("Curar Aliado", CargadorImagen.cargarImagen("/Curar Aliado.png"));
+		habilidades.put("Robar Energía y Salud", CargadorImagen.cargarImagen("/Robar Energia y Salud.png"));
+		habilidades.put("Golpe Crítico", CargadorImagen.cargarImagen("/Golpe Critico.png"));
+		habilidades.put("Aumentar Evasión", CargadorImagen.cargarImagen("/Aumentar Evasion.png"));
+		habilidades.put("Robar", CargadorImagen.cargarImagen("/Robar.png"));
+		
+		habilidades.put("Ser Energizado", CargadorImagen.cargarImagen("/Ser Energizado.png"));
+		
+		menuBatalla = CargadorImagen.cargarImagen("/MenuBatalla.png");
 		// Fin Batalla
 	}
 }
