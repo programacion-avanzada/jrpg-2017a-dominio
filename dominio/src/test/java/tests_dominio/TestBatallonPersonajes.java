@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import org.junit.Test;
 
 import dominio.*;
-import junit.framework.Assert;
+import org.junit.Assert;
 
 public class TestBatallonPersonajes {
 
@@ -34,12 +34,9 @@ public class TestBatallonPersonajes {
 	 BatallonPersonajes b2= new BatallonPersonajes(o.armarBatallonPjs());
 	 
 	 b1.batallarContraPersonajes(b2);
-	 Assert.assertTrue(h.getExperiencia()==40);//Tiene que ganar el humano
-	 System.out.println("Items Humano: "+h.listaItemsGuardados());
-	 System.out.println("Items Orco: "+ o.listaItemsGuardados()); }
+	 Assert.assertTrue(h.getExperiencia()==40);//Tiene que ganar el humano; 
+	 }
 	 
-
-	
 	 @Test public void test_1vs2(){ 
 	 Alianza a1 = new Alianza("Demacia");
 	 Alianza a2 = new Alianza("Noxus");
@@ -67,8 +64,7 @@ public class TestBatallonPersonajes {
 	 
 	 Assert.assertTrue(h.getExperiencia()==30);//Tiene que ganar el humano
 	 Assert.assertTrue(h.getNivel()==2);
-	 System.out.println("Items Humano: "+h.listaItemsGuardados());
-	 System.out.println("Items Orco: "+ o.listaItemsGuardados()); }
+	 }
 	 
 
 	@Test
@@ -106,11 +102,5 @@ public class TestBatallonPersonajes {
 		Assert.assertTrue(e.getExperiencia() == 13);// y tienen que sobrevivir
 													// los 3
 		Assert.assertTrue(g.getExperiencia() == 13);
-
-		System.out.println("Items Humano: " + h.listaItemsGuardados());
-		System.out.println("Items Orco o: " + o.listaItemsGuardados());
-		System.out.println("Items Elfo: " + e.listaItemsGuardados());
-		System.out.println("Items Orco g: " + g.listaItemsGuardados());
-
 	}
 }

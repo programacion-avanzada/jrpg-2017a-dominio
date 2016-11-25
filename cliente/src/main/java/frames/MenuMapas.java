@@ -37,7 +37,7 @@ public class MenuMapas extends JFrame {
 	public MenuMapas(final Cliente cliente) {
 		
 		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
-				new ImageIcon(MenuPrincipal.class.getResource("/cursor.png")).getImage(),
+				new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(),
 				new Point(0,0),"custom cursor"));
 		
 		setTitle("Elegir Mapa");

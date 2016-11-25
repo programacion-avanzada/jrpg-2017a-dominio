@@ -1,8 +1,7 @@
 package tests_dominio;
+import org.junit.Assert;
 import org.junit.Test;
-
 import dominio.*;
-import junit.framework.Assert;
 
 public class TestAliarCombatir {
 
@@ -42,7 +41,6 @@ public class TestAliarCombatir {
 		Assert.assertNotNull(h.getClan());
 		h.aliar(h2);
 		Assert.assertTrue(h.getClan()==h2.getClan());
-
 	}
 	
 }

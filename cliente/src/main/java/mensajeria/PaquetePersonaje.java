@@ -2,7 +2,7 @@ package mensajeria;
 
 import java.io.Serializable;
 
-import dominio.Mapa;
+import dominio.Personaje;
 import estados.Estado;
 
 public class PaquetePersonaje extends Paquete implements Serializable, Cloneable {
@@ -24,7 +24,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	public PaquetePersonaje() {
 		estado = Estado.estadoOffline;
 	}
-	
+
 	public int getEstado() {
 		return estado;
 	}
@@ -75,7 +75,6 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	public void setCasta(String casta) {
 		this.casta = casta;
 	}
-
 
 	public String getNombre() {
 		return nombre;

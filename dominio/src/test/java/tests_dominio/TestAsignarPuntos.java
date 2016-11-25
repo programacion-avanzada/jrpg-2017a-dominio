@@ -1,10 +1,9 @@
 package tests_dominio;
 
-
 import org.junit.Test;
 
 import dominio.*;
-import junit.framework.Assert;
+import org.junit.Assert;
 
 public class TestAsignarPuntos {
 
@@ -26,7 +25,6 @@ public class TestAsignarPuntos {
 		Assert.assertTrue(h.getEnergiaTope()==55);
 		h.ganarExperiencia(50);
 		Assert.assertTrue(h.getEnergiaTope()==75);
-		
 	}
 	
 	@Test
@@ -40,5 +38,4 @@ public class TestAsignarPuntos {
 		Assert.assertTrue(h.getDestreza()==199);
 		Assert.assertTrue(h.getInteligencia()==199);
 	}
-	
 }

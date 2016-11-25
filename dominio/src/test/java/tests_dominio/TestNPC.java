@@ -1,6 +1,5 @@
 package tests_dominio;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 
 import org.junit.Assert;
@@ -16,9 +15,7 @@ public class TestNPC {
 		Humano h = new Humano("Nico", 100, 100, 1000, 20, 30, new Asesino(0.2, 0.3, 1.5), new LinkedList<Item>(),
 				new LinkedList<Item>(), 0, 1, 1);
 
-		
-			Assert.assertTrue(npc.estaVivo());
-
+		Assert.assertTrue(npc.estaVivo());
 	}
 
 	@Test
@@ -37,5 +34,4 @@ public class TestNPC {
 		NonPlayableCharacter npc = new NonPlayableCharacter("Gigante", 1, null, -1);
 		Assert.assertTrue(30 == npc.otorgarExp());
 	}
-
 }

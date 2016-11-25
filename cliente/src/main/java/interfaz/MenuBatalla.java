@@ -1,5 +1,6 @@
 package interfaz;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -24,7 +25,10 @@ public class MenuBatalla {
 	
 	public void graficar(Graphics g){
 		
-		g.drawImage(Recursos.menuBatalla, x, y, null);
+		if(habilitado)
+			g.drawImage(Recursos.menuBatalla, x, y, null);
+		else
+			g.drawImage(Recursos.menuBatallaDeshabilitado, x, y, null);
 		
 		// Dibujo los boones
 		g.drawImage(Recursos.habilidades.get(personaje.getHabilidadesRaza()[0]), botones[0][0], botones[0][1], anchoBoton, anchoBoton, null);
@@ -44,6 +48,7 @@ public class MenuBatalla {
 		g.drawString("Ser energizado", x + 442, y + 168);
 		
 		// Dibujo el turno de quien es
+		g.setColor(Color.WHITE);
 		if(habilitado)
 			Pantalla.centerString(g, new Rectangle(x, y + 5, Recursos.menuBatalla.getWidth(), 20), "Mi Turno");
 		else

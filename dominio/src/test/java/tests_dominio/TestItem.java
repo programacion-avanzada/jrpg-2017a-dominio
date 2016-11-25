@@ -68,7 +68,6 @@ public class TestItem {
 		Assert.assertTrue(h.getAtaque() == 37);
 		Assert.assertTrue(h.getDefensa() == 20);
 		Assert.assertTrue(h.getMagia() == 45);
-
 	}
 
 	@Test
@@ -109,7 +108,6 @@ public class TestItem {
 		h.dropearItemMochila(excalibur);
 
 		Assert.assertTrue(h.getItemsGuardados().size() == 15);
-
 	}
 
 	@Test
@@ -125,5 +123,4 @@ public class TestItem {
 
 		Assert.assertEquals(1, h.getItemsEquipados().size());
 	}
-
 }

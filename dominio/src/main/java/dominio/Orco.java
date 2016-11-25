@@ -2,8 +2,6 @@ package dominio;
 
 import java.util.LinkedList;
 
-import javax.sound.midi.Synthesizer;
-
 public class Orco extends Personaje {
 
 	public Orco(String nombre, Casta casta, int id) {
@@ -34,7 +32,7 @@ public class Orco extends Personaje {
 	public boolean habilidadRaza1(Peleable atacado) {
 		if (this.getEnergia() > 10) {
 			this.setEnergia(this.getEnergia() - 10);
-			if(atacado.serAtacado(this.getDefensa() * 2)>0)
+			if (atacado.serAtacado(this.getDefensa() * 2) > 0)
 				return true;
 		}
 		return false;
@@ -52,5 +50,4 @@ public class Orco extends Personaje {
 		}
 		return false;
 	}
-
 }

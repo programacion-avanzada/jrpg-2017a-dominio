@@ -19,7 +19,6 @@ public class TestOrco {
 			Assert.assertTrue(h.getSalud() == 45);
 		else
 			Assert.assertTrue(o.getSalud() == 55);
-
 	}
 
 	@Test
@@ -37,9 +36,6 @@ public class TestOrco {
 		} else {
 			Assert.assertTrue(o.getSalud() == 50);
 			Assert.assertTrue(h.getSalud() == 100);
-
 		}
-
 	}
-
 }

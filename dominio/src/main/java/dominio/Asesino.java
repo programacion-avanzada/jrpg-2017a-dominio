@@ -48,8 +48,7 @@ public class Asesino extends Casta {
 		if (caster.getEnergia() > 10) {
 			caster.setEnergia(caster.getEnergia() - 10);
 			Random rnd = new Random();
-			if ((rnd.nextDouble() <= this.probabilidadDeRobo + caster.getDestreza() / 1000)
-					&& caster.itemsGuardados.size() < 20) {
+			if ((rnd.nextDouble() <= this.probabilidadDeRobo + caster.getDestreza() / 1000) && caster.itemsGuardados.size() < 20) {
 				Item itemRobado = atacado.serRobado();
 				if (itemRobado != null) {
 					caster.itemsGuardados.add(itemRobado);
@@ -59,5 +58,4 @@ public class Asesino extends Casta {
 		}
 		return false;
 	}
-
 }

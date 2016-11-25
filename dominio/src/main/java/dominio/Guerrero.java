@@ -4,14 +4,13 @@ public class Guerrero extends Casta {
 
 	public Guerrero(double prob_crit, double evasion, double daño_crit) {
 		super(prob_crit, evasion, daño_crit);
-		this.nombreCasta="Guerrero";
+		this.nombreCasta = "Guerrero";
 	}
 
-	public Guerrero()// creo que se llama por defecto no? preguntarle a lucas
-	{
+	public Guerrero() {
 		super();
-		this.nombreCasta="Guerrero";
-		
+		this.nombreCasta = "Guerrero";
+
 		habilidadesCasta = new String[3];
 		habilidadesCasta[0] = "Ataque Doble";
 		habilidadesCasta[1] = "Aumentar Defensa";
@@ -19,17 +18,17 @@ public class Guerrero extends Casta {
 	}
 
 	// Ataque Doble
-	public boolean habilidad1(Personaje caster, Peleable atacado){
+	public boolean habilidad1(Personaje caster, Peleable atacado) { 
 		if (caster.getEnergia() > 10) {
 			caster.setEnergia(caster.getEnergia() - 10);
-			if(atacado.serAtacado(caster.ataque * 2) > 0)
+			if (atacado.serAtacado(caster.ataque * 2) > 0)
 				return true;
 		}
 		return false;
 	}
-
+	
 	// Aumentar Defensa
-	public boolean habilidad2(Personaje caster, Peleable atacado){
+	public boolean habilidad2(Personaje caster, Peleable atacado) { 
 		if (caster.getEnergia() > 10) {
 			caster.setEnergia(caster.getEnergia() - 10);
 			caster.setDefensa(caster.getDefensa() + caster.magia);
@@ -39,8 +38,7 @@ public class Guerrero extends Casta {
 	}
 
 	// Ignorar Defensa
-	public boolean habilidad3(Personaje caster, Peleable atacado){
-
+	public boolean habilidad3(Personaje caster, Peleable atacado) { 
 		if (caster.getEnergia() > 10) {
 			caster.setEnergia(caster.getEnergia() - 10);
 			if (atacado instanceof Personaje) {

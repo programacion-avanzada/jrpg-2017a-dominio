@@ -7,10 +7,8 @@ import dominio.Humano;
 
 import java.util.LinkedList;
 import org.junit.Assert;
-import org.junit.Test;
 import dominio.Asesino;
 import dominio.Item;
-import dominio.Peleable;
 
 public class TestElfo {
 
@@ -26,7 +24,6 @@ public class TestElfo {
 			Assert.assertTrue(h.getSalud() < 100);
 		else
 			Assert.assertTrue(h.getSalud() == 100);
-
 	}
 
 	@Test
@@ -41,7 +38,5 @@ public class TestElfo {
 			Assert.assertTrue(h.getSalud() < 100);
 		else
 			Assert.assertTrue(h.getSalud() == 100);
-
 	}
-
 }

@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
 import com.google.gson.Gson;
 
 import cliente.Cliente;
-import frames.MenuPrincipal;
+import frames.MenuJugar;
 import mensajeria.Comando;
 import mensajeria.Paquete;
 
@@ -34,7 +34,7 @@ public class Pantalla {
 		pantalla = new JFrame(NOMBRE);
 		
 		pantalla.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
-			new ImageIcon(MenuPrincipal.class.getResource("/cursor.png")).getImage(),
+			new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(),
 			new Point(0,0),"custom cursor"));
 		
 		pantalla.setSize(ANCHO, ALTO);

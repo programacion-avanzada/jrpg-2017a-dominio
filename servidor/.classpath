@@ -9,5 +9,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/dominio"/>
 	<classpathentry kind="lib" path="gson-2.8.0.jar"/>
 	<classpathentry kind="lib" path="sqlite-jdbc-3.15.1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
