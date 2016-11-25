@@ -2,6 +2,8 @@ package frames;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Point;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -24,6 +26,10 @@ public class MenuPrincipal extends JFrame {
 	private JPanel contentPane;
 
 	public MenuPrincipal(final Cliente cliente) {
+		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
+				new ImageIcon(MenuPrincipal.class.getResource("/cursor.png")).getImage(),
+				new Point(0,0),"custom cursor"));
+		
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		// En caso de cerrar la ventana

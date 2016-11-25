@@ -18,6 +18,8 @@ import cliente.Cliente;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Point;
+import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -33,6 +35,11 @@ public class MenuMapas extends JFrame {
 	private JPanel contentPane;
 
 	public MenuMapas(final Cliente cliente) {
+		
+		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
+				new ImageIcon(MenuPrincipal.class.getResource("/cursor.png")).getImage(),
+				new Point(0,0),"custom cursor"));
+		
 		setTitle("Elegir Mapa");
 		setBounds(100, 100, 450, 300);
 		

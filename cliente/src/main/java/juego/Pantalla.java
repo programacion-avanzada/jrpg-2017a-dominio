@@ -3,19 +3,23 @@ package juego;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import com.google.gson.Gson;
 
 import cliente.Cliente;
+import frames.MenuPrincipal;
 import mensajeria.Comando;
 import mensajeria.Paquete;
 
@@ -28,6 +32,11 @@ public class Pantalla {
 
 	public Pantalla(final String NOMBRE, final int ANCHO, final int ALTO, final Cliente cliente) {
 		pantalla = new JFrame(NOMBRE);
+		
+		pantalla.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
+			new ImageIcon(MenuPrincipal.class.getResource("/cursor.png")).getImage(),
+			new Point(0,0),"custom cursor"));
+		
 		pantalla.setSize(ANCHO, ALTO);
 		pantalla.setResizable(false);
 		pantalla.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);

@@ -2,6 +2,8 @@ package frames;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Point;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -36,6 +38,11 @@ public class MenuCreacionPj extends JFrame {
 	private JComboBox<String> cbxRaza;
 
 	public MenuCreacionPj(final Cliente cliente, final PaquetePersonaje personaje) {
+		
+		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
+				new ImageIcon(MenuPrincipal.class.getResource("/cursor.png")).getImage(),
+				new Point(0,0),"custom cursor"));
+		
 		final String vecSalud[] = { "55", "50", "60" };
 		final String vecEnergia[] = { "55", "60", "50" };
 		final String vecFuerza[] = { "15", "10", "10" };

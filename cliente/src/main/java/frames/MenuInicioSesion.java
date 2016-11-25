@@ -2,6 +2,8 @@ package frames;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Point;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -28,6 +30,11 @@ public class MenuInicioSesion extends JFrame {
 	private JPasswordField passwordField;
 
 	public MenuInicioSesion(final Cliente cliente) {
+		
+		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
+				new ImageIcon(MenuPrincipal.class.getResource("/cursor.png")).getImage(),
+				new Point(0,0),"custom cursor"));
+		
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
