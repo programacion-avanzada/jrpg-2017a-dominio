@@ -206,14 +206,14 @@ public class Entidad {
 						if (tileMoverme[0] == tilePersonajes[0] && tileMoverme[1] == tilePersonajes[1]) {
 							idEnemigo = actual.getIdPersonaje();
 							juego.getEstadoJuego().setHaySolicitud(true,
-									juego.getEscuchaMensajes().getPersonajesConectados().get(idEnemigo));
+									juego.getEscuchaMensajes().getPersonajesConectados().get(idEnemigo), MenuInfoPersonaje.menuBatallar);
 							juego.getHandlerMouse().setNuevoClick(false);
 						}
 					}
 				}
 			}
 		}
-	}
+	
 
 		if (juego.getHandlerMouse().getNuevoRecorrido() && !juego.getEstadoJuego().getHaySolicitud()) {
 
