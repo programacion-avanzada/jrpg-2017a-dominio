@@ -272,7 +272,7 @@ public class EstadoBatalla extends Estado {
 			juego.getCliente().getSalida().writeObject(gson.toJson(paqueteFinalizarBatalla));
 			
 			paquetePersonaje.setSaludTope(personaje.getSaludTope());
-			paquetePersonaje.setEnergiaTope(paquetePersonaje.getEnergiaTope());
+			paquetePersonaje.setEnergiaTope(personaje.getEnergiaTope());
 			paquetePersonaje.setNivel(personaje.getNivel());
 			paquetePersonaje.setExperiencia(personaje.getExperiencia());
 			paquetePersonaje.setDestreza(personaje.getDestreza());
