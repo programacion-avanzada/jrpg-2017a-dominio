@@ -11,6 +11,11 @@ public class Guerrero extends Casta {
 	{
 		super();
 		this.nombreCasta="Guerrero";
+		
+		habilidadesCasta = new String[3];
+		habilidadesCasta[0] = "Ataque Doble";
+		habilidadesCasta[1] = "Aumentar Defensa";
+		habilidadesCasta[2] = "Ignorar Defensa";
 	}
 
 	public boolean habilidad1(Personaje caster, Peleable atacado) // pega el

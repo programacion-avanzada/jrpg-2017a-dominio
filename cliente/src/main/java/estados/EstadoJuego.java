@@ -19,6 +19,9 @@ import dominio.Humano;
 import dominio.Orco;
 import dominio.Personaje;
 import entidades.Entidad;
+import interfaz.EstadoDePersonaje;
+import interfaz.MenuBatalla;
+import interfaz.MenuEnemigo;
 import juego.Juego;
 import juego.Pantalla;
 import mensajeria.Comando;
@@ -38,29 +41,17 @@ public class EstadoJuego extends Estado {
 	
 	private final Gson gson = new Gson();
 	
-	private final int ANCHOBARRA = 122;
-	private final int ALTOSALUD = 14;
-	private final int ALTOENERGIA = 14; 
-	private final int ALTOEXPERIENCIA = 6; 
-	private final int ALTOMINIATURA = 64;
-	private final int ANCHOMINIATURA = 64;
 	private BufferedImage miniaturaPersonaje;
-	private int drawBarra;
+	
+	MenuEnemigo menuEnemigo;
 
 	public EstadoJuego(Juego juego) {
 		super(juego);
 		mundo = new Mundo(juego, "recursos/" + getMundo() + ".txt");
-		entidadPersonaje = new Entidad(juego, mundo, 64, 64, juego.getPersonaje().getNombre(), 0, 0, Recursos.personaje.get(juego.getPersonaje().getRaza()), 150);
 		paquetePersonaje = juego.getPersonaje();
-		
-		if (paquetePersonaje.getRaza().equals("Humano")) {
-			miniaturaPersonaje = Recursos.humano.get(5)[0];
-		} else if (paquetePersonaje.getRaza().equals("Orco")) {
-			miniaturaPersonaje = Recursos.orco.get(5)[0];
-		} else if (paquetePersonaje.getRaza().equals("Elfo")) {
-			miniaturaPersonaje = Recursos.elfo.get(5)[0];
-		}
-		
+		entidadPersonaje = new Entidad(juego, mundo, 64, 64, juego.getPersonaje().getNombre(), 0, 0, Recursos.personaje.get(paquetePersonaje.getRaza()), 150);
+		miniaturaPersonaje = Recursos.personaje.get(paquetePersonaje.getRaza()).get(5)[0];
+
 		try {
 			// Le envio al servidor que me conecte al mapa y mi posicion
 			juego.getPersonaje().setComando(Comando.CONEXION);
@@ -86,14 +77,9 @@ public class EstadoJuego extends Estado {
 		entidadPersonaje.graficar(g);
 		graficarPersonajes(g);
 		g.drawImage(Recursos.marco, 0, 0, juego.getAncho(), juego.getAlto(), null);
-		graficarEstadoPersonaje(g);
-		if(haySolicitud) {
-			g.drawImage(Recursos.botonMenu, 200, 0, 200, 25, null);
-			g.drawImage(Recursos.botonMenu, 430, 0, 200, 25, null);
-			g.setColor(Color.WHITE);
-			g.drawString("Batallar", 280, 15);
-			g.drawString("Cancelar", 505, 15);
-		}
+		EstadoDePersonaje.dibujarEstadoDePersonaje(g, 5, 5, paquetePersonaje, miniaturaPersonaje);
+		if(haySolicitud) 
+			menuEnemigo.graficar(g);
 	}
 
 	public void graficarPersonajes(Graphics g) {
@@ -116,33 +102,6 @@ public class EstadoJuego extends Estado {
 		}
 	}
 	
-	private void graficarEstadoPersonaje(Graphics g) {
-		g.drawImage(Recursos.estadoPersonaje, 0, 0, null);
-
-		g.drawImage(miniaturaPersonaje, 5, 5, ANCHOMINIATURA, ALTOMINIATURA, null);
-		
-		g.setColor(Color.WHITE);
-		g.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		g.drawImage(Recursos.barraSalud, 78, 23, ANCHOBARRA, ALTOSALUD, null);
-		g.drawString(String.valueOf(paquetePersonaje.getSaludTope()) + " / " + String.valueOf(paquetePersonaje.getSaludTope()), 132, 33);
-
-		g.drawImage(Recursos.barraEnergia, 78, 41, ANCHOBARRA, ALTOENERGIA, null);
-		g.drawString(String.valueOf(paquetePersonaje.getEnergiaTope()) + " / " + String.valueOf(paquetePersonaje.getEnergiaTope()), 132, 53);
-
-		if(paquetePersonaje.getExperiencia() == Personaje.tablaDeNiveles[paquetePersonaje.getNivel() + 1]) {
-			drawBarra = ANCHOBARRA;
-		} else {
-			drawBarra = (paquetePersonaje.getExperiencia() * ANCHOBARRA) / Personaje.tablaDeNiveles[paquetePersonaje.getNivel() + 1];
-		}
-		
-		g.setFont(new Font("Tahoma", Font.PLAIN, 8));
-		g.drawImage(Recursos.barraExperiencia, 77, 62, drawBarra, ALTOEXPERIENCIA, null);
-		g.drawString(String.valueOf(paquetePersonaje.getExperiencia()) + " / " + String.valueOf(Personaje.tablaDeNiveles[paquetePersonaje.getNivel() + 1]), 132, 68);
-		g.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		g.setColor(Color.GREEN);
-		g.drawString(String.valueOf(paquetePersonaje.getNivel()), 55, 68);
-	}
-	
 	public Entidad getPersonaje() {
 		return entidadPersonaje;
 	}
@@ -161,8 +120,10 @@ public class EstadoJuego extends Estado {
 		return null;
 	}
 	
-	public void setHaySolicitud(boolean b) {
+	public void setHaySolicitud(boolean b, PaquetePersonaje enemigo) {
 		haySolicitud = b;
+		// menu que mostrara al enemigo
+		menuEnemigo = new MenuEnemigo(300, 50, enemigo);
 	}
 	
 	public boolean getHaySolicitud() {
@@ -172,4 +133,9 @@ public class EstadoJuego extends Estado {
 	public void actualizarPersonaje() {
 		paquetePersonaje = juego.getPersonaje();
 	}
+	
+	public MenuEnemigo getMenuEnemigo(){
+		return menuEnemigo;
+	}
+	
 }

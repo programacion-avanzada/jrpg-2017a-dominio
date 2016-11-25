@@ -39,6 +39,16 @@ public abstract class Personaje implements Peleable,Serializable {
 	protected int itemManos = 0;
 	protected Alianza clan = null;
 	public static int tablaDeNiveles[];
+	
+	protected String [] habilidadesRaza;
+	
+	public String [] getHabilidadesRaza(){
+		return habilidadesRaza;
+	}
+	
+	public String [] getHabilidadesCasta(){
+		return casta.getHabilidadesCasta();
+	}
 
 	public static void cargarTablaNivel() {
 		Personaje.tablaDeNiveles = new int[101];
@@ -132,22 +142,6 @@ public abstract class Personaje implements Peleable,Serializable {
 		this.nombre = nombre;
 	}
 
-	public int getX() {
-		return x;
-	}
-
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
-	}
-
 	public int getAtaque() {
 		return ataque;
 	}
@@ -162,22 +156,6 @@ public abstract class Personaje implements Peleable,Serializable {
 
 	public void setMagia(int magia) {
 		this.magia = magia;
-	}
-
-	public int getPosicion_x() {
-		return x;
-	}
-
-	public void setPosicion_x(int posicion_x) {
-		this.x = posicion_x;
-	}
-
-	public int getPosicion_y() {
-		return y;
-	}
-
-	public void setPosicion_y(int posicion_y) {
-		this.y = posicion_y;
 	}
 
 	public Alianza getClan() {
