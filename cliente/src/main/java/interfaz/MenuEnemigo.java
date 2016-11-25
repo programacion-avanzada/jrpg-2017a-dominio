@@ -21,9 +21,7 @@ public class MenuEnemigo {
 	private int y;
 	private PaquetePersonaje personaje;
 	private static final BufferedImage menu = Recursos.menuEnemigo;
-	
-	
-	
+
 	public MenuEnemigo(int x, int y, PaquetePersonaje personaje){
 		this.x = x;
 		this.y = y;

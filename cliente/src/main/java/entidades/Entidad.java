@@ -49,6 +49,7 @@ public class Entidad {
 	private int yOffset;
 	private int drawX;
 	private int drawY;
+	private int posMouseRecorrido[];
 	private int posMouse[];
 	private int[] tile;
 
@@ -150,18 +151,11 @@ public class Entidad {
 
 	public void getEntrada() {
 
+		posMouseRecorrido = juego.getHandlerMouse().getPosMouseRecorrido();
 		posMouse = juego.getHandlerMouse().getPosMouse();
 
-		if (juego.getHandlerMouse().getNuevoRecorrido()) {
-
-			tileMoverme = Mundo.mouseATile(posMouse[0] + juego.getCamara().getxOffset() - xOffset, posMouse[1] + juego.getCamara().getyOffset() - yOffset);
-
-			juego.getHandlerMouse().setNuevoRecorrido(false);
-
-			pilaMovimiento = null;
-			
+		if(juego.getHandlerMouse().getNuevoClick()) {
 			if (juego.getEstadoJuego().getHaySolicitud()) {
-				
 				if(juego.getEstadoJuego().getMenuEnemigo().clickEnMenu(posMouse[0], posMouse[1])) {
 					if (juego.getEstadoJuego().getMenuEnemigo().clickEnBatallar(posMouse[0], posMouse[1])) {
 						PaqueteBatalla pBatalla = new PaqueteBatalla();
@@ -183,28 +177,40 @@ public class Entidad {
 				} else {
 					juego.getEstadoJuego().setHaySolicitud(false, null);
 				}
-			} else {
-				Iterator<Integer> it = juego.getEscuchaMensajes().getUbicacionPersonajes().keySet().iterator();
-				int key;
-				PaqueteMovimiento actual;
-				
-				while (it.hasNext()) {
-					key = (int) it.next();
-					actual = juego.getEscuchaMensajes().getUbicacionPersonajes().get(key);
-					tilePersonajes = Mundo.mouseATile(actual.getPosX(), actual.getPosY());
-					if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId() && 
-							juego.getEscuchaMensajes().getPersonajesConectados().get(actual.getIdPersonaje()) != null &&
-							juego.getEscuchaMensajes().getPersonajesConectados().get(actual.getIdPersonaje()).getEstado() == Estado.estadoJuego) {
-						
-						if (tileMoverme[0] == tilePersonajes[0] && tileMoverme[1] == tilePersonajes[1]) {
-							idEnemigo = actual.getIdPersonaje();
-							juego.getEstadoJuego().setHaySolicitud(true, juego.getEscuchaMensajes().getPersonajesConectados().get(idEnemigo));
-						}
+		} else {
+			Iterator<Integer> it = juego.getEscuchaMensajes().getUbicacionPersonajes().keySet().iterator();
+			int key;
+			int tileMoverme[] = Mundo.mouseATile(posMouse[0] + juego.getCamara().getxOffset() - xOffset, posMouse[1] + juego.getCamara().getyOffset() - yOffset);
+			PaqueteMovimiento actual;
+			
+			while (it.hasNext()) {
+				key = (int) it.next();
+				actual = juego.getEscuchaMensajes().getUbicacionPersonajes().get(key);
+				tilePersonajes = Mundo.mouseATile(actual.getPosX(), actual.getPosY());
+				if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId() && 
+						juego.getEscuchaMensajes().getPersonajesConectados().get(actual.getIdPersonaje()) != null &&
+						juego.getEscuchaMensajes().getPersonajesConectados().get(actual.getIdPersonaje()).getEstado() == Estado.estadoJuego) {
+					
+					if (tileMoverme[0] == tilePersonajes[0] && tileMoverme[1] == tilePersonajes[1]) {
+						idEnemigo = actual.getIdPersonaje();
+						juego.getEstadoJuego().setHaySolicitud(true, juego.getEscuchaMensajes().getPersonajesConectados().get(idEnemigo));
 					}
 				}
 			}
+		} 
+	} 
+		
+		if (juego.getHandlerMouse().getNuevoRecorrido() && !juego.getEstadoJuego().getHaySolicitud()) {
 
-		}
+		tileMoverme = Mundo.mouseATile(posMouseRecorrido[0] + juego.getCamara().getxOffset() - xOffset, posMouseRecorrido[1] + juego.getCamara().getyOffset() - yOffset);
+
+		juego.getHandlerMouse().setNuevoRecorrido(false);
+
+		pilaMovimiento = null;
+		
+		juego.getEstadoJuego().setHaySolicitud(false, null);
+	}
+		
 
 		if (!enMovimiento && tileMoverme != null) {
 

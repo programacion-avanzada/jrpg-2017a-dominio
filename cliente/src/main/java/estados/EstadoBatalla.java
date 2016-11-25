@@ -67,10 +67,7 @@ public class EstadoBatalla extends Estado {
 		
 		miniaturaEnemigo = Recursos.personaje.get(enemigo.getNombreRaza()).get(5)[0];
 		miniaturaPersonaje = Recursos.personaje.get(personaje.getNombreRaza()).get(5)[0];
-		
-		juego.getCamara().setxOffset(-350);
-		juego.getCamara().setyOffset(150);
-		
+	
 		paqueteFinalizarBatalla = new PaqueteFinalizarBatalla();
 		paqueteFinalizarBatalla.setId(personaje.getIdPersonaje());
 		paqueteFinalizarBatalla.setIdEnemigo(enemigo.getIdPersonaje());
@@ -79,12 +76,15 @@ public class EstadoBatalla extends Estado {
 
 	@Override
 	public void actualizar() {
-	
+		
+		juego.getCamara().setxOffset(-350);
+		juego.getCamara().setyOffset(150);
+		
 		haySpellSeleccionada = false;
 
 		if (miTurno) {
 			
-			if (juego.getHandlerMouse().getNuevoRecorrido()) {
+			if (juego.getHandlerMouse().getNuevoClick()) {
 				posMouse = juego.getHandlerMouse().getPosMouse();
 
 				if (menuBatalla.clickEnMenu(posMouse[0], posMouse[1])) {
@@ -228,7 +228,7 @@ public class EstadoBatalla extends Estado {
 		try {
 			juego.getCliente().getSalida().writeObject(gson.toJson(paqueteAtacar));
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "Fallo la conexi�n con el servidor.");
+			JOptionPane.showMessageDialog(null, "Fallo la conexion con el servidor.");
 			e.printStackTrace();
 		}
 	}

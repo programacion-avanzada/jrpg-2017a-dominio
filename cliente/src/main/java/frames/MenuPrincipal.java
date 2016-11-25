@@ -54,7 +54,7 @@ public class MenuPrincipal extends JFrame {
 		
 		// Boton Registrarse
 		JLabel lblRegistrarse = new JLabel("Registrarse");
-		lblRegistrarse.setBounds(182, 160, 82, 23);
+		lblRegistrarse.setBounds(181, 162, 82, 23);
 		layeredPane.add(lblRegistrarse, new Integer(2));
 		lblRegistrarse.setForeground(Color.WHITE);
 		lblRegistrarse.setEnabled(true);
@@ -63,7 +63,7 @@ public class MenuPrincipal extends JFrame {
 		
 		// Boton Iniciar sesion
 		JLabel lblIniciarSesion = new JLabel("Iniciar Sesion");
-		lblIniciarSesion.setBounds(175, 90, 91, 23);
+		lblIniciarSesion.setBounds(175, 91, 91, 23);
 		layeredPane.add(lblIniciarSesion, new Integer(2));
 		lblIniciarSesion.setForeground(Color.WHITE);
 		lblIniciarSesion.setFont(new Font("Tahoma", Font.PLAIN, 15));
