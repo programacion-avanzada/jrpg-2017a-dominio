@@ -48,7 +48,6 @@ public class EstadoBatalla extends Estado {
 	
 	private boolean haySpellSeleccionada;
 	private boolean seRealizoAccion;
-	private boolean golpeEvadido;
 
 	private Gson gson = new Gson();
 
@@ -92,7 +91,6 @@ public class EstadoBatalla extends Estado {
 		
 		seRealizoAccion = false;
 		haySpellSeleccionada = false;
-		golpeEvadido = false;
 
 		if (miTurno) {
 			

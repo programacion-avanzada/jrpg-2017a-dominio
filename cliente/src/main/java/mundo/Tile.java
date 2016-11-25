@@ -3,13 +3,13 @@ package mundo;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import recursos.Recursos;
+
 public class Tile {
 	
 	public static Tile[] tiles = new Tile[256];
-	public static Tile cesped = new TileCesped(0);
-	public static Tile cespedSolido = new TileCespedSolido(1);
-	public static Tile roca = new TileRoca(2);
-	public static Tile greenTree = new TileGreenTree(3, 42, 70);
+	public static Tile cesped = new Tile(Recursos.cesped, 0, false);
+	public static Tile greenTree = new Tile(Recursos.greenTree, 1, true, 64, 70);
 	
 	public static final int ANCHO = 64;
 	public static final int ALTO = 32;
@@ -17,15 +17,27 @@ public class Tile {
 	protected BufferedImage textura;
 	protected final int id;
 	
-	protected int anchoObst;
-	protected int altoObst;
+	private boolean esSolido;
 	
 	
-	public Tile(BufferedImage textura, int id) {
+	protected int ancho;
+	protected int alto;
+	
+	
+	public Tile(BufferedImage textura, int id, boolean esSolido) {
 		this.textura = textura;
 		this.id = id;
-		
 		tiles[id] = this;
+		this.esSolido = esSolido;
+	}
+	
+	public Tile(BufferedImage textura, int id, boolean esSolido, int ancho, int alto){
+		this.textura = textura;
+		this.id = id;
+		tiles[id] = this;
+		this.ancho = ancho;
+		this.alto = alto;
+		this.esSolido = esSolido;
 	}
 	
 	public void actualizar() {
@@ -42,7 +54,7 @@ public class Tile {
 	 
 	
 	public boolean esSolido() {
-		return false;
+		return esSolido;
 	}
 	
 	public int getId() {
@@ -50,11 +62,11 @@ public class Tile {
 	}
 	
 	public int getAncho() {
-		  return anchoObst; 
+		  return ancho; 
 	}
 		  
 	public int getAlto() {
-		return altoObst;	 
+		return alto;	 
 	}
 		 
 }
