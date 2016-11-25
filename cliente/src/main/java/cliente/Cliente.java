@@ -48,6 +48,7 @@ public class Cliente extends Thread {
 	}
 	
 	private Juego wome;
+	private MenuCarga menuCarga;
 
 	public Cliente(String ip, int puerto) {
 		try {
@@ -182,9 +183,21 @@ public class Cliente extends Thread {
 				// Le envio el paquete con el mapa seleccionado
 				salida.writeObject(gson.toJson(paquetePersonaje));
 	
-				// Instancio el juego y lo corro
+				// Instancio el juego y cargo los recursos
 				wome = new Juego("World Of the Middle Earth", 800, 600, this, paquetePersonaje);
+				
+				// Muestro el menu de carga
+				menuCarga = new MenuCarga(this);
+				menuCarga.setVisible(true);
+				
+				// Espero que se carguen todos los recursos
+				wait();
+				
+				// Inicio el juego
 				wome.start();
+				
+				// Finalizo el menu de carga
+				menuCarga.dispose();
 	
 			} catch (IOException | InterruptedException | ClassNotFoundException e) {
 				JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor durante el inicio de sesión.");
@@ -250,5 +263,9 @@ public class Cliente extends Thread {
 	
 	public Juego getJuego(){
 		return wome;
+	}
+	
+	public MenuCarga getMenuCarga() {
+		return menuCarga;
 	}
 }

@@ -45,6 +45,7 @@ public class Juego implements Runnable {
 	private PaquetePersonaje paquetePersonaje;
 	private PaqueteMovimiento ubicacionPersonaje;
 	
+	private CargarRecursos cargarRecursos;
 
 	public Juego(final String nombre, final int ancho, final int alto, Cliente cliente, PaquetePersonaje pp) {
 		this.NOMBRE = nombre;
@@ -64,6 +65,11 @@ public class Juego implements Runnable {
 		escuchaMensajes.start();
 		
 		handlerMouse = new HandlerMouse();
+		
+		iniciar();
+		
+		cargarRecursos = new CargarRecursos(cliente);
+		cargarRecursos.start();
 	}
 
 	public void iniciar() { // Carga lo necesario para iniciar el juego
@@ -71,14 +77,8 @@ public class Juego implements Runnable {
 
 		pantalla.getCanvas().addMouseListener(handlerMouse);
 
-		Recursos.cargar();
-
 		camara = new Camara(this, 0, 0);
-		
-		estadoJuego = new EstadoJuego(this);
-		
-		Estado.setEstado(estadoJuego);
-		
+
 		Personaje.cargarTablaNivel();
 	}
 
@@ -116,7 +116,6 @@ public class Juego implements Runnable {
 
 	@Override
 	public void run() { // Hilo principal del juego
-		iniciar();
 
 		int fps = 60; // Cantidad de actualizaciones por segundo que se desean
 		double tiempoPorActualizacion = 1000000000 / fps; // Cantidad de nanosegundos en FPS deseados
@@ -152,6 +151,10 @@ public class Juego implements Runnable {
 	public synchronized void start() { // Inicia el juego
 		if (corriendo)
 			return;
+		
+		estadoJuego = new EstadoJuego(this);
+		Estado.setEstado(estadoJuego);
+		pantalla.mostrar();
 		corriendo = true;
 		hilo = new Thread(this);
 		hilo.start();

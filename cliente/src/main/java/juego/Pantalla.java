@@ -50,7 +50,7 @@ public class Pantalla {
 		});
 
 		pantalla.setLocationRelativeTo(null);
-		pantalla.setVisible(true);
+		pantalla.setVisible(false);
 
 		canvas = new Canvas();
 		canvas.setPreferredSize(new Dimension(ANCHO, ALTO));
@@ -70,6 +70,10 @@ public class Pantalla {
 		return pantalla;
 	}
 	
+	public void mostrar() {
+		pantalla.setVisible(true);
+	}
+	
 	public static void centerString(Graphics g, Rectangle r, String s) {
 	    FontRenderContext frc = new FontRenderContext(null, true, true);
 
@@ -84,6 +88,4 @@ public class Pantalla {
 	    
 	    g.drawString(s, r.x + a, r.y + b);
 	}
-
-
 }

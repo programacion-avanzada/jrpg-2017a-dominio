@@ -78,9 +78,10 @@ public class EstadoBatalla extends Estado {
 
 		entidadPersonaje.setX(-150);
 		entidadPersonaje.setY(350);
-
+		
 		entidadEnemigo.setX(200);
 		entidadEnemigo.setY(350);
+		
 		juego.getCamara().setxOffset(-350);
 		juego.getCamara().setyOffset(150);
 
@@ -94,6 +95,7 @@ public class EstadoBatalla extends Estado {
 
 	@Override
 	public void actualizar() {
+	
 		haySpellSeleccionada = false;
 
 		if (miTurno) {
