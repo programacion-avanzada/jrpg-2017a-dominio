@@ -9,7 +9,7 @@ import frames.MenuCarga;
 
 public class Recursos {
 
-	private static int ELEMENTOS = 40;
+	private static int ELEMENTOS = 58;
 	private static int ANCHOBARRA = 345;
 
 	private static int ANCHO; // Ancho del frame a obtener
@@ -68,8 +68,8 @@ public class Recursos {
 	public static BufferedImage barraSalud;
 	public static BufferedImage barraEnergia;
 	public static BufferedImage barraExperiencia;
-	
 	public static BufferedImage menuBatalla;
+	
 	public static Map<String, BufferedImage> habilidades = new HashMap<>();
 	// Fin Batalla
 
@@ -315,7 +315,9 @@ public class Recursos {
 		marco = CargadorImagen.cargarImagen("/marco.png");
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 		botonMenu = CargadorImagen.cargarImagen("/botonMenu.png");
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 		menuEnemigo = CargadorImagen.cargarImagen("/MenuEnemigo.png");
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 		// Fin Entorno
 
 		// Inicio Batalla
@@ -328,15 +330,58 @@ public class Recursos {
 		barraEnergia = CargadorImagen.cargarImagen("/BarraDeEnergia.png");
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 		barraExperiencia = CargadorImagen.cargarImagen("/BarraDeExperiencia.png");
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+		
+		habilidades.put("Golpe Level", CargadorImagen.cargarImagen("/Golpe Level.png"));
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 		
 		habilidades.put("Ataque Bosque", CargadorImagen.cargarImagen("/Ataque Bosque.png"));
-		habilidades.put("Golpe Level", CargadorImagen.cargarImagen("/Golpe Level.png"));
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+		
 		habilidades.put("Golpe Defensa", CargadorImagen.cargarImagen("/Golpe Defensa.png"));
-		habilidades.put("Incentivar", CargadorImagen.cargarImagen("/Incentivar.png"));
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+		
 		habilidades.put("Mordisco de Vida", CargadorImagen.cargarImagen("/Mordisco de Vida.png"));
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+		
+		habilidades.put("Incentivar", CargadorImagen.cargarImagen("/Incentivar.png"));
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 		
 		habilidades.put("Golpe Fatal", CargadorImagen.cargarImagen("/Golpe Fatal.png"));
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+		
 		habilidades.put("Ataque Doble", CargadorImagen.cargarImagen("/Ataque Doble.png"));
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+		
+		habilidades.put("Aumentar Defensa", CargadorImagen.cargarImagen("/Aumentar Defensa.png"));
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+		
+		habilidades.put("Ignorar Defensa", CargadorImagen.cargarImagen("/Ignorar Defensa.png"));
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+		
+		habilidades.put("Bola de Fuego", CargadorImagen.cargarImagen("/Bola de Fuego.png"));
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+		
+		habilidades.put("Curar Aliado", CargadorImagen.cargarImagen("/Curar Aliado.png"));
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+		
+		habilidades.put("Robar Energía y Salud", CargadorImagen.cargarImagen("/Robar Energia y Salud.png"));
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+		
+		habilidades.put("Golpe Crítico", CargadorImagen.cargarImagen("/Golpe Critico.png"));
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+		
+		habilidades.put("Aumentar Evasión", CargadorImagen.cargarImagen("/Aumentar Evasion.png"));
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+		
+		habilidades.put("Robar", CargadorImagen.cargarImagen("/Robar.png"));
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+		
+		habilidades.put("Ser Energizado", CargadorImagen.cargarImagen("/Ser Energizado.png"));
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+		
+		menuBatalla = CargadorImagen.cargarImagen("/MenuBatalla.png");
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 		// Fin Batalla
 	}
 
