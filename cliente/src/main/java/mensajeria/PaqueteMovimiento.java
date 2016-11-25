@@ -2,8 +2,6 @@ package mensajeria;
 
 import java.io.Serializable;
 
-import dominio.Mapa;
-
 public class PaqueteMovimiento extends Paquete implements Serializable, Cloneable {
 
 	private int id;
