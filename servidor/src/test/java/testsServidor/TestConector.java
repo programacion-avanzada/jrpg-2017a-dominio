@@ -34,7 +34,6 @@ public class TestConector {
 		PaqueteUsuario pu = new PaqueteUsuario();
 		pu.setUsername("UserTest");
 		pu.setPassword("test");
-		pu.setIdPj(100000);
 
 		conector.registrarUsuario(pu);
 

@@ -10,7 +10,7 @@ import frames.MenuCarga;
 
 public class Recursos {
 
-	private static int ELEMENTOS = 63;
+	private static int ELEMENTOS = 65;
 	private static int ANCHOBARRA = 345;
 
 	private static int ANCHO; // Ancho del frame a obtener
@@ -330,7 +330,9 @@ public class Recursos {
 		greenTree = trees.getTile(0, 0, 42, 50);
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 		nievePiso1 = CargadorImagen.cargarImagen("/nieve piso.png");
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 		iceBlock = CargadorImagen.cargarImagen("/nieve cubo.png");
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 		// Fin Entorno
 
 		// Inicio Batalla
