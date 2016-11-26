@@ -37,7 +37,7 @@ public abstract class Personaje implements Peleable, Serializable {
 	protected int nivel;
 
 	protected int idPersonaje;
-	protected int itemManos = 0;
+
 	protected Alianza clan = null;
 	public static int tablaDeNiveles[];
 
@@ -357,7 +357,7 @@ public abstract class Personaje implements Peleable, Serializable {
 			}
 			return 0;
 		}
-		return -1;
+		return 0;
 	}
 
 	public int serRobadoSalud(int daño) {
@@ -403,8 +403,6 @@ public abstract class Personaje implements Peleable, Serializable {
 	public boolean desequiparItem(Item i) {
 		// un item equipado
 		if (this.itemsEquipados.remove(i)) {
-			if (i.getTipo() == "Manos")
-				this.itemManos--;
 			this.modificarAtributos();
 			this.saludTope -= i.getBonoSalud();
 			this.energiaTope -= i.getBonoEnergia();
@@ -445,18 +443,19 @@ public abstract class Personaje implements Peleable, Serializable {
 		if (this.fuerza < i.getFuerzaRequerida() || this.destreza < i.getDestrezaRequerida()
 				|| this.inteligencia < i.getInteligenciaRequerida())
 			return false;
-		if (i.getTipo() == "Manos") {
-			if (itemManos < 2) {
-				itemManos++;
-				return true;
-			}
-			return false;
-		}
-
+		
+		int contadorItemDeMano = 0;
 		Iterator<Item> it = this.itemsEquipados.iterator();
 		while (it.hasNext()) {
-			if (it.next().getTipo() == i.getTipo())
-				return false;
+			if (it.next().getTipo() == i.getTipo()){
+				if (i.getTipo() == "Manos"){
+					contadorItemDeMano++;
+					if(contadorItemDeMano==2)
+						return false;
+				}
+				else
+					return false;
+			}
 		}
 		return true;
 	}
