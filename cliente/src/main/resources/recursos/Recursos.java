@@ -10,7 +10,7 @@ import frames.MenuCarga;
 
 public class Recursos {
 
-	private static int ELEMENTOS = 59;
+	private static int ELEMENTOS = 63;
 	private static int ANCHOBARRA = 345;
 
 	private static int ANCHO; // Ancho del frame a obtener
@@ -55,6 +55,7 @@ public class Recursos {
 	// Fin Personajes
 
 	// Entorno
+	private static SpriteSheet trees;
 	public static BufferedImage cesped;
 	public static BufferedImage roca;
 	public static BufferedImage background;
@@ -322,8 +323,10 @@ public class Recursos {
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 		menuEnemigo = CargadorImagen.cargarImagen("/MenuEnemigo.png");
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
-		SpriteSheet trees = new SpriteSheet(CargadorImagen.cargarImagen("/trees.png"));  
+		trees = new SpriteSheet(CargadorImagen.cargarImagen("/trees.png"));  
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 		greenTree = trees.getTile(0, 0, 42, 50);
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 		// Fin Entorno
 
 		// Inicio Batalla
