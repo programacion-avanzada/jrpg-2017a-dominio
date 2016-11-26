@@ -63,6 +63,8 @@ public class Recursos {
 	public static BufferedImage botonMenu;
 	public static BufferedImage menuEnemigo;
 	public static BufferedImage greenTree;
+	public static BufferedImage nievePiso1;
+	public static BufferedImage iceBlock;
 	// Fin Entorno
 
 	// Batalla
@@ -327,6 +329,8 @@ public class Recursos {
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 		greenTree = trees.getTile(0, 0, 42, 50);
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+		nievePiso1 = CargadorImagen.cargarImagen("/nieve piso.png");
+		iceBlock = CargadorImagen.cargarImagen("/nieve cubo.png");
 		// Fin Entorno
 
 		// Inicio Batalla
@@ -374,13 +378,13 @@ public class Recursos {
 		habilidades.put("Curar Aliado", CargadorImagen.cargarImagen("/Curar Aliado.png"));
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 		
-		habilidades.put("Robar Energía y Salud", CargadorImagen.cargarImagen("/Robar Energia y Salud.png"));
+		habilidades.put("Robar Energï¿½a y Salud", CargadorImagen.cargarImagen("/Robar Energia y Salud.png"));
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 		
-		habilidades.put("Golpe Crítico", CargadorImagen.cargarImagen("/Golpe Critico.png"));
+		habilidades.put("Golpe Crï¿½tico", CargadorImagen.cargarImagen("/Golpe Critico.png"));
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 		
-		habilidades.put("Aumentar Evasión", CargadorImagen.cargarImagen("/Aumentar Evasion.png"));
+		habilidades.put("Aumentar Evasiï¿½n", CargadorImagen.cargarImagen("/Aumentar Evasion.png"));
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 		
 		habilidades.put("Robar", CargadorImagen.cargarImagen("/Robar.png"));
