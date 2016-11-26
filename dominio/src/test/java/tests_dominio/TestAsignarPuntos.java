@@ -12,9 +12,9 @@ public class TestAsignarPuntos {
 		Personaje.cargarTablaNivel();
 
 		Humano h = new Humano("Nicolas",new Guerrero(),1);
-		Assert.assertTrue(h.getSaludTope()==55);
+		Assert.assertTrue(h.getSaludTope()==105);
 		h.ganarExperiencia(50);
-		Assert.assertTrue(h.getSaludTope()==80);
+		Assert.assertTrue(h.getSaludTope()==130);
 		}
 	
 	@Test
@@ -22,9 +22,9 @@ public class TestAsignarPuntos {
 		Personaje.cargarTablaNivel();
 
 		Humano h = new Humano("Nicolas",new Guerrero(),1);
-		Assert.assertTrue(h.getEnergiaTope()==55);
+		Assert.assertTrue(h.getEnergiaTope()==105);
 		h.ganarExperiencia(50);
-		Assert.assertTrue(h.getEnergiaTope()==75);
+		Assert.assertTrue(h.getEnergiaTope()==125);
 	}
 	
 	@Test

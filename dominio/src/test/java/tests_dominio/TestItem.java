@@ -22,6 +22,20 @@ public class TestItem {
 	}
 
 	@Test
+	public void testEquiparItemMano(){
+		Humano h = new Humano("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), new LinkedList<Item>(),
+				new LinkedList<Item>(), 0, 1, 1);
+		ItemDeManos excalibur = new ItemDeManos(1, 10, "Excalibur", "Manos", 50, 0, 0, 0, 0, 10, 10, 10);
+		ItemDeManos ragnarok = new ItemDeManos(1, 10, "ragnarok", "Manos", 50, 0, 0, 0, 0, 10, 10, 10);
+		ItemDeManos anduril = new ItemDeManos(1, 10, "Anduril", "Manos", 50, 0, 0, 0, 0, 10, 10, 10);
+		
+		Assert.assertNull(h.getEquipado(0));
+		Assert.assertTrue(h.equiparItem(excalibur));
+		Assert.assertTrue(h.equiparItem(ragnarok));
+		Assert.assertFalse(h.equiparItem(ragnarok));
+	}
+	
+	@Test
 	public void testEquiparMaximo() {
 		ItemDeManos excalibur = new ItemDeManos(1, 10, "Excalibur", "Manos", 50, 0, 0, 0, 0, 10, 10, 10);
 		ItemDeManos ragnarok = new ItemDeManos(1, 10, "ragnarok", "Manos", 50, 0, 0, 0, 0, 10, 10, 10);

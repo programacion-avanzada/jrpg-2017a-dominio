@@ -14,11 +14,11 @@ public class TestOrco {
 		Humano h = new Humano("Nicolas", new Guerrero(), 1);
 		Orco o = new Orco("Hernan", new Guerrero(), 1);
 
-		Assert.assertTrue(h.getSalud() == 55);
+		Assert.assertTrue(h.getSalud() == 105);
 		if (o.habilidadRaza1(h))
-			Assert.assertTrue(h.getSalud() == 45);
+			Assert.assertTrue(h.getSalud() == 95);
 		else
-			Assert.assertTrue(o.getSalud() == 55);
+			Assert.assertTrue(o.getSalud() == 105);
 	}
 
 	@Test
@@ -29,12 +29,12 @@ public class TestOrco {
 				new LinkedList<Item>(), 0, 1, 1);
 
 		Assert.assertTrue(h.getSalud() == 100);
-		o.setSalud(50);
+		o.setSalud(100);
 		if (o.habilidadRaza2(h)) {
-			Assert.assertTrue(h.getSalud() == 40);
+			Assert.assertTrue(h.getSalud() == 90);
 			Assert.assertTrue(o.getSalud() == 100);
 		} else {
-			Assert.assertTrue(o.getSalud() == 50);
+			Assert.assertTrue(o.getSalud() == 100);
 			Assert.assertTrue(h.getSalud() == 100);
 		}
 	}

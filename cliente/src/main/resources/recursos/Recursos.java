@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.Map;
 
 import frames.MenuCarga;
+import mundo.Tile;
 
 public class Recursos {
 
@@ -332,7 +333,32 @@ public class Recursos {
 		nievePiso1 = CargadorImagen.cargarImagen("/nieve piso.png");
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 		iceBlock = CargadorImagen.cargarImagen("/nieve cubo.png");
-		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+		
+		
+		// Mapa
+		SpriteSheet mapaAubenor = new SpriteSheet(CargadorImagen.cargarImagen("/Aubenor.png"));
+		
+		Tile.aubenor = new Tile[81];
+		
+		boolean [][] solidezAubenor = {{true, true, false, true, false, true, true, true, true, true},
+				{true, true, true, true, true, true, true, true, true, true},
+				{true, true, true, true, true, true, true, true, true, true},
+				{true, false, false, false, false , false, false ,false, true, true},
+				{false, false, false, false, false , false, false ,false, true, true},
+				{false, true, true, true, true, true, true, true, true, true},
+				{true, true, true, true, true, true, true, true, true, true},
+				{true, true, true, true, true, true, true, true, true, true}};	
+		
+		for(int y = 0 ; y < 8 ; y++){
+			
+			for(int x = 0; x < 10 ; x++){
+				
+				Tile.aubenor[y * 10 + x + 1] = new Tile(mapaAubenor.getTile(x * 64, y * 64, 64, 64), y * 10 + x + 1, solidezAubenor[y][x], 64, 64);
+				
+			}
+			
+		}
+		
 		// Fin Entorno
 
 		// Inicio Batalla

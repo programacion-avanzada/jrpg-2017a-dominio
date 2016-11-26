@@ -17,8 +17,8 @@ public class TestPotenciarAtributosItems {
 		Accesorio anilloSupremo = new Accesorio(1, 10, "anilloSupremo", "Accesorio", 0, 50, 0, 0, 0, 10, 10, 10);
 		Humano h = new Humano("Nicolas", new Guerrero(), 1);
 
-		Assert.assertTrue(h.getSaludTope() == 55);
-		Assert.assertTrue(h.getEnergiaTope() == 55);
+		Assert.assertTrue(h.getSaludTope() == 105);
+		Assert.assertTrue(h.getEnergiaTope() == 105);
 
 		Assert.assertTrue(h.getFuerza() == 15);
 		Assert.assertTrue(h.getAtaque() == 22);// fuerza*1.5
@@ -37,10 +37,10 @@ public class TestPotenciarAtributosItems {
 		Assert.assertTrue(h.getMagia() == 65);
 
 		h.equiparItem(cascoDePlatino);
-		Assert.assertTrue(h.getSaludTope() == 105);
+		Assert.assertTrue(h.getSaludTope() == 155);
 
 		h.equiparItem(botasDeExplorador);
-		Assert.assertTrue(h.getEnergiaTope() == 105);
+		Assert.assertTrue(h.getEnergiaTope() == 155);
 	}
 
 	@Test
