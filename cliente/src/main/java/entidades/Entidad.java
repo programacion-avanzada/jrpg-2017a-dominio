@@ -2,11 +2,7 @@ package entidades;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
-import java.awt.Rectangle;
-import java.awt.font.FontRenderContext;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Iterator;
@@ -18,7 +14,6 @@ import com.google.gson.Gson;
 
 import juego.Juego;
 import juego.Pantalla;
-import mensajeria.Comando;
 import mensajeria.PaqueteBatalla;
 import mensajeria.PaqueteMovimiento;
 import mundo.Grafo;
@@ -67,7 +62,6 @@ public class Entidad {
 	private boolean enMovimiento;
 
 	// Animaciones
-	private LinkedList<BufferedImage[]> animaciones;
 	private final Animacion moverIzq;
 	private final Animacion moverArribaIzq;
 	private final Animacion moverArriba;
@@ -102,8 +96,6 @@ public class Entidad {
 		yOffset = alto / 2;
 		x = (int) (spawnX / 64) * 64;
 		y = (int) (spawnY / 32) * 32;
-
-		this.animaciones = animaciones;
 
 		moverIzq = new Animacion(velAnimacion, animaciones.get(0));
 		moverArribaIzq = new Animacion(velAnimacion, animaciones.get(1));
@@ -173,7 +165,7 @@ public class Entidad {
 							try {
 								juego.getCliente().getSalida().writeObject(gson.toJson(pBatalla));
 							} catch (IOException e) {
-								JOptionPane.showMessageDialog(null, "Fallo la conexiï¿½n con el servidor");
+								JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor");
 								e.printStackTrace();
 							}
 						} else {
@@ -357,6 +349,7 @@ public class Entidad {
 	
 	public void graficarNombre(Graphics g){
 		g.setColor(Color.WHITE);
+		g.setFont(new Font("Book Antiqua", Font.BOLD, 15));
 	    Pantalla.centerString(g, new java.awt.Rectangle(drawX + 32, drawY - 20, 0, 10), nombre);
 	}
 
@@ -417,7 +410,7 @@ public class Entidad {
 			juego.getCliente().getSalida()
 					.writeObject(gson.toJson(juego.getUbicacionPersonaje(), PaqueteMovimiento.class));
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "Fallo la conexiï¿½n con el servidor.");
+			JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor.");
 			e.printStackTrace();
 		}
 	}

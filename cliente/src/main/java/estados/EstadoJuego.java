@@ -14,13 +14,8 @@ import javax.swing.JOptionPane;
 
 import com.google.gson.Gson;
 
-import dominio.Elfo;
-import dominio.Humano;
-import dominio.Orco;
-import dominio.Personaje;
 import entidades.Entidad;
 import interfaz.EstadoDePersonaje;
-import interfaz.MenuBatalla;
 import interfaz.MenuInfoPersonaje;
 import juego.Juego;
 import juego.Pantalla;
@@ -94,7 +89,8 @@ public class EstadoJuego extends Estado {
 			Iterator<Integer> it = personajesConectados.keySet().iterator();
 			int key;
 			PaqueteMovimiento actual;
-			g.setFont(new Font("Book Antiqua", 0, 15));
+			g.setColor(Color.WHITE);
+			g.setFont(new Font("Book Antiqua", Font.PLAIN, 15));
 			while (it.hasNext()) {
 				key = (int) it.next();
 				actual = ubicacionPersonajes.get(key);

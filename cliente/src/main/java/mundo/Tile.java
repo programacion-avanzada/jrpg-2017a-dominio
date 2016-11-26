@@ -3,8 +3,6 @@ package mundo;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import recursos.Recursos;
-
 public class Tile {
 	
 	public static Tile[] tiles = new Tile[256];

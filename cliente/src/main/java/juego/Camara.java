@@ -1,8 +1,6 @@
 package juego;
 
 import entidades.Entidad;
-import mundo.Mundo;
-import mundo.Tile;
 
 public class Camara {
 

@@ -1,6 +1,5 @@
 package recursos;
 
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -406,13 +405,13 @@ public class Recursos {
 		habilidades.put("Curar Aliado", CargadorImagen.cargarImagen("/Curar Aliado.png"));
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 		
-		habilidades.put("Robar Energ�a y Salud", CargadorImagen.cargarImagen("/Robar Energia y Salud.png"));
+		habilidades.put("Robar Energia y Salud", CargadorImagen.cargarImagen("/Robar Energia y Salud.png"));
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 		
-		habilidades.put("Golpe Cr�tico", CargadorImagen.cargarImagen("/Golpe Critico.png"));
+		habilidades.put("Golpe Critico", CargadorImagen.cargarImagen("/Golpe Critico.png"));
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 		
-		habilidades.put("Aumentar Evasi�n", CargadorImagen.cargarImagen("/Aumentar Evasion.png"));
+		habilidades.put("Aumentar Evasion", CargadorImagen.cargarImagen("/Aumentar Evasion.png"));
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 		
 		habilidades.put("Robar", CargadorImagen.cargarImagen("/Robar.png"));

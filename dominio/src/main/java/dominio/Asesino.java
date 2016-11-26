@@ -15,8 +15,8 @@ public class Asesino extends Casta {
 		super();
 		this.nombreCasta="Asesino";
 		habilidadesCasta = new String[3];
-		habilidadesCasta[0] = "Golpe Crítico";
-		habilidadesCasta[1] = "Aumentar Evasión";
+		habilidadesCasta[0] = "Golpe Critico";
+		habilidadesCasta[1] = "Aumentar Evasion";
 		habilidadesCasta[2] = "Robar";
 	}
 

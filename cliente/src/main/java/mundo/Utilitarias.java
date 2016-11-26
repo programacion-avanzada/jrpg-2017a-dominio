@@ -6,7 +6,6 @@ import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
-import juego.Juego;
 
 public class Utilitarias {
 
@@ -20,6 +19,8 @@ public class Utilitarias {
 			while ((linea = br.readLine()) != null) {
 				builder.append(linea + System.lineSeparator());
 			}
+			
+			br.close();
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "Fallo al intentar cargar el mapa " + path );
 			e.printStackTrace();

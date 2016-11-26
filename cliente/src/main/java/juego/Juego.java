@@ -14,7 +14,6 @@ import estados.EstadoBatalla;
 import estados.EstadoJuego;
 import mensajeria.PaqueteMovimiento;
 import mensajeria.PaquetePersonaje;
-import recursos.Recursos;
 
 public class Juego implements Runnable {
 	

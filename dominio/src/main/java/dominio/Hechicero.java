@@ -13,7 +13,7 @@ public class Hechicero extends Casta {
 		habilidadesCasta = new String[3];
 		habilidadesCasta[0] = "Bola de Fuego";
 		habilidadesCasta[1] = "Curar Aliado";
-		habilidadesCasta[2] = "Robar Energía y Salud";
+		habilidadesCasta[2] = "Robar Energia y Salud";
 	}
 
 	// Bola de Fuego

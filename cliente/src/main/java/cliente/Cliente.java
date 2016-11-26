@@ -6,19 +6,15 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.Scanner;
-import java.util.concurrent.Semaphore;
 import javax.swing.JOptionPane;
 
 import com.google.gson.Gson;
 
-import dominio.*;
 import frames.*;
 import juego.Juego;
 import mensajeria.Comando;
 import mensajeria.Paquete;
-import mensajeria.PaqueteMovimiento;
 import mensajeria.PaquetePersonaje;
 import mensajeria.PaqueteUsuario;
 
@@ -178,7 +174,6 @@ public class Cliente extends Thread {
 						break;
 	
 					default:
-						JOptionPane.showMessageDialog(null, "Error tratar");
 						break;
 					}
 	

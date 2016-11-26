@@ -6,8 +6,6 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
-import javax.swing.JOptionPane;
-
 import dominio.Personaje;
 import juego.Pantalla;
 import mensajeria.PaquetePersonaje;

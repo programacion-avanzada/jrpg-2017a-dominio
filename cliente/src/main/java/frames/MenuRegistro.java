@@ -31,7 +31,6 @@ public class MenuRegistro extends JFrame {
 	
 	private JTextField txtUsuario;
 	private JPasswordField pwPassword;
-	private Cliente cli;
 
 	public MenuRegistro(final Cliente cliente) {
 		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(

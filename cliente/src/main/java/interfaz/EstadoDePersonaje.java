@@ -90,8 +90,5 @@ public class EstadoDePersonaje {
 		g.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		g.setColor(Color.GREEN);
 		g.drawString(String.valueOf(personaje.getNivel()), x + 59, y + 70);
-		
 	}
-
-
 }

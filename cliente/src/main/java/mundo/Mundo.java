@@ -4,7 +4,6 @@ import java.awt.Graphics;
 
 import estados.Estado;
 import juego.Juego;
-import recursos.Recursos;
 
 public class Mundo {
 	private Juego juego;
