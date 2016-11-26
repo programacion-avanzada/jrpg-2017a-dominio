@@ -62,6 +62,8 @@ public class Recursos {
 	public static BufferedImage botonMenu;
 	public static BufferedImage menuEnemigo;
 	public static BufferedImage greenTree;
+	public static BufferedImage nievePiso1;
+	public static BufferedImage iceBlock;
 	// Fin Entorno
 
 	// Batalla
@@ -324,6 +326,8 @@ public class Recursos {
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 		SpriteSheet trees = new SpriteSheet(CargadorImagen.cargarImagen("/trees.png"));  
 		greenTree = trees.getTile(0, 0, 42, 50);
+		nievePiso1 = CargadorImagen.cargarImagen("/nieve piso.png");
+		iceBlock = CargadorImagen.cargarImagen("/nieve cubo.png");
 		// Fin Entorno
 
 		// Inicio Batalla
