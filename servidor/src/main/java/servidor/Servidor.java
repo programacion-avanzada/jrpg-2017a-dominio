@@ -47,7 +47,7 @@ public class Servidor extends Thread {
 	public static AtencionMovimientos atencionMovimientos = new AtencionMovimientos();;
 
 	public static void main(String[] args) {
-		cargarInterfaz();
+		cargarInterfaz();	
 	}
 
 	private static void cargarInterfaz() {
@@ -101,7 +101,8 @@ public class Servidor extends Thread {
 					log.append("Fallo al intentar detener el servidor." + System.lineSeparator());
 					e1.printStackTrace();
 				}
-				conexionDB.close();
+				if(conexionDB != null)
+					conexionDB.close();
 				botonDetener.setEnabled(false);
 				botonIniciar.setEnabled(true);
 			}
@@ -138,13 +139,14 @@ public class Servidor extends Thread {
 
 	public void run() {
 		try {
-
+			
+			conexionDB = new Conector();
+			conexionDB.connect();
+			
 			log.append("Iniciando el servidor..." + System.lineSeparator());
 			serverSocket = new ServerSocket(PUERTO);
 			log.append("Servidor esperando conexiones..." + System.lineSeparator());
 			String ipRemota;
-			conexionDB = new Conector();
-			conexionDB.connect();
 			
 			atencionConexiones.start();
 			atencionMovimientos.start();

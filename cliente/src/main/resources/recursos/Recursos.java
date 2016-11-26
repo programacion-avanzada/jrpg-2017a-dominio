@@ -11,7 +11,7 @@ import mundo.Tile;
 
 public class Recursos {
 
-	private static int ELEMENTOS = 59;
+	private static int ELEMENTOS = 65;
 	private static int ANCHOBARRA = 345;
 
 	private static int ANCHO; // Ancho del frame a obtener
@@ -56,6 +56,7 @@ public class Recursos {
 	// Fin Personajes
 
 	// Entorno
+	private static SpriteSheet trees;
 	public static BufferedImage cesped;
 	public static BufferedImage roca;
 	public static BufferedImage background;
@@ -325,9 +326,12 @@ public class Recursos {
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 		menuEnemigo = CargadorImagen.cargarImagen("/MenuEnemigo.png");
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
-		SpriteSheet trees = new SpriteSheet(CargadorImagen.cargarImagen("/trees.png"));  
+		trees = new SpriteSheet(CargadorImagen.cargarImagen("/trees.png"));  
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 		greenTree = trees.getTile(0, 0, 42, 50);
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 		nievePiso1 = CargadorImagen.cargarImagen("/nieve piso.png");
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 		iceBlock = CargadorImagen.cargarImagen("/nieve cubo.png");
 		
 		
@@ -402,13 +406,13 @@ public class Recursos {
 		habilidades.put("Curar Aliado", CargadorImagen.cargarImagen("/Curar Aliado.png"));
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 		
-		habilidades.put("Robar Energía y Salud", CargadorImagen.cargarImagen("/Robar Energia y Salud.png"));
+		habilidades.put("Robar Energï¿½a y Salud", CargadorImagen.cargarImagen("/Robar Energia y Salud.png"));
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 		
-		habilidades.put("Golpe Crítico", CargadorImagen.cargarImagen("/Golpe Critico.png"));
+		habilidades.put("Golpe Crï¿½tico", CargadorImagen.cargarImagen("/Golpe Critico.png"));
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 		
-		habilidades.put("Aumentar Evasión", CargadorImagen.cargarImagen("/Aumentar Evasion.png"));
+		habilidades.put("Aumentar Evasiï¿½n", CargadorImagen.cargarImagen("/Aumentar Evasion.png"));
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 		
 		habilidades.put("Robar", CargadorImagen.cargarImagen("/Robar.png"));

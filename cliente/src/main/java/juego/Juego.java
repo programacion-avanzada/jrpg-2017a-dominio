@@ -138,7 +138,7 @@ public class Juego implements Runnable {
 			}
 
 			if (timer >= 1000000000) { // Si paso 1 segundo muestro los FPS
-				pantalla.getFrame().setTitle(NOMBRE + " | " + "FPS: " + fps);
+				pantalla.getFrame().setTitle(NOMBRE + " | " + "FPS: " + actualizaciones);
 				actualizaciones = 0;
 				timer = 0;
 			}
