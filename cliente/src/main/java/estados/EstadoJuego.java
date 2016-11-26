@@ -75,7 +75,7 @@ public class EstadoJuego extends Estado {
 	public void graficar(Graphics g) {
 		g.drawImage(Recursos.background, 0, 0, juego.getAncho(), juego.getAlto(), null);
 		mundo.graficar(g);
-		entidadPersonaje.graficar(g);
+		//entidadPersonaje.graficar(g);
 		graficarPersonajes(g);
 		mundo.graficarObstaculos(g);
 		entidadPersonaje.graficarNombre(g);

@@ -359,8 +359,6 @@ public class Entidad {
 		g.setColor(Color.WHITE);
 	    Pantalla.centerString(g, new java.awt.Rectangle(drawX + 32, drawY - 20, 0, 10), nombre);
 	}
-	 
-	 
 
 	private BufferedImage getFrameAnimacionActual() {
 		if (movimientoHacia == horizontalIzq) {
