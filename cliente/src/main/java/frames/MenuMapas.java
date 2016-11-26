@@ -130,7 +130,7 @@ public class MenuMapas extends JFrame {
 			}
 		});
 		
-		btnAris.setEnabled(true);
+		btnAris.setEnabled(false);
 		
 		JLabel lblBackground = new JLabel("");
 		lblBackground.setBounds(0, 0, 444, 271);
