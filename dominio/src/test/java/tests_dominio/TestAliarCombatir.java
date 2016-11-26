@@ -22,11 +22,11 @@ public class TestAliarCombatir {
 		Humano h = new Humano("Nicolas",new Guerrero(),1);
 		Humano h2 = new Humano("Lautaro",new Asesino(),1);
 		
-		Assert.assertTrue(h2.getSalud()==55);
+		Assert.assertTrue(h2.getSalud()==105);
 		if(	h.atacar(h2)!=0)
-			Assert.assertTrue(h2.getSalud()<55);
+			Assert.assertTrue(h2.getSalud()<105);
 		else
-			Assert.assertTrue(h2.getSalud()==55);
+			Assert.assertTrue(h2.getSalud()==105);
 	}
 	
 	@Test

@@ -1,5 +1,6 @@
 package tests_dominio;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import dominio.*;
@@ -20,5 +21,6 @@ public class TestBatallonNPC {
 		BatallonNPC b2= new BatallonNPC("Lobo",1,item,2);
 		BatallonPersonajes b1= new BatallonPersonajes(h.armarBatallonPjs());
 		b1.batallarContraNPCs(b2);
+		Assert.assertTrue(h.getExperiencia()>0);
 	}
 }
