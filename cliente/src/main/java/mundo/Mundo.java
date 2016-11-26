@@ -107,10 +107,7 @@ public class Mundo {
 
 				tiles[x][y] = Utilitarias.parseInt(tokens[(x + y * ancho + 4)]);
 				tilesInv[y][x] = tiles[x][y];
-				
-				System.out.print(tilesInv[x][y] + " ");
 			}
-			System.out.println();
 		}
 
 	}
