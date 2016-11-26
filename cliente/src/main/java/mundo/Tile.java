@@ -8,8 +8,6 @@ import recursos.Recursos;
 public class Tile {
 	
 	public static Tile[] tiles = new Tile[256];
-	//public static Tile cesped = new Tile(Recursos.cesped, 0, false);
-	//public static Tile greenTree = new Tile(Recursos.iceBlock, 1, true, 64, 64);
 	public static Tile [] aubenor;
 	
 	public static int aubenorBase = 3;

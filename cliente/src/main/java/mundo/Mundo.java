@@ -2,6 +2,7 @@ package mundo;
 
 import java.awt.Graphics;
 
+import estados.Estado;
 import juego.Juego;
 import recursos.Recursos;
 
@@ -41,8 +42,8 @@ public class Mundo {
 
 		xMinimo = (int) (juego.getCamara().getxOffset() - xOffset - 30);
 		xMaximo = xMinimo + juego.getAncho() + xOffset + 30;
-		yMinimo = (int) juego.getCamara().getyOffset() + yOffset - 5;
-		yMaximo = yMinimo + juego.getAlto() + yOffset - 5;
+		yMinimo = (int) juego.getCamara().getyOffset() + yOffset - 60;
+		yMaximo = yMinimo + juego.getAlto() + yOffset + 60;
 
 		// Grafico el el tile base
 		for (int i = 0; i < alto; i++) {
@@ -65,11 +66,12 @@ public class Mundo {
 			for (int j = 0; j < ancho; j++) {
 				iso = dosDaIso(j, i);
 				// Grafico al personaje
-				if (Mundo.mouseATile(juego.getUbicacionPersonaje().getPosX(),
-						juego.getUbicacionPersonaje().getPosY())[0] == j
-						&& Mundo.mouseATile(juego.getUbicacionPersonaje().getPosX(),
-								juego.getUbicacionPersonaje().getPosY())[1] == i )
-					juego.getEstadoJuego().getPersonaje().graficar(g);
+				if(Estado.getEstado() == juego.getEstadoJuego())
+					if (Mundo.mouseATile(juego.getUbicacionPersonaje().getPosX(),
+							juego.getUbicacionPersonaje().getPosY())[0] == j
+							&& Mundo.mouseATile(juego.getUbicacionPersonaje().getPosX(),
+									juego.getUbicacionPersonaje().getPosY())[1] == i )
+						juego.getEstadoJuego().getPersonaje().graficar(g);
 				
 				// Grafico los obstaculos
 				if ((iso[0] >= xMinimo && iso[0] <= xMaximo) && (iso[1] >= yMinimo && iso[1] <= yMaximo)
@@ -126,8 +128,6 @@ public class Mundo {
 		// Uno cada nodo con sus adyacentes
 		for (int x = 0; x < yFinal; x++) {
 			for (int y = 0; y < xFinal; y++) {
-				// Si el tile es solido no lo uno
-				System.out.println(tilesInv[x][y]);
 				if (!Tile.tiles[tilesInv[x][y]].esSolido()) {
 					// Si no es la ultima fila y el tile de abajo es no solido,
 					// lo uno
