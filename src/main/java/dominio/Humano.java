@@ -1,7 +1,5 @@
 package dominio;
 
-import java.util.LinkedList;
-
 public class Humano extends Personaje {
 
 	public Humano(String nombre, Casta casta, int id) {
@@ -14,17 +12,15 @@ public class Humano extends Personaje {
 	}
 
 	public Humano(String nombre, int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta,
-			LinkedList<Item> itemsEquipados, LinkedList<Item> itemsGuardados, int experiencia, int nivel,
-			int idPersonaje) {
-		super(nombre, salud, energia, fuerza, destreza, inteligencia, casta, itemsEquipados, itemsGuardados,
-				experiencia, nivel, idPersonaje);
+			int experiencia, int nivel, int idPersonaje) {
+		super(nombre, salud, energia, fuerza, destreza, inteligencia, casta, experiencia, nivel, idPersonaje);
 		nombreRaza = "Humano";
 
 		habilidadesRaza = new String[2];
 		habilidadesRaza[0] = "Incentivar";
 		habilidadesRaza[1] = "Golpe Fatal";
 	}
-	
+
 	// Incentivar
 	public boolean habilidadRaza1(Peleable atacado) {
 		if (this.getEnergia() > 10) {
@@ -34,7 +30,7 @@ public class Humano extends Personaje {
 		}
 		return false;
 	}
-	
+
 	// Golpe Fatal
 	public boolean habilidadRaza2(Peleable atacado) {
 		if (this.getEnergia() > 10) {

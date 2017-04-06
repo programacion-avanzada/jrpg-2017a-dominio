@@ -1,11 +1,13 @@
 package tests_dominio;
 
-import java.util.LinkedList;
-
 import org.junit.Assert;
 import org.junit.Test;
 
-import dominio.*;
+import dominio.Asesino;
+import dominio.Guerrero;
+import dominio.Hechicero;
+import dominio.Humano;
+import dominio.Orco;
 
 public class TestOrco {
 
@@ -23,15 +25,13 @@ public class TestOrco {
 
 	@Test
 	public void testMordiscoDeVida() {
-		Humano h = new Humano("Nico", 100, 100, 55, 20, 30, new Hechicero(0.2, 0.3, 1.5), new LinkedList<Item>(),
-				new LinkedList<Item>(), 0, 1, 1);
-		Orco o = new Orco("Nico", 100, 100, 80, 20, 30, new Asesino(0.2, 0.3, 1.5), new LinkedList<Item>(),
-				new LinkedList<Item>(), 0, 1, 1);
+		Humano h = new Humano("Nico", 100, 100, 55, 20, 30, new Hechicero(0.2, 0.3, 1.5), 0, 1, 1);
+		Orco o = new Orco("Nico", 100, 100, 80, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 1, 1);
 
 		Assert.assertTrue(h.getSalud() == 100);
 		o.setSalud(100);
 		if (o.habilidadRaza2(h)) {
-			Assert.assertTrue(h.getSalud() == 90);
+			Assert.assertEquals(40, h.getSalud());
 			Assert.assertTrue(o.getSalud() == 100);
 		} else {
 			Assert.assertTrue(o.getSalud() == 100);

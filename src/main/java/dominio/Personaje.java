@@ -3,7 +3,6 @@ package dominio;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Random;
 
 import javax.swing.JOptionPane;
 
@@ -31,8 +30,6 @@ public abstract class Personaje implements Peleable, Serializable {
 	protected int x;
 	protected int y;
 	
-	protected LinkedList<Item> itemsEquipados;
-	protected LinkedList<Item> itemsGuardados;
 	protected int experiencia;
 	protected int nivel;
 
@@ -63,8 +60,6 @@ public abstract class Personaje implements Peleable, Serializable {
 		this.nombre = nombre;
 		this.casta = casta;
 		this.idPersonaje = id;
-		itemsEquipados = new LinkedList<Item>();
-		itemsGuardados = new LinkedList<Item>();
 		experiencia = 0;
 		nivel = 1;
 		fuerza = 10;
@@ -89,7 +84,7 @@ public abstract class Personaje implements Peleable, Serializable {
 	}
 
 	public Personaje(String nombre, int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta,
-			LinkedList<Item> itemsEquipados, LinkedList<Item> itemsGuardados, int experiencia, int nivel,
+			int experiencia, int nivel,
 			int idPersonaje) {
 
 		this.nombre = nombre;
@@ -99,14 +94,6 @@ public abstract class Personaje implements Peleable, Serializable {
 		this.destreza = destreza;
 		this.inteligencia = inteligencia;
 		this.casta = casta;
-		if (itemsEquipados != null)
-			this.itemsEquipados = itemsEquipados;
-		else
-			this.itemsEquipados = new LinkedList<Item>();
-		if (itemsGuardados != null)
-			this.itemsGuardados = itemsGuardados;
-		else
-			this.itemsGuardados = new LinkedList<Item>();
 
 		this.experiencia = experiencia;
 		this.nivel = nivel;
@@ -209,22 +196,6 @@ public abstract class Personaje implements Peleable, Serializable {
 		this.casta = casta;
 	}
 
-	public LinkedList<Item> getItemsEquipados() {
-		return itemsEquipados;
-	}
-
-	public void setItemsEquipados(LinkedList<Item> itemsEquipados) {
-		this.itemsEquipados = itemsEquipados;
-	}
-
-	public LinkedList<Item> getItemsGuardados() {
-		return itemsGuardados;
-	}
-
-	public void setItemsGuardados(LinkedList<Item> itemsGuardados) {
-		this.itemsGuardados = itemsGuardados;
-	}
-
 	public int getExperiencia() {
 		return experiencia;
 	}
@@ -274,11 +245,10 @@ public abstract class Personaje implements Peleable, Serializable {
 	}
 
 	public int atacar(Peleable atacado) {
-		Random rnd = new Random();
 		if (salud == 0)
 			return 0;
 		if (atacado.getSalud() > 0) {
-			if (rnd.nextDouble() <= this.casta.getProbabilidadGolpeCritico() + this.destreza / 1000) {
+			if (MyRandom.nextDouble() <= this.casta.getProbabilidadGolpeCritico() + this.destreza / 1000) {
 				return atacado.serAtacado(this.golpe_critico());
 			} else {
 				return atacado.serAtacado(this.ataque);
@@ -300,28 +270,15 @@ public abstract class Personaje implements Peleable, Serializable {
 	}
 
 	public int calcularPuntosDeAtaque() {
-		int daño_items = 0;
-		Iterator<Item> it = this.itemsEquipados.iterator();
-		while (it.hasNext())
-			daño_items += it.next().bonoDaño;
-		return (int) (this.getFuerza() * 1.5 + daño_items);
+		return (int) (this.getFuerza() * 1.5);
 	}
 
 	public int calcularPuntosDeDefensa() {
-		int defensa_items = 0;
-		Iterator<Item> it = this.itemsEquipados.iterator();
-		while (it.hasNext())
-			defensa_items += it.next().bonoDefensa;
-		return (int) (defensa_items + this.getDestreza());
+		return (int) (this.getDestreza());
 	}
 
 	public int calcularPuntosDeMagia() {
-		int magia_items = 0;
-		Iterator<Item> it = this.itemsEquipados.iterator();
-		while (it.hasNext())
-			magia_items += it.next().bonoMagia;
-		return (int) (this.getInteligencia() * 1.5 + magia_items);
-
+		return (int) (this.getInteligencia() * 1.5);
 	}
 
 	public void restablecerSalud() {
@@ -343,8 +300,7 @@ public abstract class Personaje implements Peleable, Serializable {
 	}
 
 	public int serAtacado(int daño) {
-		Random rnd = new Random();
-		if (rnd.nextDouble() >= this.getCasta().getProbabilidadEvitarDaño()) {
+		if (MyRandom.nextDouble() >= this.getCasta().getProbabilidadEvitarDaño()) {
 			daño -= this.defensa;
 			if (daño > 0) {
 				if (salud <= daño) {
@@ -398,135 +354,6 @@ public abstract class Personaje implements Peleable, Serializable {
 			this.energia += energia;
 		else
 			this.energia = this.energiaTope;
-	}
-
-	public boolean desequiparItem(Item i) {
-		// un item equipado
-		if (this.itemsEquipados.remove(i)) {
-			this.modificarAtributos();
-			this.saludTope -= i.getBonoSalud();
-			this.energiaTope -= i.getBonoEnergia();
-			this.salud = this.saludTope;
-			this.energia = this.energiaTope;
-			return true;
-		}
-		return false;
-	}
-
-	public boolean dropearItemMochila(Item i) {
-		return this.itemsGuardados.remove(i);
-	}
-
-	public boolean guardarItem(Item i) {
-		if (this.itemsGuardados.size() < 20) {
-			this.itemsGuardados.add(i);
-			return true;
-		}
-		return false;
-	}
-
-	public boolean equiparItem(Item i) {
-		if (this.itemsEquipados.size() <= 6) {
-			if (this.puedeEquipar(i)) {
-				this.itemsEquipados.add(i);
-				this.modificarAtributos();
-				this.saludTope += i.getBonoSalud();
-				this.energiaTope += i.getBonoEnergia();
-				return true;
-			}
-
-		}
-		return false;
-	}
-
-	public boolean puedeEquipar(Item i) {
-		if (this.fuerza < i.getFuerzaRequerida() || this.destreza < i.getDestrezaRequerida()
-				|| this.inteligencia < i.getInteligenciaRequerida())
-			return false;
-		
-		int contadorItemDeMano = 0;
-		Iterator<Item> it = this.itemsEquipados.iterator();
-		while (it.hasNext()) {
-			if (it.next().getTipo() == i.getTipo()){
-				if (i.getTipo() == "Manos"){
-					contadorItemDeMano++;
-					if(contadorItemDeMano==2)
-						return false;
-				}
-				else
-					return false;
-			}
-		}
-		return true;
-	}
-
-	public String listaItemsEquipados() {
-		String aux = "";
-		for (Item i : this.itemsEquipados) {
-			if (i != null)
-				aux += i.toString();
-		}
-		return aux;
-	}
-
-	public String listaItemsGuardados() {
-		String aux = "";
-		for (Item i : this.itemsGuardados) {
-			if (i != null)
-				aux += i.toString();
-		}
-		return aux;
-	}
-
-	public Item serRobado() {
-		int num_item_desequipado;
-		Item item_robado;
-		if (this.itemsEquipados.size() == 0 && this.itemsGuardados.size() == 0)
-			return null;
-
-		Random rnd = new Random();
-
-		if (rnd.nextInt(2) == 0)// 0=itemsEquipados, 1=itemsGuardados
-		{
-			if (this.itemsEquipados.size() != 0) {
-				num_item_desequipado = rnd.nextInt(this.itemsEquipados.size());
-				item_robado = this.itemsEquipados.get(num_item_desequipado);
-				this.desequiparItem(item_robado);
-				return item_robado;
-			}
-		}
-		num_item_desequipado = rnd.nextInt(this.itemsGuardados.size());
-		item_robado = this.itemsGuardados.get(num_item_desequipado);
-		this.dropearItemMochila(item_robado);
-		return item_robado;
-	}
-
-	public Item getEquipado(int i) {
-		if (this.itemsEquipados.size() > i)
-			return this.itemsEquipados.get(i);
-		return null;
-	}
-
-	public Item getMochila(int i) {
-		if (this.itemsGuardados.size() > i)
-			return this.itemsGuardados.get(i);
-		return null;
-	}
-
-	public Item otorgarItem() {
-		if (this.getItemsEquipados().size() == 0 && this.getItemsGuardados().size() == 0)
-			return null;
-		Item aux;
-		Random rnd = new Random();
-		if (this.getItemsGuardados().size() > 0) {
-			aux = this.getItemsGuardados().get(rnd.nextInt(this.itemsGuardados.size()));
-			this.dropearItemMochila(aux);
-			return aux;
-		} else {
-			aux = this.getItemsEquipados().get(rnd.nextInt(this.itemsEquipados.size()));
-			this.desequiparItem(aux);
-			return aux;
-		}
 	}
 
 	public void crearAlianza(String nombre_alianza) {

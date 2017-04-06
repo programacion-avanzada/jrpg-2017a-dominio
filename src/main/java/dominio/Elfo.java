@@ -1,7 +1,5 @@
 package dominio;
 
-import java.util.LinkedList;
-
 public class Elfo extends Personaje {
 
 	public Elfo(String nombre, Casta casta, int id) {
@@ -17,9 +15,9 @@ public class Elfo extends Personaje {
 	}
 
 	public Elfo(String nombre, int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta,
-			LinkedList<Item> itemsEquipados, LinkedList<Item> itemsGuardados, int experiencia, int nivel,
+			int experiencia, int nivel,
 			int idPersonaje) {
-		super(nombre, salud, energia, fuerza, destreza, inteligencia, casta, itemsEquipados, itemsGuardados,
+		super(nombre, salud, energia, fuerza, destreza, inteligencia, casta,
 				experiencia, nivel, idPersonaje);
 		nombreRaza = "Elfo";
 

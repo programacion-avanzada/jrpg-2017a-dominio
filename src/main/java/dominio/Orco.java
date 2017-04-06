@@ -1,7 +1,5 @@
 package dominio;
 
-import java.util.LinkedList;
-
 public class Orco extends Personaje {
 
 	public Orco(String nombre, Casta casta, int id) {
@@ -17,10 +15,8 @@ public class Orco extends Personaje {
 	}
 
 	public Orco(String nombre, int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta,
-			LinkedList<Item> itemsEquipados, LinkedList<Item> itemsGuardados, int experiencia, int nivel,
-			int idPersonaje) {
-		super(nombre, salud, energia, fuerza, destreza, inteligencia, casta, itemsEquipados, itemsGuardados,
-				experiencia, nivel, idPersonaje);
+			int experiencia, int nivel, int idPersonaje) {
+		super(nombre, salud, energia, fuerza, destreza, inteligencia, casta, experiencia, nivel, idPersonaje);
 		nombreRaza = "Orco";
 
 		habilidadesRaza = new String[2];

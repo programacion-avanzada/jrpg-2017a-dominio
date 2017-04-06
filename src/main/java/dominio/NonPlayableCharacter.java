@@ -1,29 +1,20 @@
 package dominio;
 
-import java.util.Random;
-
 public class NonPlayableCharacter implements Peleable {
 
 	private int salud;
 	private int fuerza;
 	private int defensa;
 	private String nombre;
-	private Item[] itemsDropeables;
 	private int nivel;
-	private static final int cantidadItemsDropeables = 3;
 	private static final int dificultadAleatoria = -1;
 
-	public NonPlayableCharacter(String nombre, int nivel, Item[] itemsDropeables, int dificultadNPC) {
+	public NonPlayableCharacter(String nombre, int nivel, int dificultadNPC) {
 		this.nombre = nombre;
 		this.nivel = nivel;
-		if (itemsDropeables != null)
-			this.itemsDropeables = itemsDropeables.clone();
-		else
-			this.itemsDropeables = new Item[cantidadItemsDropeables];
-		Random rnd = new Random();
 		int dificultad;
 		if (dificultadNPC == dificultadAleatoria)
-			dificultad = rnd.nextInt(3);
+			dificultad = MyRandom.nextInt(3);
 		else
 			dificultad = dificultadNPC;
 
@@ -46,7 +37,6 @@ public class NonPlayableCharacter implements Peleable {
 
 		}
 	}
-		
 
 	public int otorgarExp() {
 		return this.nivel * 30;
@@ -97,16 +87,14 @@ public class NonPlayableCharacter implements Peleable {
 	}
 
 	public int atacar(Peleable atacado) {
-		Random rnd = new Random();
-		if (rnd.nextDouble() <= 0.15) {// los NPC tienen 15% de golpes criticos
+		if (MyRandom.nextDouble() <= 0.15) {// los NPC tienen 15% de golpes criticos
 			return atacado.serAtacado((int) (this.getAtaque() * 1.5));
 		} else
 			return atacado.serAtacado(this.getAtaque());
 	}
 
 	public int serAtacado(int daño) {
-		Random rnd = new Random();
-		if (rnd.nextDouble() >= 0.15) {
+		if (MyRandom.nextDouble() >= 0.15) {
 			daño -= this.getDefensa() / 2;
 			if (daño > 0) {
 				salud -= daño;
@@ -117,42 +105,7 @@ public class NonPlayableCharacter implements Peleable {
 		return 0;// esquivo el golpe
 	}
 
-	public void despuesDeTurno() {
-
-	}
-
-	public Item dropearItemAleatorio() {
-		Random rnd = new Random();
-		int numeroDeItemDropeado = rnd.nextInt(itemsDropeables.length);
-		if (itemsDropeables != null) {
-			int nivelItem = rnd.nextInt(this.nivel + 6);
-			while ((this.nivel - 5) > nivelItem || (this.nivel + 5) < nivelItem)
-				nivelItem = rnd.nextInt(this.nivel + 6);
-			return modificarItem(itemsDropeables[numeroDeItemDropeado], nivelItem);
-		}
-		return null;
-	}
-
-	public Item modificarItem(Item itemDropeado, int nivelItem) {
-		Item itemModificado = itemDropeado.clone();
-		itemModificado.setNivel(nivelItem);
-		if (itemModificado.getBonoDaño() != 0)
-			itemModificado.setBonoDaño(itemModificado.getBonoDaño() + nivelItem);
-		if (itemModificado.getBonoDefensa() != 0)
-			itemModificado.setBonoDefensa(itemModificado.getBonoDefensa() + nivelItem);
-		if (itemModificado.getBonoMagia() != 0)
-			itemModificado.setBonoMagia(itemModificado.getBonoMagia() + nivelItem);
-		if (itemModificado.getBonoSalud() != 0)
-			itemModificado.setBonoSalud(itemModificado.getBonoSalud() + nivelItem);
-		if (itemModificado.getBonoEnergia() != 0)
-			itemModificado.setBonoEnergia(itemModificado.getBonoEnergia() + nivelItem);
-		return itemModificado;
-	}
-
-	public Item serRobado() {
-		Random rnd = new Random();
-		return this.itemsDropeables[rnd.nextInt(this.itemsDropeables.length)].clone();
-	}
+	public void despuesDeTurno() { }
 
 	public void ganarExperiencia(int exp) {
 
