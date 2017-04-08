@@ -1,20 +1,14 @@
 package dominio;
 
 import java.io.Serializable;
-import java.util.Iterator;
-import java.util.LinkedList;
-
-import javax.swing.JOptionPane;
-
-import dominio.Asesino;
 
 public abstract class Personaje implements Peleable, Serializable {
 
 	protected int salud;
 	protected int energia;
-	protected int defensa;// depende de la destreza y de los items
-	protected int ataque;// depende de la fuerza y de los items
-	protected int magia;// depende de la inteligencia y de los items
+	protected int defensa;// depende de la destreza
+	protected int ataque;// depende de la fuerza
+	protected int magia;// depende de la inteligencia
 
 	protected String nombre;// hay que agregarlo a todos los constructores
 	protected String nombreRaza;
@@ -380,8 +374,7 @@ public abstract class Personaje implements Peleable, Serializable {
 			this.clan.añadirPersonaje(nuevo_aliado);
 			return true;
 		} else
-			JOptionPane.showMessageDialog(null, "Ya se encuentra en una alianza");
-		return false;
+			return false;
 	}
 
 	public void AsignarPuntosSkills(int fuerza, int destreza, int inteligencia) {
@@ -449,24 +442,4 @@ public abstract class Personaje implements Peleable, Serializable {
 	public abstract boolean habilidadRaza1(Peleable atacado);
 
 	public abstract boolean habilidadRaza2(Peleable atacado);
-
-	public int elegirOpcion() {
-		return Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el ataque a realizar: "));
-	}
-
-	public LinkedList<Personaje> armarBatallonPjs() {
-		LinkedList<Personaje> batallon_amigo = new LinkedList<>();
-		batallon_amigo.add(this);
-		if (this.getClan() != null) {
-			Iterator<Personaje> it = this.getClan().getAliados().iterator();
-			Personaje aux;
-			while (it.hasNext()) {
-				aux = it.next();
-				if (aux != this && aux.distanciaCon(this) <= 10)
-					batallon_amigo.add(aux);
-			}
-
-		}
-		return batallon_amigo;
-	}
 }
