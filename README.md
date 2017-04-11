@@ -12,7 +12,7 @@
 
 ### Integrantes del equipo
 
-* Completar ([xxxx](https://github.com/xxxx))
+* Maximiliano Ramos ([MaxiARG](https://github.com/MaxiARG))
 * Completar ([xxxx](https://github.com/xxxx))
 * Completar ([xxxx](https://github.com/xxxx))
 * Completar ([xxxx](https://github.com/xxxx))
