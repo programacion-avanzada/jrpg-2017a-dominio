@@ -9,7 +9,16 @@ public abstract class Casta implements Serializable {
 	protected String nombreCasta;
 
 	protected String[] habilidadesCasta;
-
+	/**
+	 * Clase abstracta de la cual heredarán las clases Asesion,Guerrero,Hechicero
+	 * Posee dos contructores, el contructor por defecto (no recibe argumentos) pondrá los atributos
+	 * con sus respectivos valores por defecto.
+	 * El otro constructor (el cual recibe argumentos) asignará a cada atributo el valor correspondiente
+	 * que será el que se reciba por argumento.
+	 * @param probabilidadGolpeCritico Probabilidad de que el personaje realice un golpe crítico
+	 * @param probabilidadEvitarDaño Probabilidad de que el personaje evite un golpe crítico
+	 * @param dañoCritico Valor por el cual será multiplicado el golpe básico
+	 */
 	public Casta() {
 		this.probabilidadGolpeCritico = 0.2;
 		this.probabilidadEvitarDaño = 0.2;
@@ -23,7 +32,13 @@ public abstract class Casta implements Serializable {
 	}
 
 	public abstract boolean habilidad1(Personaje caster, Peleable atacado);
-
+	
+	/**
+	 * Método abstracto que será implementado en Asesino, Guerrero y Hechicero.
+	 * @param caster Personaje atacante.
+	 * @param atacado Personaje que recibirá el ataque.
+	 * @return Retornará true si el ataque fue realizado exitosamente, false de lo contrario.
+	 */
 	public abstract boolean habilidad2(Personaje caster, Peleable atacado);
 
 	public abstract boolean habilidad3(Personaje caster, Peleable atacado);
@@ -39,7 +54,11 @@ public abstract class Casta implements Serializable {
 	public double getProbabilidadGolpeCritico() {
 		return probabilidadGolpeCritico;
 	}
-
+	/**
+	 * Método void que sobreescribe el atributo probabilidadGolpeCritico con el valor que se ingresa por 
+	 * parámetro.
+	 * @param probabilidadGolpeCritico
+	 */
 	public void setProbabilidadGolpeCritico(double probabilidadGolpeCritico) {
 		this.probabilidadGolpeCritico = probabilidadGolpeCritico;
 	}

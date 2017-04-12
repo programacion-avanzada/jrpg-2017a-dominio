@@ -8,7 +8,15 @@ public class NonPlayableCharacter implements Peleable {
 	private String nombre;
 	private int nivel;
 	private static final int dificultadAleatoria = -1;
-
+	
+	/**
+	 * La clase NonPlayableCharacter representa a los NPC del juego, dependiendo de la dificultad 
+	 * que se pasa por parámetro al constructor, aumentará o disminuirá el valor de los atributos fuerza
+	 * salud y defens
+	 * @param nombre Nombre que se le otorga al NPC
+	 * @param nivel Nivel (entero) que se le otorga al NPC
+	 * @param dificultadNPC valor entero que consecuentemente produce una variación en los atributos.
+	 */
 	public NonPlayableCharacter(String nombre, int nivel, int dificultadNPC) {
 		this.nombre = nombre;
 		this.nivel = nivel;
@@ -38,6 +46,11 @@ public class NonPlayableCharacter implements Peleable {
 		}
 	}
 
+	/**
+	 * Retorna un entero representando la cantidad de experiencia que debe sumarse al Personaje que 
+	 * produjo la disminución de la salud del NPC a 0
+	 * La experiencia será 30 veces el valor del atributo nivel
+	 */
 	public int otorgarExp() {
 		return this.nivel * 30;
 	}
@@ -93,6 +106,13 @@ public class NonPlayableCharacter implements Peleable {
 			return atacado.serAtacado(this.getAtaque());
 	}
 
+	/**
+	 * Método que retorna 0 o un valor positivo, si el número generado por MyRandom.nextDouble() es
+	 * mayor a 0.15 se procede a disminuir el daño por la mitad del atributo defensa si después de la
+	 * reducción de daño, este sigue siendo mayor a 0 se procede a restar el valor del daño al atributo
+	 * salud.
+	 * @param daño valor a ser descontado del atributo salud.
+	 */
 	public int serAtacado(int daño) {
 		if (MyRandom.nextDouble() >= 0.15) {
 			daño -= this.getDefensa() / 2;

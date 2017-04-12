@@ -1,5 +1,10 @@
 package dominio;
-
+/**
+ * 
+ * Interface implementada en las clases Personaje y NPC
+ * Dependiendo qué clase las esté implementando será como responderán
+ *
+ */
 public interface Peleable {
 	public int serAtacado(int daño);
 	public int getSalud();
