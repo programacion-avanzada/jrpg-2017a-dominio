@@ -13,7 +13,7 @@
 ### Integrantes del equipo
 
 * Ezequiel Laurenti ([ezelau95](https://github.com/ezelau95))
-* Fernando Queirolo ([fernandoq96](https://github.com/frenandoq96))
+* Fernando Queirolo ([fernandoq96](https://github.com/fernandoq96))
 * Pablo Raimondo ([PabloRai](https://github.com/PabloRai))
 * Nicolás Sapaya ([NicolasSap](https://github.com/NicolasSap))
 
