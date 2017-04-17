@@ -12,12 +12,11 @@
 
 ### Integrantes del equipo
 
-* Completar ([xxxx](https://github.com/xxxx))
-* Completar ([xxxx](https://github.com/xxxx))
-* Completar ([xxxx](https://github.com/xxxx))
-* Completar ([xxxx](https://github.com/xxxx))
-* Completar ([xxxx](https://github.com/xxxx))
-* Completar ([xxxx](https://github.com/xxxx))
+* Ezequiel Laurenti ([ezelau95](https://github.com/ezelau95))
+* Fernando Queirolo ([fernandoq96](https://github.com/frenandoq96))
+* Pablo Raimondo ([PabloRai](https://github.com/PabloRai))
+* Nicolás Sapaya ([NicolasSap](https://github.com/NicolasSap))
+
 
 ## Sobre la tecnología
 
