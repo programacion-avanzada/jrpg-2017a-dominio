@@ -28,7 +28,7 @@ public class Asesino extends Casta {
 
 	// Golpe Crítico
 	/**
-	 * Retorna un booleano dependiendo de si se realizó exitosamente o no el ataque.
+	 * Retorna un booleano dependiendo del éxito del ataque.
 	 * La primera condición para que el ataque pueda realizarse es que el atacante(caster) posea 10 o
 	 * más del atributo energia ya que estos se descuentan seguido de comprobar que los posee, de lo contrario
 	 * el ataque no será posible y se retornará false
