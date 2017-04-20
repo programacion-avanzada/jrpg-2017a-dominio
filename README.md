@@ -1,4 +1,4 @@
-# World Of Middle Earth (WOME) - dominio
+﻿# World Of Middle Earth (WOME) - dominio
 
 ## Sobre las personas
 
@@ -12,7 +12,7 @@
 
 ### Integrantes del equipo
 
-* Completar ([xxxx](https://github.com/xxxx))
+* Carroccio Julian ([juliancarroccio](https://github.com/juliancarroccio))
 * Completar ([xxxx](https://github.com/xxxx))
 * Completar ([xxxx](https://github.com/xxxx))
 * Completar ([xxxx](https://github.com/xxxx))
