@@ -2,15 +2,21 @@ package dominio;
 
 import java.io.Serializable;
 
+/**
+* La clase Personaje posee todos los atributos de los personajes del juego, algunos
+* serán completados por las clases hijo (Elfo,Humano,Orco)
+* 
+ */
+
 public abstract class Personaje implements Peleable, Serializable {
 
 	protected int salud;
 	protected int energia;
-	protected int defensa;// depende de la destreza
-	protected int ataque;// depende de la fuerza
-	protected int magia;// depende de la inteligencia
+	protected int defensa;		// depende de la destreza
+	protected int ataque;		// depende de la fuerza
+	protected int magia;		// depende de la inteligencia
 
-	protected String nombre;// hay que agregarlo a todos los constructores
+	protected String nombre;	// hay que agregarlo a todos los constructores
 	protected String nombreRaza;
 
 	protected int saludTope;
@@ -50,9 +56,8 @@ public abstract class Personaje implements Peleable, Serializable {
 			Personaje.tablaDeNiveles[i] = Personaje.tablaDeNiveles[i - 1] + 50;
 	}
 	/**
-	 * La clase Personaje es la cual posee todos los atributos de los personajes del juego, algunos
-	 * serán completados por las clases hijo (Elfo,Humano,Orco) como por ejemplo el array habilidadesRaza[]
-	 * dependiendo de qué instancia es el parámetro casta, se incrementará en 5 un atributo del personaje
+	 *Constructor de la Clase, asigna nombre y ID. Dependiendo de qué instancia es el parámetro casta,
+	 * se incrementará en 5 un atributo del personaje
 	 * @param nombre Indica el nombre el personaje
 	 * @param casta Indica la casta(Raza) del personaje y con ella el incremento que tendrá cierto atributo
 	 * @param id Identificador del personaje
@@ -84,9 +89,7 @@ public abstract class Personaje implements Peleable, Serializable {
 
 	}
 	/**
-	 * La clase Personaje es la cual posee todos los atributos de los personajes del juego, algunos serán 
-	 * completados por las clases hijo (Elfo,Humano,Orco) como por ejemplo el array habilidadesRaza[]
-	 * A diferencia del constructor de sólo 3 parámetros, éste recibe la mayoría de los atributos
+	 * Constructor de lc Clase, recibe los atributos independientes.
 	 * @param nombre Nombre del personaje
 	 * @param salud Salud del personaje
 	 * @param energia Energia del personaje

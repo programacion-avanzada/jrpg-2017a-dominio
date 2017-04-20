@@ -1,9 +1,13 @@
 package dominio;
-
+/**
+ * La clase Orco hereda de la clase Personaje, completa ciertos atributos que estaban declarados en
+ * la clase Personaje, como por ejemplo habilidadesRaza[]
+ * 
+ */
 public class Orco extends Personaje {
 	/**
-	 * La clase Orco hereda de la clase Personaje, completa ciertos atributos que estaban declarados en
-	 * la clase Personaje, como por ejemplo habilidadesRaza[]
+	 * Constructor de la Clase, heredando del constructor de Personaje y asignando ciertos atributos
+	 * característicos de la raza
 	 * @param nombre Indica el nombre el personaje
 	 * @param casta Indica la casta(Raza) del personaje
 	 * @param id Identificador del personaje
@@ -20,9 +24,8 @@ public class Orco extends Personaje {
 		habilidadesRaza[1] = "Mordisco de Vida";
 	}
 	/**
-	 * La clase Orco hereda de la clase Personaje, completa ciertos atributos que estaban declarados en
-	 * la clase Personaje, como por ejemplo habilidadesRaza[]
-	 * Recibe la mayoría de los atributos
+	 * Constructor de la Clase, heredando del constructor de Personaje,
+	 * recibiendo la mayoría de los atributos
 	 * @param nombre Nombre del personaje
 	 * @param salud Salud del personaje
 	 * @param energia Energia del personaje
@@ -46,13 +49,15 @@ public class Orco extends Personaje {
 
 	// Golpe Defensa
 	/**
-	 * Retorna un booleano dependiendo de si se realizó exitosamente o no el ataque.
+	 * *Golpe Defensa*
+	 * Retorna un booleano dependiendo del éxito del ataque.
 	 * La primera condición para que el ataque pueda realizarse es que el atacante(caster) posea 10 o
 	 * más del atributo energia ya que estos se descuentan seguido de comprobar que los posee, 
-	 * de lo contrario el ataque no será posible y se retornará false
-	 * El método serAtacado() tiene como argumento el doble del valor del atributo defensa del llamador
-	 * @param atacado Instancia de Personaje o de NPC, dependiendo de cual sea, será como responda el 
-	 * método serAtacado()
+	 * de lo contrario el ataque no será posible y se retornará false.
+	 * El ataque será exitoso únicamente si serAtacado() devuelve un valor mayor a 0, recibiendo como 
+	 * argumento el doble del valor del atributo defensa del llamador.
+	 * 
+	 * @param atacado Personaje o de NPC
 	 */
 	public boolean habilidadRaza1(Peleable atacado) {
 		if (this.getEnergia() > 10) {
@@ -65,14 +70,16 @@ public class Orco extends Personaje {
 
 	// Mordisco de Vida
 	/**
+	 * *Mordisco de Vida*
 	 * Retorna un booleano dependiendo de si se realizó exitosamente o no el ataque.
 	 * La primera condición para que el ataque pueda realizarse es que el atacante(caster) posea 10 o
 	 * más del atributo energia ya que estos se descuentan seguido de comprobar que los posee, 
-	 * de lo contrario el ataque no será posible y se retornará false
-	 * El método serAtacado() tiene como argumento el valor del atributo fuerza del llamador
-	 * luego el llamador se cura con el daño causado al atacado
-	 * @param atacado Instancia de Personaje o de NPC, dependiendo de cual sea, será como responda el 
-	 * método serAtacado()
+	 * de lo contrario el ataque no será posible y se retornará false.
+	 * El ataque será exitoso únicamente si el daño causado es mayor a 0. Dicho valor resulta del metodo
+	 * serAtacado() que recibe como argumento el valor del atributo fuerza del llamador.
+	 *Lluego el llamador se cura con el daño causado al atacado
+	 * 
+	 * @param atacado Personaje o de NPC
 	 */
 	public boolean habilidadRaza2(Peleable atacado) {
 		if (this.getEnergia() > 10) {

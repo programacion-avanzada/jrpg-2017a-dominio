@@ -1,9 +1,15 @@
 package dominio;
 
+/**
+ * La clase Elfo hereda de la clase Personaje, completa ciertos atributos que estaban declarados en
+ * la clase Personaje, como por ejemplo habilidadesRaza[]
+ *
+ */
+
 public class Elfo extends Personaje {
 	/**
-	 * La clase Elfo hereda de la clase Personaje, completa ciertos atributos que estaban declarados en
-	 * la clase Personaje, como por ejemplo habilidadesRaza[]
+	 * Constructor de la Clase, heredando del constructor de Personaje y asignando ciertos atributos
+	 * característicos de la raza
 	 * @param nombre Indica el nombre el personaje
 	 * @param casta Indica la casta(Raza) del personaje
 	 * @param id Identificador del personaje
@@ -20,9 +26,8 @@ public class Elfo extends Personaje {
 		habilidadesRaza[1] = "Ataque Bosque";
 	}
 	/**
-	 * La clase Elfo hereda de la clase Personaje, completa ciertos atributos que estaban declarados en
-	 * la clase Personaje, como por ejemplo habilidadesRaza[]
-	 * Recibe la mayoría de los atributos
+	 * Constructor de la Clase, heredando del constructor de Personaje,
+	 * recibiendo la mayoría de los atributos
 	 * @param nombre Nombre del personaje
 	 * @param salud Salud del personaje
 	 * @param energia Energia del personaje
@@ -48,14 +53,13 @@ public class Elfo extends Personaje {
 
 	// Golpe Level
 	/**
-	 * Retorna un booleano dependiendo de si se realizó exitosamente o no el ataque.
+	 * *Golpe Level*
+	 * Retorna un booleano dependiendo del éxito del ataque.
 	 * La primera condición para que el ataque pueda realizarse es que el atacante(caster) posea 10 o
-	 * más del atributo energia ya que estos se descuentan seguido de comprobar que los posee, de lo contrario
-	 * el ataque no será posible y se retornará false
-	 * El método serAtacado() posee como argumento la suma de la fuerza del atacante y 
-	 * el nivel del mismo multiplicado por 10
-	 * @param atacado Instancia de Personaje o de NPC, dependiendo de cual sea, será como responda el 
-	 * método serAtacado()
+	 * más del atributo energia ya que estos se descuentan seguido de comprobar que los posee.
+	 * El ataque será exitoso únicamente si método serAtacado() devuelve un valor mayor a 0.
+	 * 
+	 * @param atacado Personaje o NPC
 	 */
 	public boolean habilidadRaza1(Peleable atacado) {
 		if (this.getEnergia() > 10) {
@@ -69,14 +73,15 @@ public class Elfo extends Personaje {
 	// Ataque Bosque
 
 	/**
-	 * Retorna un booleano dependiendo de si se realizó exitosamente o no el ataque.
+	 * *Ataque Bosque*
+	 * Retorna un booleano dependiendo del éxito del ataque.
 	 * La primera condición para que el ataque pueda realizarse es que el atacante(caster) posea 10 o
 	 * más del atributo energia ya que estos se descuentan seguido de comprobar que los posee, de lo contrario
 	 * el ataque no será posible y se retornará false
 	 * El método serAtacado() posee como argumento un entero representando 1 o 0, dependiendo si el
 	 * atributo magia del llamador, es mayor a 0
-	 * @param atacado Instancia de Personaje o de NPC, dependiendo de cual sea, será como responda el 
-	 * método serAtacado()
+	 * 
+	 * @param atacado Personaje o de NPC
 	 */
 	public boolean habilidadRaza2(Peleable atacado) {
 		if (this.getEnergia() > 10) {

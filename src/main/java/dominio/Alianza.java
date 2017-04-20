@@ -2,13 +2,18 @@ package dominio;
 
 import java.util.LinkedList;
 
+/**
+ *  La clase Alianza tiene como función agrupar a los jugadores
+ *  mediante una LinkedList de Personajes
+ *
+ */
 public class Alianza {
 
 	String nombre;
 	LinkedList<Personaje> aliados;
 	/**
-	 * La clase Alianza tiene como función agrupar a los jugadores
-	 * mediante una LinkedList de Personajes
+	 * Constructor de la Clase que genera una lista vacía de personajes y
+	 * asigna el nombre a la Alianza
 	 * 
 	 * @param nombre Nombre que se le dará a la alianza
 	 */

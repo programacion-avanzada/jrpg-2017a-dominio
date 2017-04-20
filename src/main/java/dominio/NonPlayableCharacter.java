@@ -1,5 +1,11 @@
 package dominio;
 
+/**
+ * La clase NonPlayableCharacter representa a los NPC del juego, es decir, aquellos personajes
+ * que no son controlados por los jugadores.
+ *
+ */
+
 public class NonPlayableCharacter implements Peleable {
 
 	private int salud;
@@ -10,9 +16,9 @@ public class NonPlayableCharacter implements Peleable {
 	private static final int dificultadAleatoria = -1;
 	
 	/**
-	 * La clase NonPlayableCharacter representa a los NPC del juego, dependiendo de la dificultad 
-	 * que se pasa por parámetro al constructor, aumentará o disminuirá el valor de los atributos fuerza
-	 * salud y defens
+	 * Constructor de la Clase, asigna nombre y nivel. Ademas dependiendo de la dificultad 
+	 * pasada por parámetro, aumentará o disminuirá el valor de los atributos fuerza,
+	 * salud y defensa
 	 * @param nombre Nombre que se le otorga al NPC
 	 * @param nivel Nivel (entero) que se le otorga al NPC
 	 * @param dificultadNPC valor entero que consecuentemente produce una variación en los atributos.
