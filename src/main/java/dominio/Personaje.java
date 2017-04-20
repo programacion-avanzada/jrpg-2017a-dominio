@@ -2,15 +2,21 @@ package dominio;
 
 import java.io.Serializable;
 
+/**
+* La clase Personaje posee todos los atributos de los personajes del juego, algunos
+* serán completados por las clases hijo (Elfo,Humano,Orco)
+* 
+ */
+
 public abstract class Personaje implements Peleable, Serializable {
 
 	protected int salud;
 	protected int energia;
-	protected int defensa;// depende de la destreza
-	protected int ataque;// depende de la fuerza
-	protected int magia;// depende de la inteligencia
+	protected int defensa;		// depende de la destreza
+	protected int ataque;		// depende de la fuerza
+	protected int magia;		// depende de la inteligencia
 
-	protected String nombre;// hay que agregarlo a todos los constructores
+	protected String nombre;	// hay que agregarlo a todos los constructores
 	protected String nombreRaza;
 
 	protected int saludTope;
@@ -49,7 +55,13 @@ public abstract class Personaje implements Peleable, Serializable {
 		for (int i = 2; i < 101; i++)
 			Personaje.tablaDeNiveles[i] = Personaje.tablaDeNiveles[i - 1] + 50;
 	}
-
+	/**
+	 *Constructor de la Clase, asigna nombre y ID. Dependiendo de qué instancia es el parámetro casta,
+	 * se incrementará en 5 un atributo del personaje
+	 * @param nombre Indica el nombre el personaje
+	 * @param casta Indica la casta(Raza) del personaje y con ella el incremento que tendrá cierto atributo
+	 * @param id Identificador del personaje
+	 */
 	public Personaje(String nombre, Casta casta, int id) {
 		this.nombre = nombre;
 		this.casta = casta;
@@ -76,7 +88,19 @@ public abstract class Personaje implements Peleable, Serializable {
 		magia = this.calcularPuntosDeMagia();
 
 	}
-
+	/**
+	 * Constructor de lc Clase, recibe los atributos independientes.
+	 * @param nombre Nombre del personaje
+	 * @param salud Salud del personaje
+	 * @param energia Energia del personaje
+	 * @param fuerza Fuerza del Personaje
+	 * @param destreza Destreza del personaje
+	 * @param inteligencia Inteligencia del personaje
+	 * @param casta Casta(Raza) del personaje 
+	 * @param experiencia Experiencia del personaje
+	 * @param nivel Nivel del personaje 
+	 * @param idPersonaje Id del personaje
+	 */
 	public Personaje(String nombre, int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta,
 			int experiencia, int nivel,
 			int idPersonaje) {
@@ -237,7 +261,15 @@ public abstract class Personaje implements Peleable, Serializable {
 	public void setEnergiaTope(int energiaTope) {
 		this.energiaTope = energiaTope;
 	}
-
+	/**
+	 * Método que retorna un entero dependiendo del resultado de las comparaciones entre el Personaje llamador
+	 * y el argumento que puede ser instancia de Personaje o de NPC (NonPlayableCharacter)
+	 * La probabilidad de golpe critico depende de la casta del Personaje y de la destreza del mismo
+	 * Si la probabilidad junto con la destreza es mayor o igual al número generado de manera aleatorea entonces
+	 * se atacará con golpe crítico, de lo contrario sera atacado con el valor del atributo ataque
+	 * Retornará 0 si la salud del Personaje llamador es 0 o si el atacado posee una salud menor a 0
+	 * @param atacado Instancia de Persona o NPC la cual será atacada
+	 */
 	public int atacar(Peleable atacado) {
 		if (salud == 0)
 			return 0;
@@ -292,7 +324,15 @@ public abstract class Personaje implements Peleable, Serializable {
 	public boolean estaVivo() {
 		return salud > 0;
 	}
-
+	/**
+	 * Método implementado de la Interface Peleable, retornará un valor entero dependiendo del 
+	 * resultado de las comparaciones, si el número generado con la clase MyRandom es mayor a
+	 * la probabilidad de evitar daño la cual depende de la casta del Personaje, entonces no podrá
+	 * evitarse el ataque, se descontará el valor del argumento daño al atributo salud.
+	 * Si el valor del atributo salud es menor al valor del argumento daño, se procederá a igualar el
+	 * atributo salud a 0 y retornar el daño realziado (que será igual a la salud antes de que esté en 0 
+	 * @param daño valor a descontarse del atributo salud
+	 */
 	public int serAtacado(int daño) {
 		if (MyRandom.nextDouble() >= this.getCasta().getProbabilidadEvitarDaño()) {
 			daño -= this.defensa;
