@@ -2,6 +2,12 @@ package dominio;
 
 import java.io.Serializable;
 
+/**
+	La clase "Personaje" es la que se encargara de administrar los 
+	personajes de cada usuario, administrando todos sus atributos 
+	y las acciones que estos mismos realizan. 
+*/
+
 public abstract class Personaje implements Peleable, Serializable {
 
 	protected int salud;
@@ -310,6 +316,10 @@ public abstract class Personaje implements Peleable, Serializable {
 		return 0;
 	}
 
+/**
+	El metodo "serRobadoSalud" se encarga de evaluar la cantidad
+	de vida que, en base al daño recibido, el atacante va a robar.
+*/
 	public int serRobadoSalud(int daño) {
 		daño -= this.defensa;
 		if (daño <= 0)
@@ -336,6 +346,11 @@ public abstract class Personaje implements Peleable, Serializable {
 		return daño;
 	}
 
+/**
+	El metodo "serCurado" se encarga de evaluar la cantidad de 
+	vida que el personaje se va a curar sin sobrepasar el tope
+	de salud que un personaje puede tener. 
+*/
 	public void serCurado(int salud) {
 		if ((this.salud + salud) <= this.saludTope)
 			this.salud += salud;
