@@ -15,7 +15,11 @@ public class Asesino extends Casta {
 		habilidadesCasta[1] = "Aumentar Evasion";
 		habilidadesCasta[2] = "Robar";
 	}
-
+	
+/**
+	El metodo "habilidad1" es el que calcula el daño por golpe critico
+	segun la casta del personaje
+*/	
 	// Golpe Crítico
 	public boolean habilidad1(Personaje caster, Peleable atacado) {
 		if (caster.getEnergia() > 10) {
@@ -26,6 +30,10 @@ public class Asesino extends Casta {
 		return false;
 	}
 
+/**
+	El metodo "habilidad2" es el que aumenta la evasion segun 
+	la casta del personaje
+*/	
 	// Aumentar Evasion
 	public boolean habilidad2(Personaje caster, Peleable atacado) {
 		if (caster.getEnergia() > 10) {
