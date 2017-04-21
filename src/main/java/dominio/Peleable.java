@@ -1,5 +1,11 @@
 package dominio;
 
+/**
+ * Esta interface define los metodos requeridos por las clases que
+ * representen entidades que pueden pelear entre sí.
+ * La implementan la clase Personaje y NonPlayableCharacter.
+ */
+
 public interface Peleable {
 	public int serAtacado(int daño);
 	public int getSalud();

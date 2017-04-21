@@ -1,11 +1,22 @@
 package dominio;
 
+/**
+ * La clase Hechicero hereda de Casta e implementa los metodos abstractos
+ * de su clase padre, habilidad 1, 2 y 3. Es un tipo especifico de Casta.
+ * Tambien define sus habilidades que son la bola de fuego, curar al aliado
+ * y aumentar la defensa.
+ */
+
 public class Hechicero extends Casta {
 
 	public Hechicero(double prob_crit, double evasion, double daño_crit) {
 		super(prob_crit, evasion, daño_crit);
 		this.nombreCasta = "Hechicero";
 	}
+
+	/**
+	 * Permite crear un nuevo Hechicero con sus habilidades por defecto.
+	 */
 
 	public Hechicero() {
 		super();
@@ -15,6 +26,12 @@ public class Hechicero extends Casta {
 		habilidadesCasta[1] = "Curar Aliado";
 		habilidadesCasta[2] = "Robar Energia y Salud";
 	}
+
+	/**
+	 * Sobreescribe la habilidad1 de la clase padre.
+	 * Devuelve verdadero o falso para la utilización de la bola de fuego
+	 * dependiendo del caster y el atacado.
+	 */
 
 	// Bola de Fuego
 	public boolean habilidad1(Personaje caster, Peleable atacado) {

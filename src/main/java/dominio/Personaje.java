@@ -2,6 +2,14 @@ package dominio;
 
 import java.io.Serializable;
 
+/**
+ * La clase Personaje contiene los atributos de cada jugador.
+ * Entre ellos se destacan los de ataque y defensa, salud, posicion,
+ * nivel y nombre. Ademas posee una casta y una raza, ambas conteniendo
+ * una serie de habilidades especiales.
+ * Además implementa la interfaz Peleable por lo que debe implementar sus métodos.
+ */
+
 public abstract class Personaje implements Peleable, Serializable {
 
 	protected int salud;
@@ -23,7 +31,7 @@ public abstract class Personaje implements Peleable, Serializable {
 
 	protected int x;
 	protected int y;
-	
+
 	protected int experiencia;
 	protected int nivel;
 
@@ -238,6 +246,11 @@ public abstract class Personaje implements Peleable, Serializable {
 		this.energiaTope = energiaTope;
 	}
 
+	/**
+	 * "atacar" obtiene el ataque de este objeto e invoca al método serAtacado
+	 * del "atacado" recibido como parametro.
+	 */
+
 	public int atacar(Peleable atacado) {
 		if (salud == 0)
 			return 0;
@@ -292,6 +305,11 @@ public abstract class Personaje implements Peleable, Serializable {
 	public boolean estaVivo() {
 		return salud > 0;
 	}
+
+	/**
+	 * "serAtacado" devuelve 0 si no es dañado o
+	 * el valor del daño ocasionado por el ataque.
+	 */
 
 	public int serAtacado(int daño) {
 		if (MyRandom.nextDouble() >= this.getCasta().getProbabilidadEvitarDaño()) {

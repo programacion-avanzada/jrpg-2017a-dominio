@@ -1,5 +1,11 @@
 package dominio;
 
+/**
+ * La clase NonPlayableCharacter implementa la interface Peleable que Define
+ * una lista de métodos a ser implementados.
+ * Define los atributos de salud, fuerza, defensa, nombre y nivel.
+ */
+
 public class NonPlayableCharacter implements Peleable {
 
 	private int salud;
@@ -86,12 +92,22 @@ public class NonPlayableCharacter implements Peleable {
 		this.salud = salud;
 	}
 
+	/**
+	 * "atacar" obtiene el ataque de este objeto e invoca al método serAtacado
+	 * del "atacado" recibido como parametro.
+	 */
+
 	public int atacar(Peleable atacado) {
 		if (MyRandom.nextDouble() <= 0.15) {// los NPC tienen 15% de golpes criticos
 			return atacado.serAtacado((int) (this.getAtaque() * 1.5));
 		} else
 			return atacado.serAtacado(this.getAtaque());
 	}
+
+	/**
+	 * "serAtacado" devuelve 0 si no es dañado o si esquivo el golpe o
+	 * el valor del daño ocasionado por el ataque.
+	 */
 
 	public int serAtacado(int daño) {
 		if (MyRandom.nextDouble() >= 0.15) {

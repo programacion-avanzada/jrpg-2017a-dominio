@@ -2,6 +2,12 @@ package dominio;
 
 import java.io.Serializable;
 
+/**
+ * La clase Casta posee una serie de atributos relacionados a la defensa y el
+ * ataque del personaje y también a sus habilidades.
+ * Define 3 métodos de habilidad abstractos.
+ */
+
 public abstract class Casta implements Serializable {
 	protected double probabilidadGolpeCritico;
 	protected double probabilidadEvitarDaño;
@@ -9,6 +15,10 @@ public abstract class Casta implements Serializable {
 	protected String nombreCasta;
 
 	protected String[] habilidadesCasta;
+
+	/**
+	 * Permite construir un objecto Casta con sus valores por defecto
+	 */
 
 	public Casta() {
 		this.probabilidadGolpeCritico = 0.2;
@@ -22,11 +32,19 @@ public abstract class Casta implements Serializable {
 		this.dañoCritico = daño_crit;
 	}
 
+	/**
+	 * Habilidad 1, 2 y 3 serán sobreescritas en las clases que hereden de esta.
+	 */
+
 	public abstract boolean habilidad1(Personaje caster, Peleable atacado);
 
 	public abstract boolean habilidad2(Personaje caster, Peleable atacado);
 
 	public abstract boolean habilidad3(Personaje caster, Peleable atacado);
+
+	/**
+	 * Getters y setters para los diferentes atributos de la clase.
+	 */
 
 	public String getNombreCasta() {
 		return this.nombreCasta;

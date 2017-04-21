@@ -1,5 +1,10 @@
 package dominio;
 
+/**
+ * La clase Humano representa una raza (tipo) de personaje.
+ * Tiene 2 habilidades de raza que son incentivar y el golpe fatal.
+ */
+
 public class Humano extends Personaje {
 
 	public Humano(String nombre, Casta casta, int id) {
@@ -11,6 +16,10 @@ public class Humano extends Personaje {
 		nombreRaza = "Humano";
 	}
 
+	/**
+	 * Permite create un humano con atributos pasados por parametro.
+	 */
+
 	public Humano(String nombre, int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta,
 			int experiencia, int nivel, int idPersonaje) {
 		super(nombre, salud, energia, fuerza, destreza, inteligencia, casta, experiencia, nivel, idPersonaje);
@@ -20,6 +29,12 @@ public class Humano extends Personaje {
 		habilidadesRaza[0] = "Incentivar";
 		habilidadesRaza[1] = "Golpe Fatal";
 	}
+
+	/**
+	 * habilidadRaza1 sobrescribe el metodo de la clase padre, recibe un
+	 * objeto atacado y dependiendo de este y de sí mismo devuelve verdadero
+	 * o falso según corresponda.
+	 */
 
 	// Incentivar
 	public boolean habilidadRaza1(Peleable atacado) {

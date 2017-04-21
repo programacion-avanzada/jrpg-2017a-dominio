@@ -1,6 +1,15 @@
 package dominio;
 
+/**
+ * La clase Orco representa una raza (tipo) de personaje.
+ * Tiene 2 habilidades de raza que son el golpe defensa y el mordisco de vida.
+ */
+
 public class Orco extends Personaje {
+
+	/**
+	 * Permite crear un orco con atributos por defecto.
+	 */
 
 	public Orco(String nombre, Casta casta, int id) {
 		super(nombre, casta, id);
@@ -23,6 +32,12 @@ public class Orco extends Personaje {
 		habilidadesRaza[0] = "Golpe Defensa";
 		habilidadesRaza[1] = "Mordisco de Vida";
 	}
+
+	/**
+	 * habilidadRaza1 sobrescribe el metodo de la clase padre, recibe un
+	 * objeto atacado y dependiendo de este y de sí mismo devuelve verdadero
+	 * o falso según corresponda.
+	 */
 
 	// Golpe Defensa
 	public boolean habilidadRaza1(Peleable atacado) {

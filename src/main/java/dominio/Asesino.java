@@ -1,5 +1,11 @@
 package dominio;
 
+/**
+ * La clase Asesino hereda de Casta e implementa los metodos abstractos de su clase
+ * padre, habilidad 1, 2 y 3. Es un tipo especifico de Casta.
+ * Tambien define sus habilidades que son el golpe critico, aumentar la evasion y robar.
+ */
+
 public class Asesino extends Casta {
 
 	public Asesino(double prob_crit, double evasion, double daño_crit) {
@@ -16,6 +22,12 @@ public class Asesino extends Casta {
 		habilidadesCasta[2] = "Robar";
 	}
 
+	/**
+	 * Sobreescribe la habilidad1 de la clase padre.
+	 * Devuelve verdadero o falso para la utilización del golpe critico
+	 * dependiendo del caster y el atacado.
+	 */
+
 	// Golpe Crítico
 	public boolean habilidad1(Personaje caster, Peleable atacado) {
 		if (caster.getEnergia() > 10) {
@@ -25,6 +37,12 @@ public class Asesino extends Casta {
 		}
 		return false;
 	}
+
+	/**
+	 * Sobreescribe la habilidad2 de la clase padre.
+	 * Devuelve verdadero o falso para la utilización de aumentar evasion
+	 * dependiendo del caster y el atacado.
+	 */
 
 	// Aumentar Evasion
 	public boolean habilidad2(Personaje caster, Peleable atacado) {
