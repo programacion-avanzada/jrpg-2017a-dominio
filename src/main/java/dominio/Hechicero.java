@@ -2,7 +2,7 @@ package dominio;
 
 public class Hechicero extends Casta {
 	/**
-	 * La clase Asesino es una casta de Personaje, hereda de la clase Casta
+	 * La clase Hechicero es una casta de Personaje, hereda de la clase Casta
 	 * posee dos constructores, el constructor por defecto, llama al constructor por defecto de la clase 
 	 * padre (Casta), luego inicializa la variable nombreCasta y crea un array de String de tamaño 3
 	 * El otro constructor, llama al constructor de la clase padre (Casta), pasándole los argumentos recibidos
