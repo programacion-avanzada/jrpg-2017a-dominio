@@ -1,5 +1,9 @@
 package dominio;
 
+/**
+ * Clase que posee los atributos y funciones del NonPlayableCharacter
+ *
+ */
 public class NonPlayableCharacter implements Peleable {
 
 	private int salud;
@@ -42,6 +46,10 @@ public class NonPlayableCharacter implements Peleable {
 		return this.nivel * 30;
 	}
 
+	/**
+	 * @return
+	 * Devuelve el numero de la fuerza del personaje solicitado
+	 */
 	public int getFuerza() {
 		return fuerza;
 	}
@@ -50,6 +58,10 @@ public class NonPlayableCharacter implements Peleable {
 		this.fuerza = fuerza;
 	}
 
+	/* (non-Javadoc)
+	 * @see dominio.Peleable#getNombre()
+	 * Devuelve el nombre del personaje solicitado
+	 */
 	public String getNombre() {
 		return nombre;
 	}

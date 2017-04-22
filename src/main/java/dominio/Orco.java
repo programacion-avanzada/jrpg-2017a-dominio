@@ -1,5 +1,9 @@
 package dominio;
 
+/**
+ * Es uno de los tipos de persona, herendando asi sus atributos y funcionalidades
+ *
+ */
 public class Orco extends Personaje {
 
 	public Orco(String nombre, Casta casta, int id) {
@@ -25,6 +29,10 @@ public class Orco extends Personaje {
 	}
 
 	// Golpe Defensa
+	/* (non-Javadoc)
+	 * @see dominio.Personaje#habilidadRaza1(dominio.Peleable)
+	 * Devuele si el personaje en cuestion tiene o no la habilidad requerida
+	 */
 	public boolean habilidadRaza1(Peleable atacado) {
 		if (this.getEnergia() > 10) {
 			this.setEnergia(this.getEnergia() - 10);

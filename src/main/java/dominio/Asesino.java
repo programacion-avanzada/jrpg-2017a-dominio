@@ -1,5 +1,9 @@
 package dominio;
 
+/**
+ * Un tipo de raza que hereda las caracteristicas de Casta
+ *
+ */
 public class Asesino extends Casta {
 
 	public Asesino(double prob_crit, double evasion, double daño_crit) {
@@ -17,6 +21,10 @@ public class Asesino extends Casta {
 	}
 
 	// Golpe Crítico
+	/* (non-Javadoc)
+	 * @see dominio.Casta#habilidad1(dominio.Personaje, dominio.Peleable)
+	 * Devuelve si el personaje que le pasamos tiene la habilidad pedida
+	 */
 	public boolean habilidad1(Personaje caster, Peleable atacado) {
 		if (caster.getEnergia() > 10) {
 			caster.setEnergia(caster.getEnergia() - 10);
@@ -27,6 +35,7 @@ public class Asesino extends Casta {
 	}
 
 	// Aumentar Evasion
+
 	public boolean habilidad2(Personaje caster, Peleable atacado) {
 		if (caster.getEnergia() > 10) {
 			caster.setEnergia(caster.getEnergia() - 10);

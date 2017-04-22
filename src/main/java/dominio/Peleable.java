@@ -1,5 +1,10 @@
 package dominio;
 
+/**
+ * Esta clase contiene la definicion de los metodos y funciones que van a utilizar la clase Personaje y NonPlayableCharacter
+ * Son las funciones principales
+ * 
+ */
 public interface Peleable {
 	public int serAtacado(int daño);
 	public int getSalud();

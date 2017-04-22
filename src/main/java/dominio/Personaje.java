@@ -2,6 +2,11 @@ package dominio;
 
 import java.io.Serializable;
 
+/**
+ * Siendo una de las clases mas importantes, es la que une a todos los tipos de personajes
+ * En ella se encuentran todos los atributosy metodos apropiados para tener todo en cuenta
+ *
+ */
 public abstract class Personaje implements Peleable, Serializable {
 
 	protected int salud;
@@ -34,10 +39,18 @@ public abstract class Personaje implements Peleable, Serializable {
 
 	protected String[] habilidadesRaza;
 
+	/**
+	 * @return
+	 * Retorna las habilidades de la raza, en formato de String[]
+	 */
 	public String[] getHabilidadesRaza() {
 		return habilidadesRaza;
 	}
 
+	/**
+	 * @return
+	 * Retorna las habilidades de la casta, en formato de String[]
+	 */
 	public String[] getHabilidadesCasta() {
 		return casta.getHabilidadesCasta();
 	}

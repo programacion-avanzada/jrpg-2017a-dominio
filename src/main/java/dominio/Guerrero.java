@@ -1,5 +1,9 @@
 package dominio;
 
+/**
+ * Un tipo de raza que hereda las caracteristicas de Casta
+ *
+ */
 public class Guerrero extends Casta {
 
 	public Guerrero(double prob_crit, double evasion, double daño_crit) {
@@ -18,6 +22,10 @@ public class Guerrero extends Casta {
 	}
 
 	// Ataque Doble
+	/* (non-Javadoc)
+	 * @see dominio.Casta#habilidad1(dominio.Personaje, dominio.Peleable)
+	 * Devuelve si el personaje que le pasamos tiene la habilidad pedida
+	 */
 	public boolean habilidad1(Personaje caster, Peleable atacado) { 
 		if (caster.getEnergia() > 10) {
 			caster.setEnergia(caster.getEnergia() - 10);

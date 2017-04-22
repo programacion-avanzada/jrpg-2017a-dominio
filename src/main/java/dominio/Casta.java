@@ -2,6 +2,10 @@ package dominio;
 
 import java.io.Serializable;
 
+/**
+ * Es la clase que une a los tipos de razas (asesino, guerrero, hechicero), con sus metodos correspondientes a utilizar
+ *
+ */
 public abstract class Casta implements Serializable {
 	protected double probabilidadGolpeCritico;
 	protected double probabilidadEvitarDaño;
@@ -28,10 +32,18 @@ public abstract class Casta implements Serializable {
 
 	public abstract boolean habilidad3(Personaje caster, Peleable atacado);
 
+	/**
+	 * @return
+	 * Devuelve el nombre de la Casta pedido
+	 */
 	public String getNombreCasta() {
 		return this.nombreCasta;
 	}
 
+	/**
+	 * @return
+	 * Devuelve las habilidades que posee dicha casta, en formato String[]
+	 */
 	public String[] getHabilidadesCasta() {
 		return habilidadesCasta;
 	}
