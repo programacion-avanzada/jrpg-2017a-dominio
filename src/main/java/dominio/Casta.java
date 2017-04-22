@@ -2,6 +2,12 @@ package dominio;
 
 import java.io.Serializable;
 
+/**
+	La clase "Casta" es la que se encargara de administrar las 
+	los atributos basicos en todas las castas (como ser la
+	"probablidadGolpeCritico") del juego asi como tambien los
+	metodos que comparten. 
+*/
 public abstract class Casta implements Serializable {
 	protected double probabilidadGolpeCritico;
 	protected double probabilidadEvitarDaño;
