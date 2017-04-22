@@ -2,8 +2,9 @@ package dominio;
 
 /**
 	La clase "NonPlayableCharacter" es la que se encarga de manejar
-	todo lo relacionado a la interaccion del personaje dentro del
-	juego (Como por ejemplo, la pelea o la experiencia).
+	todos los personajes generados por el juego y como estos se 
+	relacionan con el personaje dentro del juego (Como por ejemplo,
+	en una pelea o el manejo de la experiencia).
 */
 public class NonPlayableCharacter implements Peleable {
 
@@ -93,7 +94,7 @@ public class NonPlayableCharacter implements Peleable {
 	
 /**
 	El metodo "atacar" es la que se encargara de administrar el 
-	ataque del personaje y de su probabilidad te golpe critico
+	ataque del NPC y de su probabilidad te golpe critico
 	retornando el daño infligido. 
 */
 	public int atacar(Peleable atacado) {
@@ -105,7 +106,7 @@ public class NonPlayableCharacter implements Peleable {
 
 /**
 	El metodo "serAtacado" es la que se encargara de administrar el 
-	ataque del atacante al personaje con respecto a su probabilidad
+	ataque del NPC al personaje con respecto a su probabilidad
 	de evasion y de la defensa del objetivo.
 */
 	public int serAtacado(int daño) {
