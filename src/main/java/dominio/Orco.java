@@ -1,5 +1,10 @@
 package dominio;
 
+/**
+	La clase "Orco" es un tipo de Personaje (por ende, hereda
+	de esta misma). Aqui se describen los metodos y atributos
+	propios de esta clase.
+*/
 public class Orco extends Personaje {
 
 	public Orco(String nombre, Casta casta, int id) {
@@ -24,6 +29,11 @@ public class Orco extends Personaje {
 		habilidadesRaza[1] = "Mordisco de Vida";
 	}
 
+/**
+	El metodo "habilidadRaza1" correspondiente a la habilidad
+	"Golpe Defensa" se ocupa de aplicar el doble de la defensa
+	del atacante como daño.
+*/
 	// Golpe Defensa
 	public boolean habilidadRaza1(Peleable atacado) {
 		if (this.getEnergia() > 10) {
@@ -34,6 +44,12 @@ public class Orco extends Personaje {
 		return false;
 	}
 
+/**
+	El metodo "habilidadRaza2" correspondiente a la habilidad
+	"Mordisco de Vida" se ocupa de aplicar daño en funcion a la 
+	cantidad de fuerza del personaje. Si este daño se aplica
+	el atacante se cura la misma cantidad de daño causado.
+*/
 	// Mordisco de Vida
 	public boolean habilidadRaza2(Peleable atacado) {
 		if (this.getEnergia() > 10) {
