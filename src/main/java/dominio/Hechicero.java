@@ -1,7 +1,7 @@
 package dominio;
 
 /**
-	La clase "Hechicero" hereda de la clase Casta, con esta clase se podran crear personajes "hechiceros" con sus atributos y metodos. 
+	La clase "Hechicero" hereda de la clase Casta, con esta clase se podran crear y administrar personajes "hechiceros" con sus atributos y metodos. 
 */
 
 
@@ -22,7 +22,7 @@ public class Hechicero extends Casta {
 	}
 
 	// Bola de Fuego
-
+/** "habilidad 1 es un metodo de ataque, se debe tener una energia mayor a 10 para poder ejecutarlo*/
 	public boolean habilidad1(Personaje caster, Peleable atacado) {
 		if (caster.getEnergia() > 10) {
 			caster.setEnergia(caster.getEnergia() - 10);
@@ -33,6 +33,10 @@ public class Hechicero extends Casta {
 	}
 
 	// Curar Aliado
+	/**
+	Con este metodo "habilidad2" el personaje "hechicero" tiene la capacidad de curar a un aliado, para poder hacerlo su energia
+	*debe ser mayor a 10.
+*/	
 	public boolean habilidad2(Personaje caster, Peleable aliado) {
 		if (caster.getEnergia() > 10) {
 			caster.setEnergia(caster.getEnergia() - 10);
