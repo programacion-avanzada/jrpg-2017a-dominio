@@ -4,6 +4,7 @@ package dominio;
 	La clase "Elfo" es un tipo de Personaje (por ende, hereda
 	de esta misma). Aqui se describen los metodos y atributos
 	propios de esta clase.
+	a
 */
 public class Elfo extends Personaje {
 
