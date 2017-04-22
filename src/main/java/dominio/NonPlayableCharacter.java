@@ -1,5 +1,11 @@
 package dominio;
 
+/**
+	La clase "NonPlayableCharacter" es la que se encarga de manejar
+	todos los personajes generados por el juego y como estos se 
+	relacionan con el personaje dentro del juego (Como por ejemplo,
+	en una pelea o el manejo de la experiencia).
+*/
 public class NonPlayableCharacter implements Peleable {
 
 	private int salud;
@@ -85,7 +91,12 @@ public class NonPlayableCharacter implements Peleable {
 	public void setSalud(int salud) {
 		this.salud = salud;
 	}
-
+	
+/**
+	El metodo "atacar" es la que se encargara de administrar el 
+	ataque del NPC y de su probabilidad te golpe critico
+	retornando el daño infligido. 
+*/
 	public int atacar(Peleable atacado) {
 		if (MyRandom.nextDouble() <= 0.15) {// los NPC tienen 15% de golpes criticos
 			return atacado.serAtacado((int) (this.getAtaque() * 1.5));
@@ -93,6 +104,11 @@ public class NonPlayableCharacter implements Peleable {
 			return atacado.serAtacado(this.getAtaque());
 	}
 
+/**
+	El metodo "serAtacado" es la que se encargara de administrar el 
+	ataque del NPC al personaje con respecto a su probabilidad
+	de evasion y de la defensa del objetivo.
+*/
 	public int serAtacado(int daño) {
 		if (MyRandom.nextDouble() >= 0.15) {
 			daño -= this.getDefensa() / 2;
