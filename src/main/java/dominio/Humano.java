@@ -1,5 +1,10 @@
 package dominio;
 
+/**
+	La clase "Humano" es un tipo de Personaje (por ende, 
+	hereda de esta misma). Aqui se describen los metodos y 
+	atributos propios de esta clase.
+*/
 public class Humano extends Personaje {
 
 	public Humano(String nombre, Casta casta, int id) {
@@ -20,7 +25,12 @@ public class Humano extends Personaje {
 		habilidadesRaza[0] = "Incentivar";
 		habilidadesRaza[1] = "Golpe Fatal";
 	}
-
+	
+/**
+	El metodo "habilidadRaza1" correspondiente a la habilidad
+	"Incentivar" se ocupa de aumentar el ataque del objetivo
+	en la cantidad de magia del personaje.
+*/
 	// Incentivar
 	public boolean habilidadRaza1(Peleable atacado) {
 		if (this.getEnergia() > 10) {
@@ -31,6 +41,11 @@ public class Humano extends Personaje {
 		return false;
 	}
 
+/**
+	El metodo "habilidadRaza2" correspondiente a la habilidad
+	"Golpe Fatal" se ocupa de aplicar la mitad de la vida 
+	actual de la victima como daño a la misma.
+*/
 	// Golpe Fatal
 	public boolean habilidadRaza2(Peleable atacado) {
 		if (this.getEnergia() > 10) {
