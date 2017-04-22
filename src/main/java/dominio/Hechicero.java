@@ -22,10 +22,7 @@ public class Hechicero extends Casta {
 	}
 
 	// Bola de Fuego
-	/**
-	El metodo "habilidad1" es el que calcula el daño por golpe critico
-	segun la casta del personaje
-*/	
+
 	public boolean habilidad1(Personaje caster, Peleable atacado) {
 		if (caster.getEnergia() > 10) {
 			caster.setEnergia(caster.getEnergia() - 10);
