@@ -1,7 +1,7 @@
 package dominio;
 
 import java.util.LinkedList;
-
+/**  Esta clase es desarrollada para saber saber y establecer las alianzas entre los personajes */
 public class Alianza {
 
 	String nombre;
@@ -24,10 +24,16 @@ public class Alianza {
 		return nombre;
 	}
 	
+	/**
+     * Método "eliminarPersonaje", elimina a un personaje que ya no es aliado
+     */	
 	public void eliminarPersonaje(Personaje pj){
 		aliados.remove(pj);
 	}
 	
+	/**
+     * Método "añadirPersonaje", añade a un personaje aliado.
+     */	
 	public void añadirPersonaje(Personaje pj){
 		aliados.add(pj);
 	}
