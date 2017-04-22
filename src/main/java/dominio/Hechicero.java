@@ -1,5 +1,10 @@
 package dominio;
 
+/**
+	La clase "Hechicero" hereda de la clase Casta, con esta clase se podran crear personajes "hechiceros" con sus atributos y metodos. 
+*/
+
+
 public class Hechicero extends Casta {
 
 	public Hechicero(double prob_crit, double evasion, double daño_crit) {
@@ -17,6 +22,10 @@ public class Hechicero extends Casta {
 	}
 
 	// Bola de Fuego
+	/**
+	El metodo "habilidad1" es el que calcula el daño por golpe critico
+	segun la casta del personaje
+*/	
 	public boolean habilidad1(Personaje caster, Peleable atacado) {
 		if (caster.getEnergia() > 10) {
 			caster.setEnergia(caster.getEnergia() - 10);
