@@ -1,5 +1,5 @@
 package dominio;
-
+/** Peleable es una interface utilizada en las clases NonPlayableCharacter y Personaje*/
 public interface Peleable {
 	public int serAtacado(int daño);
 	public int getSalud();
