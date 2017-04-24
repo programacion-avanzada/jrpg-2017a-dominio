@@ -6,7 +6,7 @@ import org.junit.Test;
 import dominio.Guerrero;
 import dominio.Humano;
 import dominio.Orco;
-
+ 
 public class TestDaño {
 
 	@Test
