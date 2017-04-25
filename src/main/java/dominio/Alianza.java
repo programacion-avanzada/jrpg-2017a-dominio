@@ -2,6 +2,7 @@ package dominio;
 
 import java.util.LinkedList;
 /**  Esta clase es desarrollada para saber saber y establecer las alianzas entre los personajes */
+
 public class Alianza {
 
 	String nombre;
