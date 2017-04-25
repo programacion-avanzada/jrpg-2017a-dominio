@@ -13,11 +13,12 @@
 ### Integrantes del equipo
 
 * Carroccio Julian ([juliancarroccio](https://github.com/juliancarroccio))
-* Completar ([xxxx](https://github.com/xxxx))
-* Completar ([xxxx](https://github.com/xxxx))
-* Completar ([xxxx](https://github.com/xxxx))
-* Completar ([xxxx](https://github.com/xxxx))
-* Completar ([xxxx](https://github.com/xxxx))
+* Laurenzzo Ramiro ([RLaurenzzo](https://github.com/RLaurenzzo))
+* Alomo Gonzalo ([Gonzaloalomo](https://github.com/Gonzaloalomo))
+* Piciulo Alan ([AlanPiciulo](https://github.com/AlanPiciulo))
+* Contreras David ([davidrcontreras](https://github.com/davidrcontreras))
+* Koroll Javier ([Jkoroll](https://github.com/Jkoroll))
+* Silva Diego ([SilvaDiegoUnlam](https://github.com/SilvaDiegoUnlam))
 
 ## Sobre la tecnología
 
