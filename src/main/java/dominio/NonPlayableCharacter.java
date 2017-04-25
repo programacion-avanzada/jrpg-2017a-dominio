@@ -19,10 +19,11 @@ public class NonPlayableCharacter implements Peleable {
 		this.nombre = nombre;
 		this.nivel = nivel;
 		int dificultad;
-		if (dificultadNPC == dificultadAleatoria)
-			dificultad = MyRandom.nextInt(3);
-		else
-			dificultad = dificultadNPC;
+		if (dificultadNPC == dificultadAleatoria) {
+      dificultad = MyRandom.nextInt(3);
+    } else {
+      dificultad = dificultadNPC;
+    }
 
 		switch (dificultad) {
 		case 0:
@@ -40,6 +41,8 @@ public class NonPlayableCharacter implements Peleable {
 			this.salud = 50 + (nivel - 1) * 25;
 			this.defensa = 4 + (nivel - 1) * 4;
 			break;
+    default:
+      break;
 
 		}
 	}
@@ -100,8 +103,9 @@ public class NonPlayableCharacter implements Peleable {
 	public int atacar(Peleable atacado) {
 		if (MyRandom.nextDouble() <= 0.15) {// los NPC tienen 15% de golpes criticos
 			return atacado.serAtacado((int) (this.getAtaque() * 1.5));
-		} else
-			return atacado.serAtacado(this.getAtaque());
+		} else {
+      return atacado.serAtacado(this.getAtaque());
+    }
 	}
 
 /**
