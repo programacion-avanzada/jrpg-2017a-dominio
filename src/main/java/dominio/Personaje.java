@@ -36,7 +36,7 @@ public abstract class Personaje implements Peleable, Serializable {
 	protected int idPersonaje;
 
 	protected Alianza clan = null;
-	public static int tablaDeNiveles[];
+	public static int[] tablaDeNiveles;
 
 	protected String[] habilidadesRaza;
 
@@ -52,8 +52,9 @@ public abstract class Personaje implements Peleable, Serializable {
 		Personaje.tablaDeNiveles = new int[101];
 		Personaje.tablaDeNiveles[0] = 0;
 		Personaje.tablaDeNiveles[1] = 0;
-		for (int i = 2; i < 101; i++)
-			Personaje.tablaDeNiveles[i] = Personaje.tablaDeNiveles[i - 1] + 50;
+		for (int i = 2; i < 101; i++) {
+      Personaje.tablaDeNiveles[i] = Personaje.tablaDeNiveles[i - 1] + 50;
+    }
 	}
 
 	public Personaje(String nombre, Casta casta, int id) {
@@ -65,12 +66,15 @@ public abstract class Personaje implements Peleable, Serializable {
 		fuerza = 10;
 		inteligencia = 10;
 		destreza = 10;
-		if (casta instanceof Guerrero)
-			fuerza += 5;
-		if (casta instanceof Hechicero)
-			inteligencia += 5;
-		if (casta instanceof Asesino)
-			destreza += 5;
+		if (casta instanceof Guerrero) {
+      fuerza += 5;
+    }
+		if (casta instanceof Hechicero) {
+      inteligencia += 5;
+    }
+		if (casta instanceof Asesino) {
+      destreza += 5;
+    }
 
 		x = 0;
 		y = 0;
@@ -245,8 +249,9 @@ public abstract class Personaje implements Peleable, Serializable {
 	}
 
 	public int atacar(Peleable atacado) {
-		if (salud == 0)
-			return 0;
+		if (salud == 0) {
+      return 0;
+    }
 		if (atacado.getSalud() > 0) {
 			if (MyRandom.nextDouble() <= this.casta.getProbabilidadGolpeCritico() + this.destreza / 1000) {
 				return atacado.serAtacado(this.golpe_critico());
@@ -322,11 +327,12 @@ public abstract class Personaje implements Peleable, Serializable {
 */
 	public int serRobadoSalud(int daño) {
 		daño -= this.defensa;
-		if (daño <= 0)
-			return 0;
-		if ((salud - daño) >= 0)
-			salud -= daño;
-		else {
+		if (daño <= 0) {
+      return 0;
+    }
+		if ((salud - daño) >= 0) {
+      salud -= daño;
+    } else {
 			daño = salud;// le queda menos salud que el daño inflingido
 			salud = 0;
 		}
@@ -335,11 +341,12 @@ public abstract class Personaje implements Peleable, Serializable {
 
 	public int serDesernegizado(int daño) {
 		daño -= this.defensa;
-		if (daño <= 0)
-			return 0;
-		if ((energia - daño) >= 0)
-			energia -= daño;
-		else {
+		if (daño <= 0) {
+      return 0;
+    }
+		if ((energia - daño) >= 0) {
+      energia -= daño;
+    } else {
 			daño = energia;// le queda menos energia que el daño inflingido
 			energia = 0;
 		}
@@ -352,17 +359,19 @@ public abstract class Personaje implements Peleable, Serializable {
 	de salud que un personaje puede tener. 
 */
 	public void serCurado(int salud) {
-		if ((this.salud + salud) <= this.saludTope)
-			this.salud += salud;
-		else
-			this.salud = this.saludTope;
+		if ((this.salud + salud) <= this.saludTope) {
+      this.salud += salud;
+    } else {
+      this.salud = this.saludTope;
+    }
 	}
 
 	public void serEnergizado(int energia) {
-		if ((this.energia + energia) <= this.energiaTope)
-			this.energia += energia;
-		else
-			this.energia = this.energiaTope;
+		if ((this.energia + energia) <= this.energiaTope) {
+      this.energia += energia;
+    } else {
+      this.energia = this.energiaTope;
+    }
 	}
 
 	public void crearAlianza(String nombre_alianza) {
@@ -388,17 +397,21 @@ public abstract class Personaje implements Peleable, Serializable {
 			nuevo_aliado.clan = this.clan;
 			this.clan.añadirPersonaje(nuevo_aliado);
 			return true;
-		} else
-			return false;
+		} else {
+      return false;
+    }
 	}
 
 	public void AsignarPuntosSkills(int fuerza, int destreza, int inteligencia) {
-		if (this.fuerza + fuerza <= 200)
-			this.fuerza += fuerza;
-		if (this.destreza + destreza <= 200)
-			this.destreza += destreza;
-		if (this.inteligencia + inteligencia <= 200)
-			this.inteligencia += inteligencia;
+		if (this.fuerza + fuerza <= 200) {
+      this.fuerza += fuerza;
+    }
+		if (this.destreza + destreza <= 200) {
+      this.destreza += destreza;
+    }
+		if (this.inteligencia + inteligencia <= 200) {
+      this.inteligencia += inteligencia;
+    }
 		this.modificarAtributos();
 	}
 
