@@ -83,4 +83,10 @@ public class Guerrero extends Casta {
 		}
 		return false;
 	}
+
+	@Override
+	public void recibirAtributo(Personaje caster) {
+		caster.fuerza+=5;
+		
+	}
 }

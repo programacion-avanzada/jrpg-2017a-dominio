@@ -66,12 +66,13 @@ public abstract class Personaje implements Peleable, Serializable {
 		fuerza = 10;
 		inteligencia = 10;
 		destreza = 10;
-		if (casta instanceof Guerrero)
-			fuerza += 5;
-		if (casta instanceof Hechicero)
-			inteligencia += 5;
-		if (casta instanceof Asesino)
-			destreza += 5;
+//		if (casta instanceof Guerrero)
+//			fuerza += 5;
+//		if (casta instanceof Hechicero)
+//			inteligencia += 5;
+//		if (casta instanceof Asesino)
+//			destreza += 5;
+		casta.recibirAtributo(this);
 
 		x = 0;
 		y = 0;

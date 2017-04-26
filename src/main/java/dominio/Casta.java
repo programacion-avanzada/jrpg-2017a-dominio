@@ -32,7 +32,7 @@ public abstract class Casta implements Serializable {
 	}
 
 	public abstract boolean habilidad1(Personaje caster, Peleable atacado);
-	
+	public abstract void recibirAtributo(Personaje caster);
 	/**
 	 * Método abstracto que será implementado en Asesino, Guerrero y Hechicero.
 	 * @param caster Personaje atacante.

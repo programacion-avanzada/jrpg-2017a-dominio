@@ -83,4 +83,10 @@ public class Hechicero extends Casta {
 		}
 		return false;
 	}
+
+	@Override
+	public void recibirAtributo(Personaje caster) {
+		caster.inteligencia+=5;
+		
+	}
 }
