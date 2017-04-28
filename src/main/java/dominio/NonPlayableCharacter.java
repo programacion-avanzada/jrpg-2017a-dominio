@@ -56,41 +56,41 @@ public class NonPlayableCharacter extends MadreDeTodo implements Peleable {
 		return this.nivel * 30;
 	}
 
-	public int getFuerza() {
-		return fuerza;
-	}
-
-	public void setFuerza(int fuerza) {
-		this.fuerza = fuerza;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public int getNivel() {
-		return nivel;
-	}
-
-	public void setNivel(int nivel) {
-		this.nivel = nivel;
-	}
+//	public int getFuerza() {
+//		return fuerza;
+//	}
+//
+//	public void setFuerza(int fuerza) {
+//		this.fuerza = fuerza;
+//	}
+//
+//	public String getNombre() {
+//		return nombre;
+//	}
+//
+//	public void setNombre(String nombre) {
+//		this.nombre = nombre;
+//	}
+//
+//	public int getNivel() {
+//		return nivel;
+//	}
+//
+//	public void setNivel(int nivel) {
+//		this.nivel = nivel;
+//	}
 
 	public boolean estaVivo() {
 		return salud > 0;
 	}
 
-	public int getDefensa() {
-		return defensa;
-	}
-
-	public void setDefensa(int defensa) {
-		this.defensa = defensa;
-	}
+//	public int getDefensa() {
+//		return defensa;
+//	}
+//
+//	public void setDefensa(int defensa) {
+//		this.defensa = defensa;
+//	}
 
 	public int getSalud() {
 		return salud;
