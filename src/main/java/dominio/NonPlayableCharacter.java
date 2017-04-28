@@ -1,12 +1,12 @@
 package dominio;
 
-public class NonPlayableCharacter implements Peleable {
+public class NonPlayableCharacter extends MadreDeTodo implements Peleable {
 
 	private int salud;
-	private int fuerza;
-	private int defensa;
-	private String nombre;
-	private int nivel;
+	//private int fuerza;
+	//private int defensa;
+	//private String nombre;
+	//private int nivel;
 	private static final int dificultadAleatoria = -1;
 	
 	/**
@@ -18,8 +18,9 @@ public class NonPlayableCharacter implements Peleable {
 	 * @param dificultadNPC valor entero que consecuentemente produce una variación en los atributos.
 	 */
 	public NonPlayableCharacter(String nombre, int nivel, int dificultadNPC) {
-		this.nombre = nombre;
-		this.nivel = nivel;
+		super(0,0,nivel,nombre);
+		//this.nombre = nombre;
+		//this.nivel = nivel;
 		int dificultad;
 		if (dificultadNPC == dificultadAleatoria)
 			dificultad = MyRandom.nextInt(3);
