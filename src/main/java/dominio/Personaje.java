@@ -32,7 +32,7 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 	protected Alianza clan = null;
 	public static int tablaDeNiveles[];
 
-	protected String[] habilidadesRaza;
+	protected String[] habilidadesRaza = new String[2];
 
 	public String[] getHabilidadesRaza() {
 		return habilidadesRaza;
@@ -481,4 +481,6 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 	public abstract boolean habilidadRaza1(Peleable atacado);
 
 	public abstract boolean habilidadRaza2(Peleable atacado);
+	public abstract void completarHabilidad();
+	
 }

@@ -15,6 +15,7 @@ public class Humano extends Personaje {
 		salud = saludTope;
 		energia = energiaTope;
 		nombreRaza = "Humano";
+		//POR QUE ACA NO COMPLETA EL ARRAY??
 	}
 	/**
 	 * La clase Humano hereda de la clase Personaje, completa ciertos atributos que estaban declarados en
@@ -34,11 +35,9 @@ public class Humano extends Personaje {
 	public Humano(String nombre, int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta,
 			int experiencia, int nivel, int idPersonaje) {
 		super(nombre, salud, energia, fuerza, destreza, inteligencia, casta, experiencia, nivel, idPersonaje);
-		nombreRaza = "Humano";
 
-		habilidadesRaza = new String[2];
-		habilidadesRaza[0] = "Incentivar";
-		habilidadesRaza[1] = "Golpe Fatal";
+		//habilidadesRaza = new String[2];
+		this.completarHabilidad();
 	}
 
 	// Incentivar
@@ -82,6 +81,13 @@ public class Humano extends Personaje {
 		}
 		this.setEnergia(this.getEnergia() - 10);
 		return false;
+	}
+	@Override
+	public void completarHabilidad() {
+		nombreRaza = "Humano";
+		habilidadesRaza[0] = "Incentivar";
+		habilidadesRaza[1] = "Golpe Fatal";
+		
 	}
 		
 }

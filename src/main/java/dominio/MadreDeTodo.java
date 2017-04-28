@@ -2,6 +2,7 @@ package dominio;
 
 public abstract class MadreDeTodo {
 	
+	//protected int salud;
 	protected int fuerza;
 	protected int defensa;
 	protected int nivel;
@@ -48,6 +49,16 @@ public abstract class MadreDeTodo {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
+//	public int getSalud() {
+//		return salud;
+//	}
+//
+//
+//
+//	public void setSalud(int salud) {
+//		this.salud = salud;
+//	}
 	
 	
 	

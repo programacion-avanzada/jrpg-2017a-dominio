@@ -13,11 +13,9 @@ public class Orco extends Personaje {
 		saludTope += 10;
 		salud = saludTope;
 		energia = energiaTope;
-		nombreRaza = "Orco";
+		this.completarHabilidad();
+		//habilidadesRaza = new String[2];
 
-		habilidadesRaza = new String[2];
-		habilidadesRaza[0] = "Golpe Defensa";
-		habilidadesRaza[1] = "Mordisco de Vida";
 	}
 	/**
 	 * La clase Orco hereda de la clase Personaje, completa ciertos atributos que estaban declarados en
@@ -39,9 +37,7 @@ public class Orco extends Personaje {
 		super(nombre, salud, energia, fuerza, destreza, inteligencia, casta, experiencia, nivel, idPersonaje);
 		nombreRaza = "Orco";
 
-		habilidadesRaza = new String[2];
-		habilidadesRaza[0] = "Golpe Defensa";
-		habilidadesRaza[1] = "Mordisco de Vida";
+		this.completarHabilidad();
 	}
 
 	// Golpe Defensa
@@ -84,5 +80,12 @@ public class Orco extends Personaje {
 			}
 		}
 		return false;
+	}
+	@Override
+	public void completarHabilidad() {
+		nombreRaza = "Orco";
+		habilidadesRaza[0] = "Golpe Defensa";
+		habilidadesRaza[1] = "Mordisco de Vida";
+		
 	}
 }
