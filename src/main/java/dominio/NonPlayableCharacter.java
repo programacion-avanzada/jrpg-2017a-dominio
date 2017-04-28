@@ -37,7 +37,7 @@ public class NonPlayableCharacter implements Peleable {
 			this.salud = 40 + (nivel - 1) * 20;
 			this.defensa = 5 + (nivel - 1) * 2;
 			break;
-		case 2:
+    	case 2:
 			this.fuerza = 30 + (nivel - 1) * 10;// 50%
 			this.salud = 50 + (nivel - 1) * 25;
 			this.defensa = 4 + (nivel - 1) * 4;
