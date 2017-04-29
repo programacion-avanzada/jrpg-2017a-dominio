@@ -13,17 +13,17 @@ public class Guerrero extends Casta {
 	 */
 	public Guerrero(double prob_crit, double evasion, double daño_crit) {
 		super(prob_crit, evasion, daño_crit);
-		this.nombreCasta = "Guerrero";
+//		this.nombreCasta = "Guerrero";
 	}
 
 	public Guerrero() {
 		super();
-		this.nombreCasta = "Guerrero";
-
-		habilidadesCasta = new String[3];
-		habilidadesCasta[0] = "Ataque Doble";
-		habilidadesCasta[1] = "Aumentar Defensa";
-		habilidadesCasta[2] = "Ignorar Defensa";
+//		this.nombreCasta = "Guerrero";
+//
+//		habilidadesCasta = new String[3];
+//		habilidadesCasta[0] = "Ataque Doble";
+//		habilidadesCasta[1] = "Aumentar Defensa";
+//		habilidadesCasta[2] = "Ignorar Defensa";
 	}
 
 	// Ataque Doble
@@ -85,8 +85,29 @@ public class Guerrero extends Casta {
 	}
 
 	@Override
-	public void recibirAtributo(Personaje caster) {
-		caster.fuerza+=5;
+	public int recibirFuerzaBonus() {
+		return 5;
 		
+	}
+
+	@Override
+	public int recibirDestrezaBonus() {
+		
+		return 0;
+	}
+
+	@Override
+	public int recibirInteligenciaBonus() {
+		return 0;
+	}
+
+	@Override
+	public String getNombreCasta() {
+		return "Guerrero";
+	}
+
+	@Override
+	public String[] getHabilidadesCasta() {
+		return new String[] {"Ataque Doble","Aumentar Defensa","Ignorar Defensa"};
 	}
 }

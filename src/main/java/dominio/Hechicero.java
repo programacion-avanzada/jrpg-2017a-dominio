@@ -13,16 +13,16 @@ public class Hechicero extends Casta {
 	 */
 	public Hechicero(double prob_crit, double evasion, double daño_crit) {
 		super(prob_crit, evasion, daño_crit);
-		this.nombreCasta = "Hechicero";
+		//this.nombreCasta = "Hechicero";
 	}
 
 	public Hechicero() {
 		super();
-		this.nombreCasta = "Hechicero";
-		habilidadesCasta = new String[3];
-		habilidadesCasta[0] = "Bola de Fuego";
-		habilidadesCasta[1] = "Curar Aliado";
-		habilidadesCasta[2] = "Robar Energia y Salud";
+//		this.nombreCasta = "Hechicero";
+//		habilidadesCasta = new String[3];
+//		habilidadesCasta[0] = "Bola de Fuego";
+//		habilidadesCasta[1] = "Curar Aliado";
+//		habilidadesCasta[2] = "Robar Energia y Salud";
 	}
 
 	// Bola de Fuego
@@ -85,8 +85,32 @@ public class Hechicero extends Casta {
 	}
 
 	@Override
-	public void recibirAtributo(Personaje caster) {
-		caster.inteligencia+=5;
+	public int recibirInteligenciaBonus() {
+		return 5;
 		
+	}
+
+	@Override
+	public int recibirDestrezaBonus() {
+		
+		return 0;
+	}
+
+	@Override
+	public int recibirFuerzaBonus() {
+		
+		return 0;
+	}
+
+	@Override
+	public String getNombreCasta() {
+		
+		return "Hechiero";
+	}
+
+	@Override
+	public String[] getHabilidadesCasta() {
+		
+		return new String[] {"Bola de Fuego","Curar Aliado","Robar Energia y Salud"};
 	}
 }

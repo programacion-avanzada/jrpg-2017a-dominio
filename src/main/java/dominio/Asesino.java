@@ -16,16 +16,16 @@ public class Asesino extends Casta {
 
 public Asesino(double prob_crit, double evasion, double daño_crit) {
 	super(prob_crit, evasion, daño_crit);
-	this.nombreCasta="Asesino";
+	//this.nombreCasta="Asesino";
 }
 
 	public Asesino() {
 		super();
-		this.nombreCasta="Asesino";
-		habilidadesCasta = new String[3];
-		habilidadesCasta[0] = "Golpe Critico";
-		habilidadesCasta[1] = "Aumentar Evasion";
-		habilidadesCasta[2] = "Robar";
+//		this.nombreCasta="Asesino";
+//		habilidadesCasta = new String[3];
+//		habilidadesCasta[0] = "Golpe Critico";
+//		habilidadesCasta[1] = "Aumentar Evasion";
+//		habilidadesCasta[2] = "Robar";
 	}
 
 	// Golpe Crítico
@@ -78,8 +78,28 @@ public Asesino(double prob_crit, double evasion, double daño_crit) {
 	}
 
 	@Override
-	public void recibirAtributo(Personaje caster) {
-		caster.destreza+=5;
+	public int recibirDestrezaBonus() {
+		return 5;
+	}
+
+	@Override
+	public int recibirFuerzaBonus() {
 		
+		return 0;
+	}
+
+	@Override
+	public int recibirInteligenciaBonus() {
+				return 0;
+	}
+
+	@Override
+	public String getNombreCasta() {
+		return "Asesino";
+	}
+
+	@Override
+	public String[] getHabilidadesCasta() {
+		return new String[] {"Golpe Critico","Aumentar Evasion","Robar"};
 	}
 }

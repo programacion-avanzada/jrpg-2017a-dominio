@@ -33,10 +33,9 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 	public static int tablaDeNiveles[];
 
 	protected String[] habilidadesRaza = new String[2];
+	protected String[] habilidadesCasta = new String[3];
+	protected String nombreCasta;
 
-	public String[] getHabilidadesRaza() {
-		return habilidadesRaza;
-	}
 
 	public String[] getHabilidadesCasta() {
 		return casta.getHabilidadesCasta();
@@ -73,13 +72,19 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 //			inteligencia += 5;
 //		if (casta instanceof Asesino)
 //			destreza += 5;
-		casta.recibirAtributo(this);
-
+		destreza+=casta.recibirDestrezaBonus();
+		fuerza+=casta.recibirFuerzaBonus();
+		inteligencia+=casta.recibirInteligenciaBonus();
+		nombreRaza=getNombreRaza();
+		nombreCasta=casta.getNombreCasta();
+		habilidadesRaza = getHabilidadesRaza();
+		habilidadesCasta = casta.getHabilidadesCasta();
 		x = 0;
 		y = 0;
-		saludTope = 100;
-		energiaTope = 100;
-
+		saludTope = 100 + getSaludBonus();
+		energiaTope = 100 + getEnergiaBonus();
+		salud = saludTope;
+		energia = energiaTope;
 		ataque = this.calcularPuntosDeAtaque();
 		defensa = this.calcularPuntosDeDefensa();
 		magia = this.calcularPuntosDeMagia();
@@ -124,9 +129,7 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 		this.magia = this.calcularPuntosDeMagia();
 	}
 
-	public String getNombreRaza() {
-		return nombreRaza;
-	}
+
 
 	public void setNombreRaza(String nombreRaza) {
 		this.nombreRaza = nombreRaza;
@@ -481,6 +484,9 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 	public abstract boolean habilidadRaza1(Peleable atacado);
 
 	public abstract boolean habilidadRaza2(Peleable atacado);
-	public abstract void completarHabilidad();
+	public abstract String[] getHabilidadesRaza();
+	public abstract int getSaludBonus();
+	public abstract int getEnergiaBonus();
+	public abstract String getNombreRaza();
 	
 }

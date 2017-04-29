@@ -32,7 +32,9 @@ public abstract class Casta implements Serializable {
 	}
 
 	public abstract boolean habilidad1(Personaje caster, Peleable atacado);
-	public abstract void recibirAtributo(Personaje caster);
+	public abstract int recibirFuerzaBonus();
+	public abstract int recibirDestrezaBonus();
+	public abstract int recibirInteligenciaBonus();
 	/**
 	 * Método abstracto que será implementado en Asesino, Guerrero y Hechicero.
 	 * @param caster Personaje atacante.
@@ -43,13 +45,9 @@ public abstract class Casta implements Serializable {
 
 	public abstract boolean habilidad3(Personaje caster, Peleable atacado);
 
-	public String getNombreCasta() {
-		return this.nombreCasta;
-	}
+	public abstract String getNombreCasta();
+	public abstract String[] getHabilidadesCasta();
 
-	public String[] getHabilidadesCasta() {
-		return habilidadesCasta;
-	}
 
 	public double getProbabilidadGolpeCritico() {
 		return probabilidadGolpeCritico;

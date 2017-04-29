@@ -10,10 +10,11 @@ public class Orco extends Personaje {
 	 */
 	public Orco(String nombre, Casta casta, int id) {
 		super(nombre, casta, id);
-		saludTope += 10;
-		salud = saludTope;
-		energia = energiaTope;
-		this.completarHabilidad();
+//		saludTope += 10;
+//		salud = saludTope;
+//		energia = energiaTope;
+//		nombreRaza = "Orco";
+		//this.completarHabilidad();
 		//habilidadesRaza = new String[2];
 
 	}
@@ -35,9 +36,9 @@ public class Orco extends Personaje {
 	public Orco(String nombre, int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta,
 			int experiencia, int nivel, int idPersonaje) {
 		super(nombre, salud, energia, fuerza, destreza, inteligencia, casta, experiencia, nivel, idPersonaje);
-		nombreRaza = "Orco";
-
-		this.completarHabilidad();
+		//nombreRaza = "Orco";
+		
+		//this.completarHabilidad();
 	}
 
 	// Golpe Defensa
@@ -82,10 +83,20 @@ public class Orco extends Personaje {
 		return false;
 	}
 	@Override
-	public void completarHabilidad() {
-		nombreRaza = "Orco";
-		habilidadesRaza[0] = "Golpe Defensa";
-		habilidadesRaza[1] = "Mordisco de Vida";
+	public String[] getHabilidadesRaza() {
+		return new String[] {"Golpe Defensa","Mordisco de Vida"};
+	}
+	@Override
+	public int getSaludBonus() {
 		
+		return 10;
+	}
+	@Override
+	public int getEnergiaBonus() {
+		return 0;
+	}
+	@Override
+	public String getNombreRaza() {
+		return "Orco";
 	}
 }

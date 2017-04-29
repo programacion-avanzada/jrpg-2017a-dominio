@@ -10,10 +10,10 @@ public class Elfo extends Personaje {
 	 */
 	public Elfo(String nombre, Casta casta, int id) {
 		super(nombre, casta, id);
-		energiaTope += 10;
-		salud = saludTope;
-		energia = energiaTope;
-		this.completarHabilidad();
+//		energiaTope += 10;
+//		salud = saludTope;
+//		energia = energiaTope;
+		//this.completarHabilidad();
 	}
 	/**
 	 * La clase Elfo hereda de la clase Personaje, completa ciertos atributos que estaban declarados en
@@ -35,7 +35,8 @@ public class Elfo extends Personaje {
 			int idPersonaje) {
 		super(nombre, salud, energia, fuerza, destreza, inteligencia, casta,
 				experiencia, nivel, idPersonaje);
-		this.completarHabilidad();
+		//this.completarHabilidad();
+		//nombreRaza = "Elfo";
 		//habilidadesRaza = new String[2];
 
 	}
@@ -80,11 +81,24 @@ public class Elfo extends Personaje {
 		}
 		return false;
 	}
+
 	@Override
-	public void completarHabilidad() {
-		nombreRaza = "Elfo";
-		habilidadesRaza[0] = "Golpe Level";
-		habilidadesRaza[1] = "Ataque Bosque";
+	public String[] getHabilidadesRaza() {
+		return new String[] {"Golpe Level","Ataque Bosque"};
+	}
+	@Override
+	public int getSaludBonus() {
 		
+		return 0;
+	}
+	@Override
+	public int getEnergiaBonus() {
+		
+		return 10;
+	}
+	@Override
+	public String getNombreRaza() {
+		
+		return "Elfo";
 	}
 }
