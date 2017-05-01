@@ -5,6 +5,7 @@ public class Hechicero extends Casta {
 	private static final int ENERGIAMINIMA = 10;
 	private static final double MULTIPLICADORMAGIA = 1.5;
 	private static final int DIVISORDEMAGIA = 2;
+	private static final int BONUSINTELIGENCIA = 5;
 
 	/** La clase Hechicero es una casta de Personaje, hereda de la clase Casta.
 	 * Posee dos constructores, el constructor por defecto,
@@ -63,7 +64,7 @@ public class Hechicero extends Casta {
 	 */
 	@Override
 	public final boolean habilidad2(final Personaje caster, final Peleable aliado) {
-		if (caster.getEnergia() > 10) {
+		if (caster.getEnergia() > ENERGIAMINIMA) {
 			caster.setEnergia(caster.getEnergia() - ENERGIAMINIMA);
 			if (aliado instanceof Personaje) {
 				((Personaje) aliado).serCurado(caster.calcularPuntosDeMagia());
@@ -92,7 +93,7 @@ public class Hechicero extends Casta {
 
 	@Override
 	public final int recibirInteligenciaBonus() {
-		return 5;
+		return BONUSINTELIGENCIA;
 	}
 
 	@Override
