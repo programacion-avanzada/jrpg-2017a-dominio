@@ -49,4 +49,11 @@ public abstract class MadreDeTodo {
 	public final void setNombre(final String nombre) {
 		this.nombre = nombre;
 	}
+
+	public final void aumentarFuerza(final int aumento){
+		fuerza+= aumento;
+	}
+	public final void aumentarNivel(){
+		nivel++;
+	}
 }

@@ -88,7 +88,7 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 		inteligencia = 10;
 		destreza = 10;
 		destreza+= casta.recibirDestrezaBonus();
-		this.setFuerza(this.getFuerza() + casta.recibirFuerzaBonus()) ;
+		this.aumentarFuerza(casta.recibirFuerzaBonus());
 		inteligencia+= casta.recibirInteligenciaBonus();
 		nombreRaza= getNombreRaza();
 		nombreCasta= casta.getNombreCasta();
@@ -431,7 +431,7 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 
 	public final void AsignarPuntosSkills(final int fuerza, final int destreza, final int inteligencia) {
 		if (this.getFuerza() + fuerza <= FUERZAMAXIMA){
-			this.setFuerza(this.getFuerza() + fuerza);
+			this.aumentarFuerza(fuerza);;
 		}
 		if (this.destreza + destreza <= DEFENSAMAXIMA){
 			this.destreza += destreza;
@@ -451,7 +451,7 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 		while (this.getNivel() != NIVELMAXIMO
 				&& (this.experiencia >= Personaje.tablaDeNiveles[this.getNivel() + 1] + acumuladorExperiencia)) {
 			acumuladorExperiencia += Personaje.tablaDeNiveles[this.getNivel() + 1];
-			this.setNivel(this.getNivel() + 1 );
+			this.aumentarNivel();
 			this.modificarAtributos();
 			this.saludTope += SALUDTOPESUBIRN;
 			this.energiaTope += ENERGIATOPESUBIRN;
