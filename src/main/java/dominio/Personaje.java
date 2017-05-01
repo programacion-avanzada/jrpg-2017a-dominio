@@ -88,7 +88,7 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 		inteligencia = 10;
 		destreza = 10;
 		destreza+= casta.recibirDestrezaBonus();
-		fuerza+= casta.recibirFuerzaBonus();
+		this.setFuerza(this.getFuerza() + casta.recibirFuerzaBonus()) ;
 		inteligencia+= casta.recibirInteligenciaBonus();
 		nombreRaza= getNombreRaza();
 		nombreCasta= casta.getNombreCasta();
@@ -101,7 +101,7 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 		salud = saludTope;
 		energia = energiaTope;
 		ataque = this.calcularPuntosDeAtaque();
-		defensa = this.calcularPuntosDeDefensa();
+		this.setDefensa(this.calcularPuntosDeDefensa());
 		magia = this.calcularPuntosDeMagia();
 
 	}
@@ -139,7 +139,7 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 		this.energiaTope = this.energia;
 
 		this.idPersonaje = idPersonaje;
-		this.defensa = this.calcularPuntosDeDefensa();
+		this.setDefensa(this.calcularPuntosDeDefensa());
 		this.ataque = this.calcularPuntosDeAtaque();
 		this.magia = this.calcularPuntosDeMagia();
 	}
@@ -316,7 +316,7 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 
 	public final void modificarAtributos() {
 		this.ataque = this.calcularPuntosDeAtaque();
-		this.defensa = this.calcularPuntosDeDefensa();
+		this.setDefensa(this.calcularPuntosDeDefensa());
 		this.magia = this.calcularPuntosDeMagia();
 	}
 
@@ -338,7 +338,7 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 	@Override
 	public final int serAtacado(int daño) {
 		if (MyRandom.nextDouble() >= this.getCasta().getProbabilidadEvitarDaño()) {
-			daño -= this.defensa;
+			daño -= this.getDefensa();
 			if (daño > 0) {
 				if (salud <= daño) {
 					daño = salud;
@@ -354,7 +354,7 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 	}
 
 	public final int serRobadoSalud(int daño) {
-		daño -= this.defensa;
+		daño -= this.getDefensa();
 		if (daño <= 0){
 			return 0;
 		}
@@ -369,7 +369,7 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 	}
 
 	public final int serDesernegizado(int daño) {
-		daño -= this.defensa;
+		daño -= this.getDefensa();
 		if (daño <= 0){
 			return 0;
 		}
@@ -430,8 +430,8 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 	}
 
 	public final void AsignarPuntosSkills(final int fuerza, final int destreza, final int inteligencia) {
-		if (this.fuerza + fuerza <= FUERZAMAXIMA){
-			this.fuerza += fuerza;
+		if (this.getFuerza() + fuerza <= FUERZAMAXIMA){
+			this.setFuerza(this.getFuerza() + fuerza);
 		}
 		if (this.destreza + destreza <= DEFENSAMAXIMA){
 			this.destreza += destreza;
@@ -445,13 +445,13 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 	public final void subirNivel() {
 
 		int acumuladorExperiencia = 0;
-		if (this.nivel == NIVELMAXIMO) {
+		if (this.getNivel() == NIVELMAXIMO) {
 			return;
 		}
-		while (this.nivel != NIVELMAXIMO
-				&& (this.experiencia >= Personaje.tablaDeNiveles[this.nivel + 1] + acumuladorExperiencia)) {
-			acumuladorExperiencia += Personaje.tablaDeNiveles[this.nivel + 1];
-			this.nivel++;
+		while (this.getNivel() != NIVELMAXIMO
+				&& (this.experiencia >= Personaje.tablaDeNiveles[this.getNivel() + 1] + acumuladorExperiencia)) {
+			acumuladorExperiencia += Personaje.tablaDeNiveles[this.getNivel() + 1];
+			this.setNivel(this.getNivel() + 1 );
 			this.modificarAtributos();
 			this.saludTope += SALUDTOPESUBIRN;
 			this.energiaTope += ENERGIATOPESUBIRN;
@@ -462,7 +462,7 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 	public final boolean ganarExperiencia(final int exp) {
 		this.experiencia += exp;
 
-		if (experiencia >= Personaje.tablaDeNiveles[this.nivel + 1]) {
+		if (experiencia >= Personaje.tablaDeNiveles[this.getNivel() + 1]) {
 			subirNivel();
 			return true;
 		}
@@ -471,7 +471,7 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 
 	@Override
 	public final int otorgarExp() {
-		return this.nivel * MULTIPLICADOREXP;
+		return this.getNivel() * MULTIPLICADOREXP;
 	}
 
 	@Override

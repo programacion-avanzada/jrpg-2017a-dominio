@@ -53,19 +53,19 @@ public class NonPlayableCharacter extends MadreDeTodo implements Peleable {
 
 		switch (dificultad) {
 		case 0:
-			this.fuerza = DIF1F + (nivel - 1) * DIF1MF;
+			this.setFuerza(DIF1F + (nivel - 1) * DIF1MF);
 			this.salud = DIF1S + (nivel - 1) * DIF1MS;
-			this.defensa = DIF1D + (nivel - 1) * DIF1MD;
+			this.setDefensa(DIF1D + (nivel - 1) * DIF1MD);
 			break;
 		case 1:
-			this.fuerza = DIF2F + (nivel - 1) * DIF2MF;
+			this.setFuerza(DIF2F + (nivel - 1) * DIF2MF);
 			this.salud = DIF2S + (nivel - 1) * DIF2MS;
-			this.defensa = DIF2D + (nivel - 1) * DIF2MD;
+			this.setDefensa(DIF2D + (nivel - 1) * DIF2MD);
 			break;
     	case 2:
-			this.fuerza = DIF3F + (nivel - 1) * DIF3MF;
+			this.setFuerza(DIF3F + (nivel - 1) * DIF3MF);
 			this.salud = DIF3S + (nivel - 1) * DIF3MS;
-			this.defensa = DIF3D + (nivel - 1) * DIF3MD;
+			this.setDefensa(DIF3D + (nivel - 1) * DIF3MD);
 			break;
 		default:
 			break;
@@ -79,7 +79,7 @@ public class NonPlayableCharacter extends MadreDeTodo implements Peleable {
 	 */
 	@Override
 	public final int otorgarExp() {
-		return this.nivel * MULTIPLICADOREXPNPC;
+		return this.getNivel() * MULTIPLICADOREXPNPC;
 	}
 
 
@@ -139,12 +139,12 @@ public class NonPlayableCharacter extends MadreDeTodo implements Peleable {
 
 	@Override
 	public final int getAtaque() {
-		return fuerza;
+		return this.getFuerza();
 	}
 
 	@Override
 	public final void setAtaque(final int ataque) {
-		this.fuerza = ataque;
+		this.setFuerza(ataque);
 	}
 
 	@Override
