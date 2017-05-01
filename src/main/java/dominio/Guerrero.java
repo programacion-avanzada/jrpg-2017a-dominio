@@ -46,6 +46,7 @@ public class Guerrero extends Casta {
 	 * las caracteristicas del caster en este caso la defensa (se agrega a la defensa actual el atributo
 	 * magia)
 	 * @param atacado no cumple función alguna dentro de este método
+	 * @return retorna si se ejecutó correctamente la habilidad
 	 */
 	@Override
 	public final boolean habilidad2(final Personaje caster, final Peleable atacado) {
@@ -66,6 +67,7 @@ public class Guerrero extends Casta {
 	 * @param caster Personaje atacante
 	 * @param atacado Éste argumento debe de ser clase atacado para que el método tenga posibilidad
 	 * de retornar true
+	 * @return retorna si se ejecutó correctamente la habilidad
 	 */
 	@Override
 	public final boolean habilidad3(final Personaje caster, final Peleable atacado) {
