@@ -77,7 +77,7 @@ public abstract class Casta implements Serializable {
 	}
 
 	public final void aumentarEvitarDaño(final double bonus){
-		this.probabilidadEvitarDaño+= bonus;
+		this.probabilidadEvitarDaño += bonus;
 	}
 }
 
