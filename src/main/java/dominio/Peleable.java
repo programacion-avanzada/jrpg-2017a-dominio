@@ -8,6 +8,7 @@ package dominio;
 public interface Peleable {
 	public int serAtacado(int daño);
 	public int getSalud();
+	public int getMagia();
 	public void despuesDeTurno();
 	public int atacar(Peleable atacado);
 	public int otorgarExp();

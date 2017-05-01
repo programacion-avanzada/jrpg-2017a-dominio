@@ -1,88 +1,103 @@
+
 package dominio;
 
 import java.io.Serializable;
 
 public abstract class Personaje extends MadreDeTodo implements Peleable, Serializable {
 
-	protected int salud;
-	protected int energia;
-	//protected int defensa;// depende de la destreza
-	protected int ataque;// depende de la fuerza
-	protected int magia;// depende de la inteligencia
+	private int salud;
+	private int energia;
+	private static final int CANTHABILIDADESCASTA =3;
+	private static final int CANTHABILIDADESRAZA =2;
+	private static final int CANTIDADNIVELES = 101;
+	private static final int CONSTANTENIVEL = 50;
+	private static final int FUERZAINICIAL = 10;
+	private static final int DEFENSAINICIAL = 10;
+	private static final int NIVELINICIAL = 1;
+	private static final int SALUDTOPEINICIAL = 100;
+	private static final int ENERGIATOPEINICIAL = 100;
+	private static final int FUERZAMAXIMA = 200;
+	private static final int DEFENSAMAXIMA = 200;
+	private static final int INTELIGENCIAMAXIMA = 200;
+	private static final int NIVELMAXIMO = 100;
+	private static final int SALUDTOPESUBIRN = 25;
+	private static final int ENERGIATOPESUBIRN = 20;
+	private static final double MULTIPLICADORFZA = 1.5;
+	private static final double MULTIPLICADORMGA = 1.5;
+	private static final int MULTIPLICADOREXP = 40;
+	private static final int ENERGIAMINIMA = 10;
+	private static final int DIVISORDEDESTREZA = 1000;
 
-	//protected String nombre;// hay que agregarlo a todos los constructores
-	protected String nombreRaza;
-
-	protected int saludTope;
-	protected int energiaTope;
-
-	//protected int fuerza;
-	protected int destreza;
-	protected int inteligencia;
-	protected Casta casta;
-
-	protected int x;
-	protected int y;
-	
-	protected int experiencia;
-	//protected int nivel;
-
-	protected int idPersonaje;
-
-	protected Alianza clan = null;
-	public static int tablaDeNiveles[];
-
-	protected String[] habilidadesRaza = new String[2];
-	protected String[] habilidadesCasta = new String[3];
-	protected String nombreCasta;
+	private int ataque;
+	private int magia;
 
 
-	public String[] getHabilidadesCasta() {
+	private String nombreRaza;
+
+	private int saludTope;
+	private int energiaTope;
+
+
+	private int destreza;
+	private int inteligencia;
+	private Casta casta;
+
+	private int x;
+	private int y;
+
+	private int experiencia;
+
+
+	private int idPersonaje;
+
+	private Alianza clan = null;
+	private static int tablaDeNiveles[];
+
+	private String[] habilidadesRaza = new String[CANTHABILIDADESRAZA];
+	private String[] habilidadesCasta = new String[CANTHABILIDADESCASTA];
+	private String nombreCasta;
+
+
+	public final String[] getHabilidadesCasta() {
 		return casta.getHabilidadesCasta();
 	}
 
 	public static void cargarTablaNivel() {
-		Personaje.tablaDeNiveles = new int[101];
+		Personaje.tablaDeNiveles = new int[CANTIDADNIVELES];
 		Personaje.tablaDeNiveles[0] = 0;
 		Personaje.tablaDeNiveles[1] = 0;
-		for (int i = 2; i < 101; i++)
-			Personaje.tablaDeNiveles[i] = Personaje.tablaDeNiveles[i - 1] + 50;
+		for (int i = 2; i < 101; i++){
+			Personaje.tablaDeNiveles[i] = Personaje.tablaDeNiveles[i - 1] + CONSTANTENIVEL;
+		}
 	}
-	/**
-	 * La clase Personaje es la cual posee todos los atributos de los personajes del juego, algunos
-	 * serán completados por las clases hijo (Elfo,Humano,Orco) como por ejemplo el array habilidadesRaza[]
-	 * dependiendo de qué instancia es el parámetro casta, se incrementará en 5 un atributo del personaje
+	/** La clase Personaje es la cual posee todos los atributos de los personajes del juego.
+	 * Algunos serán completados por las clases hijo (Elfo,Humano,Orco)
+	 * como por ejemplo el array habilidadesRaza[] dependiendo de qué instancia es el parámetro casta,
+	 * se incrementará en 5 un atributo del personaje
 	 * @param nombre Indica el nombre el personaje
 	 * @param casta Indica la casta(Raza) del personaje y con ella el incremento que tendrá cierto atributo
 	 * @param id Identificador del personaje
 	 */
-	public Personaje(String nombre, Casta casta, int id) {
-		super(10,10,1,nombre);
-		//this.nombre = nombre;
+	public Personaje(final String nombre, final Casta casta, final int id) {
+		super(FUERZAINICIAL, DEFENSAINICIAL, NIVELINICIAL, nombre);
+
+
 		this.casta = casta;
 		this.idPersonaje = id;
-		experiencia = 0;
-		//nivel = 1;
-		//fuerza = 10;
+		experiencia = 0;;
 		inteligencia = 10;
 		destreza = 10;
-//		if (casta instanceof Guerrero)
-//			fuerza += 5;
-//		if (casta instanceof Hechicero)
-//			inteligencia += 5;
-//		if (casta instanceof Asesino)
-//			destreza += 5;
-		destreza+=casta.recibirDestrezaBonus();
-		fuerza+=casta.recibirFuerzaBonus();
-		inteligencia+=casta.recibirInteligenciaBonus();
-		nombreRaza=getNombreRaza();
-		nombreCasta=casta.getNombreCasta();
+		destreza+= casta.recibirDestrezaBonus();
+		fuerza+= casta.recibirFuerzaBonus();
+		inteligencia+= casta.recibirInteligenciaBonus();
+		nombreRaza= getNombreRaza();
+		nombreCasta= casta.getNombreCasta();
 		habilidadesRaza = getHabilidadesRaza();
 		habilidadesCasta = casta.getHabilidadesCasta();
 		x = 0;
 		y = 0;
-		saludTope = 100 + getSaludBonus();
-		energiaTope = 100 + getEnergiaBonus();
+		saludTope = SALUDTOPEINICIAL + getSaludBonus();
+		energiaTope = ENERGIATOPEINICIAL + getEnergiaBonus();
 		salud = saludTope;
 		energia = energiaTope;
 		ataque = this.calcularPuntosDeAtaque();
@@ -90,35 +105,35 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 		magia = this.calcularPuntosDeMagia();
 
 	}
-	/**
-	 * La clase Personaje es la cual posee todos los atributos de los personajes del juego, algunos serán 
-	 * completados por las clases hijo (Elfo,Humano,Orco) como por ejemplo el array habilidadesRaza[]
-	 * A diferencia del constructor de sólo 3 parámetros, éste recibe la mayoría de los atributos
+	/** La clase Personaje es la cual posee todos los atributos de los personajes del juego.
+	 * Algunos serán completados por las clases hijo (Elfo,Humano,Orco) como por ejemplo:
+	 * El array habilidadesRaza[], a diferencia del constructor de sólo 3 parámetros,
+	 * éste recibe la mayoría de los atributos.
 	 * @param nombre Nombre del personaje
 	 * @param salud Salud del personaje
 	 * @param energia Energia del personaje
 	 * @param fuerza Fuerza del Personaje
 	 * @param destreza Destreza del personaje
 	 * @param inteligencia Inteligencia del personaje
-	 * @param casta Casta(Raza) del personaje 
+	 * @param casta Casta(Raza) del personaje
 	 * @param experiencia Experiencia del personaje
-	 * @param nivel Nivel del personaje 
+	 * @param nivel Nivel del personaje
 	 * @param idPersonaje Id del personaje
 	 */
-	public Personaje(String nombre, int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta,
-			int experiencia, int nivel,
-			int idPersonaje) {
+	public Personaje(final String nombre, final int salud, final int energia, final int fuerza, final int destreza, final int inteligencia, final Casta casta,
+			final int experiencia, final int nivel,
+			final int idPersonaje) {
 		super(fuerza,destreza,nivel,nombre);
-		//this.nombre = nombre;
+
 		this.salud = salud;
 		this.energia = energia;
-		//this.fuerza = fuerza;
+
 		this.destreza = destreza;
 		this.inteligencia = inteligencia;
 		this.casta = casta;
 
 		this.experiencia = experiencia;
-		//this.nivel = nivel;
+
 
 		this.saludTope = this.salud;
 		this.energiaTope = this.energia;
@@ -131,136 +146,115 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 
 
 
-	public void setNombreRaza(String nombreRaza) {
+	public final void setNombreRaza(final String nombreRaza) {
 		this.nombreRaza = nombreRaza;
 	}
 
-//	public String getNombre() {
-//		return nombre;
-//	}
-//
-//	public void setNombre(String nombre) {
-//		this.nombre = nombre;
-//	}
 
-	public int getAtaque() {
+
+	@Override
+	public final int getAtaque() {
 		return ataque;
 	}
 
-	public void setAtaque(int ataque) {
+	@Override
+	public final void setAtaque(final int ataque) {
 		this.ataque = ataque;
 	}
 
-	public int getMagia() {
+	@Override
+	public final int getMagia() {
 		return magia;
 	}
 
-	public void setMagia(int magia) {
+	public final void setMagia(final int magia) {
 		this.magia = magia;
 	}
 
-	public Alianza getClan() {
+	public final Alianza getClan() {
 		return clan;
 	}
 
-	public void setClan(Alianza clan) {
+	public final void setClan(final Alianza clan) {
 		this.clan = clan;
 		clan.añadirPersonaje(this);
 	}
 
-	public int getSalud() {
+	@Override
+	public final int getSalud() {
 		return salud;
 	}
 
-	public void setSalud(int salud) {
+	public final void setSalud(final int salud) {
 		this.salud = salud;
 	}
 
-	public int getEnergia() {
+	public final int getEnergia() {
 		return energia;
 	}
 
-	public void setEnergia(int energia) {
+	public final void setEnergia(final int energia) {
 		this.energia = energia;
 	}
 
-//	public int getFuerza() {
-//		return fuerza;
-//	}
 
-//	public void setFuerza(int fuerza) {
-//		this.fuerza = fuerza;
-//	}
 
-	public int getDestreza() {
+	public final int getDestreza() {
 		return destreza;
 	}
 
-	public void setDestreza(int destreza) {
+	public final void setDestreza(final int destreza) {
 		this.destreza = destreza;
 	}
 
-	public int getInteligencia() {
+	public final int getInteligencia() {
 		return inteligencia;
 	}
 
-	public void setInteligencia(int inteligencia) {
+	public final void setInteligencia(int inteligencia) {
 		this.inteligencia = inteligencia;
 	}
 
-	public Casta getCasta() {
+	public final Casta getCasta() {
 		return casta;
 	}
 
-	public void setCasta(Casta casta) {
+	public final void setCasta(Casta casta) {
 		this.casta = casta;
 	}
 
-	public int getExperiencia() {
+	public final int getExperiencia() {
 		return experiencia;
 	}
 
-	public void setExperiencia(int experiencia) {
+	public final void setExperiencia(final int experiencia) {
 		this.experiencia = experiencia;
 	}
 
-//	public int getNivel() {
-//		return nivel;
-//	}
-//
-//	public void setNivel(int nivel) {
-//		this.nivel = nivel;
-//	}
 
-	public int getIdPersonaje() {
+	public final int getIdPersonaje() {
 		return idPersonaje;
 	}
 
-	public void setIdPersonaje(int idPersonaje) {
+	public final void setIdPersonaje(int idPersonaje) {
 		this.idPersonaje = idPersonaje;
 	}
 
-//	public int getDefensa() {
-//		return defensa;
-//	}
-//
-//	public void setDefensa(int defensa) {
-//		this.defensa = defensa;
-//	}
 
-	public int getSaludTope() {
+
+	public final int getSaludTope() {
 		return saludTope;
 	}
 
-	public void setSaludTope(int saludTope) {
+	public final void setSaludTope(int saludTope) {
 		this.saludTope = saludTope;
 	}
 
-	public int getEnergiaTope() {
+	public final int getEnergiaTope() {
 		return energiaTope;
 	}
 
-	public void setEnergiaTope(int energiaTope) {
+	public final void setEnergiaTope(int energiaTope) {
 		this.energiaTope = energiaTope;
 	}
 	/**
@@ -271,12 +265,14 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 	 * se atacará con golpe crítico, de lo contrario sera atacado con el valor del atributo ataque
 	 * Retornará 0 si la salud del Personaje llamador es 0 o si el atacado posee una salud menor a 0
 	 * @param atacado Instancia de Persona o NPC la cual será atacada
+	 * @return Retorna si el ataque fue realizado con éxito o no.
 	 */
-	public int atacar(Peleable atacado) {
+	@Override
+	public final int atacar(final Peleable atacado) {
 		if (salud == 0)
 			return 0;
 		if (atacado.getSalud() > 0) {
-			if (MyRandom.nextDouble() <= this.casta.getProbabilidadGolpeCritico() + this.destreza / 1000) {
+			if (MyRandom.nextDouble() <= this.casta.getProbabilidadGolpeCritico() + this.destreza / DIVISORDEDESTREZA) {
 				return atacado.serAtacado(this.golpe_critico());
 			} else {
 				return atacado.serAtacado(this.ataque);
@@ -285,57 +281,62 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 		return 0;
 	}
 
-	public int golpe_critico() {
+	public final int golpe_critico() {
 		return (int) (this.ataque * this.getCasta().getDañoCritico());
 	}
 
+	@Override
 	public void despuesDeTurno() {
 
 	}
 
-	public boolean puedeAtacar() {
-		return energia > 10;
+	public final boolean puedeAtacar() {
+		return energia > ENERGIAMINIMA;
 	}
 
-	public int calcularPuntosDeAtaque() {
-		return (int) (this.getFuerza() * 1.5);
+	public final int calcularPuntosDeAtaque() {
+		return (int) (this.getFuerza() * MULTIPLICADORFZA);
 	}
 
-	public int calcularPuntosDeDefensa() {
-		return (int) (this.getDestreza());
+	public final int calcularPuntosDeDefensa() {
+		return (this.getDestreza());
 	}
 
-	public int calcularPuntosDeMagia() {
-		return (int) (this.getInteligencia() * 1.5);
+	public final int calcularPuntosDeMagia() {
+		return (int) (this.getInteligencia() * MULTIPLICADORMGA);
 	}
 
-	public void restablecerSalud() {
+	public final void restablecerSalud() {
 		this.salud = this.saludTope;
 	}
 
-	public void restablecerEnergia() {
+	public final void restablecerEnergia() {
 		this.energia = this.energiaTope;
 	}
 
-	public void modificarAtributos() {
+	public final void modificarAtributos() {
 		this.ataque = this.calcularPuntosDeAtaque();
 		this.defensa = this.calcularPuntosDeDefensa();
 		this.magia = this.calcularPuntosDeMagia();
 	}
 
-	public boolean estaVivo() {
+	@Override
+	public final boolean estaVivo() {
 		return salud > 0;
 	}
-	/**
-	 * Método implementado de la Interface Peleable, retornará un valor entero dependiendo del 
-	 * resultado de las comparaciones, si el número generado con la clase MyRandom es mayor a
-	 * la probabilidad de evitar daño la cual depende de la casta del Personaje, entonces no podrá
+	/** Método implementado de la Interface Peleable.
+	 * Retornará un valor entero dependiendo del resultado de las comparaciones,
+	 * si el número generado con la clase MyRandom es mayor a la probabilidad de evitar daño,
+     * La cual depende de la casta del Personaje, entonces no podrá
 	 * evitarse el ataque, se descontará el valor del argumento daño al atributo salud.
 	 * Si el valor del atributo salud es menor al valor del argumento daño, se procederá a igualar el
-	 * atributo salud a 0 y retornar el daño realziado (que será igual a la salud antes de que esté en 0 
+	 * atributo salud a 0 y retornar el daño realziado
+	 * (que será igual a la salud antes de que esté en 0)
 	 * @param daño valor a descontarse del atributo salud
+	 * @return Retorna si el Personaje peude ser atacado.
 	 */
-	public int serAtacado(int daño) {
+	@Override
+	public final int serAtacado(int daño) {
 		if (MyRandom.nextDouble() >= this.getCasta().getProbabilidadEvitarDaño()) {
 			daño -= this.defensa;
 			if (daño > 0) {
@@ -352,12 +353,14 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 		return 0;
 	}
 
-	public int serRobadoSalud(int daño) {
+	public final int serRobadoSalud(int daño) {
 		daño -= this.defensa;
-		if (daño <= 0)
+		if (daño <= 0){
 			return 0;
-		if ((salud - daño) >= 0)
+		}
+		if ((salud - daño) >= 0){
 			salud -= daño;
+		}
 		else {
 			daño = salud;// le queda menos salud que el daño inflingido
 			salud = 0;
@@ -365,46 +368,52 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 		return daño;
 	}
 
-	public int serDesernegizado(int daño) {
+	public final int serDesernegizado(int daño) {
 		daño -= this.defensa;
-		if (daño <= 0)
+		if (daño <= 0){
 			return 0;
-		if ((energia - daño) >= 0)
+		}
+		if ((energia - daño) >= 0){
 			energia -= daño;
+		}
 		else {
-			daño = energia;// le queda menos energia que el daño inflingido
+			daño = energia;
 			energia = 0;
 		}
 		return daño;
 	}
 
-	public void serCurado(int salud) {
-		if ((this.salud + salud) <= this.saludTope)
+	public final void serCurado(final int salud) {
+		if ((this.salud + salud) <= this.saludTope){
 			this.salud += salud;
-		else
+		}
+		else{
 			this.salud = this.saludTope;
+		}
 	}
 
-	public void serEnergizado(int energia) {
-		if ((this.energia + energia) <= this.energiaTope)
+	public final void serEnergizado(final int energia) {
+		if ((this.energia + energia) <= this.energiaTope){
 			this.energia += energia;
-		else
+		}
+		else{
 			this.energia = this.energiaTope;
+		}
 	}
 
-	public void crearAlianza(String nombre_alianza) {
+	public final void crearAlianza(final String nombre_alianza) {
 		this.clan = new Alianza(nombre_alianza);
 		this.clan.añadirPersonaje(this);
 	}
 
-	public void salirDeAlianza() {
+	public final void salirDeAlianza() {
 		if (this.clan != null) {
 			this.clan.eliminarPersonaje(this);
 			this.clan = null;
 		}
 	}
 
-	public boolean aliar(Personaje nuevo_aliado) {
+	public final boolean aliar(final Personaje nuevo_aliado) {
 		if (this.clan == null) {
 			Alianza a = new Alianza("Alianza 1");
 			this.clan = a;
@@ -415,38 +424,42 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 			nuevo_aliado.clan = this.clan;
 			this.clan.añadirPersonaje(nuevo_aliado);
 			return true;
-		} else
+		} else{
 			return false;
+		}
 	}
 
-	public void AsignarPuntosSkills(int fuerza, int destreza, int inteligencia) {
-		if (this.fuerza + fuerza <= 200)
+	public final void AsignarPuntosSkills(final int fuerza, final int destreza, final int inteligencia) {
+		if (this.fuerza + fuerza <= FUERZAMAXIMA){
 			this.fuerza += fuerza;
-		if (this.destreza + destreza <= 200)
+		}
+		if (this.destreza + destreza <= DEFENSAMAXIMA){
 			this.destreza += destreza;
-		if (this.inteligencia + inteligencia <= 200)
+		}
+		if (this.inteligencia + inteligencia <= INTELIGENCIAMAXIMA){
 			this.inteligencia += inteligencia;
+		}
 		this.modificarAtributos();
 	}
 
-	public void subirNivel() {
+	public final void subirNivel() {
 
 		int acumuladorExperiencia = 0;
-		if (this.nivel == 100) {
+		if (this.nivel == NIVELMAXIMO) {
 			return;
 		}
-		while (this.nivel != 100
+		while (this.nivel != NIVELMAXIMO
 				&& (this.experiencia >= Personaje.tablaDeNiveles[this.nivel + 1] + acumuladorExperiencia)) {
 			acumuladorExperiencia += Personaje.tablaDeNiveles[this.nivel + 1];
 			this.nivel++;
 			this.modificarAtributos();
-			this.saludTope += 25;
-			this.energiaTope += 20;
+			this.saludTope += SALUDTOPESUBIRN;
+			this.energiaTope += ENERGIATOPESUBIRN;
 		}
 		this.experiencia -= acumuladorExperiencia;
 	}
 
-	public boolean ganarExperiencia(int exp) {
+	public final boolean ganarExperiencia(final int exp) {
 		this.experiencia += exp;
 
 		if (experiencia >= Personaje.tablaDeNiveles[this.nivel + 1]) {
@@ -456,8 +469,9 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 		return false;
 	}
 
-	public int otorgarExp() {
-		return this.nivel * 40;
+	@Override
+	public final int otorgarExp() {
+		return this.nivel * MULTIPLICADOREXP;
 	}
 
 	@Override
@@ -465,19 +479,19 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 		return super.clone();
 	}
 
-	public double distanciaCon(Personaje p) {
+	public final double distanciaCon(final Personaje p) {
 		return Math.sqrt(Math.pow(this.x - p.x, 2) + Math.pow(this.y - p.y, 2));
 	}
 
-	public boolean habilidadCasta1(Peleable atacado) {
+	public final boolean habilidadCasta1(final Peleable atacado) {
 		return this.getCasta().habilidad1(this, atacado);
 	}
 
-	public boolean habilidadCasta2(Peleable atacado) {
+	public final boolean habilidadCasta2(final Peleable atacado) {
 		return this.getCasta().habilidad2(this, atacado);
 	}
 
-	public boolean habilidadCasta3(Peleable atacado) {
+	public final boolean habilidadCasta3(final Peleable atacado) {
 		return this.getCasta().habilidad3(this, atacado);
 	}
 
@@ -488,5 +502,6 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 	public abstract int getSaludBonus();
 	public abstract int getEnergiaBonus();
 	public abstract String getNombreRaza();
-	
+
 }
+
