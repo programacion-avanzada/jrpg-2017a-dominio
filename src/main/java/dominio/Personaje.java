@@ -151,9 +151,6 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 
 
 
-	public final void setNombreRaza(final String nombreRaza) {
-		this.nombreRaza = nombreRaza;
-	}
 
 
 
