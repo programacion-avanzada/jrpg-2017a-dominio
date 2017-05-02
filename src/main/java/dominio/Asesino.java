@@ -1,5 +1,9 @@
 package dominio;
 
+/**
+	Esta clase es creada con el fin de poder crear un tipo de raza para el personaje en 
+	el entorno del juego, en este caso Asesino.--
+*/
 public class Asesino extends Casta {
 
 	public Asesino(double prob_crit, double evasion, double daño_crit) {

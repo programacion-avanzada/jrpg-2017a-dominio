@@ -48,7 +48,7 @@ public class Hechicero extends Casta {
 		}
 		return false;
 	}
-
+    /** El siguiente metodo se encargar de robar energia y salud al personaje atacado */
 	// Robar Energia y Salud
 	public boolean habilidad3(Personaje caster, Peleable atacado) {
 		if (caster.getEnergia() > 10) {

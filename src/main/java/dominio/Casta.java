@@ -27,41 +27,42 @@ public abstract class Casta implements Serializable {
 		this.probabilidadEvitarDaño = evasion;
 		this.dañoCritico = daño_crit;
 	}
-
+	
 	public abstract boolean habilidad1(Personaje caster, Peleable atacado);
 
 	public abstract boolean habilidad2(Personaje caster, Peleable atacado);
 
 	public abstract boolean habilidad3(Personaje caster, Peleable atacado);
-
+	
+	/** Este metodo devuelve el nombre de la casra */
 	public String getNombreCasta() {
 		return this.nombreCasta;
 	}
-
+    /** Este metodo devuelve la descripción de las habilidades que posee la casta */
 	public String[] getHabilidadesCasta() {
 		return habilidadesCasta;
 	}
-
+    /** Este metodo devuelve la probabilidad que tiene la casta actual de golpecritico */ 
 	public double getProbabilidadGolpeCritico() {
 		return probabilidadGolpeCritico;
 	}
-
+	/** Este metodo establece la probabilidad de golpe critico */
 	public void setProbabilidadGolpeCritico(double probabilidadGolpeCritico) {
 		this.probabilidadGolpeCritico = probabilidadGolpeCritico;
 	}
-
+	/** Este metodo devuelve la probabilidad de evitar daño	de la casta actual */
 	public double getProbabilidadEvitarDaño() {
 		return probabilidadEvitarDaño;
 	}
-
+	/** Este metodo establece la probabilidad de evitar daño de la casta actual */
 	public void setProbabilidadEvitarDaño(double probabilidadEvitarDaño) {
 		this.probabilidadEvitarDaño = probabilidadEvitarDaño;
 	}
-
+	/** Este metodo devuelve el valor del daño critico de la casta actual */
 	public double getDañoCritico() {
 		return dañoCritico;
 	}
-
+	/** Este metodo establece la probabilidad de daño critico  de la casta actual*/
 	public void setDañoCritico(double dañoCritico) {
 		this.dañoCritico = dañoCritico;
 	}

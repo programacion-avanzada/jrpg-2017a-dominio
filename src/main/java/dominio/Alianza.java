@@ -12,15 +12,15 @@ public class Alianza {
 		this.nombre = nombre;
 		this.aliados = new LinkedList <Personaje>();
 	}
-
+     /** Este medoto devuelve el listado de los personajes aliados en la alianza actual --*/
 	public LinkedList<Personaje> getAliados() {
 		return aliados;
 	}
-
+    /** Este medoto une un nuevo personaje a la alianza actual --*/
 	public void setAliados(LinkedList<Personaje> aliados) {
 		this.aliados = aliados;
 	}
-
+    /** Este medoto devuelve el nombre de la alianza actual @David*/ 
 	public String obtenerNombre(){
 		return nombre;
 	}
