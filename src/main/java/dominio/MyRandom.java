@@ -2,7 +2,7 @@ package dominio;
 
 public class MyRandom {
 	private static final double NUMERORARO = 0.49;
-	private static final int OTRONUMERORARO =1;
+	private static final int OTRONUMERORARO = 1;
 	/**Clase con dos métodos estaticos.
 	 * Utilizados para la obtención de números de tipo int y double
 	 */

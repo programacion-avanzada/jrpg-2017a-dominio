@@ -85,7 +85,7 @@ public class Humano extends Personaje {
 
 	@Override
 	public final String[] getHabilidadesRaza() {
-		return new String[] {"Incentivar","Golpe Fatal"};
+		return new String[] {"Incentivar","Golpe Fatal"}; 
 	}
 	@Override
 	public final int getSaludBonus() {

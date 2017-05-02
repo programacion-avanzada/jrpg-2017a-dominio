@@ -45,7 +45,7 @@ public Asesino(final double prob_crit, final double evasion, final double daño_
 	public final boolean habilidad1(final Personaje caster, final Peleable atacado) {
 		if (caster.getEnergia() > ENERGIAMINIMA) {
 			caster.setEnergia(caster.getEnergia() - ENERGIAMINIMA);
-			if (atacado.serAtacado((int) (caster.getAtaque() * caster.getCasta().getDañoCritico())) > 0){
+			if (atacado.serAtacado((int) (caster.getAtaque() * caster.getCasta().getDañoCritico())) > 0) {
 				return true;
 			}
 		}
@@ -69,7 +69,7 @@ public Asesino(final double prob_crit, final double evasion, final double daño_
 			if (this.getProbabilidadEvitarDaño() + AUMENTARPROBEVITAR < 0.5){
 				this.aumentarEvitarDaño(AUMENTARPROBEVITAR);
 			}
-			else{
+			else {
 				this.setProbabilidadEvitarDaño(PROBEVITARDAÑO);
 			}
 			return true;

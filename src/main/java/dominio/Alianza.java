@@ -12,12 +12,12 @@ public class Alianza {
 	 * @param nombre Nombre que se le dará a la alianza
 	 */
 
-	public Alianza(final String nombre){
+	public Alianza(final String nombre) {
 		this.nombre = nombre;
-		this.aliados = new LinkedList <Personaje>();
+		this.aliados = new LinkedList<Personaje>();
 	}
 
-	public final LinkedList<Personaje> getAliados(){
+	public final LinkedList<Personaje> getAliados() {
 		return aliados;
 	}
 
@@ -26,15 +26,15 @@ public class Alianza {
 	 * @param aliados LinkedList que sobreescribirá a la actual
 	 */
 
-	public final void setAliados(final LinkedList<Personaje> aliados){
+	public final void setAliados(final LinkedList<Personaje> aliados) {
 		this.aliados = aliados;
 	}
 
-	public final String obtenerNombre(){
+	public final String obtenerNombre() {
 		return nombre;
 	}
 
-	public final void eliminarPersonaje(final Personaje pj){
+	public final void eliminarPersonaje(final Personaje pj) {
 		aliados.remove(pj);
 	}
 
@@ -42,7 +42,7 @@ public class Alianza {
 	 * add() de la LinkedList
 	 * @param pj Personaje a agregarse a la lista de aliados
 	 */
-	public void añadirPersonaje(Personaje pj){
+	public final void añadirPersonaje(final Personaje pj) {
 		aliados.add(pj);
 	}
 }

@@ -50,10 +50,10 @@ public abstract class MadreDeTodo {
 		this.nombre = nombre;
 	}
 
-	public final void aumentarFuerza(final int aumento){
-		fuerza+= aumento;
+	public final void aumentarFuerza(final int aumento) {
+		fuerza += aumento;
 	}
-	public final void aumentarNivel(){
+	public final void aumentarNivel() {
 		nivel++;
 	}
 }

@@ -50,7 +50,7 @@ public class Orco extends Personaje {
 	public final boolean habilidadRaza1(final Peleable atacado) {
 		if (this.getEnergia() > ENERGIAMINIMA) {
 			this.setEnergia(this.getEnergia() - ENERGIAMINIMA);
-			if (atacado.serAtacado(this.getDefensa() * MULTIPLICADORDEFENSA) > 0){
+			if (atacado.serAtacado(this.getDefensa() * MULTIPLICADORDEFENSA) > 0) {
 				return true;
 			}
 		}
@@ -82,7 +82,7 @@ public class Orco extends Personaje {
 	}
 	@Override
 	public final String[] getHabilidadesRaza() {
-		return new String[] {"Golpe Defensa","Mordisco de Vida"};
+		return new String[] {"Golpe Defensa","Mordisco de Vida"}; 
 	}
 	@Override
 	public final int getSaludBonus() {

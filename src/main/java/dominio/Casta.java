@@ -8,8 +8,8 @@ public abstract class Casta implements Serializable {
 	private double probabilidadEvitarDaño;
 	private double dañoCritico;
 	private static final double PROBEVITARGOLPC = 0.2;
-	private static final double PROBEVITARDAÑO =0.2;
-	private static final double DAÑOCRITICO =1.5;
+	private static final double PROBEVITARDAÑO = 0.2;
+	private static final double DAÑOCRITICO = 1.5;
 	private String[] habilidadesCasta;
 
 	/** Clase abstracta de la cual heredarán las clases Asesion,Guerrero,Hechicero.
@@ -76,7 +76,7 @@ public abstract class Casta implements Serializable {
 		this.dañoCritico = dañoCritico;
 	}
 
-	public final void aumentarEvitarDaño(final double bonus){
+	public final void aumentarEvitarDaño(final double bonus) {
 		this.probabilidadEvitarDaño += bonus;
 	}
 }

@@ -5,7 +5,7 @@ public class NonPlayableCharacter extends MadreDeTodo implements Peleable {
 
 	private int salud;
 
-	private static final int dificultadAleatoria = -1;
+	private static final int DIFICULTADALEATORIA = -1;
 	private static final int DIF1F = 10;
 	private static final int DIF1S = 30;
 	private static final int DIF1D = 2;
@@ -40,14 +40,14 @@ public class NonPlayableCharacter extends MadreDeTodo implements Peleable {
 	 * @param nivel Nivel (entero) que se le otorga al NPC
 	 * @param dificultadNPC valor entero que consecuentemente produce una variación en los atributos.
 	 */
-	public NonPlayableCharacter(String nombre, int nivel, final int dificultadNPC) {
-		super(0,0,nivel,nombre);
+	public NonPlayableCharacter(final String nombre, final int nivel, final int dificultadNPC) {
+		super(0, 0, nivel, nombre);
 
 		int dificultad;
-		if (dificultadNPC == dificultadAleatoria){
-			dificultad = MyRandom.nextInt(3);
+		if (dificultadNPC == DIFICULTADALEATORIA) {
+			dificultad = MyRandom.nextInt(3); 
 		}
-		else{
+		else {
 			dificultad = dificultadNPC;
 		}
 
@@ -101,11 +101,12 @@ public class NonPlayableCharacter extends MadreDeTodo implements Peleable {
 	}
 
 	@Override
-	public int atacar(Peleable atacado) {
+	public final int atacar(Peleable atacado) {
 		if (MyRandom.nextDouble() <= NUMEROPARAATACAR) {
 			return atacado.serAtacado((int) (this.getAtaque() * MULTIPLICADORFUERZA));
-		} else
+		} else{
 			return atacado.serAtacado(this.getAtaque());
+		}
 	}
 
 	/** Método que retorna 0 o un valor positivo.
@@ -118,7 +119,7 @@ public class NonPlayableCharacter extends MadreDeTodo implements Peleable {
 	 * @return Retorna 0 si el ataque no fue realizado con exito
 	 */
 	@Override
-	public int serAtacado(int daño) {
+	public final int serAtacado(int daño) {
 		if (MyRandom.nextDouble() >= NUMEROPARASERATACADO) {
 			daño -= this.getDefensa() / DIVISORDEDEFENSA;
 			if (daño > 0) {
@@ -148,7 +149,7 @@ public class NonPlayableCharacter extends MadreDeTodo implements Peleable {
 	}
 
 	@Override
-	public int getMagia() {
+	public final int getMagia() {
 
 		return 0;
 	}
