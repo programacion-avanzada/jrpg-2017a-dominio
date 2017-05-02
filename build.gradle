@@ -40,7 +40,7 @@ dependencies {
 
 checkstyle {
 	configFile = new File(rootDir, "src/test/resources/sun_checks.xml")
-	ignoreFailures = true
+	ignoreFailures = true	
 }
 
 /*cobertura {
