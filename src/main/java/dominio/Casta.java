@@ -16,11 +16,11 @@ public abstract class Casta implements Serializable {
 	private static final double DAÑO_CRITICO_POR_DEFECTO = 1.5;
 
 	private double probabilidadGolpeCritico;
-	private double probabilidadEvitarDaño;
+	protected double probabilidadEvitarDaño;
 	private double dañoCritico;
-	private String nombreCasta;
+	protected String nombreCasta;
 
-	private String[] habilidadesCasta;
+	protected String[] habilidadesCasta;
 
 	/**
 	 * Constructor de una casta con sus valores por defecto

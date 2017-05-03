@@ -31,18 +31,18 @@ public abstract class Personaje implements Peleable, Serializable {
 	private static final double SKILLS_MAXIMO = 200;
 	private static final double NIVEL_MAXIMO = 100;
 
-	private int salud;
-	private int energia;
+	protected int salud;
+	protected int energia;
+	protected int ataque; //depende de la fuerza
+	protected int magia; //depende de la inteligencia
+	protected String nombreRaza;
+	protected int saludTope;
+	protected int energiaTope;
+
+	protected String[] habilidadesRaza;
+
 	private int defensa; //depende de la destreza
-	private int ataque; //depende de la fuerza
-	private int magia; //depende de la inteligencia
-
 	private String nombre; //hay que agregarlo a todos los constructores
-	private String nombreRaza;
-
-	private int saludTope;
-	private int energiaTope;
-
 	private int fuerza;
 	private int destreza;
 	private int inteligencia;
@@ -59,7 +59,7 @@ public abstract class Personaje implements Peleable, Serializable {
 	private Alianza clan = null;
 	private static int[] tablaDeNiveles;
 
-	private String[] habilidadesRaza;
+
 
 	/**
 	 * @return habilidades de raza
@@ -579,7 +579,7 @@ public abstract class Personaje implements Peleable, Serializable {
 	 * @return daño que se ha inflingido.
 	 */
 
-	public int serRobadoSalud(final int daño) {
+	public int serRobadoSalud(int daño) {
 		daño -= this.defensa;
 		if (daño <= 0) {
 			return 0;
@@ -600,7 +600,7 @@ public abstract class Personaje implements Peleable, Serializable {
 	 * @return daño que se ha inflingido.
 	 */
 
-	public int serDesernegizado(final int daño) {
+	public int serDesernegizado(int daño) {
 		daño -= this.defensa;
 		if (daño <= 0) {
 			return 0;

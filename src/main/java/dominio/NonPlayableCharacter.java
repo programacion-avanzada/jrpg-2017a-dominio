@@ -173,7 +173,7 @@ public class NonPlayableCharacter implements Peleable {
 	 * @return daño ocasionado al atacar.
 	 */
 
-	public int serAtacado(final int daño) {
+	public int serAtacado(int daño) {
 		if (MyRandom.nextDouble() >= PORCENTAJE_GOLPE_CRITICO) {
 			daño -= this.getDefensa() / 2;
 			if (daño > 0) {
