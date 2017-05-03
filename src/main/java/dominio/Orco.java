@@ -80,18 +80,30 @@ public class Orco extends Personaje {
 		}
 		return false;
 	}
+	/**Retorna un vector de string con los nombres de las habilidades de la raza.
+	 * @return Retorna nombres de las habilidades propias de la raza.
+	 */
 	@Override
 	public final String[] getHabilidadesRaza() {
 		return new String[] {"Golpe Defensa","Mordisco de Vida"}; 
 	}
+	/**Retorna un entero con el bonificador de salud de la raza.
+	 * @return Retorna la salud extra de la raza.
+	 */
 	@Override
 	public final int getSaludBonus() {
 		return BONUSSALUD;
 	}
+	/**Retorna un entero con el bonificador de energia de la raza.
+	 * @return Retorna 0 para esta raza.
+	 */
 	@Override
 	public final int getEnergiaBonus() {
 		return 0;
 	}
+	/**Retorna una string con el nombre de la raza.
+	 * @return Retorna el nombre de la raza.
+	 */
 	@Override
 	public final String getNombreRaza() {
 		return "Orco";

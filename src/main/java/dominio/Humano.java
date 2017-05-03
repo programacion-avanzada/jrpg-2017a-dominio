@@ -82,19 +82,30 @@ public class Humano extends Personaje {
 		this.setEnergia(this.getEnergia() - ENERGIAMINIMA);
 		return false;
 	}
-
+	/**Retorna un vector de string con los nombres de las habilidades de la raza.
+	 * @return Retorna nombres de las habilidades propias de la raza.
+	 */
 	@Override
 	public final String[] getHabilidadesRaza() {
 		return new String[] {"Incentivar","Golpe Fatal"}; 
 	}
+	/**Retorna un entero con el bonificador de salud de la raza.
+	 * @return Retorna la salud extra de la raza.
+	 */
 	@Override
 	public final int getSaludBonus() {
 		return BONUSSALUD;
 	}
+	/**Retorna un entero con el bonificador de energia de la raza.
+	 * @return Retorna la energia extra para esta raza.
+	 */
 	@Override
 	public final int getEnergiaBonus() {
 		return BONUSENERGIA;
 	}
+	/**Retorna una string con el nombre de la raza.
+	 * @return Retorna el nombre de la raza.
+	 */
 	@Override
 	public final String getNombreRaza() {
 		return "Humano";
