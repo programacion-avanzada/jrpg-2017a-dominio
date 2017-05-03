@@ -9,9 +9,7 @@ public class Asesino extends Casta {
 
 
 /** La clase Asesino es una casta de Personaje, hereda de la clase Casta
- * posee dos constructores, el constructor por defecto, llama al constructor por defecto
- * de la clase
- * padre (Casta), luego inicializa la variable nombreCasta y crea un array de String de tamaño 3
+ * posee dos constructores.
  * El otro constructor, llama al constructor de la clase padre (Casta)
  * pasándole los argumentos recibidos
  * por el constructor hijo y luego inicializa la variable nombreCasta
@@ -23,7 +21,10 @@ public class Asesino extends Casta {
 public Asesino(final double prob_crit, final double evasion, final double daño_crit) {
 	super(prob_crit, evasion, daño_crit);
 }
-
+	/** El constructor por defecto, llama al constructor por defecto de la clase
+	 * padre (Casta), inicializando probabilidadGolpeCritico, probabilidadEvitarDaño, dañoCritico,
+	 * con valores predeterminados.
+	 */
 	public Asesino() {
 		super();
 	}
@@ -77,32 +78,46 @@ public Asesino(final double prob_crit, final double evasion, final double daño_
 		return false;
 	}
 
-
+	/** Not implemented yet.
+	 * @param caster Personaje que realiza el ataque.
+	 * @param atacado .
+	 * @return Retorna falso.
+	 */
 	@Override
 	public final boolean habilidad3(final Personaje caster, final Peleable atacado) {
 		return false;
 	}
-
+	/** Retorna un entero que otorga el bonus de destreza perteneciente a esta casta.
+	 * @return Retorna la destreza extra de la casta.
+	 */
 	@Override
 	public final int recibirDestrezaBonus() {
 		return BONUSDESTREZA;
 	}
-
+	/** Retorna un entero que otorga el bonus de fuerza perteneciente a esta casta.
+	 * @return Retorna 0 para esta casta.
+	 */
 	@Override
 	public final int recibirFuerzaBonus() {
 		return 0;
 	}
-
+	/** Retorna un entero que otorga el bonus de inteligencia perteneciente a esta casta.
+	 * @return Retorna 0 para esta casta.
+	 */
 	@Override
 	public final int recibirInteligenciaBonus() {
 		return 0;
 	}
-
+	/**Retorna una string con el nombre de la casta.
+	 * @return Retorna el nombre de la casta.
+	 */
 	@Override
 	public final String getNombreCasta() {
 		return "Asesino";
 	}
-
+	/**Retorna un vector de string con los nombres de las habilidades de la casta.
+	 * @return Retorna nombres de las habilidades propias de la casta.
+	 */
 	@Override
 	public final String[] getHabilidadesCasta() {
 		return new String[] {"Golpe Critico","Aumentar Evasion","Robar"};
