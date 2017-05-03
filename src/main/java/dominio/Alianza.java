@@ -10,47 +10,58 @@ import java.util.LinkedList;
 
 public class Alianza {
 
-	String nombre;
-	LinkedList<Personaje> aliados;
+	private String nombre;
+	private LinkedList<Personaje> aliados;
 
 	/**
-	 * Constructor de la clase. Recibe el nombre de la alianza.
+	 * Constructor de la clase.
+	 * @param nombre
 	 */
 
-	public Alianza(String nombre) {
+	public Alianza(final String nombre) {
 		this.nombre = nombre;
-		this.aliados = new LinkedList <Personaje>();
+		this.aliados = new LinkedList<Personaje>();
 	}
 
 	/**
-	 * Getters y Setters
+	 * Devuelve la lista de aliados
+	 * @return aliados
 	 */
 
 	public LinkedList<Personaje> getAliados() {
 		return aliados;
 	}
 
-	public void setAliados(LinkedList<Personaje> aliados) {
+	/**
+	 * Asigna la lista de aliados
+	 */
+
+	public void setAliados(final LinkedList<Personaje> aliados) {
 		this.aliados = aliados;
 	}
 
-	public String obtenerNombre(){
+	/**
+	 * Devulve el nombre de la alianza
+	 * @return nombre
+	 */
+
+	public String obtenerNombre() {
 		return nombre;
 	}
 
 	/**
-	 * eliminarPersonaje elimina un personaje de la lista que representa a los aliados.
+	 * Elimina un personaje de la lista que representa a los aliados.
 	 */
 
-	public void eliminarPersonaje(Personaje pj){
+	public void eliminarPersonaje(final Personaje pj) {
 		aliados.remove(pj);
 	}
 
 	/**
-	 * añadirPersonaje agrega un personaje a la lista que representa a los aliados.
+	 * Agrega un personaje a la lista que representa a los aliados.
 	 */
 
-	public void añadirPersonaje(Personaje pj){
+	public void añadirPersonaje(final Personaje pj) {
 		aliados.add(pj);
 	}
 }
