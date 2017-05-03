@@ -10,7 +10,6 @@ package dominio;
 public class Guerrero extends Casta {
 
 	private static final int INCREMENTO_ATAQUE = 2;
-	private static final int TAMAÑO_CASTA = 3;
 
 	/**
 	 * Permite crear un nuevo Guerrero con con valores por parámetro.
@@ -32,7 +31,7 @@ public class Guerrero extends Casta {
 		super();
 		this.nombreCasta = "Guerrero";
 
-		habilidadesCasta = new String[TAMAÑO_CASTA];
+		habilidadesCasta = new String[CANTIDAD_HABILIDADES];
 		habilidadesCasta[0] = "Ataque Doble";
 		habilidadesCasta[1] = "Aumentar Defensa";
 		habilidadesCasta[2] = "Ignorar Defensa";
@@ -48,10 +47,11 @@ public class Guerrero extends Casta {
 
 	// Ataque Doble
 	public boolean habilidad1(final Personaje caster, final Peleable atacado) {
-		if (caster.getEnergia() > ENERGIA_MAXIMA) {
-			caster.setEnergia(caster.getEnergia() - ENERGIA_MAXIMA);
-			if (atacado.serAtacado(caster.ataque * INCREMENTO_ATAQUE) > 0)
+		if (caster.getEnergia() > ENERGIA_MINIMA) {
+			caster.setEnergia(caster.getEnergia() - ENERGIA_MINIMA);
+			if (atacado.serAtacado(caster.ataque * INCREMENTO_ATAQUE) > 0) {
 				return true;
+			}
 		}
 		return false;
 	}
@@ -66,8 +66,8 @@ public class Guerrero extends Casta {
 
 	// Aumentar Defensa
 	public boolean habilidad2(final Personaje caster, final Peleable atacado) {
-		if (caster.getEnergia() > ENERGIA_MAXIMA) {
-			caster.setEnergia(caster.getEnergia() - ENERGIA_MAXIMA);
+		if (caster.getEnergia() > ENERGIA_MINIMA) {
+			caster.setEnergia(caster.getEnergia() - ENERGIA_MINIMA);
 			caster.setDefensa(caster.getDefensa() + caster.magia);
 			return true;
 		}
@@ -84,8 +84,8 @@ public class Guerrero extends Casta {
 
 	// Ignorar Defensa
 	public boolean habilidad3(final Personaje caster, final Peleable atacado) {
-		if (caster.getEnergia() > ENERGIA_MAXIMA) {
-			caster.setEnergia(caster.getEnergia() - ENERGIA_MAXIMA);
+		if (caster.getEnergia() > ENERGIA_MINIMA) {
+			caster.setEnergia(caster.getEnergia() - ENERGIA_MINIMA);
 			if (atacado instanceof Personaje) {
 				int defensa_original = ((Personaje) atacado).getDefensa();
 				((Personaje) atacado).setDefensa(0);
@@ -94,7 +94,6 @@ public class Guerrero extends Casta {
 					return true;
 				}
 			}
-
 		}
 		return false;
 	}

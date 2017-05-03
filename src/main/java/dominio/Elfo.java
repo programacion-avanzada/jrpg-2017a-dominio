@@ -19,7 +19,7 @@ public class Elfo extends Personaje {
 
 	public Elfo(final String nombre, final Casta casta, final int id) {
 		super(nombre, casta, id);
-		energiaTope += ENERGIA_MAXIMA;
+		energiaTope += ENERGIA_MINIMA;
 		salud = saludTope;
 		energia = energiaTope;
 		nombreRaza = "Elfo";
@@ -47,42 +47,45 @@ public class Elfo extends Personaje {
 
 	public Elfo(final String nombre, final int salud, final int energia,
 			final int fuerza, final int destreza, final int inteligencia,
-			final Casta casta, final int experiencia, final int nivel, int idPersonaje) {
+			final Casta casta, final int experiencia, final int nivel, final int idPersonaje) {
 		super(nombre, salud, energia, fuerza, destreza, inteligencia, casta,
 				experiencia, nivel, idPersonaje);
 		nombreRaza = "Elfo";
 
-		habilidadesRaza = new String[2];
+		habilidadesRaza = new String[CANTIDAD_HABILIDADES];
 		habilidadesRaza[0] = "Golpe Level";
 		habilidadesRaza[1] = "Ataque Bosque";
 	}
 
 	/**
-	 * habilidadRaza1 sobrescribe el metodo de la clase padre, recibe un
-	 * objeto atacado y dependiendo de este y de sí mismo devuelve verdadero
-	 * o falso según corresponda.
+	 * habilidadRaza1 sobrescribe el metodo de la clase padre
+	 * @param atacado
+	 * @return verdadero o falso dependiendo de una cuenta entre si mismo y
+	 * el objecto atacado.
 	 */
 
 	// Golpe Level
-	public boolean habilidadRaza1(Peleable atacado) {
-		if (this.getEnergia() > ENERGIA_MAXIMA) {
-			this.setEnergia(this.getEnergia() - ENERGIA_MAXIMA);
-			if (atacado.serAtacado(this.getFuerza() + this.getNivel() * INCREMENTO_NIVEL) > 0)
+	public boolean habilidadRaza1(final Peleable atacado) {
+		if (this.getEnergia() > ENERGIA_MINIMA) {
+			this.setEnergia(this.getEnergia() - ENERGIA_MINIMA);
+			if (atacado.serAtacado(this.getFuerza() + this.getNivel() * INCREMENTO_NIVEL) > 0) {
 				return true;
+			}
 		}
 		return false;
 	}
 
 	/**
-	 * habilidadRaza2 sobrescribe el metodo de la clase padre, recibe un
-	 * objeto atacado y dependiendo de este y de sí mismo devuelve verdadero
-	 * o falso según corresponda.
+	 * habilidadRaza2 sobrescribe el metodo de la clase padre
+	 * @param atacado
+	 * @return verdadero o falso dependiendo de una cuenta entre si mismo y
+	 * el objecto atacado.
 	 */
 
 	// Ataque Bosque
 	public boolean habilidadRaza2(Peleable atacado) {
-		if (this.getEnergia() > ENERGIA_MAXIMA) {
-			this.setEnergia(this.getEnergia() - ENERGIA_MAXIMA);
+		if (this.getEnergia() > ENERGIA_MINIMA) {
+			this.setEnergia(this.getEnergia() - ENERGIA_MINIMA);
 			if (atacado.serAtacado((int) (this.magia)) > 0)
 				return true;
 		}

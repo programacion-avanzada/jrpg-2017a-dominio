@@ -10,8 +10,8 @@ import java.io.Serializable;
 
 public abstract class Casta implements Serializable {
 
-	protected static final int TAMAÑO_CASTA = 3;
-	protected static final int ENERGIA_MAXIMA = 10;
+	protected static final int CANTIDAD_HABILIDADES = 3;
+	protected static final int ENERGIA_MINIMA = 10;
 	private static final double PROBABILIDAD_POR_DEFECTO = 0.2;
 	private static final double DAÑO_CRITICO_POR_DEFECTO = 1.5;
 
@@ -46,12 +46,29 @@ public abstract class Casta implements Serializable {
 	}
 
 	/**
-	 * Habilidad 1, 2 y 3 serán sobreescritas en las clases que hereden de esta.
+	 * Habilidad 1 será sobreescrita en las clases que hereden de esta.
+	 * @param caster
+	 * @param atacado
+	 * @return verdadero o falso si se puede utilizar la habilidad1 o no.
 	 */
 
 	public abstract boolean habilidad1(Personaje caster, Peleable atacado);
 
+	/**
+	 * Habilidad 2 será sobreescrita en las clases que hereden de esta.
+	 * @param caster
+	 * @param atacado
+	 * @return verdadero o falso si se puede utilizar la habilidad2 o no.
+	 */
+
 	public abstract boolean habilidad2(Personaje caster, Peleable atacado);
+
+	/**
+	 * Habilidad 3 será sobreescrita en las clases que hereden de esta.
+	 * @param caster
+	 * @param atacado
+	 * @return verdadero o falso si se puede utilizar la habilidad2 o no.
+	 */
 
 	public abstract boolean habilidad3(Personaje caster, Peleable atacado);
 

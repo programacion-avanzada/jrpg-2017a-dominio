@@ -9,7 +9,7 @@ package dominio;
 public class MyRandom {
 
 	/**
-	 * devuelve siempre 0.49
+	 * @return 0.49
 	 */
 
 	public static double nextDouble() {
@@ -17,10 +17,11 @@ public class MyRandom {
 	}
 
 	/**
-	 * devuelve el parametro menos 1
+	 * @param val
+	 * @return el valor pasado por parametro -1
 	 */
 
-	public static int nextInt(int val) {
+	public static int nextInt(final int val) {
 		return val - 1;
 	}
 

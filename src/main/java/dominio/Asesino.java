@@ -32,7 +32,7 @@ public class Asesino extends Casta {
 	public Asesino() {
 		super();
 		this.nombreCasta = "Asesino";
-		habilidadesCasta = new String[TAMAÑO_CASTA];
+		habilidadesCasta = new String[CANTIDAD_HABILIDADES];
 		habilidadesCasta[0] = "Golpe Critico";
 		habilidadesCasta[1] = "Aumentar Evasion";
 		habilidadesCasta[2] = "Robar";
