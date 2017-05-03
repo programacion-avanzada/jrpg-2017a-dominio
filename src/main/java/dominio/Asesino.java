@@ -38,6 +38,8 @@ public class Asesino extends Casta {
 
 	/**
 	 * Sobreescribe la habilidad1 de la clase padre.
+	 * @param caster es el personaje a traves del cual se obtiene el daño a realizar.
+	 * @param atacado es el objecto que será atacado.
 	 * @return verdadero o falso para la utilización del golpe critico
 	 * dependiendo del caster y el atacado.
 	 */
@@ -54,7 +56,7 @@ public class Asesino extends Casta {
 
 	/**
 	 * Sobreescribe la habilidad2 de la clase padre.
-	 * Devuelve verdadero o falso para la utilización de aumentar evasion
+	 * @return verdadero o falso para la utilización de aumentar evasion
 	 * dependiendo del caster y el atacado.
 	 */
 
