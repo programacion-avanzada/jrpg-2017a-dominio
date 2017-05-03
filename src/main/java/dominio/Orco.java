@@ -8,17 +8,18 @@ package dominio;
 public class Orco extends Personaje {
 
 	private static final int INCREMENTO_DEFENSA = 2;
+	private static final int INCREMENTO_TOPE = 10;
 
 	/**
 	 * Permite crear un orco con atributos por defecto.
 	 * @param nombre del orco
-	 * @param casta
+	 * @param casta casta
 	 * @param id del personaje
 	 */
 
 	public Orco(final String nombre, final Casta casta, final int id) {
 		super(nombre, casta, id);
-		saludTope += 10;
+		saludTope += INCREMENTO_TOPE;
 		salud = saludTope;
 		energia = energiaTope;
 		nombreRaza = "Orco";
@@ -31,15 +32,15 @@ public class Orco extends Personaje {
 	/**
 	 * Permite crear un orco con atributos pasados por parámetro.
 	 * @param nombre del orco
-	 * @param salud
-	 * @param energia
-	 * @param fuerza
-	 * @param destreza
-	 * @param inteligencia
-	 * @param casta
-	 * @param experiencia
-	 * @param nivel
-	 * @param idPersonaje
+	 * @param salud del orco
+	 * @param energia del orco
+	 * @param fuerza del orco
+	 * @param destreza del orco
+	 * @param inteligencia del orco
+	 * @param casta del orco
+	 * @param experiencia del orco
+	 * @param nivel del orco
+	 * @param idPersonaje del orco
 	 */
 
 	public Orco(final String nombre, final int salud, final int energia,
@@ -56,7 +57,7 @@ public class Orco extends Personaje {
 
 	/**
 	 * habilidadRaza1 sobrescribe el metodo de la clase padre.
-	 * @param atacado
+	 * @param atacado atacado
 	 * @return verdadero o falso dependiendo del objeto atacado y de sí mismo.
 	 */
 
@@ -64,8 +65,9 @@ public class Orco extends Personaje {
 	public boolean habilidadRaza1(final Peleable atacado) {
 		if (this.getEnergia() > ENERGIA_MINIMA) {
 			this.setEnergia(this.getEnergia() - ENERGIA_MINIMA);
-			if (atacado.serAtacado(this.getDefensa() * INCREMENTO_DEFENSA) > 0)
+			if (atacado.serAtacado(this.getDefensa() * INCREMENTO_DEFENSA) > 0) {
 				return true;
+			}
 		}
 		return false;
 	}

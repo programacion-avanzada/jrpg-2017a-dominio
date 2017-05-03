@@ -59,7 +59,7 @@ public class Elfo extends Personaje {
 
 	/**
 	 * habilidadRaza1 sobrescribe el metodo de la clase padre
-	 * @param atacado
+	 * @param atacado atacado
 	 * @return verdadero o falso dependiendo de una cuenta entre si mismo y
 	 * el objecto atacado.
 	 */
@@ -77,7 +77,7 @@ public class Elfo extends Personaje {
 
 	/**
 	 * habilidadRaza2 sobrescribe el metodo de la clase padre
-	 * @param atacado
+	 * @param atacado atacado
 	 * @return verdadero o falso dependiendo de una cuenta entre si mismo y
 	 * el objecto atacado.
 	 */
@@ -86,8 +86,9 @@ public class Elfo extends Personaje {
 	public boolean habilidadRaza2(Peleable atacado) {
 		if (this.getEnergia() > ENERGIA_MINIMA) {
 			this.setEnergia(this.getEnergia() - ENERGIA_MINIMA);
-			if (atacado.serAtacado((int) (this.magia)) > 0)
+			if (atacado.serAtacado((int) (this.magia)) > 0) {
 				return true;
+			}
 		}
 		return false;
 	}

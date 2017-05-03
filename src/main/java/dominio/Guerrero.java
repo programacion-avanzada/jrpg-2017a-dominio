@@ -14,7 +14,7 @@ public class Guerrero extends Casta {
 	/**
 	 * Permite crear un nuevo Guerrero con con valores por parámetro.
 	 * @param prob_crit es la probabilidad de golpe critico
-	 * @param evasion
+	 * @param evasion evasion
 	 * @param daño_crit es el daño crítico
 	 */
 
@@ -39,8 +39,8 @@ public class Guerrero extends Casta {
 
 	/**
 	 * Sobreescribe la habilidad1 de la clase padre.
-	 * @param caster
-	 * @param atacado
+	 * @param caster caster
+	 * @param atacado atacado
 	 * @return verdadero o falso para la utilización del ataque doble
 	 * dependiendo del caster y el atacado.
 	 */
@@ -58,8 +58,8 @@ public class Guerrero extends Casta {
 
 	/**
 	 * Sobreescribe la habilidad2 de la clase padre.
-	 * @param caster
-	 * @param atacado
+	 * @param caster caster
+	 * @param atacado atacado
 	 * @return verdadero o falso para la utilización de aumentar defensa
 	 * dependiendo del caster y el atacado.
 	 */
@@ -76,8 +76,8 @@ public class Guerrero extends Casta {
 
 	/**
 	 * Sobreescribe la habilidad3 de la clase padre.
-	 * @param caster
-	 * @param atacado
+	 * @param caster caster
+	 * @param atacado atacado
 	 * @return verdadero o falso para la utilización de aumentar defensa
 	 * dependiendo del caster y el atacado.
 	 */

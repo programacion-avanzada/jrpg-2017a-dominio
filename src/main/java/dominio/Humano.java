@@ -8,18 +8,19 @@ package dominio;
 public class Humano extends Personaje {
 
 	private static final int ENERGIA_MINIMA = 2;
+	private static final int INCREMENTO_TOPE = 5;
 
 	/**
 	 * Permite crear un humano con atributos por defecto.
 	 * @param nombre del humano
-	 * @param casta
+	 * @param casta casta
 	 * @param id de personaje
 	 */
 
 	public Humano(final String nombre, final Casta casta, final int id) {
 		super(nombre, casta, id);
-		saludTope += 5;
-		energiaTope += 5;
+		saludTope += INCREMENTO_TOPE;
+		energiaTope += INCREMENTO_TOPE;
 		salud = saludTope;
 		energia = energiaTope;
 		nombreRaza = "Humano";
@@ -27,16 +28,16 @@ public class Humano extends Personaje {
 
 	/**
 	 * Permite crear un humano con atributos pasados por parametro.
-	 * @param nombre
-	 * @param salud
-	 * @param energia
-	 * @param fuerza
-	 * @param destreza
-	 * @param inteligencia
-	 * @param casta
-	 * @param experiencia
-	 * @param nivel
-	 * @param idPersonaje
+	 * @param nombre nombre
+	 * @param salud salud
+	 * @param energia energia
+	 * @param fuerza fuerza
+	 * @param destreza destreza
+	 * @param inteligencia inteligencia
+	 * @param casta casta
+	 * @param experiencia experiencia
+	 * @param nivel nive;
+	 * @param idPersonaje idPersonaje
 	 */
 
 	public Humano(final String nombre, final int salud, final int energia,
@@ -52,7 +53,7 @@ public class Humano extends Personaje {
 
 	/**
 	 * habilidadRaza1 sobrescribe el metodo de la clase padre.
-	 * @param atacado
+	 * @param atacado attacado
 	 * @return verdadero o falso dependiendo del objeto atacado y de sí mismo.
 	 */
 
@@ -68,7 +69,7 @@ public class Humano extends Personaje {
 
 	/**
 	 * habilidadRaza2 sobrescribe el metodo de la clase padre.
-	 * @param atacado
+	 * @param atacado atacado
 	 * @return verdadero o falso dependiendo del objeto atacado y de sí mismo.
 	 */
 

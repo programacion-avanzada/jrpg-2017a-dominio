@@ -15,12 +15,12 @@ public abstract class Casta implements Serializable {
 	private static final double PROBABILIDAD_POR_DEFECTO = 0.2;
 	private static final double DAÑO_CRITICO_POR_DEFECTO = 1.5;
 
-	protected double probabilidadGolpeCritico;
-	protected double probabilidadEvitarDaño;
-	protected double dañoCritico;
-	protected String nombreCasta;
+	private double probabilidadGolpeCritico;
+	private double probabilidadEvitarDaño;
+	private double dañoCritico;
+	private String nombreCasta;
 
-	protected String[] habilidadesCasta;
+	private String[] habilidadesCasta;
 
 	/**
 	 * Constructor de una casta con sus valores por defecto
@@ -47,8 +47,8 @@ public abstract class Casta implements Serializable {
 
 	/**
 	 * Habilidad 1 será sobreescrita en las clases que hereden de esta.
-	 * @param caster
-	 * @param atacado
+	 * @param caster caster
+	 * @param atacado atacado
 	 * @return verdadero o falso si se puede utilizar la habilidad1 o no.
 	 */
 
@@ -56,8 +56,8 @@ public abstract class Casta implements Serializable {
 
 	/**
 	 * Habilidad 2 será sobreescrita en las clases que hereden de esta.
-	 * @param caster
-	 * @param atacado
+	 * @param caster caster
+	 * @param atacado atacado
 	 * @return verdadero o falso si se puede utilizar la habilidad2 o no.
 	 */
 
@@ -65,8 +65,8 @@ public abstract class Casta implements Serializable {
 
 	/**
 	 * Habilidad 3 será sobreescrita en las clases que hereden de esta.
-	 * @param caster
-	 * @param atacado
+	 * @param caster caster
+	 * @param atacado atacado
 	 * @return verdadero o falso si se puede utilizar la habilidad2 o no.
 	 */
 

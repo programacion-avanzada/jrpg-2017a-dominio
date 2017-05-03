@@ -8,16 +8,18 @@ package dominio;
 
 public class MyRandom {
 
+	private static final double NEXT_DOUBLE = 0.49;
+
 	/**
-	 * @return 0.49
+	 * @return NEXT_DOUBLE
 	 */
 
 	public static double nextDouble() {
-		return 0.49;
+		return NEXT_DOUBLE;
 	}
 
 	/**
-	 * @param val
+	 * @param val val
 	 * @return el valor pasado por parametro -1
 	 */
 

@@ -8,6 +8,8 @@ package dominio;
 
 public class NonPlayableCharacter implements Peleable {
 
+	private static final double PORCENTAJE_GOLPE_CRITICO = 0.15;
+
 	private int salud;
 	private int fuerza;
 	private int defensa;
@@ -17,8 +19,8 @@ public class NonPlayableCharacter implements Peleable {
 
 	/**
 	 * Constructor de la clase. Asigna atributos de fuerza, salud y defensa basados en la dificultad.
-	 * @param nombre
-	 * @param nivel
+	 * @param nombre nombre
+	 * @param nivel nivel
 	 * @param dificultadNPC dificultadNonPlayableCharacter
 	 */
 
@@ -26,10 +28,11 @@ public class NonPlayableCharacter implements Peleable {
 		this.nombre = nombre;
 		this.nivel = nivel;
 		int dificultad;
-		if (dificultadNPC == dificultadAleatoria)
+		if (dificultadNPC == dificultadAleatoria) {
 			dificultad = MyRandom.nextInt(3);
-		else
+		} else {
 			dificultad = dificultadNPC;
+		}
 
 		switch (dificultad) {
 		case 0:
@@ -69,7 +72,7 @@ public class NonPlayableCharacter implements Peleable {
 	}
 
 	/**
-	 * @param fuerza
+	 * @param fuerza fuerza
 	 */
 
 	public void setFuerza(final int fuerza) {
@@ -85,7 +88,7 @@ public class NonPlayableCharacter implements Peleable {
 	}
 
 	/**
-	 * @param nombre
+	 * @param nombre nombre
 	 */
 
 	public void setNombre(final String nombre) {
@@ -101,7 +104,7 @@ public class NonPlayableCharacter implements Peleable {
 	}
 
 	/**
-	 * @param nivel
+	 * @param nivel nivel
 	 */
 
 	public void setNivel(final int nivel) {
@@ -125,7 +128,7 @@ public class NonPlayableCharacter implements Peleable {
 	}
 
 	/**
-	 * @param defensa
+	 * @param defensa defensa
 	 */
 
 	public void setDefensa(final int defensa) {
@@ -141,7 +144,7 @@ public class NonPlayableCharacter implements Peleable {
 	}
 
 	/**
-	 * @param salud
+	 * @param salud salud
 	 */
 
 	public void setSalud(final int salud) {
@@ -151,34 +154,35 @@ public class NonPlayableCharacter implements Peleable {
 	/**
 	 * "atacar" obtiene el ataque de este objeto e invoca al método serAtacado
 	 * del "atacado" recibido como parametro.
-	 * @param atacado
+	 * @param atacado atacado
 	 * @return daño ocasionado al atacar
 	 */
 
 	public int atacar(final Peleable atacado) {
-		if (MyRandom.nextDouble() <= 0.15) {// los NPC tienen 15% de golpes criticos
-			return atacado.serAtacado((int) (this.getAtaque() * 1.5));
-		} else
+		if (MyRandom.nextDouble() <= 0.15) { // los NPC tienen 15% de golpes criticos
+			return atacado.serAtacado((int) (this.getAtaque() * PORCENTAJE_GOLPE_CRITICO));
+		} else {
 			return atacado.serAtacado(this.getAtaque());
+		}
 	}
 
 	/**
 	 * "serAtacado" devuelve 0 si no es dañado o si esquivo el golpe o
 	 * el valor del daño ocasionado por el ataque.
-	 * @param daño
+	 * @param daño daño
 	 * @return daño ocasionado al atacar.
 	 */
 
-	public int serAtacado(int daño) {
-		if (MyRandom.nextDouble() >= 0.15) {
+	public int serAtacado(final int daño) {
+		if (MyRandom.nextDouble() >= PORCENTAJE_GOLPE_CRITICO) {
 			daño -= this.getDefensa() / 2;
 			if (daño > 0) {
 				salud -= daño;
 				return daño;
 			}
-			return 0;// no le hace daño ya que la defensa fue mayor
+			return 0; // no le hace daño ya que la defensa fue mayor
 		}
-		return 0;// esquivo el golpe
+		return 0; // esquivo el golpe
 	}
 
 	/**
@@ -208,7 +212,7 @@ public class NonPlayableCharacter implements Peleable {
 	/**
 	 * Sobreescribe el setter de "ataque" de la clase padre
 	 * para usar el atributo "fuerza" de este objeto.
-	 * @param ataque
+	 * @param ataque ataque
 	 */
 
 	@Override

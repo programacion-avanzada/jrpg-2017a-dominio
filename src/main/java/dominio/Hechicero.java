@@ -14,7 +14,7 @@ public class Hechicero extends Casta {
 	/**
 	 * Permite crear un nuevo Hechicero con valores por parámetro.
 	 * @param prob_crit probabilidad critica
-	 * @param evasion
+	 * @param evasion evasion
 	 * @param daño_crit daño crítico
 	 */
 
@@ -57,14 +57,14 @@ public class Hechicero extends Casta {
 
 	/**
 	 * Sobreescribe la habilidad2 de la clase padre.
-	 * @param caster
-	 * @param atacado
+	 * @param caster caster
+	 * @param atacado atacado
 	 * @return verdadero o falso para la acción de curar aliado
 	 * dependiendo del caster y el atacado.
 	 */
 
 	// Curar Aliado
-	public boolean habilidad2(Personaje caster, Peleable aliado) {
+	public boolean habilidad2(final Personaje caster, final Peleable aliado) {
 		if (caster.getEnergia() > ENERGIA_MINIMA) {
 			caster.setEnergia(caster.getEnergia() - ENERGIA_MINIMA);
 			if (aliado instanceof Personaje) {
@@ -77,21 +77,22 @@ public class Hechicero extends Casta {
 
 	/**
 	 * Sobreescribe la habilidad3 de la clase padre.
-	 * @param caster
-	 * @param atacado
+	 * @param caster caster
+	 * @param atacado atacado
 	 * @return verdadero o falso para la utilización de la robar energia y
 	 * salud dependiendo del caster y el atacado.
 	 */
 
 	// Robar Energia y Salud
-	public boolean habilidad3(Personaje caster, Peleable atacado) {
+	public boolean habilidad3(final Personaje caster, final Peleable atacado) {
 		if (caster.getEnergia() > ENERGIA_MINIMA) {
 			caster.setEnergia(caster.getEnergia() - ENERGIA_MINIMA);
 			if (atacado instanceof Personaje) {
-				int energia_robada = ((Personaje) atacado).serDesernegizado(caster.calcularPuntosDeMagia());
-				int salud_robada = ((Personaje) atacado).serRobadoSalud(caster.calcularPuntosDeMagia() / 2);
-				caster.serEnergizado(energia_robada);
-				caster.serCurado(salud_robada);
+				int puntosDeMagia = caster.calcularPuntosDeMagia();
+				int energiaRobada = ((Personaje) atacado).serDesernegizado(puntosDeMagia);
+				int saludRobada = ((Personaje) atacado).serRobadoSalud(puntosDeMagia / 2);
+				caster.serEnergizado(energiaRobada);
+				caster.serCurado(saludRobada);
 				return true;
 			}
 

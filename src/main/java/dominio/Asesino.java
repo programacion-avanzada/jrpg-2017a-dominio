@@ -15,7 +15,7 @@ public class Asesino extends Casta {
 	/**
 	 * Constructor de asesinos con parámetros.
 	 * @param prob_crit es la probabilidad de golpe critico
-	 * @param evasion
+	 * @param evasion evasion
 	 * @param daño_crit es el daño crítico
 	 */
 
@@ -48,7 +48,7 @@ public class Asesino extends Casta {
 	 */
 
 	// Golpe Crítico
-	public boolean habilidad1(Personaje caster, Peleable atacado) {
+	public boolean habilidad1(final Personaje caster, final Peleable atacado) {
 		if (caster.getEnergia() > ENERGIA_MINIMA) {
 			caster.setEnergia(caster.getEnergia() - ENERGIA_MINIMA);
 			if (atacado.serAtacado((int) (caster.ataque * caster.getCasta().getDañoCritico())) > 0) {
