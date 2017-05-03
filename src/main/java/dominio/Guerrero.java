@@ -9,8 +9,8 @@ package dominio;
 
 public class Guerrero extends Casta {
 
-	private static final float INCREMENTO_ATAQUE = 2;
-	private static final int TAMANIO_CASTA = 3;
+	private static final int INCREMENTO_ATAQUE = 2;
+	private static final int TAMAÑO_CASTA = 3;
 
 	/**
 	 * Permite crear un nuevo Guerrero con con valores por parámetro.
@@ -32,7 +32,7 @@ public class Guerrero extends Casta {
 		super();
 		this.nombreCasta = "Guerrero";
 
-		habilidadesCasta = new String[TAMANIO_CASTA];
+		habilidadesCasta = new String[TAMAÑO_CASTA];
 		habilidadesCasta[0] = "Ataque Doble";
 		habilidadesCasta[1] = "Aumentar Defensa";
 		habilidadesCasta[2] = "Ignorar Defensa";

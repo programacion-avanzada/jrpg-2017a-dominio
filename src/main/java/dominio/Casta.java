@@ -10,8 +10,10 @@ import java.io.Serializable;
 
 public abstract class Casta implements Serializable {
 
-	private static final int PROBABILIDAD_POR_DEFECTO = 0.2;
-	private static final int DANIO_CRITICO_POR_DEFECTO = 1.5;
+	protected static final int TAMAÑO_CASTA = 3;
+	protected static final int ENERGIA_MAXIMA = 10;
+	private static final double PROBABILIDAD_POR_DEFECTO = 0.2;
+	private static final double DAÑO_CRITICO_POR_DEFECTO = 1.5;
 
 	protected double probabilidadGolpeCritico;
 	protected double probabilidadEvitarDaño;
@@ -27,7 +29,7 @@ public abstract class Casta implements Serializable {
 	public Casta() {
 		this.probabilidadGolpeCritico = PROBABILIDAD_POR_DEFECTO;
 		this.probabilidadEvitarDaño = PROBABILIDAD_POR_DEFECTO;
-		this.dañoCritico = DANIO_CRITICO_POR_DEFECTO;
+		this.dañoCritico = DAÑO_CRITICO_POR_DEFECTO;
 	}
 
 	/**

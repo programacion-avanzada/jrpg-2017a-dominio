@@ -8,10 +8,9 @@ package dominio;
 
 public class Asesino extends Casta {
 
-	private static final int TAMANIO_CASTA = 3;
 	private static final int ENERGIA_MINIMA = 3;
-	private static final float INCREMENTO_EVITAR_DANIO = 0.15;
-	private static final float MAX_PROBABILIDAD_EVITAR_DANIO = 0.5;
+	private static final double INCREMENTO_EVITAR_DAÑO = 0.15;
+	private static final double MAX_PROBABILIDAD_EVITAR_DAÑO = 0.5;
 
 	/**
 	 * Constructor de asesinos con parámetros.
@@ -71,10 +70,10 @@ public class Asesino extends Casta {
 	public boolean habilidad2(final Personaje caster, final Peleable atacado) {
 		if (caster.getEnergia() > ENERGIA_MINIMA) {
 			caster.setEnergia(caster.getEnergia() - ENERGIA_MINIMA);
-			if (this.getProbabilidadEvitarDaño() + INCREMENTO_EVITAR_DANIO < MAX_PROBABILIDAD_EVITAR_DANIO) {
-				this.probabilidadEvitarDaño += INCREMENTO_EVITAR_DANIO;
+			if (this.getProbabilidadEvitarDaño() + INCREMENTO_EVITAR_DAÑO < MAX_PROBABILIDAD_EVITAR_DAÑO) {
+				this.probabilidadEvitarDaño += INCREMENTO_EVITAR_DAÑO;
 			} else {
-				this.probabilidadEvitarDaño = MAX_PROBABILIDAD_EVITAR_DANIO;
+				this.probabilidadEvitarDaño = MAX_PROBABILIDAD_EVITAR_DAÑO;
 			}
 			return true;
 		}

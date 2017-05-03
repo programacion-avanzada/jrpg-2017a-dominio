@@ -12,7 +12,7 @@ import java.io.Serializable;
 
 public abstract class Personaje implements Peleable, Serializable {
 
-	private static final int ENERGIA_MAXIMA = 10;
+	protected static final int ENERGIA_MAXIMA = 10;
 
 	/**
 	 * Attributos de la clase.
