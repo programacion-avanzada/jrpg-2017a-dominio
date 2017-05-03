@@ -8,7 +8,10 @@ package dominio;
 
 public class Asesino extends Casta {
 
-	private static final int TAMAÑO_CASTA = 3;
+	private static final int TAMANIO_CASTA = 3;
+	private static final int ENERGIA_MINIMA = 3;
+	private static final float INCREMENTO_EVITAR_DANIO = 0.15;
+	private static final float MAX_PROBABILIDAD_EVITAR_DANIO = 0.5;
 
 	/**
 	 * Constructor de asesinos con parámetros.
@@ -38,7 +41,8 @@ public class Asesino extends Casta {
 
 	/**
 	 * Sobreescribe la habilidad1 de la clase padre.
-	 * @param caster es el personaje a traves del cual se obtiene el daño a realizar.
+	 * @param caster es el personaje a traves del cual se obtiene el daño y al que se
+	 * le decrementa la energía.
 	 * @param atacado es el objecto que será atacado.
 	 * @return verdadero o falso para la utilización del golpe critico
 	 * dependiendo del caster y el atacado.
@@ -46,28 +50,32 @@ public class Asesino extends Casta {
 
 	// Golpe Crítico
 	public boolean habilidad1(Personaje caster, Peleable atacado) {
-		if (caster.getEnergia() > 10) {
-			caster.setEnergia(caster.getEnergia() - 10);
-			if (atacado.serAtacado((int) (caster.ataque * caster.getCasta().getDañoCritico())) > 0)
+		if (caster.getEnergia() > ENERGIA_MINIMA) {
+			caster.setEnergia(caster.getEnergia() - ENERGIA_MINIMA);
+			if (atacado.serAtacado((int) (caster.ataque * caster.getCasta().getDañoCritico())) > 0) {
 				return true;
+			}
 		}
 		return false;
 	}
 
 	/**
 	 * Sobreescribe la habilidad2 de la clase padre.
+	 * @param caster es el personaje al cual se le decrementa la energía.
+	 * @param atacado no es utilizado en este metodo
 	 * @return verdadero o falso para la utilización de aumentar evasion
 	 * dependiendo del caster y el atacado.
 	 */
 
 	// Aumentar Evasion
-	public boolean habilidad2(Personaje caster, Peleable atacado) {
-		if (caster.getEnergia() > 10) {
-			caster.setEnergia(caster.getEnergia() - 10);
-			if (this.getProbabilidadEvitarDaño() + 0.15 < 0.5)
-				this.probabilidadEvitarDaño += 0.15;
-			else
-				this.probabilidadEvitarDaño = 0.5;
+	public boolean habilidad2(final Personaje caster, final Peleable atacado) {
+		if (caster.getEnergia() > ENERGIA_MINIMA) {
+			caster.setEnergia(caster.getEnergia() - ENERGIA_MINIMA);
+			if (this.getProbabilidadEvitarDaño() + INCREMENTO_EVITAR_DANIO < MAX_PROBABILIDAD_EVITAR_DANIO) {
+				this.probabilidadEvitarDaño += INCREMENTO_EVITAR_DANIO;
+			} else {
+				this.probabilidadEvitarDaño = MAX_PROBABILIDAD_EVITAR_DANIO;
+			}
 			return true;
 		}
 		return false;
@@ -75,11 +83,13 @@ public class Asesino extends Casta {
 
 	/**
 	 * Sobreescribe la habilidad3 de la clase padre.
-	 * Devuelve siempre falso para la acción de robar.
+	 * @param caster no es utilizado
+	 * @param atacado no es utilizado
+	 * @return siempre falso.
 	 */
 
 	// Robar
-	public boolean habilidad3(Personaje caster, Peleable atacado) {
+	public boolean habilidad3(final Personaje caster, final Peleable atacado) {
 		return false;
 	}
 }

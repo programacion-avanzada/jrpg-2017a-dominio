@@ -13,7 +13,7 @@ public class Hechicero extends Casta {
 	 * Permite crear un nuevo Hechicero con valores por parámetro.
 	 */
 
-	public Hechicero(double prob_crit, double evasion, double daño_crit) {
+	public Hechicero(final double prob_crit, final double evasion, final double daño_crit) {
 		super(prob_crit, evasion, daño_crit);
 		this.nombreCasta = "Hechicero";
 	}
