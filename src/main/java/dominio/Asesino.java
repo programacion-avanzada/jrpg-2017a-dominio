@@ -8,15 +8,18 @@ package dominio;
 
 public class Asesino extends Casta {
 
+	private static final int TAMAÑO_CASTA = 3;
+
 	/**
 	 * Constructor de asesinos con parámetros.
-	 * Recibe una probabilidad, evasion y daño y
-	 * se los pasa a la clase padre.
+	 * @param prob_crit es la probabilidad de golpe critico
+	 * @param evasion
+	 * @param daño_crit es el daño crítico
 	 */
 
-	public Asesino(double prob_crit, double evasion, double daño_crit) {
+	public Asesino(final double prob_crit, final double evasion, final double daño_crit) {
 		super(prob_crit, evasion, daño_crit);
-		this.nombreCasta="Asesino";
+		this.nombreCasta = "Asesino";
 	}
 
 	/**
@@ -26,8 +29,8 @@ public class Asesino extends Casta {
 
 	public Asesino() {
 		super();
-		this.nombreCasta="Asesino";
-		habilidadesCasta = new String[3];
+		this.nombreCasta = "Asesino";
+		habilidadesCasta = new String[TAMAÑO_CASTA];
 		habilidadesCasta[0] = "Golpe Critico";
 		habilidadesCasta[1] = "Aumentar Evasion";
 		habilidadesCasta[2] = "Robar";
@@ -35,7 +38,7 @@ public class Asesino extends Casta {
 
 	/**
 	 * Sobreescribe la habilidad1 de la clase padre.
-	 * Devuelve verdadero o falso para la utilización del golpe critico
+	 * @return verdadero o falso para la utilización del golpe critico
 	 * dependiendo del caster y el atacado.
 	 */
 
