@@ -14,7 +14,7 @@
 
 * Ramos Maximiliano ([MaxiARG](https://github.com/MaxiARG))
 * Robles Martin ([mrleonel](https://github.com/mrleonel))
-* Completar ([xxxx](https://github.com/xxxx))
+* Galluzzo Luciano ([luchogalluzzo](https://github.com/xxxx))
 * Completar ([xxxx](https://github.com/xxxx))
 * Completar ([xxxx](https://github.com/xxxx))
 * Completar ([xxxx](https://github.com/xxxx))
