@@ -15,6 +15,11 @@ public class NonPlayableCharacter implements Peleable {
 	private int nivel;
 	private static final int dificultadAleatoria = -1;
 
+	/**
+	 * Constructor de la clase. Recibe un nombre, nivel y dificultad.
+	 * Asigna atributos de fuerza, salud y defensa basados en la dificultad.
+	 */
+
 	public NonPlayableCharacter(String nombre, int nivel, int dificultadNPC) {
 		this.nombre = nombre;
 		this.nivel = nivel;
@@ -44,9 +49,17 @@ public class NonPlayableCharacter implements Peleable {
 		}
 	}
 
+	/**
+	 * Otorga experiencia al personaje multiplicando su nivel.
+	 */
+
 	public int otorgarExp() {
 		return this.nivel * 30;
 	}
+
+	/**
+	 * Getters y setters de diferentes atributos de la clase.
+	 */
 
 	public int getFuerza() {
 		return fuerza;
@@ -126,6 +139,11 @@ public class NonPlayableCharacter implements Peleable {
 	public void ganarExperiencia(int exp) {
 
 	}
+
+	/**
+	 * Sobreescribe el getter y setter de "ataque" de la clase padre
+	 * para usar el atributo "fuerza" de este objeto.
+	 */
 
 	@Override
 	public int getAtaque() {

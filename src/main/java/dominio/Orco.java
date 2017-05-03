@@ -9,6 +9,8 @@ public class Orco extends Personaje {
 
 	/**
 	 * Permite crear un orco con atributos por defecto.
+	 * El nombre, la casta y el id de personaje son requeridos en los dos
+	 * constructores.
 	 */
 
 	public Orco(String nombre, Casta casta, int id) {
@@ -22,6 +24,10 @@ public class Orco extends Personaje {
 		habilidadesRaza[0] = "Golpe Defensa";
 		habilidadesRaza[1] = "Mordisco de Vida";
 	}
+
+	/**
+	 * Permite crear un orco con atributos pasados por parámetro.
+	 */
 
 	public Orco(String nombre, int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta,
 			int experiencia, int nivel, int idPersonaje) {
@@ -48,6 +54,10 @@ public class Orco extends Personaje {
 		}
 		return false;
 	}
+
+	/**
+	 * habilidadRaza2 sobrescribe el metodo de la clase padre.
+	 */
 
 	// Mordisco de Vida
 	public boolean habilidadRaza2(Peleable atacado) {

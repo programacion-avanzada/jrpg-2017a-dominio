@@ -13,10 +13,18 @@ public class Alianza {
 	String nombre;
 	LinkedList<Personaje> aliados;
 
+	/**
+	 * Constructor de la clase. Recibe el nombre de la alianza.
+	 */
+
 	public Alianza(String nombre) {
 		this.nombre = nombre;
 		this.aliados = new LinkedList <Personaje>();
 	}
+
+	/**
+	 * Getters y Setters
+	 */
 
 	public LinkedList<Personaje> getAliados() {
 		return aliados;

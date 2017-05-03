@@ -9,6 +9,10 @@ package dominio;
 
 public class Hechicero extends Casta {
 
+	/**
+	 * Permite crear un nuevo Hechicero con valores por parámetro.
+	 */
+
 	public Hechicero(double prob_crit, double evasion, double daño_crit) {
 		super(prob_crit, evasion, daño_crit);
 		this.nombreCasta = "Hechicero";
@@ -43,6 +47,10 @@ public class Hechicero extends Casta {
 		return false;
 	}
 
+	/**
+	 * Sobreescribe la habilidad2 de la clase padre.
+	 */
+
 	// Curar Aliado
 	public boolean habilidad2(Personaje caster, Peleable aliado) {
 		if (caster.getEnergia() > 10) {
@@ -54,6 +62,10 @@ public class Hechicero extends Casta {
 		}
 		return false;
 	}
+
+	/**
+	 * Sobreescribe la habilidad3 de la clase padre.
+	 */
 
 	// Robar Energia y Salud
 	public boolean habilidad3(Personaje caster, Peleable atacado) {

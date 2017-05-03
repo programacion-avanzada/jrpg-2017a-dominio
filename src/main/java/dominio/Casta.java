@@ -17,7 +17,7 @@ public abstract class Casta implements Serializable {
 	protected String[] habilidadesCasta;
 
 	/**
-	 * Permite construir un objecto Casta con sus valores por defecto
+	 * Constructor de una casta con sus valores por defecto
 	 */
 
 	public Casta() {
@@ -25,6 +25,11 @@ public abstract class Casta implements Serializable {
 		this.probabilidadEvitarDaño = 0.2;
 		this.dañoCritico = 1.5;
 	}
+
+	/**
+	 * Constructor de una casta con valores por parámetro.
+	 * Recibe una probabilidad, evasion y daño.
+	 */
 
 	public Casta(double prob_crit, double evasion, double daño_crit) {
 		this.probabilidadGolpeCritico = prob_crit;

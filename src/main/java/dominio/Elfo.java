@@ -7,6 +7,12 @@ package dominio;
 
 public class Elfo extends Personaje {
 
+	/**
+	 * Constructor de un elfo con valores por defecto.
+	 * El nombre, casta y id de personaje son requeridos en ambos constructores.
+	 * Asigna el nombre y las habilidades de la raza.
+	 */
+
 	public Elfo(String nombre, Casta casta, int id) {
 		super(nombre, casta, id);
 		energiaTope += 10;
@@ -20,7 +26,9 @@ public class Elfo extends Personaje {
 	}
 
 	/**
-	 * Permite create un elfo con atributos pasados por parametro.
+	 * Constructor de un elfo con valores por parámetro.
+	 * Asigna los atributos del metodo de la clase padre pasando los mismos
+	 * atributos recibidos. Asigna el nombre y las habilidades de la raza.
 	 */
 
 	public Elfo(String nombre, int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta,
@@ -50,6 +58,12 @@ public class Elfo extends Personaje {
 		}
 		return false;
 	}
+
+	/**
+	 * habilidadRaza2 sobrescribe el metodo de la clase padre, recibe un
+	 * objeto atacado y dependiendo de este y de sí mismo devuelve verdadero
+	 * o falso según corresponda.
+	 */
 
 	// Ataque Bosque
 	public boolean habilidadRaza2(Peleable atacado) {

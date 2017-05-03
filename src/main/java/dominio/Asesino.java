@@ -8,10 +8,21 @@ package dominio;
 
 public class Asesino extends Casta {
 
+	/**
+	 * Constructor de asesinos con parámetros.
+	 * Recibe una probabilidad, evasion y daño y
+	 * se los pasa a la clase padre.
+	 */
+
 	public Asesino(double prob_crit, double evasion, double daño_crit) {
 		super(prob_crit, evasion, daño_crit);
 		this.nombreCasta="Asesino";
 	}
+
+	/**
+	 * Constructor de asesinos por defecto. Asigna el nombre y las habilidades
+	 * de esta casta.
+	 */
 
 	public Asesino() {
 		super();
@@ -56,6 +67,11 @@ public class Asesino extends Casta {
 		}
 		return false;
 	}
+
+	/**
+	 * Sobreescribe la habilidad3 de la clase padre.
+	 * Devuelve siempre falso para la acción de robar.
+	 */
 
 	// Robar
 	public boolean habilidad3(Personaje caster, Peleable atacado) {

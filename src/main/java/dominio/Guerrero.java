@@ -9,6 +9,10 @@ package dominio;
 
 public class Guerrero extends Casta {
 
+	/**
+	 * Permite crear un nuevo Guerrero con con valores por parámetro.
+	 */
+
 	public Guerrero(double prob_crit, double evasion, double daño_crit) {
 		super(prob_crit, evasion, daño_crit);
 		this.nombreCasta = "Guerrero";
@@ -44,6 +48,10 @@ public class Guerrero extends Casta {
 		return false;
 	}
 
+	/**
+	 * Sobreescribe la habilidad2 de la clase padre.
+	 */
+
 	// Aumentar Defensa
 	public boolean habilidad2(Personaje caster, Peleable atacado) {
 		if (caster.getEnergia() > 10) {
@@ -53,6 +61,10 @@ public class Guerrero extends Casta {
 		}
 		return false;
 	}
+
+	/**
+	 * Sobreescribe la habilidad3 de la clase padre.
+	 */
 
 	// Ignorar Defensa
 	public boolean habilidad3(Personaje caster, Peleable atacado) {

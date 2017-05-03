@@ -7,6 +7,11 @@ package dominio;
 
 public class Humano extends Personaje {
 
+	/**
+	 * Permite crear un humano con atributos por defecto.
+	 * El nombre, casta y id de personaje son simpre requeridos.
+	 */
+
 	public Humano(String nombre, Casta casta, int id) {
 		super(nombre, casta, id);
 		saludTope += 5;
@@ -17,7 +22,7 @@ public class Humano extends Personaje {
 	}
 
 	/**
-	 * Permite create un humano con atributos pasados por parametro.
+	 * Permite crear un humano con atributos pasados por parametro.
 	 */
 
 	public Humano(String nombre, int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta,
@@ -45,6 +50,10 @@ public class Humano extends Personaje {
 		}
 		return false;
 	}
+
+	/**
+	 * habilidadRaza2 sobrescribe el metodo de la clase padre.
+	 */
 
 	// Golpe Fatal
 	public boolean habilidadRaza2(Peleable atacado) {
