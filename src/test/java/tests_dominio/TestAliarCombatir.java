@@ -2,7 +2,11 @@ package tests_dominio;
 
 import org.junit.Assert;
 import org.junit.Test;
-import dominio.*;
+
+import dominio.Alianza;
+import dominio.Asesino;
+import dominio.Guerrero;
+import dominio.Humano;
 
 public class TestAliarCombatir {
 
@@ -19,19 +23,17 @@ public class TestAliarCombatir {
   }
 
   @Test
-	public void testDañ
+  public void testDañar() {
+    Humano h = new Humano("Nicolas", new Guerrero(), 1);
+    Humano h2 = new Humano("Lautaro", new Asesino(), 1);
 
-  ar(){
-		Humano h = new Humano("Nicolas",new Guerrero(),1);
-		Humano h2 = new Humano("Lautaro",new Asesino(),1);
-
-		Assert.assertTrue(h2.getSalud()==105);
-		if(	h.atacar(h2)!=0) {
-      Assert.assertTrue(h2.getSalud()<105);
+    Assert.assertTrue(h2.getSalud() == 105);
+    if (h.atacar(h2) != 0) {
+      Assert.assertTrue(h2.getSalud() < 105);
     } else {
-      Assert.assertTrue(h2.getSalud()==105);
+      Assert.assertTrue(h2.getSalud() == 105);
     }
-	}
+  }
 
   @Test
   public void testAliar() {
