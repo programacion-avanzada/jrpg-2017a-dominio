@@ -78,7 +78,7 @@ task pmd (dependsOn: compileJava) << {
         cpd(minimumTokenCount: 10, format: 'xml',
         	ignoreLiterals: 'true',
         	ignoreIdentifiers: 'true',
-        	outputFile: 'build/reports/pmd-cpd/cpd.xml') {
+        	outputFile: 'build/reports/pmd-cpd/cpd.html') {
             fileSet(dir: "src/main/java") {
                 include(name: '**/*.java')
             }

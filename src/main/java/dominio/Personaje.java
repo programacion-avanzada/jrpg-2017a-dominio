@@ -10,7 +10,7 @@ import java.io.Serializable;
  * Además implementa la interfaz Peleable por lo que debe implementar sus métodos.
  */
 
-public abstract class Personaje implements Peleable, Serializable {
+public abstract class Personaje extends Character implements Peleable, Serializable {
 
 	protected static final int ENERGIA_MINIMA = 10;
 	protected static final int CANTIDAD_HABILIDADES = 10;
@@ -33,16 +33,15 @@ public abstract class Personaje implements Peleable, Serializable {
 
 	protected int salud;
 	protected int energia;
-	protected int ataque; //depende de la fuerza
-	protected int magia; //depende de la inteligencia
+	protected int ataque;
+	protected int magia;
 	protected String nombreRaza;
 	protected int saludTope;
 	protected int energiaTope;
 
 	protected String[] habilidadesRaza;
 
-	private int defensa; //depende de la destreza
-	private String nombre; //hay que agregarlo a todos los constructores
+	private int defensa;
 	private int fuerza;
 	private int destreza;
 	private int inteligencia;
@@ -98,7 +97,8 @@ public abstract class Personaje implements Peleable, Serializable {
 	 */
 
 	public Personaje(final String nombre, final Casta casta, final int id) {
-		this.nombre = nombre;
+		super(nombre);
+
 		this.casta = casta;
 		this.idPersonaje = id;
 
@@ -139,7 +139,7 @@ public abstract class Personaje implements Peleable, Serializable {
 	 * @param destreza del personaje
 	 * @param inteligencia del personaje
 	 * @param casta del personaje
-	 * @param expeciencia del personaje
+	 * @param experiencia del personaje
 	 * @param nivel del personaje
 	 * @param idPersonaje del personaje
 	 */
@@ -148,7 +148,8 @@ public abstract class Personaje implements Peleable, Serializable {
 		final int fuerza, final int destreza, final int inteligencia,
 		final Casta casta, final int experiencia, final int nivel, final int idPersonaje) {
 
-		this.nombre = nombre;
+		super(nombre);
+
 		this.salud = salud;
 		this.energia = energia;
 		this.fuerza = fuerza;
@@ -177,7 +178,7 @@ public abstract class Personaje implements Peleable, Serializable {
 	}
 
 	/**
-	 * @param nombre de raza
+	 * @param nombreRaza string con el nombre de la raza
 	 */
 
 	public void setNombreRaza(final String nombreRaza) {
@@ -185,23 +186,7 @@ public abstract class Personaje implements Peleable, Serializable {
 	}
 
 	/**
-	 * @return nombre del personaje
-	 */
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	/**
-	 * @param nombre del personaje
-	 */
-
-	public void setNombre(final String nombre) {
-		this.nombre = nombre;
-	}
-
-	/**
-	 * @return nombre del personaje
+	 * @return ataque del personaje
 	 */
 
 	public int getAtaque() {
@@ -209,7 +194,7 @@ public abstract class Personaje implements Peleable, Serializable {
 	}
 
 	/**
-	 * @param nombre del personaje
+	 * @param ataque ataque del personaje
 	 */
 
 	public void setAtaque(final int ataque) {
@@ -274,7 +259,7 @@ public abstract class Personaje implements Peleable, Serializable {
 	}
 
 	/**
-	 * @param energía del personaje
+	 * @param energia energia del personaje
 	 */
 
 	public void setEnergia(final int energia) {
@@ -587,7 +572,7 @@ public abstract class Personaje implements Peleable, Serializable {
 		if ((salud - daño) >= 0) {
 			salud -= daño;
 		} else {
-			daño = salud;// le queda menos salud que el daño inflingido
+			daño = salud;
 			salud = 0;
 		}
 		return daño;
@@ -608,7 +593,7 @@ public abstract class Personaje implements Peleable, Serializable {
 		if ((energia - daño) >= 0) {
 			energia -= daño;
 		} else {
-			daño = energia; // le queda menos energia que el daño inflingido
+			daño = energia;
 			energia = 0;
 		}
 		return daño;
@@ -616,7 +601,7 @@ public abstract class Personaje implements Peleable, Serializable {
 
 	/**
 	 * Aumenta la salud del personaje.
-	 * @param salud
+	 * @param salud salud del personaje
 	 */
 
 	public void serCurado(final int salud) {
@@ -665,7 +650,7 @@ public abstract class Personaje implements Peleable, Serializable {
 	/**
 	 * Convierte a un personaje recibido por parámetro en el aliado de
 	 * este personaje. Crea una nueva alianza si no existe.
-	 * @param nuevo_aliado
+	 * @param nuevo_aliado nuevo aliado
 	 * @return verdadero o falso si se ha podido establecer la alianza o no.
 	 */
 

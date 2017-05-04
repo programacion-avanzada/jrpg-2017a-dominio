@@ -58,13 +58,13 @@ public class Elfo extends Personaje {
 	}
 
 	/**
+	 * Golpe Level
 	 * habilidadRaza1 sobrescribe el metodo de la clase padre
 	 * @param atacado atacado
 	 * @return verdadero o falso dependiendo de una cuenta entre si mismo y
 	 * el objecto atacado.
 	 */
 
-	// Golpe Level
 	public boolean habilidadRaza1(final Peleable atacado) {
 		if (this.getEnergia() > ENERGIA_MINIMA) {
 			this.setEnergia(this.getEnergia() - ENERGIA_MINIMA);
@@ -76,13 +76,13 @@ public class Elfo extends Personaje {
 	}
 
 	/**
+	 * Ataque Bosque
 	 * habilidadRaza2 sobrescribe el metodo de la clase padre
 	 * @param atacado atacado
 	 * @return verdadero o falso dependiendo de una cuenta entre si mismo y
 	 * el objecto atacado.
 	 */
 
-	// Ataque Bosque
 	public boolean habilidadRaza2(Peleable atacado) {
 		if (this.getEnergia() > ENERGIA_MINIMA) {
 			this.setEnergia(this.getEnergia() - ENERGIA_MINIMA);

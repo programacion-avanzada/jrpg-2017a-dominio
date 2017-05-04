@@ -47,7 +47,6 @@ public class Asesino extends Casta {
 	 * dependiendo del caster y el atacado.
 	 */
 
-	// Golpe Crítico
 	public boolean habilidad1(final Personaje caster, final Peleable atacado) {
 		if (caster.getEnergia() > ENERGIA_MINIMA) {
 			caster.setEnergia(caster.getEnergia() - ENERGIA_MINIMA);
@@ -66,7 +65,6 @@ public class Asesino extends Casta {
 	 * dependiendo del caster y el atacado.
 	 */
 
-	// Aumentar Evasion
 	public boolean habilidad2(final Personaje caster, final Peleable atacado) {
 		if (caster.getEnergia() > ENERGIA_MINIMA) {
 			caster.setEnergia(caster.getEnergia() - ENERGIA_MINIMA);
@@ -81,13 +79,12 @@ public class Asesino extends Casta {
 	}
 
 	/**
-	 * Sobreescribe la habilidad3 de la clase padre.
+	 * Sobreescribe la habilidad3 (robar) de la clase padre.
 	 * @param caster no es utilizado
 	 * @param atacado no es utilizado
 	 * @return siempre falso.
 	 */
 
-	// Robar
 	public boolean habilidad3(final Personaje caster, final Peleable atacado) {
 		return false;
 	}

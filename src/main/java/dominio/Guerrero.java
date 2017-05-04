@@ -38,6 +38,7 @@ public class Guerrero extends Casta {
 	}
 
 	/**
+	 * Ataque Doble
 	 * Sobreescribe la habilidad1 de la clase padre.
 	 * @param caster caster
 	 * @param atacado atacado
@@ -45,7 +46,6 @@ public class Guerrero extends Casta {
 	 * dependiendo del caster y el atacado.
 	 */
 
-	// Ataque Doble
 	public boolean habilidad1(final Personaje caster, final Peleable atacado) {
 		if (caster.getEnergia() > ENERGIA_MINIMA) {
 			caster.setEnergia(caster.getEnergia() - ENERGIA_MINIMA);
@@ -57,6 +57,7 @@ public class Guerrero extends Casta {
 	}
 
 	/**
+	 * Aumentar Defensa
 	 * Sobreescribe la habilidad2 de la clase padre.
 	 * @param caster caster
 	 * @param atacado atacado
@@ -64,7 +65,6 @@ public class Guerrero extends Casta {
 	 * dependiendo del caster y el atacado.
 	 */
 
-	// Aumentar Defensa
 	public boolean habilidad2(final Personaje caster, final Peleable atacado) {
 		if (caster.getEnergia() > ENERGIA_MINIMA) {
 			caster.setEnergia(caster.getEnergia() - ENERGIA_MINIMA);
@@ -75,6 +75,7 @@ public class Guerrero extends Casta {
 	}
 
 	/**
+	 * Ignorar Defensa
 	 * Sobreescribe la habilidad3 de la clase padre.
 	 * @param caster caster
 	 * @param atacado atacado
@@ -82,7 +83,6 @@ public class Guerrero extends Casta {
 	 * dependiendo del caster y el atacado.
 	 */
 
-	// Ignorar Defensa
 	public boolean habilidad3(final Personaje caster, final Peleable atacado) {
 		if (caster.getEnergia() > ENERGIA_MINIMA) {
 			caster.setEnergia(caster.getEnergia() - ENERGIA_MINIMA);

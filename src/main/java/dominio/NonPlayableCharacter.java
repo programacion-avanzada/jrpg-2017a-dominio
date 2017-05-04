@@ -6,14 +6,13 @@ package dominio;
  * Define los atributos de salud, fuerza, defensa, nombre y nivel.
  */
 
-public class NonPlayableCharacter implements Peleable {
+public class NonPlayableCharacter extends Character implements Peleable {
 
 	private static final double PORCENTAJE_GOLPE_CRITICO = 0.15;
 
 	private int salud;
 	private int fuerza;
 	private int defensa;
-	private String nombre;
 	private int nivel;
 	private static final int dificultadAleatoria = -1;
 
@@ -25,7 +24,8 @@ public class NonPlayableCharacter implements Peleable {
 	 */
 
 	public NonPlayableCharacter(final String nombre, final int nivel, final int dificultadNPC) {
-		this.nombre = nombre;
+		super(nombre);
+
 		this.nivel = nivel;
 		int dificultad;
 		if (dificultadNPC == dificultadAleatoria) {
@@ -36,17 +36,17 @@ public class NonPlayableCharacter implements Peleable {
 
 		switch (dificultad) {
 		case 0:
-			this.fuerza = 10 + (nivel - 1) * 3;// 30%
+			this.fuerza = 10 + (nivel - 1) * 3;
 			this.salud = 30 + (nivel - 1) * 15;
 			this.defensa = 2 + (nivel - 1) * 1;
 			break;
 		case 1:
-			this.fuerza = 20 + (nivel - 1) * 6;// 50%
+			this.fuerza = 20 + (nivel - 1) * 6;
 			this.salud = 40 + (nivel - 1) * 20;
 			this.defensa = 5 + (nivel - 1) * 2;
 			break;
 		case 2:
-			this.fuerza = 30 + (nivel - 1) * 10;// 50%
+			this.fuerza = 30 + (nivel - 1) * 10;
 			this.salud = 50 + (nivel - 1) * 25;
 			this.defensa = 4 + (nivel - 1) * 4;
 			break;
@@ -77,22 +77,6 @@ public class NonPlayableCharacter implements Peleable {
 
 	public void setFuerza(final int fuerza) {
 		this.fuerza = fuerza;
-	}
-
-	/**
-	 * @return nombre
-	 */
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	/**
-	 * @param nombre nombre
-	 */
-
-	public void setNombre(final String nombre) {
-		this.nombre = nombre;
 	}
 
 	/**
@@ -159,7 +143,7 @@ public class NonPlayableCharacter implements Peleable {
 	 */
 
 	public int atacar(final Peleable atacado) {
-		if (MyRandom.nextDouble() <= 0.15) { // los NPC tienen 15% de golpes criticos
+		if (MyRandom.nextDouble() <= 0.15) {
 			return atacado.serAtacado((int) (this.getAtaque() * PORCENTAJE_GOLPE_CRITICO));
 		} else {
 			return atacado.serAtacado(this.getAtaque());
@@ -180,9 +164,9 @@ public class NonPlayableCharacter implements Peleable {
 				salud -= daño;
 				return daño;
 			}
-			return 0; // no le hace daño ya que la defensa fue mayor
+			return 0;
 		}
-		return 0; // esquivo el golpe
+		return 0;
 	}
 
 	/**

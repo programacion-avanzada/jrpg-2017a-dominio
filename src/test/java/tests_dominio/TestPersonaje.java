@@ -189,12 +189,6 @@ public class TestPersonaje {
 		Orco o = new Orco("Maxi", new Hechicero(), 1);
 		o.setEnergia(99);
 		o.serEnergizado(10000);
-
-		System.out.println("--------------------------------------------");
-		System.out.println(o.serRobadoSalud(100));
-		System.out.println(o.getSalud());
-		System.out.println("--------------------------------------------");
-
 		Assert.assertTrue(o.getEnergia() == 100);
 	}
 }

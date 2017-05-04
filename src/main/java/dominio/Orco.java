@@ -56,12 +56,12 @@ public class Orco extends Personaje {
 	}
 
 	/**
+	 * Golpe Defensa
 	 * habilidadRaza1 sobrescribe el metodo de la clase padre.
 	 * @param atacado atacado
 	 * @return verdadero o falso dependiendo del objeto atacado y de sí mismo.
 	 */
 
-	// Golpe Defensa
 	public boolean habilidadRaza1(final Peleable atacado) {
 		if (this.getEnergia() > ENERGIA_MINIMA) {
 			this.setEnergia(this.getEnergia() - ENERGIA_MINIMA);
@@ -73,12 +73,12 @@ public class Orco extends Personaje {
 	}
 
 	/**
+	 * Mordisco de Vida
 	 * habilidadRaza1 sobrescribe el metodo de la clase padre.
 	 * @param atacado
 	 * @return verdadero o falso dependiendo del objeto atacado y de sí mismo.
 	 */
 
-	// Mordisco de Vida
 	public boolean habilidadRaza2(final Peleable atacado) {
 		if (this.getEnergia() > ENERGIA_MINIMA) {
 			this.setEnergia(this.getEnergia() - ENERGIA_MINIMA);

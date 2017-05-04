@@ -37,14 +37,14 @@ public class Hechicero extends Casta {
 	}
 
 	/**
+	 * Bola de Fuego
 	 * Sobreescribe la habilidad1 de la clase padre.
-	 * @param caster
-	 * @param atacado
+	 * @param caster caster
+	 * @param atacado atacado
 	 * @return verdadero o falso para la utilización de la bola de fuego
 	 * dependiendo del caster y el atacado.
 	 */
 
-	// Bola de Fuego
 	public boolean habilidad1(Personaje caster, Peleable atacado) {
 		if (caster.getEnergia() > ENERGIA_MINIMA) {
 			caster.setEnergia(caster.getEnergia() - ENERGIA_MINIMA);
@@ -56,6 +56,7 @@ public class Hechicero extends Casta {
 	}
 
 	/**
+	 * Curar Aliado
 	 * Sobreescribe la habilidad2 de la clase padre.
 	 * @param caster caster
 	 * @param atacado atacado
@@ -63,7 +64,6 @@ public class Hechicero extends Casta {
 	 * dependiendo del caster y el atacado.
 	 */
 
-	// Curar Aliado
 	public boolean habilidad2(final Personaje caster, final Peleable aliado) {
 		if (caster.getEnergia() > ENERGIA_MINIMA) {
 			caster.setEnergia(caster.getEnergia() - ENERGIA_MINIMA);
@@ -76,6 +76,7 @@ public class Hechicero extends Casta {
 	}
 
 	/**
+	 * Robar Energia y Salud
 	 * Sobreescribe la habilidad3 de la clase padre.
 	 * @param caster caster
 	 * @param atacado atacado
@@ -83,7 +84,6 @@ public class Hechicero extends Casta {
 	 * salud dependiendo del caster y el atacado.
 	 */
 
-	// Robar Energia y Salud
 	public boolean habilidad3(final Personaje caster, final Peleable atacado) {
 		if (caster.getEnergia() > ENERGIA_MINIMA) {
 			caster.setEnergia(caster.getEnergia() - ENERGIA_MINIMA);

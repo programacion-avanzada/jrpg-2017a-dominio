@@ -52,12 +52,12 @@ public class Humano extends Personaje {
 	}
 
 	/**
+	 * Incentivar
 	 * habilidadRaza1 sobrescribe el metodo de la clase padre.
 	 * @param atacado attacado
 	 * @return verdadero o falso dependiendo del objeto atacado y de sí mismo.
 	 */
 
-	// Incentivar
 	public boolean habilidadRaza1(final Peleable atacado) {
 		if (this.getEnergia() > ENERGIA_MINIMA) {
 			this.setEnergia(this.getEnergia() - ENERGIA_MINIMA);
@@ -68,12 +68,12 @@ public class Humano extends Personaje {
 	}
 
 	/**
+	 * Golpe Fatal
 	 * habilidadRaza2 sobrescribe el metodo de la clase padre.
 	 * @param atacado atacado
 	 * @return verdadero o falso dependiendo del objeto atacado y de sí mismo.
 	 */
 
-	// Golpe Fatal
 	public boolean habilidadRaza2(final Peleable atacado) {
 		if (this.getEnergia() > ENERGIA_MINIMA) {
 			if (atacado.serAtacado(atacado.getSalud() / ENERGIA_MINIMA) > 0) {
