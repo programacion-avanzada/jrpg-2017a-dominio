@@ -31,7 +31,6 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 	private static final double SKILLS_MAXIMO = 200;
 	private static final double NIVEL_MAXIMO = 100;
 
-	protected int salud;
 	protected int energia;
 	protected int ataque;
 	protected int magia;
@@ -41,8 +40,6 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 
 	protected String[] habilidadesRaza;
 
-	private int defensa;
-	private int fuerza;
 	private int destreza;
 	private int inteligencia;
 	private Casta casta;
@@ -51,8 +48,6 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 	private int y;
 
 	private int experiencia;
-	private int nivel;
-
 	private int idPersonaje;
 
 	private Alianza clan = null;
@@ -234,26 +229,6 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 		clan.añadirPersonaje(this);
 	}
 
-	/**
-	 * @return salud
-	 */
-
-	public int getSalud() {
-		return salud;
-	}
-
-	/**
-	 * @param salud del personaje
-	 */
-
-	public void setSalud(final int salud) {
-		this.salud = salud;
-	}
-
-	/**
-	 * @return energía
-	 */
-
 	public int getEnergia() {
 		return energia;
 	}
@@ -264,22 +239,6 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 
 	public void setEnergia(final int energia) {
 		this.energia = energia;
-	}
-
-	/**
-	 * @return fuerza
-	 */
-
-	public int getFuerza() {
-		return fuerza;
-	}
-
-	/**
-	 * @param fuerza del personaje
-	 */
-
-	public void setFuerza(final int fuerza) {
-		this.fuerza = fuerza;
 	}
 
 	/**
@@ -347,22 +306,6 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 	}
 
 	/**
-	 * @return nivel
-	 */
-
-	public int getNivel() {
-		return nivel;
-	}
-
-	/**
-	 * @param nivel del personaje
-	 */
-
-	public void setNivel(final int nivel) {
-		this.nivel = nivel;
-	}
-
-	/**
 	 * @return idPersonaje
 	 */
 
@@ -376,22 +319,6 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 
 	public void setIdPersonaje(final int idPersonaje) {
 		this.idPersonaje = idPersonaje;
-	}
-
-	/**
-	 * @return defensa
-	 */
-
-	public int getDefensa() {
-		return defensa;
-	}
-
-	/**
-	 * @param defensa del personaje
-	 */
-
-	public void setDefensa(final int defensa) {
-		this.defensa = defensa;
 	}
 
 	/**
@@ -523,15 +450,6 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 		this.ataque = this.calcularPuntosDeAtaque();
 		this.defensa = this.calcularPuntosDeDefensa();
 		this.magia = this.calcularPuntosDeMagia();
-	}
-
-	/**
-	 * Checker para ver si el personaje vive o no.
-	 * @return verdadero o falso si salud es mayor a cero o no.
-	 */
-
-	public boolean estaVivo() {
-		return salud > 0;
 	}
 
 	/**

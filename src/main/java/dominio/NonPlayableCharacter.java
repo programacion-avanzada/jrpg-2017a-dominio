@@ -9,11 +9,6 @@ package dominio;
 public class NonPlayableCharacter extends Character implements Peleable {
 
 	private static final double PORCENTAJE_GOLPE_CRITICO = 0.15;
-
-	private int salud;
-	private int fuerza;
-	private int defensa;
-	private int nivel;
 	private static final int dificultadAleatoria = -1;
 
 	/**
@@ -61,78 +56,6 @@ public class NonPlayableCharacter extends Character implements Peleable {
 
 	public int otorgarExp() {
 		return this.nivel * 30;
-	}
-
-	/**
-	 * @return fuerza
-	 */
-
-	public int getFuerza() {
-		return fuerza;
-	}
-
-	/**
-	 * @param fuerza fuerza
-	 */
-
-	public void setFuerza(final int fuerza) {
-		this.fuerza = fuerza;
-	}
-
-	/**
-	 * @return nivel
-	 */
-
-	public int getNivel() {
-		return nivel;
-	}
-
-	/**
-	 * @param nivel nivel
-	 */
-
-	public void setNivel(final int nivel) {
-		this.nivel = nivel;
-	}
-
-	/**
-	 * @return verdadero o falso si tiene salud
-	 */
-
-	public boolean estaVivo() {
-		return salud > 0;
-	}
-
-	/**
-	 * @return defensa
-	 */
-
-	public int getDefensa() {
-		return defensa;
-	}
-
-	/**
-	 * @param defensa defensa
-	 */
-
-	public void setDefensa(final int defensa) {
-		this.defensa = defensa;
-	}
-
-	/**
-	 * @return salud
-	 */
-
-	public int getSalud() {
-		return salud;
-	}
-
-	/**
-	 * @param salud salud
-	 */
-
-	public void setSalud(final int salud) {
-		this.salud = salud;
 	}
 
 	/**
