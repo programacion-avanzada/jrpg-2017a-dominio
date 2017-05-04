@@ -7,62 +7,81 @@ package dominio;
 
 public class Orco extends Personaje {
 
+	private static final int INCREMENTO_DEFENSA = 2;
+	private static final int INCREMENTO_TOPE = 10;
+
 	/**
 	 * Permite crear un orco con atributos por defecto.
-	 * El nombre, la casta y el id de personaje son requeridos en los dos
-	 * constructores.
+	 * @param nombre del orco
+	 * @param casta casta
+	 * @param id del personaje
 	 */
 
-	public Orco(String nombre, Casta casta, int id) {
+	public Orco(final String nombre, final Casta casta, final int id) {
 		super(nombre, casta, id);
-		saludTope += 10;
+		saludTope += INCREMENTO_TOPE;
 		salud = saludTope;
 		energia = energiaTope;
 		nombreRaza = "Orco";
 
-		habilidadesRaza = new String[2];
+		habilidadesRaza = new String[CANTIDAD_HABILIDADES];
 		habilidadesRaza[0] = "Golpe Defensa";
 		habilidadesRaza[1] = "Mordisco de Vida";
 	}
 
 	/**
 	 * Permite crear un orco con atributos pasados por parámetro.
+	 * @param nombre del orco
+	 * @param salud del orco
+	 * @param energia del orco
+	 * @param fuerza del orco
+	 * @param destreza del orco
+	 * @param inteligencia del orco
+	 * @param casta del orco
+	 * @param experiencia del orco
+	 * @param nivel del orco
+	 * @param idPersonaje del orco
 	 */
 
-	public Orco(String nombre, int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta,
-			int experiencia, int nivel, int idPersonaje) {
+	public Orco(final String nombre, final int salud, final int energia,
+			final int fuerza, final int destreza, final int inteligencia,
+			final Casta casta, final int experiencia, final int nivel,
+			final int idPersonaje) {
 		super(nombre, salud, energia, fuerza, destreza, inteligencia, casta, experiencia, nivel, idPersonaje);
 		nombreRaza = "Orco";
 
-		habilidadesRaza = new String[2];
+		habilidadesRaza = new String[CANTIDAD_HABILIDADES];
 		habilidadesRaza[0] = "Golpe Defensa";
 		habilidadesRaza[1] = "Mordisco de Vida";
 	}
 
 	/**
-	 * habilidadRaza1 sobrescribe el metodo de la clase padre, recibe un
-	 * objeto atacado y dependiendo de este y de sí mismo devuelve verdadero
-	 * o falso según corresponda.
+	 * habilidadRaza1 sobrescribe el metodo de la clase padre.
+	 * @param atacado atacado
+	 * @return verdadero o falso dependiendo del objeto atacado y de sí mismo.
 	 */
 
 	// Golpe Defensa
-	public boolean habilidadRaza1(Peleable atacado) {
-		if (this.getEnergia() > 10) {
-			this.setEnergia(this.getEnergia() - 10);
-			if (atacado.serAtacado(this.getDefensa() * 2) > 0)
+	public boolean habilidadRaza1(final Peleable atacado) {
+		if (this.getEnergia() > ENERGIA_MINIMA) {
+			this.setEnergia(this.getEnergia() - ENERGIA_MINIMA);
+			if (atacado.serAtacado(this.getDefensa() * INCREMENTO_DEFENSA) > 0) {
 				return true;
+			}
 		}
 		return false;
 	}
 
 	/**
-	 * habilidadRaza2 sobrescribe el metodo de la clase padre.
+	 * habilidadRaza1 sobrescribe el metodo de la clase padre.
+	 * @param atacado
+	 * @return verdadero o falso dependiendo del objeto atacado y de sí mismo.
 	 */
 
 	// Mordisco de Vida
-	public boolean habilidadRaza2(Peleable atacado) {
-		if (this.getEnergia() > 10) {
-			this.setEnergia(this.getEnergia() - 10);
+	public boolean habilidadRaza2(final Peleable atacado) {
+		if (this.getEnergia() > ENERGIA_MINIMA) {
+			this.setEnergia(this.getEnergia() - ENERGIA_MINIMA);
 			int daño_causado = atacado.serAtacado(this.getFuerza());
 			if (daño_causado > 0) {
 				this.serCurado(daño_causado);

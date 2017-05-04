@@ -15,7 +15,7 @@ public class Alianza {
 
 	/**
 	 * Constructor de la clase.
-	 * @param nombre
+	 * @param nombre de la alianza
 	 */
 
 	public Alianza(final String nombre) {
@@ -24,7 +24,6 @@ public class Alianza {
 	}
 
 	/**
-	 * Devuelve la lista de aliados
 	 * @return aliados
 	 */
 
@@ -34,6 +33,7 @@ public class Alianza {
 
 	/**
 	 * Asigna la lista de aliados
+	 * @param aliados es la lista de aliados a asignar
 	 */
 
 	public void setAliados(final LinkedList<Personaje> aliados) {
@@ -42,7 +42,7 @@ public class Alianza {
 
 	/**
 	 * Devulve el nombre de la alianza
-	 * @return nombre
+	 * @return nombre del asesino
 	 */
 
 	public String obtenerNombre() {
@@ -51,6 +51,7 @@ public class Alianza {
 
 	/**
 	 * Elimina un personaje de la lista que representa a los aliados.
+	 * @param pj es el personaje a eliminar
 	 */
 
 	public void eliminarPersonaje(final Personaje pj) {
@@ -59,6 +60,7 @@ public class Alianza {
 
 	/**
 	 * Agrega un personaje a la lista que representa a los aliados.
+	 * @param pj es el personaje a añadir
 	 */
 
 	public void añadirPersonaje(final Personaje pj) {

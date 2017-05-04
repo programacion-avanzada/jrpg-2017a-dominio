@@ -8,6 +8,8 @@ package dominio;
 
 public class NonPlayableCharacter implements Peleable {
 
+	private static final double PORCENTAJE_GOLPE_CRITICO = 0.15;
+
 	private int salud;
 	private int fuerza;
 	private int defensa;
@@ -16,18 +18,21 @@ public class NonPlayableCharacter implements Peleable {
 	private static final int dificultadAleatoria = -1;
 
 	/**
-	 * Constructor de la clase. Recibe un nombre, nivel y dificultad.
-	 * Asigna atributos de fuerza, salud y defensa basados en la dificultad.
+	 * Constructor de la clase. Asigna atributos de fuerza, salud y defensa basados en la dificultad.
+	 * @param nombre nombre
+	 * @param nivel nivel
+	 * @param dificultadNPC dificultadNonPlayableCharacter
 	 */
 
-	public NonPlayableCharacter(String nombre, int nivel, int dificultadNPC) {
+	public NonPlayableCharacter(final String nombre, final int nivel, final int dificultadNPC) {
 		this.nombre = nombre;
 		this.nivel = nivel;
 		int dificultad;
-		if (dificultadNPC == dificultadAleatoria)
+		if (dificultadNPC == dificultadAleatoria) {
 			dificultad = MyRandom.nextInt(3);
-		else
+		} else {
 			dificultad = dificultadNPC;
+		}
 
 		switch (dificultad) {
 		case 0:
@@ -51,6 +56,7 @@ public class NonPlayableCharacter implements Peleable {
 
 	/**
 	 * Otorga experiencia al personaje multiplicando su nivel.
+	 * @return 30 veces el nivel actual.
 	 */
 
 	public int otorgarExp() {
@@ -58,91 +64,144 @@ public class NonPlayableCharacter implements Peleable {
 	}
 
 	/**
-	 * Getters y setters de diferentes atributos de la clase.
+	 * @return fuerza
 	 */
 
 	public int getFuerza() {
 		return fuerza;
 	}
 
-	public void setFuerza(int fuerza) {
+	/**
+	 * @param fuerza fuerza
+	 */
+
+	public void setFuerza(final int fuerza) {
 		this.fuerza = fuerza;
 	}
+
+	/**
+	 * @return nombre
+	 */
 
 	public String getNombre() {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
+	/**
+	 * @param nombre nombre
+	 */
+
+	public void setNombre(final String nombre) {
 		this.nombre = nombre;
 	}
+
+	/**
+	 * @return nivel
+	 */
 
 	public int getNivel() {
 		return nivel;
 	}
 
-	public void setNivel(int nivel) {
+	/**
+	 * @param nivel nivel
+	 */
+
+	public void setNivel(final int nivel) {
 		this.nivel = nivel;
 	}
+
+	/**
+	 * @return verdadero o falso si tiene salud
+	 */
 
 	public boolean estaVivo() {
 		return salud > 0;
 	}
 
+	/**
+	 * @return defensa
+	 */
+
 	public int getDefensa() {
 		return defensa;
 	}
 
-	public void setDefensa(int defensa) {
+	/**
+	 * @param defensa defensa
+	 */
+
+	public void setDefensa(final int defensa) {
 		this.defensa = defensa;
 	}
+
+	/**
+	 * @return salud
+	 */
 
 	public int getSalud() {
 		return salud;
 	}
 
-	public void setSalud(int salud) {
+	/**
+	 * @param salud salud
+	 */
+
+	public void setSalud(final int salud) {
 		this.salud = salud;
 	}
 
 	/**
 	 * "atacar" obtiene el ataque de este objeto e invoca al método serAtacado
 	 * del "atacado" recibido como parametro.
+	 * @param atacado atacado
+	 * @return daño ocasionado al atacar
 	 */
 
-	public int atacar(Peleable atacado) {
-		if (MyRandom.nextDouble() <= 0.15) {// los NPC tienen 15% de golpes criticos
-			return atacado.serAtacado((int) (this.getAtaque() * 1.5));
-		} else
+	public int atacar(final Peleable atacado) {
+		if (MyRandom.nextDouble() <= 0.15) { // los NPC tienen 15% de golpes criticos
+			return atacado.serAtacado((int) (this.getAtaque() * PORCENTAJE_GOLPE_CRITICO));
+		} else {
 			return atacado.serAtacado(this.getAtaque());
+		}
 	}
 
 	/**
 	 * "serAtacado" devuelve 0 si no es dañado o si esquivo el golpe o
 	 * el valor del daño ocasionado por el ataque.
+	 * @param daño daño
+	 * @return daño ocasionado al atacar.
 	 */
 
 	public int serAtacado(int daño) {
-		if (MyRandom.nextDouble() >= 0.15) {
+		if (MyRandom.nextDouble() >= PORCENTAJE_GOLPE_CRITICO) {
 			daño -= this.getDefensa() / 2;
 			if (daño > 0) {
 				salud -= daño;
 				return daño;
 			}
-			return 0;// no le hace daño ya que la defensa fue mayor
+			return 0; // no le hace daño ya que la defensa fue mayor
 		}
-		return 0;// esquivo el golpe
-	}
-
-	public void despuesDeTurno() { }
-
-	public void ganarExperiencia(int exp) {
-
+		return 0; // esquivo el golpe
 	}
 
 	/**
-	 * Sobreescribe el getter y setter de "ataque" de la clase padre
+	 * to do
+	 */
+
+	public void despuesDeTurno() { }
+
+	/**
+	 * to do
+	 * @param exp experiencia
+	 */
+
+	public void ganarExperiencia(final int exp) { }
+
+	/**
+	 * Sobreescribe el getter de "ataque" de la clase padre
 	 * para usar el atributo "fuerza" de este objeto.
+	 * @return fuerza
 	 */
 
 	@Override
@@ -150,8 +209,14 @@ public class NonPlayableCharacter implements Peleable {
 		return fuerza;
 	}
 
+	/**
+	 * Sobreescribe el setter de "ataque" de la clase padre
+	 * para usar el atributo "fuerza" de este objeto.
+	 * @param ataque ataque
+	 */
+
 	@Override
-	public void setAtaque(int ataque) {
+	public void setAtaque(final int ataque) {
 		this.fuerza = ataque;
 	}
 }

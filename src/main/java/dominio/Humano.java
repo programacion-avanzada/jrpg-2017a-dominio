@@ -7,15 +7,20 @@ package dominio;
 
 public class Humano extends Personaje {
 
+	private static final int ENERGIA_MINIMA = 2;
+	private static final int INCREMENTO_TOPE = 5;
+
 	/**
 	 * Permite crear un humano con atributos por defecto.
-	 * El nombre, casta y id de personaje son simpre requeridos.
+	 * @param nombre del humano
+	 * @param casta casta
+	 * @param id de personaje
 	 */
 
-	public Humano(String nombre, Casta casta, int id) {
+	public Humano(final String nombre, final Casta casta, final int id) {
 		super(nombre, casta, id);
-		saludTope += 5;
-		energiaTope += 5;
+		saludTope += INCREMENTO_TOPE;
+		energiaTope += INCREMENTO_TOPE;
 		salud = saludTope;
 		energia = energiaTope;
 		nombreRaza = "Humano";
@@ -23,28 +28,39 @@ public class Humano extends Personaje {
 
 	/**
 	 * Permite crear un humano con atributos pasados por parametro.
+	 * @param nombre nombre
+	 * @param salud salud
+	 * @param energia energia
+	 * @param fuerza fuerza
+	 * @param destreza destreza
+	 * @param inteligencia inteligencia
+	 * @param casta casta
+	 * @param experiencia experiencia
+	 * @param nivel nive;
+	 * @param idPersonaje idPersonaje
 	 */
 
-	public Humano(String nombre, int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta,
-			int experiencia, int nivel, int idPersonaje) {
+	public Humano(final String nombre, final int salud, final int energia,
+			final int fuerza, final int destreza, final int inteligencia, final Casta casta,
+			final int experiencia, final int nivel, final int idPersonaje) {
 		super(nombre, salud, energia, fuerza, destreza, inteligencia, casta, experiencia, nivel, idPersonaje);
 		nombreRaza = "Humano";
 
-		habilidadesRaza = new String[2];
+		habilidadesRaza = new String[CANTIDAD_HABILIDADES];
 		habilidadesRaza[0] = "Incentivar";
 		habilidadesRaza[1] = "Golpe Fatal";
 	}
 
 	/**
-	 * habilidadRaza1 sobrescribe el metodo de la clase padre, recibe un
-	 * objeto atacado y dependiendo de este y de sí mismo devuelve verdadero
-	 * o falso según corresponda.
+	 * habilidadRaza1 sobrescribe el metodo de la clase padre.
+	 * @param atacado attacado
+	 * @return verdadero o falso dependiendo del objeto atacado y de sí mismo.
 	 */
 
 	// Incentivar
-	public boolean habilidadRaza1(Peleable atacado) {
-		if (this.getEnergia() > 10) {
-			this.setEnergia(this.getEnergia() - 10);
+	public boolean habilidadRaza1(final Peleable atacado) {
+		if (this.getEnergia() > ENERGIA_MINIMA) {
+			this.setEnergia(this.getEnergia() - ENERGIA_MINIMA);
 			atacado.setAtaque(atacado.getAtaque() + this.getMagia());
 			return true;
 		}
@@ -53,17 +69,19 @@ public class Humano extends Personaje {
 
 	/**
 	 * habilidadRaza2 sobrescribe el metodo de la clase padre.
+	 * @param atacado atacado
+	 * @return verdadero o falso dependiendo del objeto atacado y de sí mismo.
 	 */
 
 	// Golpe Fatal
-	public boolean habilidadRaza2(Peleable atacado) {
-		if (this.getEnergia() > 10) {
-			if (atacado.serAtacado(atacado.getSalud() / 2) > 0) {
-				this.setEnergia(this.getEnergia() / 2);
+	public boolean habilidadRaza2(final Peleable atacado) {
+		if (this.getEnergia() > ENERGIA_MINIMA) {
+			if (atacado.serAtacado(atacado.getSalud() / ENERGIA_MINIMA) > 0) {
+				this.setEnergia(this.getEnergia() / ENERGIA_MINIMA);
 				return true;
 			}
 		}
-		this.setEnergia(this.getEnergia() - 10);
+		this.setEnergia(this.getEnergia() - ENERGIA_MINIMA);
 		return false;
 	}
 }
