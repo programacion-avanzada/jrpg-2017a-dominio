@@ -520,7 +520,7 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 	 * @return daño que se ha inflingido.
 	 */
 
-	public int serDesernegizado(int daño) {
+	public int serDesenergizado(int daño) {
 		daño -= this.defensa;
 		if (daño <= 0) {
 			return 0;

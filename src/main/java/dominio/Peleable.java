@@ -64,4 +64,35 @@ public interface Peleable {
 	 * @return nombre del objeto
 	 */
 	String getNombre();
+
+	/**
+	 * Aumenta la salud del personaje.
+	 * @param salud salud del personaje
+	 */
+
+	void serCurado(int salud);
+
+	/**
+	 * @param defensa defensa
+	 */
+
+	void setDefensa(final int defensa);
+
+	/**
+	 * Aplica daño a la energia y devuelve la cantidad del
+	 * mismo que se ha inflingido.
+	 * @param daño daño
+	 * @return daño que se ha inflingido.
+	 */
+
+	int serDesenergizado(int daño);
+
+	/**
+	 * Aplica un daño a la salud y devuelve la cantidad del
+	 * mismo que se ha inflingido.
+	 * @param daño daño
+	 * @return daño que se ha inflingido.
+	 */
+
+	int serRobadoSalud(int daño);
 }

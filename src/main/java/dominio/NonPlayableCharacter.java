@@ -126,4 +126,29 @@ public class NonPlayableCharacter extends Character implements Peleable {
 	public void setAtaque(final int ataque) {
 		this.fuerza = ataque;
 	}
+
+	/**
+	 * @param salud no se utiliza
+	 */
+
+	public void serCurado(final int salud) {}
+
+	/**
+	 * @param daño no utilizado
+	 * @return 0
+	 */
+
+	public int serDesenergizado(final int daño) {
+		return 0;
+	}
+
+	/**
+	 * @param daño no utilizado
+	 * @return 0
+	 */
+
+	public int serRobadoSalud(final int daño) {
+		return 0;
+	}
+
 }

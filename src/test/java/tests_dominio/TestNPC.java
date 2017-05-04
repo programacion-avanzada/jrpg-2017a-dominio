@@ -48,8 +48,22 @@ public class TestNPC {
 
 	@Test
 	public void testAtacar() {
-		NonPlayableCharacter npc1 = new NonPlayableCharacter("Otro1", 2, 2);
+		NonPlayableCharacter npc = new NonPlayableCharacter("Otro", 2, 2);
 		Elfo e = new Elfo("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
-		Assert.assertTrue(20 == npc1.atacar(e));
+		Assert.assertTrue(20 == npc.atacar(e));
+	}
+
+	@Test
+	public void testSerAtacadoConBuenaDefensa() {
+		NonPlayableCharacter npc = new NonPlayableCharacter("Otro", 2, 2);
+		npc.setDefensa(200);
+		Assert.assertTrue(npc.serAtacado(99) == 0);
+	}
+
+	@Test
+	public void testSerDesenergizadoORobadoSalud() {
+		NonPlayableCharacter npc = new NonPlayableCharacter("Otro", 2, 2);
+		Assert.assertTrue(npc.serDesenergizado(99) == 0);
+		Assert.assertTrue(npc.serRobadoSalud(99) == 0);
 	}
 }

@@ -1246,7 +1246,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+serDesernegizado(daño: int): int",
+											"text": "+serDesenergizado(daño: int): int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -9824,7 +9824,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFbcix2i+OzUOs="
 							},
-							"name": "serDesernegizado",
+							"name": "serDesenergizado",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,

@@ -163,7 +163,7 @@ public class TestPersonaje {
 		o.setDefensa(100);
 		Assert.assertTrue(o.serAtacado(99) == 0);
 		Assert.assertTrue(o.serRobadoSalud(99) == 0);
-		Assert.assertTrue(o.serDesernegizado(99) == 0);
+		Assert.assertTrue(o.serDesenergizado(99) == 0);
 	}
 
 	@Test
@@ -180,7 +180,7 @@ public class TestPersonaje {
 		Orco o = new Orco("Maxi", new Hechicero(), 1);
 		o.setEnergia(10);
 		o.setDefensa(10);
-		Assert.assertTrue(o.serDesernegizado(100) == 10);
+		Assert.assertTrue(o.serDesenergizado(100) == 10);
 		Assert.assertTrue(o.getEnergia() == 0);
 	}
 

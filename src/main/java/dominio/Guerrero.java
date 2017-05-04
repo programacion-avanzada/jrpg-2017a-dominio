@@ -79,13 +79,11 @@ public class Guerrero extends Casta {
 	public boolean habilidad3(final Personaje caster, final Peleable atacado) {
 		if (caster.getEnergia() > ENERGIA_MINIMA) {
 			caster.setEnergia(caster.getEnergia() - ENERGIA_MINIMA);
-			if (atacado instanceof Personaje) {
-				int defensa_original = ((Personaje) atacado).getDefensa();
-				((Personaje) atacado).setDefensa(0);
-				if (atacado.serAtacado(caster.ataque) > 0) {
-					((Personaje) atacado).setDefensa(defensa_original);
-					return true;
-				}
+			int defensa_original = ((Personaje) atacado).getDefensa();
+			atacado.setDefensa(0);
+			if (atacado.serAtacado(caster.ataque) > 0) {
+				atacado.setDefensa(defensa_original);
+				return true;
 			}
 		}
 		return false;
