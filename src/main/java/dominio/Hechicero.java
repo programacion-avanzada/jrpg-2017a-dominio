@@ -19,8 +19,7 @@ public class Hechicero extends Casta {
 	 */
 
 	public Hechicero(final double prob_crit, final double evasion, final double daño_crit) {
-		super(prob_crit, evasion, daño_crit);
-		this.nombreCasta = "Hechicero";
+		super("Hechicero", prob_crit, evasion, daño_crit);
 	}
 
 	/**
@@ -28,12 +27,7 @@ public class Hechicero extends Casta {
 	 */
 
 	public Hechicero() {
-		super();
-		this.nombreCasta = "Hechicero";
-		habilidadesCasta = new String[CANTIDAD_HABILIDADES];
-		habilidadesCasta[0] = "Bola de Fuego";
-		habilidadesCasta[1] = "Curar Aliado";
-		habilidadesCasta[2] = "Robar Energia y Salud";
+		super("Hechicero", "Bola de Fuego", "Curar Aliado", "Robar Energia y Salud");
 	}
 
 	/**
@@ -99,4 +93,13 @@ public class Hechicero extends Casta {
 		}
 		return false;
 	}
+
+	/**
+	 * @param personaje sobre el cual se incrementa la inteligencia
+	 */
+
+	public void incrementarAtributoAlCrear(final Personaje personaje) {
+		personaje.setInteligencia(personaje.getInteligencia() + INCREMENTO_POR_TIPO);
+	}
+
 }

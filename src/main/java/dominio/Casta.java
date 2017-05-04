@@ -10,8 +10,10 @@ import java.io.Serializable;
 
 public abstract class Casta implements Serializable {
 
-	protected static final int CANTIDAD_HABILIDADES = 3;
+	protected static final int INCREMENTO_POR_TIPO = 5;
 	protected static final int ENERGIA_MINIMA = 10;
+
+	private static final int CANTIDAD_HABILIDADES = 3;
 	private static final double PROBABILIDAD_POR_DEFECTO = 0.2;
 	private static final double DAÑO_CRITICO_POR_DEFECTO = 1.5;
 
@@ -26,20 +28,32 @@ public abstract class Casta implements Serializable {
 	 * Constructor de una casta con sus valores por defecto
 	 */
 
-	public Casta() {
+	public Casta(final String nombreCasta, final String habilidad1,
+		final String habilidad2, final String habilidad3) {
+
 		this.probabilidadGolpeCritico = PROBABILIDAD_POR_DEFECTO;
 		this.probabilidadEvitarDaño = PROBABILIDAD_POR_DEFECTO;
 		this.dañoCritico = DAÑO_CRITICO_POR_DEFECTO;
+
+		this.nombreCasta = nombreCasta;
+
+		habilidadesCasta = new String[CANTIDAD_HABILIDADES];
+		habilidadesCasta[0] = habilidad1;
+		habilidadesCasta[1] = habilidad2;
+		habilidadesCasta[2] = habilidad3;
 	}
 
 	/**
 	 * Constructor de una casta con valores por parámetro.
+	 * @param nombreCasta nombre de la casta
 	 * @param prob_crit probabilidad de golpe critico.
 	 * @param evasion probabilidad de evitar daño.
 	 * @param daño_crit daño critico.
 	 */
 
-	public Casta(final double prob_crit, final double evasion, final double daño_crit) {
+	public Casta(final String nombreCasta, final double prob_crit, final double evasion, final double daño_crit) {
+		this.nombreCasta = nombreCasta;
+
 		this.probabilidadGolpeCritico = prob_crit;
 		this.probabilidadEvitarDaño = evasion;
 		this.dañoCritico = daño_crit;
@@ -71,6 +85,13 @@ public abstract class Casta implements Serializable {
 	 */
 
 	public abstract boolean habilidad3(Personaje caster, Peleable atacado);
+
+	/**
+	 * incrementarAtributoAlCrear será sobreescrita en las clases que hereden de esta.
+	 * @param personaje sobre el cual se incrementa el atributo
+	 */
+
+	public abstract void incrementarAtributoAlCrear(Personaje personaje);
 
 	/**
 	 * @return el nombre de la casta

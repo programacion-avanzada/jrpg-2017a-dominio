@@ -19,8 +19,7 @@ public class Guerrero extends Casta {
 	 */
 
 	public Guerrero(final double prob_crit, final double evasion, final double daño_crit) {
-		super(prob_crit, evasion, daño_crit);
-		this.nombreCasta = "Guerrero";
+		super("Guerrero", prob_crit, evasion, daño_crit);
 	}
 
 	/**
@@ -28,13 +27,7 @@ public class Guerrero extends Casta {
 	 */
 
 	public Guerrero() {
-		super();
-		this.nombreCasta = "Guerrero";
-
-		habilidadesCasta = new String[CANTIDAD_HABILIDADES];
-		habilidadesCasta[0] = "Ataque Doble";
-		habilidadesCasta[1] = "Aumentar Defensa";
-		habilidadesCasta[2] = "Ignorar Defensa";
+		super("Guerrero", "Ataque Doble", "Aumentar Defensa", "Ignorar Defensa");
 	}
 
 	/**
@@ -97,4 +90,13 @@ public class Guerrero extends Casta {
 		}
 		return false;
 	}
+
+	/**
+	 * @param personaje sobre el cual se incrementa la fuerza
+	 */
+
+	public void incrementarAtributoAlCrear(final Personaje personaje) {
+		personaje.setFuerza(personaje.getFuerza() + INCREMENTO_POR_TIPO);
+	}
+
 }

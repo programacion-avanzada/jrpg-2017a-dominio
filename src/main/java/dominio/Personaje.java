@@ -14,7 +14,7 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 
 	protected static final int INCREMENTO_TOPE = 10;
 	protected static final int ENERGIA_MINIMA = 10;
-	protected static final int CANTIDAD_HABILIDADES = 10;
+	protected static final int CANTIDAD_HABILIDADES = 2;
 
 	private static final int DIMENSION_TABLA = 101;
 
@@ -27,7 +27,6 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 	private static final int DESTREZA_INICIAL = 10;
 
 	private static final double INCREMENTO_PUNTOS = 1.5;
-	private static final double INCREMENTO_POR_TIPO = 5;
 
 	private static final double SKILLS_MAXIMO = 200;
 	private static final double NIVEL_MAXIMO = 100;
@@ -109,15 +108,7 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 		inteligencia = INTELIGENCIA_INICIAL;
 		destreza = DESTREZA_INICIAL;
 
-		if (casta instanceof Guerrero) {
-			fuerza += INCREMENTO_POR_TIPO;
-		}
-		if (casta instanceof Hechicero) {
-			inteligencia += INCREMENTO_POR_TIPO;
-		}
-		if (casta instanceof Asesino) {
-			destreza += INCREMENTO_POR_TIPO;
-		}
+		casta.incrementarAtributoAlCrear(this);
 
 		x = 0;
 		y = 0;

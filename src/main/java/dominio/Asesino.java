@@ -20,8 +20,7 @@ public class Asesino extends Casta {
 	 */
 
 	public Asesino(final double prob_crit, final double evasion, final double daño_crit) {
-		super(prob_crit, evasion, daño_crit);
-		this.nombreCasta = "Asesino";
+		super("Asesino", prob_crit, evasion, daño_crit);
 	}
 
 	/**
@@ -30,12 +29,7 @@ public class Asesino extends Casta {
 	 */
 
 	public Asesino() {
-		super();
-		this.nombreCasta = "Asesino";
-		habilidadesCasta = new String[CANTIDAD_HABILIDADES];
-		habilidadesCasta[0] = "Golpe Critico";
-		habilidadesCasta[1] = "Aumentar Evasion";
-		habilidadesCasta[2] = "Robar";
+		super("Asesino", "Golpe Critico", "Aumentar Evasion", "Robar");
 	}
 
 	/**
@@ -87,5 +81,13 @@ public class Asesino extends Casta {
 
 	public boolean habilidad3(final Personaje caster, final Peleable atacado) {
 		return false;
+	}
+
+	/**
+	 * @param personaje sobre el cual se incrementa la destreza
+	 */
+
+	public void incrementarAtributoAlCrear(final Personaje personaje) {
+		personaje.setDestreza(personaje.getDestreza() + INCREMENTO_POR_TIPO);
 	}
 }
