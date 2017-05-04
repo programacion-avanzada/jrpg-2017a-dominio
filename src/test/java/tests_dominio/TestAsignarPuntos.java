@@ -33,7 +33,7 @@ public class TestAsignarPuntos {
 		h.setFuerza(199);
 		h.setDestreza(199);
 		h.setInteligencia(199);
-		h.AsignarPuntosSkills(2, 2, 2);
+		h.asignarPuntosSkills(2, 2, 2);
 		Assert.assertTrue(h.getFuerza()==199);
 		Assert.assertTrue(h.getDestreza()==199);
 		Assert.assertTrue(h.getInteligencia()==199);
