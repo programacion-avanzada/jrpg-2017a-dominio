@@ -18,12 +18,11 @@ public class Humano extends Personaje {
 	 */
 
 	public Humano(final String nombre, final Casta casta, final int id) {
-		super(nombre, casta, id);
+		super(nombre, casta, id, "Humano", "Incentivar", "Golpe Fatal");
 		saludTope += INCREMENTO_TOPE;
 		energiaTope += INCREMENTO_TOPE;
 		salud = saludTope;
 		energia = energiaTope;
-		nombreRaza = "Humano";
 	}
 
 	/**
@@ -41,14 +40,14 @@ public class Humano extends Personaje {
 	 */
 
 	public Humano(final String nombre, final int salud, final int energia,
-			final int fuerza, final int destreza, final int inteligencia, final Casta casta,
-			final int experiencia, final int nivel, final int idPersonaje) {
-		super(nombre, salud, energia, fuerza, destreza, inteligencia, casta, experiencia, nivel, idPersonaje);
-		nombreRaza = "Humano";
+			final int fuerza, final int destreza, final int inteligencia,
+			final Casta casta, final int experiencia, final int nivel,
+			final int idPersonaje) {
 
-		habilidadesRaza = new String[CANTIDAD_HABILIDADES];
-		habilidadesRaza[0] = "Incentivar";
-		habilidadesRaza[1] = "Golpe Fatal";
+		super(
+			nombre, salud, energia, fuerza, destreza, inteligencia, casta, experiencia,
+			nivel, idPersonaje, "Humano", "Incentivar", "Golpe Fatal"
+		);
 	}
 
 	/**

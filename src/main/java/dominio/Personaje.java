@@ -12,6 +12,7 @@ import java.io.Serializable;
 
 public abstract class Personaje extends Character implements Peleable, Serializable {
 
+	protected static final int INCREMENTO_TOPE = 10;
 	protected static final int ENERGIA_MINIMA = 10;
 	protected static final int CANTIDAD_HABILIDADES = 10;
 
@@ -89,13 +90,18 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 	 * @param nombre del personaje
 	 * @param casta casta
 	 * @param id del personaje
+	 * @param nombreRaza del personaje
+	 * @param habilidad1 del personaje
+	 * @param habilidad2 del personaje
 	 */
 
-	public Personaje(final String nombre, final Casta casta, final int id) {
+	public Personaje(final String nombre, final Casta casta, final int id,
+		final String nombreRaza, final String habilidad1, final String habilidad2) {
 		super(nombre);
 
 		this.casta = casta;
 		this.idPersonaje = id;
+		this.nombreRaza = nombreRaza;
 
 		experiencia = EXPERIENCIA_INICIAL;
 		nivel = NIVEL_INICIAL;
@@ -122,6 +128,7 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 		defensa = this.calcularPuntosDeDefensa();
 		magia = this.calcularPuntosDeMagia();
 
+		this.setHabilidades(habilidad1, habilidad2);
 	}
 
 	/**
@@ -137,11 +144,15 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 	 * @param experiencia del personaje
 	 * @param nivel del personaje
 	 * @param idPersonaje del personaje
+	 * @param nombreRaza del personaje
+	 * @param habilidad1 del personaje
+	 * @param habilidad2 del personaje
 	 */
 
 	public Personaje(final String nombre, final int salud, final int energia,
 		final int fuerza, final int destreza, final int inteligencia,
-		final Casta casta, final int experiencia, final int nivel, final int idPersonaje) {
+		final Casta casta, final int experiencia, final int nivel,
+		final int idPersonaje, final String nombreRaza, final String habilidad1, final String habilidad2) {
 
 		super(nombre);
 
@@ -162,6 +173,21 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 		this.defensa = this.calcularPuntosDeDefensa();
 		this.ataque = this.calcularPuntosDeAtaque();
 		this.magia = this.calcularPuntosDeMagia();
+
+		this.nombreRaza = nombreRaza;
+		this.setHabilidades(habilidad1, habilidad2);
+	}
+
+	/**
+	 * Asigna las habilidades de raza del personaje
+	 * @param habilidad1 del personaje
+	 * @param habilidad2 del personaje
+	 */
+
+	private void setHabilidades(final String habilidad1, final String habilidad2) {
+		habilidadesRaza = new String[CANTIDAD_HABILIDADES];
+		habilidadesRaza[0] = habilidad1;
+		habilidadesRaza[1] = habilidad2;
 	}
 
 	/**

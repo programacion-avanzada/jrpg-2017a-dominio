@@ -18,15 +18,10 @@ public class Elfo extends Personaje {
 	 */
 
 	public Elfo(final String nombre, final Casta casta, final int id) {
-		super(nombre, casta, id);
-		energiaTope += ENERGIA_MINIMA;
+		super(nombre, casta, id, "Elfo", "Golpe Level", "Ataque Bosque");
+		energiaTope += INCREMENTO_TOPE;
 		salud = saludTope;
 		energia = energiaTope;
-		nombreRaza = "Elfo";
-
-		habilidadesRaza = new String[2];
-		habilidadesRaza[0] = "Golpe Level";
-		habilidadesRaza[1] = "Ataque Bosque";
 	}
 
 	/**
@@ -47,14 +42,13 @@ public class Elfo extends Personaje {
 
 	public Elfo(final String nombre, final int salud, final int energia,
 			final int fuerza, final int destreza, final int inteligencia,
-			final Casta casta, final int experiencia, final int nivel, final int idPersonaje) {
-		super(nombre, salud, energia, fuerza, destreza, inteligencia, casta,
-				experiencia, nivel, idPersonaje);
-		nombreRaza = "Elfo";
+			final Casta casta, final int experiencia, final int nivel,
+			final int idPersonaje) {
 
-		habilidadesRaza = new String[CANTIDAD_HABILIDADES];
-		habilidadesRaza[0] = "Golpe Level";
-		habilidadesRaza[1] = "Ataque Bosque";
+		super(
+			nombre, salud, energia, fuerza, destreza, inteligencia, casta, experiencia,
+			nivel, idPersonaje, "Elfo", "Golpe Level", "Ataque Bosque"
+		);
 	}
 
 	/**
