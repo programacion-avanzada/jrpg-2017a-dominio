@@ -39,7 +39,8 @@ public class Guerrero extends Casta {
 		return false;
 	}
 	
-	// Aumentar Defensa
+	
+	/** El metodo "habilidad2" es un metodo que provoca un aumento en la defensa*/
 	public boolean habilidad2(Personaje caster, Peleable atacado) { 
 		if (caster.getEnergia() > 10) {
 			caster.setEnergia(caster.getEnergia() - 10);
@@ -66,7 +67,7 @@ public class Guerrero extends Casta {
 					((Personaje) atacado).setDefensa(defensa_original);
 					return true;
 				}
-			}
+			} 
 
 		}
 		return false;
