@@ -127,8 +127,7 @@ public abstract class Personaje implements Peleable, Serializable {
    * @param idPersonaje
    *          identificador del personaje
    */
-  public Personaje(String nombre, int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta,
-      int experiencia, int nivel, int idPersonaje) {
+  public Personaje(String nombre, int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta, int experiencia, int nivel, int idPersonaje) {
 
     this.nombre = nombre;
     this.salud = salud;
@@ -519,8 +518,7 @@ public abstract class Personaje implements Peleable, Serializable {
     if (this.nivel == 100) {
       return;
     }
-    while ((this.nivel != 100)
-        && (this.experiencia >= (Personaje.tablaDeNiveles[this.nivel + 1] + acumuladorExperiencia))) {
+    while ((this.nivel != 100) && (this.experiencia >= (Personaje.tablaDeNiveles[this.nivel + 1] + acumuladorExperiencia))) {
       acumuladorExperiencia += Personaje.tablaDeNiveles[this.nivel + 1];
       this.nivel++;
       this.modificarAtributos();
