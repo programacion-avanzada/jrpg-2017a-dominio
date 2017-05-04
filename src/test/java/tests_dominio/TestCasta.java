@@ -21,10 +21,6 @@ public class TestCasta {
 		h.setDañoCritico(0.5);
 		Assert.assertTrue(0.5 == h.getDañoCritico());
 
-		System.out.println("------------------------------------------------");
-		System.out.println(h.getHabilidadesCasta()[0]);
-		System.out.println("------------------------------------------------");
-
 		Assert.assertTrue("Hechicero" == h.getNombreCasta());
 		Assert.assertTrue("Bola de Fuego" == h.getHabilidadesCasta()[0]);
 	}
