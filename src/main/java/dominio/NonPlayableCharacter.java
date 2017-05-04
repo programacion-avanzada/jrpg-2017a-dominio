@@ -1,123 +1,158 @@
+
 package dominio;
 
-public class NonPlayableCharacter implements Peleable {
+public class NonPlayableCharacter extends MadreDeTodo implements Peleable {
 
 	private int salud;
-	private int fuerza;
-	private int defensa;
-	private String nombre;
-	private int nivel;
-	private static final int dificultadAleatoria = -1;
 
-	public NonPlayableCharacter(String nombre, int nivel, int dificultadNPC) {
-		this.nombre = nombre;
-		this.nivel = nivel;
+	private static final int DIFICULTADALEATORIA = -1;
+	private static final int DIF1F = 10;
+	private static final int DIF1S = 30;
+	private static final int DIF1D = 2;
+	private static final int DIF1MF = 3;
+	private static final int DIF1MS = 15;
+	private static final int DIF1MD = 1;
+
+	private static final int DIF2F = 20;
+	private static final int DIF2S = 40;
+	private static final int DIF2D = 5;
+	private static final int DIF2MF = 6;
+	private static final int DIF2MS = 20;
+	private static final int DIF2MD = 2;
+
+	private static final int DIF3F = 30;
+	private static final int DIF3S = 50;
+	private static final int DIF3D = 4;
+	private static final int DIF3MF = 10;
+	private static final int DIF3MS = 25;
+	private static final int DIF3MD = 4;
+
+	private static final int MULTIPLICADOREXPNPC = 30;
+	private static final double MULTIPLICADORFUERZA = 1.5;
+	private static final double NUMEROPARASERATACADO = 0.15;
+	private static final double NUMEROPARAATACAR = 0.15;
+	private static final int DIVISORDEDEFENSA = 2;
+
+	/** La clase NonPlayableCharacter representa a los NPC del juego.
+	 * Dependiendo de la dificultad que se pasa por parámetro al constructor,
+	 * aumentará o disminuirá el valor de los atributos fuerza salud y defensa.
+	 * @param nombre Nombre que se le otorga al NPC
+	 * @param nivel Nivel (entero) que se le otorga al NPC
+	 * @param dificultadNPC valor entero que consecuentemente produce una variación en los atributos.
+	 */
+	public NonPlayableCharacter(final String nombre, final int nivel, final int dificultadNPC) {
+		super(0, 0, nivel, nombre);
+
 		int dificultad;
-		if (dificultadNPC == dificultadAleatoria)
-			dificultad = MyRandom.nextInt(3);
-		else
+		if (dificultadNPC == DIFICULTADALEATORIA) {
+			dificultad = MyRandom.nextInt(3); 
+		}
+		else {
 			dificultad = dificultadNPC;
+		}
 
 		switch (dificultad) {
 		case 0:
-			this.fuerza = 10 + (nivel - 1) * 3;// 30%
-			this.salud = 30 + (nivel - 1) * 15;
-			this.defensa = 2 + (nivel - 1) * 1;
+			this.setFuerza(DIF1F + (nivel - 1) * DIF1MF);
+			this.salud = DIF1S + (nivel - 1) * DIF1MS;
+			this.setDefensa(DIF1D + (nivel - 1) * DIF1MD);
 			break;
 		case 1:
-			this.fuerza = 20 + (nivel - 1) * 6;// 50%
-			this.salud = 40 + (nivel - 1) * 20;
-			this.defensa = 5 + (nivel - 1) * 2;
+			this.setFuerza(DIF2F + (nivel - 1) * DIF2MF);
+			this.salud = DIF2S + (nivel - 1) * DIF2MS;
+			this.setDefensa(DIF2D + (nivel - 1) * DIF2MD);
 			break;
-		case 2:
-			this.fuerza = 30 + (nivel - 1) * 10;// 50%
-			this.salud = 50 + (nivel - 1) * 25;
-			this.defensa = 4 + (nivel - 1) * 4;
+    	case 2:
+			this.setFuerza(DIF3F + (nivel - 1) * DIF3MF);
+			this.salud = DIF3S + (nivel - 1) * DIF3MS;
+			this.setDefensa(DIF3D + (nivel - 1) * DIF3MD);
 			break;
-
+		default:
+			break;
 		}
 	}
 
-	public int otorgarExp() {
-		return this.nivel * 30;
+	/** Retorna un entero.
+	 * Rrepresentando la cantidad de experiencia que debe sumarse al Personaje que
+	 * produjo la disminución de la salud del NPC a 0
+	 * La experiencia será 30 veces el valor del atributo nivel
+	 */
+	@Override
+	public final int otorgarExp() {
+		return this.getNivel() * MULTIPLICADOREXPNPC;
 	}
 
-	public int getFuerza() {
-		return fuerza;
-	}
 
-	public void setFuerza(int fuerza) {
-		this.fuerza = fuerza;
-	}
 
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public int getNivel() {
-		return nivel;
-	}
-
-	public void setNivel(int nivel) {
-		this.nivel = nivel;
-	}
-
-	public boolean estaVivo() {
+	@Override
+	public final boolean estaVivo() {
 		return salud > 0;
 	}
 
-	public int getDefensa() {
-		return defensa;
-	}
 
-	public void setDefensa(int defensa) {
-		this.defensa = defensa;
-	}
 
-	public int getSalud() {
+	@Override
+	public final int getSalud() {
 		return salud;
 	}
 
-	public void setSalud(int salud) {
+	public final void setSalud(int salud) {
 		this.salud = salud;
 	}
 
-	public int atacar(Peleable atacado) {
-		if (MyRandom.nextDouble() <= 0.15) {// los NPC tienen 15% de golpes criticos
-			return atacado.serAtacado((int) (this.getAtaque() * 1.5));
-		} else
+	@Override
+	public final int atacar(Peleable atacado) {
+		if (MyRandom.nextDouble() <= NUMEROPARAATACAR) {
+			return atacado.serAtacado((int) (this.getAtaque() * MULTIPLICADORFUERZA));
+		} else{
 			return atacado.serAtacado(this.getAtaque());
+		}
 	}
 
-	public int serAtacado(int daño) {
-		if (MyRandom.nextDouble() >= 0.15) {
-			daño -= this.getDefensa() / 2;
+	/** Método que retorna 0 o un valor positivo.
+	 * Ei el número generado por MyRandom.nextDouble() es mayor a 0.15,
+	 * se procede a disminuir el daño por la mitad del atributo defensa si después de la
+	 * reducción de daño, este sigue siendo mayor a 0,
+	 *  se procede a restar el valor del daño al atributo
+	 * salud.
+	 * @param daño valor a ser descontado del atributo salud.
+	 * @return Retorna 0 si el ataque no fue realizado con exito
+	 */
+	@Override
+	public final int serAtacado(int daño) {
+		if (MyRandom.nextDouble() >= NUMEROPARASERATACADO) {
+			daño -= this.getDefensa() / DIVISORDEDEFENSA;
 			if (daño > 0) {
 				salud -= daño;
 				return daño;
 			}
-			return 0;// no le hace daño ya que la defensa fue mayor
+			return 0;
 		}
-		return 0;// esquivo el golpe
+		return 0;
 	}
 
+	@Override
 	public void despuesDeTurno() { }
 
-	public void ganarExperiencia(int exp) {
+	public void ganarExperiencia(final int exp) {
 
 	}
 
 	@Override
-	public int getAtaque() {
-		return fuerza;
+	public final int getAtaque() {
+		return this.getFuerza();
 	}
 
 	@Override
-	public void setAtaque(int ataque) {
-		this.fuerza = ataque;
+	public final void setAtaque(final int ataque) {
+		this.setFuerza(ataque);
+	}
+
+	@Override
+	public final int getMagia() {
+
+		return 0;
 	}
 }
+
+
