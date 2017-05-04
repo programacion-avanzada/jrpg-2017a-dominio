@@ -18,7 +18,7 @@ public class Alianza {
   }
 
   /**
-   * Devuelve una lista de personajes donde estan todos los aliados
+   * Devuelve una lista de personajes donde estan todos los aliados.
    */
   public LinkedList<Personaje> getAliados() {
     return aliados;
