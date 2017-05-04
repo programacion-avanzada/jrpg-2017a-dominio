@@ -16,7 +16,7 @@
 * Robles Martin ([mrleonel](https://github.com/mrleonel))
 * Galluzzo Luciano ([luchogalluzzo](https://github.com/xxxx))
 * Diego Andrada ([dandradagithub](https://github.com/dandradagithub))
-* Completar ([xxxx](https://github.com/xxxx))
+* Nahuel Coronel ([coronelnah](https://github.com/coronelnah))
 * Completar ([xxxx](https://github.com/xxxx))
 
 ## Sobre la tecnología
