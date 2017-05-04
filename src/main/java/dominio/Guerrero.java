@@ -11,6 +11,9 @@ public class Guerrero extends Casta {
     this.nombreCasta = "Guerrero";
   }
 
+  /**
+   * Constructor por defecto de guerrero
+   */
   public Guerrero() {
     super();
     this.nombreCasta = "Guerrero";

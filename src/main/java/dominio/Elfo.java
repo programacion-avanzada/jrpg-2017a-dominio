@@ -7,6 +7,11 @@ package dominio;
  */
 public class Elfo extends Personaje {
 
+  /**
+   * @param nombre
+   * @param casta
+   * @param id
+   */
   public Elfo(String nombre, Casta casta, int id) {
     super(nombre, casta, id);
     energiaTope += 10;

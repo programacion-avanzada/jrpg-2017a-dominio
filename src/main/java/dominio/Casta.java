@@ -15,12 +15,20 @@ public abstract class Casta implements Serializable {
 
   protected String[] habilidadesCasta;
 
+  /**
+   * Constructor por defecto
+   */
   public Casta() {
     this.probabilidadGolpeCritico = 0.2;
     this.probabilidadEvitarDaño = 0.2;
     this.dañoCritico = 1.5;
   }
 
+  /**
+   * @param prob_crit
+   * @param evasion
+   * @param daño_crit
+   */
   public Casta(double prob_crit, double evasion, double daño_crit) {
     this.probabilidadGolpeCritico = prob_crit;
     this.probabilidadEvitarDaño = evasion;
@@ -43,30 +51,51 @@ public abstract class Casta implements Serializable {
   /**
    * @return Devuelve las habilidades que posee dicha casta, en formato String[]
    */
+  /**
+   * @return devuelve todas las habilidades de la casta
+   */
   public String[] getHabilidadesCasta() {
     return habilidadesCasta;
   }
 
+  /**
+   * @return devuelve la probabilidad de golpe critico
+   */
   public double getProbabilidadGolpeCritico() {
     return probabilidadGolpeCritico;
   }
 
+  /**
+   * @param probabilidadGolpeCritico
+   */
   public void setProbabilidadGolpeCritico(double probabilidadGolpeCritico) {
     this.probabilidadGolpeCritico = probabilidadGolpeCritico;
   }
 
+  /**
+   * @return devuelve la probabilidad de Evitar Daño
+   */
   public double getProbabilidadEvitarDaño() {
     return probabilidadEvitarDaño;
   }
 
+  /**
+   * @param probabilidadEvitarDaño
+   */
   public void setProbabilidadEvitarDaño(double probabilidadEvitarDaño) {
     this.probabilidadEvitarDaño = probabilidadEvitarDaño;
   }
 
+  /**
+   * @return devuelve el daño critico
+   */
   public double getDañoCritico() {
     return dañoCritico;
   }
 
+  /**
+   * @param dañoCritico
+   */
   public void setDañoCritico(double dañoCritico) {
     this.dañoCritico = dañoCritico;
   }

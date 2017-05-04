@@ -11,6 +11,9 @@ public class Asesino extends Casta {
     this.nombreCasta = "Asesino";
   }
 
+  /**
+   * Constructor por defecto
+   */
   public Asesino() {
     super();
     this.nombreCasta = "Asesino";

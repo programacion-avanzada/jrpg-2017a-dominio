@@ -148,147 +148,252 @@ public abstract class Personaje implements Peleable, Serializable {
     this.magia = this.calcularPuntosDeMagia();
   }
 
+  /**
+   * @return devuelve el nombre de la raza
+   */
   public String getNombreRaza() {
     return nombreRaza;
   }
 
+  /**
+   * @param nombreRaza
+   */
   public void setNombreRaza(String nombreRaza) {
     this.nombreRaza = nombreRaza;
   }
 
+  /* (non-Javadoc)
+   * @see dominio.Peleable#getNombre()
+   */
   @Override
   public String getNombre() {
     return nombre;
   }
 
+  /**
+   * @param nombre
+   */
   public void setNombre(String nombre) {
     this.nombre = nombre;
   }
 
+  /* (non-Javadoc)
+   * @see dominio.Peleable#getAtaque()
+   */
   @Override
   public int getAtaque() {
     return ataque;
   }
 
+  /* (non-Javadoc)
+   * @see dominio.Peleable#setAtaque(int)
+   */
   @Override
   public void setAtaque(int ataque) {
     this.ataque = ataque;
   }
 
+  /**
+   * @return devuelve la magia
+   */
   public int getMagia() {
     return magia;
   }
 
+  /**
+   * @param magia
+   */
   public void setMagia(int magia) {
     this.magia = magia;
   }
 
+  /**
+   * @return devuelve el clan
+   */
   public Alianza getClan() {
     return clan;
   }
 
+  /**
+   * @param clan
+   */
   public void setClan(Alianza clan) {
     this.clan = clan;
     clan.añadirPersonaje(this);
   }
 
+  /* (non-Javadoc)
+   * @see dominio.Peleable#getSalud()
+   */
   @Override
   public int getSalud() {
     return salud;
   }
 
+  /**
+   * @param salud
+   */
   public void setSalud(int salud) {
     this.salud = salud;
   }
 
+  /**
+   * @return devuelve la energia
+   */
   public int getEnergia() {
     return energia;
   }
 
+  /**
+   * @param energia
+   */
   public void setEnergia(int energia) {
     this.energia = energia;
   }
 
+  /**
+   * @return devuelve la fuerza
+   */
   public int getFuerza() {
     return fuerza;
   }
 
+  /**
+   * @param fuerza
+   */
   public void setFuerza(int fuerza) {
     this.fuerza = fuerza;
   }
 
+  /**
+   * @return devuelve la destreza
+   */
   public int getDestreza() {
     return destreza;
   }
 
+  /**
+   * @param destreza
+   */
   public void setDestreza(int destreza) {
     this.destreza = destreza;
   }
 
+  /**
+   * @return devuelve la inteligencia
+   */
   public int getInteligencia() {
     return inteligencia;
   }
 
+  /**
+   * @param inteligencia
+   */
   public void setInteligencia(int inteligencia) {
     this.inteligencia = inteligencia;
   }
 
+  /**
+   * @return devuelve la casta a la que pertenece el personaje
+   */
   public Casta getCasta() {
     return casta;
   }
 
+  /**
+   * @param casta
+   */
   public void setCasta(Casta casta) {
     this.casta = casta;
   }
 
+  /**
+   * @return devuelve la experiencia del personaje
+   */
   public int getExperiencia() {
     return experiencia;
   }
 
+  /**
+   * @param experiencia
+   */
   public void setExperiencia(int experiencia) {
     this.experiencia = experiencia;
   }
 
+  /**
+   * @return devuelve el nivel
+   */
   public int getNivel() {
     return nivel;
   }
 
+  /**
+   * @param nivel
+   */
   public void setNivel(int nivel) {
     this.nivel = nivel;
   }
 
+  /**
+   * @return devuelve el id del personaje
+   */
   public int getIdPersonaje() {
     return idPersonaje;
   }
 
+  /**
+   * @param idPersonaje
+   */
   public void setIdPersonaje(int idPersonaje) {
     this.idPersonaje = idPersonaje;
   }
 
+  /**
+   * @return devuelve la defensa del personaje
+   */
   public int getDefensa() {
     return defensa;
   }
 
+  /**
+   * @param defensa
+   */
   public void setDefensa(int defensa) {
     this.defensa = defensa;
   }
 
+  /**
+   * @return devuelve el tope de salud
+   */
   public int getSaludTope() {
     return saludTope;
   }
 
+  /**
+   * @param saludTope
+   */
   public void setSaludTope(int saludTope) {
     this.saludTope = saludTope;
   }
 
+  /**
+   * @return devuelve el tope de energia
+   */
   public int getEnergiaTope() {
     return energiaTope;
   }
 
+  /**
+   * @param energiaTope
+   */
   public void setEnergiaTope(int energiaTope) {
     this.energiaTope = energiaTope;
   }
 
+  /* (non-Javadoc)
+   * @see dominio.Peleable#atacar(dominio.Peleable)
+   */
   @Override
   public int atacar(Peleable atacado) {
     if (salud == 0) {
@@ -304,35 +409,59 @@ public abstract class Personaje implements Peleable, Serializable {
     return 0;
   }
 
+  /**
+   * @return devuelve el valor del golpe critico
+   */
   public int golpe_critico() {
     return (int) (this.ataque * this.getCasta().getDañoCritico());
   }
 
+  /* (non-Javadoc)
+   * @see dominio.Peleable#despuesDeTurno()
+   */
   @Override
   public void despuesDeTurno() {
 
   }
 
+  /**
+   * @return devuelve si puede atacar o no
+   */
   public boolean puedeAtacar() {
     return energia > 10;
   }
 
+  /**
+   * @return devuelve los puntos de ataque
+   */
   public int calcularPuntosDeAtaque() {
     return (int) (this.getFuerza() * 1.5);
   }
 
+  /**
+   * @return devuelve los puntos de defensa
+   */
   public int calcularPuntosDeDefensa() {
     return (this.getDestreza());
   }
 
+  /**
+   * @return devuelve los puntos de magia
+   */
   public int calcularPuntosDeMagia() {
     return (int) (this.getInteligencia() * 1.5);
   }
 
+  /**
+   * Reestablece la salud del personaje
+   */
   public void restablecerSalud() {
     this.salud = this.saludTope;
   }
 
+  /**
+   * Reestablece la energia del personaje
+   */
   public void restablecerEnergia() {
     this.energia = this.energiaTope;
   }
@@ -347,11 +476,17 @@ public abstract class Personaje implements Peleable, Serializable {
     this.magia = this.calcularPuntosDeMagia();
   }
 
+  /* (non-Javadoc)
+   * @see dominio.Peleable#estaVivo()
+   */
   @Override
   public boolean estaVivo() {
     return salud > 0;
   }
 
+  /* (non-Javadoc)
+   * @see dominio.Peleable#serAtacado(int)
+   */
   @Override
   public int serAtacado(int danio) {
     if (MyRandom.nextDouble() >= this.getCasta().getProbabilidadEvitarDaño()) {
@@ -545,28 +680,48 @@ public abstract class Personaje implements Peleable, Serializable {
     return false;
   }
 
+  /* (non-Javadoc)
+   * @see dominio.Peleable#otorgarExp()
+   */
   @Override
   public int otorgarExp() {
     return this.nivel * 40;
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#clone()
+   */
   @Override
   protected Object clone() throws CloneNotSupportedException {
     return super.clone();
   }
 
+  /**
+   * @param p
+   * @return calcula la distancia
+   */
   public double distanciaCon(Personaje p) {
     return Math.sqrt(Math.pow(this.posX - p.posX, 2) + Math.pow(this.posY - p.posY, 2));
   }
 
+  /**
+   * @param atacado
+   * @return devuelve la habilidad de la casta 1
+   */
   public boolean habilidadCasta1(Peleable atacado) {
     return this.getCasta().habilidad1(this, atacado);
   }
-
+  /**
+   * @param atacado
+   * @return devuelve la habilidad de la casta 2
+   */
   public boolean habilidadCasta2(Peleable atacado) {
     return this.getCasta().habilidad2(this, atacado);
   }
-
+  /**
+   * @param atacado
+   * @return devuelve la habilidad de la casta 3
+   */
   public boolean habilidadCasta3(Peleable atacado) {
     return this.getCasta().habilidad3(this, atacado);
   }

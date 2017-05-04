@@ -7,6 +7,11 @@ package dominio;
  */
 public class Orco extends Personaje {
 
+  /**
+   * @param nombre
+   * @param casta
+   * @param id
+   */
   public Orco(String nombre, Casta casta, int id) {
     super(nombre, casta, id);
     saludTope += 10;

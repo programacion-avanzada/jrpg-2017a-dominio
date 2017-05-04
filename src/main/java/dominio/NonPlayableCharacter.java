@@ -13,6 +13,11 @@ public class NonPlayableCharacter implements Peleable {
   private int nivel;
   private static final int dificultadAleatoria = -1;
 
+  /**
+   * @param nombre
+   * @param nivel
+   * @param dificultadNPC
+   */
   public NonPlayableCharacter(String nombre, int nivel, int dificultadNPC) {
     this.nombre = nombre;
     this.nivel = nivel;
@@ -56,6 +61,9 @@ public class NonPlayableCharacter implements Peleable {
     return fuerza;
   }
 
+  /**
+   * @param fuerza
+   */
   public void setFuerza(int fuerza) {
     this.fuerza = fuerza;
   }
@@ -75,10 +83,16 @@ public class NonPlayableCharacter implements Peleable {
     this.nombre = nombre;
   }
 
+  /**
+   * @return devuelve el nivel del personaje
+   */
   public int getNivel() {
     return nivel;
   }
 
+  /**
+   * @param nivel
+   */
   public void setNivel(int nivel) {
     this.nivel = nivel;
   }
@@ -88,23 +102,38 @@ public class NonPlayableCharacter implements Peleable {
     return salud > 0;
   }
 
+  /**
+   * @return devuelve la defensa del personaje
+   */
   public int getDefensa() {
     return defensa;
   }
 
-  public void setDefensa(int defensa) {
+  /**
+   * @param defensa
+   */
+  public void setDefensa(int defensa) { 
     this.defensa = defensa;
   }
 
+  /* (non-Javadoc)
+   * @see dominio.Peleable#getSalud()
+   */
   @Override
   public int getSalud() {
     return salud;
   }
 
+  /**
+   * @param salud
+   */
   public void setSalud(int salud) {
     this.salud = salud;
   }
 
+  /* (non-Javadoc)
+   * @see dominio.Peleable#atacar(dominio.Peleable)
+   */
   @Override
   public int atacar(Peleable atacado) {
     if (MyRandom.nextDouble() <= 0.15) {// los NPC tienen 15% de golpes criticos
@@ -114,6 +143,9 @@ public class NonPlayableCharacter implements Peleable {
     }
   }
 
+  /* (non-Javadoc)
+   * @see dominio.Peleable#serAtacado(int)
+   */
   @Override
   public int serAtacado(int daño) {
     if (MyRandom.nextDouble() >= 0.15) {
@@ -127,19 +159,31 @@ public class NonPlayableCharacter implements Peleable {
     return 0;// esquivo el golpe
   }
 
+  /* (non-Javadoc)
+   * @see dominio.Peleable#despuesDeTurno()
+   */
   @Override
   public void despuesDeTurno() {
   }
 
+  /**
+   * @param exp
+   */
   public void ganarExperiencia(int exp) {
 
   }
 
+  /* (non-Javadoc)
+   * @see dominio.Peleable#getAtaque()
+   */
   @Override
   public int getAtaque() {
     return fuerza;
   }
 
+  /* (non-Javadoc)
+   * @see dominio.Peleable#setAtaque(int)
+   */
   @Override
   public void setAtaque(int ataque) {
     this.fuerza = ataque;

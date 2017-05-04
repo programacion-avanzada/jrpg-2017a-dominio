@@ -12,6 +12,9 @@ public class Alianza {
   String nombre;
   LinkedList<Personaje> aliados;
 
+  /**
+   * @param Constructor parametrizado
+   */
   public Alianza(String nombre) {
     this.nombre = nombre;
     this.aliados = new LinkedList<Personaje>();
@@ -32,14 +35,23 @@ public class Alianza {
     this.aliados = aliados;
   }
 
+  /**
+   * @return devuelve el nombre
+   */
   public String obtenerNombre() {
     return nombre;
   }
 
+  /**
+   * @param Elimina un personaje de la alianza
+   */
   public void eliminarPersonaje(Personaje pj) {
     aliados.remove(pj);
   }
 
+  /**
+   * @param Agrega un personaje a la alianza
+   */
   public void añadirPersonaje(Personaje pj) {
     aliados.add(pj);
   }

@@ -16,6 +16,18 @@ public class Humano extends Personaje {
     nombreRaza = "Humano";
   }
 
+  /**
+   * @param nombre
+   * @param salud
+   * @param energia
+   * @param fuerza
+   * @param destreza
+   * @param inteligencia
+   * @param casta
+   * @param experiencia
+   * @param nivel
+   * @param idPersonaje
+   */
   public Humano(String nombre, int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta, int experiencia, int nivel, int idPersonaje) {
     super(nombre, salud, energia, fuerza, destreza, inteligencia, casta, experiencia, nivel, idPersonaje);
     nombreRaza = "Humano";

@@ -11,6 +11,9 @@ public class Hechicero extends Casta {
     this.nombreCasta = "Hechicero";
   }
 
+  /**
+   * Constructor por defecto de Hechicero
+   */
   public Hechicero() {
     super();
     this.nombreCasta = "Hechicero";
