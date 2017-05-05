@@ -28,8 +28,6 @@ public class TestAsesino {
     Assert.assertEquals(105, h2.getSalud());
     if (h.habilidadCasta1(h2)) {
       Assert.assertTrue(93 == h2.getSalud());
-    } else {
-      Assert.assertEquals(105, h2.getSalud());
     }
   }
 

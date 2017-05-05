@@ -30,8 +30,6 @@ public class TestHechicero {
     Assert.assertTrue(e.getSalud() == 100);
     if (h.habilidadCasta1(e)) {
       Assert.assertTrue(e.getSalud() < 100);
-    } else {
-      Assert.assertTrue(e.getSalud() == 100);
     }
   }
 

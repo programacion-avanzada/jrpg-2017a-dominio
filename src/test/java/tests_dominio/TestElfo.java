@@ -17,8 +17,6 @@ public class TestElfo {
     Assert.assertTrue(h.getSalud() == 100);
     if (e.habilidadRaza1(h)) {
       Assert.assertTrue(h.getSalud() < 100);
-    } else {
-      Assert.assertTrue(h.getSalud() == 100);
     }
   }
 
@@ -30,8 +28,6 @@ public class TestElfo {
     Assert.assertTrue(h.getSalud() == 100);
     if (e.habilidadRaza2(h)) {
       Assert.assertTrue(h.getSalud() < 100);
-    } else {
-      Assert.assertTrue(h.getSalud() == 100);
     }
   }
 
