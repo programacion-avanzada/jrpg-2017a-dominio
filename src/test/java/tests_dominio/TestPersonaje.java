@@ -78,4 +78,117 @@ public class TestPersonaje {
 		Assert.assertTrue(o3.getDestreza() == 15);
 		Assert.assertTrue(o3.getInteligencia() == 10);
 	}
+
+	@Test
+	public void testDistanciaCon() {
+		Orco o1 = new Orco("Maxi", new Guerrero(), 1);
+		Orco o2 = new Orco("Nico", new Guerrero(), 1);
+
+		Assert.assertTrue(o2.distanciaCon(o1) == 0);
+	}
+
+	@Test
+	public void testElAliadoYaTieneUnClan() {
+		Orco o1 = new Orco("Maxi", new Guerrero(), 1);
+		Orco o2 = new Orco("Nico", new Guerrero(), 1);
+		Orco o3 = new Orco("Otro", new Guerrero(), 1);
+
+		Assert.assertTrue(o2.aliar(o3) == true);
+		Assert.assertTrue(o1.aliar(o2) == false);
+	}
+
+	@Test
+	public void testManipularAlianza() {
+		Orco o1 = new Orco("Maxi", new Guerrero(), 1);
+		Orco o2 = new Orco("Nico", new Guerrero(), 1);
+		Orco o3 = new Orco("Otro", new Guerrero(), 1);
+
+    o1.crearAlianza("el clan");
+
+		Assert.assertTrue("el clan" == o1.getClan().obtenerNombre());
+    Assert.assertTrue(o1.getClan().getAliados().getFirst() == o1);
+
+    o1.salirDeAlianza();
+		Assert.assertTrue(o1.getClan() == null);
+		o1.salirDeAlianza();
+	}
+
+	@Test
+	public void testGettersYSetters() {
+		Orco o = new Orco("Maxi", new Hechicero(), 1);
+		Guerrero g = new Guerrero();
+		o.setNombre("Roberto");
+		o.setNombreRaza("Enano");
+		o.setCasta(g);
+		o.setMagia(10);
+		o.setNivel(10);
+		o.setExperiencia(10);
+		o.setIdPersonaje(10);
+		o.setSaludTope(10);
+		o.setEnergiaTope(10);
+		Assert.assertTrue(o.getNombre() == "Roberto");
+		Assert.assertTrue(o.getNombreRaza() == "Enano");
+		Assert.assertTrue(o.getCasta() == g);
+		Assert.assertTrue(o.getNivel() == 10);
+		Assert.assertTrue(o.getExperiencia() == 10);
+		Assert.assertTrue(o.getIdPersonaje() == 10);
+		Assert.assertTrue(o.getSaludTope() == 10);
+		Assert.assertTrue(o.getEnergiaTope() == 10);
+		Assert.assertTrue(o.getHabilidadesCasta()[0] == "Ataque Doble");
+		Assert.assertTrue(o.getHabilidadesRaza()[0] == "Golpe Defensa");
+	}
+
+	@Test
+	public void testPuedeAtacar() {
+		Orco o = new Orco("Maxi", new Hechicero(), 1);
+		Assert.assertTrue(o.puedeAtacar() == true);
+		o.setEnergia(9);
+		Assert.assertTrue(o.puedeAtacar() == false);
+	}
+
+	@Test
+	public void testRestablecerEnergiaYSalud() {
+		Orco o = new Orco("Maxi", new Hechicero(), 1);
+		o.setEnergia(9);
+		o.setSalud(9);
+		o.restablecerEnergia();
+		o.restablecerSalud();
+		Assert.assertTrue(o.getEnergia() == 100);
+		Assert.assertTrue(o.getSalud() == 110);
+	}
+
+	@Test
+	public void testTenerBuenaDefensa() {
+		Orco o = new Orco("Maxi", new Hechicero(), 1);
+		o.setDefensa(100);
+		Assert.assertTrue(o.serAtacado(99) == 0);
+		Assert.assertTrue(o.serRobadoSalud(99) == 0);
+		Assert.assertTrue(o.serDesenergizado(99) == 0);
+	}
+
+	@Test
+	public void testSerRobadoSaludYMorir() {
+		Orco o = new Orco("Maxi", new Hechicero(), 1);
+		o.setSalud(10);
+		o.setDefensa(10);
+		Assert.assertTrue(o.serRobadoSalud(100) == 10);
+		Assert.assertTrue(o.getSalud() == 0);
+	}
+
+	@Test
+	public void testSerDesenergizadoYMorir() {
+		Orco o = new Orco("Maxi", new Hechicero(), 1);
+		o.setEnergia(10);
+		o.setDefensa(10);
+		Assert.assertTrue(o.serDesenergizado(100) == 10);
+		Assert.assertTrue(o.getEnergia() == 0);
+	}
+
+	@Test
+	public void serEnergizadoAlMaximo() {
+		Orco o = new Orco("Maxi", new Hechicero(), 1);
+		o.setEnergia(99);
+		o.serEnergizado(10000);
+		Assert.assertTrue(o.getEnergia() == 100);
+	}
 }
