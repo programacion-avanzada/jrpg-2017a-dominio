@@ -6,21 +6,30 @@ el entorno del juego, en este caso Asesino.--
 */
 public class Asesino extends Casta {
 
+  static final int CANTIDAD_DE_HABILIDADES = 3;
+  static final int COSTE_DE_ENERGIA_HABILIDADES = 10;
+  static final double AUMENTO_EVASION_HABILIDAD = 0.15;
+  static final double TOPE_AUMENTO_EVASION = 0.5;
+
+  private static final long serialVersionUID = 1L;
+
   //constructores
   /** 
    * Constructor parametrizado
  */
-  public Asesino(double probCrit, double evasion, double dañoCrit) {
+  public Asesino(final double probCrit, final double evasion, final double dañoCrit) {
 super(probCrit, evasion, dañoCrit);
     this.nombreCasta = "Asesino";
   }
 
-  /** Constructor por defecto*/
+  /**
+   *  Constructor por defecto
+   */
   
   public Asesino() {
 super();
     this.nombreCasta = "Asesino";
-    habilidadesCasta = new String[3];
+    habilidadesCasta = new String[CANTIDAD_DE_HABILIDADES];
     habilidadesCasta[0] = "Golpe Critico";
     habilidadesCasta[1] = "Aumentar Evasion";
     habilidadesCasta[2] = "Robar";
@@ -30,10 +39,9 @@ super();
   *El metodo "habilidad1" es el que calcula el daño por golpe critico
   *segun la casta del personaje
   */
-
-  public boolean habilidad1(Personaje caster, Peleable atacado) {
-    if (caster.getEnergia() > 10) {
-      caster.setEnergia(caster.getEnergia() - 10);
+  public boolean habilidad1(final Personaje caster, final Peleable atacado) {
+    if (caster.getEnergia() > COSTE_DE_ENERGIA_HABILIDADES) {
+      caster.setEnergia(caster.getEnergia() - COSTE_DE_ENERGIA_HABILIDADES);
       if (atacado.serAtacado((int) (caster.ataque * caster.getCasta().getDañoCritico())) > 0) {
         return true;
       }
@@ -46,13 +54,13 @@ super();
   *la casta del personaje
   */
 
-  public boolean habilidad2(Personaje caster, Peleable atacado) {
-    if (caster.getEnergia() > 10) {
-      caster.setEnergia(caster.getEnergia() - 10);
-      if (this.getProbabilidadEvitarDaño() + 0.15 < 0.5) {
-        this.probabilidadEvitarDaño += 0.15;
+  public boolean habilidad2(final Personaje caster, final Peleable atacado) {
+    if (caster.getEnergia() > COSTE_DE_ENERGIA_HABILIDADES) {
+      caster.setEnergia(caster.getEnergia() - COSTE_DE_ENERGIA_HABILIDADES);
+      if (this.getProbabilidadEvitarDaño() + AUMENTO_EVASION_HABILIDAD < TOPE_AUMENTO_EVASION) {
+        this.probabilidadEvitarDaño += AUMENTO_EVASION_HABILIDAD;
       } else {
-        this.probabilidadEvitarDaño = 0.5;
+        this.probabilidadEvitarDaño = TOPE_AUMENTO_EVASION;
       }
       return true;
     }
@@ -60,7 +68,7 @@ super();
   }
 
   // Robar
-  public boolean habilidad3(Personaje caster, Peleable atacado) {
+  public boolean habilidad3(final Personaje caster, final Peleable atacado) {
     return false;
   }
 }
