@@ -35,4 +35,15 @@ public class TestHumano {
       Assert.assertTrue(e.getSalud() == 100);
     }
   }
+
+  @Test
+  public void misTestSobreHumano() {
+    Humano a = new Humano("humanito", 55, 2, 55, 55, 55, new Hechicero(), 55, 55, 55);
+    Humano b = new Humano("humanito2", 55, 424, 55, 55, 55, new Hechicero(), 55, 55, 55);
+    Assert.assertFalse(a.habilidadRaza1(b));
+
+    Humano c = new Humano("humanito", 55, 90, 55, 55, 55, new Hechicero(), 55, 55, 55);
+    Assert.assertFalse(c.habilidadRaza2(b));
+
+  }
 }
