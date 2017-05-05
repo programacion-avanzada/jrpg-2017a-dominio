@@ -29,21 +29,21 @@ public class NonPlayableCharacter implements Peleable {
     }
 
     switch (dificultad) {
-      case 0:
-        this.fuerza = 10 + ((nivel - 1) * 3);// 30%
-        this.salud = 30 + ((nivel - 1) * 15);
-        this.defensa = 2 + ((nivel - 1) * 1);
-        break;
-      case 1:
-        this.fuerza = 20 + ((nivel - 1) * 6);// 50%
-        this.salud = 40 + ((nivel - 1) * 20);
-        this.defensa = 5 + ((nivel - 1) * 2);
-        break;
-      case 2:
-        this.fuerza = 30 + ((nivel - 1) * 10);// 50%
-        this.salud = 50 + ((nivel - 1) * 25);
-        this.defensa = 4 + ((nivel - 1) * 4);
-        break;
+    case 0:
+      this.fuerza = 10 + ((nivel - 1) * 3);// 30%
+      this.salud = 30 + ((nivel - 1) * 15);
+      this.defensa = 2 + ((nivel - 1) * 1);
+      break;
+    case 1:
+      this.fuerza = 20 + ((nivel - 1) * 6);// 50%
+      this.salud = 40 + ((nivel - 1) * 20);
+      this.defensa = 5 + ((nivel - 1) * 2);
+      break;
+    case 2:
+      this.fuerza = 30 + ((nivel - 1) * 10);// 50%
+      this.salud = 50 + ((nivel - 1) * 25);
+      this.defensa = 4 + ((nivel - 1) * 4);
+      break;
     }
   }
 
@@ -112,11 +112,13 @@ public class NonPlayableCharacter implements Peleable {
   /**
    * @param defensa
    */
-  public void setDefensa(int defensa) { 
+  public void setDefensa(int defensa) {
     this.defensa = defensa;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see dominio.Peleable#getSalud()
    */
   @Override
@@ -131,7 +133,9 @@ public class NonPlayableCharacter implements Peleable {
     this.salud = salud;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see dominio.Peleable#atacar(dominio.Peleable)
    */
   @Override
@@ -143,23 +147,27 @@ public class NonPlayableCharacter implements Peleable {
     }
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see dominio.Peleable#serAtacado(int)
    */
   @Override
-  public int serAtacado(int daño) {
+  public int serAtacado(int daÃ±o) {
     if (MyRandom.nextDouble() >= 0.15) {
-      daño -= this.getDefensa() / 2;
-      if (daño > 0) {
-        salud -= daño;
-        return daño;
+      daÃ±o -= this.getDefensa() / 2;
+      if (daÃ±o > 0) {
+        salud -= daÃ±o;
+        return daÃ±o;
       }
-      return 0;// no le hace daño ya que la defensa fue mayor
+      return 0;// no le hace daï¿½o ya que la defensa fue mayor
     }
     return 0;// esquivo el golpe
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see dominio.Peleable#despuesDeTurno()
    */
   @Override
@@ -173,7 +181,9 @@ public class NonPlayableCharacter implements Peleable {
 
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see dominio.Peleable#getAtaque()
    */
   @Override
@@ -181,7 +191,9 @@ public class NonPlayableCharacter implements Peleable {
     return fuerza;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see dominio.Peleable#setAtaque(int)
    */
   @Override

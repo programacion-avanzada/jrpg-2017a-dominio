@@ -162,7 +162,9 @@ public abstract class Personaje implements Peleable, Serializable {
     this.nombreRaza = nombreRaza;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   *
    * @see dominio.Peleable#getNombre()
    */
   @Override
@@ -177,7 +179,9 @@ public abstract class Personaje implements Peleable, Serializable {
     this.nombre = nombre;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   *
    * @see dominio.Peleable#getAtaque()
    */
   @Override
@@ -185,7 +189,9 @@ public abstract class Personaje implements Peleable, Serializable {
     return ataque;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   *
    * @see dominio.Peleable#setAtaque(int)
    */
   @Override
@@ -219,10 +225,12 @@ public abstract class Personaje implements Peleable, Serializable {
    */
   public void setClan(Alianza clan) {
     this.clan = clan;
-    clan.añadirPersonaje(this);
+    clan.aÃ±adirPersonaje(this);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   *
    * @see dominio.Peleable#getSalud()
    */
   @Override
@@ -391,7 +399,9 @@ public abstract class Personaje implements Peleable, Serializable {
     this.energiaTope = energiaTope;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   *
    * @see dominio.Peleable#atacar(dominio.Peleable)
    */
   @Override
@@ -413,10 +423,12 @@ public abstract class Personaje implements Peleable, Serializable {
    * @return devuelve el valor del golpe critico
    */
   public int golpe_critico() {
-    return (int) (this.ataque * this.getCasta().getDañoCritico());
+    return (int) (this.ataque * this.getCasta().getDaÃ±oCritico());
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   *
    * @see dominio.Peleable#despuesDeTurno()
    */
   @Override
@@ -476,7 +488,9 @@ public abstract class Personaje implements Peleable, Serializable {
     this.magia = this.calcularPuntosDeMagia();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   *
    * @see dominio.Peleable#estaVivo()
    */
   @Override
@@ -484,12 +498,14 @@ public abstract class Personaje implements Peleable, Serializable {
     return salud > 0;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   *
    * @see dominio.Peleable#serAtacado(int)
    */
   @Override
   public int serAtacado(int danio) {
-    if (MyRandom.nextDouble() >= this.getCasta().getProbabilidadEvitarDaño()) {
+    if (MyRandom.nextDouble() >= this.getCasta().getProbabilidadEvitarDaÃ±o()) {
       danio -= this.defensa;
       if (danio > 0) {
         if (salud <= danio) {
@@ -509,8 +525,8 @@ public abstract class Personaje implements Peleable, Serializable {
    * serRobadoSalud(int danio).
    *
    * @param danio
-   *          daño producido
-   * @return daño restante?_verificar
+   *          daï¿½o producido
+   * @return daï¿½o restante?_verificar
    */
   public int serRobadoSalud(int danio) {
     danio -= this.defensa;
@@ -520,18 +536,18 @@ public abstract class Personaje implements Peleable, Serializable {
     if ((salud - danio) >= 0) {
       salud -= danio;
     } else {
-      danio = salud;// le queda menos salud que el daño inflingido
+      danio = salud;// le queda menos salud que el daï¿½o inflingido
       salud = 0;
     }
     return danio;
   }
 
   /**
-   * serDesenergizado(int daño).
+   * serDesenergizado(int daï¿½o).
    *
    * @param danio
-   *          daño a producir ?
-   * @return daño producido?
+   *          daï¿½o a producir ?
+   * @return daï¿½o producido?
    */
   public int serDesernegizado(int danio) {
     danio -= this.defensa;
@@ -541,7 +557,7 @@ public abstract class Personaje implements Peleable, Serializable {
     if ((energia - danio) >= 0) {
       energia -= danio;
     } else {
-      danio = energia;// le queda menos energia que el daño inflingido
+      danio = energia;// le queda menos energia que el daï¿½o inflingido
       energia = 0;
     }
     return danio;
@@ -583,7 +599,7 @@ public abstract class Personaje implements Peleable, Serializable {
    */
   public void crearAlianza(String nombreAlianza) {
     this.clan = new Alianza(nombreAlianza);
-    this.clan.añadirPersonaje(this);
+    this.clan.aÃ±adirPersonaje(this);
   }
 
   /**
@@ -608,12 +624,12 @@ public abstract class Personaje implements Peleable, Serializable {
     if (this.clan == null) {
       Alianza a = new Alianza("Alianza 1");
       this.clan = a;
-      a.añadirPersonaje(this);
+      a.aÃ±adirPersonaje(this);
     }
 
     if (nuevoAliado.clan == null) {
       nuevoAliado.clan = this.clan;
-      this.clan.añadirPersonaje(nuevoAliado);
+      this.clan.aÃ±adirPersonaje(nuevoAliado);
       return true;
     } else {
       return false;
@@ -680,7 +696,9 @@ public abstract class Personaje implements Peleable, Serializable {
     return false;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   *
    * @see dominio.Peleable#otorgarExp()
    */
   @Override
@@ -688,7 +706,9 @@ public abstract class Personaje implements Peleable, Serializable {
     return this.nivel * 40;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   *
    * @see java.lang.Object#clone()
    */
   @Override
@@ -697,6 +717,8 @@ public abstract class Personaje implements Peleable, Serializable {
   }
 
   /**
+   * distanciaCon.
+   *
    * @param p
    * @return calcula la distancia
    */
@@ -711,6 +733,7 @@ public abstract class Personaje implements Peleable, Serializable {
   public boolean habilidadCasta1(Peleable atacado) {
     return this.getCasta().habilidad1(this, atacado);
   }
+
   /**
    * @param atacado
    * @return devuelve la habilidad de la casta 2
@@ -718,6 +741,7 @@ public abstract class Personaje implements Peleable, Serializable {
   public boolean habilidadCasta2(Peleable atacado) {
     return this.getCasta().habilidad2(this, atacado);
   }
+
   /**
    * @param atacado
    * @return devuelve la habilidad de la casta 3

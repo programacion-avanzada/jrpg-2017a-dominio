@@ -11,5 +11,6 @@ public class TestNPC {
   public void testOtorgarExp() {
     NonPlayableCharacter npc = new NonPlayableCharacter("Gigante", 1, -1);
     Assert.assertTrue(30 == npc.otorgarExp());
+
   }
 }

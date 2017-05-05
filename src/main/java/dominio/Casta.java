@@ -9,8 +9,8 @@ import java.io.Serializable;
  */
 public abstract class Casta implements Serializable {
   protected double probabilidadGolpeCritico;
-  protected double probabilidadEvitarDaño;
-  protected double dañoCritico;
+  protected double probabilidadEvitarDaÃ±o;
+  protected double daÃ±oCritico;
   protected String nombreCasta;
 
   protected String[] habilidadesCasta;
@@ -20,19 +20,19 @@ public abstract class Casta implements Serializable {
    */
   public Casta() {
     this.probabilidadGolpeCritico = 0.2;
-    this.probabilidadEvitarDaño = 0.2;
-    this.dañoCritico = 1.5;
+    this.probabilidadEvitarDaÃ±o = 0.2;
+    this.daÃ±oCritico = 1.5;
   }
 
   /**
    * @param prob_crit
    * @param evasion
-   * @param daño_crit
+   * @param daï¿½o_crit
    */
-  public Casta(double prob_crit, double evasion, double daño_crit) {
+  public Casta(double prob_crit, double evasion, double daÃ±o_crit) {
     this.probabilidadGolpeCritico = prob_crit;
-    this.probabilidadEvitarDaño = evasion;
-    this.dañoCritico = daño_crit;
+    this.probabilidadEvitarDaÃ±o = evasion;
+    this.daÃ±oCritico = daÃ±o_crit;
   }
 
   public abstract boolean habilidad1(Personaje caster, Peleable atacado);
@@ -73,30 +73,30 @@ public abstract class Casta implements Serializable {
   }
 
   /**
-   * @return devuelve la probabilidad de Evitar Daño
+   * @return devuelve la probabilidad de Evitar DaÃ±o
    */
-  public double getProbabilidadEvitarDaño() {
-    return probabilidadEvitarDaño;
+  public double getProbabilidadEvitarDaÃ±o() {
+    return probabilidadEvitarDaÃ±o;
   }
 
   /**
-   * @param probabilidadEvitarDaño
+   * @param probabilidadEvitarDaï¿½o
    */
-  public void setProbabilidadEvitarDaño(double probabilidadEvitarDaño) {
-    this.probabilidadEvitarDaño = probabilidadEvitarDaño;
+  public void setProbabilidadEvitarDaÃ±o(double probabilidadEvitarDaÃ±o) {
+    this.probabilidadEvitarDaÃ±o = probabilidadEvitarDaÃ±o;
   }
 
   /**
-   * @return devuelve el daño critico
+   * @return devuelve el daÃ±o critico
    */
-  public double getDañoCritico() {
-    return dañoCritico;
+  public double getDaÃ±oCritico() {
+    return daÃ±oCritico;
   }
 
   /**
-   * @param dañoCritico
+   * @param daÃ±oCritico
    */
-  public void setDañoCritico(double dañoCritico) {
-    this.dañoCritico = dañoCritico;
+  public void setDaÃ±oCritico(double daÃ±oCritico) {
+    this.daÃ±oCritico = daÃ±oCritico;
   }
 }
