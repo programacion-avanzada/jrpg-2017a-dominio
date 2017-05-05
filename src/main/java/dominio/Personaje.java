@@ -508,6 +508,7 @@ public abstract class Personaje implements Peleable, Serializable {
   public int serAtacado(int daño) {
     if (MyRandom.nextDouble() >= this.getCasta().getProbabilidadEvitarDaño()) {
       daño -= this.defensa;
+
       if (daño > 0) {
         if (salud <= daño) {
           daño = salud;
@@ -517,6 +518,7 @@ public abstract class Personaje implements Peleable, Serializable {
         }
         return daño;
       }
+
       return 0;
     }
     return 0;

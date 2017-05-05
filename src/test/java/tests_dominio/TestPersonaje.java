@@ -9,7 +9,6 @@ import dominio.Elfo;
 import dominio.Guerrero;
 import dominio.Hechicero;
 import dominio.Humano;
-import dominio.MyRandom;
 import dominio.Orco;
 import dominio.Personaje;
 
@@ -168,20 +167,13 @@ public class TestPersonaje {
     nuevoAliado.setClan(new Alianza("Alianza Piedra"));
     nuevoAliado.salirDeAlianza();
     Assert.assertNull(nuevoAliado.getClan());
+  }
 
+  @Test
+  public void testCrearAlianza() {
+    Personaje nuevoAliado = new Elfo("Piedras", new Hechicero(), 232);
     nuevoAliado.setClan(new Alianza("Alianza Piedra"));
-
-    double rand = MyRandom.nextDouble();
-    // if (MyRandom.nextDouble() >= this.getCasta().getProbabilidadEvitarDaño())
-    // {
-    while (rand < nuevoAliado.getCasta().getProbabilidadEvitarDaño()) {
-      rand = MyRandom.nextDouble();
-    }
-    Assert.assertTrue(nuevoAliado.serAtacado(0) == 0);
-
-    while (rand >= nuevoAliado.getCasta().getProbabilidadEvitarDaño()) {
-      rand = MyRandom.nextDouble();
-    }
+    nuevoAliado.crearAlianza("asda");
 
   }
 }
