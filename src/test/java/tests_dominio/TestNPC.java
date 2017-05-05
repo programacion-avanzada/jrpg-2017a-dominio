@@ -55,5 +55,12 @@ public class TestNPC {
     d.setSalud(66);
     Assert.assertTrue(d.getSalud() == 66);
 
+    d.setAtaque(66);
+    Assert.assertTrue(d.getAtaque() == 66);
+    d.despuesDeTurno();
+    d.ganarExperiencia(2);
+
+    Assert.assertTrue(d.serAtacado(-1) == 0);
+
   }
 }

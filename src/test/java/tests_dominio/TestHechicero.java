@@ -53,4 +53,15 @@ public class TestHechicero {
       Assert.assertTrue(e.getSalud() == 100);
     }
   }
+
+  @Test
+  public void testHechicero() {
+    Humano h = new Humano("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 1, 1);
+    Hechicero e = new Hechicero();
+    h.setEnergia(9);
+    Assert.assertFalse(e.habilidad1(h, h));
+    Assert.assertFalse(e.habilidad2(h, h));
+    Assert.assertFalse(e.habilidad3(h, h));
+
+  }
 }

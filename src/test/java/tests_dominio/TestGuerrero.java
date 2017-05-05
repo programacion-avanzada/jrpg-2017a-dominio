@@ -45,4 +45,15 @@ public class TestGuerrero {
     }
   }
 
+  @Test
+  public void testGuerrero() {
+    Humano h = new Humano("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 1, 1);
+    Guerrero e = new Guerrero();
+    h.setEnergia(9);
+    Assert.assertFalse(e.habilidad1(h, h));
+    Assert.assertFalse(e.habilidad2(h, h));
+    Assert.assertFalse(e.habilidad3(h, h));
+
+  }
+
 }

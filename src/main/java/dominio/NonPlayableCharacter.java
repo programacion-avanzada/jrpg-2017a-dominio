@@ -51,7 +51,7 @@ public class NonPlayableCharacter implements Peleable {
      * = 40 + ((nivel - 1) * 20); this.defensa = 5 + ((nivel - 1) * 2); break;
      * case 2: this.fuerza = 30 + ((nivel - 1) * 10);// 50% this.salud = 50 +
      * ((nivel - 1) * 25); this.defensa = 4 + ((nivel - 1) * 4); break; }
-     * 
+     *
      */
   }
 
@@ -148,6 +148,7 @@ public class NonPlayableCharacter implements Peleable {
    */
   @Override
   public int atacar(Peleable atacado) {
+
     if (MyRandom.nextDouble() <= 0.15) {// los NPC tienen 15% de golpes criticos
       return atacado.serAtacado((int) (this.getAtaque() * 1.5));
     } else {
@@ -168,7 +169,7 @@ public class NonPlayableCharacter implements Peleable {
         salud -= daño;
         return daño;
       }
-      return 0;// no le hace da�o ya que la defensa fue mayor
+      return 0;// no le hace daño ya que la defensa fue mayor
     }
     return 0;// esquivo el golpe
   }

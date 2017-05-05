@@ -505,17 +505,17 @@ public abstract class Personaje implements Peleable, Serializable {
    * @see dominio.Peleable#serAtacado(int)
    */
   @Override
-  public int serAtacado(int danio) {
+  public int serAtacado(int daño) {
     if (MyRandom.nextDouble() >= this.getCasta().getProbabilidadEvitarDaño()) {
-      danio -= this.defensa;
-      if (danio > 0) {
-        if (salud <= danio) {
-          danio = salud;
+      daño -= this.defensa;
+      if (daño > 0) {
+        if (salud <= daño) {
+          daño = salud;
           salud = 0;
         } else {
-          salud -= danio;
+          salud -= daño;
         }
-        return danio;
+        return daño;
       }
       return 0;
     }
@@ -604,7 +604,7 @@ public abstract class Personaje implements Peleable, Serializable {
   }
 
   /**
-   * salirDeAlianza().
+   * salirDeAlianza(). Pone el clan de alianza en null
    *
    */
   public void salirDeAlianza() {

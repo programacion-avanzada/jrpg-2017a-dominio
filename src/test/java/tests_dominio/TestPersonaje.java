@@ -9,6 +9,7 @@ import dominio.Elfo;
 import dominio.Guerrero;
 import dominio.Hechicero;
 import dominio.Humano;
+import dominio.MyRandom;
 import dominio.Orco;
 import dominio.Personaje;
 
@@ -148,6 +149,39 @@ public class TestPersonaje {
       Assert.assertFalse(b);
     }
     Assert.assertTrue(nuevoAliado.distanciaCon(new Elfo("Piedras2", new Hechicero(), 232)) == 0);
+
+    Assert.assertTrue(nuevoAliado.serRobadoSalud(0) == 0);
+    Assert.assertTrue(nuevoAliado.serRobadoSalud(121212) > 0);
+
+  }
+
+  @Test
+  public void testSerEnergizadoTopeNoTope() {
+    Personaje nuevoAliado = new Elfo("Piedras", new Hechicero(), 232);
+    nuevoAliado.serEnergizado(7878);
+    Assert.assertTrue(nuevoAliado.getEnergia() == nuevoAliado.getEnergiaTope());
+  }
+
+  @Test
+  public void testSalirDeAliaza() {
+    Personaje nuevoAliado = new Elfo("Piedras", new Hechicero(), 232);
+    nuevoAliado.setClan(new Alianza("Alianza Piedra"));
+    nuevoAliado.salirDeAlianza();
+    Assert.assertNull(nuevoAliado.getClan());
+
+    nuevoAliado.setClan(new Alianza("Alianza Piedra"));
+
+    double rand = MyRandom.nextDouble();
+    // if (MyRandom.nextDouble() >= this.getCasta().getProbabilidadEvitarDaño())
+    // {
+    while (rand < nuevoAliado.getCasta().getProbabilidadEvitarDaño()) {
+      rand = MyRandom.nextDouble();
+    }
+    Assert.assertTrue(nuevoAliado.serAtacado(0) == 0);
+
+    while (rand >= nuevoAliado.getCasta().getProbabilidadEvitarDaño()) {
+      rand = MyRandom.nextDouble();
+    }
 
   }
 }
