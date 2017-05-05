@@ -33,7 +33,7 @@ public class TestAlianza {
   public void testGetNombreIsNull() {
     LinkedList<Personaje> aliados = new LinkedList<Personaje>();
     aliados.add(new Elfo("elfito", new Guerrero(1, 2, 3), 34));
-    Alianza a = new Alianza("");
+    Alianza a = new Alianza(null);
     Assert.assertNull(a.obtenerNombre());
     // Assert.assertNotNull(a.getAliados());
   }

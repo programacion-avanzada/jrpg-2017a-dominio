@@ -3,12 +3,14 @@ package tests_dominio;
 import org.junit.Assert;
 import org.junit.Test;
 
+import dominio.Alianza;
 import dominio.Asesino;
 import dominio.Elfo;
 import dominio.Guerrero;
 import dominio.Hechicero;
 import dominio.Humano;
 import dominio.Orco;
+import dominio.Personaje;
 
 public class TestPersonaje {
 
@@ -82,5 +84,70 @@ public class TestPersonaje {
     Assert.assertTrue(o3.getFuerza() == 10);
     Assert.assertTrue(o3.getDestreza() == 15);
     Assert.assertTrue(o3.getInteligencia() == 10);
+  }
+
+  @Test
+  public void testAsesino() {
+    Elfo a = new Elfo("elfitoChico", new Asesino(), 44);
+    Assert.assertNotNull(a.getHabilidadesCasta());
+    Assert.assertNotNull(a.getHabilidadesRaza());
+
+    a.setNombreRaza("ElfitoChico");
+    Assert.assertTrue(a.getNombreRaza().equals("ElfitoChico"));
+
+    a.setNombre("Elfaso");
+    Assert.assertTrue(a.getNombre().equals("Elfaso"));
+
+    a.setMagia(33);
+    Assert.assertTrue(a.getMagia() == 33);
+
+    a.setCasta(new Hechicero());
+    Assert.assertTrue(a.getCasta().getNombreCasta().equals("Hechicero"));
+
+    a.setExperiencia(22);
+    Assert.assertTrue(a.getExperiencia() == 22);
+
+    a.setNivel(22);
+    Assert.assertTrue(a.getNivel() == 22);
+
+    a.setIdPersonaje(11);
+    Assert.assertTrue(a.getIdPersonaje() == 11);
+
+    a.setSaludTope(99);
+    Assert.assertTrue(a.getSaludTope() == 99);
+
+    a.setEnergiaTope(99);
+    Assert.assertTrue(a.getEnergiaTope() == 99);
+
+    a.setEnergia(23);
+    Assert.assertTrue(a.puedeAtacar());
+
+    a.setEnergia(5);
+    Assert.assertFalse(a.puedeAtacar());
+
+    a.despuesDeTurno();
+
+    a.restablecerEnergia();
+    Assert.assertTrue(a.getEnergiaTope() == 99);
+
+    a.restablecerSalud();
+    Assert.assertTrue(a.getSaludTope() == 99);
+
+    Assert.assertTrue(a.serDesernegizado(1) == 0);
+    // energia - daño
+    int daño = 9898;
+    if ((a.getEnergia() - daño) < 0) {
+      a.serDesernegizado(daño);
+      Assert.assertTrue(a.getEnergia() == 0);
+    }
+
+    Personaje nuevoAliado = new Elfo("Piedras", new Hechicero(), 232);
+    nuevoAliado.setClan(new Alianza("Alianza Piedra"));
+    boolean b = a.aliar(nuevoAliado);
+    if (nuevoAliado.getClan() != null) {
+      Assert.assertFalse(b);
+    }
+    Assert.assertTrue(nuevoAliado.distanciaCon(new Elfo("Piedras2", new Hechicero(), 232)) == 0);
+
   }
 }

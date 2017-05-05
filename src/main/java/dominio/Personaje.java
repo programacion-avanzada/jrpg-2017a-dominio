@@ -440,7 +440,8 @@ public abstract class Personaje implements Peleable, Serializable {
    * @return devuelve si puede atacar o no
    */
   public boolean puedeAtacar() {
-    return energia > 10;
+    return energia > 10; // En el CT cuando esta asi probar por V y por F
+                         // siempre para tener luz verde
   }
 
   /**
@@ -528,39 +529,39 @@ public abstract class Personaje implements Peleable, Serializable {
    *          da�o producido
    * @return da�o restante?_verificar
    */
-  public int serRobadoSalud(int danio) {
-    danio -= this.defensa;
-    if (danio <= 0) {
+  public int serRobadoSalud(int daño) {
+    daño -= this.defensa;
+    if (daño <= 0) {
       return 0;
     }
-    if ((salud - danio) >= 0) {
-      salud -= danio;
+    if ((salud - daño) >= 0) {
+      salud -= daño;
     } else {
-      danio = salud;// le queda menos salud que el da�o inflingido
+      daño = salud;// le queda menos salud que el da�o inflingido
       salud = 0;
     }
-    return danio;
+    return daño;
   }
 
   /**
-   * serDesenergizado(int da�o).
+   * serDesenergizado(int daño).
    *
    * @param danio
-   *          da�o a producir ?
-   * @return da�o producido?
+   *          daño a producir ?
+   * @return daño producido?
    */
-  public int serDesernegizado(int danio) {
-    danio -= this.defensa;
-    if (danio <= 0) {
+  public int serDesernegizado(int daño) {
+    daño -= this.defensa;
+    if (daño <= 0) {
       return 0;
     }
-    if ((energia - danio) >= 0) {
-      energia -= danio;
+    if ((energia - daño) >= 0) {
+      energia -= daño;
     } else {
-      danio = energia;// le queda menos energia que el da�o inflingido
+      daño = energia;// le queda menos energia que el daño inflingido
       energia = 0;
     }
-    return danio;
+    return daño;
   }
 
   /**
