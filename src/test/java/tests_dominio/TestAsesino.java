@@ -30,10 +30,10 @@ public class TestAsesino {
   public void testProbEvasion() {
     Humano h = new Humano("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 1, 1);
 
-    Assert.assertTrue(0.3 == h.getCasta().getProbabilidadEvitarDaÃ±o());
+    Assert.assertTrue(0.3 == h.getCasta().getProbabilidadEvitarDaño());
     h.habilidadCasta2(null);
-    Assert.assertEquals(0.45, h.getCasta().getProbabilidadEvitarDaÃ±o(), 0.01);
+    Assert.assertEquals(0.45, h.getCasta().getProbabilidadEvitarDaño(), 0.01);
     h.habilidadCasta2(null);
-    Assert.assertTrue(0.5 == h.getCasta().getProbabilidadEvitarDaÃ±o());
+    Assert.assertTrue(0.5 == h.getCasta().getProbabilidadEvitarDaño());
   }
 }

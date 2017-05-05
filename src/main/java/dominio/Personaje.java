@@ -219,7 +219,7 @@ public abstract class Personaje implements Peleable, Serializable {
    */
   public void setClan(Alianza clan) {
     this.clan = clan;
-    clan.aÃ±adirPersonaje(this);
+    clan.añadirPersonaje(this);
   }
 
   /* (non-Javadoc)
@@ -413,7 +413,7 @@ public abstract class Personaje implements Peleable, Serializable {
    * @return devuelve el valor del golpe critico
    */
   public int golpe_critico() {
-    return (int) (this.ataque * this.getCasta().getDaÃ±oCritico());
+    return (int) (this.ataque * this.getCasta().getDañoCritico());
   }
 
   /* (non-Javadoc)
@@ -489,7 +489,7 @@ public abstract class Personaje implements Peleable, Serializable {
    */
   @Override
   public int serAtacado(int danio) {
-    if (MyRandom.nextDouble() >= this.getCasta().getProbabilidadEvitarDaÃ±o()) {
+    if (MyRandom.nextDouble() >= this.getCasta().getProbabilidadEvitarDaño()) {
       danio -= this.defensa;
       if (danio > 0) {
         if (salud <= danio) {
@@ -509,8 +509,8 @@ public abstract class Personaje implements Peleable, Serializable {
    * serRobadoSalud(int danio).
    *
    * @param danio
-   *          daÃ±o producido
-   * @return daÃ±o restante?_verificar
+   *          daño producido
+   * @return daño restante?_verificar
    */
   public int serRobadoSalud(int danio) {
     danio -= this.defensa;
@@ -520,18 +520,18 @@ public abstract class Personaje implements Peleable, Serializable {
     if ((salud - danio) >= 0) {
       salud -= danio;
     } else {
-      danio = salud;// le queda menos salud que el daÃ±o inflingido
+      danio = salud;// le queda menos salud que el daño inflingido
       salud = 0;
     }
     return danio;
   }
 
   /**
-   * serDesenergizado(int daÃ±o).
+   * serDesenergizado(int daño).
    *
    * @param danio
-   *          daÃ±o a producir ?
-   * @return daÃ±o producido?
+   *          daño a producir ?
+   * @return daño producido?
    */
   public int serDesernegizado(int danio) {
     danio -= this.defensa;
@@ -541,7 +541,7 @@ public abstract class Personaje implements Peleable, Serializable {
     if ((energia - danio) >= 0) {
       energia -= danio;
     } else {
-      danio = energia;// le queda menos energia que el daÃ±o inflingido
+      danio = energia;// le queda menos energia que el daño inflingido
       energia = 0;
     }
     return danio;
@@ -583,7 +583,7 @@ public abstract class Personaje implements Peleable, Serializable {
    */
   public void crearAlianza(String nombreAlianza) {
     this.clan = new Alianza(nombreAlianza);
-    this.clan.aÃ±adirPersonaje(this);
+    this.clan.añadirPersonaje(this);
   }
 
   /**
@@ -608,12 +608,12 @@ public abstract class Personaje implements Peleable, Serializable {
     if (this.clan == null) {
       Alianza a = new Alianza("Alianza 1");
       this.clan = a;
-      a.aÃ±adirPersonaje(this);
+      a.añadirPersonaje(this);
     }
 
     if (nuevoAliado.clan == null) {
       nuevoAliado.clan = this.clan;
-      this.clan.aÃ±adirPersonaje(nuevoAliado);
+      this.clan.añadirPersonaje(nuevoAliado);
       return true;
     } else {
       return false;

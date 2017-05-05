@@ -7,7 +7,7 @@ import dominio.Guerrero;
 import dominio.Humano;
 import dominio.Orco;
 
-public class TestDaÃ±o {
+public class TestDaño {
 
   @Test
   public void testAtaqueComunYLaSaludNoBajeDe0() {

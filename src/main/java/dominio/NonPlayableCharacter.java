@@ -147,14 +147,14 @@ public class NonPlayableCharacter implements Peleable {
    * @see dominio.Peleable#serAtacado(int)
    */
   @Override
-  public int serAtacado(int daÃ±o) {
+  public int serAtacado(int daño) {
     if (MyRandom.nextDouble() >= 0.15) {
-      daÃ±o -= this.getDefensa() / 2;
-      if (daÃ±o > 0) {
-        salud -= daÃ±o;
-        return daÃ±o;
+      daño -= this.getDefensa() / 2;
+      if (daño > 0) {
+        salud -= daño;
+        return daño;
       }
-      return 0;// no le hace daÃ±o ya que la defensa fue mayor
+      return 0;// no le hace daño ya que la defensa fue mayor
     }
     return 0;// esquivo el golpe
   }
