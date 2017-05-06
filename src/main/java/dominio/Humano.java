@@ -8,12 +8,11 @@ package dominio;
 public class Humano extends Personaje {
 
   public Humano(String nombre, Casta casta, int id) {
-    super(nombre, casta, id);
+    super(nombre, casta, id, "Humano", "Incentivar", "Golpe Fatal");
     saludTope += 5;
     energiaTope += 5;
     salud = saludTope;
     energia = energiaTope;
-    nombreRaza = "Humano";
   }
 
   /**
@@ -29,12 +28,8 @@ public class Humano extends Personaje {
    * @param idPersonaje
    */
   public Humano(String nombre, int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta, int experiencia, int nivel, int idPersonaje) {
-    super(nombre, salud, energia, fuerza, destreza, inteligencia, casta, experiencia, nivel, idPersonaje);
-    nombreRaza = "Humano";
+    super(nombre, salud, energia, fuerza, destreza, inteligencia, casta, experiencia, nivel, idPersonaje,  "Humano", "Incentivar", "Golpe Fatal");
 
-    habilidadesRaza = new String[2];
-    habilidadesRaza[0] = "Incentivar";
-    habilidadesRaza[1] = "Golpe Fatal";
   }
 
   // Incentivar
