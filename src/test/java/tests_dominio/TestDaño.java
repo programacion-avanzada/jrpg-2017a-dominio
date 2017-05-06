@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import dominio.Guerrero;
 import dominio.Humano;
+import dominio.MyRandom;
 import dominio.Orco;
 
 public class TestDaño {
@@ -37,5 +38,11 @@ public class TestDaño {
 
 		o.atacar(h);
 		Assert.assertEquals(100, h.getSalud());
+	}
+	@Test
+	public void pruebaNextIntRandom(){
+		MyRandom r = new MyRandom();
+		int aux= 1;
+		Assert.assertEquals(0, r.nextInt(aux));
 	}
 }

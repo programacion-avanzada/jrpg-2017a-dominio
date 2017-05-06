@@ -19,6 +19,8 @@ public class TestElfo {
 			Assert.assertTrue(h.getSalud() < 100);
 		else
 			Assert.assertTrue(h.getSalud() == 100);
+		e.setEnergia(0);
+		Assert.assertFalse(e.habilidadRaza1(h));
 	}
 
 	@Test
@@ -31,5 +33,7 @@ public class TestElfo {
 			Assert.assertTrue(h.getSalud() < 100);
 		else
 			Assert.assertTrue(h.getSalud() == 100);
+		e.setEnergia(0);
+		Assert.assertFalse(e.habilidadRaza2(h));
 	}
 }

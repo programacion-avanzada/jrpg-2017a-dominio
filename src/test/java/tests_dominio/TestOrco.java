@@ -21,6 +21,8 @@ public class TestOrco {
 			Assert.assertTrue(h.getSalud() == 95);
 		else
 			Assert.assertTrue(o.getSalud() == 105);
+		o.setEnergia(0);
+		Assert.assertFalse(o.habilidadRaza1(h));
 	}
 
 	@Test
@@ -37,5 +39,7 @@ public class TestOrco {
 			Assert.assertTrue(o.getSalud() == 100);
 			Assert.assertTrue(h.getSalud() == 100);
 		}
+		o.setEnergia(0);
+		Assert.assertFalse(o.habilidadRaza2(h));
 	}
 }

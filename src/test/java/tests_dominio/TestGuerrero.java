@@ -21,6 +21,8 @@ public class TestGuerrero {
 
 		else
 			Assert.assertTrue(e.getSalud() == 100);
+		h.setEnergia(0);
+		Assert.assertFalse(h.habilidadCasta1(e));
 	}
 
 	@Test
@@ -30,6 +32,8 @@ public class TestGuerrero {
 		Assert.assertTrue(h.getDefensa() == 20);
 		h.habilidadCasta2(null);
 		Assert.assertTrue(h.getDefensa() == 65);
+		h.setEnergia(0);
+		Assert.assertFalse(h.habilidadCasta2(h));
 	}
 
 	@Test
@@ -42,6 +46,9 @@ public class TestGuerrero {
 			Assert.assertTrue(e.getSalud() < 100);
 		else
 			Assert.assertTrue(e.getSalud() == 100);
-	}
+		h.setEnergia(0);
+		Assert.assertFalse(h.habilidadCasta3(e));
 
+	}
+	
 }
