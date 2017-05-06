@@ -8,9 +8,20 @@ package dominio;
 */
 public class Elfo extends Personaje {
 
-	public Elfo(String nombre, Casta casta, int id) {
+	/**
+   * 
+   */
+  private static final long serialVersionUID = 1L;
+  private static final int AUMENTO_ENERGIA_TOPE_POR_RAZA = 10;
+  private static final int MULTIPLICADOR_HABILIDAD_1 = 10;
+  private static final int COSTE_DE_ENERGIA_HABILIDADES = 10;
+  
+  /** 
+   * Constructor parametrizado
+ */
+  public Elfo(final String nombre, final Casta casta, final int id) {
 		super(nombre, casta, id);
-		energiaTope += 10;
+		energiaTope += AUMENTO_ENERGIA_TOPE_POR_RAZA;
 		salud = saludTope;
 		energia = energiaTope;
 		nombreRaza = "Elfo";
@@ -20,9 +31,12 @@ public class Elfo extends Personaje {
 		habilidadesRaza[1] = "Ataque Bosque";
 	}
 
-	public Elfo(String nombre, int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta,
-			int experiencia, int nivel,
-			int idPersonaje) {
+  /** 
+   * Constructor parametrizado en donde se pasan los states de la raza
+ */
+	public Elfo(final String nombre, final int salud, final int energia, final int fuerza,
+	    final int destreza, final int inteligencia, final Casta casta, final int experiencia,
+	    final int nivel, final int idPersonaje) {
 		super(nombre, salud, energia, fuerza, destreza, inteligencia, casta,
 				experiencia, nivel, idPersonaje);
 		nombreRaza = "Elfo";
@@ -38,10 +52,10 @@ public class Elfo extends Personaje {
 	por el nivel del personaje.
 */
 	// Golpe Level
-	public boolean habilidadRaza1(Peleable atacado) {
-		if (this.getEnergia() > 10) {
-			this.setEnergia(this.getEnergia() - 10);
-			if (atacado.serAtacado(this.getFuerza() + this.getNivel() * 10) > 0) {
+	public boolean habilidadRaza1(final Peleable atacado) {
+		if (this.getEnergia() > COSTE_DE_ENERGIA_HABILIDADES) {
+			this.setEnergia(this.getEnergia() - COSTE_DE_ENERGIA_HABILIDADES);
+			if (atacado.serAtacado(this.getFuerza() + this.getNivel() * MULTIPLICADOR_HABILIDAD_1) > 0) {
         return true;
       }
 		}
@@ -54,9 +68,9 @@ public class Elfo extends Personaje {
 	cantidad de magia del personaje.
 */
 	// Ataque Bosque
-	public boolean habilidadRaza2(Peleable atacado) {
-		if (this.getEnergia() > 10) {
-			this.setEnergia(this.getEnergia() - 10);
+	public boolean habilidadRaza2(final Peleable atacado) {
+		if (this.getEnergia() > COSTE_DE_ENERGIA_HABILIDADES) {
+			this.setEnergia(this.getEnergia() - COSTE_DE_ENERGIA_HABILIDADES);
 			if (atacado.serAtacado((int) (this.magia)) > 0) {
         return true;
       }
