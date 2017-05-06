@@ -1,123 +1,135 @@
 package dominio;
 
-public class NonPlayableCharacter implements Peleable {
+/**
+ * Clase que posee los atributos y funciones del NonPlayableCharacter.
+ *
+ */
+public class NonPlayableCharacter extends Character {
 
-	private int salud;
-	private int fuerza;
-	private int defensa;
-	private String nombre;
-	private int nivel;
-	private static final int dificultadAleatoria = -1;
+  private int fuerza;
 
-	public NonPlayableCharacter(String nombre, int nivel, int dificultadNPC) {
-		this.nombre = nombre;
-		this.nivel = nivel;
-		int dificultad;
-		if (dificultadNPC == dificultadAleatoria)
-			dificultad = MyRandom.nextInt(3);
-		else
-			dificultad = dificultadNPC;
+  private static final int dificultadAleatoria = -1;
 
-		switch (dificultad) {
-		case 0:
-			this.fuerza = 10 + (nivel - 1) * 3;// 30%
-			this.salud = 30 + (nivel - 1) * 15;
-			this.defensa = 2 + (nivel - 1) * 1;
-			break;
-		case 1:
-			this.fuerza = 20 + (nivel - 1) * 6;// 50%
-			this.salud = 40 + (nivel - 1) * 20;
-			this.defensa = 5 + (nivel - 1) * 2;
-			break;
-		case 2:
-			this.fuerza = 30 + (nivel - 1) * 10;// 50%
-			this.salud = 50 + (nivel - 1) * 25;
-			this.defensa = 4 + (nivel - 1) * 4;
-			break;
+  /**
+   * @param nombre
+   * @param nivel
+   * @param dificultadNPC
+   */
+  public NonPlayableCharacter(String nombre, int nivel, int dificultadNPC) {
+    this.nombre = nombre;
+    this.nivel = nivel;
+    int dificultad;
+    if (dificultadNPC == dificultadAleatoria) {
+      dificultad = MyRandom.nextInt(3);
+    } else {
+      dificultad = dificultadNPC;
+    }
+    if (dificultad == 0) {
+      this.fuerza = 10 + ((nivel - 1) * 3);// 30%
+      this.salud = 30 + ((nivel - 1) * 15);
+      this.defensa = 2 + ((nivel - 1) * 1);
+    }
 
-		}
-	}
+    if (dificultad == 1) {
+      this.fuerza = 20 + ((nivel - 1) * 6);// 50%
+      this.salud = 40 + ((nivel - 1) * 20);
+      this.defensa = 5 + ((nivel - 1) * 2);
+    }
 
-	public int otorgarExp() {
-		return this.nivel * 30;
-	}
+    if (dificultad == 2) {
+      this.fuerza = 30 + ((nivel - 1) * 10);// 50%
+      this.salud = 50 + ((nivel - 1) * 25);
+      this.defensa = 4 + ((nivel - 1) * 4);
+    }
+    /*
+     * switch (dificultad) { case 0: this.fuerza = 10 + ((nivel - 1) * 3);// 30%
+     * this.salud = 30 + ((nivel - 1) * 15); this.defensa = 2 + ((nivel - 1) *
+     * 1); break; case 1: this.fuerza = 20 + ((nivel - 1) * 6);// 50% this.salud
+     * = 40 + ((nivel - 1) * 20); this.defensa = 5 + ((nivel - 1) * 2); break;
+     * case 2: this.fuerza = 30 + ((nivel - 1) * 10);// 50% this.salud = 50 +
+     * ((nivel - 1) * 25); this.defensa = 4 + ((nivel - 1) * 4); break; }
+     *
+     */
+  }
 
-	public int getFuerza() {
-		return fuerza;
-	}
+  @Override
+  public boolean esPersonaje() {
+    return false;
+  }
 
-	public void setFuerza(int fuerza) {
-		this.fuerza = fuerza;
-	}
+  @Override
+  public int otorgarExp() {
+    return this.nivel * 30;
+  }
 
-	public String getNombre() {
-		return nombre;
-	}
+  /*
+   * (non-Javadoc)
+   *
+   * @see dominio.Peleable#getSalud()
+   */
+  @Override
+  public int getSalud() {
+    return salud;
+  }
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+  /**
+   * @param salud
+   */
+  public void setSalud(int salud) {
+    this.salud = salud;
+  }
 
-	public int getNivel() {
-		return nivel;
-	}
+  /*
+   * (non-Javadoc)
+   *
+   * @see dominio.Peleable#atacar(dominio.Peleable)
+   */
+  @Override
+  public int atacar(Peleable atacado) {
 
-	public void setNivel(int nivel) {
-		this.nivel = nivel;
-	}
+    if (MyRandom.nextDouble() <= 0.15) {// los NPC tienen 15% de golpes criticos
+      return atacado.serAtacado((int) (this.getAtaque() * 1.5));
+    } else {
+      return atacado.serAtacado(this.getAtaque());
+    }
+  }
 
-	public boolean estaVivo() {
-		return salud > 0;
-	}
+  /*
+   * (non-Javadoc)
+   *
+   * @see dominio.Peleable#serAtacado(int)
+   */
+  @Override
+  public int serAtacado(int daño) {
+    if (MyRandom.nextDouble() >= 0.15) {
+      daño -= this.getDefensa() / 2;
+      if (daño > 0) {
+        salud -= daño;
+        return daño;
+      }
+      return 0;// no le hace daño ya que la defensa fue mayor
+    }
+    return 0;// esquivo el golpe
+  }
 
-	public int getDefensa() {
-		return defensa;
-	}
+  /*
+   * (non-Javadoc)
+   *
+   * @see dominio.Peleable#getAtaque()
+   */
+  @Override
+  public int getAtaque() {
+    return fuerza;
+  }
 
-	public void setDefensa(int defensa) {
-		this.defensa = defensa;
-	}
+  /*
+   * (non-Javadoc)
+   *
+   * @see dominio.Peleable#setAtaque(int)
+   */
+  @Override
+  public void setAtaque(int ataque) {
+    this.fuerza = ataque;
+  }
 
-	public int getSalud() {
-		return salud;
-	}
-
-	public void setSalud(int salud) {
-		this.salud = salud;
-	}
-
-	public int atacar(Peleable atacado) {
-		if (MyRandom.nextDouble() <= 0.15) {// los NPC tienen 15% de golpes criticos
-			return atacado.serAtacado((int) (this.getAtaque() * 1.5));
-		} else
-			return atacado.serAtacado(this.getAtaque());
-	}
-
-	public int serAtacado(int daño) {
-		if (MyRandom.nextDouble() >= 0.15) {
-			daño -= this.getDefensa() / 2;
-			if (daño > 0) {
-				salud -= daño;
-				return daño;
-			}
-			return 0;// no le hace daño ya que la defensa fue mayor
-		}
-		return 0;// esquivo el golpe
-	}
-
-	public void despuesDeTurno() { }
-
-	public void ganarExperiencia(int exp) {
-
-	}
-
-	@Override
-	public int getAtaque() {
-		return fuerza;
-	}
-
-	@Override
-	public void setAtaque(int ataque) {
-		this.fuerza = ataque;
-	}
 }

@@ -2,61 +2,129 @@ package dominio;
 
 import java.io.Serializable;
 
+/**
+ * Es la clase que une a los tipos de razas (asesino, guerrero, hechicero), con
+ * sus metodos correspondientes a utilizar.
+ *
+ */
 public abstract class Casta implements Serializable {
-	protected double probabilidadGolpeCritico;
-	protected double probabilidadEvitarDaño;
-	protected double dañoCritico;
-	protected String nombreCasta;
+  protected double probabilidadGolpeCritico;
+  protected double probabilidadEvitarDaño;
+  protected double dañoCritico;
+  protected String nombreCasta;
 
-	protected String[] habilidadesCasta;
+  protected String[] habilidadesCasta;
 
-	public Casta() {
-		this.probabilidadGolpeCritico = 0.2;
-		this.probabilidadEvitarDaño = 0.2;
-		this.dañoCritico = 1.5;
-	}
+  /**
+   * Constructor por defecto
+   */
+  public Casta() {
+    this.probabilidadGolpeCritico = 0.2;
+    this.probabilidadEvitarDaño = 0.2;
+    this.dañoCritico = 1.5;
 
-	public Casta(double prob_crit, double evasion, double daño_crit) {
-		this.probabilidadGolpeCritico = prob_crit;
-		this.probabilidadEvitarDaño = evasion;
-		this.dañoCritico = daño_crit;
-	}
+  }
 
-	public abstract boolean habilidad1(Personaje caster, Peleable atacado);
+  /**
+   * @param prob_crit
+   * @param evasion
+   * @param da�o_crit
+   */
+  public Casta(double prob_crit, double evasion, double daño_crit) {
+    this.probabilidadGolpeCritico = prob_crit;
+    this.probabilidadEvitarDaño = evasion;
+    this.dañoCritico = daño_crit;
+  }
 
-	public abstract boolean habilidad2(Personaje caster, Peleable atacado);
+  public abstract boolean habilidad1(Personaje caster, Peleable atacado);
 
-	public abstract boolean habilidad3(Personaje caster, Peleable atacado);
+  public abstract boolean habilidad2(Personaje caster, Peleable atacado);
 
-	public String getNombreCasta() {
-		return this.nombreCasta;
-	}
+  public abstract boolean habilidad3(Personaje caster, Peleable atacado);
 
-	public String[] getHabilidadesCasta() {
-		return habilidadesCasta;
-	}
+  /**
+   * @return Devuelve el nombre de la Casta pedido
+   */
+  public String getNombreCasta() {
+    return this.nombreCasta;
+  }
 
-	public double getProbabilidadGolpeCritico() {
-		return probabilidadGolpeCritico;
-	}
+  /**
+   * @return Devuelve las habilidades que posee dicha casta, en formato String[]
+   */
+  /**
+   * @return devuelve todas las habilidades de la casta
+   */
+  public String[] getHabilidadesCasta() {
+    return habilidadesCasta;
+  }
 
-	public void setProbabilidadGolpeCritico(double probabilidadGolpeCritico) {
-		this.probabilidadGolpeCritico = probabilidadGolpeCritico;
-	}
+  /**
+   * @return devuelve la probabilidad de golpe critico
+   */
+  public double getProbabilidadGolpeCritico() {
+    return probabilidadGolpeCritico;
+  }
 
-	public double getProbabilidadEvitarDaño() {
-		return probabilidadEvitarDaño;
-	}
+  /**
+   * @param probabilidadGolpeCritico
+   */
+  public void setProbabilidadGolpeCritico(double probabilidadGolpeCritico) {
+    this.probabilidadGolpeCritico = probabilidadGolpeCritico;
+  }
 
-	public void setProbabilidadEvitarDaño(double probabilidadEvitarDaño) {
-		this.probabilidadEvitarDaño = probabilidadEvitarDaño;
-	}
+  /**
+   * @return devuelve la probabilidad de Evitar Daño
+   */
+  public double getProbabilidadEvitarDaño() {
+    return probabilidadEvitarDaño;
+  }
 
-	public double getDañoCritico() {
-		return dañoCritico;
-	}
+  /**
+   * @param probabilidadEvitarDa�o
+   */
+  public void setProbabilidadEvitarDaño(double probabilidadEvitarDaño) {
+    this.probabilidadEvitarDaño = probabilidadEvitarDaño;
+  }
 
-	public void setDañoCritico(double dañoCritico) {
-		this.dañoCritico = dañoCritico;
-	}
+  /**
+   * @return devuelve el daño critico
+   */
+  public double getDañoCritico() {
+    return dañoCritico;
+  }
+
+  /**
+   * @param dañoCritico
+   */
+  public void setDañoCritico(double dañoCritico) {
+    this.dañoCritico = dañoCritico;
+  }
+
+  /**
+   * addFuerzaInicial().
+   *
+   * @return el numero a sumarle a la fuerza inicial
+   */
+  protected int addFuerzaInicial() {
+    return 0;
+  }
+
+  /**
+   * addInteligenciaInicial().
+   *
+   * @return el numero a sumarle a la Inteligencia inicial
+   */
+  public int addInteligenciaInicial() {
+    return 0;
+  }
+
+  /**
+   * addDestrezaInicial().
+   *
+   * @return el numero a sumarle a la destreza inicial
+   */
+  public int addDestrezaInicial() {
+    return 0;
+  }
 }

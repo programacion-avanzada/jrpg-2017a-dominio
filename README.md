@@ -12,11 +12,11 @@
 
 ### Integrantes del equipo
 
-* Completar ([xxxx](https://github.com/xxxx))
-* Completar ([xxxx](https://github.com/xxxx))
-* Completar ([xxxx](https://github.com/xxxx))
-* Completar ([xxxx](https://github.com/xxxx))
-* Completar ([xxxx](https://github.com/xxxx))
+* Ramos Maximiliano ([MaxiARG](https://github.com/MaxiARG))
+* Robles Martin ([mrleonel](https://github.com/mrleonel))
+* Galluzzo Luciano ([luchogalluzzo](https://github.com/xxxx))
+* Diego Andrada ([dandradagithub](https://github.com/dandradagithub))
+* Nahuel Coronel ([coronelnah](https://github.com/coronelnah))
 * Completar ([xxxx](https://github.com/xxxx))
 
 ## Sobre la tecnología
