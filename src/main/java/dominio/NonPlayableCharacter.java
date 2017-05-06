@@ -13,33 +13,59 @@ public class NonPlayableCharacter implements Peleable {
 	private int defensa;
 	private String nombre;
 	private int nivel;
-	private static final int dificultadAleatoria = -1;
+	private static final int DIFICULTADO_ALEATORIA = -1;
+	private static final int SEMILLA_RANDOM = 3;
+	
+	private static final int FUERZA_BASE_DIFICULTAD_0 = 10;
+	private static final int MULTIPLICADOR_FUERZA_DIFICULTAD_0 = 3;
+	private static final int SALUD_BASE_DIFICULTAD_0 = 30;
+  private static final int MULTIPICADOR_SALUD_DIFICULTAD_0 = 15;
+  
+  private static final int FUERZA_BASE_DIFICULTAD_1 = 20;
+  private static final int MULTIPLICADOR_FUERZA_DIFICULTAD_1 = 6;
+  private static final int SALUD_BASE_DIFICULTAD_1 = 40;
+  private static final int MULTIPICADOR_SALUD_DIFICULTAD_1 = 20;
+  private static final int DEFENSA_BASE_DIFICULTAD_1 = 5;
+  
+  private static final int FUERZA_BASE_DIFICULTAD_2 = 30;
+  private static final int MULTIPLICADOR_FUERZA_DIFICULTAD_2 = 10;
+  private static final int SALUD_BASE_DIFICULTAD_2 = 50;
+  private static final int MULTIPICADOR_SALUD_DIFICULTAD_2 = 25;
+  private static final int DEFENSA_BASE_DIFICULTAD_2 = 4;
+  private static final int MULTIPLICADOR_DEFENSA_DIFICULTAD_2 = 4;
+  private static final int MULTIPLICADOR_EXPERIENCIA = 30;
+  
+  private static final double PORCENTAJE_CRITICO = 0.15;
+  private static final double AUMENTO_DANO_CRITICO = 1.5;
 
-	public NonPlayableCharacter(String nombre, int nivel, int dificultadNPC) {
+  /** 
+   * Constructor parametrizado
+ */
+	public NonPlayableCharacter(final String nombre, int nivel, final int dificultadNPC) {
 		this.nombre = nombre;
 		this.nivel = nivel;
 		int dificultad;
-		if (dificultadNPC == dificultadAleatoria) {
-      dificultad = MyRandom.nextInt(3);
+		if (dificultadNPC == DIFICULTADO_ALEATORIA) {
+      dificultad = MyRandom.nextInt(SEMILLA_RANDOM);
     } else {
       dificultad = dificultadNPC;
     }
 
 		switch (dificultad) {
 		case 0:
-			this.fuerza = 10 + (nivel - 1) * 3;// 30%
-			this.salud = 30 + (nivel - 1) * 15;
+			this.fuerza = FUERZA_BASE_DIFICULTAD_0 + (nivel - 1) * MULTIPLICADOR_FUERZA_DIFICULTAD_0;  // 30%
+			this.salud = SALUD_BASE_DIFICULTAD_0 + (nivel - 1) * MULTIPICADOR_SALUD_DIFICULTAD_0;
 			this.defensa = 2 + (nivel - 1) * 1;
 			break;
 		case 1:
-			this.fuerza = 20 + (nivel - 1) * 6;// 50%
-			this.salud = 40 + (nivel - 1) * 20;
-			this.defensa = 5 + (nivel - 1) * 2;
+			this.fuerza = FUERZA_BASE_DIFICULTAD_1 + (nivel - 1) * MULTIPLICADOR_FUERZA_DIFICULTAD_1;  // 50%
+			this.salud = SALUD_BASE_DIFICULTAD_1 + (nivel - 1) * MULTIPICADOR_SALUD_DIFICULTAD_1;
+			this.defensa = DEFENSA_BASE_DIFICULTAD_1 + (nivel - 1) * 2;
 			break;
 		case 2:
-			this.fuerza = 30 + (nivel - 1) * 10;// 50%
-			this.salud = 50 + (nivel - 1) * 25;
-			this.defensa = 4 + (nivel - 1) * 4;
+			this.fuerza = FUERZA_BASE_DIFICULTAD_2 + (nivel - 1) * MULTIPLICADOR_FUERZA_DIFICULTAD_2; // 50%
+			this.salud = SALUD_BASE_DIFICULTAD_2 + (nivel - 1) * MULTIPICADOR_SALUD_DIFICULTAD_2;
+			this.defensa = DEFENSA_BASE_DIFICULTAD_2 + (nivel - 1) * MULTIPLICADOR_DEFENSA_DIFICULTAD_2;
 			break;
     default:
       break;
@@ -47,62 +73,74 @@ public class NonPlayableCharacter implements Peleable {
 		}
 	}
 
+  /** este metodo decide la experiencia repartida por cada NPC derrotado*/
 	public int otorgarExp() {
-		return this.nivel * 30;
+		return this.nivel * MULTIPLICADOR_EXPERIENCIA;
 	}
 
+	/** Este metodo devuelve la fuerza del NPC*/
 	public int getFuerza() {
 		return fuerza;
 	}
 
-	public void setFuerza(int fuerza) {
+	/** Este metodo sirve para modificar la fuerza del NPC*/
+	public void setFuerza(final int fuerza) {
 		this.fuerza = fuerza;
 	}
 
+	 /** Este metodo devuelve el nombre del NPC*/
 	public String getNombre() {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
+	/** Este metodo sirve para modificar el nombre del NPC*/
+	public void setNombre(final String nombre) {
 		this.nombre = nombre;
 	}
 
+	/** Este metodo devuelve el nivel del NPC*/
 	public int getNivel() {
 		return nivel;
 	}
 
-	public void setNivel(int nivel) {
+	/** Este metodo sirve para modificar el nivel del NPC*/
+	public void setNivel(final int nivel) {
 		this.nivel = nivel;
 	}
 
+	/** Este metodo booleano verifica la salud del NPC para verificar si sigue vivo*/
 	public boolean estaVivo() {
 		return salud > 0;
 	}
 
+	/** Este metodo devuelve la defensa del NPC*/
 	public int getDefensa() {
 		return defensa;
 	}
 
-	public void setDefensa(int defensa) {
+	/** Este medoto sirve para modificar la defensa del NPC*/
+	public void setDefensa(final int defensa) {
 		this.defensa = defensa;
 	}
 
+	/** Este metodo devuelve la salud del NPC*/
 	public int getSalud() {
 		return salud;
 	}
 
-	public void setSalud(int salud) {
+	/** Este medoto sirve para modificar la salud del NPC*/
+	public void setSalud(final int salud) {
 		this.salud = salud;
 	}
 	
 /**
 	El metodo "atacar" es la que se encargara de administrar el 
-	ataque del NPC y de su probabilidad te golpe critico
+	ataque del NPC y de su probabilidad de golpe critico
 	retornando el daño infligido. 
 */
-	public int atacar(Peleable atacado) {
-		if (MyRandom.nextDouble() <= 0.15) {// los NPC tienen 15% de golpes criticos
-			return atacado.serAtacado((int) (this.getAtaque() * 1.5));
+	public int atacar(final Peleable atacado) {
+		if (MyRandom.nextDouble() <= PORCENTAJE_CRITICO) {  // los NPC tienen 15% de golpes criticos
+			return atacado.serAtacado((int) (this.getAtaque() * AUMENTO_DANO_CRITICO));
 		} else {
       return atacado.serAtacado(this.getAtaque());
     }
@@ -113,31 +151,32 @@ public class NonPlayableCharacter implements Peleable {
 	ataque del NPC al personaje con respecto a su probabilidad
 	de evasion y de la defensa del objetivo.
 */
-	public int serAtacado(int daño) {
+	public int serAtacado(int dano) {
 		if (MyRandom.nextDouble() >= 0.15) {
-			daño -= this.getDefensa() / 2;
-			if (daño > 0) {
-				salud -= daño;
-				return daño;
+			dano -= this.getDefensa() / 2;
+			if (dano > 0) {
+				salud -= dano;
+				return dano;
 			}
 			return 0;// no le hace daño ya que la defensa fue mayor
 		}
 		return 0;// esquivo el golpe
 	}
 
+	/** Metodo que realiza las acciones del NPC despues de su turno*/
 	public void despuesDeTurno() { }
 
-	public void ganarExperiencia(int exp) {
+	/** Este medoto calcula la experiencia que gana el NPC*/
+	public void ganarExperiencia(final int exp) { }
 
-	}
-
+	/** Este metodo devuelve el ataque del NPC*/
 	@Override
 	public int getAtaque() {
 		return fuerza;
 	}
-
+	/** Este medoto sirve para modificar el ataque del NPC*/
 	@Override
-	public void setAtaque(int ataque) {
+	public void setAtaque(final int ataque) {
 		this.fuerza = ataque;
 	}
 }
