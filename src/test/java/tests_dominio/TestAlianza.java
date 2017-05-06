@@ -26,7 +26,7 @@ public class TestAlianza {
     aliados.add(new Elfo("elfito", new Guerrero(1, 2, 3), 34));
     Alianza a = new Alianza("miAlianza");
     Assert.assertTrue(a.obtenerNombre().equals("miAlianza"));
-    // Assert.assertNotNull(a.getAliados());
+
   }
 
   @Test
@@ -35,7 +35,7 @@ public class TestAlianza {
     aliados.add(new Elfo("elfito", new Guerrero(1, 2, 3), 34));
     Alianza a = new Alianza(null);
     Assert.assertNull(a.obtenerNombre());
-    // Assert.assertNotNull(a.getAliados());
+
   }
 
   @Test

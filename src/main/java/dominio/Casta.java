@@ -22,6 +22,7 @@ public abstract class Casta implements Serializable {
     this.probabilidadGolpeCritico = 0.2;
     this.probabilidadEvitarDaño = 0.2;
     this.dañoCritico = 1.5;
+
   }
 
   /**
