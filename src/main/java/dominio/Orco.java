@@ -7,9 +7,21 @@ package dominio;
 */
 public class Orco extends Personaje {
 
-	public Orco(String nombre, Casta casta, int id) {
+	/**
+   * 
+   */
+  private static final long serialVersionUID = 1L;
+  private static final int AUMENTO_SALUD_TOPE_POR_RAZA = 10;
+  private static final int COSTE_DE_ENERGIA_HABILIDADES = 10;
+
+
+
+  /** 
+   * Constructor parametrizado
+ */
+  public Orco(final String nombre, final Casta casta, final int id) {
 		super(nombre, casta, id);
-		saludTope += 10;
+		saludTope += AUMENTO_SALUD_TOPE_POR_RAZA;
 		salud = saludTope;
 		energia = energiaTope;
 		nombreRaza = "Orco";
@@ -19,8 +31,12 @@ public class Orco extends Personaje {
 		habilidadesRaza[1] = "Mordisco de Vida";
 	}
 
-	public Orco(String nombre, int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta,
-			int experiencia, int nivel, int idPersonaje) {
+  /** 
+   * Constructor parametrizado en donde se pasan los states de la raza
+ */
+	public Orco(final String nombre, final int salud, final int energia, final int fuerza,
+	    final int destreza, final int inteligencia, final Casta casta, final int experiencia,
+	    final int nivel, final int idPersonaje) {
 		super(nombre, salud, energia, fuerza, destreza, inteligencia, casta, experiencia, nivel, idPersonaje);
 		nombreRaza = "Orco";
 
@@ -35,9 +51,9 @@ public class Orco extends Personaje {
 	del atacante como daño.
 */
 	// Golpe Defensa
-	public boolean habilidadRaza1(Peleable atacado) {
-		if (this.getEnergia() > 10) {
-			this.setEnergia(this.getEnergia() - 10);
+	public boolean habilidadRaza1(final Peleable atacado) {
+		if (this.getEnergia() > COSTE_DE_ENERGIA_HABILIDADES) {
+			this.setEnergia(this.getEnergia() - COSTE_DE_ENERGIA_HABILIDADES);
 			if (atacado.serAtacado(this.getDefensa() * 2) > 0) {
         return true;
       }
@@ -52,12 +68,12 @@ public class Orco extends Personaje {
 	el atacante se cura la misma cantidad de daño causado.
 */
 	// Mordisco de Vida
-	public boolean habilidadRaza2(Peleable atacado) {
-		if (this.getEnergia() > 10) {
-			this.setEnergia(this.getEnergia() - 10);
-			int daño_causado = atacado.serAtacado(this.getFuerza());
-			if (daño_causado > 0) {
-				this.serCurado(daño_causado);
+	public boolean habilidadRaza2(final Peleable atacado) {
+		if (this.getEnergia() > COSTE_DE_ENERGIA_HABILIDADES) {
+			this.setEnergia(this.getEnergia() - COSTE_DE_ENERGIA_HABILIDADES);
+			int danoCausado = atacado.serAtacado(this.getFuerza());
+			if (danoCausado > 0) {
+				this.serCurado(danoCausado);
 				return true;
 			}
 		}
