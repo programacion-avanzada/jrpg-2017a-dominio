@@ -13,24 +13,15 @@ public class Orco extends Personaje {
    * @param id
    */
   public Orco(String nombre, Casta casta, int id) {
-    super(nombre, casta, id);
+    super(nombre, casta, id, "Orco", "Golpe Defensa", "Mordisco de Vida");
     saludTope += 10;
     salud = saludTope;
     energia = energiaTope;
-    nombreRaza = "Orco";
-
-    habilidadesRaza = new String[2];
-    habilidadesRaza[0] = "Golpe Defensa";
-    habilidadesRaza[1] = "Mordisco de Vida";
   }
 
   public Orco(String nombre, int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta, int experiencia, int nivel, int idPersonaje) {
-    super(nombre, salud, energia, fuerza, destreza, inteligencia, casta, experiencia, nivel, idPersonaje);
-    nombreRaza = "Orco";
+    super(nombre, salud, energia, fuerza, destreza, inteligencia, casta, experiencia, nivel, idPersonaje,  "Orco", "Golpe Defensa", "Mordisco de Vida");
 
-    habilidadesRaza = new String[2];
-    habilidadesRaza[0] = "Golpe Defensa";
-    habilidadesRaza[1] = "Mordisco de Vida";
   }
 
   // Golpe Defensa

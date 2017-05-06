@@ -73,7 +73,7 @@ public abstract class Personaje implements Peleable, Serializable {
    * @param id
    *          identificador
    */
-  public Personaje(String nombre, Casta casta, int id) {
+  public Personaje(String nombre, Casta casta, int id, String nomRaza, String hab1, String hab2) {
     this.nombre = nombre;
     this.casta = casta;
     this.idPersonaje = id;
@@ -100,6 +100,11 @@ public abstract class Personaje implements Peleable, Serializable {
     ataque = this.calcularPuntosDeAtaque();
     defensa = this.calcularPuntosDeDefensa();
     magia = this.calcularPuntosDeMagia();
+    nombreRaza = nomRaza;
+
+    habilidadesRaza = new String[2];
+    habilidadesRaza[0] = hab1;
+    habilidadesRaza[1] = hab2;
 
   }
 
@@ -127,7 +132,7 @@ public abstract class Personaje implements Peleable, Serializable {
    * @param idPersonaje
    *          identificador del personaje
    */
-  public Personaje(String nombre, int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta, int experiencia, int nivel, int idPersonaje) {
+  public Personaje(String nombre, int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta, int experiencia, int nivel, int idPersonaje, String nomRaza, String hab1, String hab2) {
 
     this.nombre = nombre;
     this.salud = salud;
@@ -146,6 +151,11 @@ public abstract class Personaje implements Peleable, Serializable {
     this.defensa = this.calcularPuntosDeDefensa();
     this.ataque = this.calcularPuntosDeAtaque();
     this.magia = this.calcularPuntosDeMagia();
+    nombreRaza = nomRaza;
+
+    habilidadesRaza = new String[2];
+    habilidadesRaza[0] = hab1;
+    habilidadesRaza[1] = hab2;    
   }
 
   /**

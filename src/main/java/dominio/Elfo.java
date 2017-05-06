@@ -13,24 +13,15 @@ public class Elfo extends Personaje {
    * @param id
    */
   public Elfo(String nombre, Casta casta, int id) {
-    super(nombre, casta, id);
+    super(nombre, casta, id, "Elfo", "Golpe Level", "Ataque Bosque");
     energiaTope += 10;
     salud = saludTope;
     energia = energiaTope;
-    nombreRaza = "Elfo";
-
-    habilidadesRaza = new String[2];
-    habilidadesRaza[0] = "Golpe Level";
-    habilidadesRaza[1] = "Ataque Bosque";
+    
   }
 
   public Elfo(String nombre, int salud, int energia, int fuerza, int destreza, int inteligencia, Casta casta, int experiencia, int nivel, int idPersonaje) {
-    super(nombre, salud, energia, fuerza, destreza, inteligencia, casta, experiencia, nivel, idPersonaje);
-    nombreRaza = "Elfo";
-
-    habilidadesRaza = new String[2];
-    habilidadesRaza[0] = "Golpe Level";
-    habilidadesRaza[1] = "Ataque Bosque";
+    super(nombre, salud, energia, fuerza, destreza, inteligencia, casta, experiencia, nivel, idPersonaje,  "Elfo", "Golpe Level", "Ataque Bosque");
   }
 
   // Golpe Level
