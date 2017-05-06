@@ -46,7 +46,9 @@ public class Hechicero extends Casta {
   public boolean habilidad2(Personaje caster, Peleable aliado) {
     if (caster.getEnergia() > 10) {
       caster.setEnergia(caster.getEnergia() - 10);
-      if (aliado instanceof Personaje) {
+      // es personaje esta sobreescrito en Personaje y NPC. cada uno devolvera V
+      // & F respectivamente
+      if (aliado.esPersonaje()) {
         ((Personaje) aliado).serCurado(caster.calcularPuntosDeMagia());
         return true;
       }
@@ -59,15 +61,35 @@ public class Hechicero extends Casta {
   public boolean habilidad3(Personaje caster, Peleable atacado) {
     if (caster.getEnergia() > 10) {
       caster.setEnergia(caster.getEnergia() - 10);
-      if (atacado instanceof Personaje) {
+
+      if (atacado.esPersonaje()) {
         int energia_robada = ((Personaje) atacado).serDesernegizado(caster.calcularPuntosDeMagia());
         int salud_robada = ((Personaje) atacado).serRobadoSalud(caster.calcularPuntosDeMagia() / 2);
         caster.serEnergizado(energia_robada);
         caster.serCurado(salud_robada);
         return true;
       }
+      /*
+       * if (atacado instanceof Personaje) { int energia_robada = ((Personaje)
+       * atacado).serDesernegizado(caster.calcularPuntosDeMagia()); int
+       * salud_robada = ((Personaje)
+       * atacado).serRobadoSalud(caster.calcularPuntosDeMagia() / 2);
+       * caster.serEnergizado(energia_robada); caster.serCurado(salud_robada);
+       * return true; }
+       */
 
     }
     return false;
   }
+
+  @Override
+  /**
+   * addInteligenciaInicial().
+   *
+   * @return Devuelve el numero a sumar al valor base
+   */
+  public int addInteligenciaInicial() {
+    return 5;
+  }
+
 }

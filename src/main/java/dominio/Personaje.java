@@ -8,25 +8,21 @@ import java.io.Serializable;
  * apropiados para tener todo en cuenta
  *
  */
-public abstract class Personaje implements Peleable, Serializable {
+public abstract class Personaje extends Character implements Serializable {
   private static final long serialVersionUID = 1L;
-  protected int salud;
   protected int energia;
-  protected int defensa;// depende de la destreza
   protected int ataque;// depende de la fuerza
   protected int magia;// depende de la inteligencia
-  protected String nombre;// hay que agregarlo a todos los constructores
   protected String nombreRaza;
   protected int saludTope;
   protected int energiaTope;
-  protected int fuerza;
+
   protected int destreza;
   protected int inteligencia;
   protected Casta casta;
   protected int posX;
   protected int posY;
   protected int experiencia;
-  protected int nivel;
   protected int idPersonaje;
   protected Alianza clan = null;
   public static int[] tablaDeNiveles;
@@ -74,6 +70,7 @@ public abstract class Personaje implements Peleable, Serializable {
    *          identificador
    */
   public Personaje(String nombre, Casta casta, int id, String nomRaza, String hab1, String hab2) {
+
     this.nombre = nombre;
     this.casta = casta;
     this.idPersonaje = id;
@@ -82,15 +79,15 @@ public abstract class Personaje implements Peleable, Serializable {
     fuerza = 10;
     inteligencia = 10;
     destreza = 10;
-    if (casta instanceof Guerrero) {
-      fuerza += 5;
-    }
-    if (casta instanceof Hechicero) {
-      inteligencia += 5;
-    }
-    if (casta instanceof Asesino) {
-      destreza += 5;
-    }
+
+    fuerza += casta.addFuerzaInicial();
+    fuerza += casta.addInteligenciaInicial();
+    fuerza += casta.addDestrezaInicial();
+    /*
+     * if (casta instanceof Guerrero) { fuerza += 5; } if (casta instanceof
+     * Hechicero) { inteligencia += 5; } if (casta instanceof Asesino) {
+     * destreza += 5; }
+     */
 
     posX = 0;
     posY = 0;
@@ -155,7 +152,7 @@ public abstract class Personaje implements Peleable, Serializable {
 
     habilidadesRaza = new String[2];
     habilidadesRaza[0] = hab1;
-    habilidadesRaza[1] = hab2;    
+    habilidadesRaza[1] = hab2;
   }
 
   /**
@@ -170,23 +167,6 @@ public abstract class Personaje implements Peleable, Serializable {
    */
   public void setNombreRaza(String nombreRaza) {
     this.nombreRaza = nombreRaza;
-  }
-
-  /*
-   * (non-Javadoc)
-   *
-   * @see dominio.Peleable#getNombre()
-   */
-  @Override
-  public String getNombre() {
-    return nombre;
-  }
-
-  /**
-   * @param nombre
-   */
-  public void setNombre(String nombre) {
-    this.nombre = nombre;
   }
 
   /*
@@ -270,20 +250,6 @@ public abstract class Personaje implements Peleable, Serializable {
   }
 
   /**
-   * @return devuelve la fuerza
-   */
-  public int getFuerza() {
-    return fuerza;
-  }
-
-  /**
-   * @param fuerza
-   */
-  public void setFuerza(int fuerza) {
-    this.fuerza = fuerza;
-  }
-
-  /**
    * @return devuelve la destreza
    */
   public int getDestreza() {
@@ -342,6 +308,7 @@ public abstract class Personaje implements Peleable, Serializable {
   /**
    * @return devuelve el nivel
    */
+  @Override
   public int getNivel() {
     return nivel;
   }
@@ -349,6 +316,7 @@ public abstract class Personaje implements Peleable, Serializable {
   /**
    * @param nivel
    */
+  @Override
   public void setNivel(int nivel) {
     this.nivel = nivel;
   }
@@ -370,6 +338,7 @@ public abstract class Personaje implements Peleable, Serializable {
   /**
    * @return devuelve la defensa del personaje
    */
+  @Override
   public int getDefensa() {
     return defensa;
   }
@@ -377,6 +346,7 @@ public abstract class Personaje implements Peleable, Serializable {
   /**
    * @param defensa
    */
+  @Override
   public void setDefensa(int defensa) {
     this.defensa = defensa;
   }
@@ -436,16 +406,6 @@ public abstract class Personaje implements Peleable, Serializable {
     return (int) (this.ataque * this.getCasta().getDañoCritico());
   }
 
-  /*
-   * (non-Javadoc)
-   *
-   * @see dominio.Peleable#despuesDeTurno()
-   */
-  @Override
-  public void despuesDeTurno() {
-
-  }
-
   /**
    * @return devuelve si puede atacar o no
    */
@@ -497,16 +457,6 @@ public abstract class Personaje implements Peleable, Serializable {
     this.ataque = this.calcularPuntosDeAtaque();
     this.defensa = this.calcularPuntosDeDefensa();
     this.magia = this.calcularPuntosDeMagia();
-  }
-
-  /*
-   * (non-Javadoc)
-   *
-   * @see dominio.Peleable#estaVivo()
-   */
-  @Override
-  public boolean estaVivo() {
-    return salud > 0;
   }
 
   /*
@@ -699,6 +649,7 @@ public abstract class Personaje implements Peleable, Serializable {
    *          experiencia ganada
    * @return true or false si se pudo aplicar la experiencia
    */
+  @Override
   public boolean ganarExperiencia(int exp) {
     this.experiencia += exp;
 
@@ -761,6 +712,11 @@ public abstract class Personaje implements Peleable, Serializable {
    */
   public boolean habilidadCasta3(Peleable atacado) {
     return this.getCasta().habilidad3(this, atacado);
+  }
+
+  @Override
+  public boolean esPersonaje() {//
+    return true;
   }
 
   public abstract boolean habilidadRaza1(Peleable atacado);

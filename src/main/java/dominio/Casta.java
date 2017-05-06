@@ -100,4 +100,31 @@ public abstract class Casta implements Serializable {
   public void setDañoCritico(double dañoCritico) {
     this.dañoCritico = dañoCritico;
   }
+
+  /**
+   * addFuerzaInicial().
+   *
+   * @return el numero a sumarle a la fuerza inicial
+   */
+  protected int addFuerzaInicial() {
+    return 0;
+  }
+
+  /**
+   * addInteligenciaInicial().
+   *
+   * @return el numero a sumarle a la Inteligencia inicial
+   */
+  public int addInteligenciaInicial() {
+    return 0;
+  }
+
+  /**
+   * addDestrezaInicial().
+   *
+   * @return el numero a sumarle a la destreza inicial
+   */
+  public int addDestrezaInicial() {
+    return 0;
+  }
 }

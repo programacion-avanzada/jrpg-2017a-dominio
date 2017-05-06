@@ -42,6 +42,11 @@ public class Guerrero extends Casta {
     return false;
   }
 
+  @Override
+  public int addFuerzaInicial() {
+    return 5;
+  }
+
   // Aumentar Defensa
   @Override
   public boolean habilidad2(Personaje caster, Peleable atacado) {
@@ -58,14 +63,21 @@ public class Guerrero extends Casta {
   public boolean habilidad3(Personaje caster, Peleable atacado) {
     if (caster.getEnergia() > 10) {
       caster.setEnergia(caster.getEnergia() - 10);
-      if (atacado instanceof Personaje) {
-        int defensa_original = ((Personaje) atacado).getDefensa();
-        ((Personaje) atacado).setDefensa(0);
+
+      if (atacado.esPersonaje()) {
+        int defensa_original = atacado.getDefensa();
+        atacado.setDefensa(0);
         if (atacado.serAtacado(caster.ataque) > 0) {
-          ((Personaje) atacado).setDefensa(defensa_original);
+          atacado.setDefensa(defensa_original);
           return true;
         }
       }
+      /*
+       * if (atacado instanceof Personaje) { int defensa_original = ((Personaje)
+       * atacado).getDefensa(); ((Personaje) atacado).setDefensa(0); if
+       * (atacado.serAtacado(caster.ataque) > 0) { ((Personaje)
+       * atacado).setDefensa(defensa_original); return true; } }
+       */
 
     }
     return false;

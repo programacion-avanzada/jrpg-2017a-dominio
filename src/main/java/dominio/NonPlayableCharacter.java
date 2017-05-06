@@ -4,13 +4,10 @@ package dominio;
  * Clase que posee los atributos y funciones del NonPlayableCharacter.
  *
  */
-public class NonPlayableCharacter implements Peleable {
+public class NonPlayableCharacter extends Character {
 
-  private int salud;
   private int fuerza;
-  private int defensa;
-  private String nombre;
-  private int nivel;
+
   private static final int dificultadAleatoria = -1;
 
   /**
@@ -56,72 +53,13 @@ public class NonPlayableCharacter implements Peleable {
   }
 
   @Override
+  public boolean esPersonaje() {
+    return false;
+  }
+
+  @Override
   public int otorgarExp() {
     return this.nivel * 30;
-  }
-
-  /**
-   * getFuerza().
-   *
-   * @return Devuelve el numero de la fuerza del personaje solicitado
-   */
-  public int getFuerza() {
-    return fuerza;
-  }
-
-  /**
-   * @param fuerza
-   */
-  public void setFuerza(int fuerza) {
-    this.fuerza = fuerza;
-  }
-
-  /*
-   * (non-Javadoc)
-   *
-   * @see dominio.Peleable#getNombre() Devuelve el nombre del personaje
-   * solicitado
-   */
-  @Override
-  public String getNombre() {
-    return nombre;
-  }
-
-  public void setNombre(String nombre) {
-    this.nombre = nombre;
-  }
-
-  /**
-   * @return devuelve el nivel del personaje
-   */
-  public int getNivel() {
-    return nivel;
-  }
-
-  /**
-   * @param nivel
-   */
-  public void setNivel(int nivel) {
-    this.nivel = nivel;
-  }
-
-  @Override
-  public boolean estaVivo() {
-    return salud > 0;
-  }
-
-  /**
-   * @return devuelve la defensa del personaje
-   */
-  public int getDefensa() {
-    return defensa;
-  }
-
-  /**
-   * @param defensa
-   */
-  public void setDefensa(int defensa) {
-    this.defensa = defensa;
   }
 
   /*
@@ -177,22 +115,6 @@ public class NonPlayableCharacter implements Peleable {
   /*
    * (non-Javadoc)
    *
-   * @see dominio.Peleable#despuesDeTurno()
-   */
-  @Override
-  public void despuesDeTurno() {
-  }
-
-  /**
-   * @param exp
-   */
-  public void ganarExperiencia(int exp) {
-
-  }
-
-  /*
-   * (non-Javadoc)
-   *
    * @see dominio.Peleable#getAtaque()
    */
   @Override
@@ -209,4 +131,5 @@ public class NonPlayableCharacter implements Peleable {
   public void setAtaque(int ataque) {
     this.fuerza = ataque;
   }
+
 }

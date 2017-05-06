@@ -24,4 +24,11 @@ public interface Peleable {
   public boolean estaVivo();
 
   public String getNombre();
+
+  public int getDefensa();
+
+  public void setDefensa(int defensa);
+
+  public boolean esPersonaje();
+
 }

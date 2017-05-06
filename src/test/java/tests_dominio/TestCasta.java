@@ -35,4 +35,9 @@ public class TestCasta {
     Assert.assertTrue(a.getDañoCritico() == (55));
   }
 
+  @Test
+  public void testVarios() {
+    Asesino a = new Asesino(1, 2, 3);
+  }
+
 }
