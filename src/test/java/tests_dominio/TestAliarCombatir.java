@@ -62,7 +62,7 @@ public class TestAliarCombatir {
 	}
 	
 	@Test
-	public void testAlianzaNombre(){
+	public void testObtenerNombreAlianza(){
 		Alianza a = new Alianza("Algo Gracioso");
 		Assert.assertEquals("Algo Gracioso",a.obtenerNombre());
 		
@@ -72,10 +72,10 @@ public class TestAliarCombatir {
 	public void testSetGetAliados(){
 		Alianza a = new Alianza("Algo Gracioso");
 		Assert.assertEquals("Algo Gracioso",a.obtenerNombre());
-		Humano h = new Humano("Chistoso", new Hechicero(),69);
+		Humano h = new Humano("Nico", new Hechicero(),20);
 		h.setClan(a);
-		Humano h2 = new Humano("Chistoso2", new Hechicero(),69);
-		h.setClan(a);
+		Humano h2 = new Humano("Lucas", new Asesino(),30);
+		h2.setClan(a);
 		LinkedList <Personaje> aliados = a.getAliados();
 		Assert.assertEquals(aliados, a.getAliados());
 		Assert.assertEquals("Algo Gracioso", a.getNombre());
