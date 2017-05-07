@@ -29,7 +29,7 @@ public class TestOrco {
 		o.setEnergia(0);
 		Assert.assertFalse(o.habilidadRaza1(h));
 	}
-
+	
 	@Test
 	public void testMordiscoDeVida() {
 		Humano h = new Humano("Nico", 100, 100, 55, 20, 30, new Hechicero(0.2, 0.3, 1.5), 0, 1, 1);
@@ -44,10 +44,11 @@ public class TestOrco {
 			Assert.assertTrue(h.getSalud() == 100);
 		}
 	}
+	
 	@Test
 	public void testMordiscoDeVidaFallido() {
 		Humano h = new Humano("Nico", 100, 100, 55, 20, 30, new Hechicero(0.2, 0.3, 1.5), 0, 1, 1);
-		Orco o = new Orco("Nico", 100, 100, 80, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 1, 1);
+		Orco o = new Orco("Juan", 100, 100, 80, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 1, 1);
 		o.setEnergia(0);
 		Assert.assertFalse(o.habilidadRaza2(h));
 	}
