@@ -17,12 +17,12 @@ public class Elfo extends Personaje {
   private static final int COSTE_DE_ENERGIA_HABILIDADES = 10;
   
   /** 
-   * Constructor parametrizado
+   * Constructor parametrizado para Casta Guerrero
  */
-  public Elfo(final String nombre, final Casta casta, final int id) {
-		super(nombre, casta, id);
+  public Elfo(final String nombre, final Guerrero guerrero, final int id) {
+		super(nombre, guerrero, id);
 		energiaTope += AUMENTO_ENERGIA_TOPE_POR_RAZA;
-		salud = saludTope;
+		this.setSalud(saludTope);
 		energia = energiaTope;
 		nombreRaza = "Elfo";
 
@@ -30,7 +30,35 @@ public class Elfo extends Personaje {
 		habilidadesRaza[0] = "Golpe Level";
 		habilidadesRaza[1] = "Ataque Bosque";
 	}
+  /** 
+   * Constructor parametrizado para Casta Hechicero
+ */
+  public Elfo(final String nombre, final Hechicero hechicero, final int id) {
+		super(nombre, hechicero, id);
+		energiaTope += AUMENTO_ENERGIA_TOPE_POR_RAZA;
+		this.setSalud(saludTope);
+		energia = energiaTope;
+		nombreRaza = "Elfo";
 
+		habilidadesRaza = new String[2];
+		habilidadesRaza[0] = "Golpe Level";
+		habilidadesRaza[1] = "Ataque Bosque";
+	}
+  /** 
+   * Constructor parametrizado para Casta Asesino
+ */
+  public Elfo(final String nombre, final Asesino asesino, final int id) {
+		super(nombre, asesino, id);
+		energiaTope += AUMENTO_ENERGIA_TOPE_POR_RAZA;
+		this.setSalud(saludTope);
+		energia = energiaTope;
+		nombreRaza = "Elfo";
+
+		habilidadesRaza = new String[2];
+		habilidadesRaza[0] = "Golpe Level";
+		habilidadesRaza[1] = "Ataque Bosque";
+	}
+  
   /** 
    * Constructor parametrizado en donde se pasan los states de la raza
  */

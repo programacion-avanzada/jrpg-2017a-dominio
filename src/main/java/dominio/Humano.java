@@ -17,17 +17,39 @@ public class Humano extends Personaje {
 
   
   /** 
-   * Constructor parametrizado
+   * Constructor parametrizado para la casta Guerrero
  */
-  public Humano(final String nombre, final Casta casta, final int id) {
-		super(nombre, casta, id);
+  public Humano(final String nombre, final Guerrero guerrero, final int id) {
+		super(nombre, guerrero, id);
 		saludTope += AUMENTO_SALUD_TOPE_HUMANO;
 		energiaTope += ENERGIA_SALUD_TOPE_HUMANO;
-		salud = saludTope;
+		this.setSalud(saludTope);
 		energia = energiaTope;
 		nombreRaza = "Humano";
 	}
-
+  /** 
+   * Constructor parametrizado la casta Hechicero
+ */
+  public Humano(final String nombre, final Hechicero hechicero, final int id) {
+		super(nombre, hechicero, id);
+		saludTope += AUMENTO_SALUD_TOPE_HUMANO;
+		energiaTope += ENERGIA_SALUD_TOPE_HUMANO;
+		this.setSalud(saludTope);
+		energia = energiaTope;
+		nombreRaza = "Humano";
+	}
+  /** 
+   * Constructor parametrizado para la casta Asesino
+ */
+  public Humano(final String nombre, final Asesino asesino, final int id) {
+		super(nombre, asesino, id);
+		saludTope += AUMENTO_SALUD_TOPE_HUMANO;
+		energiaTope += ENERGIA_SALUD_TOPE_HUMANO;
+		this.setSalud(saludTope);
+		energia = energiaTope;
+		nombreRaza = "Humano";
+	}
+ 	
   /** 
    * Constructor parametrizado en donde se pasan los states de la raza
  */

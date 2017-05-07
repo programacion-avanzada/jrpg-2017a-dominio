@@ -17,12 +17,40 @@ public class Orco extends Personaje {
 
 
   /** 
-   * Constructor parametrizado
+   * Constructor parametrizado para la casta Guerrero
  */
-  public Orco(final String nombre, final Casta casta, final int id) {
-		super(nombre, casta, id);
+  public Orco(final String nombre, final Guerrero guerrero, final int id) {
+		super(nombre, guerrero, id);
 		saludTope += AUMENTO_SALUD_TOPE_POR_RAZA;
-		salud = saludTope;
+		this.setSalud(saludTope);
+		energia = energiaTope;
+		nombreRaza = "Orco";
+
+		habilidadesRaza = new String[2];
+		habilidadesRaza[0] = "Golpe Defensa";
+		habilidadesRaza[1] = "Mordisco de Vida";
+	}
+  /** 
+   * Constructor parametrizado para la casta Hechicero
+ */
+  public Orco(final String nombre, final Hechicero hechicero, final int id) {
+		super(nombre, hechicero, id);
+		saludTope += AUMENTO_SALUD_TOPE_POR_RAZA;
+		this.setSalud(saludTope);
+		energia = energiaTope;
+		nombreRaza = "Orco";
+
+		habilidadesRaza = new String[2];
+		habilidadesRaza[0] = "Golpe Defensa";
+		habilidadesRaza[1] = "Mordisco de Vida";
+	}
+  /** 
+   * Constructor parametrizado para la casta Asesino
+ */
+  public Orco(final String nombre, final Asesino asesino, final int id) {
+		super(nombre, asesino, id);
+		saludTope += AUMENTO_SALUD_TOPE_POR_RAZA;
+		this.setSalud(saludTope);
 		energia = energiaTope;
 		nombreRaza = "Orco";
 
