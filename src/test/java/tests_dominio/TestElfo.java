@@ -22,6 +22,15 @@ public class TestElfo {
 		e.setEnergia(0);
 		Assert.assertFalse(e.habilidadRaza1(h));
 	}
+	@Test
+	public void testGolpeLevelFallido() {
+		Elfo e = new Elfo("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
+		Humano h = new Humano("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 1, 1);
+		e.setEnergia(0);
+		Assert.assertTrue(h.getSalud() == 100);
+		e.habilidadRaza1(h);
+		Assert.assertTrue(h.getSalud() == 100);
+	}
 
 	@Test
 	public void testAtaqueBosque() {
@@ -33,7 +42,14 @@ public class TestElfo {
 			Assert.assertTrue(h.getSalud() < 100);
 		else
 			Assert.assertTrue(h.getSalud() == 100);
+	}
+	
+	public void testAtaqueBosqueFallido() {
+		Elfo e = new Elfo("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
+		Humano h = new Humano("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 1, 1);
 		e.setEnergia(0);
-		Assert.assertFalse(e.habilidadRaza2(h));
+		Assert.assertTrue(h.getSalud() == 100);
+		e.habilidadRaza2(h);
+		Assert.assertTrue(h.getSalud() == 100);
 	}
 }

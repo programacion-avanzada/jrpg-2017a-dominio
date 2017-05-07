@@ -35,8 +35,8 @@ public class TestOrco {
 		Assert.assertTrue(h.getSalud() == 100);
 		o.setSalud(100);
 		o.habilidadRaza2(h);
-			Assert.assertEquals(40, h.getSalud());
-			Assert.assertTrue(o.getSalud() == 100);
+		Assert.assertEquals(40, h.getSalud());
+		Assert.assertTrue(o.getSalud() == 100);
 	}
 	
 	@Test
