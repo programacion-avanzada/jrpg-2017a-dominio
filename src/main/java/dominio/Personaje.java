@@ -69,7 +69,9 @@ public abstract class Personaje extends Unidad implements Peleable, Serializable
   /** 
    * Constructor parametrizado para la casta Guerrero
  */
-  public Personaje(final String nombre,final Guerrero guerrero,final int id) {
+  public Personaje(final String nombre,final Guerrero guerrero,final int id,
+		  final int AUMENTO_SALUD,final int AUMENTO_ENERGIA, final String nombreDeRaza,
+		  final String nomHabilidadesRaza []) {
     super(nombre);
     this.casta = guerrero;
     this.idPersonaje = id;
@@ -81,18 +83,22 @@ public abstract class Personaje extends Unidad implements Peleable, Serializable
     this.setFuerza(this.getFuerza() + BONUS_POR_CASTA);
     x = 0;
     y = 0;
-    saludTope = TOPE_SALUD;
-    energiaTope = TOPE_ENERGIA;
-
+    saludTope = TOPE_SALUD+AUMENTO_SALUD;
+    setSalud(saludTope);
+    energiaTope = TOPE_ENERGIA+AUMENTO_ENERGIA;
+    energia = energiaTope;
+    nombreRaza = nombreDeRaza;
     ataque = this.calcularPuntosDeAtaque();
     this.setDefensa( this.calcularPuntosDeDefensa());
     magia = this.calcularPuntosDeMagia();
-
+    habilidadesRaza =nomHabilidadesRaza;
   }
   /** 
    * Constructor parametrizado para la casta Hechicero
  */
-  public Personaje(final String nombre,final Hechicero hechicero,final int id) {
+  public Personaje(final String nombre,final Hechicero hechicero,final int id,
+		  final int AUMENTO_SALUD,final int AUMENTO_ENERGIA, final String nombreDeRaza
+		  ,final String nomHabilidadesRaza []) {
     super(nombre);
     this.casta = hechicero;
     this.idPersonaje = id;
@@ -104,18 +110,22 @@ public abstract class Personaje extends Unidad implements Peleable, Serializable
     inteligencia += BONUS_POR_CASTA;
     x = 0;
     y = 0;
-    saludTope = TOPE_SALUD;
-    energiaTope = TOPE_ENERGIA;
-
+    saludTope = TOPE_SALUD+AUMENTO_SALUD;
+    setSalud(saludTope);
+    energiaTope = TOPE_ENERGIA+AUMENTO_ENERGIA;
+    energia = energiaTope;
+    nombreRaza = nombreDeRaza;
     ataque = this.calcularPuntosDeAtaque();
     this.setDefensa( this.calcularPuntosDeDefensa());
     magia = this.calcularPuntosDeMagia();
-
+    habilidadesRaza =nomHabilidadesRaza;
   }
   /** 
    * Constructor parametrizado para la casta Asesino
  */
-  public Personaje(final String nombre,final Asesino asesino,final int id) {
+  public Personaje(final String nombre,final Asesino asesino,final int id,
+		  final int AUMENTO_SALUD,final int AUMENTO_ENERGIA, final String nombreDeRaza
+		  ,final String nomHabilidadesRaza []) {
     super(nombre);
     this.casta = asesino;
     this.idPersonaje = id;
@@ -127,12 +137,15 @@ public abstract class Personaje extends Unidad implements Peleable, Serializable
     destreza += BONUS_POR_CASTA;
     x = 0;
     y = 0;
-    saludTope = TOPE_SALUD;
-    energiaTope = TOPE_ENERGIA;
+    saludTope = TOPE_SALUD+AUMENTO_SALUD;
+    setSalud(saludTope);
+    energiaTope = TOPE_ENERGIA+AUMENTO_ENERGIA;
+    energia = energiaTope;
+    nombreRaza = nombreDeRaza;
     ataque = this.calcularPuntosDeAtaque();
     this.setDefensa( this.calcularPuntosDeDefensa());
     magia = this.calcularPuntosDeMagia();
-
+    habilidadesRaza =nomHabilidadesRaza;
   }
    
   /** 
@@ -140,7 +153,8 @@ public abstract class Personaje extends Unidad implements Peleable, Serializable
  */
   public Personaje(final String nombre, final int salud, final int energia,
       final int fuerza, final int destreza, final int inteligencia,final Casta casta,
-      final int experiencia, final int nivel, final int idPersonaje) {
+      final int experiencia, final int nivel, final int idPersonaje, final String nombreDeRaza
+      ,final String nomHabilidadesRaza []) {
      super(salud,nombre,fuerza,nivel);
     
     this.energia = energia;
@@ -155,6 +169,8 @@ public abstract class Personaje extends Unidad implements Peleable, Serializable
     this.setDefensa(this.calcularPuntosDeDefensa());
     this.ataque = this.calcularPuntosDeAtaque();
     this.magia = this.calcularPuntosDeMagia();
+    nombreRaza = nombreDeRaza;
+    habilidadesRaza =nomHabilidadesRaza;
   }
   
   /** El siguiente metodo retorna el mombre de la raza del personaje */

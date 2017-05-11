@@ -15,48 +15,24 @@ public class Elfo extends Personaje {
   private static final int AUMENTO_ENERGIA_TOPE_POR_RAZA = 10;
   private static final int MULTIPLICADOR_HABILIDAD_1 = 10;
   private static final int COSTE_DE_ENERGIA_HABILIDADES = 10;
-  
+  protected final static String habilidades [] = new String[]{"Golpe Level","Ataque Bosque"};
   /** 
    * Constructor parametrizado para Casta Guerrero
  */
   public Elfo(final String nombre, final Guerrero guerrero, final int id) {
-		super(nombre, guerrero, id);
-		energiaTope += AUMENTO_ENERGIA_TOPE_POR_RAZA;
-		this.setSalud(saludTope);
-		energia = energiaTope;
-		nombreRaza = "Elfo";
-
-		habilidadesRaza = new String[2];
-		habilidadesRaza[0] = "Golpe Level";
-		habilidadesRaza[1] = "Ataque Bosque";
+		super(nombre, guerrero, id,0, AUMENTO_ENERGIA_TOPE_POR_RAZA,"Elfo",habilidades);
 	}
   /** 
    * Constructor parametrizado para Casta Hechicero
  */
   public Elfo(final String nombre, final Hechicero hechicero, final int id) {
-		super(nombre, hechicero, id);
-		energiaTope += AUMENTO_ENERGIA_TOPE_POR_RAZA;
-		this.setSalud(saludTope);
-		energia = energiaTope;
-		nombreRaza = "Elfo";
-
-		habilidadesRaza = new String[2];
-		habilidadesRaza[0] = "Golpe Level";
-		habilidadesRaza[1] = "Ataque Bosque";
+		super(nombre, hechicero, id,0, AUMENTO_ENERGIA_TOPE_POR_RAZA,"Elfo",habilidades);
 	}
   /** 
    * Constructor parametrizado para Casta Asesino
  */
   public Elfo(final String nombre, final Asesino asesino, final int id) {
-		super(nombre, asesino, id);
-		energiaTope += AUMENTO_ENERGIA_TOPE_POR_RAZA;
-		this.setSalud(saludTope);
-		energia = energiaTope;
-		nombreRaza = "Elfo";
-
-		habilidadesRaza = new String[2];
-		habilidadesRaza[0] = "Golpe Level";
-		habilidadesRaza[1] = "Ataque Bosque";
+		super(nombre, asesino, id,0, AUMENTO_ENERGIA_TOPE_POR_RAZA,"Elfo",habilidades);
 	}
   
   /** 
@@ -66,12 +42,7 @@ public class Elfo extends Personaje {
 	    final int destreza, final int inteligencia, final Casta casta, final int experiencia,
 	    final int nivel, final int idPersonaje) {
 		super(nombre, salud, energia, fuerza, destreza, inteligencia, casta,
-				experiencia, nivel, idPersonaje);
-		nombreRaza = "Elfo";
-
-		habilidadesRaza = new String[2];
-		habilidadesRaza[0] = "Golpe Level";
-		habilidadesRaza[1] = "Ataque Bosque";
+				experiencia, nivel, idPersonaje,"Elfo",habilidades);
 	}
 
 /**

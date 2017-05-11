@@ -6,7 +6,6 @@ package dominio;
 	atributos propios de esta clase.
 */
 public class Humano extends Personaje {
-
 	/**
    * 
    */
@@ -14,40 +13,27 @@ public class Humano extends Personaje {
   private static final int AUMENTO_SALUD_TOPE_HUMANO = 5;
   private static final int ENERGIA_SALUD_TOPE_HUMANO = 5;
   private static final int COSTE_DE_ENERGIA_HABILIDADES = 10;
-
-  
+  protected final static String habilidades [] = new String[]{"Incentivar","Golpe Fatal"};
   /** 
    * Constructor parametrizado para la casta Guerrero
  */
   public Humano(final String nombre, final Guerrero guerrero, final int id) {
-		super(nombre, guerrero, id);
-		saludTope += AUMENTO_SALUD_TOPE_HUMANO;
-		energiaTope += ENERGIA_SALUD_TOPE_HUMANO;
-		this.setSalud(saludTope);
-		energia = energiaTope;
-		nombreRaza = "Humano";
+		super(nombre, guerrero, id,AUMENTO_SALUD_TOPE_HUMANO,
+				ENERGIA_SALUD_TOPE_HUMANO,"Humano",habilidades);
 	}
   /** 
    * Constructor parametrizado la casta Hechicero
  */
   public Humano(final String nombre, final Hechicero hechicero, final int id) {
-		super(nombre, hechicero, id);
-		saludTope += AUMENTO_SALUD_TOPE_HUMANO;
-		energiaTope += ENERGIA_SALUD_TOPE_HUMANO;
-		this.setSalud(saludTope);
-		energia = energiaTope;
-		nombreRaza = "Humano";
+		super(nombre, hechicero, id,AUMENTO_SALUD_TOPE_HUMANO,
+				ENERGIA_SALUD_TOPE_HUMANO,"Humano",habilidades);
 	}
   /** 
    * Constructor parametrizado para la casta Asesino
  */
   public Humano(final String nombre, final Asesino asesino, final int id) {
-		super(nombre, asesino, id);
-		saludTope += AUMENTO_SALUD_TOPE_HUMANO;
-		energiaTope += ENERGIA_SALUD_TOPE_HUMANO;
-		this.setSalud(saludTope);
-		energia = energiaTope;
-		nombreRaza = "Humano";
+		super(nombre, asesino, id,AUMENTO_SALUD_TOPE_HUMANO,
+				ENERGIA_SALUD_TOPE_HUMANO,"Humano",habilidades);
 	}
  	
   /** 
@@ -56,12 +42,8 @@ public class Humano extends Personaje {
 	public Humano(final String nombre, final int salud, final int energia, final int fuerza,
 	    final int destreza, final int inteligencia, final Casta casta,
 	    final int experiencia, final int nivel, final int idPersonaje) {
-		super(nombre, salud, energia, fuerza, destreza, inteligencia, casta, experiencia, nivel, idPersonaje);
-		nombreRaza = "Humano";
-
-		habilidadesRaza = new String[2];
-		habilidadesRaza[0] = "Incentivar";
-		habilidadesRaza[1] = "Golpe Fatal";
+		super(nombre, salud, energia, fuerza, destreza, inteligencia, casta, experiencia, nivel, idPersonaje,
+				"Humano",habilidades);
 	}
 	
 /**

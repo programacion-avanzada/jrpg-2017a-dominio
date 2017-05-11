@@ -69,7 +69,7 @@ public class TestAliarCombatir {
 	}
 	
 	@Test
-	public void testSetGetAliados(){
+	public void testSetterGettterAliados(){
 		Alianza a = new Alianza("Algo Gracioso");
 		Assert.assertEquals("Algo Gracioso",a.obtenerNombre());
 		Humano h = new Humano("Nico", new Hechicero(),20);
