@@ -11,6 +11,29 @@ import dominio.Humano;
 public class TestHechicero {
 
 	@Test
+	public void testBolaDeFuego() {
+		Humano h = new Humano("Nico", 100, 100, 55, 20, 30, new Hechicero(0.2, 0.3, 1.5), 0, 1, 1);
+		Elfo e = new Elfo("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
+
+		Assert.assertTrue(e.getSalud() == 100);
+		if (h.habilidadCasta1(e))
+			Assert.assertTrue(e.getSalud() < 100);
+		else
+			Assert.assertTrue(e.getSalud() == 100);
+	}
+
+	@Test
+	public void testBolaDeFuegoSinEnergia() {
+		Humano h = new Humano("Nico", 100, 100, 25, 20, 30, new Hechicero(0.2, 0.3, 1.5), 0, 1, 1);
+		Elfo e = new Elfo("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
+
+		Assert.assertTrue(h.getEnergia() > 3);
+		h.setEnergia(2);
+		Assert.assertFalse(h.habilidadCasta1(e));
+		Assert.assertEquals(100, e.getSalud());
+	}
+
+	@Test
 	public void testCurar() {
 		Humano h = new Humano("Nico", 100, 100, 55, 20, 30, new Hechicero(0.2, 0.3, 1.5), 0, 1, 1);
 		Elfo e = new Elfo("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
@@ -23,15 +46,14 @@ public class TestHechicero {
 	}
 
 	@Test
-	public void testBolaDeFuego() {
-		Humano h = new Humano("Nico", 100, 100, 55, 20, 30, new Hechicero(0.2, 0.3, 1.5), 0, 1, 1);
-		Elfo e = new Elfo("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
+	public void testCurarSinEnergia() {
+		Humano h = new Humano("Nico", 100, 100, 25, 20, 30, new Hechicero(0.2, 0.3, 1.5), 0, 1, 1);
+		Elfo e = new Elfo("Nico", 10, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
 
-		Assert.assertTrue(e.getSalud() == 100);
-		if (h.habilidadCasta1(e))
-			Assert.assertTrue(e.getSalud() < 100);
-		else
-			Assert.assertTrue(e.getSalud() == 100);
+		Assert.assertTrue(h.getEnergia() > 3);
+		h.setEnergia(2);
+		Assert.assertFalse(h.habilidadCasta2(e));
+		Assert.assertEquals(10, e.getSalud());
 	}
 
 	@Test
@@ -51,5 +73,16 @@ public class TestHechicero {
 			Assert.assertTrue(h.getEnergia() < 50);
 			Assert.assertTrue(e.getSalud() == 100);
 		}
+	}
+
+	@Test
+	public void testRobarEnergia_y_SaludSinEnergia() {
+		Humano h = new Humano("Nico", 10, 100, 25, 20, 30, new Hechicero(0.2, 0.3, 1.5), 0, 1, 1);
+		Elfo e = new Elfo("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
+
+		Assert.assertTrue(h.getEnergia() > 3);
+		h.setEnergia(2);
+		Assert.assertFalse(h.habilidadCasta3(e));
+		Assert.assertEquals(10, h.getSalud());
 	}
 }

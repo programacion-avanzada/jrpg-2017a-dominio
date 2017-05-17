@@ -21,6 +21,17 @@ public class TestHumano {
 	}
 
 	@Test
+	public void testIncentivarSinEnergia() {
+		Humano h = new Humano("Nico", 100, 100, 55, 20, 30, new Hechicero(0.2, 0.3, 1.5), 0, 1, 1);
+		Elfo e = new Elfo("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
+
+		Assert.assertTrue(e.getAtaque() == 37);
+		h.setEnergia(2);
+		h.habilidadRaza1(e);
+		Assert.assertTrue(e.getAtaque() == 37);
+	}
+
+	@Test
 	public void testGolpeFatal() {
 		Humano h = new Humano("Nico", 100, 100, 55, 20, 30, new Hechicero(0.2, 0.3, 1.5), 0, 1, 1);
 		Elfo e = new Elfo("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
@@ -34,5 +45,15 @@ public class TestHumano {
 			Assert.assertTrue(h.getEnergia() == 90);
 			Assert.assertTrue(e.getSalud() == 100);
 		}
+	}
+
+	@Test
+	public void testGolpeFatalSinEnergia() {
+		Humano h = new Humano("Nico", 100, 100, 55, 20, 30, new Hechicero(0.2, 0.3, 1.5), 0, 1, 1);
+		Elfo e = new Elfo("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
+
+		h.setEnergia(2);
+		h.habilidadRaza2(e);
+		Assert.assertTrue(h.getEnergia() == 0);
 	}
 }
