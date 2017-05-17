@@ -28,16 +28,7 @@ public class Alianza {
 	 */
 
 	public LinkedList<Personaje> getAliados() {
-		return aliados;
-	}
-
-	/**
-	 * Asigna la lista de aliados
-	 * @param aliados es la lista de aliados a asignar
-	 */
-
-	public void setAliados(final LinkedList<Personaje> aliados) {
-		this.aliados = aliados;
+		return copiarLista(this.aliados);
 	}
 
 	/**
@@ -66,4 +57,13 @@ public class Alianza {
 	public void añadirPersonaje(final Personaje pj) {
 		aliados.add(pj);
 	}
+
+	private static LinkedList<Personaje> copiarLista(LinkedList<Personaje> lista) {
+		LinkedList<Personaje> copia = new LinkedList<Personaje>();
+		for(int i = 0 ; i < lista.size() ; i++) {
+			copia.add(lista.get(i));
+		}
+		return copia;
+	}
+	
 }

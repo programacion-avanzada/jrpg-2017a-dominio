@@ -76,7 +76,6 @@ public class TestAliarCombatir {
 		Assert.assertNull(h3.getClan());
 		Assert.assertNull(h4.getClan());
 		Assert.assertNotNull(aliados2);
-		a1.setAliados(aliados2);
 		h3.setClan(a1);
 		h4.setClan(a1);
 	}
