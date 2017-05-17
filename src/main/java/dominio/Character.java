@@ -16,6 +16,8 @@ public abstract class Character {
   protected int fuerza;
   protected int nivel;
 
+  protected RandomGenerator aleatorizador;
+
   /**
    * Contructor de un Character
    * @param nombre nombre del character
@@ -23,7 +25,16 @@ public abstract class Character {
 
   public Character(final String nombre) {
     this.nombre = nombre;
+    this.aleatorizador = new MyRandom();
   }
+
+  /**
+   * @param nombre del personaje
+   */
+
+  public void setRandomGenerator(final RandomGenerator randomGenerator) {
+		this.aleatorizador = randomGenerator;
+	}
 
   /**
    * @return nombre del personaje

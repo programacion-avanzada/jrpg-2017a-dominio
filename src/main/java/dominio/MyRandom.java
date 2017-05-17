@@ -1,30 +1,32 @@
 package dominio;
 
+import java.util.Random;
+
 /**
- * La clase MyRandom define dos metodos que aparentan devolver un siguente
- * valor entero y un siguiente valor double.
- * El programador nunca entendió el concepto de aleatoriedad.
+ * La clase MyRandom devuelve lo mismo que Random
  */
 
-public class MyRandom {
+public class MyRandom extends RandomGenerator {
 
 	private static final double NEXT_DOUBLE = 0.49;
 
 	/**
-	 * @return NEXT_DOUBLE
+	 * @return Random.nextDouble
 	 */
 
-	public static double nextDouble() {
-		return NEXT_DOUBLE;
+	public double nextDouble() {
+		Random r = new Random();
+		return r.nextDouble();
 	}
 
 	/**
 	 * @param val val
-	 * @return el valor pasado por parametro -1
+	 * @return Random.nextInt
 	 */
 
-	public static int nextInt(final int val) {
-		return val - 1;
+	public int nextInt(final int val) {
+		Random r = new Random();
+		return r.nextInt(val);
 	}
 
 }

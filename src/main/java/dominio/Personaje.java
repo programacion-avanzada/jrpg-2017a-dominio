@@ -384,7 +384,7 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 			return 0;
 		}
 		if (atacado.getSalud() > 0) {
-			if (MyRandom.nextDouble() <= this.casta.getProbabilidadGolpeCritico() + this.destreza / 1000) {
+			if (this.aleatorizador.nextDouble() <= this.casta.getProbabilidadGolpeCritico() + this.destreza / 1000) {
 				return atacado.serAtacado(this.golpe_critico());
 			} else {
 				return atacado.serAtacado(this.ataque);
@@ -478,7 +478,7 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 	 */
 
 	public int serAtacado(int daño) {
-		if (MyRandom.nextDouble() >= this.getCasta().getProbabilidadEvitarDaño()) {
+		if (this.aleatorizador.nextDouble() >= this.getCasta().getProbabilidadEvitarDaño()) {
 			daño -= this.defensa;
 			if (daño > 0) {
 				if (salud <= daño) {
