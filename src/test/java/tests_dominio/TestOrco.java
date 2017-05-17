@@ -8,6 +8,7 @@ import dominio.Guerrero;
 import dominio.Hechicero;
 import dominio.Humano;
 import dominio.Orco;
+import dominio.MyRandomStub;
 
 public class TestOrco {
 
@@ -16,11 +17,25 @@ public class TestOrco {
 		Humano h = new Humano("Nicolas", new Guerrero(), 1);
 		Orco o = new Orco("Hernan", new Guerrero(), 1);
 
+		MyRandomStub mrs = new MyRandomStub(0.49, 2);
+		h.setRandomGenerator(mrs);
+		o.setRandomGenerator(mrs);
+
 		Assert.assertTrue(h.getSalud() == 105);
 		if (o.habilidadRaza1(h))
 			Assert.assertTrue(h.getSalud() == 95);
 		else
 			Assert.assertTrue(o.getSalud() == 105);
+	}
+
+	@Test
+	public void testGolpeDefensivoSinEnergia() {
+		Humano h = new Humano("Nicolas", new Guerrero(), 1);
+		Orco o = new Orco("Hernan", new Guerrero(), 1);
+
+		o.setEnergia(2);
+		o.habilidadRaza1(h);
+		Assert.assertTrue(h.getSalud() == 105);
 	}
 
 	@Test
@@ -37,5 +52,15 @@ public class TestOrco {
 			Assert.assertTrue(o.getSalud() == 100);
 			Assert.assertTrue(h.getSalud() == 100);
 		}
+	}
+
+	@Test
+	public void testMordiscoDeVidaSinEnergia() {
+		Humano h = new Humano("Nicolas", new Guerrero(), 1);
+		Orco o = new Orco("Hernan", new Guerrero(), 1);
+
+		o.setEnergia(2);
+		o.habilidadRaza2(h);
+		Assert.assertTrue(h.getSalud() == 105);
 	}
 }

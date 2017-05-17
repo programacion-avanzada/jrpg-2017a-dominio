@@ -3,6 +3,7 @@ package tests_dominio;
 import org.junit.Assert;
 import org.junit.Test;
 
+import dominio.MyRandomStub;
 import dominio.NonPlayableCharacter;
 import dominio.Elfo;
 import dominio.Asesino;
@@ -47,10 +48,23 @@ public class TestNPC {
 	}
 
 	@Test
-	public void testAtacar() {
+	public void testAtacarNormal() {
 		NonPlayableCharacter npc = new NonPlayableCharacter("Otro", 2, 2);
-		Elfo e = new Elfo("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
+		Elfo e = new Elfo("nicochino", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
+		MyRandomStub mrs = new MyRandomStub(0.49, 2);
+		e.setRandomGenerator(mrs);
+
 		Assert.assertTrue(20 == npc.atacar(e));
+	}
+
+	@Test
+	public void testAtacarPotenciado() {
+		NonPlayableCharacter npc = new NonPlayableCharacter("Otro", 2, 2);
+		MyRandomStub mrs = new MyRandomStub(0.1, 2);
+		npc.setRandomGenerator(mrs);
+
+		Elfo e = new Elfo("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
+		Assert.assertTrue(0 == npc.atacar(e));
 	}
 
 	@Test
