@@ -87,11 +87,33 @@ public abstract class Casta implements Serializable {
 	public abstract boolean habilidad3(Personaje caster, Peleable atacado);
 
 	/**
-	 * incrementarAtributoAlCrear será sobreescrita en las clases que hereden de esta.
-	 * @param personaje sobre el cual se incrementa el atributo
+	 * getIncrementoInteligencia sera reemplazada en los hijos segun corresponda.
+	 * @return 0
 	 */
 
-	public abstract void incrementarAtributoAlCrear(Personaje personaje);
+	public int getIncrementoInteligencia(){
+		return 0;
+	}
+
+	/**
+	 * getIncrementoFuerza sera reemplazada en los hijos segun corresponda.
+	 * @return 0
+	 */
+
+	public int getIncrementoFuerza(){
+		return 0;
+	}
+
+	/**
+	 * getIncrementoDestreza sera reemplazada en los hijos segun corresponda.
+	 * @return 0
+	 */
+
+	public int getIncrementoDestreza(){
+		return 0;
+	}
+
+
 
 	/**
 	 * @return el nombre de la casta

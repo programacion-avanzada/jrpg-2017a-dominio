@@ -31,6 +31,15 @@ public class Hechicero extends Casta {
 	}
 
 	/**
+	 * getIncrementoInteligencia los hechizeros se inicializan con mas inteligencia
+	 * @return INCREMENTO_POR_TIPO
+	 */
+
+	public int getIncrementoInteligencia(){
+		return INCREMENTO_POR_TIPO;
+	}
+
+	/**
 	 * Bola de Fuego
 	 * Sobreescribe la habilidad1 de la clase padre.
 	 * @param caster caster
@@ -87,14 +96,6 @@ public class Hechicero extends Casta {
 			return true;
 		}
 		return false;
-	}
-
-	/**
-	 * @param personaje sobre el cual se incrementa la inteligencia
-	 */
-
-	public void incrementarAtributoAlCrear(final Personaje personaje) {
-		personaje.setInteligencia(personaje.getInteligencia() + INCREMENTO_POR_TIPO);
 	}
 
 }

@@ -33,6 +33,15 @@ public class Asesino extends Casta {
 	}
 
 	/**
+	 * getIncrementoDestreza los asesinos se inicializan con mas destreza
+	 * @return INCREMENTO_POR_TIPO
+	 */
+
+	public int getIncrementoDestreza(){
+		return INCREMENTO_POR_TIPO;
+	}
+
+	/**
 	 * Sobreescribe la habilidad1 de la clase padre.
 	 * @param caster es el personaje a traves del cual se obtiene el daño y al que se
 	 * le decrementa la energía.
@@ -83,11 +92,4 @@ public class Asesino extends Casta {
 		return false;
 	}
 
-	/**
-	 * @param personaje sobre el cual se incrementa la destreza
-	 */
-
-	public void incrementarAtributoAlCrear(final Personaje personaje) {
-		personaje.setDestreza(personaje.getDestreza() + INCREMENTO_POR_TIPO);
-	}
 }

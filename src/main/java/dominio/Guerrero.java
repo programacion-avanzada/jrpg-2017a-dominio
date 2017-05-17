@@ -31,6 +31,15 @@ public class Guerrero extends Casta {
 	}
 
 	/**
+	 * getIncrementoFuerza los guerreros se inicializan con mas fuerza
+	 * @return INCREMENTO_POR_TIPO
+	 */
+
+	public int getIncrementoFuerza(){
+		return INCREMENTO_POR_TIPO;
+	}
+
+	/**
 	 * Ataque Doble
 	 * Sobreescribe la habilidad1 de la clase padre.
 	 * @param caster caster
@@ -48,6 +57,8 @@ public class Guerrero extends Casta {
 		}
 		return false;
 	}
+
+
 
 	/**
 	 * Aumentar Defensa
@@ -87,14 +98,6 @@ public class Guerrero extends Casta {
 			}
 		}
 		return false;
-	}
-
-	/**
-	 * @param personaje sobre el cual se incrementa la fuerza
-	 */
-
-	public void incrementarAtributoAlCrear(final Personaje personaje) {
-		personaje.setFuerza(personaje.getFuerza() + INCREMENTO_POR_TIPO);
 	}
 
 }
