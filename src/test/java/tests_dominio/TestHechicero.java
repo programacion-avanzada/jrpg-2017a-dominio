@@ -20,6 +20,20 @@ public class TestHechicero {
 		Assert.assertTrue(e.getSalud() == 65);
 		h.habilidadCasta2(e);
 		Assert.assertTrue(e.getSalud() > 65);
+		h.setEnergia(0);
+		Assert.assertFalse(h.habilidadCasta1(e));
+	}
+	
+	@Test
+	public void testCurarFallido() {
+		Humano h = new Humano("Nico", 100, 100, 55, 20, 30, new Hechicero(0.2, 0.3, 1.5), 0, 1, 1);
+		Elfo e = new Elfo("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
+		h.setEnergia(0);
+		Assert.assertTrue(e.getSalud() == 100);
+		e.setSalud(65);
+		Assert.assertTrue(e.getSalud() == 65);
+		h.habilidadCasta2(e);
+		Assert.assertTrue(e.getSalud() == 65);
 	}
 
 	@Test
@@ -32,6 +46,18 @@ public class TestHechicero {
 			Assert.assertTrue(e.getSalud() < 100);
 		else
 			Assert.assertTrue(e.getSalud() == 100);
+		h.setEnergia(0);
+		Assert.assertFalse(h.habilidadCasta2(e));
+	}
+	
+	@Test
+	public void testBolaDeFuegoFallido() {
+		Humano h = new Humano("Nico", 100, 100, 55, 20, 30, new Hechicero(0.2, 0.3, 1.5), 0, 1, 1);
+		Elfo e = new Elfo("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
+		h.setEnergia(0);
+		Assert.assertTrue(e.getSalud() == 100);
+		h.habilidadCasta1(e);
+		Assert.assertTrue(e.getSalud() == 100);
 	}
 
 	@Test
@@ -51,5 +77,20 @@ public class TestHechicero {
 			Assert.assertTrue(h.getEnergia() < 50);
 			Assert.assertTrue(e.getSalud() == 100);
 		}
+		h.setEnergia(0);
+		Assert.assertFalse(h.habilidadCasta3(e));
+	}
+	
+	@Test
+	public void testRobarEnergia_y_SaludFallido() {
+		Humano h = new Humano("Nico", 100, 100, 55, 20, 50, new Hechicero(0.2, 0.3, 1.5), 0, 1, 1);
+		Elfo e = new Elfo("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
+		Assert.assertTrue(e.getSalud() == 100);
+		h.setSalud(50);
+		h.setEnergia(0);
+		h.habilidadCasta3(e);
+		Assert.assertTrue(h.getSalud() == 50);
+		Assert.assertTrue(h.getEnergia() == 0);
+		Assert.assertTrue(e.getSalud() == 100);
 	}
 }
