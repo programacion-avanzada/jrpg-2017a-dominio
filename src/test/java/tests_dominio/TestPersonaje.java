@@ -142,14 +142,14 @@ public class TestPersonaje {
 	public void testPuedeAtacar() {
 		Orco o = new Orco("Maxi", new Hechicero(), 1);
 		Assert.assertTrue(o.puedeAtacar() == true);
-		o.setEnergia(9);
+		o.usarHabilidad(91);
 		Assert.assertTrue(o.puedeAtacar() == false);
 	}
 
 	@Test
 	public void testRestablecerEnergiaYSalud() {
 		Orco o = new Orco("Maxi", new Hechicero(), 1);
-		o.setEnergia(9);
+		o.usarHabilidad(91);
 		o.setSalud(9);
 		o.restablecerEnergia();
 		o.restablecerSalud();
@@ -178,7 +178,7 @@ public class TestPersonaje {
 	@Test
 	public void testSerDesenergizadoYMorir() {
 		Orco o = new Orco("Maxi", new Hechicero(), 1);
-		o.setEnergia(10);
+		o.usarHabilidad(90);
 		o.setDefensa(10);
 		Assert.assertTrue(o.serDesenergizado(100) == 10);
 		Assert.assertTrue(o.getEnergia() == 0);
@@ -187,7 +187,7 @@ public class TestPersonaje {
 	@Test
 	public void serEnergizadoAlMaximo() {
 		Orco o = new Orco("Maxi", new Hechicero(), 1);
-		o.setEnergia(99);
+		o.usarHabilidad(1);
 		o.serEnergizado(10000);
 		Assert.assertTrue(o.getEnergia() == 100);
 	}

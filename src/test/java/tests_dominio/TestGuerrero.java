@@ -22,29 +22,29 @@ public class TestGuerrero {
 		else
 			Assert.assertTrue(e.getSalud() == 100);
 	}
-	
+
 	@Test
 	public void testDobleGolpeSinEnergia() {
 		Humano h = new Humano("Nico", 100, 100, 25, 20, 30, new Guerrero(0.2, 0.3, 1.5), 0, 1, 1);
 		Elfo e = new Elfo("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
-		
+
 		Assert.assertTrue(h.getEnergia() > 3);
-		h.setEnergia(2);
+		h.usarHabilidad(98);
 		Assert.assertFalse(h.habilidadCasta1(e));
 		Assert.assertEquals(100, e.getSalud());
-		
+
 	}
-	
+
 	@Test
 	public void testDobleGolpeSinEnergiaPorDefecto() {
 		Humano h = new Humano("Nico", 100, 100, 25, 20, 30, new Guerrero(), 0, 1, 1);
 		Elfo e = new Elfo("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
-		
+
 		Assert.assertTrue(h.getEnergia() > 3);
-		h.setEnergia(2);
+		h.usarHabilidad(98);
 		Assert.assertFalse(h.habilidadCasta1(e));
 		Assert.assertEquals(100, e.getSalud());
-		
+
 	}
 
 	@Test
@@ -55,7 +55,7 @@ public class TestGuerrero {
 		h.habilidadCasta2(null);
 		Assert.assertTrue(h.getDefensa() == 65);
 	}
-	
+
 	@Test
 	public void testAutoDefensaPorDefecto() {
 		Humano h = new Humano("Nico", 100, 100, 25, 20, 30, new Guerrero(), 0, 1, 1);
@@ -64,26 +64,26 @@ public class TestGuerrero {
 		h.habilidadCasta2(null);
 		Assert.assertTrue(h.getDefensa() == 65);
 	}
-	
-	
+
+
 	@Test
 	public void testAutoDefensaSinEnergia() {
 		Humano h = new Humano("Nico", 100, 100, 25, 20, 30, new Guerrero(0.2, 0.3, 1.5), 0, 1, 1);
 		Elfo e = new Elfo("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
-		
+
 		Assert.assertTrue(h.getEnergia() > 3);
-		h.setEnergia(2);
+		h.usarHabilidad(98);
 		Assert.assertFalse(h.habilidadCasta2(e));
 		Assert.assertEquals(100, e.getSalud());
 	}
-	
+
 	@Test
 	public void testAutoDefensaSinEnergiaPorDefecto() {
 		Humano h = new Humano("Nico", 100, 100, 25, 20, 30, new Guerrero(), 0, 1, 1);
 		Elfo e = new Elfo("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
-		
+
 		Assert.assertTrue(h.getEnergia() > 3);
-		h.setEnergia(2);
+		h.usarHabilidad(98);
 		Assert.assertFalse(h.habilidadCasta2(e));
 		Assert.assertEquals(100, e.getSalud());
 	}
@@ -99,7 +99,7 @@ public class TestGuerrero {
 		else
 			Assert.assertTrue(e.getSalud() == 100);
 	}
-	
+
 	@Test
 	public void testIgnoraDefensaPorDefecto() {
 		Humano h = new Humano("Nico", 100, 100, 25, 20, 30, new Guerrero(), 0, 1, 1);
@@ -111,25 +111,25 @@ public class TestGuerrero {
 		else
 			Assert.assertTrue(e.getSalud() == 100);
 	}
-	
+
 	@Test
 	public void testIgnorarDefensaSinEnergia() {
 		Humano h = new Humano("Nico", 100, 100, 25, 20, 30, new Guerrero(0.2, 0.3, 1.5), 0, 1, 1);
 		Elfo e = new Elfo("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
-		
+
 		Assert.assertTrue(h.getEnergia() > 3);
-		h.setEnergia(2);
+		h.usarHabilidad(98);
 		Assert.assertFalse(h.habilidadCasta3(e));
 		Assert.assertEquals(100, e.getSalud());
 	}
-	
+
 	@Test
 	public void testIgnorarDefensaSinEnergiaPorDefecto() {
 		Humano h = new Humano("Nico", 100, 100, 25, 20, 30, new Guerrero(), 0, 1, 1);
 		Elfo e = new Elfo("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
-		
+
 		Assert.assertTrue(h.getEnergia() > 3);
-		h.setEnergia(2);
+		h.usarHabilidad(98);
 		Assert.assertFalse(h.habilidadCasta3(e));
 		Assert.assertEquals(100, e.getSalud());
 	}

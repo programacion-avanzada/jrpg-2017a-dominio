@@ -33,7 +33,7 @@ public class TestOrco {
 		Humano h = new Humano("Nicolas", new Guerrero(), 1);
 		Orco o = new Orco("Hernan", new Guerrero(), 1);
 
-		o.setEnergia(2);
+		o.usarHabilidad(120);
 		o.habilidadRaza1(h);
 		Assert.assertTrue(h.getSalud() == 105);
 	}
@@ -59,7 +59,7 @@ public class TestOrco {
 		Humano h = new Humano("Nicolas", new Guerrero(), 1);
 		Orco o = new Orco("Hernan", new Guerrero(), 1);
 
-		o.setEnergia(2);
+		o.usarHabilidad(120);
 		o.habilidadRaza2(h);
 		Assert.assertTrue(h.getSalud() == 105);
 	}

@@ -59,7 +59,7 @@ public class Humano extends Personaje {
 
 	public boolean habilidadRaza1(final Peleable atacado) {
 		if (this.getEnergia() > ENERGIA_MINIMA) {
-			this.setEnergia(this.getEnergia() - ENERGIA_MINIMA);
+			this.usarHabilidad(ENERGIA_MINIMA);
 			atacado.setAtaque(atacado.getAtaque() + this.getMagia());
 			return true;
 		}
@@ -76,11 +76,11 @@ public class Humano extends Personaje {
 	public boolean habilidadRaza2(final Peleable atacado) {
 		if (this.getEnergia() > ENERGIA_MINIMA) {
 			if (atacado.serAtacado(atacado.getSalud() / ENERGIA_MINIMA) > 0) {
-				this.setEnergia(this.getEnergia() / ENERGIA_MINIMA);
+				this.usarHabilidad(this.getEnergia() - (this.getEnergia()/ENERGIA_MINIMA));
 				return true;
 			}
 		}
-		this.setEnergia(this.getEnergia() - ENERGIA_MINIMA);
+		this.usarHabilidad(ENERGIA_MINIMA);
 		return false;
 	}
 }

@@ -12,6 +12,7 @@ import java.io.Serializable;
 
 public abstract class Personaje extends Character implements Peleable, Serializable {
 
+
 	protected static final int INCREMENTO_TOPE = 10;
 	protected static final int ENERGIA_MINIMA = 10;
 	protected static final int CANTIDAD_HABILIDADES = 2;
@@ -253,11 +254,11 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 	}
 
 	/**
-	 * @param energia energia del personaje
+	 * @param energia energia a disminuir
 	 */
 
-	public void setEnergia(final int energia) {
-		this.energia = energia;
+	public void usarHabilidad(final int energia) {
+		this.energia -= energia;
 	}
 
 	/**

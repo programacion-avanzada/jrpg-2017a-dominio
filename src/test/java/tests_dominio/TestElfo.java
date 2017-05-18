@@ -27,7 +27,7 @@ public class TestElfo {
 		Elfo e = new Elfo("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
 		Humano h = new Humano("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 1, 1);
 
-		h.setEnergia(2);
+		h.usarHabilidad(98);
 		e.habilidadRaza1(h);
 		Assert.assertTrue(h.getEnergia() == 2);
 	}
@@ -49,7 +49,7 @@ public class TestElfo {
 		Elfo e = new Elfo("Elfo", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
 		Humano h = new Humano("Humano", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 1, 1);
 
-		h.setEnergia(2);
+		h.usarHabilidad(98);
 		e.habilidadRaza2(h);
 		Assert.assertTrue(h.getEnergia() == 2);
 	}

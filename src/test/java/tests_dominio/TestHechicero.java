@@ -7,6 +7,7 @@ import dominio.Asesino;
 import dominio.Elfo;
 import dominio.Hechicero;
 import dominio.Humano;
+import dominio.MyRandomStub;
 
 public class TestHechicero {
 
@@ -28,7 +29,7 @@ public class TestHechicero {
 		Elfo e = new Elfo("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
 
 		Assert.assertTrue(h.getEnergia() > 3);
-		h.setEnergia(2);
+		h.usarHabilidad(98);
 		Assert.assertFalse(h.habilidadCasta1(e));
 		Assert.assertEquals(100, e.getSalud());
 	}
@@ -51,7 +52,7 @@ public class TestHechicero {
 		Elfo e = new Elfo("Nico", 10, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
 
 		Assert.assertTrue(h.getEnergia() > 3);
-		h.setEnergia(2);
+		h.usarHabilidad(98);
 		Assert.assertFalse(h.habilidadCasta2(e));
 		Assert.assertEquals(10, e.getSalud());
 	}
@@ -61,9 +62,13 @@ public class TestHechicero {
 		Humano h = new Humano("Nico", 100, 100, 55, 20, 50, new Hechicero(0.2, 0.3, 1.5), 0, 1, 1);
 		Elfo e = new Elfo("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
 
+		MyRandomStub mrs = new MyRandomStub(0.49, 2);
+		h.setRandomGenerator(mrs);
+		e.setRandomGenerator(mrs);
+
 		Assert.assertTrue(e.getSalud() == 100);
 		h.setSalud(50);
-		h.setEnergia(50);
+		h.usarHabilidad(50);
 		if (h.habilidadCasta3(e)) {
 			Assert.assertTrue(e.getSalud() < 100);
 			Assert.assertTrue(h.getEnergia() > 50);
@@ -81,7 +86,7 @@ public class TestHechicero {
 		Elfo e = new Elfo("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
 
 		Assert.assertTrue(h.getEnergia() > 3);
-		h.setEnergia(2);
+		h.usarHabilidad(120);
 		Assert.assertFalse(h.habilidadCasta3(e));
 		Assert.assertEquals(10, h.getSalud());
 	}
