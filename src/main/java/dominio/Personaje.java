@@ -51,7 +51,7 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 	private int idPersonaje;
 
 	private Alianza clan = null;
-	private static int[] tablaDeNiveles;
+	public static int[] tablaDeNiveles;
 
 
 
