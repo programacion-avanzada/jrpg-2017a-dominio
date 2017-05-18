@@ -2,6 +2,7 @@ package tests_dominio;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.Before;
 
 import dominio.Asesino;
 import dominio.Elfo;
@@ -11,11 +12,21 @@ import dominio.MyRandomStub;
 
 public class TestHechicero {
 
+	private Humano h;
+	private Elfo e;
+
+	@Before
+	public void initialize() {
+		h = new Humano("Nico", 100, 100, 55, 20, 30, new Hechicero(0.2, 0.3, 1.5), 0, 1, 1);
+	 	e = new Elfo("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
+
+		MyRandomStub mrs = new MyRandomStub(0.49, 2);
+		h.setRandomGenerator(mrs);
+		e.setRandomGenerator(mrs);
+  }
+
 	@Test
 	public void testBolaDeFuego() {
-		Humano h = new Humano("Nico", 100, 100, 55, 20, 30, new Hechicero(0.2, 0.3, 1.5), 0, 1, 1);
-		Elfo e = new Elfo("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
-
 		Assert.assertTrue(e.getSalud() == 100);
 		if (h.habilidadCasta1(e))
 			Assert.assertTrue(e.getSalud() < 100);
@@ -25,9 +36,6 @@ public class TestHechicero {
 
 	@Test
 	public void testBolaDeFuegoSinEnergia() {
-		Humano h = new Humano("Nico", 100, 100, 25, 20, 30, new Hechicero(0.2, 0.3, 1.5), 0, 1, 1);
-		Elfo e = new Elfo("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
-
 		Assert.assertTrue(h.getEnergia() > 3);
 		h.usarHabilidad(98);
 		Assert.assertFalse(h.habilidadCasta1(e));
@@ -36,11 +44,7 @@ public class TestHechicero {
 
 	@Test
 	public void testCurar() {
-		Humano h = new Humano("Nico", 100, 100, 55, 20, 30, new Hechicero(0.2, 0.3, 1.5), 0, 1, 1);
-		Elfo e = new Elfo("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
-
-		Assert.assertTrue(e.getSalud() == 100);
-		e.setSalud(65);
+		e.serAtacado(55);
 		Assert.assertTrue(e.getSalud() == 65);
 		h.habilidadCasta2(e);
 		Assert.assertTrue(e.getSalud() > 65);
@@ -48,9 +52,7 @@ public class TestHechicero {
 
 	@Test
 	public void testCurarSinEnergia() {
-		Humano h = new Humano("Nico", 100, 100, 25, 20, 30, new Hechicero(0.2, 0.3, 1.5), 0, 1, 1);
-		Elfo e = new Elfo("Nico", 10, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
-
+		e.serAtacado(110);
 		Assert.assertTrue(h.getEnergia() > 3);
 		h.usarHabilidad(98);
 		Assert.assertFalse(h.habilidadCasta2(e));
@@ -59,15 +61,8 @@ public class TestHechicero {
 
 	@Test
 	public void testRobarEnergia_y_Salud() {
-		Humano h = new Humano("Nico", 100, 100, 55, 20, 50, new Hechicero(0.2, 0.3, 1.5), 0, 1, 1);
-		Elfo e = new Elfo("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
-
-		MyRandomStub mrs = new MyRandomStub(0.49, 2);
-		h.setRandomGenerator(mrs);
-		e.setRandomGenerator(mrs);
-
+		h.serAtacado(50);
 		Assert.assertTrue(e.getSalud() == 100);
-		h.setSalud(50);
 		h.usarHabilidad(50);
 		if (h.habilidadCasta3(e)) {
 			Assert.assertTrue(e.getSalud() < 100);
@@ -82,9 +77,7 @@ public class TestHechicero {
 
 	@Test
 	public void testRobarEnergia_y_SaludSinEnergia() {
-		Humano h = new Humano("Nico", 10, 100, 25, 20, 30, new Hechicero(0.2, 0.3, 1.5), 0, 1, 1);
-		Elfo e = new Elfo("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
-
+		h.serAtacado(110);
 		Assert.assertTrue(h.getEnergia() > 3);
 		h.usarHabilidad(120);
 		Assert.assertFalse(h.habilidadCasta3(e));

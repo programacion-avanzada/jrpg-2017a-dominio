@@ -60,14 +60,6 @@ public abstract class Character {
 		return salud;
 	}
 
-	/**
-	 * @param salud salud
-	 */
-
-	public void setSalud(final int salud) {
-		this.salud = salud;
-	}
-
   /**
 	 * @return defensa
 	 */

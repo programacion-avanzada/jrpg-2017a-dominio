@@ -40,8 +40,7 @@ public class TestNPC {
 		npc.setDefensa(123);
 		Assert.assertTrue(123 == npc.getDefensa());
 
-		npc.setSalud(123);
-		Assert.assertTrue(123 == npc.getSalud());
+		Assert.assertTrue(75 == npc.getSalud());
 
 		npc.setAtaque(123);
 		Assert.assertTrue(123 == npc.getAtaque());
@@ -51,8 +50,10 @@ public class TestNPC {
 	public void testAtacarNormal() {
 		NonPlayableCharacter npc = new NonPlayableCharacter("Otro", 2, 2);
 		Elfo e = new Elfo("nicochino", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
+
 		MyRandomStub mrs = new MyRandomStub(0.49, 2);
 		e.setRandomGenerator(mrs);
+		npc.setRandomGenerator(mrs);
 
 		Assert.assertTrue(20 == npc.atacar(e));
 	}

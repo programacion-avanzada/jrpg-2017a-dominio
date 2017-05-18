@@ -44,7 +44,7 @@ public class TestOrco {
 		Orco o = new Orco("Nico", 100, 100, 80, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 1, 1);
 
 		Assert.assertTrue(h.getSalud() == 100);
-		o.setSalud(100);
+
 		if (o.habilidadRaza2(h)) {
 			Assert.assertEquals(40, h.getSalud());
 			Assert.assertTrue(o.getSalud() == 100);
