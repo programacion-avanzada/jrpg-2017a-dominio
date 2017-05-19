@@ -337,7 +337,7 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 	 * "atacar" obtiene el ataque de este objeto e invoca al método serAtacado
 	 * del "atacado" recibido como parametro.
 	 * @param atacado atacado
-	 * @return daño ocasionado al atacar
+	 * @return dano ocasionado al atacar
 	 */
 
 	public int atacar(final Peleable atacado) {
@@ -356,11 +356,11 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 
 	/**
 	 * @return calculo del valor del golpe critico basado en el
-	 * ataque y el daño de la casta.
+	 * ataque y el dano de la casta.
 	 */
 
 	public int golpe_critico() {
-		return (int) (this.ataque * this.getCasta().getDañoCritico());
+		return (int) (this.ataque * this.getCasta().getDanoCritico());
 	}
 
 	/**
@@ -433,22 +433,22 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 	}
 
 	/**
-	 * Aplica un daño sobre la salud.
-	 * @param daño daño
-	 * @return 0 si no es dañado o el valor del daño ocasionado por el ataque.
+	 * Aplica un dano sobre la salud.
+	 * @param dano dano
+	 * @return 0 si no es dañado o el valor del dano ocasionado por el ataque.
 	 */
 
-	public int serAtacado(int daño) {
-		if (this.aleatorizador.nextDouble() >= this.getCasta().getProbabilidadEvitarDaño()) {
-			daño -= this.defensa;
-			if (daño > 0) {
-				if (salud <= daño) {
-					daño = salud;
+	public int serAtacado(int dano) {
+		if (this.aleatorizador.nextDouble() >= this.getCasta().getProbabilidadEvitarDano()) {
+			dano -= this.defensa;
+			if (dano > 0) {
+				if (salud <= dano) {
+					dano = salud;
 					salud = 0;
 				} else {
-					salud -= daño;
+					salud -= dano;
 				}
-				return daño;
+				return dano;
 			}
 			return 0;
 		}
@@ -456,45 +456,45 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 	}
 
 	/**
-	 * Aplica un daño a la salud y devuelve la cantidad del
+	 * Aplica un dano a la salud y devuelve la cantidad del
 	 * mismo que se ha inflingido.
-	 * @param daño daño
-	 * @return daño que se ha inflingido.
+	 * @param dano dano
+	 * @return dano que se ha inflingido.
 	 */
 
-	public int serRobadoSalud(int daño) {
-		daño -= this.defensa;
-		if (daño <= 0) {
+	public int serRobadoSalud(int dano) {
+		dano -= this.defensa;
+		if (dano <= 0) {
 			return 0;
 		}
-		if ((salud - daño) >= 0) {
-			salud -= daño;
+		if ((salud - dano) >= 0) {
+			salud -= dano;
 		} else {
-			daño = salud;
+			dano = salud;
 			salud = 0;
 		}
-		return daño;
+		return dano;
 	}
 
 	/**
-	 * Aplica daño a la energia y devuelve la cantidad del
+	 * Aplica dano a la energia y devuelve la cantidad del
 	 * mismo que se ha inflingido.
-	 * @param daño daño
-	 * @return daño que se ha inflingido.
+	 * @param dano dano
+	 * @return dano que se ha inflingido.
 	 */
 
-	public int serDesenergizado(int daño) {
-		daño -= this.defensa;
-		if (daño <= 0) {
+	public int serDesenergizado(int dano) {
+		dano -= this.defensa;
+		if (dano <= 0) {
 			return 0;
 		}
-		if ((energia - daño) >= 0) {
-			energia -= daño;
+		if ((energia - dano) >= 0) {
+			energia -= dano;
 		} else {
-			daño = energia;
+			dano = energia;
 			energia = 0;
 		}
-		return daño;
+		return dano;
 	}
 
 	/**

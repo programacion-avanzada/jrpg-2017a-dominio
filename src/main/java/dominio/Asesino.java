@@ -16,11 +16,11 @@ public class Asesino extends Casta {
 	 * Constructor de asesinos con parámetros.
 	 * @param prob_crit es la probabilidad de golpe critico
 	 * @param evasion evasion
-	 * @param daño_crit es el daño crítico
+	 * @param dano_crit es el dano crítico
 	 */
 
-	public Asesino(final double prob_crit, final double evasion, final double daño_crit) {
-		super("Asesino", prob_crit, evasion, daño_crit);
+	public Asesino(final double prob_crit, final double evasion, final double dano_crit) {
+		super("Asesino", prob_crit, evasion, dano_crit);
 	}
 
 	/**
@@ -43,7 +43,7 @@ public class Asesino extends Casta {
 
 	/**
 	 * Sobreescribe la habilidad1 de la clase padre.
-	 * @param caster es el personaje a traves del cual se obtiene el daño y al que se
+	 * @param caster es el personaje a traves del cual se obtiene el dano y al que se
 	 * le decrementa la energía.
 	 * @param atacado es el objecto que será atacado.
 	 * @return verdadero o falso para la utilización del golpe critico
@@ -54,7 +54,7 @@ public class Asesino extends Casta {
 		if (caster.getEnergia() > ENERGIA_MINIMA) {
 			caster.usarHabilidad(ENERGIA_MINIMA);
 
-			if (atacado.serAtacado((int) (caster.ataque * caster.getCasta().getDañoCritico())) > 0) {
+			if (atacado.serAtacado((int) (caster.ataque * caster.getCasta().getDanoCritico())) > 0) {
 				return true;
 			}
 		}
@@ -73,10 +73,10 @@ public class Asesino extends Casta {
 		if (caster.getEnergia() > ENERGIA_MINIMA) {
 			caster.usarHabilidad(ENERGIA_MINIMA);
 
-			if (this.getProbabilidadEvitarDaño() + INCREMENTO_EVITAR_DAÑO < MAX_PROBABILIDAD_EVITAR_DAÑO) {
-				this.probabilidadEvitarDaño += INCREMENTO_EVITAR_DAÑO;
+			if (this.getProbabilidadEvitarDano() + INCREMENTO_EVITAR_DAÑO < MAX_PROBABILIDAD_EVITAR_DAÑO) {
+				this.probabilidadEvitarDano += INCREMENTO_EVITAR_DAÑO;
 			} else {
-				this.probabilidadEvitarDaño = MAX_PROBABILIDAD_EVITAR_DAÑO;
+				this.probabilidadEvitarDano = MAX_PROBABILIDAD_EVITAR_DAÑO;
 			}
 			return true;
 		}

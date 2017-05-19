@@ -18,8 +18,8 @@ public abstract class Casta implements Serializable {
 	private static final double DAÑO_CRITICO_POR_DEFECTO = 1.5;
 
 	private double probabilidadGolpeCritico;
-	protected double probabilidadEvitarDaño;
-	private double dañoCritico;
+	protected double probabilidadEvitarDano;
+	private double danoCritico;
 	protected String nombreCasta;
 
 	protected String[] habilidadesCasta;
@@ -32,8 +32,8 @@ public abstract class Casta implements Serializable {
 		final String habilidad2, final String habilidad3) {
 
 		this.probabilidadGolpeCritico = PROBABILIDAD_POR_DEFECTO;
-		this.probabilidadEvitarDaño = PROBABILIDAD_POR_DEFECTO;
-		this.dañoCritico = DAÑO_CRITICO_POR_DEFECTO;
+		this.probabilidadEvitarDano = PROBABILIDAD_POR_DEFECTO;
+		this.danoCritico = DAÑO_CRITICO_POR_DEFECTO;
 
 		this.nombreCasta = nombreCasta;
 
@@ -47,16 +47,16 @@ public abstract class Casta implements Serializable {
 	 * Constructor de una casta con valores por parámetro.
 	 * @param nombreCasta nombre de la casta
 	 * @param prob_crit probabilidad de golpe critico.
-	 * @param evasion probabilidad de evitar daño.
-	 * @param daño_crit daño critico.
+	 * @param evasion probabilidad de evitar dano.
+	 * @param dano_crit dano critico.
 	 */
 
-	public Casta(final String nombreCasta, final double prob_crit, final double evasion, final double daño_crit) {
+	public Casta(final String nombreCasta, final double prob_crit, final double evasion, final double dano_crit) {
 		this.nombreCasta = nombreCasta;
 
 		this.probabilidadGolpeCritico = prob_crit;
-		this.probabilidadEvitarDaño = evasion;
-		this.dañoCritico = daño_crit;
+		this.probabilidadEvitarDano = evasion;
+		this.danoCritico = dano_crit;
 	}
 
 	/**
@@ -149,36 +149,36 @@ public abstract class Casta implements Serializable {
 	}
 
 	/**
-	 * @return la probabilidad del evitar daño
+	 * @return la probabilidad del evitar dano
 	 */
 
-	public double getProbabilidadEvitarDaño() {
-		return probabilidadEvitarDaño;
+	public double getProbabilidadEvitarDano() {
+		return probabilidadEvitarDano;
 	}
 
 	/**
-	 * Asigna la probabilidad de evitar daño
-	 * @param probabilidadEvitarDaño a asignar
+	 * Asigna la probabilidad de evitar dano
+	 * @param probabilidadEvitarDano a asignar
 	 */
 
-	public void setProbabilidadEvitarDaño(final double probabilidadEvitarDaño) {
-		this.probabilidadEvitarDaño = probabilidadEvitarDaño;
+	public void setProbabilidadEvitarDano(final double probabilidadEvitarDano) {
+		this.probabilidadEvitarDano = probabilidadEvitarDano;
 	}
 
 	/**
-	 * @return el daño critico
+	 * @return el dano critico
 	 */
 
-	public double getDañoCritico() {
-		return dañoCritico;
+	public double getDanoCritico() {
+		return danoCritico;
 	}
 
 	/**
-	 * Asigna el daño critico
-	 * @param dañoCritico a asignar
+	 * Asigna el dano critico
+	 * @param danoCritico a asignar
 	 */
 
-	public void setDañoCritico(final double dañoCritico) {
-		this.dañoCritico = dañoCritico;
+	public void setDanoCritico(final double danoCritico) {
+		this.danoCritico = danoCritico;
 	}
 }

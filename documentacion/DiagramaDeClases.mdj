@@ -1217,7 +1217,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+serAtacado(daño: int): int",
+											"text": "+serAtacado(dano: int): int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1246,7 +1246,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+serDesenergizado(daño: int): int",
+											"text": "+serDesenergizado(dano: int): int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -2000,7 +2000,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Guerrero(prob_crit: double, evasion: double, daño_crit: double)",
+											"text": "+Guerrero(prob_crit: double, evasion: double, dano_crit: double)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -2435,7 +2435,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Hechicero(prob_crit: double, evasion: double, daño_crit: double)",
+											"text": "+Hechicero(prob_crit: double, evasion: double, dano_crit: double)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -4119,7 +4119,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Asesino(prob_crit: double, evasion: double, daño_crit: double)",
+											"text": "+Asesino(prob_crit: double, evasion: double, dano_crit: double)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -4530,7 +4530,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "#probabilidadEvitarDaño: double",
+											"text": "#probabilidadEvitarDano: double",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -4559,7 +4559,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "#dañoCritico: double",
+											"text": "#danoCritico: double",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -4701,7 +4701,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Casta(prob_crit: double, evasion: double, daño_crit: double)",
+											"text": "+Casta(prob_crit: double, evasion: double, dano_crit: double)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -6124,7 +6124,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+serAtacado(daño: int): int",
+											"text": "+serAtacado(dano: int): int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -7781,7 +7781,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+serAtacado(daño: int): int",
+											"text": "+serAtacado(dano: int): int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -9586,7 +9586,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFbcosqluohd/s="
 									},
-									"name": "daño_crit",
+									"name": "dano_crit",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -9890,7 +9890,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFbcpHcKOpnnbU="
 									},
-									"name": "daño_crit",
+									"name": "dano_crit",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -11162,7 +11162,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFbcpNEeOqjJf4="
 									},
-									"name": "daño_crit",
+									"name": "dano_crit",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -11458,7 +11458,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFbci5FXuURTyo="
 							},
-							"name": "probabilidadEvitarDaño",
+							"name": "probabilidadEvitarDano",
 							"visibility": "protected",
 							"isStatic": false,
 							"isLeaf": false,
@@ -11476,7 +11476,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFbci5FXuURTyo="
 							},
-							"name": "dañoCritico",
+							"name": "danoCritico",
 							"visibility": "protected",
 							"isStatic": false,
 							"isLeaf": false,
@@ -11589,7 +11589,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFbcoZG+enVOUY="
 									},
-									"name": "daño_crit",
+									"name": "dano_crit",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -12575,7 +12575,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFbcmb3Zuh/gKY="
 									},
-									"name": "daño",
+									"name": "dano",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -12715,7 +12715,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFbcvcR/QNHXig="
 									},
-									"name": "daño",
+									"name": "dano",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,

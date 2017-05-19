@@ -53,6 +53,10 @@ public class TestNPC {
 	public void testAtacarNormal() {
 		NonPlayableCharacter npc2 = new NonPlayableCharacter("Otro", 2, 2);
 		Elfo e = new Elfo("Elfo", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
+
+		MyRandomStub mrs = new MyRandomStub(0.49, 2);
+		npc2.setRandomGenerator(mrs);
+
 		Assert.assertTrue(20 == npc2.atacar(e));
 	}
 

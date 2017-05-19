@@ -15,11 +15,11 @@ public class Hechicero extends Casta {
 	 * Permite crear un nuevo Hechicero con valores por parámetro.
 	 * @param prob_crit probabilidad critica
 	 * @param evasion evasion
-	 * @param daño_crit daño crítico
+	 * @param dano_crit dano crítico
 	 */
 
-	public Hechicero(final double prob_crit, final double evasion, final double daño_crit) {
-		super("Hechicero", prob_crit, evasion, daño_crit);
+	public Hechicero(final double prob_crit, final double evasion, final double dano_crit) {
+		super("Hechicero", prob_crit, evasion, dano_crit);
 	}
 
 	/**

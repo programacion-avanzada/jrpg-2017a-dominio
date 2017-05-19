@@ -15,11 +15,11 @@ public class Guerrero extends Casta {
 	 * Permite crear un nuevo Guerrero con con valores por parámetro.
 	 * @param prob_crit es la probabilidad de golpe critico
 	 * @param evasion evasion
-	 * @param daño_crit es el daño crítico
+	 * @param dano_crit es el dano crítico
 	 */
 
-	public Guerrero(final double prob_crit, final double evasion, final double daño_crit) {
-		super("Guerrero", prob_crit, evasion, daño_crit);
+	public Guerrero(final double prob_crit, final double evasion, final double dano_crit) {
+		super("Guerrero", prob_crit, evasion, dano_crit);
 	}
 
 	/**
