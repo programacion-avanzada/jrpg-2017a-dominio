@@ -109,9 +109,9 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 		inteligencia = INTELIGENCIA_INICIAL;
 		destreza = DESTREZA_INICIAL;
 
-		this.setInteligencia(this.getInteligencia() + casta.getIncrementoInteligencia());
+		this.aumentarInteligencia(casta.getIncrementoInteligencia());
 		this.aumentarFuerza(casta.getIncrementoFuerza());
-		this.setDestreza(this.getDestreza() + casta.getIncrementoDestreza());
+		this.aumentarDestreza(casta.getIncrementoDestreza());
 
 		x = 0;
 		y = 0;
@@ -270,11 +270,11 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 	}
 
 	/**
-	 * @param destreza del personaje
+	 * @param destreza a adicionar
 	 */
 
-	public void setDestreza(final int destreza) {
-		this.destreza = destreza;
+	public void aumentarDestreza(final int destreza) {
+		this.destreza += destreza;
 	}
 
 	/**
@@ -286,11 +286,11 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 	}
 
 	/**
-	 * @param inteligencia del personaje
+	 * @param inteligencia a adicionar
 	 */
 
-	public void setInteligencia(final int inteligencia) {
-		this.inteligencia = inteligencia;
+	public void aumentarInteligencia(final int inteligencia) {
+		this.inteligencia += inteligencia;
 	}
 
 	/**
