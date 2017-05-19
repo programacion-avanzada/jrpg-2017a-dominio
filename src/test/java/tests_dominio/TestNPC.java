@@ -2,6 +2,7 @@ package tests_dominio;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.Before;
 
 import dominio.MyRandomStub;
 import dominio.NonPlayableCharacter;
@@ -10,15 +11,24 @@ import dominio.Asesino;
 
 public class TestNPC {
 
+	private NonPlayableCharacter npc;
+
+	@Before
+	public void initialize(){
+		npc = new NonPlayableCharacter("Perro", 1, 1);
+
+		MyRandomStub mrs = new MyRandomStub(0.49, 2);
+		npc.setRandomGenerator(mrs);
+	}
+
 	@Test
 	public void testOtorgarExp() {
-		NonPlayableCharacter npc = new NonPlayableCharacter("Gigante", 1, -1);
-		Assert.assertTrue(30 == npc.otorgarExp());
+		NonPlayableCharacter npc2 = new NonPlayableCharacter("Gigante", 1, -1);
+		Assert.assertTrue(30 == npc2.otorgarExp());
 	}
 
 	@Test
 	public void testCrearConDificultadUno() {
-		NonPlayableCharacter npc = new NonPlayableCharacter("Perro", 1, 1);
 		Assert.assertTrue(20 == npc.getFuerza());
 		Assert.assertTrue(40 == npc.getSalud());
 		Assert.assertTrue(5 == npc.getDefensa());
@@ -26,10 +36,7 @@ public class TestNPC {
 
 	@Test
 	public void testGettersySetters() {
-		NonPlayableCharacter npc = new NonPlayableCharacter("Otro", 2, 2);
-
-		npc.setFuerza(123);
-		Assert.assertTrue(123 == npc.getFuerza());
+		Assert.assertTrue(20 == npc.getFuerza());
 
 		npc.setNombre("nombre");
 		Assert.assertTrue("nombre" == npc.getNombre());
@@ -40,7 +47,7 @@ public class TestNPC {
 		npc.setDefensa(123);
 		Assert.assertTrue(123 == npc.getDefensa());
 
-		Assert.assertTrue(75 == npc.getSalud());
+		Assert.assertTrue(40 == npc.getSalud());
 
 		npc.setAtaque(123);
 		Assert.assertTrue(123 == npc.getAtaque());
@@ -48,36 +55,25 @@ public class TestNPC {
 
 	@Test
 	public void testAtacarNormal() {
-		NonPlayableCharacter npc = new NonPlayableCharacter("Otro", 2, 2);
-		Elfo e = new Elfo("nicochino", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
-
-		MyRandomStub mrs = new MyRandomStub(0.49, 2);
-		e.setRandomGenerator(mrs);
-		npc.setRandomGenerator(mrs);
-
-		Assert.assertTrue(20 == npc.atacar(e));
+		NonPlayableCharacter npc2 = new NonPlayableCharacter("Otro", 2, 2);
+		Elfo e = new Elfo("Elfo", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
+		Assert.assertTrue(20 == npc2.atacar(e));
 	}
 
 	@Test
 	public void testAtacarPotenciado() {
-		NonPlayableCharacter npc = new NonPlayableCharacter("Otro", 2, 2);
-		MyRandomStub mrs = new MyRandomStub(0.1, 2);
-		npc.setRandomGenerator(mrs);
-
 		Elfo e = new Elfo("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
 		Assert.assertTrue(0 == npc.atacar(e));
 	}
 
 	@Test
 	public void testSerAtacadoConBuenaDefensa() {
-		NonPlayableCharacter npc = new NonPlayableCharacter("Otro", 2, 2);
 		npc.setDefensa(200);
 		Assert.assertTrue(npc.serAtacado(99) == 0);
 	}
 
 	@Test
 	public void testSerDesenergizadoORobadoSalud() {
-		NonPlayableCharacter npc = new NonPlayableCharacter("Otro", 2, 2);
 		Assert.assertTrue(npc.serDesenergizado(99) == 0);
 		Assert.assertTrue(npc.serRobadoSalud(99) == 0);
 	}

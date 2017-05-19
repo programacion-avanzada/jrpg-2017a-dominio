@@ -85,11 +85,11 @@ public abstract class Character {
 	}
 
 	/**
-	 * @param fuerza fuerza
+	 * @param fuerza fuerza a adicionar
 	 */
 
-	public void setFuerza(final int fuerza) {
-		this.fuerza = fuerza;
+	public void aumentarFuerza(final int fuerza) {
+		this.fuerza += fuerza;
 	}
 
   /**

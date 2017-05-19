@@ -110,7 +110,7 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 		destreza = DESTREZA_INICIAL;
 
 		this.setInteligencia(this.getInteligencia() + casta.getIncrementoInteligencia());
-		this.setFuerza(this.getFuerza() + casta.getIncrementoFuerza());
+		this.aumentarFuerza(casta.getIncrementoFuerza());
 		this.setDestreza(this.getDestreza() + casta.getIncrementoDestreza());
 
 		x = 0;

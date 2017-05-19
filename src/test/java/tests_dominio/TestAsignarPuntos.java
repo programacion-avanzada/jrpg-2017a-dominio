@@ -16,7 +16,7 @@ public class TestAsignarPuntos {
 		h.ganarExperiencia(50);
 		Assert.assertTrue(h.getSaludTope()==130);
 		}
-	
+
 	@Test
 	public void testAumentarEnergia_tope(){
 		Personaje.cargarTablaNivel();
@@ -26,11 +26,11 @@ public class TestAsignarPuntos {
 		h.ganarExperiencia(50);
 		Assert.assertTrue(h.getEnergiaTope()==125);
 	}
-	
+
 	@Test
 	public void testMasDe200Puntos(){
 		Humano h = new Humano("Nicolas",new Guerrero(),1);
-		h.setFuerza(199);
+		h.aumentarFuerza(182);
 		h.setDestreza(199);
 		h.setInteligencia(199);
 		h.AsignarPuntosSkills(2, 2, 2);
