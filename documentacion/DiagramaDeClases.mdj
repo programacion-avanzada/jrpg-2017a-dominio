@@ -956,7 +956,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+golpe_critico(): int",
+											"text": "+golpeCritico(): int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1333,7 +1333,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+crearAliaza(nombre_alianza: String): void",
+											"text": "+crearAliaza(nombreAlianza: String): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1391,7 +1391,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+aliar(nuevo_aliado: Personaje): boolean",
+											"text": "+aliar(nuevoAliado: Personaje): boolean",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
