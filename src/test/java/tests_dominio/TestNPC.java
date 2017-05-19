@@ -41,8 +41,7 @@ public class TestNPC {
 		npc.setNombre("nombre");
 		Assert.assertTrue("nombre" == npc.getNombre());
 
-		npc.setNivel(123);
-		Assert.assertTrue(123 == npc.getNivel());
+		Assert.assertTrue(1 == npc.getNivel());
 
 		npc.setDefensa(123);
 		Assert.assertTrue(123 == npc.getDefensa());

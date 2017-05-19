@@ -100,14 +100,6 @@ public abstract class Character {
 		return nivel;
 	}
 
-	/**
-	 * @param nivel nivel
-	 */
-
-	public void setNivel(final int nivel) {
-		this.nivel = nivel;
-	}
-
   /**
 	 * Checker para ver si el personaje vive o no.
 	 * @return verdadero o falso si salud es mayor a cero o no.

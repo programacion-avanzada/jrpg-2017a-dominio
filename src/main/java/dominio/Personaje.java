@@ -302,14 +302,6 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 	}
 
 	/**
-	 * @param casta del personaje
-	 */
-
-	public void setCasta(final Casta casta) {
-		this.casta = casta;
-	}
-
-	/**
 	 * @return experiencia
 	 */
 
@@ -318,27 +310,11 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 	}
 
 	/**
-	 * @param experiencia del personaje
-	 */
-
-	public void setExperiencia(final int experiencia) {
-		this.experiencia = experiencia;
-	}
-
-	/**
 	 * @return idPersonaje
 	 */
 
 	public int getIdPersonaje() {
 		return idPersonaje;
-	}
-
-	/**
-	 * @param idPersonaje id del personaje
-	 */
-
-	public void setIdPersonaje(final int idPersonaje) {
-		this.idPersonaje = idPersonaje;
 	}
 
 	/**

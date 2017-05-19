@@ -124,21 +124,16 @@ public class TestPersonaje {
 
 	@Test
 	public void testGettersYSetters() {
-		Guerrero g = new Guerrero();
 		o.setNombre("Roberto");
 		o.setNombreRaza("Enano");
-		o.setCasta(g);
 		o.setMagia(10);
-		o.setNivel(10);
-		o.setExperiencia(10);
-		o.setIdPersonaje(10);
 		Assert.assertTrue(o.getNombre() == "Roberto");
 		Assert.assertTrue(o.getNombreRaza() == "Enano");
-		Assert.assertTrue(o.getCasta() == g);
-		Assert.assertTrue(o.getNivel() == 10);
-		Assert.assertTrue(o.getExperiencia() == 10);
-		Assert.assertTrue(o.getIdPersonaje() == 10);
-		Assert.assertTrue(o.getHabilidadesCasta()[0] == "Ataque Doble");
+		Assert.assertTrue(o.getCasta().getClass().getName() == "dominio.Hechicero");
+		Assert.assertTrue(o.getNivel() == 1);
+		Assert.assertTrue(o.getExperiencia() == 0);
+		Assert.assertTrue(o.getIdPersonaje() == 1);
+		Assert.assertTrue(o.getHabilidadesCasta()[0] == "Bola de Fuego");
 		Assert.assertTrue(o.getHabilidadesRaza()[0] == "Golpe Defensa");
 	}
 
