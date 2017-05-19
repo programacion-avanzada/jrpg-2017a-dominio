@@ -19,6 +19,12 @@ public class TestPersonaje {
 		o1 = new Orco("Maxi", new Guerrero(), 1);
 		o2 = new Orco("Nico", new Guerrero(), 1);
 		o3 = new Orco("Otro", new Guerrero(), 1);
+
+		MyRandomStub mrs = new MyRandomStub(0.49, 2);
+		o.setRandomGenerator(mrs);
+		o1.setRandomGenerator(mrs);
+		o2.setRandomGenerator(mrs);
+		o3.setRandomGenerator(mrs);
 	}
 
 	@Test
@@ -126,16 +132,12 @@ public class TestPersonaje {
 		o.setNivel(10);
 		o.setExperiencia(10);
 		o.setIdPersonaje(10);
-		o.setSaludTope(10);
-		o.setEnergiaTope(10);
 		Assert.assertTrue(o.getNombre() == "Roberto");
 		Assert.assertTrue(o.getNombreRaza() == "Enano");
 		Assert.assertTrue(o.getCasta() == g);
 		Assert.assertTrue(o.getNivel() == 10);
 		Assert.assertTrue(o.getExperiencia() == 10);
 		Assert.assertTrue(o.getIdPersonaje() == 10);
-		Assert.assertTrue(o.getSaludTope() == 10);
-		Assert.assertTrue(o.getEnergiaTope() == 10);
 		Assert.assertTrue(o.getHabilidadesCasta()[0] == "Ataque Doble");
 		Assert.assertTrue(o.getHabilidadesRaza()[0] == "Golpe Defensa");
 	}

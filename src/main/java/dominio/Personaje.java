@@ -350,27 +350,11 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 	}
 
 	/**
-	 * @param saludTope salud tope del personaje
-	 */
-
-	public void setSaludTope(final int saludTope) {
-		this.saludTope = saludTope;
-	}
-
-	/**
 	 * @return energiaTope
 	 */
 
 	public int getEnergiaTope() {
 		return energiaTope;
-	}
-
-	/**
-	 * @param energiaTope energia tope del personaje
-	 */
-
-	public void setEnergiaTope(final int energiaTope) {
-		this.energiaTope = energiaTope;
 	}
 
 	/**
