@@ -13,6 +13,7 @@ public abstract class Character {
 
   protected int salud;
   protected int defensa;
+  protected int ultima_defensa;
   protected int fuerza;
   protected int nivel;
 
@@ -68,14 +69,6 @@ public abstract class Character {
 		return defensa;
 	}
 
-	/**
-	 * @param defensa defensa
-	 */
-
-	public void setDefensa(final int defensa) {
-		this.defensa = defensa;
-	}
-
   /**
 	 * @return fuerza
 	 */
@@ -107,6 +100,32 @@ public abstract class Character {
 
 	public boolean estaVivo() {
 		return salud > 0;
+	}
+
+  /**
+	 * Anular defensa guarda la defensa y la asigna a 0
+	 */
+
+	public void anularDefensa() {
+		this.ultima_defensa = this.defensa;
+		this.defensa = 0;
+	}
+
+	/**
+	 * Reestablecer defensa pone de nuevo en defensa el valor
+	 * almacenado en anularDefensa.
+	 */
+
+	public void reestablecerDefensa() {
+		this.defensa = this.ultima_defensa;
+	}
+
+	/**
+	 * @param defensa a incrementar
+	 */
+
+	public void aumentarDefensa(final int defensa) {
+		this.defensa += defensa;
 	}
 
 }

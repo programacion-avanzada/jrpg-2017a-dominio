@@ -158,7 +158,7 @@ public class TestPersonaje {
 
 	@Test
 	public void testTenerBuenaDefensa() {
-		o.setDefensa(100);
+		o.aumentarDefensa(100);
 		Assert.assertTrue(o.serAtacado(99) == 0);
 		Assert.assertTrue(o.serRobadoSalud(99) == 0);
 		Assert.assertTrue(o.serDesenergizado(99) == 0);
@@ -167,7 +167,7 @@ public class TestPersonaje {
 	@Test
 	public void testSerRobadoSaludYMorir() {
 		o.serAtacado(90);
-		o.setDefensa(10);
+		o.aumentarDefensa(-90);
 		Assert.assertTrue(o.serRobadoSalud(100) == 30);
 		Assert.assertTrue(o.getSalud() == 0);
 	}
@@ -175,7 +175,7 @@ public class TestPersonaje {
 	@Test
 	public void testSerDesenergizadoYMorir() {
 		o.usarHabilidad(90);
-		o.setDefensa(10);
+		o.aumentarDefensa(-90);
 		Assert.assertTrue(o.serDesenergizado(100) == 10);
 		Assert.assertTrue(o.getEnergia() == 0);
 	}

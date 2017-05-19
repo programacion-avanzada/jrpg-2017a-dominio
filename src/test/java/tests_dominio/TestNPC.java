@@ -42,10 +42,7 @@ public class TestNPC {
 		Assert.assertTrue("nombre" == npc.getNombre());
 
 		Assert.assertTrue(1 == npc.getNivel());
-
-		npc.setDefensa(123);
-		Assert.assertTrue(123 == npc.getDefensa());
-
+		Assert.assertTrue(5 == npc.getDefensa());
 		Assert.assertTrue(40 == npc.getSalud());
 
 		npc.setAtaque(123);
@@ -67,7 +64,7 @@ public class TestNPC {
 
 	@Test
 	public void testSerAtacadoConBuenaDefensa() {
-		npc.setDefensa(200);
+		npc.aumentarDefensa(200);
 		Assert.assertTrue(npc.serAtacado(99) == 0);
 	}
 

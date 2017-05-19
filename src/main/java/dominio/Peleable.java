@@ -76,8 +76,6 @@ public interface Peleable {
 	 * @param defensa defensa
 	 */
 
-	void setDefensa(final int defensa);
-
 	/**
 	 * Aplica daño a la energia y devuelve la cantidad del
 	 * mismo que se ha inflingido.
@@ -95,4 +93,16 @@ public interface Peleable {
 	 */
 
 	int serRobadoSalud(int daño);
+
+	/**
+	 * Anula la defensa hasta ser reestablecida
+	 */
+
+	void anularDefensa();
+
+	/**
+	 * Reestablece la defensa
+	 */
+
+	void reestablecerDefensa();
 }
