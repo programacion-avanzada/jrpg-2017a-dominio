@@ -186,4 +186,9 @@ public class TestPersonaje {
 		o.serEnergizado(10000);
 		Assert.assertTrue(o.getEnergia() == 100);
 	}
+
+	@Test
+	public void testToDo() {
+		o.despuesDeTurno();
+	}
 }

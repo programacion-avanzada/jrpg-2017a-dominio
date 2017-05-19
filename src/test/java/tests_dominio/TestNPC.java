@@ -62,8 +62,12 @@ public class TestNPC {
 	}
 
 	@Test
-	public void testAtacarPotenciado() {
+	public void testAtacarConSuerte() {
 		Elfo e = new Elfo("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
+
+		MyRandomStub mrs = new MyRandomStub(0.1, 2);
+		npc.setRandomGenerator(mrs);
+
 		Assert.assertTrue(0 == npc.atacar(e));
 	}
 
@@ -74,8 +78,23 @@ public class TestNPC {
 	}
 
 	@Test
+	public void testSerAtacadoConSuerte() {
+		MyRandomStub mrs = new MyRandomStub(0.1, 2);
+		npc.setRandomGenerator(mrs);
+
+		Assert.assertTrue(npc.serAtacado(99) == 0);
+	}
+
+	@Test
 	public void testSerDesenergizadoORobadoSalud() {
 		Assert.assertTrue(npc.serDesenergizado(99) == 0);
 		Assert.assertTrue(npc.serRobadoSalud(99) == 0);
+	}
+
+	@Test
+	public void testToDo() {
+		npc.despuesDeTurno();
+		npc.ganarExperiencia(123);
+		npc.serCurado(123);
 	}
 }
