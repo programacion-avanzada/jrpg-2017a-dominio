@@ -608,7 +608,8 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 		if (this.nivel == NIVEL_MAXIMO) {
 			return;
 		}
-		while (this.nivel != NIVEL_MAXIMO && (this.experiencia >= Personaje.tablaDeNiveles[this.nivel + 1] + acumExperiencia)) {
+		while (this.nivel != NIVEL_MAXIMO
+			&& (this.experiencia >= Personaje.tablaDeNiveles[this.nivel + 1] + acumExperiencia)) {
 			acumExperiencia += Personaje.tablaDeNiveles[this.nivel + 1];
 			this.nivel++;
 			this.modificarAtributos();

@@ -52,9 +52,12 @@ public class NonPlayableCharacter extends Character implements Peleable {
 	/**
 	* Calcula el atributo fuerza salud o defensa al inicializar
 	* el NPC
+	* @param a es un valor numerico
+	* @param b es un valor numerico
+	* @return una funcion lineal con el nivel
 	*/
 
-	private int calcularAtributo(final int a, final int b){
+	private int calcularAtributo(final int a, final int b) {
 		return a + (nivel - 1) * b;
 	}
 
