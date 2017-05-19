@@ -9,7 +9,7 @@ package dominio;
 public class NonPlayableCharacter extends Character implements Peleable {
 
 	private static final double PORCENTAJE_GOLPE_CRITICO = 0.15;
-	private static final int dificultadAleatoria = -1;
+	private static final int DIFICULTAD_ALEATORIA = -1;
 
 	/**
 	 * Constructor de la clase. Asigna atributos de fuerza, salud y defensa basados en la dificultad.
@@ -23,7 +23,7 @@ public class NonPlayableCharacter extends Character implements Peleable {
 
 		this.nivel = nivel;
 		int dificultad;
-		if (dificultadNPC == dificultadAleatoria) {
+		if (dificultadNPC == DIFICULTAD_ALEATORIA) {
 			dificultad = this.aleatorizador.nextInt(3);
 		} else {
 			dificultad = dificultadNPC;
@@ -31,22 +31,31 @@ public class NonPlayableCharacter extends Character implements Peleable {
 
 		switch (dificultad) {
 		case 0:
-			this.fuerza = 10 + (nivel - 1) * 3;
-			this.salud = 30 + (nivel - 1) * 15;
-			this.defensa = 2 + (nivel - 1) * 1;
+			this.fuerza  = calcularAtributo(10, 3);
+			this.salud   = calcularAtributo(30, 15);
+			this.defensa = calcularAtributo(2, 1);
 			break;
 		case 1:
-			this.fuerza = 20 + (nivel - 1) * 6;
-			this.salud = 40 + (nivel - 1) * 20;
-			this.defensa = 5 + (nivel - 1) * 2;
+			this.fuerza  = calcularAtributo(20, 6);
+			this.salud   = calcularAtributo(40, 20);
+			this.defensa = calcularAtributo(5, 2);
 			break;
 		case 2:
-			this.fuerza = 30 + (nivel - 1) * 10;
-			this.salud = 50 + (nivel - 1) * 25;
-			this.defensa = 4 + (nivel - 1) * 4;
+			this.fuerza  = calcularAtributo(30, 10);
+			this.salud   = calcularAtributo(50, 25);
+			this.defensa = calcularAtributo(4, 4);
 			break;
-
+		default: break;
 		}
+	}
+
+	/**
+	* Calcula el atributo fuerza salud o defensa al inicializar
+	* el NPC
+	*/
+
+	private int calcularAtributo(final int a, final int b){
+		return a + (nivel - 1) * b;
 	}
 
 	/**
@@ -80,12 +89,12 @@ public class NonPlayableCharacter extends Character implements Peleable {
 	 * @return dano ocasionado al atacar.
 	 */
 
-	public int serAtacado(int dano) {
+	public int serAtacado(final int dano) {
 		if (this.aleatorizador.nextDouble() >= PORCENTAJE_GOLPE_CRITICO) {
-			dano -= this.getDefensa() / 2;
-			if (dano > 0) {
-				salud -= dano;
-				return dano;
+			int danio = dano - (this.getDefensa() / 2);
+			if (danio > 0) {
+				salud -= danio;
+				return danio;
 			}
 			return 0;
 		}
@@ -131,7 +140,7 @@ public class NonPlayableCharacter extends Character implements Peleable {
 	 * @param salud no se utiliza
 	 */
 
-	public void serCurado(final int salud) {}
+	public void serCurado(final int salud) { }
 
 	/**
 	 * @param dano no utilizado

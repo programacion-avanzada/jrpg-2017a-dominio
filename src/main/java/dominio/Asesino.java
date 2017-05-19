@@ -9,18 +9,18 @@ package dominio;
 public class Asesino extends Casta {
 
 	private static final int ENERGIA_MINIMA = 3;
-	private static final double INCREMENTO_EVITAR_DAÑO = 0.15;
-	private static final double MAX_PROBABILIDAD_EVITAR_DAÑO = 0.5;
+	private static final double INCREMENTO_EVITAR_DANO = 0.15;
+	private static final double MAX_PROBABILIDAD_EVITAR_DANO = 0.5;
 
 	/**
 	 * Constructor de asesinos con parámetros.
-	 * @param prob_crit es la probabilidad de golpe critico
+	 * @param probCrit es la probabilidad de golpe critico
 	 * @param evasion evasion
-	 * @param dano_crit es el dano crítico
+	 * @param danoCrit es el dano crítico
 	 */
 
-	public Asesino(final double prob_crit, final double evasion, final double dano_crit) {
-		super("Asesino", prob_crit, evasion, dano_crit);
+	public Asesino(final double probCrit, final double evasion, final double danoCrit) {
+		super("Asesino", probCrit, evasion, danoCrit);
 	}
 
 	/**
@@ -37,7 +37,7 @@ public class Asesino extends Casta {
 	 * @return INCREMENTO_POR_TIPO
 	 */
 
-	public int getIncrementoDestreza(){
+	public int getIncrementoDestreza() {
 		return INCREMENTO_POR_TIPO;
 	}
 
@@ -73,10 +73,10 @@ public class Asesino extends Casta {
 		if (caster.getEnergia() > ENERGIA_MINIMA) {
 			caster.usarHabilidad(ENERGIA_MINIMA);
 
-			if (this.getProbabilidadEvitarDano() + INCREMENTO_EVITAR_DAÑO < MAX_PROBABILIDAD_EVITAR_DAÑO) {
-				this.probabilidadEvitarDano += INCREMENTO_EVITAR_DAÑO;
+			if (this.getProbabilidadEvitarDano() + INCREMENTO_EVITAR_DANO < MAX_PROBABILIDAD_EVITAR_DANO) {
+				this.probabilidadEvitarDano += INCREMENTO_EVITAR_DANO;
 			} else {
-				this.probabilidadEvitarDano = MAX_PROBABILIDAD_EVITAR_DAÑO;
+				this.probabilidadEvitarDano = MAX_PROBABILIDAD_EVITAR_DANO;
 			}
 			return true;
 		}

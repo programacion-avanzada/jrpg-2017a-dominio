@@ -13,13 +13,13 @@ public class Hechicero extends Casta {
 
 	/**
 	 * Permite crear un nuevo Hechicero con valores por parámetro.
-	 * @param prob_crit probabilidad critica
+	 * @param probCrit probabilidad critica
 	 * @param evasion evasion
-	 * @param dano_crit dano crítico
+	 * @param danoCrit dano crítico
 	 */
 
-	public Hechicero(final double prob_crit, final double evasion, final double dano_crit) {
-		super("Hechicero", prob_crit, evasion, dano_crit);
+	public Hechicero(final double probCrit, final double evasion, final double danoCrit) {
+		super("Hechicero", probCrit, evasion, danoCrit);
 	}
 
 	/**
@@ -35,7 +35,7 @@ public class Hechicero extends Casta {
 	 * @return INCREMENTO_POR_TIPO
 	 */
 
-	public int getIncrementoInteligencia(){
+	public int getIncrementoInteligencia() {
 		return INCREMENTO_POR_TIPO;
 	}
 
@@ -48,7 +48,7 @@ public class Hechicero extends Casta {
 	 * dependiendo del caster y el atacado.
 	 */
 
-	public boolean habilidad1(Personaje caster, Peleable atacado) {
+	public boolean habilidad1(final Personaje caster, final Peleable atacado) {
 		if (caster.getEnergia() > ENERGIA_MINIMA) {
 			caster.usarHabilidad(ENERGIA_MINIMA);
 			if (atacado.serAtacado((int) (caster.calcularPuntosDeMagia() * INCREMENTO_MAGIA)) > 0) {
@@ -62,7 +62,7 @@ public class Hechicero extends Casta {
 	 * Curar Aliado
 	 * Sobreescribe la habilidad2 de la clase padre.
 	 * @param caster caster
-	 * @param atacado atacado
+	 * @param aliado aliado
 	 * @return verdadero o falso para la acción de curar aliado
 	 * dependiendo del caster y el atacado.
 	 */

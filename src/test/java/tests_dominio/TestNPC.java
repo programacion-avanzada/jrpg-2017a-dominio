@@ -56,6 +56,7 @@ public class TestNPC {
 
 		MyRandomStub mrs = new MyRandomStub(0.49, 2);
 		npc2.setRandomGenerator(mrs);
+		e.setRandomGenerator(mrs);
 
 		Assert.assertTrue(20 == npc2.atacar(e));
 	}

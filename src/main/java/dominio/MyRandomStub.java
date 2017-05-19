@@ -9,7 +9,13 @@ public class MyRandomStub extends RandomGenerator {
   private double nextDouble;
   private int nextInt;
 
-  public MyRandomStub(final double nextDouble, final int nextInt){
+  /**
+	 * Constructor de la clase
+   * @param nextDouble nextDouble
+   * @param nextInt nextInt
+	 */
+
+  public MyRandomStub(final double nextDouble, final int nextInt) {
     this.nextDouble = nextDouble;
     this.nextInt = nextInt;
   }
@@ -24,6 +30,7 @@ public class MyRandomStub extends RandomGenerator {
 	}
 
   /**
+   * @param val no es utilizado
 	 * @return el mismo valor que recibe en el constructor
 	 */
 

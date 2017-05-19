@@ -54,16 +54,21 @@ public class Alianza {
 	 * @param pj es el personaje a añadir
 	 */
 
-	public void añadirPersonaje(final Personaje pj) {
+	public void anadirPersonaje(final Personaje pj) {
 		aliados.add(pj);
 	}
 
-	private static LinkedList<Personaje> copiarLista(LinkedList<Personaje> lista) {
+	/**
+	 * Copia la lista a una nueva LinkedList
+	 * @param lista es la lista a copiar
+	 * @return copia de la lista
+	 */
+
+	private static LinkedList<Personaje> copiarLista(final LinkedList<Personaje> lista) {
 		LinkedList<Personaje> copia = new LinkedList<Personaje>();
-		for(int i = 0 ; i < lista.size() ; i++) {
+		for (int i = 0; i < lista.size(); i++) {
 			copia.add(lista.get(i));
 		}
 		return copia;
 	}
-	
 }

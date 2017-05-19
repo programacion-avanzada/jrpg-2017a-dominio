@@ -68,16 +68,16 @@ public class Orco extends Personaje {
 	/**
 	 * Mordisco de Vida
 	 * habilidadRaza1 sobrescribe el metodo de la clase padre.
-	 * @param atacado
+	 * @param atacado peleable atacado
 	 * @return verdadero o falso dependiendo del objeto atacado y de sí mismo.
 	 */
 
 	public boolean habilidadRaza2(final Peleable atacado) {
 		if (this.getEnergia() > ENERGIA_MINIMA) {
 			this.usarHabilidad(ENERGIA_MINIMA);
-			int dano_causado = atacado.serAtacado(this.getFuerza());
-			if (dano_causado > 0) {
-				this.serCurado(dano_causado);
+			int danoCausado = atacado.serAtacado(this.getFuerza());
+			if (danoCausado > 0) {
+				this.serCurado(danoCausado);
 				return true;
 			}
 		}

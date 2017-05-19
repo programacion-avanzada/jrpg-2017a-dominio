@@ -13,11 +13,11 @@ public abstract class Character {
 
   protected int salud;
   protected int defensa;
-  protected int ultima_defensa;
+  protected int ultimaDefensa;
   protected int fuerza;
   protected int nivel;
 
-  public RandomGenerator aleatorizador;
+  protected RandomGenerator aleatorizador;
 
   /**
    * Contructor de un Character
@@ -30,7 +30,7 @@ public abstract class Character {
   }
 
   /**
-   * @param nombre del personaje
+   * @param randomGenerator randomGenerator a asignar
    */
 
   public void setRandomGenerator(final MyRandomStub randomGenerator) {
@@ -107,7 +107,7 @@ public abstract class Character {
 	 */
 
 	public void anularDefensa() {
-		this.ultima_defensa = this.defensa;
+		this.ultimaDefensa = this.defensa;
 		this.defensa = 0;
 	}
 
@@ -117,15 +117,15 @@ public abstract class Character {
 	 */
 
 	public void reestablecerDefensa() {
-		this.defensa = this.ultima_defensa;
+		this.defensa = this.ultimaDefensa;
 	}
 
 	/**
-	 * @param defensa a incrementar
+	 * @param aumento de defensa a incrementar
 	 */
 
-	public void aumentarDefensa(final int defensa) {
-		this.defensa += defensa;
+	public void aumentarDefensa(final int aumento) {
+		this.defensa += aumento;
 	}
 
 }

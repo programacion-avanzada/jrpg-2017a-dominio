@@ -2000,7 +2000,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Guerrero(prob_crit: double, evasion: double, dano_crit: double)",
+											"text": "+Guerrero(probCrit: double, evasion: double, danoCrit: double)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -2435,7 +2435,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Hechicero(prob_crit: double, evasion: double, dano_crit: double)",
+											"text": "+Hechicero(probCrit: double, evasion: double, danoCrit: double)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -3771,7 +3771,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+añadirPersonaje(pj: Personaje): void",
+											"text": "+anadirPersonaje(pj: Personaje): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -4119,7 +4119,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Asesino(prob_crit: double, evasion: double, dano_crit: double)",
+											"text": "+Asesino(probCrit: double, evasion: double, danoCrit: double)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -4701,7 +4701,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Casta(prob_crit: double, evasion: double, dano_crit: double)",
+											"text": "+Casta(probCrit: double, evasion: double, danoCrit: double)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -5982,7 +5982,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": true,
-											"text": "#dificultadAleatoria: int",
+											"text": "#DIFICULTAD_ALEATORIA: int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -9554,7 +9554,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFbcosqluohd/s="
 									},
-									"name": "prob_crit",
+									"name": "probCrit",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -9586,7 +9586,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFbcosqluohd/s="
 									},
-									"name": "dano_crit",
+									"name": "danoCrit",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -9858,7 +9858,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFbcpHcKOpnnbU="
 									},
-									"name": "prob_crit",
+									"name": "probCrit",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -9890,7 +9890,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFbcpHcKOpnnbU="
 									},
-									"name": "dano_crit",
+									"name": "danoCrit",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -11025,7 +11025,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFbci4D7uS7HDM="
 							},
-							"name": "añadirPersonaje",
+							"name": "anadirPersonaje",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -11130,7 +11130,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFbcpNEeOqjJf4="
 									},
-									"name": "prob_crit",
+									"name": "probCrit",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -11162,7 +11162,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFbcpNEeOqjJf4="
 									},
-									"name": "dano_crit",
+									"name": "danoCrit",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -11557,7 +11557,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFbcoZG+enVOUY="
 									},
-									"name": "prob_crit",
+									"name": "probCrit",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -11589,7 +11589,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFbcoZG+enVOUY="
 									},
-									"name": "dano_crit",
+									"name": "danoCrit",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -12402,7 +12402,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFbci78u+WSxco="
 							},
-							"name": "dificultadAleatoria",
+							"name": "DIFICULTAD_ALEATORIA",
 							"visibility": "protected",
 							"isStatic": true,
 							"isLeaf": false,

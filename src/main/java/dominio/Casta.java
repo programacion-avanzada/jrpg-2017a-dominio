@@ -15,7 +15,7 @@ public abstract class Casta implements Serializable {
 
 	private static final int CANTIDAD_HABILIDADES = 3;
 	private static final double PROBABILIDAD_POR_DEFECTO = 0.2;
-	private static final double DAÑO_CRITICO_POR_DEFECTO = 1.5;
+	private static final double DANO_CRITICO_POR_DEFECTO = 1.5;
 
 	private double probabilidadGolpeCritico;
 	protected double probabilidadEvitarDano;
@@ -26,6 +26,10 @@ public abstract class Casta implements Serializable {
 
 	/**
 	 * Constructor de una casta con sus valores por defecto
+	 * @param nombreCasta nombre de la casta
+	 * @param habilidad1 habilidad1
+	 * @param habilidad2 habilidad2
+	 * @param habilidad3 habilidad3
 	 */
 
 	public Casta(final String nombreCasta, final String habilidad1,
@@ -33,7 +37,7 @@ public abstract class Casta implements Serializable {
 
 		this.probabilidadGolpeCritico = PROBABILIDAD_POR_DEFECTO;
 		this.probabilidadEvitarDano = PROBABILIDAD_POR_DEFECTO;
-		this.danoCritico = DAÑO_CRITICO_POR_DEFECTO;
+		this.danoCritico = DANO_CRITICO_POR_DEFECTO;
 
 		this.nombreCasta = nombreCasta;
 
@@ -46,17 +50,17 @@ public abstract class Casta implements Serializable {
 	/**
 	 * Constructor de una casta con valores por parámetro.
 	 * @param nombreCasta nombre de la casta
-	 * @param prob_crit probabilidad de golpe critico.
+	 * @param probCrit probabilidad de golpe critico.
 	 * @param evasion probabilidad de evitar dano.
-	 * @param dano_crit dano critico.
+	 * @param danoCrit dano critico.
 	 */
 
-	public Casta(final String nombreCasta, final double prob_crit, final double evasion, final double dano_crit) {
+	public Casta(final String nombreCasta, final double probCrit, final double evasion, final double danoCrit) {
 		this.nombreCasta = nombreCasta;
 
-		this.probabilidadGolpeCritico = prob_crit;
+		this.probabilidadGolpeCritico = probCrit;
 		this.probabilidadEvitarDano = evasion;
-		this.danoCritico = dano_crit;
+		this.danoCritico = danoCrit;
 	}
 
 	/**
@@ -91,7 +95,7 @@ public abstract class Casta implements Serializable {
 	 * @return 0
 	 */
 
-	public int getIncrementoInteligencia(){
+	public int getIncrementoInteligencia() {
 		return 0;
 	}
 
@@ -100,7 +104,7 @@ public abstract class Casta implements Serializable {
 	 * @return 0
 	 */
 
-	public int getIncrementoFuerza(){
+	public int getIncrementoFuerza() {
 		return 0;
 	}
 
@@ -109,7 +113,7 @@ public abstract class Casta implements Serializable {
 	 * @return 0
 	 */
 
-	public int getIncrementoDestreza(){
+	public int getIncrementoDestreza() {
 		return 0;
 	}
 

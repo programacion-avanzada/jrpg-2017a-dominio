@@ -249,19 +249,23 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 
 	public void setClan(final Alianza clan) {
 		this.clan = clan;
-		clan.añadirPersonaje(this);
+		clan.anadirPersonaje(this);
 	}
+
+	/**
+	 * @return energia
+	 */
 
 	public int getEnergia() {
 		return energia;
 	}
 
 	/**
-	 * @param energia energia a disminuir
+	 * @param gasto de energia a disminuir
 	 */
 
-	public void usarHabilidad(final int energia) {
-		this.energia -= energia;
+	public void usarHabilidad(final int gasto) {
+		this.energia -= gasto;
 	}
 
 	/**
@@ -273,11 +277,11 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 	}
 
 	/**
-	 * @param destreza a adicionar
+	 * @param aumento de destreza a adicionar
 	 */
 
-	public void aumentarDestreza(final int destreza) {
-		this.destreza += destreza;
+	public void aumentarDestreza(final int aumento) {
+		this.destreza += aumento;
 	}
 
 	/**
@@ -289,11 +293,11 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 	}
 
 	/**
-	 * @param inteligencia a adicionar
+	 * @param aumento de inteligencia a adicionar
 	 */
 
-	public void aumentarInteligencia(final int inteligencia) {
-		this.inteligencia += inteligencia;
+	public void aumentarInteligencia(final int aumento) {
+		this.inteligencia += aumento;
 	}
 
 	/**
@@ -443,7 +447,7 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 	 * @return 0 si no es dañado o el valor del dano ocasionado por el ataque.
 	 */
 
-	public int serAtacado(int dano) {
+	public int serAtacado(final int dano) {
 		if (this.aleatorizador.nextDouble() >= this.getCasta().getProbabilidadEvitarDano()) {
 			int danio = dano - this.defensa;
 			if (danio > 0) {
@@ -536,7 +540,7 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 
 	public void crearAlianza(final String nombreAlianza) {
 		this.clan = new Alianza(nombreAlianza);
-		this.clan.añadirPersonaje(this);
+		this.clan.anadirPersonaje(this);
 	}
 
 	/**
@@ -561,12 +565,12 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 		if (this.clan == null) {
 			Alianza a = new Alianza("Alianza 1");
 			this.clan = a;
-			a.añadirPersonaje(this);
+			a.anadirPersonaje(this);
 		}
 
 		if (nuevoAliado.clan == null) {
 			nuevoAliado.clan = this.clan;
-			this.clan.añadirPersonaje(nuevoAliado);
+			this.clan.anadirPersonaje(nuevoAliado);
 			return true;
 		} else {
 			return false;
@@ -576,20 +580,20 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 	/**
 	 * Aumenta fuerza, destreza e inteligencia siempre que el total
 	 * sea menor a SKILLS_MAXIMO.
-	 * @param fuerza del personaje
-	 * @param destreza del personaje
-	 * @param inteligencia del personaje
+	 * @param masFuerza del personaje
+	 * @param masDestreza del personaje
+	 * @param masInteligencia del personaje
 	 */
 
-	public void asignarPuntosSkills(final int aumentoFuerza, final int aumentoDestreza, final int aumentoInteligencia) {
-		if (this.fuerza + aumentoFuerza <= SKILLS_MAXIMO) {
-			this.fuerza += aumentoFuerza;
+	public void asignarPuntosSkills(final int masFuerza, final int masDestreza, final int masInteligencia) {
+		if (this.fuerza + masFuerza <= SKILLS_MAXIMO) {
+			this.fuerza += masFuerza;
 		}
-		if (this.destreza + aumentoDestreza <= SKILLS_MAXIMO) {
-			this.destreza += aumentoDestreza;
+		if (this.destreza + masDestreza <= SKILLS_MAXIMO) {
+			this.destreza += masDestreza;
 		}
-		if (this.inteligencia + aumentoInteligencia <= SKILLS_MAXIMO) {
-			this.inteligencia += aumentoInteligencia;
+		if (this.inteligencia + masInteligencia <= SKILLS_MAXIMO) {
+			this.inteligencia += masInteligencia;
 		}
 		this.modificarAtributos();
 	}
@@ -600,19 +604,18 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 
 	public void subirNivel() {
 
-		int acumuladorExperiencia = 0;
+		int acumExperiencia = 0;
 		if (this.nivel == NIVEL_MAXIMO) {
 			return;
 		}
-		while (this.nivel != NIVEL_MAXIMO
-				&& (this.experiencia >= Personaje.tablaDeNiveles[this.nivel + 1] + acumuladorExperiencia)) {
-			acumuladorExperiencia += Personaje.tablaDeNiveles[this.nivel + 1];
+		while (this.nivel != NIVEL_MAXIMO && (this.experiencia >= Personaje.tablaDeNiveles[this.nivel + 1] + acumExperiencia)) {
+			acumExperiencia += Personaje.tablaDeNiveles[this.nivel + 1];
 			this.nivel++;
 			this.modificarAtributos();
 			this.saludTope += AUMENTO_SALUD_TOPE;
 			this.energiaTope += AUMENTO_ENERGIA_TOPE;
 		}
-		this.experiencia -= acumuladorExperiencia;
+		this.experiencia -= acumExperiencia;
 	}
 
 	/**
