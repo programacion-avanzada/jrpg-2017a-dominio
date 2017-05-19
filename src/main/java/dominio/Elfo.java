@@ -21,7 +21,7 @@ public class Elfo extends Personaje {
 		super(nombre, casta, id, "Elfo", "Golpe Level", "Ataque Bosque");
 		energiaTope += INCREMENTO_TOPE;
 		salud = saludTope;
-		energia = energiaTope;
+		this.energia = energiaTope;
 	}
 
 	/**

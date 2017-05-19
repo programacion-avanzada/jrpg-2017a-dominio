@@ -637,6 +637,17 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 	}
 
 	/**
+	* Reemplaza la salud y la energia del personaje
+	* @param nuevaSalud a reemplazar
+	* @param nuevaEnergia a reemplazar
+	*/
+
+	public void serHerido(final int nuevaSalud, final int nuevaEnergia) {
+		this.salud = nuevaSalud;
+		this.energia = nuevaEnergia;
+	}
+
+	/**
 	 * Aumenta el nivel del personaje 40 veces.
 	 * @return nuevo nivel
 	 */

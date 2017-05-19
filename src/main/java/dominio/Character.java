@@ -128,4 +128,14 @@ public abstract class Character {
 		this.defensa += aumento;
 	}
 
+  /**
+  * Reemplaza la salud y la energia del personaje
+  * @param nuevaSalud a reemplazar
+  * @param nuevaEnergia a reemplazar
+  */
+
+	public void serHerido(final int nuevaSalud, final int nuevaEnergia) {
+		this.salud = nuevaSalud;
+	}
+
 }
