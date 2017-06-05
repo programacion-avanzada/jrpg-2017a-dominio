@@ -31,11 +31,11 @@ public class Hechicero extends Casta {
 	}
 
 	/**
-	 * getIncrementoInteligencia los hechizeros se inicializan con mas inteligencia
+	 * getInteligencia los hechizeros se inicializan con mas inteligencia
 	 * @return INCREMENTO_POR_TIPO
 	 */
 
-	public int getIncrementoInteligencia() {
+	public int getInteligencia() {
 		return INCREMENTO_POR_TIPO;
 	}
 

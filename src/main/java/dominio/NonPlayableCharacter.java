@@ -6,7 +6,7 @@ package dominio;
  * Define los atributos de salud, fuerza, defensa, nombre y nivel.
  */
 
-public class NonPlayableCharacter extends Character implements Peleable {
+public class NonPlayableCharacter extends Character {
 
 	private static final double PORCENTAJE_GOLPE_CRITICO = 0.15;
 	private static final int DIFICULTAD_ALEATORIA = -1;
@@ -19,9 +19,8 @@ public class NonPlayableCharacter extends Character implements Peleable {
 	 */
 
 	public NonPlayableCharacter(final String nombre, final int nivel, final int dificultadNPC) {
-		super(nombre);
+		super(nombre, nivel);
 
-		this.nivel = nivel;
 		int dificultad;
 		if (dificultadNPC == DIFICULTAD_ALEATORIA) {
 			dificultad = this.aleatorizador.nextInt(3);

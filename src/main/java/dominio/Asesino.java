@@ -33,11 +33,11 @@ public class Asesino extends Casta {
 	}
 
 	/**
-	 * getIncrementoDestreza los asesinos se inicializan con mas destreza
+	 * getDestreza los asesinos se inicializan con mas destreza
 	 * @return INCREMENTO_POR_TIPO
 	 */
 
-	public int getIncrementoDestreza() {
+	public int getDestreza() {
 		return INCREMENTO_POR_TIPO;
 	}
 

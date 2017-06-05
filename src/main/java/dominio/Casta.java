@@ -91,29 +91,29 @@ public abstract class Casta implements Serializable {
 	public abstract boolean habilidad3(Personaje caster, Peleable atacado);
 
 	/**
-	 * getIncrementoInteligencia sera reemplazada en los hijos segun corresponda.
+	 * getInteligencia sera reemplazada en los hijos segun corresponda.
 	 * @return 0
 	 */
 
-	public int getIncrementoInteligencia() {
+	public int getInteligencia() {
 		return 0;
 	}
 
 	/**
-	 * getIncrementoFuerza sera reemplazada en los hijos segun corresponda.
+	 * getFuerza sera reemplazada en los hijos segun corresponda.
 	 * @return 0
 	 */
 
-	public int getIncrementoFuerza() {
+	public int getFuerza() {
 		return 0;
 	}
 
 	/**
-	 * getIncrementoDestreza sera reemplazada en los hijos segun corresponda.
+	 * getDestreza sera reemplazada en los hijos segun corresponda.
 	 * @return 0
 	 */
 
-	public int getIncrementoDestreza() {
+	public int getDestreza() {
 		return 0;
 	}
 

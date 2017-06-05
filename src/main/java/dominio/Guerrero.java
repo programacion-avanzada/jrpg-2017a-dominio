@@ -31,11 +31,11 @@ public class Guerrero extends Casta {
 	}
 
 	/**
-	 * getIncrementoFuerza los guerreros se inicializan con mas fuerza
+	 * getFuerza los guerreros se inicializan con mas fuerza
 	 * @return INCREMENTO_POR_TIPO
 	 */
 
-	public int getIncrementoFuerza() {
+	public int getFuerza() {
 		return INCREMENTO_POR_TIPO;
 	}
 

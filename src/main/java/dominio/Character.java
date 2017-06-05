@@ -1,21 +1,27 @@
 package dominio;
 
-
+import java.util.HashMap;
 
 /**
  * La clase Character contiene los atributos y metodos compartidos de
  * Personaje y NonPlayableCharacter.
  */
 
-public abstract class Character {
+public abstract class Character implements Peleable {
+
+  public static final String ATRIBUTO_NOMBRE   = "nombre";
+  public static final String ATRIBUTO_SALUD    = "salud";
+	public static final String ATRIBUTO_DEFENSA  = "defensa";
+  public static final String ATRIBUTO_FUERZA   = "fuerza";
+  public static final String ATRIBUTO_NIVEL    = "nivel";
 
   private String nombre;
-
   protected int salud;
   protected int defensa;
-  protected int ultimaDefensa;
   protected int fuerza;
   protected int nivel;
+
+  protected int ultimaDefensa;
 
   protected RandomGenerator aleatorizador;
 
@@ -24,8 +30,9 @@ public abstract class Character {
    * @param nombre nombre del character
    */
 
-  public Character(final String nombre) {
+  public Character(final String nombre, final int nivel) {
     this.nombre = nombre;
+    this.nivel = nivel;
     this.aleatorizador = new MyRandom();
   }
 
@@ -77,14 +84,6 @@ public abstract class Character {
 		return fuerza;
 	}
 
-	/**
-	 * @param aumento fuerza a adicionar
-	 */
-
-	public void aumentarFuerza(final int aumento) {
-		this.fuerza += aumento;
-	}
-
   /**
 	 * @return nivel
 	 */
@@ -129,13 +128,31 @@ public abstract class Character {
 	}
 
   /**
-  * Reemplaza la salud y la energia del personaje
-  * @param nuevaSalud a reemplazar
-  * @param nuevaEnergia a reemplazar
+  * Actualiza el Character recibiendo un HashMap
+  * @param mapa con los datos del Character
   */
 
-	public void serHerido(final int nuevaSalud, final int nuevaEnergia) {
-		this.salud = nuevaSalud;
+  public void update(final HashMap<String, Object> mapa) {
+    this.nombre = (String) mapa.get(ATRIBUTO_SALUD);
+    this.salud = (Integer) mapa.get(ATRIBUTO_SALUD);
+    this.defensa = (Integer) mapa.get(ATRIBUTO_DEFENSA);
+    this.fuerza = (Integer) mapa.get(ATRIBUTO_FUERZA);
+		this.nivel = (Integer) mapa.get(ATRIBUTO_NIVEL);
+	}
+
+  /**
+	 * Crea un HashMap con los datos del Character
+	 * @return mapa de datos
+	 */
+
+	public HashMap<String, Object> all() {
+		HashMap<String, Object> mapa = new HashMap<>();
+		mapa.put(ATRIBUTO_SALUD, this.salud);
+		mapa.put(ATRIBUTO_FUERZA, this.fuerza);
+		mapa.put(ATRIBUTO_DEFENSA, this.defensa);
+		mapa.put(ATRIBUTO_NOMBRE, this.nombre);
+		mapa.put(ATRIBUTO_NIVEL, this.nivel);
+		return mapa;
 	}
 
 }

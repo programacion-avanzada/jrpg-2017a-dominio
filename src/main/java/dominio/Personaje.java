@@ -1,6 +1,7 @@
 package dominio;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 /**
  * La clase Personaje contiene los atributos de cada jugador.
@@ -10,7 +11,16 @@ import java.io.Serializable;
  * Además implementa la interfaz Peleable por lo que debe implementar sus métodos.
  */
 
-public abstract class Personaje extends Character implements Peleable, Serializable {
+public abstract class Personaje extends Character implements Serializable {
+
+	public static final String ATRIBUTO_IDPERSONAJE 	= "idpersonaje";
+	public static final String ATRIBUTO_ENERGIATOPE 	= "energiatope";
+	public static final String ATRIBUTO_SALUDTOPE 		= "saludtope";
+	public static final String ATRIBUTO_ENERGIA 			= "energia";
+	public static final String ATRIBUTO_DESTREZA 			= "destreza";
+	public static final String ATRIBUTO_INTELIGENCIA	= "inteligencia";
+	public static final String ATRIBUTO_CASTA 				= "casta";
+	public static final String ATRIBUTO_EXPERIENCIA 	= "experiencia";
 
 
 	protected static final int INCREMENTO_TOPE = 10;
@@ -100,30 +110,25 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 
 	public Personaje(final String nombre, final Casta casta, final int id,
 		final String nombreRaza, final String habilidad1, final String habilidad2) {
-		super(nombre);
+		super(nombre, NIVEL_INICIAL);
 
-		this.casta = casta;
-		this.idPersonaje = id;
-		this.nombreRaza = nombreRaza;
-
-		experiencia = EXPERIENCIA_INICIAL;
-		nivel = NIVEL_INICIAL;
-		fuerza = FUERZA_INICIAL;
-		inteligencia = INTELIGENCIA_INICIAL;
-		destreza = DESTREZA_INICIAL;
-
-		this.aumentarInteligencia(casta.getIncrementoInteligencia());
-		this.aumentarFuerza(casta.getIncrementoFuerza());
-		this.aumentarDestreza(casta.getIncrementoDestreza());
+		this.idPersonaje 	= id;
+		this.saludTope 		= SALUD_INICIAL;
+		this.energiaTope 	= ENERGIA_INICIAL;
+		this.salud 				= SALUD_INICIAL;
+		this.energia      = ENERGIA_INICIAL;
+		this.inteligencia = INTELIGENCIA_INICIAL + INCREMENTO_TOPE + casta.getInteligencia();
+		this.fuerza 			= FUERZA_INICIAL + INCREMENTO_TOPE + casta.getFuerza();
+		this.destreza 		= DESTREZA_INICIAL + INCREMENTO_TOPE + casta.getDestreza();
+		this.casta 				= casta;
+		this.experiencia 	= EXPERIENCIA_INICIAL;
+		this.ataque 			= this.calcularPuntosDeAtaque();
+		this.defensa 			= this.calcularPuntosDeDefensa();
+		this.magia 				= this.calcularPuntosDeMagia();
+		this.nombreRaza 	= nombreRaza;
 
 		x = 0;
 		y = 0;
-		saludTope = SALUD_INICIAL;
-		energiaTope = ENERGIA_INICIAL;
-
-		ataque = this.calcularPuntosDeAtaque();
-		defensa = this.calcularPuntosDeDefensa();
-		magia = this.calcularPuntosDeMagia();
 
 		this.setHabilidades(habilidad1, habilidad2);
 	}
@@ -149,31 +154,64 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 	public Personaje(final String nombre, final int salud, final int energia,
 		final int fuerza, final int destreza, final int inteligencia,
 		final Casta casta, final int experiencia, final int nivel,
-		final int idPersonaje, final String nombreRaza, final String habilidad1, final String habilidad2) {
+		final int idPersonaje, final String nombreRaza, final String habilidad1,
+		final String habilidad2) {
 
-		super(nombre);
+		super(nombre, nivel);
 
-		this.salud = salud;
-		this.energia = energia;
-		this.fuerza = fuerza;
-		this.destreza = destreza;
+		this.idPersonaje 	= idPersonaje;
+		this.saludTope 		= this.salud;
+		this.energiaTope 	= this.energia;
+		this.salud 				= salud;
+		this.energia 			= energia;
+		this.fuerza 			= fuerza;
+		this.destreza 		= destreza;
 		this.inteligencia = inteligencia;
-		this.casta = casta;
+		this.casta 				= casta;
+		this.experiencia 	= experiencia;
+		this.defensa 			= this.calcularPuntosDeDefensa();
+		this.ataque 			= this.calcularPuntosDeAtaque();
+		this.magia 				= this.calcularPuntosDeMagia();
+		this.nombreRaza 	= nombreRaza;
 
-		this.experiencia = experiencia;
-		this.nivel = nivel;
-
-		this.saludTope = this.salud;
-		this.energiaTope = this.energia;
-
-		this.idPersonaje = idPersonaje;
-		this.defensa = this.calcularPuntosDeDefensa();
-		this.ataque = this.calcularPuntosDeAtaque();
-		this.magia = this.calcularPuntosDeMagia();
-
-		this.nombreRaza = nombreRaza;
 		this.setHabilidades(habilidad1, habilidad2);
 	}
+
+	/**
+  * Actualiza el Personaje recibiendo un HashMap
+  * @param mapa con los datos del Personaje
+  */
+
+	public void update(final HashMap<String, Object> mapa) {
+		super.update(mapa);
+		this.idPersonaje 	= (Integer) mapa.get(ATRIBUTO_IDPERSONAJE);
+		this.energiaTope 	= (Integer) mapa.get(ATRIBUTO_ENERGIATOPE);
+		this.saludTope		= (Integer) mapa.get(ATRIBUTO_SALUDTOPE);
+		this.energia 			= (Integer) mapa.get(ATRIBUTO_ENERGIA);
+		this.destreza 		= (Integer) mapa.get(ATRIBUTO_DESTREZA);
+		this.inteligencia = (Integer) mapa.get(ATRIBUTO_INTELIGENCIA);
+		this.casta 				= (Casta) mapa.get(ATRIBUTO_CASTA);
+		this.experiencia 	= (Integer) mapa.get(ATRIBUTO_EXPERIENCIA);
+	}
+
+	/**
+	 * Crea un HashMap con los datos del Personaje
+	 * @return mapa de datos
+	 */
+
+	public HashMap<String, Object> all() {
+		HashMap<String, Object> mapa = super.all();
+		mapa.put(ATRIBUTO_ENERGIA, 			this.energia);
+		mapa.put(ATRIBUTO_DESTREZA, 		this.destreza);
+		mapa.put(ATRIBUTO_INTELIGENCIA, this.inteligencia);
+		mapa.put(ATRIBUTO_CASTA, 				this.casta);
+		mapa.put(ATRIBUTO_EXPERIENCIA, 	this.experiencia);
+		mapa.put(ATRIBUTO_IDPERSONAJE, 	this.idPersonaje);
+		mapa.put(ATRIBUTO_ENERGIATOPE, 	this.energiaTope);
+		mapa.put(ATRIBUTO_SALUDTOPE, 		this.saludTope);
+		return mapa;
+	}
+
 
 	/**
 	 * Asigna las habilidades de raza del personaje
@@ -277,27 +315,11 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 	}
 
 	/**
-	 * @param aumento de destreza a adicionar
-	 */
-
-	public void aumentarDestreza(final int aumento) {
-		this.destreza += aumento;
-	}
-
-	/**
 	 * @return inteligencia
 	 */
 
 	public int getInteligencia() {
 		return inteligencia;
-	}
-
-	/**
-	 * @param aumento de inteligencia a adicionar
-	 */
-
-	public void aumentarInteligencia(final int aumento) {
-		this.inteligencia += aumento;
 	}
 
 	/**
@@ -634,17 +656,6 @@ public abstract class Personaje extends Character implements Peleable, Serializa
 			return true;
 		}
 		return false;
-	}
-
-	/**
-	* Reemplaza la salud y la energia del personaje
-	* @param nuevaSalud a reemplazar
-	* @param nuevaEnergia a reemplazar
-	*/
-
-	public void serHerido(final int nuevaSalud, final int nuevaEnergia) {
-		this.salud = nuevaSalud;
-		this.energia = nuevaEnergia;
 	}
 
 	/**
