@@ -3,64 +3,70 @@ package dominio;
 import java.util.HashMap;
 
 /**
- * La clase Character contiene los atributos y metodos compartidos de
- * Personaje y NonPlayableCharacter.
+ * La clase Character contiene los atributos y metodos compartidos de Personaje
+ * y NonPlayableCharacter.
  */
 
 public abstract class Character implements Peleable {
 
-  public static final String ATRIBUTO_NOMBRE   = "nombre";
-  public static final String ATRIBUTO_SALUD    = "salud";
-	public static final String ATRIBUTO_DEFENSA  = "defensa";
-  public static final String ATRIBUTO_FUERZA   = "fuerza";
-  public static final String ATRIBUTO_NIVEL    = "nivel";
+	public static final String ATRIBUTO_NOMBRE = "nombre";
+	public static final String ATRIBUTO_SALUD = "salud";
+	public static final String ATRIBUTO_DEFENSA = "defensa";
+	public static final String ATRIBUTO_FUERZA = "fuerza";
+	public static final String ATRIBUTO_NIVEL = "nivel";
 
-  private String nombre;
-  protected int salud;
-  protected int defensa;
-  protected int fuerza;
-  protected int nivel;
+	private String nombre;
+	protected int salud;
+	protected int defensa;
+	protected int fuerza;
+	protected int nivel;
 
-  protected int ultimaDefensa;
+	protected int ultimaDefensa;
 
-  protected RandomGenerator aleatorizador;
+	protected RandomGenerator aleatorizador;
 
-  /**
-   * Contructor de un Character
-   * @param nombre nombre del character
-   */
+	
+	
+	/**
+	 * Contructor de un Character
+	 * 
+	 * @param nombre
+	 *            nombre del character
+	 */
 
-  public Character(final String nombre, final int nivel) {
-    this.nombre = nombre;
-    this.nivel = nivel;
-    this.aleatorizador = new MyRandom();
-  }
+	public Character(final String nombre, final int nivel) {
+		this.nombre = nombre;
+		this.nivel = nivel;
+		this.aleatorizador = new MyRandom();
+	}
 
-  /**
-   * @param randomGenerator randomGenerator a asignar
-   */
+	/**
+	 * @param randomGenerator
+	 *            randomGenerator a asignar
+	 */
 
-  public void setRandomGenerator(final MyRandomStub randomGenerator) {
+	public void setRandomGenerator(final MyRandomStub randomGenerator) {
 		this.aleatorizador = randomGenerator;
 	}
 
-  /**
-   * @return nombre del personaje
-   */
+	/**
+	 * @return nombre del personaje
+	 */
 
-  public String getNombre() {
-    return nombre;
-  }
+	public String getNombre() {
+		return nombre;
+	}
 
-  /**
-   * @param nombre del personaje
-   */
+	/**
+	 * @param nombre
+	 *            del personaje
+	 */
 
-  public void setNombre(final String nombre) {
-    this.nombre = nombre;
-  }
+	public void setNombre(final String nombre) {
+		this.nombre = nombre;
+	}
 
-  /**
+	/**
 	 * @return salud
 	 */
 
@@ -68,7 +74,7 @@ public abstract class Character implements Peleable {
 		return salud;
 	}
 
-  /**
+	/**
 	 * @return defensa
 	 */
 
@@ -76,7 +82,7 @@ public abstract class Character implements Peleable {
 		return defensa;
 	}
 
-  /**
+	/**
 	 * @return fuerza
 	 */
 
@@ -84,7 +90,7 @@ public abstract class Character implements Peleable {
 		return fuerza;
 	}
 
-  /**
+	/**
 	 * @return nivel
 	 */
 
@@ -92,8 +98,9 @@ public abstract class Character implements Peleable {
 		return nivel;
 	}
 
-  /**
+	/**
 	 * Checker para ver si el personaje vive o no.
+	 * 
 	 * @return verdadero o falso si salud es mayor a cero o no.
 	 */
 
@@ -101,7 +108,7 @@ public abstract class Character implements Peleable {
 		return salud > 0;
 	}
 
-  /**
+	/**
 	 * Anular defensa guarda la defensa y la asigna a 0
 	 */
 
@@ -111,8 +118,8 @@ public abstract class Character implements Peleable {
 	}
 
 	/**
-	 * Reestablecer defensa pone de nuevo en defensa el valor
-	 * almacenado en anularDefensa.
+	 * Reestablecer defensa pone de nuevo en defensa el valor almacenado en
+	 * anularDefensa.
 	 */
 
 	public void reestablecerDefensa() {
@@ -120,28 +127,32 @@ public abstract class Character implements Peleable {
 	}
 
 	/**
-	 * @param aumento de defensa a incrementar
+	 * @param aumento
+	 *            de defensa a incrementar
 	 */
 
 	public void aumentarDefensa(final int aumento) {
 		this.defensa += aumento;
 	}
 
-  /**
-  * Actualiza el Character recibiendo un HashMap
-  * @param mapa con los datos del Character
-  */
+	/**
+	 * Actualiza el Character recibiendo un HashMap
+	 * 
+	 * @param mapa
+	 *            con los datos del Character
+	 */
 
-  public void update(final HashMap<String, Object> mapa) {
-    this.nombre = (String) mapa.get(ATRIBUTO_SALUD);
-    this.salud = (Integer) mapa.get(ATRIBUTO_SALUD);
-    this.defensa = (Integer) mapa.get(ATRIBUTO_DEFENSA);
-    this.fuerza = (Integer) mapa.get(ATRIBUTO_FUERZA);
+	public void update(final HashMap<String, Object> mapa) {
+		this.nombre = (String) mapa.get(ATRIBUTO_NOMBRE);
+		this.salud = (Integer) mapa.get(ATRIBUTO_SALUD);
+		this.defensa = (Integer) mapa.get(ATRIBUTO_DEFENSA);
+		this.fuerza = (Integer) mapa.get(ATRIBUTO_FUERZA);
 		this.nivel = (Integer) mapa.get(ATRIBUTO_NIVEL);
 	}
 
-  /**
+	/**
 	 * Crea un HashMap con los datos del Character
+	 * 
 	 * @return mapa de datos
 	 */
 
