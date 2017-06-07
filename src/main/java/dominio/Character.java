@@ -1,5 +1,6 @@
 package dominio;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -14,7 +15,7 @@ public abstract class Character implements Peleable {
 	public static final String ATRIBUTO_DEFENSA = "defensa";
 	public static final String ATRIBUTO_FUERZA = "fuerza";
 	public static final String ATRIBUTO_NIVEL = "nivel";
-
+	
 	private String nombre;
 	protected int salud;
 	protected int defensa;
@@ -25,7 +26,8 @@ public abstract class Character implements Peleable {
 
 	protected RandomGenerator aleatorizador;
 
-	
+	protected ArrayList<Item> inventario;
+	protected int espacioInventario;
 	
 	/**
 	 * Contructor de un Character
@@ -38,6 +40,7 @@ public abstract class Character implements Peleable {
 		this.nombre = nombre;
 		this.nivel = nivel;
 		this.aleatorizador = new MyRandom();
+		this.inventario = new ArrayList<Item>();
 	}
 
 	/**
@@ -165,5 +168,26 @@ public abstract class Character implements Peleable {
 		mapa.put(ATRIBUTO_NIVEL, this.nivel);
 		return mapa;
 	}
+	
+	/**
+	 * Agrega el item indicado a la lista de items
+	 * 
+	 * @param item
+	 */
 
+	public void equiparItem(Item item) {
+		this.inventario.add(item);
+	}
+	
+	/**
+	 * Quita el item indicado de la lista de items
+	 * 
+	 * @param item
+	 */
+	public void eliminarItem(Item item) {
+		this.inventario.remove(item);
+	}
+	
+	
+	
 }

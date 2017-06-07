@@ -2,6 +2,7 @@ package dominio;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class Item implements Serializable{
 	
 	private final int ID;
@@ -14,6 +15,7 @@ public class Item implements Serializable{
 	private int defensa;
 	
 	private int ataque;
+	
 	private int magia;
 	private int inteligencia;
 	private int destreza;
@@ -36,6 +38,58 @@ public class Item implements Serializable{
 		this.energia = energia;
 	}
 	
-	
+	public int getID() {
+		return ID;
+	}
+
+
+	public String getNombre() {
+		return nombre;
+	}
+
+
+	public String getFlavorText() {
+		return flavorText;
+	}
+
+
+	public int getFuerza() {
+		return fuerza;
+	}
+
+
+	public int getSalud() {
+		return salud;
+	}
+
+
+	public int getDefensa() {
+		return defensa;
+	}
+
+
+	public int getAtaque() {
+		return ataque;
+	}
+
+
+	public int getMagia() {
+		return magia;
+	}
+
+
+	public int getInteligencia() {
+		return inteligencia;
+	}
+
+
+	public int getDestreza() {
+		return destreza;
+	}
+
+
+	public int getEnergia() {
+		return energia;
+	}
 
 }
