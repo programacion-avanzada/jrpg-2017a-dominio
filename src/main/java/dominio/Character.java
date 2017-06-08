@@ -168,6 +168,34 @@ public abstract class Character implements Peleable {
 		mapa.put(ATRIBUTO_NIVEL, this.nivel);
 		return mapa;
 	}
+	
+	/**
+	 * Crea un HashMap con los datos del Character modificados según los atributos del item 
+	 * 
+	 * @param item
+	 * @return mapa de datos
+	 */
+	
+	public HashMap<String, Object> allEquipar(Item item) {
+		HashMap<String, Object> mapa = new HashMap<>();
+		mapa.put(ATRIBUTO_FUERZA, this.fuerza + item.getFuerza());
+		mapa.put(ATRIBUTO_DEFENSA, this.defensa + item.getDefensa());
+		return mapa;
+	}
+	
+	/**
+	 * Crea un HashMap con los datos del Character reestablecidos según los atributos del item 
+	 * 
+	 * @param item
+	 * @return mapa de datos
+	 */
+	
+	public HashMap<String, Object> allReestablecer(Item item) {
+		HashMap<String, Object> mapa = new HashMap<>();
+		mapa.put(ATRIBUTO_FUERZA, this.fuerza - item.getFuerza());
+		mapa.put(ATRIBUTO_DEFENSA, this.defensa - item.getDefensa());
+		return mapa;
+	}
 
 	/**
 	 * Agrega el item indicado a la lista de items y se actualizan los atributos
@@ -179,9 +207,8 @@ public abstract class Character implements Peleable {
 	public void equiparItem(Item item) {
 		if (tieneEspacio()) {
 			this.inventario.add(item);
-			aplicarAtributosItem(item);
+			update(allEquipar(item));
 		}
-
 	}
 
 	/**
@@ -191,27 +218,11 @@ public abstract class Character implements Peleable {
 	 */
 
 	public void eliminarItem(Item item) {
-		this.inventario.remove(item);
-		reestablecerAtributos(item);
+		if(this.inventario.size() > 0) {
+			this.inventario.remove(item);
+			update(allReestablecer(item));
+		}
 	}
-
-	/**
-	 * Actualiza los atributos del Character con los que tenga el item Será
-	 * implementado por las clases que heredan de esta
-	 * 
-	 * @param item
-	 */
-
-	protected abstract void aplicarAtributosItem(Item item);
-
-	/**
-	 * Reestablece los atributos del Character a como estaban antes de equipar
-	 * el item Será implementado por las clases que heredan de esta
-	 * 
-	 * @param item
-	 */
-
-	protected abstract void reestablecerAtributos(Item item);
 
 	/*
 	 * Verifica que haya espacio libre en el inventario

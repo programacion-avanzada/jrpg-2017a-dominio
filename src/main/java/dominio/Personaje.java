@@ -234,41 +234,37 @@ public abstract class Personaje extends Character implements Serializable {
 		mapa.put(ATRIBUTO_SALUDTOPE, this.saludTope);
 		return mapa;
 	}
-
+	
 	/**
-	 * Se implementa el método de la clase padre
+	 * Crea un HashMap con los datos del Personaje modificados según los atributos del item 
 	 * 
 	 * @param item
+	 * @return mapa de datos
 	 */
-
-	@Override
-	protected void aplicarAtributosItem(Item item) {
-		this.fuerza += item.getFuerza();
-		this.defensa += item.getDefensa();
-		this.salud += item.getSalud();
-		this.ataque += item.getAtaque();
-		this.magia += item.getMagia();
-		this.inteligencia += item.getInteligencia();
-		this.destreza += item.getInteligencia();
-		this.energiaTope += item.getEnergia();
+	
+	public HashMap<String, Object> allEquipar(Item item) {
+		HashMap<String, Object> mapa = super.allEquipar(item);
+		mapa.put(ATRIBUTO_ENERGIA, this.energiaTope + item.getEnergia());
+		mapa.put(ATRIBUTO_DESTREZA, this.destreza + item.getDestreza());
+		mapa.put(ATRIBUTO_INTELIGENCIA, this.inteligencia + item.getInteligencia());
+		mapa.put(ATRIBUTO_SALUDTOPE, this.saludTope + item.getSalud());
+		return mapa;
 	}
-
+	
 	/**
-	 * Se implementa el método de la clase padre
+	 * Crea un HashMap con los datos del Personaje reestablecidos según los atributos del item 
 	 * 
 	 * @param item
+	 * @return mapa de datos
 	 */
-
-	@Override
-	protected void reestablecerAtributos(Item item) {
-		this.fuerza -= item.getFuerza();
-		this.defensa -= item.getDefensa();
-		this.salud -= item.getSalud();
-		this.ataque -= item.getAtaque();
-		this.magia -= item.getMagia();
-		this.inteligencia -= item.getInteligencia();
-		this.destreza -= item.getInteligencia();
-		this.energiaTope -= item.getEnergia();
+	
+	public HashMap<String, Object> allReestablecer(Item item) {
+		HashMap<String, Object> mapa = super.allEquipar(item);
+		mapa.put(ATRIBUTO_ENERGIA, this.energiaTope - item.getEnergia());
+		mapa.put(ATRIBUTO_DESTREZA, this.destreza - item.getDestreza());
+		mapa.put(ATRIBUTO_INTELIGENCIA, this.inteligencia - item.getInteligencia());
+		mapa.put(ATRIBUTO_SALUDTOPE, this.saludTope - item.getSalud());
+		return mapa;
 	}
 
 	/**

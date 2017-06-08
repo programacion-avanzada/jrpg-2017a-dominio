@@ -190,30 +190,4 @@ public class NonPlayableCharacter extends Character {
 		return 0;
 	}
 
-	/**
-	 * Se implementa el método de la clase padre
-	 * 
-	 * @param item
-	 */
-
-	@Override
-	protected void aplicarAtributosItem(Item item) {
-		this.fuerza += item.getFuerza();
-		this.defensa += item.getDefensa();
-		this.salud += item.getSalud();
-	}
-
-	/**
-	 * Se implementa el método de la clase padre
-	 * 
-	 * @param item
-	 */
-
-	@Override
-	protected void reestablecerAtributos(Item item) {
-		this.fuerza -= item.getFuerza();
-		this.defensa -= item.getDefensa();
-		this.salud -= item.getSalud();
-	}
-
 }
