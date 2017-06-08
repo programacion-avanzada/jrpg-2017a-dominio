@@ -22,6 +22,9 @@ public abstract class Personaje extends Character implements Serializable {
 	public static final String ATRIBUTO_INTELIGENCIA = "inteligencia";
 	public static final String ATRIBUTO_CASTA = "casta";
 	public static final String ATRIBUTO_EXPERIENCIA = "experiencia";
+	
+	public static final String ATRIBUTO_ATAQUE = "ataque";
+	public static final String ATRIBUTO_MAGIA = "magia";
 
 	private static final int ESPACIO_INVENTARIO = 6;
 
@@ -214,6 +217,8 @@ public abstract class Personaje extends Character implements Serializable {
 		this.inteligencia = (Integer) mapa.get(ATRIBUTO_INTELIGENCIA);
 		this.casta = (Casta) mapa.get(ATRIBUTO_CASTA);
 		this.experiencia = (Integer) mapa.get(ATRIBUTO_EXPERIENCIA);
+		this.magia = (Integer) mapa.get(ATRIBUTO_MAGIA);
+		this.ataque = (Integer) mapa.get(ATRIBUTO_ATAQUE);
 	}
 
 	/**
@@ -232,6 +237,8 @@ public abstract class Personaje extends Character implements Serializable {
 		mapa.put(ATRIBUTO_IDPERSONAJE, this.idPersonaje);
 		mapa.put(ATRIBUTO_ENERGIATOPE, this.energiaTope);
 		mapa.put(ATRIBUTO_SALUDTOPE, this.saludTope);
+		mapa.put(ATRIBUTO_ATAQUE, this.ataque);
+		mapa.put(ATRIBUTO_MAGIA, this.magia);
 		return mapa;
 	}
 	
@@ -244,10 +251,17 @@ public abstract class Personaje extends Character implements Serializable {
 	
 	public HashMap<String, Object> allEquipar(Item item) {
 		HashMap<String, Object> mapa = super.allEquipar(item);
-		mapa.put(ATRIBUTO_ENERGIA, this.energiaTope + item.getEnergia());
+		mapa.put(ATRIBUTO_ENERGIATOPE, this.energiaTope + item.getEnergia());
 		mapa.put(ATRIBUTO_DESTREZA, this.destreza + item.getDestreza());
 		mapa.put(ATRIBUTO_INTELIGENCIA, this.inteligencia + item.getInteligencia());
 		mapa.put(ATRIBUTO_SALUDTOPE, this.saludTope + item.getSalud());
+		mapa.put(ATRIBUTO_ATAQUE, this.ataque + item.getAtaque());
+		mapa.put(ATRIBUTO_MAGIA, this.magia + item.getMagia());
+		
+		mapa.put(ATRIBUTO_CASTA, this.casta);
+		mapa.put(ATRIBUTO_EXPERIENCIA, this.experiencia);
+		mapa.put(ATRIBUTO_IDPERSONAJE, this.idPersonaje);
+		mapa.put(ATRIBUTO_ENERGIA, this.energia);
 		return mapa;
 	}
 	
@@ -259,11 +273,18 @@ public abstract class Personaje extends Character implements Serializable {
 	 */
 	
 	public HashMap<String, Object> allReestablecer(Item item) {
-		HashMap<String, Object> mapa = super.allEquipar(item);
-		mapa.put(ATRIBUTO_ENERGIA, this.energiaTope - item.getEnergia());
+		HashMap<String, Object> mapa = super.allReestablecer(item);
+		mapa.put(ATRIBUTO_ENERGIATOPE, this.energiaTope - item.getEnergia());
 		mapa.put(ATRIBUTO_DESTREZA, this.destreza - item.getDestreza());
 		mapa.put(ATRIBUTO_INTELIGENCIA, this.inteligencia - item.getInteligencia());
 		mapa.put(ATRIBUTO_SALUDTOPE, this.saludTope - item.getSalud());
+		mapa.put(ATRIBUTO_ATAQUE, this.ataque - item.getAtaque());
+		mapa.put(ATRIBUTO_MAGIA, this.magia - item.getMagia());
+		
+		mapa.put(ATRIBUTO_CASTA, this.casta);
+		mapa.put(ATRIBUTO_EXPERIENCIA, this.experiencia);
+		mapa.put(ATRIBUTO_IDPERSONAJE, this.idPersonaje);
+		mapa.put(ATRIBUTO_ENERGIA, this.energia);
 		return mapa;
 	}
 
