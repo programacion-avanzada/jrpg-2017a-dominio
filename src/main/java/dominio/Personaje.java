@@ -211,8 +211,11 @@ public abstract class Personaje extends Character implements Serializable {
 		mapa.put(ATRIBUTO_SALUDTOPE, 		this.saludTope);
 		return mapa;
 	}
+	
 
-
+	
+	
+	
 	/**
 	 * Asigna las habilidades de raza del personaje
 	 * @param habilidad1 del personaje

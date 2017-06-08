@@ -171,12 +171,17 @@ public abstract class Character implements Peleable {
 	
 	/**
 	 * Agrega el item indicado a la lista de items
+	 * y se actualizan los atributos base del Character
 	 * 
 	 * @param item
 	 */
 
 	public void equiparItem(Item item) {
-		this.inventario.add(item);
+		if(tieneEspacio()) {
+			this.inventario.add(item);
+			aplicarAtributosItem(item);
+		}
+		
 	}
 	
 	/**
@@ -184,10 +189,35 @@ public abstract class Character implements Peleable {
 	 * 
 	 * @param item
 	 */
+	
 	public void eliminarItem(Item item) {
 		this.inventario.remove(item);
+		reestablecerAtributos(item);
 	}
 	
+	/**
+	 * Actualiza los atributos del Character con los que tenga el item
+	 * Será implementado por las clases que heredan de esta
+	 * 
+	 * @param item
+	 */
 	
+	protected abstract void aplicarAtributosItem(Item item);
 	
+	/**
+	 * Reestablece los atributos del Character a como estaban antes de equipar el item
+	 * Será implementado por las clases que heredan de esta
+	 * 
+	 * @param item
+	 */
+	
+	protected abstract void reestablecerAtributos(Item item);
+	
+	/*
+	 * Verifica que haya espacio libre en el inventario
+	 */
+	
+	private boolean tieneEspacio() {
+		return this.espacioInventario - this.inventario.size() > 0 ? true : false;
+	}
 }

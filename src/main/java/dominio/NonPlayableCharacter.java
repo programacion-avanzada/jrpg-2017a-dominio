@@ -162,4 +162,16 @@ public class NonPlayableCharacter extends Character {
 		return 0;
 	}
 
+	@Override
+	protected void aplicarAtributosItem(Item item) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void reestablecerAtributos(Item item) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
