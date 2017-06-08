@@ -1,6 +1,11 @@
 package dominio;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
+
+import javax.imageio.ImageIO;
 
 @SuppressWarnings("serial")
 public class Item implements Serializable {
@@ -19,9 +24,12 @@ public class Item implements Serializable {
 	private int inteligencia;
 	private int destreza;
 	private int energia;
+	
+	@SuppressWarnings("unused")
+	private BufferedImage icono;
 
 	public Item(int id, String name, String text, int fuerza, int salud, int defensa, int ataque, int magia,
-			int inteligencia, int destreza, int energia) {
+			int inteligencia, int destreza, int energia, String path) {
 
 		this.ID = id;
 		this.nombre = name;
@@ -34,6 +42,11 @@ public class Item implements Serializable {
 		this.inteligencia = inteligencia;
 		this.destreza = destreza;
 		this.energia = energia;
+		try {
+			this.icono = ImageIO.read(new File(path));
+		} catch (IOException e) {
+			System.out.println("item_icon_error: No se pudo leer archivo de imagen");
+		}
 	}
 
 	public int getID() {
