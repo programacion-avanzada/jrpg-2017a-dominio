@@ -13,12 +13,12 @@ public class TestItem {
 	@Test
 	public void testCrearItem() {
 		@SuppressWarnings("unused")
-		Item item = new Item(100, "Chromatic Sword", "Los colores de esta espada son infinitos", 10, 10, 10, 10, 10, 10, 10, 10);
+		Item item = new Item(100, "Chromatic Sword", "Los colores de esta espada son infinitos", 10, 10, 10, 10, 10, 10, 10, 10, "item_dagger(test).png");
 	}
 	
 	@Test
 	public void testEquiparNPC() {
-		Item item = new Item(100, "Espada Cromática", "Los colores de esta espada son infinitos", 10, 10, 10, 10, 10, 10, 10, 10);
+		Item item = new Item(100, "Espada Cromática", "Los colores de esta espada son infinitos", 10, 10, 10, 10, 10, 10, 10, 10, "item_dagger(test).png");
 		NonPlayableCharacter npc = new NonPlayableCharacter("Ezequiel", 1, 2);
 		
 		int fuerzaInicial = npc.getFuerza();
@@ -31,7 +31,7 @@ public class TestItem {
 	
 	@Test
 	public void testDesequiparNPC() {
-		Item item = new Item(100, "Espada Cromática", "Los colores de esta espada son infinitos", 10, 10, 10, 10, 10, 10, 10, 10);
+		Item item = new Item(100, "Espada Cromática", "Los colores de esta espada son infinitos", 10, 10, 10, 10, 10, 10, 10, 10, "item_dagger(test).png");
 		NonPlayableCharacter npc = new NonPlayableCharacter("Ezequiel", 1, 2);
 		
 		npc.equiparItem(item);
@@ -45,7 +45,7 @@ public class TestItem {
 	
 	@Test
 	public void testEquiparPersonaje() {
-		Item item = new Item(100, "Espada Cromática", "Los colores de esta espada son infinitos", 10, 10, 10, 10, 10, 10, 10, 10);
+		Item item = new Item(100, "Espada Cromática", "Los colores de esta espada son infinitos", 10, 10, 10, 10, 10, 10, 10, 10, "item_dagger(test).png");
 		Orco orco = new Orco("Hernan", new Guerrero(), 1);
 		
 		int fuerzaInicial = orco.getFuerza();
@@ -70,7 +70,7 @@ public class TestItem {
 	
 	@Test
 	public void testDesequiparPersonaje() {
-		Item item = new Item(100, "Espada Cromática", "Los colores de esta espada son infinitos", 10, 10, 10, 10, 10, 10, 10, 10);
+		Item item = new Item(100, "Espada Cromática", "Los colores de esta espada son infinitos", 10, 10, 10, 10, 10, 10, 10, 10, "item_dagger(test).png");
 		Orco orco = new Orco("Hernan", new Guerrero(), 1);
 		
 		orco.equiparItem(item);
