@@ -1,8 +1,8 @@
 package dominio;
 
 /**
- * La clase Orco representa una raza (tipo) de personaje.
- * Tiene 2 habilidades de raza que son el golpe defensa y el mordisco de vida.
+ * La clase Orco representa una raza (tipo) de personaje. Tiene 2 habilidades de
+ * raza que son el golpe defensa y el mordisco de vida.
  */
 
 public class Orco extends Personaje {
@@ -11,9 +11,13 @@ public class Orco extends Personaje {
 
 	/**
 	 * Permite crear un orco con atributos por defecto.
-	 * @param nombre del orco
-	 * @param casta casta
-	 * @param id del personaje
+	 * 
+	 * @param nombre
+	 *            del orco
+	 * @param casta
+	 *            casta
+	 * @param id
+	 *            del personaje
 	 */
 
 	public Orco(final String nombre, final Casta casta, final int id) {
@@ -25,33 +29,41 @@ public class Orco extends Personaje {
 
 	/**
 	 * Permite crear un orco con atributos pasados por parámetro.
-	 * @param nombre del orco
-	 * @param salud del orco
-	 * @param energia del orco
-	 * @param fuerza del orco
-	 * @param destreza del orco
-	 * @param inteligencia del orco
-	 * @param casta del orco
-	 * @param experiencia del orco
-	 * @param nivel del orco
-	 * @param idPersonaje del orco
+	 * 
+	 * @param nombre
+	 *            del orco
+	 * @param salud
+	 *            del orco
+	 * @param energia
+	 *            del orco
+	 * @param fuerza
+	 *            del orco
+	 * @param destreza
+	 *            del orco
+	 * @param inteligencia
+	 *            del orco
+	 * @param casta
+	 *            del orco
+	 * @param experiencia
+	 *            del orco
+	 * @param nivel
+	 *            del orco
+	 * @param idPersonaje
+	 *            del orco
 	 */
 
-	public Orco(final String nombre, final int salud, final int energia,
-			final int fuerza, final int destreza, final int inteligencia,
-			final Casta casta, final int experiencia, final int nivel,
-			final int idPersonaje) {
+	public Orco(final String nombre, final int salud, final int energia, final int fuerza, final int destreza,
+			final int inteligencia, final Casta casta, final int experiencia, final int nivel, final int idPersonaje) {
 
-		super(
-			nombre, salud, energia, fuerza, destreza, inteligencia, casta, experiencia,
-			nivel, idPersonaje, "Orco", "Golpe Defensa", "Mordisco de Vida"
-		);
+		super(nombre, salud, energia, fuerza, destreza, inteligencia, casta, experiencia, nivel, idPersonaje, "Orco",
+				"Golpe Defensa", "Mordisco de Vida");
 	}
 
 	/**
-	 * Golpe Defensa
-	 * habilidadRaza1 sobrescribe el metodo de la clase padre.
-	 * @param atacado atacado
+	 * Golpe Defensa habilidadRaza1 sobrescribe el metodo de la clase padre.
+	 * 
+	 * @param atacado
+	 *            atacado
 	 * @return verdadero o falso dependiendo del objeto atacado y de sí mismo.
 	 */
 
@@ -66,9 +78,10 @@ public class Orco extends Personaje {
 	}
 
 	/**
-	 * Mordisco de Vida
-	 * habilidadRaza1 sobrescribe el metodo de la clase padre.
-	 * @param atacado peleable atacado
+	 * Mordisco de Vida habilidadRaza1 sobrescribe el metodo de la clase padre.
+	 * 
+	 * @param atacado
+	 *            peleable atacado
 	 * @return verdadero o falso dependiendo del objeto atacado y de sí mismo.
 	 */
 
@@ -83,4 +96,5 @@ public class Orco extends Personaje {
 		}
 		return false;
 	}
+
 }

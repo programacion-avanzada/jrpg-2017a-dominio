@@ -4,24 +4,26 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 /**
- * La clase Personaje contiene los atributos de cada jugador.
- * Entre ellos se destacan los de ataque y defensa, salud, posicion,
- * nivel y nombre. Ademas posee una casta y una raza, ambas conteniendo
- * una serie de habilidades especiales.
- * Además implementa la interfaz Peleable por lo que debe implementar sus métodos.
+ * La clase Personaje contiene los atributos de cada jugador. Entre ellos se
+ * destacan los de ataque y defensa, salud, posicion, nivel y nombre. Ademas
+ * posee una casta y una raza, ambas conteniendo una serie de habilidades
+ * especiales. Además implementa la interfaz Peleable por lo que debe
+ * implementar sus métodos.
  */
 
+@SuppressWarnings("serial")
 public abstract class Personaje extends Character implements Serializable {
 
-	public static final String ATRIBUTO_IDPERSONAJE 	= "idpersonaje";
-	public static final String ATRIBUTO_ENERGIATOPE 	= "energiatope";
-	public static final String ATRIBUTO_SALUDTOPE 		= "saludtope";
-	public static final String ATRIBUTO_ENERGIA 			= "energia";
-	public static final String ATRIBUTO_DESTREZA 			= "destreza";
-	public static final String ATRIBUTO_INTELIGENCIA	= "inteligencia";
-	public static final String ATRIBUTO_CASTA 				= "casta";
-	public static final String ATRIBUTO_EXPERIENCIA 	= "experiencia";
+	public static final String ATRIBUTO_IDPERSONAJE = "idpersonaje";
+	public static final String ATRIBUTO_ENERGIATOPE = "energiatope";
+	public static final String ATRIBUTO_SALUDTOPE = "saludtope";
+	public static final String ATRIBUTO_ENERGIA = "energia";
+	public static final String ATRIBUTO_DESTREZA = "destreza";
+	public static final String ATRIBUTO_INTELIGENCIA = "inteligencia";
+	public static final String ATRIBUTO_CASTA = "casta";
+	public static final String ATRIBUTO_EXPERIENCIA = "experiencia";
 
+	private static final int ESPACIO_INVENTARIO = 6;
 
 	protected static final int INCREMENTO_TOPE = 10;
 	protected static final int ENERGIA_MINIMA = 10;
@@ -67,8 +69,6 @@ public abstract class Personaje extends Character implements Serializable {
 	private Alianza clan = null;
 	public static int[] tablaDeNiveles;
 
-
-
 	/**
 	 * @return habilidades de raza
 	 */
@@ -100,32 +100,40 @@ public abstract class Personaje extends Character implements Serializable {
 
 	/**
 	 * Constructor de la clase con valores por defecto.
-	 * @param nombre del personaje
-	 * @param casta casta
-	 * @param id del personaje
-	 * @param nombreRaza del personaje
-	 * @param habilidad1 del personaje
-	 * @param habilidad2 del personaje
+	 * 
+	 * @param nombre
+	 *            del personaje
+	 * @param casta
+	 *            casta
+	 * @param id
+	 *            del personaje
+	 * @param nombreRaza
+	 *            del personaje
+	 * @param habilidad1
+	 *            del personaje
+	 * @param habilidad2
+	 *            del personaje
 	 */
 
-	public Personaje(final String nombre, final Casta casta, final int id,
-		final String nombreRaza, final String habilidad1, final String habilidad2) {
+	public Personaje(final String nombre, final Casta casta, final int id, final String nombreRaza,
+			final String habilidad1, final String habilidad2) {
 		super(nombre, NIVEL_INICIAL);
 
-		this.idPersonaje 	= id;
-		this.saludTope 		= SALUD_INICIAL;
-		this.energiaTope 	= ENERGIA_INICIAL;
-		this.salud 				= SALUD_INICIAL;
-		this.energia      = ENERGIA_INICIAL;
+		this.idPersonaje = id;
+		this.saludTope = SALUD_INICIAL;
+		this.energiaTope = ENERGIA_INICIAL;
+		this.salud = SALUD_INICIAL;
+		this.energia = ENERGIA_INICIAL;
 		this.inteligencia = INTELIGENCIA_INICIAL + INCREMENTO_TOPE + casta.getInteligencia();
-		this.fuerza 			= FUERZA_INICIAL + INCREMENTO_TOPE + casta.getFuerza();
-		this.destreza 		= DESTREZA_INICIAL + INCREMENTO_TOPE + casta.getDestreza();
-		this.casta 				= casta;
-		this.experiencia 	= EXPERIENCIA_INICIAL;
-		this.ataque 			= this.calcularPuntosDeAtaque();
-		this.defensa 			= this.calcularPuntosDeDefensa();
-		this.magia 				= this.calcularPuntosDeMagia();
-		this.nombreRaza 	= nombreRaza;
+		this.fuerza = FUERZA_INICIAL + INCREMENTO_TOPE + casta.getFuerza();
+		this.destreza = DESTREZA_INICIAL + INCREMENTO_TOPE + casta.getDestreza();
+		this.casta = casta;
+		this.experiencia = EXPERIENCIA_INICIAL;
+		this.ataque = this.calcularPuntosDeAtaque();
+		this.defensa = this.calcularPuntosDeDefensa();
+		this.magia = this.calcularPuntosDeMagia();
+		this.nombreRaza = nombreRaza;
+		this.espacioInventario = ESPACIO_INVENTARIO;
 
 		x = 0;
 		y = 0;
@@ -134,92 +142,142 @@ public abstract class Personaje extends Character implements Serializable {
 	}
 
 	/**
-	 * Constructor de la clase con valores pasados por parámetro.
-	 * Los atributos defensa ataque y magia son calculados.
-	 * @param nombre del personaje
-	 * @param salud del personaje
-	 * @param energia del personaje
-	 * @param fuerza del personaje
-	 * @param destreza del personaje
-	 * @param inteligencia del personaje
-	 * @param casta del personaje
-	 * @param experiencia del personaje
-	 * @param nivel del personaje
-	 * @param idPersonaje del personaje
-	 * @param nombreRaza del personaje
-	 * @param habilidad1 del personaje
-	 * @param habilidad2 del personaje
+	 * Constructor de la clase con valores pasados por parámetro. Los atributos
+	 * defensa ataque y magia son calculados.
+	 * 
+	 * @param nombre
+	 *            del personaje
+	 * @param salud
+	 *            del personaje
+	 * @param energia
+	 *            del personaje
+	 * @param fuerza
+	 *            del personaje
+	 * @param destreza
+	 *            del personaje
+	 * @param inteligencia
+	 *            del personaje
+	 * @param casta
+	 *            del personaje
+	 * @param experiencia
+	 *            del personaje
+	 * @param nivel
+	 *            del personaje
+	 * @param idPersonaje
+	 *            del personaje
+	 * @param nombreRaza
+	 *            del personaje
+	 * @param habilidad1
+	 *            del personaje
+	 * @param habilidad2
+	 *            del personaje
 	 */
 
-	public Personaje(final String nombre, final int salud, final int energia,
-		final int fuerza, final int destreza, final int inteligencia,
-		final Casta casta, final int experiencia, final int nivel,
-		final int idPersonaje, final String nombreRaza, final String habilidad1,
-		final String habilidad2) {
+	public Personaje(final String nombre, final int salud, final int energia, final int fuerza, final int destreza,
+			final int inteligencia, final Casta casta, final int experiencia, final int nivel, final int idPersonaje,
+			final String nombreRaza, final String habilidad1, final String habilidad2) {
 
 		super(nombre, nivel);
 
-		this.idPersonaje 	= idPersonaje;
-		this.saludTope 		= this.salud;
-		this.energiaTope 	= this.energia;
-		this.salud 				= salud;
-		this.energia 			= energia;
-		this.fuerza 			= fuerza;
-		this.destreza 		= destreza;
+		this.idPersonaje = idPersonaje;
+		this.saludTope = this.salud;
+		this.energiaTope = this.energia;
+		this.salud = salud;
+		this.energia = energia;
+		this.fuerza = fuerza;
+		this.destreza = destreza;
 		this.inteligencia = inteligencia;
-		this.casta 				= casta;
-		this.experiencia 	= experiencia;
-		this.defensa 			= this.calcularPuntosDeDefensa();
-		this.ataque 			= this.calcularPuntosDeAtaque();
-		this.magia 				= this.calcularPuntosDeMagia();
-		this.nombreRaza 	= nombreRaza;
+		this.casta = casta;
+		this.experiencia = experiencia;
+		this.defensa = this.calcularPuntosDeDefensa();
+		this.ataque = this.calcularPuntosDeAtaque();
+		this.magia = this.calcularPuntosDeMagia();
+		this.nombreRaza = nombreRaza;
 
 		this.setHabilidades(habilidad1, habilidad2);
 	}
 
 	/**
-  * Actualiza el Personaje recibiendo un HashMap
-  * @param mapa con los datos del Personaje
-  */
+	 * Actualiza el Personaje recibiendo un HashMap
+	 * 
+	 * @param mapa
+	 *            con los datos del Personaje
+	 */
 
 	public void update(final HashMap<String, Object> mapa) {
 		super.update(mapa);
-		this.idPersonaje 	= (Integer) mapa.get(ATRIBUTO_IDPERSONAJE);
-		this.energiaTope 	= (Integer) mapa.get(ATRIBUTO_ENERGIATOPE);
-		this.saludTope		= (Integer) mapa.get(ATRIBUTO_SALUDTOPE);
-		this.energia 			= (Integer) mapa.get(ATRIBUTO_ENERGIA);
-		this.destreza 		= (Integer) mapa.get(ATRIBUTO_DESTREZA);
+		this.idPersonaje = (Integer) mapa.get(ATRIBUTO_IDPERSONAJE);
+		this.energiaTope = (Integer) mapa.get(ATRIBUTO_ENERGIATOPE);
+		this.saludTope = (Integer) mapa.get(ATRIBUTO_SALUDTOPE);
+		this.energia = (Integer) mapa.get(ATRIBUTO_ENERGIA);
+		this.destreza = (Integer) mapa.get(ATRIBUTO_DESTREZA);
 		this.inteligencia = (Integer) mapa.get(ATRIBUTO_INTELIGENCIA);
-		this.casta 				= (Casta) mapa.get(ATRIBUTO_CASTA);
-		this.experiencia 	= (Integer) mapa.get(ATRIBUTO_EXPERIENCIA);
+		this.casta = (Casta) mapa.get(ATRIBUTO_CASTA);
+		this.experiencia = (Integer) mapa.get(ATRIBUTO_EXPERIENCIA);
 	}
 
 	/**
 	 * Crea un HashMap con los datos del Personaje
+	 * 
 	 * @return mapa de datos
 	 */
 
 	public HashMap<String, Object> all() {
 		HashMap<String, Object> mapa = super.all();
-		mapa.put(ATRIBUTO_ENERGIA, 			this.energia);
-		mapa.put(ATRIBUTO_DESTREZA, 		this.destreza);
+		mapa.put(ATRIBUTO_ENERGIA, this.energia);
+		mapa.put(ATRIBUTO_DESTREZA, this.destreza);
 		mapa.put(ATRIBUTO_INTELIGENCIA, this.inteligencia);
-		mapa.put(ATRIBUTO_CASTA, 				this.casta);
-		mapa.put(ATRIBUTO_EXPERIENCIA, 	this.experiencia);
-		mapa.put(ATRIBUTO_IDPERSONAJE, 	this.idPersonaje);
-		mapa.put(ATRIBUTO_ENERGIATOPE, 	this.energiaTope);
-		mapa.put(ATRIBUTO_SALUDTOPE, 		this.saludTope);
+		mapa.put(ATRIBUTO_CASTA, this.casta);
+		mapa.put(ATRIBUTO_EXPERIENCIA, this.experiencia);
+		mapa.put(ATRIBUTO_IDPERSONAJE, this.idPersonaje);
+		mapa.put(ATRIBUTO_ENERGIATOPE, this.energiaTope);
+		mapa.put(ATRIBUTO_SALUDTOPE, this.saludTope);
 		return mapa;
 	}
-	
 
-	
-	
-	
+	/**
+	 * Se implementa el método de la clase padre
+	 * 
+	 * @param item
+	 */
+
+	@Override
+	protected void aplicarAtributosItem(Item item) {
+		this.fuerza += item.getFuerza();
+		this.defensa += item.getDefensa();
+		this.salud += item.getSalud();
+		this.ataque += item.getAtaque();
+		this.magia += item.getMagia();
+		this.inteligencia += item.getInteligencia();
+		this.destreza += item.getInteligencia();
+		this.energiaTope += item.getEnergia();
+	}
+
+	/**
+	 * Se implementa el método de la clase padre
+	 * 
+	 * @param item
+	 */
+
+	@Override
+	protected void reestablecerAtributos(Item item) {
+		this.fuerza -= item.getFuerza();
+		this.defensa -= item.getDefensa();
+		this.salud -= item.getSalud();
+		this.ataque -= item.getAtaque();
+		this.magia -= item.getMagia();
+		this.inteligencia -= item.getInteligencia();
+		this.destreza -= item.getInteligencia();
+		this.energiaTope -= item.getEnergia();
+	}
+
 	/**
 	 * Asigna las habilidades de raza del personaje
-	 * @param habilidad1 del personaje
-	 * @param habilidad2 del personaje
+	 * 
+	 * @param habilidad1
+	 *            del personaje
+	 * @param habilidad2
+	 *            del personaje
 	 */
 
 	private void setHabilidades(final String habilidad1, final String habilidad2) {
@@ -237,7 +295,8 @@ public abstract class Personaje extends Character implements Serializable {
 	}
 
 	/**
-	 * @param nombreRaza string con el nombre de la raza
+	 * @param nombreRaza
+	 *            string con el nombre de la raza
 	 */
 
 	public void setNombreRaza(final String nombreRaza) {
@@ -253,7 +312,8 @@ public abstract class Personaje extends Character implements Serializable {
 	}
 
 	/**
-	 * @param ataque ataque del personaje
+	 * @param ataque
+	 *            ataque del personaje
 	 */
 
 	public void setAtaque(final int ataque) {
@@ -269,7 +329,8 @@ public abstract class Personaje extends Character implements Serializable {
 	}
 
 	/**
-	 * @param magia del personaje
+	 * @param magia
+	 *            del personaje
 	 */
 
 	public void setMagia(final int magia) {
@@ -285,7 +346,8 @@ public abstract class Personaje extends Character implements Serializable {
 	}
 
 	/**
-	 * @param clan (alianza)
+	 * @param clan
+	 *            (alianza)
 	 */
 
 	public void setClan(final Alianza clan) {
@@ -302,7 +364,8 @@ public abstract class Personaje extends Character implements Serializable {
 	}
 
 	/**
-	 * @param gasto de energia a disminuir
+	 * @param gasto
+	 *            de energia a disminuir
 	 */
 
 	public void usarHabilidad(final int gasto) {
@@ -368,7 +431,9 @@ public abstract class Personaje extends Character implements Serializable {
 	/**
 	 * "atacar" obtiene el ataque de este objeto e invoca al método serAtacado
 	 * del "atacado" recibido como parametro.
-	 * @param atacado atacado
+	 * 
+	 * @param atacado
+	 *            atacado
 	 * @return daño ocasionado al atacar
 	 */
 
@@ -389,8 +454,8 @@ public abstract class Personaje extends Character implements Serializable {
 	}
 
 	/**
-	 * @return calculo del valor del golpe critico basado en el
-	 * ataque y el dano de la casta.
+	 * @return calculo del valor del golpe critico basado en el ataque y el dano
+	 *         de la casta.
 	 */
 
 	public int golpeCritico() {
@@ -401,10 +466,12 @@ public abstract class Personaje extends Character implements Serializable {
 	 * to do
 	 */
 
-	public void despuesDeTurno() { }
+	public void despuesDeTurno() {
+	}
 
 	/**
 	 * Verifica que el personaje pueda atacar.
+	 * 
 	 * @return verdadero o falso si la energia es mayor al maximo o no.
 	 */
 
@@ -414,6 +481,7 @@ public abstract class Personaje extends Character implements Serializable {
 
 	/**
 	 * Calculo de los puntos de ataque del personaje.
+	 * 
 	 * @return nuevos puntos de ataque
 	 */
 
@@ -423,6 +491,7 @@ public abstract class Personaje extends Character implements Serializable {
 
 	/**
 	 * Calculo de los puntos de defensa.
+	 * 
 	 * @return la parte entera del atributo destreza.
 	 */
 
@@ -431,8 +500,8 @@ public abstract class Personaje extends Character implements Serializable {
 	}
 
 	/**
-	 * Calculo de los puntos de magia.
-	 * Función lineal de la inteligencia.
+	 * Calculo de los puntos de magia. Función lineal de la inteligencia.
+	 * 
 	 * @return nuevos puntos de magia
 	 */
 
@@ -468,7 +537,9 @@ public abstract class Personaje extends Character implements Serializable {
 
 	/**
 	 * Aplica un dano sobre la salud.
-	 * @param dano dano
+	 * 
+	 * @param dano
+	 *            dano
 	 * @return 0 si no es dañado o el valor del dano ocasionado por el ataque.
 	 */
 
@@ -490,9 +561,11 @@ public abstract class Personaje extends Character implements Serializable {
 	}
 
 	/**
-	 * Aplica un dano a la salud y devuelve la cantidad del
-	 * mismo que se ha inflingido.
-	 * @param dano dano
+	 * Aplica un dano a la salud y devuelve la cantidad del mismo que se ha
+	 * inflingido.
+	 * 
+	 * @param dano
+	 *            dano
 	 * @return dano que se ha inflingido.
 	 */
 
@@ -511,9 +584,11 @@ public abstract class Personaje extends Character implements Serializable {
 	}
 
 	/**
-	 * Aplica dano a la energia y devuelve la cantidad del
-	 * mismo que se ha inflingido.
-	 * @param dano dano
+	 * Aplica dano a la energia y devuelve la cantidad del mismo que se ha
+	 * inflingido.
+	 * 
+	 * @param dano
+	 *            dano
 	 * @return dano que se ha inflingido.
 	 */
 
@@ -533,7 +608,9 @@ public abstract class Personaje extends Character implements Serializable {
 
 	/**
 	 * Aumenta la salud del personaje.
-	 * @param salud salud del personaje
+	 * 
+	 * @param salud
+	 *            salud del personaje
 	 */
 
 	public void serCurado(final int salud) {
@@ -546,7 +623,9 @@ public abstract class Personaje extends Character implements Serializable {
 
 	/**
 	 * Aumenta la energia del personaje.
-	 * @param aumento de energia del personaje
+	 * 
+	 * @param aumento
+	 *            de energia del personaje
 	 */
 
 	public void serEnergizado(final int aumento) {
@@ -558,9 +637,11 @@ public abstract class Personaje extends Character implements Serializable {
 	}
 
 	/**
-	 * Crea una nueva alianza entre personajes y agregar
-	 * al objeto como el primer integrante.
-	 * @param nombreAlianza nombre del clan
+	 * Crea una nueva alianza entre personajes y agregar al objeto como el
+	 * primer integrante.
+	 * 
+	 * @param nombreAlianza
+	 *            nombre del clan
 	 */
 
 	public void crearAlianza(final String nombreAlianza) {
@@ -580,9 +661,11 @@ public abstract class Personaje extends Character implements Serializable {
 	}
 
 	/**
-	 * Convierte a un personaje recibido por parámetro en el aliado de
-	 * este personaje. Crea una nueva alianza si no existe.
-	 * @param nuevoAliado nuevo aliado
+	 * Convierte a un personaje recibido por parámetro en el aliado de este
+	 * personaje. Crea una nueva alianza si no existe.
+	 * 
+	 * @param nuevoAliado
+	 *            nuevo aliado
 	 * @return verdadero o falso si se ha podido establecer la alianza o no.
 	 */
 
@@ -603,11 +686,15 @@ public abstract class Personaje extends Character implements Serializable {
 	}
 
 	/**
-	 * Aumenta fuerza, destreza e inteligencia siempre que el total
-	 * sea menor a SKILLS_MAXIMO.
-	 * @param masFuerza del personaje
-	 * @param masDestreza del personaje
-	 * @param masInteligencia del personaje
+	 * Aumenta fuerza, destreza e inteligencia siempre que el total sea menor a
+	 * SKILLS_MAXIMO.
+	 * 
+	 * @param masFuerza
+	 *            del personaje
+	 * @param masDestreza
+	 *            del personaje
+	 * @param masInteligencia
+	 *            del personaje
 	 */
 
 	public void asignarPuntosSkills(final int masFuerza, final int masDestreza, final int masInteligencia) {
@@ -634,7 +721,7 @@ public abstract class Personaje extends Character implements Serializable {
 			return;
 		}
 		while (this.nivel != NIVEL_MAXIMO
-			&& (this.experiencia >= Personaje.tablaDeNiveles[this.nivel + 1] + acumExperiencia)) {
+				&& (this.experiencia >= Personaje.tablaDeNiveles[this.nivel + 1] + acumExperiencia)) {
 			acumExperiencia += Personaje.tablaDeNiveles[this.nivel + 1];
 			this.nivel++;
 			this.modificarAtributos();
@@ -645,9 +732,10 @@ public abstract class Personaje extends Character implements Serializable {
 	}
 
 	/**
-	 * Aumenta la experiencia del personaje y lo sube de nivel
-	 * llegado el caso.
-	 * @param exp (experiencia)
+	 * Aumenta la experiencia del personaje y lo sube de nivel llegado el caso.
+	 * 
+	 * @param exp
+	 *            (experiencia)
 	 * @return verdadero cuando sube de nivel y falso en caso contrario.
 	 */
 
@@ -663,6 +751,7 @@ public abstract class Personaje extends Character implements Serializable {
 
 	/**
 	 * Aumenta el nivel del personaje 40 veces.
+	 * 
 	 * @return nuevo nivel
 	 */
 
@@ -672,7 +761,9 @@ public abstract class Personaje extends Character implements Serializable {
 
 	/**
 	 * Sobreescribe el clone de la clase padre
-	 * @throws CloneNotSupportedException cuando no se puede clonar
+	 * 
+	 * @throws CloneNotSupportedException
+	 *             cuando no se puede clonar
 	 * @return un clon del padre
 	 */
 
@@ -683,7 +774,9 @@ public abstract class Personaje extends Character implements Serializable {
 
 	/**
 	 * Calcula la distancia con otro personaje.
-	 * @param p (otro personaje)
+	 * 
+	 * @param p
+	 *            (otro personaje)
 	 * @return distancia entre ambos
 	 */
 
@@ -693,7 +786,9 @@ public abstract class Personaje extends Character implements Serializable {
 
 	/**
 	 * Invoca al metodo habilidad 1 de la casta.
-	 * @param atacado atacado
+	 * 
+	 * @param atacado
+	 *            atacado
 	 * @return lo mismo que habilidad1 de la casta
 	 */
 
@@ -703,7 +798,9 @@ public abstract class Personaje extends Character implements Serializable {
 
 	/**
 	 * Invoca al metodo habilidad 2 de la casta.
-	 * @param atacado atacado
+	 * 
+	 * @param atacado
+	 *            atacado
 	 * @return lo mismo que habilidad2 de la casta
 	 */
 
@@ -713,7 +810,9 @@ public abstract class Personaje extends Character implements Serializable {
 
 	/**
 	 * Invoca al metodo habilidad 3 de la casta.
-	 * @param atacado atacado
+	 * 
+	 * @param atacado
+	 *            atacado
 	 * @return lo mismo que habilidad3 de la casta
 	 */
 
@@ -723,7 +822,9 @@ public abstract class Personaje extends Character implements Serializable {
 
 	/**
 	 * habilidadRaza1 será implementado en las clases que hereden de esta.
-	 * @param atacado atacado
+	 * 
+	 * @param atacado
+	 *            atacado
 	 * @return verdadero o falso
 	 */
 
@@ -731,7 +832,9 @@ public abstract class Personaje extends Character implements Serializable {
 
 	/**
 	 * habilidadRaza2 será implementado en las clases que hereden de esta.
-	 * @param atacado atacado
+	 * 
+	 * @param atacado
+	 *            atacado
 	 * @return verdadero o falso
 	 */
 
