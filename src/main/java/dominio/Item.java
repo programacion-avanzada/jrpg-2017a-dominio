@@ -92,5 +92,9 @@ public class Item implements Serializable {
 	public int getEnergia() {
 		return energia;
 	}
+	
+	public BufferedImage getIcono() {
+		return this.icono;
+	}
 
 }
