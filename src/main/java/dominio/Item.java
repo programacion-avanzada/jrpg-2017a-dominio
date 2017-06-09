@@ -19,7 +19,7 @@ public class Item implements Serializable {
 	private int defensa;
 	private int magia;
 	private int salud;
-	private int fuerza;
+	private int energia;
 
 	public Item() {
 		this.id = 0;
@@ -32,7 +32,7 @@ public class Item implements Serializable {
 		}
 	}
 
-	public Item(final int id, final String nombre, final String icono, final int ataque, final int defensa, final int magia, final int salud, final int fuerza) {
+	public Item(final int id, final String nombre, final String icono, final int ataque, final int defensa, final int magia, final int salud, final int energia) {
 
 		this.id = id;
 		this.nombre = nombre;
@@ -48,7 +48,7 @@ public class Item implements Serializable {
 		this.defensa = defensa;
 		this.magia = magia;
 		this.salud = salud;
-		this.fuerza = fuerza;
+		this.energia = energia;
 	}
 
 	public int getId() {
@@ -79,7 +79,7 @@ public class Item implements Serializable {
 		return this.salud;
 	}
 
-	public int getFuerza() {
-		return this.fuerza;
+	public int getEnergia() {
+		return this.energia;
 	}
 }

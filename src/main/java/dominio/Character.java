@@ -27,11 +27,10 @@ public abstract class Character implements Peleable {
 	protected RandomGenerator aleatorizador;
 
 	protected ArrayList<Item> inventario;
-	protected int espacioInventario;
 
 	/**
 	 * Contructor de un Character
-	 * 
+	 *
 	 * @param nombre
 	 *            nombre del character
 	 */
@@ -103,7 +102,7 @@ public abstract class Character implements Peleable {
 
 	/**
 	 * Checker para ver si el personaje vive o no.
-	 * 
+	 *
 	 * @return verdadero o falso si salud es mayor a cero o no.
 	 */
 
@@ -140,7 +139,7 @@ public abstract class Character implements Peleable {
 
 	/**
 	 * Actualiza el Character recibiendo un HashMap
-	 * 
+	 *
 	 * @param mapa
 	 *            con los datos del Character
 	 */
@@ -155,7 +154,7 @@ public abstract class Character implements Peleable {
 
 	/**
 	 * Crea un HashMap con los datos del Character
-	 * 
+	 *
 	 * @return mapa de datos
 	 */
 
@@ -167,66 +166,5 @@ public abstract class Character implements Peleable {
 		mapa.put(ATRIBUTO_NOMBRE, this.nombre);
 		mapa.put(ATRIBUTO_NIVEL, this.nivel);
 		return mapa;
-	}
-	
-	/**
-	 * Crea un HashMap con los datos del Character modificados según los atributos del item 
-	 * 
-	 * @param item
-	 * @return mapa de datos
-	 */
-	
-	public HashMap<String, Object> allEquipar(Item item) {
-		HashMap<String, Object> mapa = this.all();
-		mapa.put(ATRIBUTO_FUERZA, this.fuerza + item.getFuerza());
-		return mapa;
-	}
-	
-	/**
-	 * Crea un HashMap con los datos del Character reestablecidos según los atributos del item 
-	 * 
-	 * @param item
-	 * @return mapa de datos
-	 */
-	
-	public HashMap<String, Object> allReestablecer(Item item) {
-		HashMap<String, Object> mapa = this.all();
-		mapa.put(ATRIBUTO_FUERZA, this.fuerza - item.getFuerza());
-		return mapa;
-	}
-
-	/**
-	 * Agrega el item indicado a la lista de items y se actualizan los atributos
-	 * base del Character
-	 * 
-	 * @param item
-	 */
-
-	public void equiparItem(Item item) {
-		if (tieneEspacio()) {
-			this.inventario.add(item);
-			update(allEquipar(item));
-		}
-	}
-
-	/**
-	 * Quita el item indicado de la lista de items
-	 * 
-	 * @param item
-	 */
-
-	public void eliminarItem(Item item) {
-		if(this.inventario.size() > 0) {
-			this.inventario.remove(item);
-			update(allReestablecer(item));
-		}
-	}
-
-	/*
-	 * Verifica que haya espacio libre en el inventario
-	 */
-
-	private boolean tieneEspacio() {
-		return this.espacioInventario - this.inventario.size() > 0 ? true : false;
 	}
 }
