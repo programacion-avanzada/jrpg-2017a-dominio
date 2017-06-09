@@ -10,71 +10,76 @@ import javax.imageio.ImageIO;
 @SuppressWarnings("serial")
 public class Item implements Serializable {
 
-	private final int ID;
+	private final int id;
 
 	private String nombre;
-	private String flavorText;
-
-	private int fuerza;
-	private int salud;
-	private int inteligencia;
-	private int destreza;
-	private int energia;
-	
-	@SuppressWarnings("unused")
 	private BufferedImage icono;
 
-	public Item(int id, String name, String text, int fuerza, int salud, int inteligencia, int destreza, int energia, String path) {
+	private int ataque;
+	private int defensa;
+	private int magia;
+	private int salud;
+	private int fuerza;
 
-		this.ID = id;
-		this.nombre = name;
-		this.flavorText = text;
-		this.fuerza = fuerza;
-		this.salud = salud;
-		this.inteligencia = inteligencia;
-		this.destreza = destreza;
-		this.energia = energia;
+	public Item() {
+		this.id = 0;
+
 		try {
-			this.icono = ImageIO.read(new File(path));
+			this.icono = ImageIO.read(new File("recursos//inventario_ranura_vacia.jpg"));
 		} catch (IOException e) {
-			System.out.println("item_icon_error: No se pudo leer archivo de imagen");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
-	public int getID() {
-		return ID;
+	public Item(final int id, final String nombre, final String icono, final int ataque, final int defensa, final int magia, final int salud, final int fuerza) {
+
+		this.id = id;
+		this.nombre = nombre;
+
+		try {
+			this.icono = ImageIO.read(new File("recursos//" + icono));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		this.ataque = ataque;
+		this.defensa = defensa;
+		this.magia = magia;
+		this.salud = salud;
+		this.fuerza = fuerza;
+	}
+
+	public int getId() {
+		return this.id;
 	}
 
 	public String getNombre() {
 		return nombre;
 	}
 
-	public String getFlavorText() {
-		return flavorText;
-	}
-
-	public int getFuerza() {
-		return fuerza;
-	}
-
-	public int getSalud() {
-		return salud;
-	}
-
-	public int getInteligencia() {
-		return inteligencia;
-	}
-
-	public int getDestreza() {
-		return destreza;
-	}
-
-	public int getEnergia() {
-		return energia;
-	}
-	
 	public BufferedImage getIcono() {
 		return this.icono;
 	}
 
+	public int getAtaque() {
+		return this.ataque;
+	}
+
+	public int getDefensa() {
+		return this.defensa;
+	}
+
+	public int getMagia() {
+		return this.magia;
+	}
+
+	public int getSalud() {
+		return this.salud;
+	}
+
+	public int getFuerza() {
+		return this.fuerza;
+	}
 }
