@@ -177,12 +177,8 @@ public abstract class Character implements Peleable {
 	 */
 	
 	public HashMap<String, Object> allEquipar(Item item) {
-		HashMap<String, Object> mapa = new HashMap<>();
+		HashMap<String, Object> mapa = this.all();
 		mapa.put(ATRIBUTO_FUERZA, this.fuerza + item.getFuerza());
-		mapa.put(ATRIBUTO_DEFENSA, this.defensa + item.getDefensa());
-		mapa.put(ATRIBUTO_SALUD, this.salud);
-		mapa.put(ATRIBUTO_NOMBRE, this.nombre);
-		mapa.put(ATRIBUTO_NIVEL, this.nivel);
 		return mapa;
 	}
 	
@@ -194,12 +190,8 @@ public abstract class Character implements Peleable {
 	 */
 	
 	public HashMap<String, Object> allReestablecer(Item item) {
-		HashMap<String, Object> mapa = new HashMap<>();
+		HashMap<String, Object> mapa = this.all();
 		mapa.put(ATRIBUTO_FUERZA, this.fuerza - item.getFuerza());
-		mapa.put(ATRIBUTO_DEFENSA, this.defensa - item.getDefensa());
-		mapa.put(ATRIBUTO_SALUD, this.salud);
-		mapa.put(ATRIBUTO_NOMBRE, this.nombre);
-		mapa.put(ATRIBUTO_NIVEL, this.nivel);
 		return mapa;
 	}
 

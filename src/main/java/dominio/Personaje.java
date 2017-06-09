@@ -255,13 +255,6 @@ public abstract class Personaje extends Character implements Serializable {
 		mapa.put(ATRIBUTO_DESTREZA, this.destreza + item.getDestreza());
 		mapa.put(ATRIBUTO_INTELIGENCIA, this.inteligencia + item.getInteligencia());
 		mapa.put(ATRIBUTO_SALUDTOPE, this.saludTope + item.getSalud());
-		mapa.put(ATRIBUTO_ATAQUE, this.ataque + item.getAtaque());
-		mapa.put(ATRIBUTO_MAGIA, this.magia + item.getMagia());
-		
-		mapa.put(ATRIBUTO_CASTA, this.casta);
-		mapa.put(ATRIBUTO_EXPERIENCIA, this.experiencia);
-		mapa.put(ATRIBUTO_IDPERSONAJE, this.idPersonaje);
-		mapa.put(ATRIBUTO_ENERGIA, this.energia);
 		return mapa;
 	}
 	
@@ -278,13 +271,6 @@ public abstract class Personaje extends Character implements Serializable {
 		mapa.put(ATRIBUTO_DESTREZA, this.destreza - item.getDestreza());
 		mapa.put(ATRIBUTO_INTELIGENCIA, this.inteligencia - item.getInteligencia());
 		mapa.put(ATRIBUTO_SALUDTOPE, this.saludTope - item.getSalud());
-		mapa.put(ATRIBUTO_ATAQUE, this.ataque - item.getAtaque());
-		mapa.put(ATRIBUTO_MAGIA, this.magia - item.getMagia());
-		
-		mapa.put(ATRIBUTO_CASTA, this.casta);
-		mapa.put(ATRIBUTO_EXPERIENCIA, this.experiencia);
-		mapa.put(ATRIBUTO_IDPERSONAJE, this.idPersonaje);
-		mapa.put(ATRIBUTO_ENERGIA, this.energia);
 		return mapa;
 	}
 
