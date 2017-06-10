@@ -13,7 +13,6 @@ public class Item implements Serializable {
 	private final int id;
 
 	private String nombre;
-	private BufferedImage icono;
 
 	private int ataque;
 	private int defensa;
@@ -21,34 +20,14 @@ public class Item implements Serializable {
 	private int salud;
 	private int energia;
 
-	public Item() {
-		this.id = 0;
-
-		try {
-			this.icono = ImageIO.read(new File("recursos//inventario_ranura_vacia.jpg"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	public Item(final int id, final String nombre, final String icono, final int ataque, final int defensa, final int magia, final int salud, final int energia) {
-
-		this.id = id;
-		this.nombre = nombre;
-
-		try {
-			this.icono = ImageIO.read(new File("recursos//" + icono));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		this.ataque = ataque;
-		this.defensa = defensa;
-		this.magia = magia;
-		this.salud = salud;
-		this.energia = energia;
+	public Item(final int _id, final String _nombre, final int _ataque, final int _defensa, final int _magia, final int _salud, final int _energia) {
+		this.id = _id;
+		this.nombre = _nombre;
+		this.ataque = _ataque;
+		this.defensa = _defensa;
+		this.magia = _magia;
+		this.salud = _salud;
+		this.energia = _energia;
 	}
 
 	public int getId() {
@@ -57,10 +36,6 @@ public class Item implements Serializable {
 
 	public String getNombre() {
 		return nombre;
-	}
-
-	public BufferedImage getIcono() {
-		return this.icono;
 	}
 
 	public int getAtaque() {

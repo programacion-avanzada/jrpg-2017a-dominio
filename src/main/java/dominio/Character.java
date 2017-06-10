@@ -10,6 +10,9 @@ import java.util.HashMap;
 
 public abstract class Character implements Peleable {
 
+	private static final int SOLTAR = -1;
+	private static final int EQUIPAR = 1;
+	
 	public static final String ATRIBUTO_NOMBRE = "nombre";
 	public static final String ATRIBUTO_SALUD = "salud";
 	public static final String ATRIBUTO_DEFENSA = "defensa";
@@ -21,12 +24,12 @@ public abstract class Character implements Peleable {
 	protected int defensa;
 	protected int fuerza;
 	protected int nivel;
+	protected ArrayList<Item> inventario;
 
 	protected int ultimaDefensa;
 
 	protected RandomGenerator aleatorizador;
 
-	protected ArrayList<Item> inventario;
 
 	/**
 	 * Contructor de un Character
@@ -35,11 +38,11 @@ public abstract class Character implements Peleable {
 	 *            nombre del character
 	 */
 
-	public Character(final String nombre, final int nivel) {
+	public Character(final String nombre, final int nivel, ArrayList<Item> inventario) {
 		this.nombre = nombre;
 		this.nivel = nivel;
 		this.aleatorizador = new MyRandom();
-		this.inventario = new ArrayList<Item>();
+		this.inventario = inventario;
 	}
 
 	/**

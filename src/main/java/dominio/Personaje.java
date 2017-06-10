@@ -1,6 +1,7 @@
 package dominio;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -25,8 +26,6 @@ public abstract class Personaje extends Character implements Serializable {
 
 	public static final String ATRIBUTO_ATAQUE = "ataque";
 	public static final String ATRIBUTO_MAGIA = "magia";
-
-	private static final int ESPACIO_INVENTARIO = 6;
 
 	protected static final int INCREMENTO_TOPE = 10;
 	protected static final int ENERGIA_MINIMA = 10;
@@ -136,7 +135,6 @@ public abstract class Personaje extends Character implements Serializable {
 		this.defensa = this.calcularPuntosDeDefensa();
 		this.magia = this.calcularPuntosDeMagia();
 		this.nombreRaza = nombreRaza;
-		this.espacioInventario = ESPACIO_INVENTARIO;
 
 		x = 0;
 		y = 0;
@@ -178,9 +176,9 @@ public abstract class Personaje extends Character implements Serializable {
 
 	public Personaje(final String nombre, final int salud, final int energia, final int fuerza, final int destreza,
 			final int inteligencia, final Casta casta, final int experiencia, final int nivel, final int idPersonaje,
-			final String nombreRaza, final String habilidad1, final String habilidad2) {
+			ArrayList<Item> inventario, final String nombreRaza, final String habilidad1, final String habilidad2) {
 
-		super(nombre, nivel);
+		super(nombre, nivel, inventario);
 
 		this.idPersonaje = idPersonaje;
 		this.saludTope = this.salud;

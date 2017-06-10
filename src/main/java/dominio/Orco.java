@@ -1,5 +1,7 @@
 package dominio;
 
+import java.util.ArrayList;
+
 /**
  * La clase Orco representa una raza (tipo) de personaje. Tiene 2 habilidades de
  * raza que son el golpe defensa y el mordisco de vida.
@@ -53,9 +55,9 @@ public class Orco extends Personaje {
 	 */
 
 	public Orco(final String nombre, final int salud, final int energia, final int fuerza, final int destreza,
-			final int inteligencia, final Casta casta, final int experiencia, final int nivel, final int idPersonaje) {
+			final int inteligencia, final Casta casta, final int experiencia, final int nivel, final int idPersonaje, ArrayList<Item> inventario) {
 
-		super(nombre, salud, energia, fuerza, destreza, inteligencia, casta, experiencia, nivel, idPersonaje, "Orco",
+		super(nombre, salud, energia, fuerza, destreza, inteligencia, casta, experiencia, nivel, idPersonaje, inventario, "Orco",
 				"Golpe Defensa", "Mordisco de Vida");
 	}
 

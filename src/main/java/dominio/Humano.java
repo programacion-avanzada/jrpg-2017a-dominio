@@ -1,5 +1,7 @@
 package dominio;
 
+import java.util.ArrayList;
+
 /**
  * La clase Humano representa una raza (tipo) de personaje.
  * Tiene 2 habilidades de raza que son incentivar y el golpe fatal.
@@ -42,11 +44,11 @@ public class Humano extends Personaje {
 	public Humano(final String nombre, final int salud, final int energia,
 			final int fuerza, final int destreza, final int inteligencia,
 			final Casta casta, final int experiencia, final int nivel,
-			final int idPersonaje) {
+			final int idPersonaje, ArrayList<Item> inventario) {
 
 		super(
 			nombre, salud, energia, fuerza, destreza, inteligencia, casta, experiencia,
-			nivel, idPersonaje, "Humano", "Incentivar", "Golpe Fatal"
+			nivel, idPersonaje, inventario, "Humano", "Incentivar", "Golpe Fatal"
 		);
 	}
 

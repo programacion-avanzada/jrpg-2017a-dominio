@@ -11,8 +11,6 @@ public class NonPlayableCharacter extends Character {
 	private static final double PORCENTAJE_GOLPE_CRITICO = 0.15;
 	private static final int DIFICULTAD_ALEATORIA = -1;
 
-	private static final int ESPACIO_INVENTARIO = 3;
-
 	/**
 	 * Constructor de la clase. Asigna atributos de fuerza, salud y defensa
 	 * basados en la dificultad.
@@ -54,8 +52,6 @@ public class NonPlayableCharacter extends Character {
 		default:
 			break;
 		}
-
-		this.espacioInventario = ESPACIO_INVENTARIO;
 	}
 
 	/**

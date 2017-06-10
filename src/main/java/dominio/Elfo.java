@@ -1,5 +1,7 @@
 package dominio;
 
+import java.util.ArrayList;
+
 /**
  * La clase Elfo representa una raza (tipo) de personaje.
  * Tiene 2 habilidades que son el Golpe Level y Ataque Bosque.
@@ -43,11 +45,11 @@ public class Elfo extends Personaje {
 	public Elfo(final String nombre, final int salud, final int energia,
 			final int fuerza, final int destreza, final int inteligencia,
 			final Casta casta, final int experiencia, final int nivel,
-			final int idPersonaje) {
+			final int idPersonaje, ArrayList<Item> inventario) {
 
 		super(
 			nombre, salud, energia, fuerza, destreza, inteligencia, casta, experiencia,
-			nivel, idPersonaje, "Elfo", "Golpe Level", "Ataque Bosque"
+			nivel, idPersonaje, inventario, "Elfo", "Golpe Level", "Ataque Bosque"
 		);
 	}
 
