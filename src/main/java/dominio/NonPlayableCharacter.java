@@ -1,5 +1,7 @@
 package dominio;
 
+import java.util.ArrayList;
+
 /**
  * La clase NonPlayableCharacter implementa la interface Peleable que Define una
  * lista de métodos a ser implementados. Define los atributos de salud, fuerza,
@@ -23,8 +25,8 @@ public class NonPlayableCharacter extends Character {
 	 *            dificultadNonPlayableCharacter
 	 */
 
-	public NonPlayableCharacter(final String nombre, final int nivel, final int dificultadNPC) {
-		super(nombre, nivel);
+	public NonPlayableCharacter(final String nombre, final int nivel, final int dificultadNPC, ArrayList<Item> inventario) {
+		super(nombre, nivel, inventario);
 
 		int dificultad;
 		if (dificultadNPC == DIFICULTAD_ALEATORIA) {
@@ -88,11 +90,19 @@ public class NonPlayableCharacter extends Character {
 	 */
 
 	public int atacar(final Peleable atacado) {
+		darBonus();
+
+		int danio;
+		
 		if (this.aleatorizador.nextDouble() <= 0.15) {
-			return atacado.serAtacado((int) (this.getAtaque() * PORCENTAJE_GOLPE_CRITICO));
+			danio = atacado.serAtacado((int) (this.getAtaque() * PORCENTAJE_GOLPE_CRITICO));
 		} else {
-			return atacado.serAtacado(this.getAtaque());
+			danio = atacado.serAtacado(this.getAtaque());
 		}
+		
+		sacarBonus();
+
+		return danio;
 	}
 
 	/**
@@ -105,15 +115,23 @@ public class NonPlayableCharacter extends Character {
 	 */
 
 	public int serAtacado(final int dano) {
+		darBonus();
+		int danio = 0;
+		
 		if (this.aleatorizador.nextDouble() >= PORCENTAJE_GOLPE_CRITICO) {
-			int danio = dano - (this.getDefensa() / 2);
+			danio = dano - (this.getDefensa() / 2);
 			if (danio > 0) {
 				salud -= danio;
-				return danio;
+			} else {
+				danio = 0;
 			}
-			return 0;
+		} else {
+			danio = 0;
 		}
-		return 0;
+		
+		sacarBonus();
+		
+		return danio;
 	}
 
 	/**

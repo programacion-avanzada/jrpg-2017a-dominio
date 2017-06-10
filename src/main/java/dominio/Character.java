@@ -139,7 +139,27 @@ public abstract class Character implements Peleable {
 	public void aumentarDefensa(final int aumento) {
 		this.defensa += aumento;
 	}
+	
+	
+	public void darBonus() {
+		bonusSegunItems(EQUIPAR);
+	}
+	
+	public void sacarBonus() {
+		bonusSegunItems(SOLTAR);
+	}
+	
+	public void bonusSegunItems(int accion) {
+		for(Item item : this.inventario) {
+			this.salud += item.getSalud() * accion;
+			this.defensa += item.getDefensa() * accion;
+		}
+	}
 
+	public void regalarItem(Item item) {
+		this.inventario.add(item);
+	}
+	
 	/**
 	 * Actualiza el Character recibiendo un HashMap
 	 *
@@ -169,5 +189,13 @@ public abstract class Character implements Peleable {
 		mapa.put(ATRIBUTO_NOMBRE, this.nombre);
 		mapa.put(ATRIBUTO_NIVEL, this.nivel);
 		return mapa;
+	}
+	
+	public ArrayList<Item> getInventario() {
+		return this.inventario;
+	}
+	
+	public void setInventario(final ArrayList<Item> inventario) {
+		this.inventario = inventario;
 	}
 }

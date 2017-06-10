@@ -22,8 +22,8 @@ public class Orco extends Personaje {
 	 *            del personaje
 	 */
 
-	public Orco(final String nombre, final Casta casta, final int id) {
-		super(nombre, casta, id, "Orco", "Golpe Defensa", "Mordisco de Vida");
+	public Orco(final String nombre, final Casta casta, final int id, final ArrayList<Item> inventario) {
+		super(nombre, casta, id, inventario, "Orco", "Golpe Defensa", "Mordisco de Vida");
 		saludTope += INCREMENTO_TOPE;
 		salud = saludTope;
 		energia = energiaTope;

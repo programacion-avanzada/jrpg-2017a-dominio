@@ -19,8 +19,8 @@ public class Elfo extends Personaje {
 	 * @param id del personaje
 	 */
 
-	public Elfo(final String nombre, final Casta casta, final int id) {
-		super(nombre, casta, id, "Elfo", "Golpe Level", "Ataque Bosque");
+	public Elfo(final String nombre, final Casta casta, final int id, final ArrayList<Item> inventario) {
+		super(nombre, casta, id, inventario, "Elfo", "Golpe Level", "Ataque Bosque");
 		energiaTope += INCREMENTO_TOPE;
 		salud = saludTope;
 		this.energia = energiaTope;

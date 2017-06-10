@@ -19,8 +19,8 @@ public class Humano extends Personaje {
 	 * @param id de personaje
 	 */
 
-	public Humano(final String nombre, final Casta casta, final int id) {
-		super(nombre, casta, id, "Humano", "Incentivar", "Golpe Fatal");
+	public Humano(final String nombre, final Casta casta, final int id, final ArrayList<Item> inventario) {
+		super(nombre, casta, id, inventario, "Humano", "Incentivar", "Golpe Fatal");
 		saludTope += INCREMENTO_TOPE;
 		energiaTope += INCREMENTO_TOPE;
 		salud = saludTope;

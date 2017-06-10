@@ -1,16 +1,25 @@
 package tests_dominio;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import dominio.*;
 
 public class TestAliarCombatir {
 
+private ArrayList<Item> l;
+	
+	@Before
+	public void initialize(){
+		l = new ArrayList<Item>();
+	}
+	
 	@Test
 	public void testCrearAlianza(){
-		Humano h = new Humano("Nicolas",new Guerrero(),1);
-		Humano h2 = new Humano("Lautaro",new Guerrero(),1);
+		Humano h = new Humano("Nicolas",new Guerrero(), 1, l);
+		Humano h2 = new Humano("Lautaro",new Guerrero(), 1, l);
 		
 		Assert.assertNull(h.getClan());
 		Assert.assertNull(h2.getClan());
@@ -21,8 +30,8 @@ public class TestAliarCombatir {
 	
 	@Test
 	public void testDañar(){
-		Humano h = new Humano("Nicolas",new Guerrero(),1);
-		Humano h2 = new Humano("Lautaro",new Asesino(),1);
+		Humano h = new Humano("Nicolas",new Guerrero(),1, l);
+		Humano h2 = new Humano("Lautaro",new Asesino(),1, l);
 		
 		Assert.assertTrue(h2.getSalud()==105);
 		if(	h.atacar(h2)!=0)
@@ -33,8 +42,8 @@ public class TestAliarCombatir {
 	
 	@Test
 	public void testAliar(){
-		Humano h = new Humano("Nicolas",new Guerrero(),1);
-		Humano h2 = new Humano("Lautaro",new Guerrero(),1);
+		Humano h = new Humano("Nicolas",new Guerrero(),1, l);
+		Humano h2 = new Humano("Lautaro",new Guerrero(),1, l);
 		Alianza a1= new Alianza("Los CacheFC");
 		
 		Assert.assertNull(h2.getClan());
@@ -47,10 +56,10 @@ public class TestAliarCombatir {
 	
 	@Test
 	public void testGettersYSetters() {
-		Humano h = new Humano("Nicolas",new Guerrero(),1);
-		Humano h2 = new Humano("Lautaro",new Guerrero(),1);
-		Humano h3 = new Humano("Maxi",new Guerrero(),1);
-		Humano h4 = new Humano("Dimas",new Guerrero(),1);
+		Humano h = new Humano("Nicolas",new Guerrero(),1, l);
+		Humano h2 = new Humano("Lautaro",new Guerrero(),1, l);
+		Humano h3 = new Humano("Maxi",new Guerrero(),1, l);
+		Humano h4 = new Humano("Dimas",new Guerrero(),1,l);
 		
 		Alianza a1= new Alianza("Los CacheFC");
 		
@@ -94,8 +103,8 @@ public class TestAliarCombatir {
 	
 	@Test
 	public void testEliminarPersonaje() {
-		Humano h = new Humano("Nicolas",new Guerrero(),1);
-		Humano h2 = new Humano("Lautaro",new Guerrero(),1);
+		Humano h = new Humano("Nicolas",new Guerrero(),1,l);
+		Humano h2 = new Humano("Lautaro",new Guerrero(),1,l);
 		
 		Alianza a1= new Alianza("Los CacheFC");
 		

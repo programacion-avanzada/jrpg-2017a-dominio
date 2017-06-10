@@ -117,9 +117,9 @@ public abstract class Personaje extends Character implements Serializable {
 	 *            del personaje
 	 */
 
-	public Personaje(final String nombre, final Casta casta, final int id, final String nombreRaza,
-			final String habilidad1, final String habilidad2) {
-		super(nombre, NIVEL_INICIAL);
+	public Personaje(final String nombre, final Casta casta, final int id, final ArrayList<Item> inventario,
+			final String nombreRaza, final String habilidad1, final String habilidad2) {
+		super(nombre, NIVEL_INICIAL, inventario);
 
 		this.idPersonaje = id;
 		this.saludTope = SALUD_INICIAL;
@@ -240,6 +240,15 @@ public abstract class Personaje extends Character implements Serializable {
 		return mapa;
 	}
 
+	public void bonusSegunItems(int accion) {
+		super.bonusSegunItems(accion);
+		for(Item item : this.inventario) {
+			this.ataque += item.getAtaque() * accion;
+			this.magia += item.getMagia() * accion;
+			this.energia += item.getEnergia() * accion;
+		}
+	}
+	
 	/**
 	 * Asigna las habilidades de raza del personaje
 	 *
@@ -410,16 +419,26 @@ public abstract class Personaje extends Character implements Serializable {
 		if (salud == 0) {
 			return 0;
 		}
+		
+		int danio;
+		
+		darBonus();
+		
 		if (atacado.getSalud() > 0) {
 			Double aleatorio = this.aleatorizador.nextDouble();
 			double probabilidad = this.casta.getProbabilidadGolpeCritico();
 			if (aleatorio <= probabilidad + this.destreza / MIL) {
-				return atacado.serAtacado(this.golpeCritico());
+				danio = atacado.serAtacado(this.golpeCritico());
 			} else {
-				return atacado.serAtacado(this.ataque);
+				danio = atacado.serAtacado(this.ataque);
 			}
+		} else {
+			danio = 0;
 		}
-		return 0;
+			
+		sacarBonus();
+		
+		return danio;
 	}
 
 	/**
@@ -513,8 +532,12 @@ public abstract class Personaje extends Character implements Serializable {
 	 */
 
 	public int serAtacado(final int dano) {
+		darBonus();
+		
+		int danio = 0;
+
 		if (this.aleatorizador.nextDouble() >= this.getCasta().getProbabilidadEvitarDano()) {
-			int danio = dano - this.defensa;
+			danio = dano - this.defensa;
 			if (danio > 0) {
 				if (salud <= danio) {
 					danio = salud;
@@ -522,11 +545,14 @@ public abstract class Personaje extends Character implements Serializable {
 				} else {
 					salud -= danio;
 				}
-				return danio;
+			} else {
+				danio = 0;
 			}
-			return 0;
 		}
-		return 0;
+
+		sacarBonus();
+
+		return danio;
 	}
 
 	/**

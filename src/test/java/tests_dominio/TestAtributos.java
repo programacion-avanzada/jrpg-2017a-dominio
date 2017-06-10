@@ -4,15 +4,18 @@ import org.junit.Test;
 import org.junit.Before;
 
 import dominio.*;
+
+import java.util.ArrayList;
+
 import org.junit.Assert;
 
 public class TestAtributos {
 
 	private Humano h;
-
+	
 	@Before
 	public void initialize() {
-		h = new Humano("Nicolas", new Guerrero(), 1);
+		h = new Humano("Nicolas", new Guerrero(), 1, new ArrayList<Item>());
 	}
 
 	@Test

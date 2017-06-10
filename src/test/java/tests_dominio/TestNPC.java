@@ -1,5 +1,7 @@
 package tests_dominio;
 
+import java.util.ArrayList;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.Before;
@@ -7,15 +9,18 @@ import org.junit.Before;
 import dominio.MyRandomStub;
 import dominio.NonPlayableCharacter;
 import dominio.Elfo;
+import dominio.Item;
 import dominio.Asesino;
 
 public class TestNPC {
 
 	private NonPlayableCharacter npc;
-
+	private ArrayList<Item> l;
+	
 	@Before
 	public void initialize(){
-		npc = new NonPlayableCharacter("Perro", 1, 1);
+		l = new ArrayList<Item>();
+		npc = new NonPlayableCharacter("Perro", 1, 1,l);
 
 		MyRandomStub mrs = new MyRandomStub(0.49, 2);
 		npc.setRandomGenerator(mrs);
@@ -23,7 +28,7 @@ public class TestNPC {
 
 	@Test
 	public void testOtorgarExp() {
-		NonPlayableCharacter npc2 = new NonPlayableCharacter("Gigante", 1, -1);
+		NonPlayableCharacter npc2 = new NonPlayableCharacter("Gigante", 1, -1,l);
 		Assert.assertTrue(30 == npc2.otorgarExp());
 	}
 
@@ -51,8 +56,8 @@ public class TestNPC {
 
 	@Test
 	public void testAtacarNormal() {
-		NonPlayableCharacter npc2 = new NonPlayableCharacter("Otro", 2, 2);
-		Elfo e = new Elfo("Elfo", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
+		NonPlayableCharacter npc2 = new NonPlayableCharacter("Otro", 2, 2,l);
+		Elfo e = new Elfo("Elfo", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1,l);
 
 		MyRandomStub mrs = new MyRandomStub(0.49, 2);
 		npc2.setRandomGenerator(mrs);
@@ -63,7 +68,7 @@ public class TestNPC {
 
 	@Test
 	public void testAtacarConSuerte() {
-		Elfo e = new Elfo("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1);
+		Elfo e = new Elfo("Nico", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1,l);
 
 		MyRandomStub mrs = new MyRandomStub(0.1, 2);
 		npc.setRandomGenerator(mrs);

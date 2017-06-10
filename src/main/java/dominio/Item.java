@@ -19,7 +19,7 @@ public class Item implements Serializable {
 	private int magia;
 	private int salud;
 	private int energia;
-
+	
 	public Item(final int _id, final String _nombre, final int _ataque, final int _defensa, final int _magia, final int _salud, final int _energia) {
 		this.id = _id;
 		this.nombre = _nombre;
