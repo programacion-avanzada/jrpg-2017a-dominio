@@ -42,8 +42,8 @@ public class TestAsignarPuntos {
 	public void testMasDe200Puntos(){
 		Humano h = new Humano("Nicolas",new Guerrero(),1,l);
 		h.asignarPuntosSkills(2, 2, 2);
-		Assert.assertTrue(h.getFuerza()==199);
-		Assert.assertTrue(h.getDestreza()==199);
-		Assert.assertTrue(h.getInteligencia()==199);
+		Assert.assertTrue(h.getFuerza()==27);
+		Assert.assertTrue(h.getDestreza()==22);
+		Assert.assertTrue(h.getInteligencia()==22);
 	}
 }

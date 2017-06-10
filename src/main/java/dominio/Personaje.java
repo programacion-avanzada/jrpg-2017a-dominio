@@ -195,6 +195,9 @@ public abstract class Personaje extends Character implements Serializable {
 		this.magia = this.calcularPuntosDeMagia();
 		this.nombreRaza = nombreRaza;
 
+		this.saludTope = SALUD_INICIAL;
+		this.energiaTope = ENERGIA_INICIAL;
+
 		this.setHabilidades(habilidad1, habilidad2);
 	}
 

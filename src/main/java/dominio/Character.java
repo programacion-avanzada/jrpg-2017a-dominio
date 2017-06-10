@@ -9,7 +9,6 @@ import java.util.HashMap;
  */
 
 public abstract class Character implements Peleable {
-
 	private static final int SOLTAR = -1;
 	private static final int EQUIPAR = 1;
 	

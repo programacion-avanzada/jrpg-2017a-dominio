@@ -33,10 +33,11 @@ public class TestOrco {
 		o.setRandomGenerator(mrs);
 
 		Assert.assertTrue(h.getSalud() == 105);
-		if (o.habilidadRaza1(h))
-			Assert.assertTrue(h.getSalud() == 95);
-		else
+		if (o.habilidadRaza1(h)) {
+			Assert.assertTrue(h.getSalud() == 85);
+		} else {
 			Assert.assertTrue(o.getSalud() == 105);
+		}
 	}
 
 	@Test

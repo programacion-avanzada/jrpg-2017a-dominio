@@ -20,36 +20,36 @@ public class TestAtributos {
 
 	@Test
 	public void testIncrementarFuerza() {
-		Assert.assertTrue(h.getAtaque() == 22);
+		Assert.assertTrue(h.getAtaque() == 37);
 		h.asignarPuntosSkills(10, 0, 0);
-		Assert.assertTrue(h.getAtaque() > 22);
+		Assert.assertTrue(h.getAtaque() > 37);
 	}
 
 	@Test
 	public void testIncrementarDestreza() {
-		Assert.assertTrue(h.getDefensa() == 10);
+		Assert.assertTrue(h.getDefensa() == 20);
 		h.asignarPuntosSkills(0, 10, 0);
-		Assert.assertTrue(h.getDefensa() > 10);
+		Assert.assertTrue(h.getDefensa() > 20);
 	}
 
 	@Test
 	public void testIncrementarInteligencia() {
-		Assert.assertTrue(h.getMagia() == 15);
+		Assert.assertTrue(h.getMagia() == 30);
 		h.asignarPuntosSkills(0, 0, 10);
-		Assert.assertTrue(h.getMagia() > 15);
+		Assert.assertTrue(h.getMagia() > 30);
 	}
 
 	@Test
 	public void testIncrementarMasDelMaximo() {
 		int max = 201;
 
-		Assert.assertTrue(h.getAtaque() == 22);
-		Assert.assertTrue(h.getDefensa() == 10);
-		Assert.assertTrue(h.getMagia() == 15);
+		Assert.assertTrue(h.getAtaque() == 37);
+		Assert.assertTrue(h.getDefensa() == 20);
+		Assert.assertTrue(h.getMagia() == 30);
 
 		h.asignarPuntosSkills(max, max, max);
-		Assert.assertTrue(h.getAtaque() == 22);
-		Assert.assertTrue(h.getDefensa() == 10);
-		Assert.assertTrue(h.getMagia() == 15);
+		Assert.assertTrue(h.getAtaque() == 37);
+		Assert.assertTrue(h.getDefensa() == 20);
+		Assert.assertTrue(h.getMagia() == 30);
 	}
 }

@@ -38,23 +38,23 @@ public class TestPersonaje {
 		Humano h = new Humano("Nicolas", new Guerrero(), 1,l);
 		Assert.assertTrue(h.getSalud() == 105);
 		Assert.assertTrue(h.getEnergia() == 105);
-		Assert.assertTrue(h.getFuerza() == 15);
-		Assert.assertTrue(h.getDestreza() == 10);
-		Assert.assertTrue(h.getInteligencia() == 10);
+		Assert.assertTrue(h.getFuerza() == 25);
+		Assert.assertTrue(h.getDestreza() == 20);
+		Assert.assertTrue(h.getInteligencia() == 20);
 
 		Humano h2 = new Humano("Lautaro", new Hechicero(), 2,l);
 		Assert.assertTrue(h2.getSalud() == 105);
 		Assert.assertTrue(h2.getEnergia() == 105);
-		Assert.assertTrue(h2.getFuerza() == 10);
-		Assert.assertTrue(h2.getDestreza() == 10);
-		Assert.assertTrue(h2.getInteligencia() == 15);
+		Assert.assertTrue(h2.getFuerza() == 20);
+		Assert.assertTrue(h2.getDestreza() == 20);
+		Assert.assertTrue(h2.getInteligencia() == 25);
 
 		Humano h3 = new Humano("Hernan", new Asesino(), 3,l);
 		Assert.assertTrue(h3.getSalud() == 105);
 		Assert.assertTrue(h3.getEnergia() == 105);
-		Assert.assertTrue(h3.getFuerza() == 10);
-		Assert.assertTrue(h3.getDestreza() == 15);
-		Assert.assertTrue(h3.getInteligencia() == 10);
+		Assert.assertTrue(h3.getFuerza() == 20);
+		Assert.assertTrue(h3.getDestreza() == 25);
+		Assert.assertTrue(h3.getInteligencia() == 20);
 	}
 
 	@Test
@@ -62,23 +62,23 @@ public class TestPersonaje {
 		Elfo e = new Elfo("Nicolas", new Guerrero(), 1,l);
 		Assert.assertTrue(e.getSalud() == 100);
 		Assert.assertTrue(e.getEnergia() == 110);
-		Assert.assertTrue(e.getFuerza() == 15);
-		Assert.assertTrue(e.getDestreza() == 10);
-		Assert.assertTrue(e.getInteligencia() == 10);
+		Assert.assertTrue(e.getFuerza() == 25);
+		Assert.assertTrue(e.getDestreza() == 20);
+		Assert.assertTrue(e.getInteligencia() == 20);
 
 		Elfo e2 = new Elfo("Lautaro", new Hechicero(), 2,l);
 		Assert.assertTrue(e2.getSalud() == 100);
 		Assert.assertTrue(e2.getEnergia() == 110);
-		Assert.assertTrue(e2.getFuerza() == 10);
-		Assert.assertTrue(e2.getDestreza() == 10);
-		Assert.assertTrue(e2.getInteligencia() == 15);
+		Assert.assertTrue(e2.getFuerza() == 20);
+		Assert.assertTrue(e2.getDestreza() == 20);
+		Assert.assertTrue(e2.getInteligencia() == 25);
 
 		Elfo e3 = new Elfo("Hernan", new Asesino(), 3,l);
 		Assert.assertTrue(e3.getSalud() == 100);
 		Assert.assertTrue(e3.getEnergia() == 110);
-		Assert.assertTrue(e3.getFuerza() == 10);
-		Assert.assertTrue(e3.getDestreza() == 15);
-		Assert.assertTrue(e3.getInteligencia() == 10);
+		Assert.assertTrue(e3.getFuerza() == 20);
+		Assert.assertTrue(e3.getDestreza() == 25);
+		Assert.assertTrue(e3.getInteligencia() == 20);
 	}
 
 	@Test
@@ -86,23 +86,23 @@ public class TestPersonaje {
 		Orco o = new Orco("Nicolas", new Guerrero(), 1,l);
 		Assert.assertTrue(o.getSalud() == 110);
 		Assert.assertTrue(o.getEnergia() == 100);
-		Assert.assertTrue(o.getFuerza() == 15);
-		Assert.assertTrue(o.getDestreza() == 10);
-		Assert.assertTrue(o.getInteligencia() == 10);
+		Assert.assertTrue(o.getFuerza() == 25);
+		Assert.assertTrue(o.getDestreza() == 20);
+		Assert.assertTrue(o.getInteligencia() == 20);
 
 		Orco o2 = new Orco("Lautaro", new Hechicero(), 2,l);
 		Assert.assertTrue(o2.getSalud() == 110);
 		Assert.assertTrue(o2.getEnergia() == 100);
-		Assert.assertTrue(o2.getFuerza() == 10);
-		Assert.assertTrue(o2.getDestreza() == 10);
-		Assert.assertTrue(o2.getInteligencia() == 15);
+		Assert.assertTrue(o2.getFuerza() == 20);
+		Assert.assertTrue(o2.getDestreza() == 20);
+		Assert.assertTrue(o2.getInteligencia() == 25);
 
 		Orco o3 = new Orco("Hernan", new Asesino(), 3,l);
 		Assert.assertTrue(o3.getSalud() == 110);
 		Assert.assertTrue(o3.getEnergia() == 100);
-		Assert.assertTrue(o3.getFuerza() == 10);
-		Assert.assertTrue(o3.getDestreza() == 15);
-		Assert.assertTrue(o3.getInteligencia() == 10);
+		Assert.assertTrue(o3.getFuerza() == 20);
+		Assert.assertTrue(o3.getDestreza() == 25);
+		Assert.assertTrue(o3.getInteligencia() == 20);
 	}
 
 	@Test
@@ -155,7 +155,7 @@ public class TestPersonaje {
 		o.usarHabilidad(91);
 		o.serAtacado(50);
 		Assert.assertTrue(o.getEnergia() == 9);
-		Assert.assertTrue(o.getSalud() == 70);
+		Assert.assertTrue(o.getSalud() == 80);
 		o.restablecerEnergia();
 		o.restablecerSalud();
 		Assert.assertTrue(o.getEnergia() == 100);
@@ -174,7 +174,7 @@ public class TestPersonaje {
 	public void testSerRobadoSaludYMorir() {
 		o.serAtacado(90);
 		o.aumentarDefensa(-90);
-		Assert.assertTrue(o.serRobadoSalud(100) == 30);
+		Assert.assertTrue(o.serRobadoSalud(100) == 40);
 		Assert.assertTrue(o.getSalud() == 0);
 	}
 
