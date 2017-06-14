@@ -123,6 +123,7 @@ public abstract class Personaje extends Character implements Serializable {
 
 		this.idPersonaje = id;
 		this.saludTope = SALUD_INICIAL;
+		System.out.println("creado personaje con saludtope = " + this.saludTope);
 		this.energiaTope = ENERGIA_INICIAL;
 		this.salud = SALUD_INICIAL;
 		this.energia = ENERGIA_INICIAL;
@@ -182,9 +183,9 @@ public abstract class Personaje extends Character implements Serializable {
 
 		this.idPersonaje = idPersonaje;
 		this.saludTope = this.salud;
-		this.energiaTope = this.energia;
 		this.salud = salud;
 		this.energia = energia;
+		this.energiaTope = this.energia;
 		this.fuerza = fuerza;
 		this.destreza = destreza;
 		this.inteligencia = inteligencia;
