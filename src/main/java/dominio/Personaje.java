@@ -182,8 +182,8 @@ public abstract class Personaje extends Character implements Serializable {
 		super(nombre, nivel, inventario);
 
 		this.idPersonaje = idPersonaje;
-		this.saludTope = this.salud;
 		this.salud = salud;
+		this.saludTope = this.salud;
 		this.energia = energia;
 		this.energiaTope = this.energia;
 		this.fuerza = fuerza;
