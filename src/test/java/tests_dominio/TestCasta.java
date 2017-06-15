@@ -2,8 +2,6 @@ package tests_dominio;
 
 import org.junit.Assert;
 import org.junit.Test;
-import dominio.Casta;
-import dominio.Humano;
 import dominio.Hechicero;
 
 public class TestCasta {

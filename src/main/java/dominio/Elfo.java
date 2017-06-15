@@ -9,6 +9,10 @@ import java.util.ArrayList;
 
 public class Elfo extends Personaje {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4367876252877820292L;
 	private static final int INCREMENTO_NIVEL = 10;
 
 	/**
