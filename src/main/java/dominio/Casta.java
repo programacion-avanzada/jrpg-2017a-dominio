@@ -10,6 +10,10 @@ import java.io.Serializable;
 
 public abstract class Casta implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1494790491018757796L;
 	protected static final int INCREMENTO_POR_TIPO = 5;
 	protected static final int ENERGIA_MINIMA = 10;
 

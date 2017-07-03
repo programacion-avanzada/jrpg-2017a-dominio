@@ -9,6 +9,10 @@ import java.util.ArrayList;
 
 public class Orco extends Personaje {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1458549822568373992L;
 	private static final int INCREMENTO_DEFENSA = 2;
 
 	/**

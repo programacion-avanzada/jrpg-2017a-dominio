@@ -9,6 +9,10 @@ import java.util.ArrayList;
 
 public class Humano extends Personaje {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5654086832027841794L;
 	private static final int ENERGIA_MINIMA = 2;
 	private static final int INCREMENTO_TOPE = 5;
 
@@ -24,6 +28,7 @@ public class Humano extends Personaje {
 		saludTope += INCREMENTO_TOPE;
 		energiaTope += INCREMENTO_TOPE;
 		salud = saludTope;
+		System.out.println("created human with salud = saludtope : " + salud + " = " + saludTope);
 		energia = energiaTope;
 	}
 

@@ -10,7 +10,6 @@ import dominio.Asesino;
 import dominio.Elfo;
 import dominio.Humano;
 import dominio.Item;
-import dominio.MyRandomStub;
 
 public class TestElfo {
 

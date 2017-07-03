@@ -9,6 +9,10 @@ package dominio;
 
 public class Guerrero extends Casta {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4422966556647029259L;
 	private static final int INCREMENTO_ATAQUE = 2;
 
 	/**

@@ -1,14 +1,13 @@
 package dominio;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.io.Serializable;
 
-import javax.imageio.ImageIO;
-
-@SuppressWarnings("serial")
 public class Item implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 936650374906569457L;
 
 	private final int id;
 

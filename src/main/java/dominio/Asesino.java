@@ -8,6 +8,10 @@ package dominio;
 
 public class Asesino extends Casta {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3100248153113357954L;
 	private static final int ENERGIA_MINIMA = 3;
 	private static final double INCREMENTO_EVITAR_DANO = 0.15;
 	private static final double MAX_PROBABILIDAD_EVITAR_DANO = 0.5;

@@ -11,8 +11,6 @@ import dominio.Elfo;
 import dominio.Guerrero;
 import dominio.Humano;
 import dominio.Item;
-import dominio.MyRandomStub;
-import dominio.NonPlayableCharacter;
 
 public class TestGuerrero {
 
