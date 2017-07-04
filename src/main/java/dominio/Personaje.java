@@ -3,6 +3,7 @@ package dominio;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * La clase Personaje contiene los atributos de cada jugador. Entre ellos se
@@ -205,43 +206,12 @@ public abstract class Personaje extends Character implements Serializable {
 	/**
 	 * Actualiza el Personaje recibiendo un HashMap
 	 *
-	 * @param mapa
-	 *            con los datos del Personaje
+	 * @param mapa con los datos del Personaje
 	 */
 
-	public void update(final HashMap<String, Object> mapa) {
-		super.update(mapa);
-		this.idPersonaje = (Integer) mapa.get(ATRIBUTO_IDPERSONAJE);
-		this.energiaTope = (Integer) mapa.get(ATRIBUTO_ENERGIATOPE);
-		this.saludTope = (Integer) mapa.get(ATRIBUTO_SALUDTOPE);
-		this.energia = (Integer) mapa.get(ATRIBUTO_ENERGIA);
-		this.destreza = (Integer) mapa.get(ATRIBUTO_DESTREZA);
-		this.inteligencia = (Integer) mapa.get(ATRIBUTO_INTELIGENCIA);
-		this.casta = (Casta) mapa.get(ATRIBUTO_CASTA);
-		this.experiencia = (Integer) mapa.get(ATRIBUTO_EXPERIENCIA);
-		this.magia = (Integer) mapa.get(ATRIBUTO_MAGIA);
-		this.ataque = (Integer) mapa.get(ATRIBUTO_ATAQUE);
-	}
-
-	/**
-	 * Crea un HashMap con los datos del Personaje
-	 *
-	 * @return mapa de datos
-	 */
-
-	public HashMap<String, Object> all() {
-		HashMap<String, Object> mapa = super.all();
-		mapa.put(ATRIBUTO_ENERGIA, this.energia);
-		mapa.put(ATRIBUTO_DESTREZA, this.destreza);
-		mapa.put(ATRIBUTO_INTELIGENCIA, this.inteligencia);
-		mapa.put(ATRIBUTO_CASTA, this.casta);
-		mapa.put(ATRIBUTO_EXPERIENCIA, this.experiencia);
-		mapa.put(ATRIBUTO_IDPERSONAJE, this.idPersonaje);
-		mapa.put(ATRIBUTO_ENERGIATOPE, this.energiaTope);
-		mapa.put(ATRIBUTO_SALUDTOPE, this.saludTope);
-		mapa.put(ATRIBUTO_ATAQUE, this.ataque);
-		mapa.put(ATRIBUTO_MAGIA, this.magia);
-		return mapa;
+	public void actualizar(final HashMap<String, Integer> mapa) {
+		this.salud = mapa.get("salud").intValue();
+		this.energia = mapa.get("energia").intValue();
 	}
 
 	public void bonusSegunItems(int accion) {

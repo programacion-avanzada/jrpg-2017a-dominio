@@ -2,6 +2,7 @@ package dominio;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * La clase Character contiene los atributos y metodos compartidos de Personaje
@@ -158,38 +159,7 @@ public abstract class Character implements Peleable {
 	public void regalarItem(Item item) {
 		this.inventario.add(item);
 	}
-	
-	/**
-	 * Actualiza el Character recibiendo un HashMap
-	 *
-	 * @param mapa
-	 *            con los datos del Character
-	 */
-
-	public void update(final HashMap<String, Object> mapa) {
-		this.nombre = (String) mapa.get(ATRIBUTO_NOMBRE);
-		this.salud = (Integer) mapa.get(ATRIBUTO_SALUD);
-		this.defensa = (Integer) mapa.get(ATRIBUTO_DEFENSA);
-		this.fuerza = (Integer) mapa.get(ATRIBUTO_FUERZA);
-		this.nivel = (Integer) mapa.get(ATRIBUTO_NIVEL);
-	}
-
-	/**
-	 * Crea un HashMap con los datos del Character
-	 *
-	 * @return mapa de datos
-	 */
-
-	public HashMap<String, Object> all() {
-		HashMap<String, Object> mapa = new HashMap<>();
-		mapa.put(ATRIBUTO_SALUD, this.salud);
-		mapa.put(ATRIBUTO_FUERZA, this.fuerza);
-		mapa.put(ATRIBUTO_DEFENSA, this.defensa);
-		mapa.put(ATRIBUTO_NOMBRE, this.nombre);
-		mapa.put(ATRIBUTO_NIVEL, this.nivel);
-		return mapa;
-	}
-	
+		
 	public ArrayList<Item> getInventario() {
 		return this.inventario;
 	}
