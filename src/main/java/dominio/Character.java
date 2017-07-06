@@ -12,7 +12,9 @@ import java.util.Map;
 public abstract class Character implements Peleable {
 	private static final int SOLTAR = -1;
 	private static final int EQUIPAR = 1;
-	
+
+	public static final int MAX_ITEMS = 12;
+
 	public static final String ATRIBUTO_NOMBRE = "nombre";
 	public static final String ATRIBUTO_SALUD = "salud";
 	public static final String ATRIBUTO_DEFENSA = "defensa";
@@ -29,7 +31,6 @@ public abstract class Character implements Peleable {
 	protected int ultimaDefensa;
 
 	protected RandomGenerator aleatorizador;
-
 
 	/**
 	 * Contructor de un Character
@@ -139,31 +140,32 @@ public abstract class Character implements Peleable {
 	public void aumentarDefensa(final int aumento) {
 		this.defensa += aumento;
 	}
-	
-	
+
 	public void darBonus() {
 		bonusSegunItems(EQUIPAR);
 	}
-	
+
 	public void sacarBonus() {
 		bonusSegunItems(SOLTAR);
 	}
-	
+
 	public void bonusSegunItems(int accion) {
-		for(Item item : this.inventario) {
+		for (Item item : this.inventario) {
 			this.salud += item.getSalud() * accion;
 			this.defensa += item.getDefensa() * accion;
 		}
 	}
 
 	public void regalarItem(Item item) {
-		this.inventario.add(item);
+		if (this.inventario.size() < MAX_ITEMS) {
+			this.inventario.add(item);
+		}
 	}
-		
+
 	public ArrayList<Item> getInventario() {
 		return this.inventario;
 	}
-	
+
 	public void setInventario(final ArrayList<Item> inventario) {
 		this.inventario = inventario;
 	}
