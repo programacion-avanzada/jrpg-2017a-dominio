@@ -11,7 +11,7 @@ public class Intercambiable implements Serializable {
 		
 	}
 	
-	public static boolean sonIntercambiables(final Intercambiable i1, final Intercambiable i2) {
+	public static boolean intercambiar(final Intercambiable i1, final Intercambiable i2) {
 		if(i1.oferta == null || i2.oferta == null) {
 			return false;
 		}
@@ -23,6 +23,11 @@ public class Intercambiable implements Serializable {
 		if(i1.oferta.getId() != i2.demanda.getId() || i1.demanda.getId() != i2.oferta.getId()) {
 			return false;
 		}
+		
+		i1.oferta = null;
+		i1.demanda = null;
+		i2.oferta = null;
+		i2.demanda = null;
 		
 		return true;
 	}
