@@ -1,6 +1,8 @@
 package tests_dominio;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -17,14 +19,13 @@ public class TestPersonaje {
 
 	private ArrayList<Item> l;
 
-	
 	@Before
 	public void initialize() {
 		l = new ArrayList<Item>();
-		o  = new Orco("Maxi", new Hechicero(), 1,l);
-		o1 = new Orco("Maxi", new Guerrero(), 1,l);
-		o2 = new Orco("Nico", new Guerrero(), 1,l);
-		o3 = new Orco("Otro", new Guerrero(), 1,l);
+		o = new Orco("Maxi", new Hechicero(), 1, l);
+		o1 = new Orco("Maxi", new Guerrero(), 1, l);
+		o2 = new Orco("Nico", new Guerrero(), 1, l);
+		o3 = new Orco("Otro", new Guerrero(), 1, l);
 
 		MyRandomStub mrs = new MyRandomStub(0.49, 2);
 		o.setRandomGenerator(mrs);
@@ -35,21 +36,21 @@ public class TestPersonaje {
 
 	@Test
 	public void testHumano() {
-		Humano h = new Humano("Nicolas", new Guerrero(), 1,l);
+		Humano h = new Humano("Nicolas", new Guerrero(), 1, l);
 		Assert.assertTrue(h.getSalud() == 105);
 		Assert.assertTrue(h.getEnergia() == 105);
 		Assert.assertTrue(h.getFuerza() == 25);
 		Assert.assertTrue(h.getDestreza() == 20);
 		Assert.assertTrue(h.getInteligencia() == 20);
 
-		Humano h2 = new Humano("Lautaro", new Hechicero(), 2,l);
+		Humano h2 = new Humano("Lautaro", new Hechicero(), 2, l);
 		Assert.assertTrue(h2.getSalud() == 105);
 		Assert.assertTrue(h2.getEnergia() == 105);
 		Assert.assertTrue(h2.getFuerza() == 20);
 		Assert.assertTrue(h2.getDestreza() == 20);
 		Assert.assertTrue(h2.getInteligencia() == 25);
 
-		Humano h3 = new Humano("Hernan", new Asesino(), 3,l);
+		Humano h3 = new Humano("Hernan", new Asesino(), 3, l);
 		Assert.assertTrue(h3.getSalud() == 105);
 		Assert.assertTrue(h3.getEnergia() == 105);
 		Assert.assertTrue(h3.getFuerza() == 20);
@@ -59,21 +60,21 @@ public class TestPersonaje {
 
 	@Test
 	public void testElfo() {
-		Elfo e = new Elfo("Nicolas", new Guerrero(), 1,l);
+		Elfo e = new Elfo("Nicolas", new Guerrero(), 1, l);
 		Assert.assertTrue(e.getSalud() == 100);
 		Assert.assertTrue(e.getEnergia() == 110);
 		Assert.assertTrue(e.getFuerza() == 25);
 		Assert.assertTrue(e.getDestreza() == 20);
 		Assert.assertTrue(e.getInteligencia() == 20);
 
-		Elfo e2 = new Elfo("Lautaro", new Hechicero(), 2,l);
+		Elfo e2 = new Elfo("Lautaro", new Hechicero(), 2, l);
 		Assert.assertTrue(e2.getSalud() == 100);
 		Assert.assertTrue(e2.getEnergia() == 110);
 		Assert.assertTrue(e2.getFuerza() == 20);
 		Assert.assertTrue(e2.getDestreza() == 20);
 		Assert.assertTrue(e2.getInteligencia() == 25);
 
-		Elfo e3 = new Elfo("Hernan", new Asesino(), 3,l);
+		Elfo e3 = new Elfo("Hernan", new Asesino(), 3, l);
 		Assert.assertTrue(e3.getSalud() == 100);
 		Assert.assertTrue(e3.getEnergia() == 110);
 		Assert.assertTrue(e3.getFuerza() == 20);
@@ -83,21 +84,21 @@ public class TestPersonaje {
 
 	@Test
 	public void testOrco() {
-		Orco o = new Orco("Nicolas", new Guerrero(), 1,l);
+		Orco o = new Orco("Nicolas", new Guerrero(), 1, l);
 		Assert.assertTrue(o.getSalud() == 110);
 		Assert.assertTrue(o.getEnergia() == 100);
 		Assert.assertTrue(o.getFuerza() == 25);
 		Assert.assertTrue(o.getDestreza() == 20);
 		Assert.assertTrue(o.getInteligencia() == 20);
 
-		Orco o2 = new Orco("Lautaro", new Hechicero(), 2,l);
+		Orco o2 = new Orco("Lautaro", new Hechicero(), 2, l);
 		Assert.assertTrue(o2.getSalud() == 110);
 		Assert.assertTrue(o2.getEnergia() == 100);
 		Assert.assertTrue(o2.getFuerza() == 20);
 		Assert.assertTrue(o2.getDestreza() == 20);
 		Assert.assertTrue(o2.getInteligencia() == 25);
 
-		Orco o3 = new Orco("Hernan", new Asesino(), 3,l);
+		Orco o3 = new Orco("Hernan", new Asesino(), 3, l);
 		Assert.assertTrue(o3.getSalud() == 110);
 		Assert.assertTrue(o3.getEnergia() == 100);
 		Assert.assertTrue(o3.getFuerza() == 20);
@@ -118,12 +119,12 @@ public class TestPersonaje {
 
 	@Test
 	public void testManipularAlianza() {
-    o1.crearAlianza("el clan");
+		o1.crearAlianza("el clan");
 
 		Assert.assertTrue("el clan" == o1.getClan().obtenerNombre());
-    Assert.assertTrue(o1.getClan().getAliados().getFirst() == o1);
+		Assert.assertTrue(o1.getClan().getAliados().getFirst() == o1);
 
-    o1.salirDeAlianza();
+		o1.salirDeAlianza();
 		Assert.assertTrue(o1.getClan() == null);
 		o1.salirDeAlianza();
 	}
@@ -197,4 +198,49 @@ public class TestPersonaje {
 	public void testToDo() {
 		o.despuesDeTurno();
 	}
+
+	@Test
+	public void testBonusSegunItems() {
+		Item item = new Item(1, "New", 10, 10, 10, 10, 10);
+		l.add(item);
+		Humano h = new Humano("Nicolas", new Guerrero(), 1, l);
+
+		h.bonusSegunItems(1);
+		Assert.assertTrue(h.getAtaque() == 47);
+
+		h.bonusSegunItems(-1);
+		Assert.assertTrue(h.getAtaque() == 37);
+	}
+
+	@Test
+	public void testActualizar() {
+		Humano h = new Humano("Nicolas", new Guerrero(), 1, l);
+
+		HashMap<String, Integer> mapa = new HashMap<String, Integer>();
+		mapa.put("salud", 400);
+		mapa.put("energia", 500);
+		h.actualizar(mapa);
+
+		Assert.assertTrue(h.getSalud() == 400);
+		Assert.assertTrue(h.getEnergia() == 500);
+	}
+	
+	@Test
+	public void testRegalarItem() {
+		Humano h = new Humano("Nicolas", new Guerrero(), 1, l);
+		Item item = new Item(1, "New", 10, 10, 10, 10, 10);
+
+		h.regalarItem(item);
+		Assert.assertTrue(h.getInventario().get(0) == item);
+
+		for (int i = 0; i < Personaje.MAX_ITEMS + 10; i++) {
+			h.regalarItem(item);
+		}
+
+		Assert.assertTrue(h.getInventario().size() == Personaje.MAX_ITEMS );
+		
+		h.setInventario(new ArrayList<Item>());
+		Assert.assertTrue(h.getInventario().size() == 0);
+	}
+
 }

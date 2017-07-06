@@ -35,10 +35,21 @@ public class TestHechicero {
 	@Test
 	public void testBolaDeFuego() {
 		Assert.assertTrue(e.getSalud() == 100);
-		if (h.habilidadCasta1(e))
+		if (h.habilidadCasta1(e)) {
 			Assert.assertTrue(e.getSalud() < 100);
-		else
+		} else {
 			Assert.assertTrue(e.getSalud() == 100);
+		}
+	}
+	
+	@Test
+	public void testBolaDeFuegoSinInteligencia() {
+		h = new Humano("Nico", 100, 100, 55, 20, -30, new Hechicero(0.2, 0.3, 1.5), 0, 1, 1,l);
+		MyRandomStub mrs = new MyRandomStub(0.49, 2);
+		h.setRandomGenerator(mrs);
+		
+		h.habilidadCasta1(e);
+		Assert.assertTrue(e.getSalud() > 0);
 	}
 
 	@Test

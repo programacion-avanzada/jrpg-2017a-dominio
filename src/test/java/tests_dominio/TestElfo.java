@@ -59,8 +59,11 @@ public class TestElfo {
 		Elfo e = new Elfo("Elfo", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 3, 1, l);
 		Humano h = new Humano("Humano", 100, 100, 25, 20, 30, new Asesino(0.2, 0.3, 1.5), 0, 1, 1, l);
 
-		h.usarHabilidad(98);
-		e.habilidadRaza2(h);
-		Assert.assertTrue(h.getEnergia() == 2);
+		e.usarHabilidad(98);
+		h.habilidadRaza2(e);
+		Assert.assertTrue(e.getEnergia() == 2);
+
+		Assert.assertTrue(e.habilidadRaza1(h) == false);
+		Assert.assertTrue(e.habilidadRaza2(h) == false);
 	}
 }

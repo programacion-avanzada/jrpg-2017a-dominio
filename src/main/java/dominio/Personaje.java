@@ -750,7 +750,7 @@ public abstract class Personaje extends Character implements Serializable {
 	 */
 
 	@Override
-	protected Object clone() throws CloneNotSupportedException {
+	public Object clone() throws CloneNotSupportedException {
 		return super.clone();
 	}
 

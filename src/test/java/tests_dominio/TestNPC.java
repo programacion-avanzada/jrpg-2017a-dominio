@@ -21,11 +21,17 @@ public class TestNPC {
 	public void initialize(){
 		l = new ArrayList<Item>();
 		npc = new NonPlayableCharacter("Perro", 1, 1,l);
-
+		
 		MyRandomStub mrs = new MyRandomStub(0.49, 2);
 		npc.setRandomGenerator(mrs);
 	}
-
+	
+	@Test
+	public void testDificultadEquivocada() {
+		NonPlayableCharacter npc = new NonPlayableCharacter("Perro", 1, 4, l);
+		Assert.assertTrue(npc.getFuerza() == 0);
+	}
+	
 	@Test
 	public void testOtorgarExp() {
 		NonPlayableCharacter npc2 = new NonPlayableCharacter("Gigante", 1, -1,l);
