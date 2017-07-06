@@ -9,9 +9,6 @@ package dominio;
 
 public class Hechicero extends Casta {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2134709641580929637L;
 	private static final double INCREMENTO_MAGIA = 1.5;
 

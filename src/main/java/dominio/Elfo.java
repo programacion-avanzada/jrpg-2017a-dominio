@@ -9,9 +9,6 @@ import java.util.ArrayList;
 
 public class Elfo extends Personaje {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 4367876252877820292L;
 	private static final int INCREMENTO_NIVEL = 10;
 
@@ -21,6 +18,7 @@ public class Elfo extends Personaje {
 	 * @param nombre del personaje
 	 * @param casta del personaje
 	 * @param id del personaje
+	 * @param inventario del personaje
 	 */
 
 	public Elfo(final String nombre, final Casta casta, final int id, final ArrayList<Item> inventario) {
@@ -44,12 +42,13 @@ public class Elfo extends Personaje {
 	 * @param experiencia del personaje
 	 * @param nivel del personaje
 	 * @param idPersonaje del personaje
+	 * @param inventario del personaje
 	 */
 
 	public Elfo(final String nombre, final int salud, final int energia,
 			final int fuerza, final int destreza, final int inteligencia,
 			final Casta casta, final int experiencia, final int nivel,
-			final int idPersonaje, ArrayList<Item> inventario) {
+			final int idPersonaje, final ArrayList<Item> inventario) {
 
 		super(
 			nombre, salud, energia, fuerza, destreza, inteligencia, casta, experiencia,

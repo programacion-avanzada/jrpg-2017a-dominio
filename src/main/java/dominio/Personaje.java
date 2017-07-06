@@ -3,7 +3,6 @@ package dominio;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * La clase Personaje contiene los atributos de cada jugador. Entre ellos se
@@ -110,6 +109,8 @@ public abstract class Personaje extends Character implements Serializable {
 	 *            casta
 	 * @param id
 	 *            del personaje
+	 * @param inventario
+	 *            del personaje
 	 * @param nombreRaza
 	 *            del personaje
 	 * @param habilidad1
@@ -118,13 +119,14 @@ public abstract class Personaje extends Character implements Serializable {
 	 *            del personaje
 	 */
 
-	public Personaje(final String nombre, final Casta casta, final int id, final ArrayList<Item> inventario,
-			final String nombreRaza, final String habilidad1, final String habilidad2) {
+	public Personaje(final String nombre, final Casta casta, final int id,
+		final ArrayList<Item> inventario, final String nombreRaza,
+		final String habilidad1, final String habilidad2) {
+
 		super(nombre, NIVEL_INICIAL, inventario);
 
 		this.idPersonaje = id;
 		this.saludTope = SALUD_INICIAL;
-		System.out.println("creado personaje con saludtope = " + this.saludTope);
 		this.energiaTope = ENERGIA_INICIAL;
 		this.salud = SALUD_INICIAL;
 		this.energia = ENERGIA_INICIAL;
@@ -168,6 +170,8 @@ public abstract class Personaje extends Character implements Serializable {
 	 *            del personaje
 	 * @param idPersonaje
 	 *            del personaje
+	 * @param inventario
+	 *            del personaje
 	 * @param nombreRaza
 	 *            del personaje
 	 * @param habilidad1
@@ -176,9 +180,12 @@ public abstract class Personaje extends Character implements Serializable {
 	 *            del personaje
 	 */
 
-	public Personaje(final String nombre, final int salud, final int energia, final int fuerza, final int destreza,
-			final int inteligencia, final Casta casta, final int experiencia, final int nivel, final int idPersonaje,
-			ArrayList<Item> inventario, final String nombreRaza, final String habilidad1, final String habilidad2) {
+	public Personaje(final String nombre, final int salud, final int energia,
+			final int fuerza, final int destreza, final int inteligencia,
+			final Casta casta, final int experiencia, final int nivel,
+			final int idPersonaje, final ArrayList<Item> inventario,
+			final String nombreRaza, final String habilidad1,
+			final String habilidad2) {
 
 		super(nombre, nivel, inventario);
 
@@ -214,15 +221,21 @@ public abstract class Personaje extends Character implements Serializable {
 		this.energia = mapa.get("energia").intValue();
 	}
 
-	public void bonusSegunItems(int accion) {
+	/**
+	 * Actualiza los atributos segun los items y
+	 * la accion requerida (1 o -1)
+	 * @param accion 1 o -1 - poner o sacar.
+	 */
+
+	public void bonusSegunItems(final int accion) {
 		super.bonusSegunItems(accion);
-		for(Item item : this.inventario) {
+		for (Item item : this.inventario) {
 			this.ataque += item.getAtaque() * accion;
 			this.magia += item.getMagia() * accion;
 			this.energia += item.getEnergia() * accion;
 		}
 	}
-	
+
 	/**
 	 * Asigna las habilidades de raza del personaje
 	 *
@@ -393,11 +406,11 @@ public abstract class Personaje extends Character implements Serializable {
 		if (salud == 0) {
 			return 0;
 		}
-		
+
 		int danio;
-		
+
 		darBonus();
-		
+
 		if (atacado.getSalud() > 0) {
 			Double aleatorio = this.aleatorizador.nextDouble();
 			double probabilidad = this.casta.getProbabilidadGolpeCritico();
@@ -409,9 +422,9 @@ public abstract class Personaje extends Character implements Serializable {
 		} else {
 			danio = 0;
 		}
-			
+
 		sacarBonus();
-		
+
 		return danio;
 	}
 
@@ -507,7 +520,7 @@ public abstract class Personaje extends Character implements Serializable {
 
 	public int serAtacado(final int dano) {
 		darBonus();
-		
+
 		int danio = 0;
 
 		if (this.aleatorizador.nextDouble() >= this.getCasta().getProbabilidadEvitarDano()) {

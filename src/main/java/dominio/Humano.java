@@ -9,9 +9,6 @@ import java.util.ArrayList;
 
 public class Humano extends Personaje {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -5654086832027841794L;
 	private static final int ENERGIA_MINIMA = 2;
 	private static final int INCREMENTO_TOPE = 5;
@@ -21,6 +18,7 @@ public class Humano extends Personaje {
 	 * @param nombre del humano
 	 * @param casta casta
 	 * @param id de personaje
+	 * @param inventario de personaje
 	 */
 
 	public Humano(final String nombre, final Casta casta, final int id, final ArrayList<Item> inventario) {
@@ -28,7 +26,6 @@ public class Humano extends Personaje {
 		saludTope += INCREMENTO_TOPE;
 		energiaTope += INCREMENTO_TOPE;
 		salud = saludTope;
-		System.out.println("created human with salud = saludtope : " + salud + " = " + saludTope);
 		energia = energiaTope;
 	}
 
@@ -44,12 +41,13 @@ public class Humano extends Personaje {
 	 * @param experiencia experiencia
 	 * @param nivel nive;
 	 * @param idPersonaje idPersonaje
+	 * @param inventario inventario
 	 */
 
 	public Humano(final String nombre, final int salud, final int energia,
 			final int fuerza, final int destreza, final int inteligencia,
 			final Casta casta, final int experiencia, final int nivel,
-			final int idPersonaje, ArrayList<Item> inventario) {
+			final int idPersonaje, final ArrayList<Item> inventario) {
 
 		super(
 			nombre, salud, energia, fuerza, destreza, inteligencia, casta, experiencia,

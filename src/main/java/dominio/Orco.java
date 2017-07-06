@@ -9,20 +9,19 @@ import java.util.ArrayList;
 
 public class Orco extends Personaje {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1458549822568373992L;
 	private static final int INCREMENTO_DEFENSA = 2;
 
 	/**
 	 * Permite crear un orco con atributos por defecto.
-	 * 
+	 *
 	 * @param nombre
 	 *            del orco
 	 * @param casta
 	 *            casta
 	 * @param id
+	 *            del personaje
+	 * @param inventario
 	 *            del personaje
 	 */
 
@@ -35,7 +34,7 @@ public class Orco extends Personaje {
 
 	/**
 	 * Permite crear un orco con atributos pasados por parámetro.
-	 * 
+	 *
 	 * @param nombre
 	 *            del orco
 	 * @param salud
@@ -56,18 +55,25 @@ public class Orco extends Personaje {
 	 *            del orco
 	 * @param idPersonaje
 	 *            del orco
+	 * @param inventario
+	 *            del orco
 	 */
 
-	public Orco(final String nombre, final int salud, final int energia, final int fuerza, final int destreza,
-			final int inteligencia, final Casta casta, final int experiencia, final int nivel, final int idPersonaje, ArrayList<Item> inventario) {
+	public Orco(final String nombre, final int salud, final int energia,
+		final int fuerza, final int destreza, final int inteligencia,
+		final Casta casta, final int experiencia, final int nivel,
+		final int idPersonaje, final ArrayList<Item> inventario) {
 
-		super(nombre, salud, energia, fuerza, destreza, inteligencia, casta, experiencia, nivel, idPersonaje, inventario, "Orco",
-				"Golpe Defensa", "Mordisco de Vida");
+		super(
+			nombre, salud, energia, fuerza, destreza, inteligencia,
+			casta, experiencia, nivel, idPersonaje, inventario, "Orco",
+				"Golpe Defensa", "Mordisco de Vida"
+		);
 	}
 
 	/**
 	 * Golpe Defensa habilidadRaza1 sobrescribe el metodo de la clase padre.
-	 * 
+	 *
 	 * @param atacado
 	 *            atacado
 	 * @return verdadero o falso dependiendo del objeto atacado y de sí mismo.
@@ -85,7 +91,7 @@ public class Orco extends Personaje {
 
 	/**
 	 * Mordisco de Vida habilidadRaza1 sobrescribe el metodo de la clase padre.
-	 * 
+	 *
 	 * @param atacado
 	 *            peleable atacado
 	 * @return verdadero o falso dependiendo del objeto atacado y de sí mismo.

@@ -16,16 +16,20 @@ public class NonPlayableCharacter extends Character {
 	/**
 	 * Constructor de la clase. Asigna atributos de fuerza, salud y defensa
 	 * basados en la dificultad.
-	 * 
+	 *
 	 * @param nombre
 	 *            nombre
 	 * @param nivel
 	 *            nivel
 	 * @param dificultadNPC
 	 *            dificultadNonPlayableCharacter
+	 * @param inventario
+	 *            inventario
 	 */
 
-	public NonPlayableCharacter(final String nombre, final int nivel, final int dificultadNPC, ArrayList<Item> inventario) {
+	public NonPlayableCharacter(final String nombre, final int nivel,
+		final int dificultadNPC, final ArrayList<Item> inventario) {
+
 		super(nombre, nivel, inventario);
 
 		int dificultad;
@@ -58,7 +62,6 @@ public class NonPlayableCharacter extends Character {
 
 	/**
 	 * Calcula el atributo fuerza salud o defensa al inicializar el NPC
-	 * 
 	 * @param a
 	 *            es un valor numerico
 	 * @param b
@@ -72,7 +75,7 @@ public class NonPlayableCharacter extends Character {
 
 	/**
 	 * Otorga experiencia al personaje multiplicando su nivel.
-	 * 
+	 *
 	 * @return 30 veces el nivel actual.
 	 */
 
@@ -83,7 +86,7 @@ public class NonPlayableCharacter extends Character {
 	/**
 	 * "atacar" obtiene el ataque de este objeto e invoca al método serAtacado
 	 * del "atacado" recibido como parametro.
-	 * 
+	 *
 	 * @param atacado
 	 *            atacado
 	 * @return dano ocasionado al atacar
@@ -93,13 +96,13 @@ public class NonPlayableCharacter extends Character {
 		darBonus();
 
 		int danio;
-		
+
 		if (this.aleatorizador.nextDouble() <= 0.15) {
 			danio = atacado.serAtacado((int) (this.getAtaque() * PORCENTAJE_GOLPE_CRITICO));
 		} else {
 			danio = atacado.serAtacado(this.getAtaque());
 		}
-		
+
 		sacarBonus();
 
 		return danio;
@@ -108,7 +111,7 @@ public class NonPlayableCharacter extends Character {
 	/**
 	 * "serAtacado" devuelve 0 si no es dañado o si esquivo el golpe o el valor
 	 * del dano ocasionado por el ataque.
-	 * 
+	 *
 	 * @param dano
 	 *            dano
 	 * @return dano ocasionado al atacar.
@@ -117,7 +120,7 @@ public class NonPlayableCharacter extends Character {
 	public int serAtacado(final int dano) {
 		darBonus();
 		int danio = 0;
-		
+
 		if (this.aleatorizador.nextDouble() >= PORCENTAJE_GOLPE_CRITICO) {
 			danio = dano - (this.getDefensa() / 2);
 			if (danio > 0) {
@@ -128,9 +131,9 @@ public class NonPlayableCharacter extends Character {
 		} else {
 			danio = 0;
 		}
-		
+
 		sacarBonus();
-		
+
 		return danio;
 	}
 
@@ -143,7 +146,7 @@ public class NonPlayableCharacter extends Character {
 
 	/**
 	 * to do
-	 * 
+	 *
 	 * @param exp
 	 *            experiencia
 	 */
@@ -154,7 +157,7 @@ public class NonPlayableCharacter extends Character {
 	/**
 	 * Sobreescribe el getter de "ataque" de la clase padre para usar el
 	 * atributo "fuerza" de este objeto.
-	 * 
+	 *
 	 * @return fuerza
 	 */
 
@@ -166,7 +169,7 @@ public class NonPlayableCharacter extends Character {
 	/**
 	 * Sobreescribe el setter de "ataque" de la clase padre para usar el
 	 * atributo "fuerza" de este objeto.
-	 * 
+	 *
 	 * @param ataque
 	 *            ataque
 	 */

@@ -1,8 +1,6 @@
 package dominio;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * La clase Character contiene los atributos y metodos compartidos de Personaje
@@ -35,11 +33,12 @@ public abstract class Character implements Peleable {
 	/**
 	 * Contructor de un Character
 	 *
-	 * @param nombre
-	 *            nombre del character
+	 * @param nombre nombre del character
+	 * @param nivel nivel
+	 * @param inventario inventario del character
 	 */
 
-	public Character(final String nombre, final int nivel, ArrayList<Item> inventario) {
+	public Character(final String nombre, final int nivel, final ArrayList<Item> inventario) {
 		this.nombre = nombre;
 		this.nivel = nivel;
 		this.aleatorizador = new MyRandom();
@@ -133,38 +132,65 @@ public abstract class Character implements Peleable {
 	}
 
 	/**
-	 * @param aumento
-	 *            de defensa a incrementar
+	 * @param aumento de defensa a incrementar
 	 */
 
 	public void aumentarDefensa(final int aumento) {
 		this.defensa += aumento;
 	}
 
+	/**
+	 * darBonus agrega bonus a los atributos segun los items
+	 */
+
 	public void darBonus() {
 		bonusSegunItems(EQUIPAR);
 	}
+
+	/**
+	 * sacarBonus saca los bonus a los atributos segun los items
+	 */
 
 	public void sacarBonus() {
 		bonusSegunItems(SOLTAR);
 	}
 
-	public void bonusSegunItems(int accion) {
+	/**
+	 * Agrega o saca los bonus segun la accion 1 o -1
+	 * @param accion accion
+	 */
+
+	public void bonusSegunItems(final int accion) {
 		for (Item item : this.inventario) {
 			this.salud += item.getSalud() * accion;
 			this.defensa += item.getDefensa() * accion;
 		}
 	}
 
-	public void regalarItem(Item item) {
+	/**
+	 * Agrega el item al inventario si hay espacio
+	 * @param item item
+	 */
+
+	public void regalarItem(final Item item) {
 		if (this.inventario.size() < MAX_ITEMS) {
 			this.inventario.add(item);
 		}
 	}
 
+	/**
+	 * Devuelve el inventario
+	 * @return inventario inventario
+	 */
+
 	public ArrayList<Item> getInventario() {
 		return this.inventario;
 	}
+
+	/**
+	 * Asigna el inventario
+	 * @param inventario inventario
+	 */
 
 	public void setInventario(final ArrayList<Item> inventario) {
 		this.inventario = inventario;
