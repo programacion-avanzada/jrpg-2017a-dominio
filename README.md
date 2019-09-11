@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/TheBitles/jrpg-2017a-dominio.svg?branch=master)](https://travis-ci.org/TheBitles/jrpg-2017a-dominio)
+
 # World Of Middle Earth (WOME) - dominio
 
 ## Sobre las personas
@@ -12,18 +14,16 @@
 
 ### Integrantes del equipo
 
-* Completar ([xxxx](https://github.com/xxxx))
-* Completar ([xxxx](https://github.com/xxxx))
-* Completar ([xxxx](https://github.com/xxxx))
-* Completar ([xxxx](https://github.com/xxxx))
-* Completar ([xxxx](https://github.com/xxxx))
-* Completar ([xxxx](https://github.com/xxxx))
+* Dimas Aguirre ([a-dimas](https://github.com/a-dimas))
+* Fabián Norberto Escobar ([FabianNorbertoEscobar](https://github.com/FabianNorbertoEscobar))
+* Maxi Perez Coto ([maxiperezc](https://github.com/maxiperezc))
+* Pablo Lopez ([pabloL0pez](https://github.com/pabloL0pez))
 
 ## Sobre la tecnología
 
 ### Herramientas utilizadas
 
-* Java 1.7
+* Java 1.8
 * JUnit 4
 
 ## Cómo hacer andar el proyecto
@@ -35,6 +35,6 @@
 5. Ya pueden ejecutar los tests del proyecto, y si todo funciona correctamente, obtendrán verde como resultado.
 
 ## Historia original de WOME
-Mientras el portador del anillo se hace camino en las tierras de Mordor para destruir el Anillo Unico, al otro lado de la Tierra Media el caos y el terror se desata. Ya no hay pueblo ni tierras seguras, en las que no haya conflictos entre Humanos, Orcos y Elfos. El miedo y la desconfianza se apodero de todas las mentes, inclusive entre los que en antaño lucharon juntos por destruir el mal. Nuevas alianzas y nuevas enemistades se van desarrollando a todo lo largo de la Tierra Media, desde las llanuras de Rohan, hasta los desiertos aridos del Rhin. 
+Mientras el portador del anillo se hace camino en las tierras de Mordor para destruir el Anillo Unico, al otro lado de la Tierra Media el caos y el terror se desata. Ya no hay pueblo ni tierras seguras, en las que no haya conflictos entre Humanos, Orcos y Elfos. El miedo y la desconfianza se apodero de todas las mentes, inclusive entre los que en antaño lucharon juntos por destruir el mal. Nuevas alianzas y nuevas enemistades se van desarrollando a todo lo largo de la Tierra Media, desde las llanuras de Rohan, hasta los desiertos aridos del Rhin.
 
 En este mundo estaras con aliados que vayas formando, pero tambien estaras solo, ya que la desconfianza y los deseos de poder pueden llevar a grandes masacres y grandes traiciones. Elije que raza crees que dominara la tierra, entrenate en un modo de pelea, ya sea un gran guerrero capaz de grandes hazañas, o un asesino que elige el sigilo y la muerte silenciosa. Unete a batallones y se parte de las grandes guerras de la Tercera Edad. Entrena y lucha para comvertirte en el ser mas temido de la Tierra Media, y dejar tu nombre inmortalizado en leyendas sobre tus hazañas.

@@ -1,12 +1,32 @@
 package dominio;
 
-public class MyRandom {
+import java.util.Random;
 
-	public static double nextDouble() {
-		return 0.49;
+/**
+ * La clase MyRandom devuelve lo mismo que Random
+ */
+
+public class MyRandom extends RandomGenerator {
+
+	private static final double NEXT_DOUBLE = 0.49;
+
+	/**
+	 * @return Random.nextDouble
+	 */
+
+	public double nextDouble() {
+		Random r = new Random();
+		return r.nextDouble();
 	}
-	public static int nextInt(int val) {
-		return val - 1;
+
+	/**
+	 * @param val val
+	 * @return Random.nextInt
+	 */
+
+	public int nextInt(final int val) {
+		Random r = new Random();
+		return r.nextInt(val);
 	}
-	
+
 }

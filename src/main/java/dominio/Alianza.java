@@ -2,33 +2,73 @@ package dominio;
 
 import java.util.LinkedList;
 
+/**
+ * La clase Alianza representa el vinculo entre una lista personajes
+ * la cual tiene un nombre como atributo. Se pueden agregar y eliminar personajes
+ * de las alianzas.
+ */
+
 public class Alianza {
 
-	String nombre;
-	LinkedList<Personaje> aliados;
+	private String nombre;
+	private LinkedList<Personaje> aliados;
 
-	public Alianza(String nombre) {
+	/**
+	 * Constructor de la clase.
+	 * @param nombre de la alianza
+	 */
+
+	public Alianza(final String nombre) {
 		this.nombre = nombre;
-		this.aliados = new LinkedList <Personaje>();
+		this.aliados = new LinkedList<Personaje>();
 	}
+
+	/**
+	 * @return aliados
+	 */
 
 	public LinkedList<Personaje> getAliados() {
-		return aliados;
+		return copiarLista(this.aliados);
 	}
 
-	public void setAliados(LinkedList<Personaje> aliados) {
-		this.aliados = aliados;
-	}
+	/**
+	 * Devulve el nombre de la alianza
+	 * @return nombre del asesino
+	 */
 
-	public String obtenerNombre(){
+	public String obtenerNombre() {
 		return nombre;
 	}
-	
-	public void eliminarPersonaje(Personaje pj){
+
+	/**
+	 * Elimina un personaje de la lista que representa a los aliados.
+	 * @param pj es el personaje a eliminar
+	 */
+
+	public void eliminarPersonaje(final Personaje pj) {
 		aliados.remove(pj);
 	}
-	
-	public void añadirPersonaje(Personaje pj){
+
+	/**
+	 * Agrega un personaje a la lista que representa a los aliados.
+	 * @param pj es el personaje a añadir
+	 */
+
+	public void anadirPersonaje(final Personaje pj) {
 		aliados.add(pj);
+	}
+
+	/**
+	 * Copia la lista a una nueva LinkedList
+	 * @param lista es la lista a copiar
+	 * @return copia de la lista
+	 */
+
+	private static LinkedList<Personaje> copiarLista(final LinkedList<Personaje> lista) {
+		LinkedList<Personaje> copia = new LinkedList<Personaje>();
+		for (int i = 0; i < lista.size(); i++) {
+			copia.add(lista.get(i));
+		}
+		return copia;
 	}
 }
